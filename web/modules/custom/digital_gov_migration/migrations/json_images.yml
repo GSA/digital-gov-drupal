@@ -16,7 +16,8 @@ source:
     # Another host to try is host.docker.internal or find your local machine's
     # IP address.
     #- http://172.31.222.216:1313/images/v1/json/
-    - http://localhost:1313/images/v1/json/
+    #- http://localhost:1313/images/v1/json/
+    - https://federalist-466b7d92-5da1-4208-974f-d61fd4348571.sites.pages.cloud.gov/preview/gsa/digitalgov.gov/1631-migrate-approaches/images/v1/json/
 
 
   # XPath-like selector. The slash (/) at the beginning is optional.
