@@ -4,7 +4,7 @@
       "Disable drupal/core from scaffolding without being in composer.extra.drupal-scaffold.allowed-packages in that way one has more control of when new scaffolding is added.": "./patches/drupal.core-composer-scaffold.implicit-drupal-core-disable.patch"
     },
     "drupal/maillog": {
-      "/project/maillog/issues/3176023: Not configurable sender and other issues.": "https://www.drupal.org/files/issues/2024-01-17/maillog-n3176023-6.patch"
+      "/project/maillog/issues/3176023: Not configurable sender and other issues.": "https://www.drupal.org/files/issues/2024-07-24/maillog-n3176023-9.patch"
     }
   }
 }
