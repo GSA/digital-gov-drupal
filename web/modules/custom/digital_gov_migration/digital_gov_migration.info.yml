@@ -1,0 +1,7 @@
+name: 'Digital.gov Migration'
+type: module
+description: 'Migrations to Drupal from Hugo.'
+package: Custom
+core_version_requirement: ^10 || ^11
+dependencies:
+  - migrate_plus:migrate_plus
