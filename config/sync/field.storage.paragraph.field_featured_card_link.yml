@@ -1,22 +1,20 @@
-uuid: aea3ee1f-c454-43ef-b5f0-fd33f79a9051
+uuid: 0cf34638-31b8-4dec-97fc-348af835716b
 langcode: en
 status: true
 dependencies:
   module:
     - field_permissions
+    - link
     - paragraphs
 third_party_settings:
   field_permissions:
     permission_type: public
-id: paragraph.field_summary
-field_name: field_summary
+id: paragraph.field_featured_card_link
+field_name: field_featured_card_link
 entity_type: paragraph
-type: string
-settings:
-  max_length: 255
-  case_sensitive: false
-  is_ascii: false
-module: core
+type: link
+settings: {  }
+module: link
 locked: false
 cardinality: 1
 translatable: true

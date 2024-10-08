@@ -1,0 +1,25 @@
+uuid: 1e6b4c7d-8983-40c3-acb5-6708db0e5a3d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.featured_resources_title.field_field_headline
+    - paragraphs.paragraphs_type.featured_resources_title
+  module:
+    - text
+id: paragraph.featured_resources_title.default
+targetEntityType: paragraph
+bundle: featured_resources_title
+mode: default
+content:
+  field_field_headline:
+    type: text_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

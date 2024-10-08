@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.article.body
     - field.field.node.article.field_content_manager_approved
     - field.field.node.article.field_featured_resource
+    - field.field.node.article.field_featured_resources_boxes
     - field.field.node.article.field_federal_review_comments
     - field.field.node.article.field_google_doc
     - field.field.node.article.field_peer_review_comments
@@ -42,7 +43,16 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 103
+    weight: 7
+    region: content
+  field_featured_resources_boxes:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 6
     region: content
   field_federal_review_comments:
     type: comment_default
@@ -63,7 +73,7 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    weight: 102
+    weight: 5
     region: content
   field_peer_review_comments:
     type: comment_default

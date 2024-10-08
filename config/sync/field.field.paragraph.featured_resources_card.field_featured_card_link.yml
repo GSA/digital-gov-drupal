@@ -1,0 +1,23 @@
+uuid: e9c21f54-722b-4cad-b214-77df406894e1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_featured_card_link
+    - paragraphs.paragraphs_type.featured_resources_card
+  module:
+    - link
+id: paragraph.featured_resources_card.field_featured_card_link
+field_name: field_featured_card_link
+entity_type: paragraph
+bundle: featured_resources_card
+label: 'Featured Card Link'
+description: 'This is where this featured resources goes. It does not have a label but its url is the destination for the gray box. This may only go to internal to Digital.gov areas. There is no text on the label.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 0
+  link_type: 1
+field_type: link

@@ -1,19 +1,19 @@
-uuid: 9eedeef6-4b73-4ac6-8823-04bb44ba2d1a
+uuid: 39db23ca-e7c8-4dab-8e4e-b869f6b55fd6
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_featured_resource
-    - node.type.article
+    - field.storage.paragraph.field_featured_resources_headlin
+    - paragraphs.paragraphs_type.featured_resources
     - paragraphs.paragraphs_type.featured_resources_title
   module:
     - entity_reference_revisions
-id: node.article.field_featured_resource
-field_name: field_featured_resource
-entity_type: node
-bundle: article
-label: 'Featured Resource'
-description: ''
+id: paragraph.featured_resources.field_featured_resources_headlin
+field_name: field_featured_resources_headlin
+entity_type: paragraph
+bundle: featured_resources
+label: 'Featured Resources Headline'
+description: 'This is the overall type of resources linked to from this content.'
 required: false
 translatable: false
 default_value: {  }

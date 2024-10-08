@@ -1,0 +1,10 @@
+uuid: 0fb7d4a5-24e4-4666-b402-d724a06bde76
+langcode: en
+status: true
+dependencies: {  }
+id: featured_resources_card
+label: 'Featured Resources Card'
+icon_uuid: null
+icon_default: null
+description: 'This is the card for the featured resources. Each of these paragraphs has a title, a summary, and a link. They can go to services, communities, topics, or any other content type in Digital.gov.'
+behavior_plugins: {  }

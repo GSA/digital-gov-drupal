@@ -1,0 +1,10 @@
+uuid: 19bcb884-2b9e-4a9e-9a05-452b1964a353
+langcode: en
+status: true
+dependencies: {  }
+id: featured_resources
+label: 'Featured Resources'
+icon_uuid: null
+icon_default: null
+description: 'This is the grouping of all of the internal featured resources on this page.'
+behavior_plugins: {  }
