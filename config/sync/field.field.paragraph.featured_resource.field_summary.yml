@@ -1,0 +1,19 @@
+uuid: 14a42d23-7fd9-4044-845d-dbcc9230e1c9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_summary
+    - paragraphs.paragraphs_type.featured_resource
+id: paragraph.featured_resource.field_summary
+field_name: field_summary
+entity_type: paragraph
+bundle: featured_resource
+label: Summary
+description: 'This is the headline for the featured resources paragraph.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
