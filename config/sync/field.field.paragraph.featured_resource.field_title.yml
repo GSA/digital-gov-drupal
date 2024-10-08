@@ -1,0 +1,19 @@
+uuid: 1d94e8c1-8e1f-4385-a503-bd968d45bd2f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_title
+    - paragraphs.paragraphs_type.featured_resource
+id: paragraph.featured_resource.field_title
+field_name: field_title
+entity_type: paragraph
+bundle: featured_resource
+label: Title
+description: 'This is the title for featured resources'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -2,7 +2,7 @@ _core:
   default_config_hash: l58O_yEXSo-SeJi19LXdzTU1tNJG3lmnIhCitRkM1tk
 langcode: en
 uuid: 4500d032-f2f6-465f-81f0-86a5b20089f3
-name: 'Digital.gov'
+name: Digital.gov
 mail: no-reply@digital.gov
 slogan: ''
 page:
