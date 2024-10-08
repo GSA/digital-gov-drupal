@@ -1,0 +1,31 @@
+uuid: 41b44cfe-57bb-4362-a752-4e55dfeee2ba
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_featured_resource
+    - node.type.article
+    - paragraphs.paragraphs_type.featured_resource
+  module:
+    - entity_reference_revisions
+id: node.article.field_featured_resource
+field_name: field_featured_resource
+entity_type: node
+bundle: article
+label: 'featured resource'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      featured_resource: featured_resource
+    negate: 0
+    target_bundles_drag_drop:
+      featured_resource:
+        weight: 2
+        enabled: true
+field_type: entity_reference_revisions

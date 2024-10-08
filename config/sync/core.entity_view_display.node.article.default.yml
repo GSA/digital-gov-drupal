@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_display.comment.peer_review.default
     - field.field.node.article.body
     - field.field.node.article.field_content_manager_approved
+    - field.field.node.article.field_featured_resource
     - field.field.node.article.field_federal_review_comments
     - field.field.node.article.field_google_doc
     - field.field.node.article.field_peer_review_comments
@@ -13,6 +14,7 @@ dependencies:
     - node.type.article
   module:
     - comment
+    - entity_reference_revisions
     - link
     - text
     - user
@@ -32,6 +34,15 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 0
+    region: content
+  field_featured_resource:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 103
     region: content
   field_federal_review_comments:
     type: comment_default
