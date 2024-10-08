@@ -1,0 +1,22 @@
+uuid: 0d172970-6284-4deb-8d13-fd2c4db08bea
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.featured_resources_title.field_field_headline
+    - paragraphs.paragraphs_type.featured_resources_title
+  module:
+    - text
+id: paragraph.featured_resources_title.default
+targetEntityType: paragraph
+bundle: featured_resources_title
+mode: default
+content:
+  field_field_headline:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

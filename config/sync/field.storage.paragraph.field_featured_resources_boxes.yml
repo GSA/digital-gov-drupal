@@ -1,24 +1,23 @@
-uuid: a8d262b5-0ac6-446d-aec4-bd24f5a2e8a1
+uuid: a3f027ad-64d5-4bdd-91b1-b6392ebec916
 langcode: en
 status: true
 dependencies:
   module:
     - entity_reference_revisions
     - field_permissions
-    - node
     - paragraphs
 third_party_settings:
   field_permissions:
     permission_type: public
-id: node.field_featured_resource
-field_name: field_featured_resource
-entity_type: node
+id: paragraph.field_featured_resources_boxes
+field_name: field_featured_resources_boxes
+entity_type: paragraph
 type: entity_reference_revisions
 settings:
   target_type: paragraph
 module: entity_reference_revisions
 locked: false
-cardinality: 1
+cardinality: -1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false

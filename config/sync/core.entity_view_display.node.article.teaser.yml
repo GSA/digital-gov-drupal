@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.article.body
     - field.field.node.article.field_content_manager_approved
     - field.field.node.article.field_featured_resource
+    - field.field.node.article.field_featured_resources_boxes
     - field.field.node.article.field_federal_review_comments
     - field.field.node.article.field_google_doc
     - field.field.node.article.field_peer_review_comments
@@ -41,6 +42,7 @@ content:
 hidden:
   field_content_manager_approved: true
   field_featured_resource: true
+  field_featured_resources_boxes: true
   field_federal_review_comments: true
   field_google_doc: true
   field_peer_review_comments: true

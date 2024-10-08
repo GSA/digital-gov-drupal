@@ -1,0 +1,10 @@
+uuid: e8ba5881-8484-4a8d-b690-5d476567c8ae
+langcode: en
+status: true
+dependencies: {  }
+id: featured_resources_title
+label: 'Featured Resources Title'
+icon_uuid: null
+icon_default: null
+description: 'This is the title for the Featured Resources Page. For example, "Design" or "User Experience." A group of cards can only have one title.'
+behavior_plugins: {  }

@@ -1,18 +1,17 @@
-uuid: a8d262b5-0ac6-446d-aec4-bd24f5a2e8a1
+uuid: 17130438-6a86-4e8d-99a1-3f1a30e3b756
 langcode: en
 status: true
 dependencies:
   module:
     - entity_reference_revisions
     - field_permissions
-    - node
     - paragraphs
 third_party_settings:
   field_permissions:
     permission_type: public
-id: node.field_featured_resource
-field_name: field_featured_resource
-entity_type: node
+id: paragraph.field_featured_resources_headlin
+field_name: field_featured_resources_headlin
+entity_type: paragraph
 type: entity_reference_revisions
 settings:
   target_type: paragraph

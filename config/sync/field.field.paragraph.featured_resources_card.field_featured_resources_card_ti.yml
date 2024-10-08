@@ -1,0 +1,22 @@
+uuid: 35989be0-6535-4ac9-8aa7-5cf1a810b6df
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_featured_resources_card_ti
+    - paragraphs.paragraphs_type.featured_resources_card
+  module:
+    - text
+id: paragraph.featured_resources_card.field_featured_resources_card_ti
+field_name: field_featured_resources_card_ti
+entity_type: paragraph
+bundle: featured_resources_card
+label: 'Featured Resources Card Title'
+description: 'This is the title for this card. It should be descriptive but not long.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

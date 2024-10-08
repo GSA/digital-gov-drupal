@@ -1,18 +1,18 @@
-uuid: 9eedeef6-4b73-4ac6-8823-04bb44ba2d1a
+uuid: f5a2816b-af08-4467-9034-49abbd95a5cd
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_featured_resource
+    - field.storage.node.field_featured_resources_boxes
     - node.type.article
-    - paragraphs.paragraphs_type.featured_resources_title
+    - paragraphs.paragraphs_type.featured_resources_card
   module:
     - entity_reference_revisions
-id: node.article.field_featured_resource
-field_name: field_featured_resource
+id: node.article.field_featured_resources_boxes
+field_name: field_featured_resources_boxes
 entity_type: node
 bundle: article
-label: 'Featured Resource'
+label: 'Featured Resources Boxes'
 description: ''
 required: false
 translatable: false
@@ -22,7 +22,7 @@ settings:
   handler: 'default:paragraph'
   handler_settings:
     target_bundles:
-      featured_resources_title: featured_resources_title
+      featured_resources_card: featured_resources_card
     negate: 0
     target_bundles_drag_drop:
       featured_resources:
@@ -30,8 +30,8 @@ settings:
         enabled: false
       featured_resources_card:
         weight: 5
-        enabled: false
+        enabled: true
       featured_resources_title:
         weight: 6
-        enabled: true
+        enabled: false
 field_type: entity_reference_revisions
