@@ -1,0 +1,40 @@
+uuid: 332be325-3826-4051-a8e3-6e1e36678f93
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_featured_links
+    - node.type.article
+    - paragraphs.paragraphs_type.featured_resources_links
+  module:
+    - entity_reference_revisions
+id: node.article.field_featured_links
+field_name: field_featured_links
+entity_type: node
+bundle: article
+label: 'Featured Links'
+description: 'Featured external links.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      featured_resources_links: featured_resources_links
+    negate: 0
+    target_bundles_drag_drop:
+      featured_resources:
+        weight: 6
+        enabled: false
+      featured_resources_card:
+        weight: 7
+        enabled: false
+      featured_resources_links:
+        weight: 5
+        enabled: true
+      featured_resources_title:
+        weight: 8
+        enabled: false
+field_type: entity_reference_revisions
