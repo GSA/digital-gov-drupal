@@ -5,9 +5,11 @@ dependencies:
   config:
     - field.field.paragraph.featured_resources_links.field_featured_link_icon
     - field.field.paragraph.featured_resources_links.field_resources_link
+    - field.field.paragraph.featured_resources_links.field_resources_summary
     - paragraphs.paragraphs_type.featured_resources_links
   module:
     - link
+    - text
 id: paragraph.featured_resources_links.default
 targetEntityType: paragraph
 bundle: featured_resources_links
@@ -33,5 +35,12 @@ content:
       target: ''
     third_party_settings: {  }
     weight: 1
+    region: content
+  field_resources_summary:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
     region: content
 hidden: {  }
