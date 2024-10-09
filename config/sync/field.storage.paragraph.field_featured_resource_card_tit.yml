@@ -1,4 +1,4 @@
-uuid: ed5ed54f-17df-441f-bc81-3970bdbf12e9
+uuid: 3e66aace-4e10-41f6-8fda-d6e6252627b9
 langcode: en
 status: true
 dependencies:
@@ -9,11 +9,12 @@ dependencies:
 third_party_settings:
   field_permissions:
     permission_type: public
-id: paragraph.field_featured_resources_card_ti
-field_name: field_featured_resources_card_ti
+id: paragraph.field_featured_resource_card_tit
+field_name: field_featured_resource_card_tit
 entity_type: paragraph
-type: text_long
-settings: {  }
+type: text
+settings:
+  max_length: 255
 module: text
 locked: false
 cardinality: 1

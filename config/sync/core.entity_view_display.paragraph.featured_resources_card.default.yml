@@ -4,8 +4,8 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.featured_resources_card.field_featured_card_link
+    - field.field.paragraph.featured_resources_card.field_featured_resource_card_tit
     - field.field.paragraph.featured_resources_card.field_featured_resources_card_bl
-    - field.field.paragraph.featured_resources_card.field_featured_resources_card_ti
     - paragraphs.paragraphs_type.featured_resources_card
   module:
     - link
@@ -27,18 +27,18 @@ content:
     third_party_settings: {  }
     weight: 2
     region: content
+  field_featured_resource_card_tit:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
   field_featured_resources_card_bl:
     type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
     weight: 1
-    region: content
-  field_featured_resources_card_ti:
-    type: text_default
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    weight: 0
     region: content
 hidden: {  }

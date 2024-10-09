@@ -1,0 +1,22 @@
+uuid: 46c94bbb-24ce-4b9b-9a71-23480bad56fc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_resources_summary
+    - paragraphs.paragraphs_type.featured_resources_links
+  module:
+    - text
+id: paragraph.featured_resources_links.field_resources_summary
+field_name: field_resources_summary
+entity_type: paragraph
+bundle: featured_resources_links
+label: 'Resources Summary'
+description: 'This is the text that will appear below the link.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text
