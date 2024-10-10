@@ -1,0 +1,19 @@
+uuid: a23afec7-9dc1-47ac-9679-f4d6273baee6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_venue_address
+    - paragraphs.paragraphs_type.venue
+id: paragraph.venue.field_venue_address
+field_name: field_venue_address
+entity_type: paragraph
+bundle: venue
+label: 'Venue Address'
+description: "This is the venue's street address."
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

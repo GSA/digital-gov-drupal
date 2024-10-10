@@ -1,0 +1,43 @@
+uuid: 9759997a-62c1-4b05-a5ec-3eb9c5466101
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_venue_paragraph
+    - node.type.article
+    - paragraphs.paragraphs_type.venue
+  module:
+    - entity_reference_revisions
+id: node.article.field_venue_paragraph
+field_name: field_venue_paragraph
+entity_type: node
+bundle: article
+label: 'Venue Paragraph'
+description: "An event can be in many places.\r\n"
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      venue: venue
+    negate: 0
+    target_bundles_drag_drop:
+      featured_resources:
+        weight: 7
+        enabled: false
+      featured_resources_card:
+        weight: 8
+        enabled: false
+      featured_resources_links:
+        weight: 9
+        enabled: false
+      featured_resources_title:
+        weight: 10
+        enabled: false
+      venue:
+        weight: 6
+        enabled: true
+field_type: entity_reference_revisions

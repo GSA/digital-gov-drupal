@@ -1,0 +1,88 @@
+uuid: 659f0812-d123-49e0-9af4-0e783e51d379
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.venue.field_venue_address
+    - field.field.paragraph.venue.field_venue_city
+    - field.field.paragraph.venue.field_venue_country
+    - field.field.paragraph.venue.field_venue_map
+    - field.field.paragraph.venue.field_venue_name
+    - field.field.paragraph.venue.field_venue_room
+    - field.field.paragraph.venue.field_venue_state
+    - field.field.paragraph.venue.field_venue_zip
+    - paragraphs.paragraphs_type.venue
+  module:
+    - link
+id: paragraph.venue.default
+targetEntityType: paragraph
+bundle: venue
+mode: default
+content:
+  field_venue_address:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_venue_city:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_venue_country:
+    type: string_textfield
+    weight: 5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_venue_map:
+    type: link_default
+    weight: 7
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_venue_name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_venue_room:
+    type: string_textfield
+    weight: 6
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_venue_state:
+    type: string_textfield
+    weight: 3
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_venue_zip:
+    type: string_textfield
+    weight: 4
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

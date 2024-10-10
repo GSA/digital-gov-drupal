@@ -1,0 +1,90 @@
+uuid: ac41919b-a75e-4dd0-a7d5-cf3df1fc46bc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.venue.field_venue_address
+    - field.field.paragraph.venue.field_venue_city
+    - field.field.paragraph.venue.field_venue_country
+    - field.field.paragraph.venue.field_venue_map
+    - field.field.paragraph.venue.field_venue_name
+    - field.field.paragraph.venue.field_venue_room
+    - field.field.paragraph.venue.field_venue_state
+    - field.field.paragraph.venue.field_venue_zip
+    - paragraphs.paragraphs_type.venue
+  module:
+    - link
+id: paragraph.venue.default
+targetEntityType: paragraph
+bundle: venue
+mode: default
+content:
+  field_venue_address:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_venue_city:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_venue_country:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_venue_map:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: true
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_venue_name:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_venue_room:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_venue_state:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_venue_zip:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+hidden: {  }

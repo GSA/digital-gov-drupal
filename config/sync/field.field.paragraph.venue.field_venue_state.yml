@@ -1,0 +1,19 @@
+uuid: 409a11e8-be60-475a-bdde-ba0508093aab
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_venue_state
+    - paragraphs.paragraphs_type.venue
+id: paragraph.venue.field_venue_state
+field_name: field_venue_state
+entity_type: paragraph
+bundle: venue
+label: 'Venue State'
+description: 'The state in which this venue is located.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

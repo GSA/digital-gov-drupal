@@ -1,0 +1,19 @@
+uuid: 95afe0b2-5e2a-4b83-b397-e191463bc704
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_venue_room
+    - paragraphs.paragraphs_type.venue
+id: paragraph.venue.field_venue_room
+field_name: field_venue_room
+entity_type: paragraph
+bundle: venue
+label: 'Venue Room'
+description: 'The room for this venue.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

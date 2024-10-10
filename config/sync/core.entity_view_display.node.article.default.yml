@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.article.field_google_doc
     - field.field.node.article.field_peer_review_comments
     - field.field.node.article.field_sme_approved
+    - field.field.node.article.field_venue_paragraph
     - node.type.article
   module:
     - comment
@@ -93,6 +94,15 @@ content:
       pager_id: 0
     third_party_settings: {  }
     weight: 3
+    region: content
+  field_venue_paragraph:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 9
     region: content
   links:
     settings: {  }

@@ -1,0 +1,19 @@
+uuid: c00c1634-7d75-4e69-a42c-53e52a737837
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_venue_zip
+    - paragraphs.paragraphs_type.venue
+id: paragraph.venue.field_venue_zip
+field_name: field_venue_zip
+entity_type: paragraph
+bundle: venue
+label: 'Venue Zip'
+description: "The venue's zip code."
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

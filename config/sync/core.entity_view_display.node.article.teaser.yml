@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.article.field_google_doc
     - field.field.node.article.field_peer_review_comments
     - field.field.node.article.field_sme_approved
+    - field.field.node.article.field_venue_paragraph
     - node.type.article
   module:
     - text
@@ -49,3 +50,4 @@ hidden:
   field_google_doc: true
   field_peer_review_comments: true
   field_sme_approved: true
+  field_venue_paragraph: true

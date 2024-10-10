@@ -1,0 +1,10 @@
+uuid: 04631159-8efe-4f5c-b1d0-b7142eb19890
+langcode: en
+status: true
+dependencies: {  }
+id: venue
+label: Venue
+icon_uuid: null
+icon_default: null
+description: 'This is the venue paragraph. Use this paragraph to set up the details for a particular venue for an event.'
+behavior_plugins: {  }

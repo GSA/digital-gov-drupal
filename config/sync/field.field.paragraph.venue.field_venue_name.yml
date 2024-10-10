@@ -1,0 +1,19 @@
+uuid: 269c380c-f361-4c93-b2e1-74486e004470
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_venue_name
+    - paragraphs.paragraphs_type.venue
+id: paragraph.venue.field_venue_name
+field_name: field_venue_name
+entity_type: paragraph
+bundle: venue
+label: 'Venue Name'
+description: "This is the venue's name. For example, U.S. General Services Administration."
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

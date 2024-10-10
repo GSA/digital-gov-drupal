@@ -1,0 +1,19 @@
+uuid: 83d9154b-da06-4a5b-9708-fa3b5a7acfab
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_venue_city
+    - paragraphs.paragraphs_type.venue
+id: paragraph.venue.field_venue_city
+field_name: field_venue_city
+entity_type: paragraph
+bundle: venue
+label: 'Venue City'
+description: 'This is the city in which the venue is located.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

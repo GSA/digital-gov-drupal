@@ -1,0 +1,23 @@
+uuid: 01912581-791f-4a66-ba93-acf9026926db
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_venue_map
+    - paragraphs.paragraphs_type.venue
+  module:
+    - link
+id: paragraph.venue.field_venue_map
+field_name: field_venue_map
+entity_type: paragraph
+bundle: venue
+label: 'Venue Map'
+description: "A link to the venue's map."
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 17
+field_type: link
