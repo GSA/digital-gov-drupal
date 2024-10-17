@@ -22,7 +22,7 @@ class ConvertText {
    * @return string
    *   The converted text.
    */
-  static protected function convertText(string $source_text, string $field_type): string {
+  protected static function convert(string $source_text, string $field_type): string {
     // Start by removing space before and after.
     $source_text = trim($source_text);
     // Remove extra spaces before new lines.
@@ -30,7 +30,7 @@ class ConvertText {
 
     switch ($field_type) {
       case 'plain_text':
-        return html_entity_decode($source_text,ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401 , 'UTF-8');
+        return html_entity_decode($source_text, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401, 'UTF-8');
 
       case 'html':
         $converter = new CommonMarkConverter();
@@ -49,23 +49,23 @@ class ConvertText {
    *   The original source value.
    *
    * @return string
-   *    The converted text.
+   *   The converted text.
    */
-  static public function plainText(string $source_text): string {
-    return self::convertText($source_text, 'plain_text');
+  public static function plainText(string $source_text): string {
+    return self::convert($source_text, 'plain_text');
   }
 
   /**
    * Gets text ready to be stored in html text fields.
    *
    * @var string $source_text
-   *    The original source value.
+   *   The original source value.
    *
    * @return string
-   *    The converted text.
+   *   The converted text.
    */
-  static public function htmlText(string $source_text): string {
-    return self::convertText($source_text, 'html');
+  public static function htmlText(string $source_text): string {
+    return self::convert($source_text, 'html');
   }
 
 }
