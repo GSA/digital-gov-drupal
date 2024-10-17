@@ -1,9 +1,9 @@
 # Main theme library.
 global:
   js:
-    static/dist/js/main.js: { minified: true }
-    static/dist/js/uswds.js: {}
-    static/dist/js/uswds-init.js: {}
+    static/dist/js/main.min.js: { minified: true }
+    static/dist/js/uswds.min.js: { minified: true }
+    static/dist/js/uswds-init.min.js: { minified: true }
   css:
     base:
-      static/dist/styles.css: { minified: true }
+      static/dist/styles.min.css: { minified: true }
