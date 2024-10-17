@@ -1,0 +1,43 @@
+uuid: a3b5bcdc-6932-4f37-b456-e0ff87409fba
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_resource_links
+    - node.type.topics
+    - paragraphs.paragraphs_type.featured_resources_links
+  module:
+    - entity_reference_revisions
+id: node.topics.field_resource_links
+field_name: field_resource_links
+entity_type: node
+bundle: topics
+label: 'Resource Links'
+description: 'Resource Links'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      featured_resources_links: featured_resources_links
+    negate: 0
+    target_bundles_drag_drop:
+      featured_resources:
+        weight: 6
+        enabled: false
+      featured_resources_card:
+        weight: 7
+        enabled: false
+      featured_resources_links:
+        weight: 8
+        enabled: true
+      featured_resources_title:
+        weight: 9
+        enabled: false
+      venue:
+        weight: 10
+        enabled: false
+field_type: entity_reference_revisions

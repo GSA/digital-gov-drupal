@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.storage.node.field_featured_links
     - node.type.article
+    - paragraphs.paragraphs_type.featured_resources_links
   module:
     - entity_reference_revisions
 id: node.article.field_featured_links
@@ -20,7 +21,8 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    target_bundles: {  }
+    target_bundles:
+      featured_resources_links: featured_resources_links
     negate: 0
     target_bundles_drag_drop:
       featured_resources:

@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 2faf32a2-02df-4a3f-b3f6-a967aa94d2da
+  bundle: image
+  default_langcode: en
+  depends:
+    4d3167af-d734-46ba-8f59-419485adb644: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: icon.png
+  created:
+    -
+      value: 1728669183
+  field_media_image:
+    -
+      entity: 4d3167af-d734-46ba-8f59-419485adb644
+      alt: afd
+      title: ''
+      width: 27
+      height: 32

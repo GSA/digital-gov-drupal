@@ -1,0 +1,25 @@
+uuid: 85ef7582-6439-41d4-a36b-77fa9b505e1c
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:banner_block:4a940f48-2e25-4a78-a33a-5c113cf8de9b'
+  module:
+    - block_content
+  theme:
+    - digital_gov
+id: digital_gov_bannerblock
+theme: digital_gov
+region: header
+weight: 0
+provider: null
+plugin: 'block_content:4a940f48-2e25-4a78-a33a-5c113cf8de9b'
+settings:
+  id: 'block_content:4a940f48-2e25-4a78-a33a-5c113cf8de9b'
+  label: 'Banner Block'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

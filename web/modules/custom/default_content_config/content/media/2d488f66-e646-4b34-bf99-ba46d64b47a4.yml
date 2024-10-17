@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 2d488f66-e646-4b34-bf99-ba46d64b47a4
+  bundle: image
+  default_langcode: en
+  depends:
+    e133ac3b-e1bd-4665-a8fe-02ee2db72ba1: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: icon.png
+  created:
+    -
+      value: 1728669150
+  field_media_image:
+    -
+      entity: e133ac3b-e1bd-4665-a8fe-02ee2db72ba1
+      alt: icon
+      title: ''
+      width: 27
+      height: 32

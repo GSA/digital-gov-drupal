@@ -1,0 +1,24 @@
+uuid: bec4a806-bd9f-42df-b248-3022eebd74c5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_featured_resources_card_bl
+    - filter.format.html
+    - paragraphs.paragraphs_type.featured_resources_card
+  module:
+    - text
+id: paragraph.featured_resources_card.field_featured_resources_card_bl
+field_name: field_featured_resources_card_bl
+entity_type: paragraph
+bundle: featured_resources_card
+label: 'Featured Resources Card Blurb'
+description: 'This is the blurb that appears below the title in the card.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - html
+field_type: text_long

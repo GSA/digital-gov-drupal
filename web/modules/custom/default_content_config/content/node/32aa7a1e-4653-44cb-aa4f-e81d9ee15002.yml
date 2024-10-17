@@ -1,0 +1,222 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 32aa7a1e-4653-44cb-aa4f-e81d9ee15002
+  bundle: topics
+  default_langcode: en
+  depends:
+    791047b3-fda0-4f8f-8210-4d0193b0dd59: media
+    2d488f66-e646-4b34-bf99-ba46d64b47a4: media
+    2faf32a2-02df-4a3f-b3f6-a967aa94d2da: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'this is a fantastic topic'
+  created:
+    -
+      value: 1728668254
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  body:
+    -
+      value: '<p>And here is the body field</p>'
+      format: html
+      summary: ''
+  field_deck:
+    -
+      value: 'this is the deck. '
+      format: html
+  field_featured_resources:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 84a231ca-a640-4330-ad97-67e9352aaa88
+          bundle: featured_resources
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1728668351
+          behavior_settings:
+            -
+              value: {  }
+          field_featured_resources_boxes:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 8ddd46d4-726f-44a9-8fa9-9d321c164774
+                  bundle: featured_resources_card
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1728668351
+                  behavior_settings:
+                    -
+                      value: {  }
+                  field_featured_resources_card_bl:
+                    -
+                      value: '<h6>A series of guides to help you understand and practice human-centered design.</h6><p>&nbsp;</p>'
+                      format: html
+                  field_featured_card_link:
+                    -
+                      uri: 'internal:/node/admin'
+                      title: ''
+                      options: {  }
+                  field_featured_resource_card_tit:
+                    -
+                      value: '<h1>Human Centered Design Guide Series</h1>'
+                      format: html
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: f4186cb8-b970-4448-949d-dd38f9440a96
+                  bundle: featured_resources_card
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1728668589
+                  behavior_settings:
+                    -
+                      value: {  }
+                  field_featured_resources_card_bl:
+                    -
+                      value: '<h2>Create better user-centered products for the public</h2>'
+                      format: html
+                  field_featured_card_link:
+                    -
+                      uri: 'internal:/node/admin'
+                      title: ''
+                      options: {  }
+                  field_featured_resource_card_tit:
+                    -
+                      value: '<h3>User Experience</h3>'
+                      format: html
+          field_featured_resources_headlin:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 7ae1f4a8-260a-4726-ad40-2822bdec620b
+                  bundle: featured_resources_title
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1728668351
+                  behavior_settings:
+                    -
+                      value: {  }
+                  field_field_headline:
+                    -
+                      value: '<h1>User Experience: Essential Knowledge</h1>'
+                      format: html
+  field_legislation:
+    -
+      uri: 'http://www.google.com'
+      title: 'This is the legislation link'
+      options: {  }
+  field_page_weight:
+    -
+      value: 2
+  field_primary_image:
+    -
+      entity: 791047b3-fda0-4f8f-8210-4d0193b0dd59
+  field_resource_links:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 69acf03f-5f6f-40f2-81c4-f2c450403fcd
+          bundle: featured_resources_links
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1728669131
+          behavior_settings:
+            -
+              value: {  }
+          field_featured_link_icon:
+            -
+              entity: 2d488f66-e646-4b34-bf99-ba46d64b47a4
+          field_resources_link:
+            -
+              uri: 'http://www.google.com'
+              title: Google
+              options: {  }
+          field_resources_summary:
+            -
+              value: 'This is all about google.whatver.'
+              format: html
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 8d919cd6-c83e-4863-9f9c-96627fec1b37
+          bundle: featured_resources_links
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1728669174
+          behavior_settings:
+            -
+              value: {  }
+          field_featured_link_icon:
+            -
+              entity: 2faf32a2-02df-4a3f-b3f6-a967aa94d2da
+          field_resources_link:
+            -
+              uri: 'http://www.slagathor.com'
+              title: Slagathor
+              options: {  }
+          field_resources_summary:
+            -
+              value: 'slagawho?'
+              format: html
+  field_summary:
+    -
+      value: 'And here is a summary'
+      format: html

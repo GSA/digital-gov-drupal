@@ -6,11 +6,11 @@ dependencies:
     - field.field.node.topics.body
     - field.field.node.topics.field_deck
     - field.field.node.topics.field_featured_communities
-    - field.field.node.topics.field_featured_links
     - field.field.node.topics.field_featured_resources
     - field.field.node.topics.field_legislation
     - field.field.node.topics.field_page_weight
     - field.field.node.topics.field_primary_image
+    - field.field.node.topics.field_resource_links
     - field.field.node.topics.field_slug
     - field.field.node.topics.field_summary
     - node.type.topics
@@ -45,15 +45,6 @@ content:
       link: true
     third_party_settings: {  }
     weight: 118
-    region: content
-  field_featured_links:
-    type: entity_reference_revisions_entity_view
-    label: hidden
-    settings:
-      view_mode: default
-      link: ''
-    third_party_settings: {  }
-    weight: 8
     region: content
   field_featured_resources:
     type: entity_reference_revisions_entity_view
@@ -93,6 +84,15 @@ content:
       link: false
     third_party_settings: {  }
     weight: 114
+    region: content
+  field_resource_links:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 120
     region: content
   field_slug:
     type: string

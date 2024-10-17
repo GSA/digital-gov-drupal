@@ -1,0 +1,22 @@
+uuid: b0d80115-7862-4733-9ee1-c57bbfdf48c7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_featured_resource_card_tit
+    - paragraphs.paragraphs_type.featured_resources_card
+  module:
+    - text
+id: paragraph.featured_resources_card.field_featured_resource_card_tit
+field_name: field_featured_resource_card_tit
+entity_type: paragraph
+bundle: featured_resources_card
+label: 'Featured Resource Card Title'
+description: 'This is the title used in the featured resources card.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text

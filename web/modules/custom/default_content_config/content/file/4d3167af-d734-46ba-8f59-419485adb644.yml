@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 4d3167af-d734-46ba-8f59-419485adb644
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: icon.png
+  uri:
+    -
+      value: 'public://2024-10/icon_2.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 5441
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1728669183

@@ -1,0 +1,10 @@
+uuid: c092788b-1322-459f-af6b-c39d7df3a775
+langcode: en
+status: true
+dependencies: {  }
+id: featured_resources_links
+label: 'Featured Resources Links'
+icon_uuid: null
+icon_default: null
+description: 'This is the paragraph for external links. '
+behavior_plugins: {  }

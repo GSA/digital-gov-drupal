@@ -26,7 +26,6 @@ dependencies:
   module:
     - content_moderation
     - datetime
-    - inline_entity_form
     - link
     - media_library
     - paragraphs
@@ -53,22 +52,14 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_authors:
-    type: inline_entity_form_complex
+    type: entity_reference_autocomplete
     weight: 21
     region: content
     settings:
-      form_mode: default
-      override_labels: false
-      label_singular: ''
-      label_plural: ''
-      allow_new: true
-      allow_existing: true
       match_operator: CONTAINS
-      allow_duplicate: false
-      collapsible: true
-      collapsed: true
-      revision: false
-      removed_reference: optional
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_captions:
     type: link_default
@@ -168,22 +159,14 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_topics:
-    type: inline_entity_form_complex
+    type: entity_reference_autocomplete
     weight: 20
     region: content
     settings:
-      form_mode: default
-      override_labels: false
-      label_singular: ''
-      label_plural: ''
-      allow_new: true
-      allow_existing: true
       match_operator: CONTAINS
-      allow_duplicate: false
-      collapsible: true
-      collapsed: true
-      revision: false
-      removed_reference: optional
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_venue:
     type: paragraphs
@@ -192,17 +175,15 @@ content:
     settings:
       title: Paragraph
       title_plural: Paragraphs
-      edit_mode: closed
+      edit_mode: open
       closed_mode: summary
       autocollapse: none
       closed_mode_threshold: 0
       add_mode: dropdown
       form_display_mode: default
-      default_paragraph_type: venue
+      default_paragraph_type: ''
       features:
-        add_above: '0'
         collapse_edit_all: collapse_edit_all
-        convert: '0'
         duplicate: duplicate
     third_party_settings: {  }
   field_youtube_id:

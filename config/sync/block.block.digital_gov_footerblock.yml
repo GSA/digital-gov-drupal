@@ -1,0 +1,25 @@
+uuid: 00fb0f1d-3ee4-4394-98ff-c77c075d53b3
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:banner_block:0f8d6b04-26bd-4567-b2b7-d157574a2ba9'
+  module:
+    - block_content
+  theme:
+    - digital_gov
+id: digital_gov_footerblock
+theme: digital_gov
+region: footer
+weight: 0
+provider: null
+plugin: 'block_content:0f8d6b04-26bd-4567-b2b7-d157574a2ba9'
+settings:
+  id: 'block_content:0f8d6b04-26bd-4567-b2b7-d157574a2ba9'
+  label: 'Footer Block'
+  label_display: visible
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

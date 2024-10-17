@@ -1,0 +1,24 @@
+uuid: 6eab58b4-9e16-4a79-a639-fbcf48d259e8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_field_headline
+    - filter.format.html
+    - paragraphs.paragraphs_type.featured_resources_title
+  module:
+    - text
+id: paragraph.featured_resources_title.field_field_headline
+field_name: field_field_headline
+entity_type: paragraph
+bundle: featured_resources_title
+label: Title
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - html
+field_type: text

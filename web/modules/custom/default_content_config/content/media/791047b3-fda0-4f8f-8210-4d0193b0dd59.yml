@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 791047b3-fda0-4f8f-8210-4d0193b0dd59
+  bundle: image
+  default_langcode: en
+  depends:
+    d35da5a6-7275-4923-b700-35b0571d3ec3: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Screenshot 2024-09-19 at 6.38.00 PM.png'
+  created:
+    -
+      value: 1728670626
+  field_media_image:
+    -
+      entity: d35da5a6-7275-4923-b700-35b0571d3ec3
+      alt: huh
+      title: ''
+      width: 966
+      height: 688

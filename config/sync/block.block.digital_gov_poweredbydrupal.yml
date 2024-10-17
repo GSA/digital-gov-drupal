@@ -1,0 +1,20 @@
+uuid: 44e4f993-fea9-4485-82c8-e2f903fd794b
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - digital_gov
+id: digital_gov_poweredbydrupal
+theme: digital_gov
+region: footer
+weight: 0
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  label_display: '0'
+  provider: system
+visibility: {  }

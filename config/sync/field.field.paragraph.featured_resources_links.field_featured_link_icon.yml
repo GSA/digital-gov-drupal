@@ -1,0 +1,29 @@
+uuid: 954d03e4-cf60-4491-9951-e9ccdefd9e2a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_featured_link_icon
+    - media.type.image
+    - paragraphs.paragraphs_type.featured_resources_links
+id: paragraph.featured_resources_links.field_featured_link_icon
+field_name: field_featured_link_icon
+entity_type: paragraph
+bundle: featured_resources_links
+label: 'Featured Link Icon'
+description: "This is the small icon for this link, it's typically a small icon that represents the Company link."
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,88 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 2993dadf-bbab-4367-bed0-858b588c1d39
+  bundle: event
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Silly event'
+  created:
+    -
+      value: 1728669427
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  body:
+    -
+      value: '<p>adf</p>'
+      format: html
+      summary: ''
+  field_end_date:
+    -
+      value: '0123-01-11T18:00:05'
+  field_start_date:
+    -
+      value: '2024-10-11T20:58:58'
+  field_summary:
+    -
+      value: sadg
+      format: html
+  field_venue:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: bec7d9e7-eefd-4906-8e37-1242f99ba9be
+          bundle: venue
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1728669574
+          behavior_settings:
+            -
+              value: {  }
+          field_venue_address:
+            -
+              value: '323 infert road'
+          field_venue_city:
+            -
+              value: chantilly
+          field_venue_country:
+            -
+              value: usa
+          field_venue_map:
+            -
+              uri: 'http://www.map.com'
+              title: map
+              options: {  }
+          field_venue_name:
+            -
+              value: bacyard
+          field_venue_room:
+            -
+              value: '53'
+          field_venue_state:
+            -
+              value: va
+          field_venue_zip:
+            -
+              value: '22033'

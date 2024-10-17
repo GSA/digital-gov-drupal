@@ -12,8 +12,8 @@ id: node.event.field_venue
 field_name: field_venue
 entity_type: node
 bundle: event
-label: Venue
-description: 'Physical location for the event.'
+label: venue
+description: venue
 required: false
 translatable: false
 default_value: {  }

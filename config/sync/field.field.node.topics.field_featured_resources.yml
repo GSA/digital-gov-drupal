@@ -5,8 +5,7 @@ dependencies:
   config:
     - field.storage.node.field_featured_resources
     - node.type.topics
-    - paragraphs.paragraphs_type.external_content
-    - paragraphs.paragraphs_type.internal_content
+    - paragraphs.paragraphs_type.featured_resources
   module:
     - entity_reference_revisions
 id: node.topics.field_featured_resources
@@ -14,7 +13,7 @@ field_name: field_featured_resources
 entity_type: node
 bundle: topics
 label: 'Featured Resources'
-description: 'Highlight these resources on the current topic page.'
+description: 'This is the featured resources paragraph'
 required: false
 translatable: false
 default_value: {  }
@@ -23,25 +22,21 @@ settings:
   handler: 'default:paragraph'
   handler_settings:
     target_bundles:
-      external_content: external_content
-      internal_content: internal_content
+      featured_resources: featured_resources
     negate: 0
     target_bundles_drag_drop:
-      external_content:
-        weight: 7
+      featured_resources:
+        weight: 6
         enabled: true
-      external_featured_resource:
-        weight: 4
+      featured_resources_card:
+        weight: 7
         enabled: false
-      featured_links:
+      featured_resources_links:
+        weight: 8
+        enabled: false
+      featured_resources_title:
         weight: 9
         enabled: false
-      interal_featured_resource:
-        weight: 5
-        enabled: false
-      internal_content:
-        weight: 10
-        enabled: true
       venue:
         weight: 10
         enabled: false

@@ -12,7 +12,6 @@ dependencies:
     - node.type.short_post
   module:
     - content_moderation
-    - inline_entity_form
     - text
 id: node.short_post.default
 targetEntityType: node
@@ -40,22 +39,14 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_source:
-    type: inline_entity_form_complex
+    type: entity_reference_autocomplete
     weight: 4
     region: content
     settings:
-      form_mode: default
-      override_labels: false
-      label_singular: ''
-      label_plural: ''
-      allow_new: true
-      allow_existing: true
       match_operator: CONTAINS
-      allow_duplicate: false
-      collapsible: false
-      collapsed: false
-      revision: false
-      removed_reference: optional
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_summary:
     type: text_textfield
@@ -66,22 +57,14 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_topics:
-    type: inline_entity_form_complex
+    type: entity_reference_autocomplete
     weight: 6
     region: content
     settings:
-      form_mode: default
-      override_labels: false
-      label_singular: ''
-      label_plural: ''
-      allow_new: true
-      allow_existing: true
       match_operator: CONTAINS
-      allow_duplicate: false
-      collapsible: false
-      collapsed: false
-      revision: false
-      removed_reference: optional
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
@@ -119,22 +102,14 @@ content:
       placeholder: ''
     third_party_settings: {  }
   uid:
-    type: inline_entity_form_complex
+    type: entity_reference_autocomplete
     weight: 7
     region: content
     settings:
-      form_mode: default
-      override_labels: false
-      label_singular: ''
-      label_plural: ''
-      allow_new: true
-      allow_existing: true
       match_operator: CONTAINS
-      allow_duplicate: false
-      collapsible: true
-      collapsed: true
-      revision: false
-      removed_reference: optional
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
 hidden:
   field_slug: true

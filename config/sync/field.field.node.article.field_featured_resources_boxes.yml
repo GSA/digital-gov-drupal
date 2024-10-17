@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.storage.node.field_featured_resources_boxes
     - node.type.article
+    - paragraphs.paragraphs_type.featured_resources_card
   module:
     - entity_reference_revisions
 id: node.article.field_featured_resources_boxes
@@ -20,7 +21,8 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    target_bundles: {  }
+    target_bundles:
+      featured_resources_card: featured_resources_card
     negate: 0
     target_bundles_drag_drop:
       featured_resources:

@@ -1,0 +1,46 @@
+uuid: 35dcf770-bca4-4154-abc5-5ed892019805
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.featured_resources_links.field_featured_link_icon
+    - field.field.paragraph.featured_resources_links.field_resources_link
+    - field.field.paragraph.featured_resources_links.field_resources_summary
+    - paragraphs.paragraphs_type.featured_resources_links
+  module:
+    - link
+    - text
+id: paragraph.featured_resources_links.default
+targetEntityType: paragraph
+bundle: featured_resources_links
+mode: default
+content:
+  field_featured_link_icon:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_resources_link:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_resources_summary:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden: {  }

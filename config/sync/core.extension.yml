@@ -5,6 +5,7 @@ module:
   admin_toolbar_search: 0
   admin_toolbar_tools: 0
   block: 0
+  block_content: 0
   breakpoint: 0
   ckeditor5: 0
   ckeditor5_embedded_content: 0
@@ -30,7 +31,6 @@ module:
   file: 0
   filter: 0
   image: 0
-  inline_entity_form: 0
   layout_discovery: 0
   link: 0
   linkit: 0
