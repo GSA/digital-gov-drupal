@@ -40,7 +40,8 @@
         "drush/drush": "^12.5",
         "league/commonmark": "^2.5",
         "mattsqd/drupal-env": "dev-main",
-        "mattsqd/drupal-env-lando": "dev-main"
+        "mattsqd/drupal-env-lando": "dev-main",
+        "mattsqd/robovalidate": "@alpha"
     },
     "conflict": {
         "drupal/drupal": "*"
