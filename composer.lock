@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c09325fc5ce8d438b5d896382459119e",
+    "content-hash": "a0cdbb65e9f93a9932dc2395b10df5e2",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4099,6 +4099,54 @@
                 "source": "https://github.com/mattsqd/drupal-env-lando/tree/main"
             },
             "time": "2024-07-31T19:04:40+00:00"
+        },
+        {
+            "name": "mattsqd/robovalidate",
+            "version": "1.4.0-alpha",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mattsqd/robovalidate.git",
+                "reference": "db39f0605b1a1a2d94f36a57e07237d0f2326217"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mattsqd/robovalidate/zipball/db39f0605b1a1a2d94f36a57e07237d0f2326217",
+                "reference": "db39f0605b1a1a2d94f36a57e07237d0f2326217",
+                "shasum": ""
+            },
+            "require": {
+                "consolidation/robo": "^3.0.9 || ^4.0.1",
+                "php": ">=8.0.17"
+            },
+            "require-dev": {
+                "composer/composer": "^2.5",
+                "squizlabs/php_codesniffer": "^3.6"
+            },
+            "suggest": {
+                "squizlabs/php_codesniffer": "Recommended if wanting to validate coding standards."
+            },
+            "type": "robo-tasks",
+            "autoload": {
+                "psr-4": {
+                    "RoboValidate\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "mattsqd",
+                    "email": "mattsqd@users.noreply.github.com"
+                }
+            ],
+            "description": "A group of Robo commands that run various validation tasks on local environments or pipelines",
+            "support": {
+                "issues": "https://github.com/mattsqd/robovalidate/issues",
+                "source": "https://github.com/mattsqd/robovalidate/tree/1.4.0-alpha"
+            },
+            "time": "2024-07-31T17:51:40+00:00"
         },
         {
             "name": "mck89/peast",
@@ -13633,7 +13681,8 @@
         "drupal/scheduler_content_moderation_integration": 10,
         "drupal/uswds_templates": 20,
         "mattsqd/drupal-env": 20,
-        "mattsqd/drupal-env-lando": 20
+        "mattsqd/drupal-env-lando": 20,
+        "mattsqd/robovalidate": 15
     },
     "prefer-stable": true,
     "prefer-lowest": false,
