@@ -19,9 +19,9 @@ settings:
       - blockQuote
       - bulletedList
       - numberedList
-      - embeddedContent
       - drupalMedia
       - sourceEditing
+      - embeddedContent__default
   plugins:
     ckeditor5_heading:
       enabled_headings:

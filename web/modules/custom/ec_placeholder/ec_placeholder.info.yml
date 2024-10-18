@@ -4,4 +4,4 @@ description: Provides replacement placeholder for Ckeditor5 embedded content.
 package: Custom
 core_version_requirement: ^9 || ^10
 dependencies:
-  - ckeditor5_embedded_content
+  - embedded_content

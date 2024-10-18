@@ -2,8 +2,8 @@
 
 namespace Drupal\ec_touchpoints_survey\Plugin\EmbeddedContent;
 
-use Drupal\ckeditor5_embedded_content\EmbeddedContentInterface;
-use Drupal\ckeditor5_embedded_content\EmbeddedContentPluginBase;
+use Drupal\embedded_content\EmbeddedContentInterface;
+use Drupal\embedded_content\EmbeddedContentPluginBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 
@@ -59,6 +59,13 @@ class TouchpointsSurvey extends EmbeddedContentPluginBase implements EmbeddedCon
       '#required' => TRUE,
     ];
     return $form;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function isInline(): bool {
+    return FALSE;
   }
 
 }
