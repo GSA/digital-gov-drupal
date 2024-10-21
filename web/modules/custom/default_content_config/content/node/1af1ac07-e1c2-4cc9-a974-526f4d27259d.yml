@@ -1,0 +1,68 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 1af1ac07-e1c2-4cc9-a974-526f4d27259d
+  bundle: community
+  default_langcode: en
+  depends:
+    df325658-effa-4ff9-9e6b-abfbaf437ff9: media
+    c807a95f-ee73-4bd2-b616-0e56b5ff1ad1: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'COMMUNITIES-all fields'
+  created:
+    -
+      value: 1729459409
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  body:
+    -
+      value: '<p>The Communicators community was established in recognition that communication is an essential function for government activities at all organizational levels. Our community members are dedicated to the goals of improving communication and understanding among all people, and helping make government more effective. What We Do Government communicators have relied on this community for best practices, training and networking for almost 30 years. Who We Are We are a community of government communicators with extensive experience and deep subject knowledge in communications, public affairs, social media, and other related areas. Beginners in the field can ask questions to the group on advice and best practices. The community also shares job opportunities to help members advance in their careers. The community works to bring relevant training to help members develop their communications skills. Related Resources</p><p>&nbsp;</p>'
+      format: html
+      summary: ''
+  field_deck:
+    -
+      value: 'Collaborate and share resources with other communities across government who are focused on building better digital experience in government.'
+      format: html
+  field_dg_acronym:
+    -
+      value: FCN
+  field_dg_highlight:
+    -
+      value: true
+  field_dg_logo:
+    -
+      entity: df325658-effa-4ff9-9e6b-abfbaf437ff9
+  field_dg_shortname:
+    -
+      value: 'Plain Language'
+  field_members:
+    -
+      value: 2501
+  field_page_weight:
+    -
+      value: 1
+  field_primary_image:
+    -
+      entity: c807a95f-ee73-4bd2-b616-0e56b5ff1ad1
+  field_subscribe_email_subject:
+    -
+      value: 'oin the Communicators Community'
+  field_summary:
+    -
+      value: 'Collaborate and share resources with others across government.'
+      format: html

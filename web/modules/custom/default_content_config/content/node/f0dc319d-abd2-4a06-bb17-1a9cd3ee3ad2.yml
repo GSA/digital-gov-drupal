@@ -1,0 +1,35 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: f0dc319d-abd2-4a06-bb17-1a9cd3ee3ad2
+  bundle: guides
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'GUIDE-all required fields'
+  created:
+    -
+      value: 1729463294
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  field_summary:
+    -
+      value: 'A ‘quick-start’ guide for embedding accessibility and inclusive design practices into your team’s workflow'
+      format: html
+  field_summary_box:
+    -
+      value: false

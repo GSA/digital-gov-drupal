@@ -1,0 +1,63 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 45a32394-3a9a-4481-a9bf-4701e39138ea
+  bundle: guides
+  default_langcode: en
+  depends:
+    c2eb37c0-02a5-4a36-90bc-a7039449b61b: media
+    1e945b0b-bcf5-4df7-9105-6c222eb70c13: media
+    2936fe3c-b64e-46e7-bad5-067d4f873416: node
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'GUIDE-all fields'
+  created:
+    -
+      value: 1729463587
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  body:
+    -
+      value: "<p>Everyone who works on government websites has a role to play in making federal resources accessible and inclusive.</p><p>&nbsp;</p><p><strong>**This guide provides:**</strong></p><p>&nbsp;</p><p>- An overview of how each team member can contribute to a product's accessibility.</p><p>- A framework for thinking about accessibility and inclusive design in your role.</p><p>- An understanding of the human need behind accessibility practices.</p><p>&nbsp;</p><p>We focus on the issues most likely to impact government sites. These guidelines do not provide a comprehensive list of all possible issues. Your team will need additional resources and work to conduct manual audits to conform to the standards of [Section 508](<u>https://www.section508.gov/</u>), a law that ensures all web content is accessible to anybody with a disability. It aligns with the World Wide Web Consortium (W3C) Web Accessibility Initiative (WAI) [Web Content Accessibility Guidelines (WCAG) 2.0, Level AA](<u>https://www.w3.org/WAI/WCAG22/quickref/?versions=2.0&amp;currentsidebar=%23col_overview&amp;levels=a%2Caaa</u>).</p><p>&nbsp;</p><p>Choose the guide that best fits your role:</p><p>&nbsp;</p><p>1. Product management</p><p>2. Content design</p><p>3. User Experience (UX) design</p><p>4. Visual design</p><p>5. Front-end development</p><p>&nbsp;</p><p><em>_These roles are based on the roles we have at the Technology Transformation Services at GSA._</em></p>"
+      format: html
+      summary: ''
+  field_deck:
+    -
+      value: 'A ‘quick-start’ guide for embedding accessibility and inclusive design practices into your team’s workflow'
+      format: html
+  field_featured_image:
+    -
+      entity: c2eb37c0-02a5-4a36-90bc-a7039449b61b
+  field_guide_weight:
+    -
+      value: 5
+  field_page_weight:
+    -
+      value: 2
+  field_primary_image:
+    -
+      entity: 1e945b0b-bcf5-4df7-9105-6c222eb70c13
+  field_summary:
+    -
+      value: 'A ‘quick-start’ guide for embedding accessibility and inclusive design practices into your team’s workflow'
+      format: html
+  field_summary_box:
+    -
+      value: true
+  field_topics:
+    -
+      entity: 2936fe3c-b64e-46e7-bad5-067d4f873416

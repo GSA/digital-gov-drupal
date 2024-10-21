@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: adf49a05-8e7f-4796-b8a8-035b433efee4
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: dap-10-years-total-daily-visitors.png
+  uri:
+    -
+      value: 'public://2024-10/dap-10-years-total-daily-visitors.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 53273
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1729471922

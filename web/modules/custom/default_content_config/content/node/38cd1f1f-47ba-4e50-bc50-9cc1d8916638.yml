@@ -1,0 +1,96 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 38cd1f1f-47ba-4e50-bc50-9cc1d8916638
+  bundle: authors
+  default_langcode: en
+  depends:
+    ef65b2ce-4c90-4865-bb72-5d70b7f92ea3: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'AUTHORS-all fields'
+  created:
+    -
+      value: 1729458390
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  body:
+    -
+      value: '<p>This is a body field. It is part of the form.</p>'
+      format: html
+      summary: ''
+  field_agency_acronym:
+    -
+      value: GSA
+  field_agency_full_name:
+    -
+      value: 'U.S. General Services Administration'
+  field_bio:
+    -
+      value: "Ammie is the implementation lead for [21st Century IDEA](https://digital.gov/resources/21st-century-integrated-digital-experience-act/) at GSA's Technology Transformation Services."
+      format: html
+  field_bio_image:
+    -
+      entity: ef65b2ce-4c90-4865-bb72-5d70b7f92ea3
+  field_bio_url:
+    -
+      uri: 'https://github.com/afeijoo'
+      title: ''
+      options: {  }
+  field_display_name:
+    -
+      value: 'Ammie Farraj Feijoo'
+      format: html
+  field_email:
+    -
+      value: ammie.farrajfeijoo@gsa.gov
+  field_facebook:
+    -
+      value: 'field intentionally left blank'
+  field_first_name:
+    -
+      value: Ammie
+      format: html
+  field_github:
+    -
+      value: afeijoo
+  field_instagram:
+    -
+      value: 'field intentionally left blank'
+  field_last_name:
+    -
+      value: 'Farraj Feijoo'
+      format: html
+  field_linkedin:
+    -
+      value: 'field intentionally left blank'
+  field_location:
+    -
+      value: 'Washington, DC'
+  field_pronouns:
+    -
+      value: 'this field intentionally left blank'
+  field_summary:
+    -
+      value: 'summary not in md'
+      format: html
+  field_twitter:
+    -
+      value: 'field intentionally left blank'
+  field_youtube:
+    -
+      value: 'field intentionally left blank'

@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 93810db1-d94a-4e2f-9615-c70b44fae0de
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: pink_logo.jpeg
+  uri:
+    -
+      value: 'public://2024-10/pink_logo.jpeg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 10958
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1729460198

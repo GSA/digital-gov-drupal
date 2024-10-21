@@ -1,0 +1,136 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 26f2d370-453e-4fdb-8b51-3f6a932fd3e9
+  bundle: topics
+  default_langcode: en
+  depends:
+    4bcab59d-11d5-4bf3-84bb-e2d533673c94: node
+    47d1784c-68a3-4a3b-a341-3e4f8d092253: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'TOPICS-all fields'
+  created:
+    -
+      value: 1729472045
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  body:
+    -
+      value: '<p>Body field&nbsp;</p>'
+      format: html
+      summary: ''
+  field_deck:
+    -
+      value: 'The design of products, devices, services, or environments for people with disabilities'
+      format: html
+  field_featured_communities:
+    -
+      entity: 4bcab59d-11d5-4bf3-84bb-e2d533673c94
+  field_featured_links:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: c3d9253c-d7ca-40a0-8449-e41956cce8fd
+          bundle: featured_links
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1729472244
+          behavior_settings:
+            -
+              value: {  }
+          field_links:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: d71a97ce-88f1-4788-babc-cddeb07bacd2
+                  bundle: external_content
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1729472853
+                  behavior_settings:
+                    -
+                      value: {  }
+                  field_link:
+                    -
+                      uri: 'http://www.digital.gov'
+                      title: 'digital gov'
+                      options: {  }
+                  field_summary:
+                    -
+                      value: 'An overview of how to design and deliver accessible digital products and services in the federal government'
+                      format: html
+          field_title:
+            -
+              value: 'These are external links'
+  field_featured_resources:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 273ac8e6-cf57-4f33-9874-eadc084f13c6
+          bundle: external_content
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1729472750
+          behavior_settings:
+            -
+              value: {  }
+          field_link:
+            -
+              uri: 'http://www.digital.gov'
+              title: 'digital gov'
+              options: {  }
+          field_summary:
+            -
+              value: 'he Federal Field Guide to De-risk Government Technology offers guidance to federal agencies on how to structure software development teams, write contracts, and oversee agile software activities to reduce risks and improve outcomes for end-users.'
+              format: html
+  field_legislation:
+    -
+      uri: 'internal:/resources/delivering-digital-first-public-experience'
+      title: '21st Century Integrated Digital Experience Act (21st Century IDEA) and M-23-22'
+      options: {  }
+  field_page_weight:
+    -
+      value: 1
+  field_primary_image:
+    -
+      entity: 47d1784c-68a3-4a3b-a341-3e4f8d092253
+  field_summary:
+    -
+      value: "Accessibility isn't just the right thing to do; it’s the law. The guidance, resources, and community you find here will help you deliver accessible digital products and services in the federal government."
+      format: html

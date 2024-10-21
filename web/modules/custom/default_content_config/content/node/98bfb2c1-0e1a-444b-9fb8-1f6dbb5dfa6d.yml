@@ -1,0 +1,48 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 98bfb2c1-0e1a-444b-9fb8-1f6dbb5dfa6d
+  bundle: services
+  default_langcode: en
+  depends:
+    e06c7386-71b5-4d29-b82f-7a0c887634fe: node
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'SERVICES-all fields'
+  created:
+    -
+      value: 1729471544
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  body:
+    -
+      value: '<p>body field</p>'
+      format: html
+      summary: ''
+  field_contact:
+    -
+      value: connectcoe@gsa.gov
+  field_page_weight:
+    -
+      value: 1
+  field_summary:
+    -
+      value: 'Explore services that are user-centered, open-source, and built by government for government.'
+      format: html
+  field_topics:
+    -
+      entity: e06c7386-71b5-4d29-b82f-7a0c887634fe

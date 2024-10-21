@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: ef65b2ce-4c90-4865-bb72-5d70b7f92ea3
+  bundle: image
+  default_langcode: en
+  depends:
+    fe6fd513-54a9-468e-9cce-ec30115a8161: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 400690.jpeg
+  created:
+    -
+      value: 1729458887
+  field_media_image:
+    -
+      entity: fe6fd513-54a9-468e-9cce-ec30115a8161
+      alt: 'Image of Amy'
+      title: ''
+      width: 460
+      height: 460

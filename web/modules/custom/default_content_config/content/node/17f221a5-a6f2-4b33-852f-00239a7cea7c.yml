@@ -1,0 +1,94 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 17f221a5-a6f2-4b33-852f-00239a7cea7c
+  bundle: event
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Cultivating a dynamic career in UX'
+  created:
+    -
+      value: 1729525999
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  body:
+    -
+      value: '<p>Join us as we explore what success can look like in a dynamic user experience (UX) career. Speakers from the Department of the Treasury and the Library of Congress will share their insights on how their careers in UX have continued to evolve.</p><p>&nbsp;</p><p>In this session, you’ll learn how to:</p><p>&nbsp;</p><p>* Identify skills that support a quick-moving UX career</p><p>* Apply these skills with career-enhancing activities</p><p>* Continue to evolve your career in UX</p><p>&nbsp;</p><p><strong>**This event is best suited for:**</strong> UX professionals of all levels</p><p>&nbsp;</p><p><strong>## Speakers</strong></p><p>&nbsp;</p><p>* <strong>**UX Community co-lead, Natalie Buda Smith**</strong> - Director of Digital Strategy, Library of Congress&nbsp;</p><p>* <strong>**Michelle Zager**</strong> - TEI</p><p>* <strong>**Carlos Alvarado**</strong> - Senior UX Designer, Library of Congress</p><p>&nbsp;</p><p><strong>## Moderator</strong></p><p>&nbsp;</p><p>* <strong>**UX Community co-lead, Jaime Kern**</strong> - Lead Strategist for the Federal Marketplace, GSA</p><p>&nbsp;</p><p><strong>## Video Clips</strong></p><p>&nbsp;</p><p>1. Cultivating a dynamic career in UX - Natalie Buda Smith (time length: 12:06)</p><p>&nbsp;</p><p>{{&lt; youtube id="m9L-vJn6OlI" title="Cultivating a dynamic career in UX" &gt;}}</p><p>&nbsp;</p><p>2. Cultivating a dynamic career in UX - Michelle Zager (time length: 7:26)</p><p>&nbsp;</p><p>{{&lt; youtube id="It-I7gcaaBg" title="Cultivating a dynamic career in UX" &gt;}}</p><p>&nbsp;</p><p>3. Cultivating a dynamic career in UX - Carlos Alvarado (time length: 8:11)</p><p>&nbsp;</p><p>{{&lt; youtube id="UW8v-I8JM_U" title="Cultivating a dynamic career in UX" &gt;}}</p><p>&nbsp;</p><p>- - -</p><p>&nbsp;</p><p><em>*The UX Community of Practice is a group of managers, subject matter experts, designers, developers, writers and others interested in creating efficient, effective and useful technologies. [Join the UX Community](</em><u>https://digital.gov/communities/user-experience/</u><em>).*</em></p>'
+      format: html
+      summary: ''
+  field_captions:
+    -
+      uri: 'https://www.captionedtext.com'
+      title: ''
+      options: {  }
+  field_deck:
+    -
+      value: 'This field purposely left blank'
+      format: html
+  field_end_date:
+    -
+      value: '2050-12-10T00:00:00'
+  field_event_organizer:
+    -
+      value: Digital.gov
+  field_event_platform:
+    -
+      value: zoom
+  field_host:
+    -
+      value: 'User Experience Community of Practice'
+  field_kicker:
+    -
+      value: 'User Experience'
+  field_page_weight:
+    -
+      value: 0
+  field_registration_url:
+    -
+      uri: 'https://gsa.zoomgov.com/meeting/register/vJItdOmpqTgpEygCPS5a5zwjlr-_nNeqAR4'
+      title: ''
+      options: {  }
+  field_start_date:
+    -
+      value: '2050-12-09T22:00:00'
+  field_summary:
+    -
+      value: 'Join us for a discussion on how to adapt your career in user experience (UX) to a quickly changing world.'
+      format: html
+  field_venue:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: efec5435-b4c0-4557-8b55-49be69c2a33f
+          bundle: venue
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1729526457
+          behavior_settings:
+            -
+              value: {  }
+  field_youtube_id:
+    -
+      value: N/A

@@ -1,0 +1,49 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: ddfe8ef0-9df2-4e67-9ebc-cfe54b3083a7
+  bundle: basic_page
+  default_langcode: en
+  depends:
+    47d1784c-68a3-4a3b-a341-3e4f8d092253: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'BASIC-PAGE-all fields'
+  created:
+    -
+      value: 1729524469
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  body:
+    -
+      value: "<p><strong>**The page you're looking for cannot be found.**</strong> Here are a few things that you can try:</p><p>&nbsp;</p><p>* Go back to the [homepage](<u>https://digital.gov/</u>).</p><p>* [Search](<u>http://find.digitalgov.gov/search?affiliate=digitalgov</u>) for the page.</p><p>* View our [latest news](<u>https://digital.gov/news/</u>).</p><p>* Explore topics in our [guides and resources](<u>https://digital.gov/resources/</u>).</p><p>* Send us an email and [let us know this page is missing](<u>mailto:digitalgov@gsa.gov</u>).</p>"
+      format: html
+      summary: ''
+  field_deck:
+    -
+      value: "I'm sorry, but the page you're looking for does not exist."
+      format: html
+  field_featured_image:
+    -
+      entity: 47d1784c-68a3-4a3b-a341-3e4f8d092253
+  field_page_weight:
+    -
+      value: 1
+  field_summary:
+    -
+      value: "We're sorry, but the page you're seeking does not exist. Please verify that you've entered the correct URL in your browser's address bar."
+      format: html

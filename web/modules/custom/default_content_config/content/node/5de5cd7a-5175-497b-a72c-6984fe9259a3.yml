@@ -1,0 +1,54 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 5de5cd7a-5175-497b-a72c-6984fe9259a3
+  bundle: event
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'EVENT-all required fields'
+  created:
+    -
+      value: 1729461042
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  field_start_date:
+    -
+      value: '2024-01-18T19:00:00'
+  field_summary:
+    -
+      value: 'This month the Design System team will talk about the development and rollout of their new accessibility tests for components.'
+      format: html
+  field_venue:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 6fa9a42a-2897-4a67-8ae5-89d0ede6bc7d
+          bundle: venue
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1729461221
+          behavior_settings:
+            -
+              value: {  }

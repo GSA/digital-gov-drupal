@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 11b3c503-cd86-4601-883b-928b8f2cf717
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: topics-og-primary-image.jpg
+  uri:
+    -
+      value: 'public://2024-10/topics-og-primary-image.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 40667
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1729472729

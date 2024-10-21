@@ -1,0 +1,44 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 4bcab59d-11d5-4bf3-84bb-e2d533673c94
+  bundle: community
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'test featured communities topics'
+  created:
+    -
+      value: 1729472244
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  body:
+    -
+      value: '<p>test</p>'
+      format: html
+      summary: ''
+  field_deck:
+    -
+      value: test
+      format: html
+  field_dg_highlight:
+    -
+      value: false
+  field_summary:
+    -
+      value: test
+      format: html

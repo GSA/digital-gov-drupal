@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 79eea7ab-18ce-4c1d-8cee-4c7c5d226c88
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: creative-brain-concept-thanaphiphat-istock-thinkstock-494897999.png
+  uri:
+    -
+      value: 'public://2024-10/creative-brain-concept-thanaphiphat-istock-thinkstock-494897999.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 10639074
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1729470445

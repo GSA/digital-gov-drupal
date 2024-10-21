@@ -1,0 +1,33 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: daf21905-f24f-44d5-bfc2-e53e5cb41d51
+  bundle: source
+  default_langcode: en
+  depends:
+    261021f8-1c56-4529-b0fe-e008bb65d033: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'SOURCE-all required fields'
+  created:
+    -
+      value: 1729471725
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  field_logo:
+    -
+      entity: 261021f8-1c56-4529-b0fe-e008bb65d033

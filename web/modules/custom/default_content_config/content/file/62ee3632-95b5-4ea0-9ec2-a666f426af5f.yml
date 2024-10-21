@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 62ee3632-95b5-4ea0-9ec2-a666f426af5f
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: 2024-uswds-monthly-call-march-title-card.png
+  uri:
+    -
+      value: 'public://2024-10/2024-uswds-monthly-call-march-title-card.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 99754
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1729462358

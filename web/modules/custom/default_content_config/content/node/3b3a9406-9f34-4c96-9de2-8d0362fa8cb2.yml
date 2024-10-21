@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 3b3a9406-9f34-4c96-9de2-8d0362fa8cb2
+  bundle: resources
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'RESOURCES-all required fields'
+  created:
+    -
+      value: 1729471333
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false

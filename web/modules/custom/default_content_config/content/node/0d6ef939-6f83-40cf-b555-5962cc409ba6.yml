@@ -1,0 +1,89 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 0d6ef939-6f83-40cf-b555-5962cc409ba6
+  bundle: event
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Federal Crowdsourcing Webinar Series, Episode 3: The Opportunity Project'
+  created:
+    -
+      value: 1729525313
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  field_captions:
+    -
+      uri: 'https://www.captionedtext.com'
+      title: ''
+      options: {  }
+  field_deck:
+    -
+      value: 'This field purposely left blank'
+      format: html
+  field_end_date:
+    -
+      value: '2050-11-06T15:00:00'
+  field_event_organizer:
+    -
+      value: 'DigitalGov University'
+  field_event_platform:
+    -
+      value: youtube
+  field_host:
+    -
+      value: Challenge.gov
+  field_kicker:
+    -
+      value: 'Episode 3'
+  field_page_weight:
+    -
+      value: 0
+  field_registration_url:
+    -
+      uri: 'https://www.eventbrite.com/e/federal-crowdsourcing-webinar-series-episode-3-the-opportunity-project-registration-59460181002 captions:'
+      title: ''
+      options: {  }
+  field_start_date:
+    -
+      value: '2050-11-06T14:00:00'
+  field_summary:
+    -
+      value: 'The Opportunity Project engages government, communities, and the technology industry to create digital tools that address our greatest challenges as a nation. Learn how this initiative is making government data more accessible through cross-sector collabo'
+      format: html
+  field_venue:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: f8fe89f1-4b73-4e50-a227-e9a2a3118ea8
+          bundle: venue
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1729525817
+          behavior_settings:
+            -
+              value: {  }
+  field_youtube_id:
+    -
+      value: ZhMgfptuiUw

@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: cda4e111-a7b4-4e38-86b6-5f9c095c2300
+  bundle: services
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'SERVICES-all required fields'
+  created:
+    -
+      value: 1729471454
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  field_summary:
+    -
+      value: 'Explore services that are user-centered, open-source, and built by government for government.'
+      format: html

@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 5422ab63-c9a2-48cd-9816-a1892a687169
+  bundle: landing_page
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'JOB BOARD'
+  created:
+    -
+      value: 1729528301
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  body:
+    -
+      value: '<p>body text</p>'
+      format: html
+      summary: ''
+  field_buttons:
+    -
+      uri: 'http://www.digital.gov'
+      title: 'Placeholder Button'
+      options: {  }
+  field_summary:
+    -
+      value: n/a
+      format: html

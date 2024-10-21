@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 986de625-5015-47c0-9ccc-273f985b69b8
+  bundle: landing_page
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: BLOGS
+  created:
+    -
+      value: 1729526618
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  body:
+    -
+      value: '<p>This is placeholder text in the body field</p>'
+      format: html
+      summary: ''
+  field_buttons:
+    -
+      uri: 'http://www.digital.gov'
+      title: 'Placeholder Button'
+      options: {  }
+  field_summary:
+    -
+      value: 'Innovative work, news, and ideas from people and teams in government'
+      format: html

@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 261021f8-1c56-4529-b0fe-e008bb65d033
+  bundle: image
+  default_langcode: en
+  depends:
+    adf49a05-8e7f-4796-b8a8-035b433efee4: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: dap-10-years-total-daily-visitors.png
+  created:
+    -
+      value: 1729471922
+  field_media_image:
+    -
+      entity: adf49a05-8e7f-4796-b8a8-035b433efee4
+      alt: dap
+      title: ''
+      width: 1200
+      height: 500
