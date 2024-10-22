@@ -5,10 +5,8 @@ _meta:
   bundle: news
   default_langcode: en
   depends:
-    6929bd3c-6aac-4d75-a8b8-5f4990d4470e: node
     c2eb37c0-02a5-4a36-90bc-a7039449b61b: media
     8c66bd6c-e163-46cd-b915-2575b5686eec: media
-    ecc6c716-4a3a-4e2c-80fd-990cd7210633: node
 default:
   revision_uid:
     -
@@ -38,7 +36,7 @@ default:
       summary: ''
   field_authors:
     -
-      entity: 6929bd3c-6aac-4d75-a8b8-5f4990d4470e
+      target_id: 15
   field_deck:
     -
       value: 'The new community will explore opportunities, share ideas, and collaborate on how RPA can be effectively implemented in federal agencies'
@@ -61,4 +59,4 @@ default:
       format: html
   field_topics:
     -
-      entity: ecc6c716-4a3a-4e2c-80fd-990cd7210633
+      target_id: 13

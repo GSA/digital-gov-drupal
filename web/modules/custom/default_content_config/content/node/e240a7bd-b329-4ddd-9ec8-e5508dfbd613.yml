@@ -5,9 +5,7 @@ _meta:
   bundle: event
   default_langcode: en
   depends:
-    920ed3b5-9167-496f-8c3b-84d0a9a97b90: node
     15e82358-a177-4949-af9f-4bd344d44083: media
-    39014256-e826-49de-836e-268973750a59: node
 default:
   revision_uid:
     -
@@ -37,7 +35,7 @@ default:
       summary: ''
   field_authors:
     -
-      entity: 920ed3b5-9167-496f-8c3b-84d0a9a97b90
+      target_id: 7
   field_captions:
     -
       uri: 'https://www.captionedtext.com/client/event.aspx?EventID=4341007&CustomerID=321'
@@ -85,7 +83,7 @@ default:
       format: html
   field_topics:
     -
-      entity: 39014256-e826-49de-836e-268973750a59
+      target_id: 6
   field_venue:
     -
       entity:

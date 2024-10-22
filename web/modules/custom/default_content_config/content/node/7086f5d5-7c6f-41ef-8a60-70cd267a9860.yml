@@ -4,8 +4,6 @@ _meta:
   uuid: 7086f5d5-7c6f-41ef-8a60-70cd267a9860
   bundle: resources
   default_langcode: en
-  depends:
-    148fe456-e86f-45a0-8191-b9044bedd2e6: node
 default:
   revision_uid:
     -
@@ -42,7 +40,7 @@ default:
       format: html
   field_topics:
     -
-      entity: 148fe456-e86f-45a0-8191-b9044bedd2e6
+      target_id: 16
   field_deck:
     -
       value: "Don't know where to start with a federal requirement? Aren't sure how to adopt a new technology with your team? Start here! We have resources for every level. Our collections are organized by popular topics, and they will help you meet the requirements of"

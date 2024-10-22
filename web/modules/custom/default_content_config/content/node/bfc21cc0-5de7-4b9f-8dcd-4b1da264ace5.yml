@@ -1,0 +1,122 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: bfc21cc0-5de7-4b9f-8dcd-4b1da264ace5
+  bundle: topics
+  default_langcode: en
+  depends:
+    f8ffffda-7ab8-48d7-8e20-2f5d5277ec6d: node
+    8f5405bb-957a-4842-b1fb-6276ef95a165: node
+    47d1784c-68a3-4a3b-a341-3e4f8d092253: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Plain Language'
+  created:
+    -
+      value: 1729618450
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  field_featured_communities:
+    -
+      entity: f8ffffda-7ab8-48d7-8e20-2f5d5277ec6d
+  field_featured_links:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 65be57ca-1660-4535-9a1b-62f709df61b9
+          bundle: featured_links
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1729618596
+          behavior_settings:
+            -
+              value: {  }
+          field_links:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 41217f56-b5f3-4137-88f3-7673414e12af
+                  bundle: internal_content
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1729619776
+                  behavior_settings:
+                    -
+                      value: {  }
+                  field_content:
+                    -
+                      entity: 8f5405bb-957a-4842-b1fb-6276ef95a165
+          field_title:
+            -
+              value: 'Plain Language Web Writing Tips'
+  field_featured_resources:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: e0695d15-fc3a-4438-8b90-dd0eba8b6461
+          bundle: external_content
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1729619480
+          behavior_settings:
+            -
+              value: {  }
+          field_link:
+            -
+              uri: 'https://www.plainlanguage.gov/?_gl=1*18e8vtx*_ga*MTQ1MzgyODI0LjE3MTY5MjA5NzY.*_ga_HBYXWFP794*MTcyOTYxMzAxNy43MC4xLjE3Mjk2MTg2MjcuMC4wLjA.'
+              title: PlainLanguage.gov
+              options: {  }
+          field_summary:
+            -
+              value: 'A resource to help federal employees write in plain language and comply   with the Plain Writing Act of 2010.'
+              format: html
+  field_legislation:
+    -
+      uri: 'https://www.govinfo.gov/app/details/PLAW-111publ274'
+      title: 'Plain Writing Act of 2010'
+      options: {  }
+  field_page_weight:
+    -
+      value: 1
+  field_primary_image:
+    -
+      entity: 47d1784c-68a3-4a3b-a341-3e4f8d092253
+  field_summary:
+    -
+      value: 'Plain language is communication that is clear and easy to understand for your target audience, regardless of the medium used to deliver it. It is communication your audience can understand the first time they encounter it. Using plain language on governme'
+      format: html

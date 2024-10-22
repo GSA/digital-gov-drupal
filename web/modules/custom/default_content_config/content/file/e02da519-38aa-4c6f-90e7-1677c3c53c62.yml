@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: e02da519-38aa-4c6f-90e7-1677c3c53c62
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: communities-card-web-mgrs.png
+  uri:
+    -
+      value: 'public://2024-10/communities-card-web-mgrs.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 91566
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1729611457

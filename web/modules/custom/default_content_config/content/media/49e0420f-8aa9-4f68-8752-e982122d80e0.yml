@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 49e0420f-8aa9-4f68-8752-e982122d80e0
+  bundle: image
+  default_langcode: en
+  depends:
+    ecd6a311-13ac-4394-878e-5b36a2121a3e: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: web_analytics.png
+  created:
+    -
+      value: 1729636715
+  field_media_image:
+    -
+      entity: ecd6a311-13ac-4394-878e-5b36a2121a3e
+      alt: 'Web Analytics'
+      title: ''
+      width: 2501
+      height: 1307

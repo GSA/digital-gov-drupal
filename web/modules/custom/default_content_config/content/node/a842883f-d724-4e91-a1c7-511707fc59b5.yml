@@ -1,0 +1,37 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: a842883f-d724-4e91-a1c7-511707fc59b5
+  bundle: resources
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Guidance for Implementing the Privacy Provisions of the E–Government Act of 2002 (M-03–22)'
+  created:
+    -
+      value: 1729617981
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  body:
+    -
+      value: '<p>This guidance provides information to agencies on implementing the privacy provisions of the E-Government Act of 2002.</p><p>&nbsp;</p><p>It addresses privacy protections when Americans interact with their government. The guidance directs agencies to conduct reviews of how information about individuals is handled within their agency when they use information technology (IT) to collect new information, or when agencies develop or buy new IT systems to handle collections of personally identifiable information. Agencies are also directed to describe how the government handles information that individuals provide electronically, so that the American public has assurances that personal information is protected.</p><p>&nbsp;</p><p>[View M-03-22: Guidance for Implementing the Privacy Provisions of the E-Gov Act (PDF, 165 kb, 16 pages, September 2003)](<u>https://www.whitehouse.gov/wp-content/uploads/2017/11/203-M-03-22-OMB-Guidance-for-Implementing-the-Privacy-Provisions-of-the-E-Government-Act-of-2002-1.pdf</u>)</p><p>&nbsp;</p><p><strong>## Related Resources</strong></p><p>&nbsp;</p><p>- [OMB M-15-13, Policy to Require Secure Connections across Federal Websites and Web Services](<u>https://www.whitehouse.gov/wp-content/uploads/legacy_drupal_files/omb/memoranda/2015/m-15-13.pdf</u>) (PDF, 258 KB, 5 pages, June 2015)</p><p>- [Requirements for Accepting Externally Issued Identity Credentials](<u>https://obamawhitehouse.archives.gov/sites/default/files/omb/assets/egov_docs/ombreqforacceptingexternally_issuedidcred10-6-2011.pdf</u>) (PDF, 166 KB, 4 pages, October 2011)</p><p>- [OMB M-10-22, Guidance for Online Use of Web Measurement and Customization Technologies](<u>https://www.whitehouse.gov/wp-content/uploads/legacy_drupal_files/omb/memoranda/2010/m10-22.pdf</u>) (PDF, 130 KB, 9 pages, June 2010)</p><p>- [OMB M-10-23, Guidance for Agency Use of Third-Party Websites and Applications](<u>https://www.whitehouse.gov/wp-content/uploads/legacy_drupal_files/omb/memoranda/2010/m10-23.pdf</u>) (PDF, 78 KB, 9 pages, June 2010)</p><p>- [OMB Circular A–130 Appendix 1](<u>https://obamawhitehouse.archives.gov/omb/circulars_a130_a130appendix_i</u>)</p><p>- [Children’s Online Privacy Protection Act of 1998 (COPPA)](<u>http://www.ftc.gov/ogc/coppa1.htm</u>)</p><p>- [OMB M-05-04, Policies for Federal Agency Public Websites](<u>https://www.whitehouse.gov/wp-content/uploads/legacy_drupal_files/omb/memoranda/2005/m05-04.pdf</u>) (PDF, 48 KB, 5 pages, December 2004)</p><p>- [E-Government Act of 2002, Section 207](<u>http://www.archives.gov/about/laws/egov-act-section-207.html</u>)</p><p>- [Privacy Act of 1974](<u>http://www.justice.gov/opcl/1974privacyact-overview.htm</u>)</p><p>&nbsp;</p><p>---</p><p>&nbsp;</p><p>See more [DigitalGov Resources]({{&lt; ref "/resources" &gt;}})</p>'
+      format: html
+      summary: ''
+  field_summary:
+    -
+      value: 'This guidance provides information to agencies on implementing the privacy provisions of the E-Government Act of 2002. It addresses privacy protections when Americans interact with their government.'
+      format: html

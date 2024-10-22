@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 6bd8641f-84c6-4ddb-b8b2-9c076b017198
+  bundle: image
+  default_langcode: en
+  depends:
+    fb33e5f3-246b-4db7-b5a2-3c86bbbd9d3d: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: fpo.jpeg
+  created:
+    -
+      value: 1729603979
+  field_media_image:
+    -
+      entity: fb33e5f3-246b-4db7-b5a2-3c86bbbd9d3d
+      alt: FPO
+      title: ''
+      width: 204
+      height: 192

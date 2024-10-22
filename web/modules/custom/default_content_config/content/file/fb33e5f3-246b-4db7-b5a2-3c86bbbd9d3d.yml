@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: fb33e5f3-246b-4db7-b5a2-3c86bbbd9d3d
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: fpo.jpeg
+  uri:
+    -
+      value: 'public://2024-10/fpo.jpeg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 1290
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1729603979

@@ -1,0 +1,72 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 80caaa35-a22b-43ae-a72c-9a714c333a06
+  bundle: topics
+  default_langcode: en
+  depends:
+    bd7fedff-9767-49b3-8a71-8bab51265a86: node
+    6bd8641f-84c6-4ddb-b8b2-9c076b017198: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: Analytics
+  created:
+    -
+      value: 1729636108
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  field_deck:
+    -
+      value: 'easure and plan your site performance with analytics best practices and tools'
+      format: html
+  field_featured_communities:
+    -
+      entity: bd7fedff-9767-49b3-8a71-8bab51265a86
+  field_featured_links:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: acb3f905-b8cd-40ed-b741-6cad245a9f38
+          bundle: featured_links
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1729636289
+          behavior_settings:
+            -
+              value: {  }
+  field_legislation:
+    -
+      uri: 'https://www.whitehouse.gov/wp-content/uploads/legacy_drupal_files/omb/memoranda/2010/m10-23.pdf'
+      title: 'M-10-22, Guidance for Online Use of Web Measurement and Customization Technologies (PDF, 130 KB, 9 pages, June 2010)'
+      options: {  }
+  field_page_weight:
+    -
+      value: 2
+  field_primary_image:
+    -
+      entity: 6bd8641f-84c6-4ddb-b8b2-9c076b017198
+  field_summary:
+    -
+      value: 'Web analytics provide valuable insights into how users interact with a website. Use the data gained from web analytics to identify areas for improvement and make data-driven decisions. This can lead to a more user-friendly and engaging website, which can '
+      format: html

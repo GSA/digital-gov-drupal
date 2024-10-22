@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: f53fc4bd-54e8-49b3-b419-73525681c8a1
+  bundle: image
+  default_langcode: en
+  depends:
+    e02da519-38aa-4c6f-90e7-1677c3c53c62: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: communities-card-web-mgrs.png
+  created:
+    -
+      value: 1729611457
+  field_media_image:
+    -
+      entity: e02da519-38aa-4c6f-90e7-1677c3c53c62
+      alt: 'Web Managers Community'
+      title: ''
+      width: 2501
+      height: 1307

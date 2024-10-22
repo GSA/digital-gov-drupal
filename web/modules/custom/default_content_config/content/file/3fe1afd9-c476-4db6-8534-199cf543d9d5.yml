@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 3fe1afd9-c476-4db6-8534-199cf543d9d5
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: communities-card-pl.png
+  uri:
+    -
+      value: 'public://2024-10/communities-card-pl.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 86883
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1729618993

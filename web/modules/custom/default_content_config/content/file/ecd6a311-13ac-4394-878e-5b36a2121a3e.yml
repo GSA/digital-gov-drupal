@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: ecd6a311-13ac-4394-878e-5b36a2121a3e
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: web_analytics.png
+  uri:
+    -
+      value: 'public://2024-10/web_analytics.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 90900
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1729636715

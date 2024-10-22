@@ -5,7 +5,7 @@ _meta:
   bundle: topics
   default_langcode: en
   depends:
-    4bcab59d-11d5-4bf3-84bb-e2d533673c94: node
+    623a2982-602b-4762-a59e-9a7c30c64f36: node
     47d1784c-68a3-4a3b-a341-3e4f8d092253: media
 default:
   revision_uid:
@@ -31,23 +31,23 @@ default:
       value: false
   body:
     -
-      value: '<p>Body field&nbsp;</p>'
+      value: '<p>Lorem ipsum odor amet, consectetuer adipiscing elit. Dapibus facilisis tellus eleifend cras lectus diam efficitur. Porttitor aenean habitasse magna inceptos commodo litora. Magna fermentum sit phasellus taciti neque venenatis feugiat proin! Himenaeos nam leo hendrerit netus litora luctus porttitor? Congue <strong>habitasse</strong> faucibus habitasse nascetur sit. Dolor hac sagittis ligula vulputate; elit quisque mi tempor. Posuere penatibus vehicula orci suspendisse tortor netus nostra leo laoreet.</p><p>Cursus etiam metus sagittis ultricies, aliquet eget. Nostra euismod feugiat fames suspendisse hendrerit dapibus phasellus felis. Tempor tellus lacus convallis varius hac turpis. Pulvinar augue fusce accumsan suscipit molestie interdum augue porta. Consectetur maximus pulvinar ex curae nostra tellus nisi eu. Convallis mattis ex ullamcorper nisl neque mi torquent. Eros inceptos dis pretium lectus sem mus a. Faucibus proin luctus ultrices; vestibulum tincidunt rutrum.</p>'
       format: html
       summary: ''
   field_deck:
     -
-      value: 'The design of products, devices, services, or environments for people with disabilities'
+      value: 'nulla iaculis ligula fames proin in <b>erat</b>'
       format: html
   field_featured_communities:
     -
-      entity: 4bcab59d-11d5-4bf3-84bb-e2d533673c94
+      entity: 623a2982-602b-4762-a59e-9a7c30c64f36
   field_featured_links:
     -
       entity:
         _meta:
           version: '1.0'
           entity_type: paragraph
-          uuid: c3d9253c-d7ca-40a0-8449-e41956cce8fd
+          uuid: 2322b996-a2ea-4ec5-a5e7-947bd26aec48
           bundle: featured_links
           default_langcode: en
         default:
@@ -56,7 +56,7 @@ default:
               value: true
           created:
             -
-              value: 1729472244
+              value: 1729613493
           behavior_settings:
             -
               value: {  }
@@ -66,7 +66,7 @@ default:
                 _meta:
                   version: '1.0'
                   entity_type: paragraph
-                  uuid: d71a97ce-88f1-4788-babc-cddeb07bacd2
+                  uuid: 3035f2a9-682e-4d0a-b961-dd56bfad1171
                   bundle: external_content
                   default_langcode: en
                 default:
@@ -75,29 +75,29 @@ default:
                       value: true
                   created:
                     -
-                      value: 1729472853
+                      value: 1729613533
                   behavior_settings:
                     -
                       value: {  }
                   field_link:
                     -
-                      uri: 'http://www.digital.gov'
-                      title: 'digital gov'
+                      uri: 'https://digital.gov/2019/06/18/introducing-a-guide-paperwork-reduction-act/'
+                      title: 'Guide to the Paperwork Reduction Act'
                       options: {  }
                   field_summary:
                     -
-                      value: 'An overview of how to design and deliver accessible digital products and services in the federal government'
+                      value: 'The Paperwork Reduction Act (PRA) of 1995 requires that agencies obtain Office of Management and Budget (OMB) approval before requesting most types of information from the public.'
                       format: html
           field_title:
             -
-              value: 'These are external links'
+              value: 'Guide to the Paperwork Reduction Act'
   field_featured_resources:
     -
       entity:
         _meta:
           version: '1.0'
           entity_type: paragraph
-          uuid: 273ac8e6-cf57-4f33-9874-eadc084f13c6
+          uuid: 330f862b-6410-4c03-8a8d-7cc54869e8d3
           bundle: external_content
           default_langcode: en
         default:
@@ -106,23 +106,23 @@ default:
               value: true
           created:
             -
-              value: 1729472750
+              value: 1729616185
           behavior_settings:
             -
               value: {  }
           field_link:
             -
-              uri: 'http://www.digital.gov'
-              title: 'digital gov'
+              uri: 'https://www.cdc.gov/ccindex/index.html'
+              title: 'The CDC Clear Communication Index'
               options: {  }
           field_summary:
             -
-              value: 'he Federal Field Guide to De-risk Government Technology offers guidance to federal agencies on how to structure software development teams, write contracts, and oversee agile software activities to reduce risks and improve outcomes for end-users.'
+              value: 'The CDC Clear Communication Index is a research-based tool to help you develop and assess public communication materials.'
               format: html
   field_legislation:
     -
       uri: 'internal:/resources/delivering-digital-first-public-experience'
-      title: '21st Century Integrated Digital Experience Act (21st Century IDEA) and M-23-22'
+      title: 'nulla iaculis ligula fames proin in <b>erat</b>'
       options: {  }
   field_page_weight:
     -
@@ -132,5 +132,5 @@ default:
       entity: 47d1784c-68a3-4a3b-a341-3e4f8d092253
   field_summary:
     -
-      value: "Accessibility isn't just the right thing to do; it’s the law. The guidance, resources, and community you find here will help you deliver accessible digital products and services in the federal government."
+      value: 'nulla iaculis ligula fames proin in <b>erat</b>'
       format: html

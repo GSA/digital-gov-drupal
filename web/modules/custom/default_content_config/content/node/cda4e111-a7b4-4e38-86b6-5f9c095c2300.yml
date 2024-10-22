@@ -28,5 +28,5 @@ default:
       value: false
   field_summary:
     -
-      value: 'Explore services that are user-centered, open-source, and built by government for government.'
+      value: 'Lorem ipsum odor amet, consectetuer <b>adipi</b>'
       format: html

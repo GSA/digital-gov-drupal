@@ -1,0 +1,121 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 58b5051e-356e-4ace-be42-ca090259d6ab
+  bundle: topics
+  default_langcode: en
+  depends:
+    623a2982-602b-4762-a59e-9a7c30c64f36: node
+    a842883f-d724-4e91-a1c7-511707fc59b5: node
+    cbcd65ff-8274-46c7-89bc-9f8c2bdaddd3: node
+    47d1784c-68a3-4a3b-a341-3e4f8d092253: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: Privacy
+  created:
+    -
+      value: 1729617378
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  field_deck:
+    -
+      value: 'As agencies carry out their diverse missions, they must also respect and protect personally identifiable information (PII)'
+      format: html
+  field_featured_communities:
+    -
+      entity: 623a2982-602b-4762-a59e-9a7c30c64f36
+  field_featured_links:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 62f634e2-c9d0-4824-ab99-949d787c673c
+          bundle: featured_links
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1729617573
+          behavior_settings:
+            -
+              value: {  }
+          field_links:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 678ad8f1-eb73-4957-aa0a-ac41caeabcbc
+                  bundle: internal_content
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1729617946
+                  behavior_settings:
+                    -
+                      value: {  }
+                  field_content:
+                    -
+                      entity: a842883f-d724-4e91-a1c7-511707fc59b5
+          field_title:
+            -
+              value: 'Guidance for Implementing the Privacy Provisions of the E–Government Act of 2002 (M-03–22)'
+  field_featured_resources:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 0f307e01-52fd-4940-b907-e34562f33571
+          bundle: internal_content
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1729617779
+          behavior_settings:
+            -
+              value: {  }
+          field_content:
+            -
+              entity: cbcd65ff-8274-46c7-89bc-9f8c2bdaddd3
+  field_legislation:
+    -
+      uri: 'https://www.fpc.gov/resources/omb/'
+      title: 'Privacy Act of 1974 & various OMB memos'
+      options: {  }
+  field_page_weight:
+    -
+      value: 2
+  field_primary_image:
+    -
+      entity: 47d1784c-68a3-4a3b-a341-3e4f8d092253
+  field_summary:
+    -
+      value: 'For the public to have trust in government institutions, they need to know that their personal information is secure, and will be used only for legitimate purposes. Privacy violations can put people at risk for identity theft, financial fraud, discriminat'
+      format: html

@@ -1,0 +1,56 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 220a49de-e1ee-4314-ba79-39e0b3cf552a
+  bundle: authors
+  default_langcode: en
+  depends:
+    6bd8641f-84c6-4ddb-b8b2-9c076b017198: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: Authors
+  created:
+    -
+      value: 1729604607
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  field_bio:
+    -
+      value: 'Erika is a Marketing and Communication Coordinator for Peace Corps Response, a short-term, high-impact Peace Corps program.'
+      format: html
+  field_bio_image:
+    -
+      entity: 6bd8641f-84c6-4ddb-b8b2-9c076b017198
+  field_display_name:
+    -
+      value: 'Erika Brown'
+      format: html
+  field_email:
+    -
+      value: ebrown2@peacecorps.gov
+  field_first_name:
+    -
+      value: Erika
+      format: html
+  field_last_name:
+    -
+      value: Brown
+      format: html
+  field_summary:
+    -
+      value: 'The people who have contributed their stories and guidance over the years.'
+      format: html

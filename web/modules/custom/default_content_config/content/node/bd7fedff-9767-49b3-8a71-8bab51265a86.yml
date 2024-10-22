@@ -1,0 +1,40 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: bd7fedff-9767-49b3-8a71-8bab51265a86
+  bundle: community
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Web Analytics and Optimization'
+  created:
+    -
+      value: 1729636289
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  body:
+    -
+      value: '<p>In government, those with analytics as part of their duties are faced with a fast-paced, ever-changing environment. Technologies, strategies, and tools change regularly. This community aims to uncover best practices, case studies, tips, and tools for web analytics and optimization.</p><p>&nbsp;</p><p><strong>## What We Do</strong></p><p>&nbsp;</p><p>We run meetings and trainings, engage in collaborative discussion, and send general emails with updates on new technology and trends.</p><p>&nbsp;</p><p><strong>## Who We Are</strong></p><p>&nbsp;</p><p>We’re government website analysts, developers, content strategists, user experience (UX) designers, communications professionals, or any and everyone else who use data to improve the public’s interaction with government sites.</p><p>&nbsp;</p><p><strong>## Related Resources</strong></p><p>&nbsp;</p><p>* [Digital Analytics Program](<u>https://digital.gov/guides/dap/</u>)</p><p>* [Search.gov](<u>https://search.gov/</u>)</p><p>* [U.S. Web Design System](<u>https://designsystem.digital.gov/</u>)</p><p>* [Web Analytics Playbook](<u>https://digital.gov/guides/web-analytics-playbook/</u>)</p>'
+      format: html
+      summary: ''
+  field_dg_highlight:
+    -
+      value: false
+  field_summary:
+    -
+      value: 'Make better decisions using web analytics and other optimization strategies'
+      format: html
