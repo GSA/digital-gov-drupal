@@ -12,7 +12,7 @@ default:
       value: web_analytics.png
   uri:
     -
-      value: 'public://2024-10/web_analytics.png'
+      value: 'public://2024-10/web_analytics_0.png'
   filemime:
     -
       value: image/png

@@ -12,7 +12,7 @@ default:
       value: communities-card-web-mgrs.png
   uri:
     -
-      value: 'public://2024-10/communities-card-web-mgrs.png'
+      value: 'public://2024-10/communities-card-web-mgrs_0.png'
   filemime:
     -
       value: image/png

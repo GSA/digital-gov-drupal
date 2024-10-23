@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 48556cac-53e4-4f0e-85c9-b44cd9867296
+  bundle: image
+  default_langcode: en
+  depends:
+    0ec3708e-1d2d-4879-8f4c-04145eb83b3a: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: kaufmann-404-page-spike.png
+  created:
+    -
+      value: 1729710809
+  field_media_image:
+    -
+      entity: 0ec3708e-1d2d-4879-8f4c-04145eb83b3a
+      alt: 'page spike'
+      title: ''
+      width: 844
+      height: 670

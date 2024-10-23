@@ -12,7 +12,7 @@ default:
       value: pink_logo.jpeg
   uri:
     -
-      value: 'public://2024-10/pink_logo.jpeg'
+      value: 'public://2024-10/pink_logo_0.jpeg'
   filemime:
     -
       value: image/jpeg

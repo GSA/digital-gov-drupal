@@ -7,6 +7,7 @@ _meta:
   depends:
     c2eb37c0-02a5-4a36-90bc-a7039449b61b: media
     1e945b0b-bcf5-4df7-9105-6c222eb70c13: media
+    2e0f1e02-efde-48e6-9e9e-4cc1e572feec: node
 default:
   revision_uid:
     -
@@ -59,4 +60,4 @@ default:
       value: true
   field_topics:
     -
-      target_id: 11
+      entity: 2e0f1e02-efde-48e6-9e9e-4cc1e572feec

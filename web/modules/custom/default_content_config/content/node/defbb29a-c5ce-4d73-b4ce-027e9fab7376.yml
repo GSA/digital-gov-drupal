@@ -1,7 +1,7 @@
 _meta:
   version: '1.0'
   entity_type: node
-  uuid: 5de5cd7a-5175-497b-a72c-6984fe9259a3
+  uuid: defbb29a-c5ce-4d73-b4ce-027e9fab7376
   bundle: event
   default_langcode: en
 default:
@@ -19,7 +19,7 @@ default:
       value: 'EVENT-all required fields'
   created:
     -
-      value: 1729461042
+      value: 1729711401
   promote:
     -
       value: false
@@ -28,10 +28,10 @@ default:
       value: false
   field_start_date:
     -
-      value: '2024-01-18T19:00:00'
+      value: '9999-09-09T13:09:09'
   field_summary:
     -
-      value: 'This month the Design System team will talk about the development and rollout of their new accessibility tests for components.'
+      value: 'nulla iaculis ligula fames proin in <b>erat</b>'
       format: html
   field_venue:
     -
@@ -39,7 +39,7 @@ default:
         _meta:
           version: '1.0'
           entity_type: paragraph
-          uuid: 6fa9a42a-2897-4a67-8ae5-89d0ede6bc7d
+          uuid: 13b168e5-b995-4c6e-b0b8-e4c27d9cdfc5
           bundle: venue
           default_langcode: en
         default:
@@ -48,7 +48,7 @@ default:
               value: true
           created:
             -
-              value: 1729461221
+              value: 1729711487
           behavior_settings:
             -
               value: {  }

@@ -1,0 +1,49 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 8f1dda66-7cf9-43ca-a086-ea1f8b19ef6d
+  bundle: basic_page
+  default_langcode: en
+  depends:
+    6bd8641f-84c6-4ddb-b8b2-9c076b017198: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Contribute to Digital.gov'
+  created:
+    -
+      value: 1729713568
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  body:
+    -
+      value: '<p>While we welcome event and content contributions from community members across all levels of experience, we know that can feel like a big leap, especially for folks who are new to the federal government or Digital.gov. So, we offer other ways to contribute.</p><p>&nbsp;</p><p><strong>**Open Opportunities:**</strong> We occasionally post short, recurring tasks on the Open Opportunities platform. Each task takes about 8 hours. [Browse all Digital.gov tasks](<u>https://openopps.usajobs.gov/search?state=open&amp;state=in%20progress&amp;term=digital.gov&amp;page=1</u>) to find one that is a good fit for you.</p><p>&nbsp;</p><p><strong>**Community mailing lists:**</strong> Share your thoughts and ideas on the community LISTSERV. Tell us about your agency and team and some of your noteworthy projects. Share best practices and resources. Ask questions about new research, industry trends, and other topics. All community members can post messages on the LISTSERV. And be sure to [join several Digital.gov communities of practice](<u>https://digital.gov/communities/</u>). Each community has its own culture, and you’ll learn something new by joining more than one community.</p><p>&nbsp;</p><p><strong>**Feedback:**</strong> We want to hear from you. We use feedback from community members and the public to continually improve Digital.gov. Complete our post-event, website, and community surveys, or write to us at [digitalgov@gsa.gov](<u>mailto:digitalgov@gsa.gov</u>) to share what’s on your mind.</p>'
+      format: html
+      summary: ''
+  field_deck:
+    -
+      value: "Have a case study to share? Did your team recently launch something new? Here is what we're looking for."
+      format: html
+  field_featured_image:
+    -
+      entity: 6bd8641f-84c6-4ddb-b8b2-9c076b017198
+  field_page_weight:
+    -
+      value: 1
+  field_summary:
+    -
+      value: "Have a case study to share? Did your team recently launch something new? Here is what we're looking for."
+      format: html

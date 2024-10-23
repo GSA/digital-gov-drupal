@@ -1,0 +1,43 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 96c5f0a4-57d7-42d6-a297-7f9996e322ee
+  bundle: services
+  default_langcode: en
+  depends:
+    95077128-6d33-4445-a48a-4ad8ebb7d9b3: node
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Centers of Excellence'
+  created:
+    -
+      value: 1729706079
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  field_contact:
+    -
+      value: connectcoe@gsa.gov
+  field_page_weight:
+    -
+      value: 1
+  field_summary:
+    -
+      value: 'We implement IT modernization at federal agencies by leveraging private   sector innovation and government services while centralizing best practices   and expertise for holistic transformation.'
+      format: html
+  field_topics:
+    -
+      entity: 95077128-6d33-4445-a48a-4ad8ebb7d9b3

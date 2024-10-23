@@ -12,7 +12,7 @@ default:
       value: communities-card-comms.png
   uri:
     -
-      value: 'public://2024-10/communities-card-comms.png'
+      value: 'public://2024-10/communities-card-comms_0.png'
   filemime:
     -
       value: image/png

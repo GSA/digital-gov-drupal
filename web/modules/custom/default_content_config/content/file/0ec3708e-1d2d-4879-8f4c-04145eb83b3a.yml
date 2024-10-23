@@ -1,7 +1,7 @@
 _meta:
   version: '1.0'
   entity_type: file
-  uuid: adf49a05-8e7f-4796-b8a8-035b433efee4
+  uuid: 0ec3708e-1d2d-4879-8f4c-04145eb83b3a
   default_langcode: en
 default:
   uid:
@@ -9,19 +9,19 @@ default:
       target_id: 1
   filename:
     -
-      value: dap-10-years-total-daily-visitors.png
+      value: kaufmann-404-page-spike.png
   uri:
     -
-      value: 'public://2024-10/dap-10-years-total-daily-visitors_0.png'
+      value: 'public://2024-10/kaufmann-404-page-spike.png'
   filemime:
     -
       value: image/png
   filesize:
     -
-      value: 53273
+      value: 161774
   status:
     -
       value: true
   created:
     -
-      value: 1729471922
+      value: 1729710809

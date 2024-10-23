@@ -12,7 +12,7 @@ default:
       value: guide-dap.png
   uri:
     -
-      value: 'public://2024-10/guide-dap.png'
+      value: 'public://2024-10/guide-dap_0.png'
   filemime:
     -
       value: image/png

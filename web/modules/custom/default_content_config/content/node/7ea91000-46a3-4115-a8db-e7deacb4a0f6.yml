@@ -1,0 +1,119 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 7ea91000-46a3-4115-a8db-e7deacb4a0f6
+  bundle: event
+  default_langcode: en
+  depends:
+    6bd8641f-84c6-4ddb-b8b2-9c076b017198: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'The Intersection Between Plain Language and 508 Compliance'
+  created:
+    -
+      value: 1729712066
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  body:
+    -
+      value: '<p>At its core, plain language is about making documents accessible to readers. In this month’s meeting we will discuss how plain language intersects with 508 compliance requirements to make federal electronic documents and technology accessible to people with disabilities. We invite 508 program managers and plain language experts to join us for an informative discussion. Topics include:</p><p>&nbsp;</p><p>- What do plain language experts need to know about 508 compliance?</p><p>- How can plain language support 508 compliance (and vice versa)</p><p>- Disabilities can be permanent, temporary, or situational, and even when they’re permanent, they can be new or longstanding. What are some of the ways in which we all experience disabilities that might increase our need for plain language?</p><p>- What are some common disabilities we need to consider when writing documents in plain language?</p><p>- What formatting techniques hinder access to electronic or print texts?</p><p>- Are there times when plain language and accessibility might be at odds?</p><p>&nbsp;</p><p><strong>## In This Talk</strong></p><p>&nbsp;</p><p>- <strong>**Katina Stapleton**</strong>, Co-Chair of PLAIN</p><p>- <strong>**David Lipscomb**</strong>, from the Center for Plain Language</p><p>&nbsp;</p><p>---</p><p>&nbsp;</p><p><strong>## Related Links and Resources:</strong></p><p>&nbsp;</p><p>- [Section 508 training](<u>https://www.section508.gov/training</u>)</p><p>- [Accessibility for Teams](<u>https://accessibility.digital.gov/</u>)</p><p>- [18F''s Guide to Accessibility](<u>https://accessibility.18f.gov/</u>)</p><p>- [Join the Accessibility Community]({{&lt; ref "/communities/it-accessibility-section-508.md" &gt;}})</p><p>- [Plain language training](<u>https://plainlanguage.gov/</u>)</p><p>- [Join the Plain Community]({{&lt; ref "/communities/plain-language-community-of-practice.md" &gt;}})</p><p>&nbsp;</p><p><span>&nbsp;</span>---</p><p>&nbsp;</p><p><span>&nbsp;</span><em>*This meeting is hosted by the [Plain Language Action and Information Network](</em><u>https://plainlanguage.gov/</u><em>) (PLAIN), a community of federal employees dedicated to the idea that citizens deserve clear communications from the government.*</em></p><p>&nbsp;</p><p>&nbsp;</p>'
+      format: html
+      summary: ''
+  field_captions:
+    -
+      uri: 'https://www.captionedtext.com/client/event.aspx?EventID=4380373&CustomerID=321'
+      title: ''
+      options: {  }
+  field_end_date:
+    -
+      value: '2020-04-15T19:00:00'
+  field_event_organizer:
+    -
+      value: Digital.gov
+  field_event_platform:
+    -
+      value: adobe_connect
+  field_featured_image:
+    -
+      entity: 6bd8641f-84c6-4ddb-b8b2-9c076b017198
+  field_host:
+    -
+      value: 'Plain Community of Practice'
+  field_kicker:
+    -
+      value: Accessibility
+  field_page_weight:
+    -
+      value: 2
+  field_primary_image:
+    -
+      entity: 6bd8641f-84c6-4ddb-b8b2-9c076b017198
+  field_registration_url:
+    -
+      uri: 'https://www.eventbrite.com/e/100304240684'
+      title: ''
+      options: {  }
+  field_start_date:
+    -
+      value: '2020-04-15T18:00:00'
+  field_summary:
+    -
+      value: 'We’ll discuss how plain language intersects with 508 compliance requirements to make federal electronic documents and information technology accessible to people with disabilities.'
+      format: html
+  field_venue:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: ce0b218d-009e-497e-ad18-e1d932454544
+          bundle: venue
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1729712443
+          behavior_settings:
+            -
+              value: {  }
+          field_venue_address:
+            -
+              value: '1800 F Street NW'
+          field_venue_city:
+            -
+              value: Washington
+          field_venue_country:
+            -
+              value: 'United States'
+          field_venue_name:
+            -
+              value: 'General Services Administration'
+          field_venue_room:
+            -
+              value: '1200'
+          field_venue_state:
+            -
+              value: DC
+          field_venue_zip:
+            -
+              value: '20006'
+  field_youtube_id:
+    -
+      value: tFkN0s7UWcE

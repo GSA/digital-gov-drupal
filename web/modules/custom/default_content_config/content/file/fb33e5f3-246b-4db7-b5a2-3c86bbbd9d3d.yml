@@ -12,7 +12,7 @@ default:
       value: fpo.jpeg
   uri:
     -
-      value: 'public://2024-10/fpo.jpeg'
+      value: 'public://2024-10/fpo_0.jpeg'
   filemime:
     -
       value: image/jpeg

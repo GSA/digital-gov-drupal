@@ -6,6 +6,7 @@ _meta:
   default_langcode: en
   depends:
     bd7fedff-9767-49b3-8a71-8bab51265a86: node
+    3c8c1a7b-5b5b-4196-b435-1fa57ff0230b: node
     6bd8641f-84c6-4ddb-b8b2-9c076b017198: media
 default:
   revision_uid:
@@ -55,6 +56,31 @@ default:
           behavior_settings:
             -
               value: {  }
+          field_links:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 4ced8e17-8b6b-4b67-9b11-6f2fd606134a
+                  bundle: internal_content
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1729705485
+                  behavior_settings:
+                    -
+                      value: {  }
+                  field_content:
+                    -
+                      entity: 3c8c1a7b-5b5b-4196-b435-1fa57ff0230b
+          field_title:
+            -
+              value: 'An introduction to accessibility'
   field_legislation:
     -
       uri: 'https://www.whitehouse.gov/wp-content/uploads/legacy_drupal_files/omb/memoranda/2010/m10-23.pdf'

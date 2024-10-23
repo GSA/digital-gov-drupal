@@ -12,7 +12,7 @@ default:
       value: guide-mobile-principles.png
   uri:
     -
-      value: 'public://2024-10/guide-mobile-principles.png'
+      value: 'public://2024-10/guide-mobile-principles_0.png'
   filemime:
     -
       value: image/png

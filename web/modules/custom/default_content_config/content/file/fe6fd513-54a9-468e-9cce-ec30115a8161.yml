@@ -12,7 +12,7 @@ default:
       value: 400690.jpeg
   uri:
     -
-      value: 'public://2024-10/400690.jpeg'
+      value: 'public://2024-10/400690_0.jpeg'
   filemime:
     -
       value: image/jpeg

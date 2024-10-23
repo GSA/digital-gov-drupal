@@ -1,0 +1,58 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 91b1798f-4dec-49d6-bfee-38ed0a4f5e49
+  bundle: guides
+  default_langcode: en
+  depends:
+    6bd8641f-84c6-4ddb-b8b2-9c076b017198: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Web analytics playbook'
+  created:
+    -
+      value: 1729713796
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  body:
+    -
+      value: '<p>Federal websites vary greatly in content and purpose, but they all share a common objective: to deliver information or services to the public in an efficient, easy, and accessible way.</p><p>&nbsp;</p><p>Web analytics tools play an integral role in pursuit of that goal. However, if the tool is implemented improperly or the data it collects are analyzed incorrectly, it can derail delivering information or services to the public.</p><p>&nbsp;</p><p>Use these plays to help strategize how your team can most effectively use web analytics for your website and target audience.</p><p>&nbsp;</p><p>1.<span>&nbsp; </span>[Create a foundation for your strategy]({{&lt; ref "create-a-foundation-for-your-strategy" &gt;}})</p><p>2.<span>&nbsp; </span>[Commit to action]({{&lt; ref "commit-to-action" &gt;}})</p><p>3.<span>&nbsp; </span>[Implement wisely]({{&lt; ref "implement-wisely" &gt;}})</p><p>4.<span>&nbsp; </span>[Configure your tool’s settings carefully]({{&lt; ref "configure-your-tools-settings-carefully" &gt;}})</p><p>5.<span>&nbsp; </span>[Know what you’re looking for]({{&lt; ref "know-what-youre-looking-for" &gt;}})</p><p>6.<span>&nbsp; </span>[Democratize the data]({{&lt; ref "democratize-the-data" &gt;}})</p><p>7.<span>&nbsp; </span>[Invest in training and support]({{&lt; ref "invest-in-training-and-support" &gt;}})</p><p>8.<span>&nbsp; </span>[Do it continuously]({{&lt; ref "do-it-continuously" &gt;}})</p>'
+      format: html
+      summary: ''
+  field_deck:
+    -
+      value: 'Use web analytics to reach your strategic website goals'
+      format: html
+  field_featured_image:
+    -
+      entity: 6bd8641f-84c6-4ddb-b8b2-9c076b017198
+  field_guide_weight:
+    -
+      value: 1
+  field_page_weight:
+    -
+      value: 0
+  field_primary_image:
+    -
+      entity: 6bd8641f-84c6-4ddb-b8b2-9c076b017198
+  field_summary:
+    -
+      value: 'This guide provides actionable strategies for effectively using web analytics to improve federal websites and digital services.'
+      format: html
+  field_summary_box:
+    -
+      value: false

@@ -12,7 +12,7 @@ default:
       value: 2024-uswds-monthly-call-march-title-card.png
   uri:
     -
-      value: 'public://2024-10/2024-uswds-monthly-call-march-title-card.png'
+      value: 'public://2024-10/2024-uswds-monthly-call-march-title-card_0.png'
   filemime:
     -
       value: image/png

@@ -1,0 +1,52 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: b5f41387-ec98-4f72-964e-0a5c26612d15
+  bundle: news
+  default_langcode: en
+  depends:
+    6bd8641f-84c6-4ddb-b8b2-9c076b017198: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: "Security is Everyone's Responsibility: Delivering Secure, Usable Login for Government"
+  created:
+    -
+      value: 1729711007
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  body:
+    -
+      value: '<p>Creating easy-to-use online products and services is not something you read much about when referring to the government. In this blog post, I''ll share how the cross-functional teams on [Login.gov](<u>https://login.gov</u>) designs and delivers human-centered experience to create a modern, secure, and impactful login service for the public.</p><p>&nbsp;</p><p><strong>## What is Login.gov?</strong></p><p>&nbsp;</p><p>{{&lt; img-right src="login-lock-graphic" &gt;}}</p><p>&nbsp;</p><p>Trusted by government agencies, Login.gov is a shared service used by the public. Our program''s mission is to simplify secure access to online government services for the public, and reduce costs for agencies and taxpayers. With one Login.gov account, the sign-in process is streamlined; the need to remember different passwords for each agency is eliminated.</p><p>&nbsp;</p><p><strong>### Security experience</strong></p><p>&nbsp;</p><p>{{&lt; img-right src="login-vault-door" &gt;}}</p><p>&nbsp;</p><p>To create the best product possible, our subject matter experts (SMEs) on the team take our security experience of the product seriously.</p><p>&nbsp;</p><p>We do this by keeping a balance of privacy, usability, and trust. Our cross-disciplinary teams of engineering, product management and user experience (UX) work to ensure we deliver an easy to use service that is simple for agencies to integrate into their systems.</p><p>&nbsp;</p><p>We are also unique in that we are built to be for the government, but we are also the government ourselves. Our SMEs in authentication and identity verification management understand how the government works so that we can create products that best suit our partners—and ultimately the public''s—needs.</p><p>&nbsp;</p><p>When it comes to our security experience, our encryption method works like a safe deposit box in a bank vault. Only the user has the key; only the user can open the box to reveal the contents.</p><p>&nbsp;</p><p><strong>### Authentication and identity verification services</strong></p><p>&nbsp;</p><p>Login.gov has varying levels of service that we provide to our agency partners. The two that I’ll be referring to here are our authentication and identity verification services.</p><p>&nbsp;</p><p>Our authentication service is to provide strong, modern authentication methods to the entire U.S. public. We do this by using modern security techniques, [plain language](<u>https://digital.gov/topics/plain-language/</u>), and human-centered design.</p><p>&nbsp;</p><p>Identity verification refers to our online identity-proofing platform that allows our partner agencies to verify that their users are who they say they are, wherever they are; whether it’s from the convenience of their own home, or on the go with a mobile device.&nbsp;</p><p>&nbsp;</p><p><strong>## Creating a human-centered approach to our process</strong></p><p>&nbsp;</p><p>Login.gov has actively been incorporating human-centered design into our delivery process to include continuous discovery and create impact. Here are a few specific ways in which the team has collaborated to create an optimal security user experience for the public.</p><p>&nbsp;</p><p><strong>### Continuous and iterative user feedback loops</strong></p><p>&nbsp;</p><p>Usability testing is a priority when trying to obtain information directly from the public and get feedback about their experiences with our product. We use online tooling to test our concepts directly with users and quickly iterate on our designs. Within 30 minutes (or sometimes less!) we are able to get the public’s direct feedback on our new concepts and ideas. This helps to ensure we are making the best product possible for the public.</p><p>&nbsp;</p><p><strong>### Performing cross disciplinary ideation sessions</strong></p><p>&nbsp;</p><p>We’ve also incorporated remote [human-centered design methods](<u>https://methods.18f.gov/</u>) to perform cross disciplinary ideation sessions for convergent and divergent thinking. Bringing together engineers, product managers and user experience subject matter experts to ideate has been beneficial to creating new, enriching concepts for Login.gov products and services. It has also been a great way for our team to bond and get to know how we all think and work.</p><p>&nbsp;</p><p><strong>### Working transparently</strong></p><p>&nbsp;</p><p>We ensure that all members of the Login.gov team are aware of user experience methods that are happening around the program (e.g., user interviews) and invite them to join. This can be done by joining various meetings (e.g., engineering weekly) for feedback on concepts and watching user interviews together over a conference call.</p><p>&nbsp;</p><p><strong>## Case study: Increasing our identity verification proofing rates</strong></p><p>&nbsp;</p><p>Now that you know a bit more about what Login.gov is and how we work, I’d like to outline a case study of how we put our methods into practice to increase our proofing rates for our identity verification service.</p><p>&nbsp;</p><p><strong>### Creating user flows for IAL2</strong></p><p>&nbsp;</p><p>Identity verification, also referred to as [Identity Assurance Level 2 NIST](<u>https://pages.nist.gov/800-63-3/sp800-63-3.html</u>) standard (also known as IAL2), has been a big focus area for the past year. We’ve been actively working on how to better understand when and where to improve our flows so that users are securely verified with as little burden to them as possible.</p><p>&nbsp;</p><p><strong>### Performing usability testing on new concepts</strong></p><p>&nbsp;</p><p>After creating these flows, we targeted the image capture portion of the flow and how we could better enhance the experience to better meet the public’s needs. There were a few updates to the flow that we made, based on feedback we received from our study:</p><p>&nbsp;</p><p>* Being on mobile, having large, easy to click areas is important when creating a quality user experience. We decided to make the entire “Photo” box clickable, which tested well!&nbsp;</p><p>* We also decided to use more plain language to describe the interactions required for verification. For example, this screen asked for the user to take a “selfie” of themselves. Now, some folks on this call may know what a “selfie” is, but that is an assumption we knew we could not make for the public’s understanding of this term. Therefore, we changed the language to read, “Take a photo of yourself.”</p><p>&nbsp;</p><p><strong>### Removing confusing steps in the process</strong></p><p>&nbsp;</p><p>We also heard from users that certain screens were unhelpful or unuseful in the proofing process. For example, this screen appeared when the user had only made it through two of the steps BUT had not completed the proofing process.</p><p>&nbsp;</p><p>{{&lt; img src="logingov-screenshot" &gt;}}</p><p>&nbsp;</p><p><strong>### Increased to 60% proofing success rates in two weeks</strong></p><p>&nbsp;</p><p>We implemented the recommendations that were based off of our usability testing and saw our actual* proofing rates increase from 51% to 60% within two weeks. This was a remarkable outcome for us to see after making a few incremental changes to improving our service, based on our teams findings and recommendations.</p><p>&nbsp;</p><p>Within 30 days of implementation, our average actual success rate increased to 74%, and with a daily high as high as much 84%. These numbers will continue to climb by using continuous discovery and human-centered design techniques. As you can see, not only does this improve the public’s experience of Login.gov, but also has serious business impact - making our product more attractive to partners, and reducing our costs to proof users.</p><p>&nbsp;</p><p><em>_&amp;#42; Note: Actual is the percent of successfully proofed users who actually start the proofing process and complete all steps._</em></p><p>&nbsp;</p><p><strong>## And we’re just getting started</strong></p><p>&nbsp;</p><p>In fiscal year 2021, we are expanding upon our work and continuing to build the best security user experience for the public. By taking a human-centered approach to our metrics, product iterations, and service design, we will continue to build an even better Login.gov for everyone.</p><p>&nbsp;</p><p>You can learn more by visiting our [Login.gov website](<u>https://www.login.gov</u>).</p><p>&nbsp;</p><p>Is your agency looking for a login solution for your online products and services? Visit [partners.login.gov](<u>https://partners.login.gov</u>).</p><p>&nbsp;</p><p><strong>##&nbsp;</strong><em>_About the Author_</em></p><p>{{&lt; author-bio "julia-solorzano" &gt;}}</p><p>&nbsp;</p><p>---</p><p>&nbsp;</p><p><em>_Do you have a .gov or .mil email address and are looking to connect with other feds working on digital products and services? Join our [Communities of Practice](</em><u>https://digital.gov/communities/</u><em>), such as User Experience, DevOps, Web Content Managers Forum, IT Accessibility and Section 508, MobileGov, and more! Explore Digital.gov’s [Resources](</em><u>https://digital.gov/resources/</u><em>) and [Tools and Services](</em><u>https://digital.gov/services/</u><em>) for additional information and help._</em></p><p>&nbsp;</p><p>&nbsp;</p>'
+      format: html
+      summary: ''
+  field_deck:
+    -
+      value: 'How login.gov incorporated human centered design and continuous discovery into their product development process to improve the user experience.'
+      format: html
+  field_kicker:
+    -
+      value: Privacy
+  field_page_weight:
+    -
+      value: 1
+  field_primary_image:
+    -
+      entity: 6bd8641f-84c6-4ddb-b8b2-9c076b017198
+  field_summary:
+    -
+      value: 'How login.gov incorporated human centered design and continuous discovery into their product development process to improve the user experience.'
+      format: html
