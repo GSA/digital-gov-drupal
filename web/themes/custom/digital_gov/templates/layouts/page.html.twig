@@ -32,7 +32,7 @@
     <div class="paper">
         {# what is this notice-bar? #}
       {#{{- partialCached "core/notice-bar.html" . -#}}
-      {{ include "core/usa-banner.html" -}}
+      {% include 'themes/custom/digital_gov/templates/layouts/core/usa-banner.html'%}
       {#{{- partialCached "core/sitewide-alert.html" . -}}
       [Image Placeholder] {# {{ drupal_menu('info') }} 
       [Info Menu Placeholder] {# {{ drupal_menu('info') }} 
