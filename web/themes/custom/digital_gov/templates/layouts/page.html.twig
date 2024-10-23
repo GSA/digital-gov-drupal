@@ -51,52 +51,28 @@
 */
 #}
 {# Load utility libraries when logged in. #}
-{% if logged_in %}
-  {{ attach_library('bixaluswds/logged-in') }}
-{% endif %}
-<div class="usa-overlay"></div>
-    {{ page.header }}
-    {# these are just holding items so we are sure to include them #}
-    {% include 'themes/custom/digital_gov/templates/layouts/core/sitewide-alert.html'%}
-    {% include 'themes/custom/digital_gov/templates/layouts/core/header.html'%}
-    {#
-    {{- partialCached "core/sitewide-alert.html" . -}}
-    {{- partialCached "core/header.html" . -}} #}
-    {#{{ page.admin }}#}
+    <div class="paper">
+      {#{{- partialCached "core/notice-bar.html" . -}}#}
+      {{- partialCached "core/usa-banner.html" . -}}
+      {{- partialCached "core/sitewide-alert.html" . -}}
+      [Image Placeholder] {# {{ drupal_menu('info') }} #}
+      [Info Menu Placeholder] {# {{ drupal_menu('info') }} #}
+      {{- partialCached "core/header.html" . -}}
+      {#cathy, check if thee image and the menus are in the header"}
 
-{% block main %}
-  {% if page.sidebar_first %}
-    <aside id="sidebar" role="complementary">
-      {{ page.sidebar_first }}
-    </aside>
-    <main role="main">
-      {# link is in html.html.twig #}
-      <a id="main-content" tabindex="-1"></a>
-      {#{{- partialCached "core/notice-bar.html" . -}}      
       {{/* Main Content */}}
-      #includes main page, communities and news.#}
-      {{ page.primary_menu }}
-      {{ page.content }}
-    </main>
-  {% else %}
-    <main role="main" id="main">
-      {# link is in html.html.twig #}
-      <a id="main-content" tabindex="-1"></a>
-      {{ page.primary_menu }}x
-      {{ page.content }}
-    </main>
-  {% endif %}
-{% endblock %}
+      {{ block "data" . }}{{ end }}
+      {{ block "content" . }}The BASE CONTENT didn't load. :/{{ end }#}
 
-{{ page.footer }}
-{% include 'themes/custom/digital_gov/templates/layouts/core/newsletter-signup.html' %}
-{% include 'themes/custom/digital_gov/templates/layouts/usa-identifier.html.twig' with {
-  'domain': 'domain.gov',
-  'agencyname': "General Service Administration" | t,
-  'agency_url': "https://gsa.gov/",
-  'identifier_menu': drupal_entity('block', 'identifier_menu'),
-  'description_link_url': "https://www.usa.gov/",
-  'description_link_text': 'Visit USA.gov' | t,
-} %}
+      {{- partialCached "core/newsletter-signup.html" . -}}
+      {{- partialCached "core/footer.html" . -}}
+      {{- partialCached "core/usa-identifier.html" . -}}
 
+    </div>
+    <!-- end paper -->
+
+    <div id="clicks_iframe" class="display-none"></div>
+  </body>
+
+  {# you are just going to go through each of these files and add them.#}
 
