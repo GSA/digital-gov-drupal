@@ -4,10 +4,6 @@
 * Theme override for the basic structure of a single Drupal page.
 *
 * Variables:
-* - logged_in: A flag indicating if user is logged in.
-* - root_path: The root path of the current page (e.g., node, admin, user).
-* - node_type: The content type for the current node, if the page is a node.
-* - head_title: List of text elements that make up the head_title variable.
 * May contain one or more of the following:
 * - title: The title of the page.
 * - name: The name of the site.
@@ -16,9 +12,6 @@
 * - page: The rendered page markup.
 * - page_bottom: Closing rendered markup. This variable should be printed after
 * 'page'.
-* - db_offline: A flag indicating if the database is offline.
-* - placeholder_token: The token for generating head, css, js and js-bottom
-* placeholders.
 *
 * @see template_preprocess_html()
 */
@@ -40,7 +33,7 @@
 </head>
 
 <body class="twig variables here.">
-{#{{- "<!-- Google Tag Manager (noscript) -->" | safeHTML -}}
+{{- "<!-- Google Tag Manager (noscript) -->" -}}
     <noscript
       ><iframe
         src="https://www.googletagmanager.com/ns.html?id=GTM-MZCKZPQ"
@@ -49,7 +42,7 @@
         style="display:none;visibility:hidden"
       ></iframe
     ></noscript>
-    {{ "<!-- End Google Tag Manager (noscript) -->" | safeHTML }#}
+    {{ "<!-- End Google Tag Manager (noscript) -->" }}
 
   <div class="paper">
   {{ page_top }}
@@ -58,7 +51,7 @@
   </div>
 </body>
 
-{# a few js scripts that we can't forget, libraries?
+{# a few js scripts that we can't forget, libraries? Comment them out for now and figure them out later.
   <!-- Set the glossary terms as a variable -->
   <script type="text/javascript">
     {{- $terms := .Params.glossary -}}
