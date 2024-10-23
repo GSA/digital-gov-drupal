@@ -30,22 +30,22 @@
 */
 #}
     <div class="paper">
-        {# what is this notice-bar? #}
-      {#{{- partialCached "core/notice-bar.html" . -#}}
+        {# The notice bar is an html page that lets people know if they are on dev/stg/prod#}
+      {#{{- partialCached "core/notice-bar.html" . - }}#}
       {% include 'themes/custom/digital_gov/templates/layouts/core/usa-banner.html'%}
-      {#{{- partialCached "core/sitewide-alert.html" . -}}
-      [Image Placeholder] {# {{ drupal_menu('info') }} 
-      [Info Menu Placeholder] {# {{ drupal_menu('info') }} 
-      {{- partialCached "core/header.html" . -}}
-      {#cathy, check if thee image and the menus are in the header"}
+      {#{{- partialCached "core/sitewide-alert.html" . -}#}
+      [Image Placeholder]  {{ drupal_menu('info') }} 
+      [Info Menu Placeholder]  {{ drupal_menu('info') }} 
+      {#{{- partialCached "core/header.html" . -}}
+      {# the two placeholder items above are in the header. }
 
       {{/* Main Content */}}
       {{ block "data" . }}{{ end }}
-      {{ block "content" . }}The BASE CONTENT didn't load. :/{{ end }
+      {{ block "content" . }}The BASE CONTENT didn't load. :/{{ end #}
 
-      {{- partialCached "core/newsletter-signup.html" . -}}
-      {{- partialCached "core/footer.html" . -}}
-      {{- partialCached "core/usa-identifier.html" . -}}#}
+      {% include 'themes/custom/digital_gov/templates/layouts/core/newsletter-signup.html'%}
+      {#{{- partialCached "core/footer.html" . -}#}
+      {% include 'themes/custom/digital_gov/templates/layouts/core/identifier.html'%}
 
     </div>
     <!-- end paper -->
@@ -53,5 +53,4 @@
     <div id="clicks_iframe" class="display-none"></div>
   </body>
 
-  {# you are just going to go through each of these files and add them.#}
 
