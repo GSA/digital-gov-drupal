@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\ec_touchpoints_survey\Plugin\EmbeddedContent;
+namespace Drupal\ec_shortcodes\Plugin\EmbeddedContent;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
@@ -11,12 +11,12 @@ use Drupal\embedded_content\EmbeddedContentPluginBase;
  * Plugin iframes.
  *
  * @EmbeddedContent(
- *   id = "touchpoints_survey",
- *   label = @Translation("Touchpoints survey"),
- *   description = @Translation("Renders a Touchpoints survey."),
+ *   id = "ec_shortcodes_card_quote",
+ *   label = @Translation("Card Quote"),
+ *   description = @Translation("Renders an card styled quote."),
  * )
  */
-class TouchpointsSurvey extends EmbeddedContentPluginBase implements EmbeddedContentInterface {
+class ECShortcodesCardQuote extends EmbeddedContentPluginBase implements EmbeddedContentInterface {
 
   use StringTranslationTrait;
 
@@ -25,8 +25,8 @@ class TouchpointsSurvey extends EmbeddedContentPluginBase implements EmbeddedCon
    */
   public function defaultConfiguration() {
     return [
-      'file_name' => NULL,
-      'id' => NULL,
+      'text' => NULL,
+      'cite' => NULL,
     ];
   }
 
@@ -35,9 +35,9 @@ class TouchpointsSurvey extends EmbeddedContentPluginBase implements EmbeddedCon
    */
   public function build(): array {
     return [
-      '#theme' => 'ec_touchpoints_survey',
-      '#file_name' => $this->configuration['file_name'],
-      '#id' => $this->configuration['id'],
+      '#theme' => 'ec_shortcodes_card_quote',
+      '#text' => $this->configuration['text'],
+      '#cite' => $this->configuration['cite'],
     ];
   }
 
@@ -45,19 +45,19 @@ class TouchpointsSurvey extends EmbeddedContentPluginBase implements EmbeddedCon
    * {@inheritdoc}
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
-    $form['file_name'] = [
+    $form['text'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Touchpoints js file name'),
-      '#default_value' => $this->configuration['file_name'],
-      '#required' => TRUE,
-      '#description' => $this->t('example: x1678367.js'),
-    ];
-    $form['id'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Div target ID'),
-      '#default_value' => $this->configuration['id'],
+      '#title' => $this->t('Text'),
+      '#default_value' => $this->configuration['text'],
       '#required' => TRUE,
     ];
+    $form['cite'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Cite'),
+      '#default_value' => $this->configuration['text'],
+      '#required' => TRUE,
+    ];
+
     return $form;
   }
 

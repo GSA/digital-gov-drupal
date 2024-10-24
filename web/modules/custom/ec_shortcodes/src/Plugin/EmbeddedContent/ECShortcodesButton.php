@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\ec_placeholder\Plugin\EmbeddedContent;
+namespace Drupal\ec_shortcodes\Plugin\EmbeddedContent;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
@@ -11,12 +11,12 @@ use Drupal\embedded_content\EmbeddedContentPluginBase;
  * Plugin iframes.
  *
  * @EmbeddedContent(
- *   id = "ec_placeholder",
- *   label = @Translation("Placeholder"),
- *   description = @Translation("Renders a placeholder for replacement."),
+ *   id = "ec_shortcodes_button",
+ *   label = @Translation("Button"),
+ *   description = @Translation("Renders a button."),
  * )
  */
-class ECPlaceholder extends EmbeddedContentPluginBase implements EmbeddedContentInterface {
+class ECShortcodesButton extends EmbeddedContentPluginBase implements EmbeddedContentInterface {
 
   use StringTranslationTrait;
 
@@ -25,7 +25,8 @@ class ECPlaceholder extends EmbeddedContentPluginBase implements EmbeddedContent
    */
   public function defaultConfiguration() {
     return [
-      'machine_name' => NULL,
+      'url' => NULL,
+      'text' => NULL,
     ];
   }
 
@@ -34,8 +35,9 @@ class ECPlaceholder extends EmbeddedContentPluginBase implements EmbeddedContent
    */
   public function build(): array {
     return [
-      '#theme' => 'ec_placeholder',
-      '#machine_name' => $this->configuration['machine_name'],
+      '#theme' => 'ec_shortcodes_button',
+      '#url' => $this->configuration['url'],
+      '#text' => $this->configuration['text'],
     ];
   }
 
@@ -43,12 +45,17 @@ class ECPlaceholder extends EmbeddedContentPluginBase implements EmbeddedContent
    * {@inheritdoc}
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
-    $form['machine_name'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Placeholder name'),
-      '#default_value' => $this->configuration['machine_name'],
+    $form['url'] = [
+      '#type' => 'url',
+      '#title' => $this->t('Url'),
+      '#default_value' => $this->configuration['url'],
       '#required' => TRUE,
-      '#description' => $this->t('example: machine_name'),
+    ];
+    $form['text'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Text'),
+      '#default_value' => $this->configuration['text'],
+      '#required' => TRUE,
     ];
     return $form;
   }

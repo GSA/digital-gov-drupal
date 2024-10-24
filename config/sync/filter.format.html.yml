@@ -5,25 +5,25 @@ dependencies:
   config:
     - core.entity_view_mode.media.full
   module:
-    - ckeditor5_embedded_content
     - editor
+    - embedded_content
     - linkit
     - media
 name: HTML
 format: html
 weight: 0
 filters:
-  ckeditor5_embedded_content:
-    id: ckeditor5_embedded_content
-    provider: ckeditor5_embedded_content
-    status: true
-    weight: -46
-    settings: {  }
   editor_file_reference:
     id: editor_file_reference
     provider: editor
     status: false
     weight: -43
+    settings: {  }
+  embedded_content:
+    id: embedded_content
+    provider: embedded_content
+    status: true
+    weight: 100
     settings: {  }
   filter_align:
     id: filter_align
@@ -49,7 +49,7 @@ filters:
     status: false
     weight: -48
     settings:
-      allowed_html: ''
+      allowed_html: '<span class="highlight-text"> <div class="box">'
       filter_html_help: true
       filter_html_nofollow: false
   filter_html_escape:

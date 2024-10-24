@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\ec_uswds\Plugin\EmbeddedContent;
+namespace Drupal\ec_shortcodes\Plugin\EmbeddedContent;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
@@ -11,12 +11,12 @@ use Drupal\embedded_content\EmbeddedContentPluginBase;
  * Plugin iframes.
  *
  * @EmbeddedContent(
- *   id = "ec_usaalert",
- *   label = @Translation("USWDS: alert"),
- *   description = @Translation("Renders a inline alert."),
+ *   id = "ec_shortcodes_note",
+ *   label = @Translation("Note"),
+ *   description = @Translation("Renders Note component with various options."),
  * )
  */
-class ECUsaAlert extends EmbeddedContentPluginBase implements EmbeddedContentInterface {
+class ECShortcodesNote extends EmbeddedContentPluginBase implements EmbeddedContentInterface {
 
   use StringTranslationTrait;
 
@@ -36,7 +36,7 @@ class ECUsaAlert extends EmbeddedContentPluginBase implements EmbeddedContentInt
    */
   public function build(): array {
     return [
-      '#theme' => 'ec_usaalert',
+      '#theme' => 'ec_shortcodes_note',
       '#heading' => $this->configuration['heading'],
       '#type' => $this->configuration['type'],
       '#text' => $this->configuration['text'],
@@ -49,22 +49,28 @@ class ECUsaAlert extends EmbeddedContentPluginBase implements EmbeddedContentInt
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
     $form['heading'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Alert Heading'),
+      '#title' => $this->t('Note Heading'),
       '#default_value' => $this->configuration['heading'],
     ];
     $form['type'] = [
       '#type' => 'select',
-      '#title' => $this->t('Alert type'),
+      '#title' => $this->t('Note Type'),
       '#options' => [
-        'info' => $this->t('Info'),
-        'warning' => $this->t('Warning'),
+        'activity' => $this->t('Activity'),
+        'action' => $this->t('Action'),
+        'alert' => $this->t('Alert'),
+        'comment' => $this->t('Comment'),
+        'video' => $this->t('Video'),
+        'join' => $this->t('Join'),
+        'note' => $this->t('Note'),
+        'disclaimer' => $this->t('Disclaimer'),
       ],
       '#default_value' => $this->configuration['type'],
       '#required' => TRUE,
     ];
     $form['text'] = [
       '#type' => 'text_format',
-      '#title' => $this->t('Alert text'),
+      '#title' => $this->t('Note Text'),
       '#format' => $this->configuration['text']['format'] ?? 'html',
       '#allowed_formats' => ['html'],
       '#default_value' => $this->configuration['text']['value'] ?? '',

@@ -1,6 +1,6 @@
-name: Embedded Content - USWDS components
+name: Embedded Content - Short Codes
 type: module
-description: Provides USWDS components for Ckeditor5 embedded content.
+description: Short Codes
 package: Custom
 core_version_requirement: ^9 || ^10
 dependencies:

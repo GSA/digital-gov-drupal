@@ -1,0 +1,67 @@
+name: Run validation with RoboValidate
+
+on:
+    # Run on any branch so validate branch can always run.
+    push:
+    # Commit message validation requires a target branch which is only available in a PR.
+    pull_request:
+
+jobs:
+    validate:
+        runs-on: ubuntu-latest
+
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v4
+
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: '8.3'
+                    tools: composer:v2
+                    # https://github.com/shivammathur/setup-php?tab=readme-ov-file#disable-coverage
+                    coverage: none
+
+            -   name: Get composer cache directory
+                id: composer-cache
+                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+            -   name: Cache Composer dependencies
+                uses: actions/cache@v4
+                with:
+                    path: ${{ steps.composer-cache.outputs.dir }}
+                    key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+                    restore-keys: ${{ runner.os }}-composer
+
+            -   name: Install Composer dependencies and initialize Robo
+                run: |
+                    composer install --ignore-platform-reqs --optimize-autoloader --no-progress --no-ansi
+                    # If a Robo command exits with a failure and a RoboFile.php does not exist
+                    # a warning about 'Robo is not initialized here. Please run `robo init` to create a new RoboFile.'
+                    # will be created, which might make users think that is what the error was caused by.
+                    if [ ! -f "RoboFile.php" ]; then
+                        vendor/bin/robo init
+                    fi
+
+            -   name: Validate a change to any branch
+                if: github.event_name == 'push'
+                run: |
+                    # Initialize status variables to 0
+                    status1=0
+                    status2=0
+                    status3=0
+
+                    # Run all commands and capture their exit statuses
+                    vendor/bin/robo validate:branch-name || status1=$? || status1=0
+                    vendor/bin/robo validate:composer-lock || status3=$? || status3=0
+                    vendor/bin/robo validate:coding-standards || status2=$? || status2=0
+
+                    # Exit with a non-zero status if any command failed
+                    if [ "$status1" -ne 0 ] || [ "$status2" -ne 0 ] || [ "$status3" -ne 0 ]; then
+                      exit 1
+                    fi
+
+            -   name: Validate pull requests
+                if: github.event_name == 'pull_request'
+                run: |
+                    vendor/bin/robo validate:commit-messages --target-branch="${{ github.base_ref }}" --current-branch="${{ github.head_ref }}"

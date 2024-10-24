@@ -19,9 +19,10 @@ settings:
       - blockQuote
       - bulletedList
       - numberedList
-      - embeddedContent
       - drupalMedia
       - sourceEditing
+      - embeddedContent__default
+      - style
   plugins:
     ckeditor5_heading:
       enabled_headings:
@@ -37,6 +38,14 @@ settings:
       multiBlock: true
     ckeditor5_sourceEditing:
       allowed_tags: {  }
+    ckeditor5_style:
+      styles:
+        -
+          label: 'Highlight Text'
+          element: '<span class="highlight-text">'
+        -
+          label: 'Box Border'
+          element: '<div class="box">'
     linkit_extension:
       linkit_enabled: true
       linkit_profile: default

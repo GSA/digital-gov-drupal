@@ -1,0 +1,53 @@
+{# {{ $variant := (.Get "variant") }}
+{{ $icon := "notifications" }}
+
+{{ if eq $variant "activity" }}
+  {{ $icon = "assessment" }}
+{{ else if eq $variant "action" }}
+  {{ $icon = "campaign" }}
+{{ else if eq $variant "alert" }}
+  {{ $icon = "report" }}
+{{ else if eq $variant "comment" }}
+  {{ $icon = "comment" }}
+{{ else if eq $variant "video" }}
+  {{ $icon = "fast_forward" }}
+{{ else if eq $variant "join" }}
+  {{ $icon = "groups" }}
+{{ else if eq $variant "note" }}
+  {{ $icon = "notifications" }}
+{{ else if eq $variant "disclaimer" }}
+  {{ $icon = "info" }}
+{{ end }}
+
+{{- $iconPath := (printf "uswds/img/sprite.svg#%s" $icon) -}} #}
+
+
+<article
+  {# class="dg-note {{ if $variant }}dg-note--{{- $variant | lower -}}{{ end }}" #}
+>
+  <h4 class="dg-note__heading">
+    <svg
+      class="dg-note__icon usa-icon dg-icon dg-icon--large"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <use xlink:href="{{ $iconPath | relURL }}"></use>
+    </svg>
+    {{ if $variant }}
+      {# {{ if eq $variant "join" }} #}
+        Who can join?
+      {{ else }}
+        {# {{ $variant | title }} #}
+      {{ end }}
+    {{ else }}
+      Note
+    {{ end }}
+  </h4>
+  {{ if eq $variant "disclaimer" }}
+    All references to specific brands, products, and/or companies are used only
+    for illustrative purposes and do not imply endorsement by the U.S. federal
+    government or any federal government agency.
+  {{ else }}
+    {# {{- .Inner | markdownify -}} #}
+  {{ end }}
+</article>
