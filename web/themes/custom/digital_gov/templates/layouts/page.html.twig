@@ -1,0 +1,51 @@
+{#
+/**
+* @file
+* Theme override to display a single page.
+*
+* The doctype, html, head and body tags are not in this template. Instead they
+* can be found in the html.html.twig template in this directory.
+*
+* Page content (in order of occurrence in the default page.html.twig):
+* - node: Fully loaded node, if there is an automatically-loaded node
+* associated with the page and the node ID is the second argument in the
+* page's path (e.g. node/12345 and node/12345/revisions, but not
+* comment/reply/12345).
+*
+//these are the regions for digital.gov
+  page.header: 'Header'
+  page.primary_menu: 'Primary menu'
+  page.secondary_menu: 'Secondary menu'
+  page.page_top: 'Page top'
+  page.page_bottom: 'Page bottom'
+  page.featured: 'Featured'
+  page.breadcrumb: 'Breadcrumb'
+  page.content: 'Content'
+  page.sidebar_first: 'Sidebar first'
+  page.sidebar_second: 'Sidebar second'
+  page.footer: 'Footer'
+*
+* @see template_preprocess_page()
+* @see html.html.twig
+*/
+#}
+    <div class="paper">
+        {# The notice bar is an html page that lets people know if they are on dev/stg/prod#}
+        {#{{- partialCached "core/notice-bar.html" . - }}#}
+        {% include 'themes/custom/digital_gov/templates/layouts/core/usa-banner.html'%}
+        [Sitewide Alert (install and configure 'https://www.drupal.org/project/site_alert')]<br>
+        {% include 'themes/custom/digital_gov/templates/layouts/header.twig'%}
+
+        {#{{/* Main Content */}}
+        {{ block "data" . }}{{ end }}
+        {{ block "content" . }}The BASE CONTENT didn't load. :/{{ end #}
+
+        {% include 'themes/custom/digital_gov/templates/layouts/footer.twig'%}
+
+    </div>
+    <!-- end paper -->
+
+    <div id="clicks_iframe" class="display-none"></div>
+  </body>
+
+

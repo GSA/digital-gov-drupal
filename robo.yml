@@ -1,0 +1,24 @@
+# Automatically Generated from 'robo validate:init-robo-yml'.
+# See ./vendor/mattsqd/robovalidate/robo.example.yml for additional context.
+command:
+  validate:
+    options:
+      project-id: DIGITAL
+    branch-name:
+      options:
+        # These refer to all the possible branch names. There are 4 different types and they will be
+        # described below. If you'd like to override any of these, you must put all back in that you'd like to
+        # use, they will not be merged together.
+        valid-branch-names:
+          # Matches a branch named 'develop'.
+          - 'explicit|develop'
+          # Matches a branch named 'main'.
+          - 'explicit|main'
+          # Matches a custom regular expression found in $pattern.
+          - 'custom|'
+          # Matches a branch like: hotfix/2.1.3.
+          - 'semantic|hotfix'
+          # Matches a branch like (the last number MUST be a 0): release/2.1.0.
+          - 'semantic_end_0|release'
+          # Matches a branch named 'stage' (MOD FROM DEFAULTS).
+          - 'explicit|stage'

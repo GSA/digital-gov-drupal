@@ -40,8 +40,22 @@ Simply edit or add new content, then run `./robo.sh drupal-project:export-conten
 
 ## Validation
 
-We will soon have validation on branches, commits, composer.lock, and code. I'm waiting until our move to Jira.
+ * Uses [RoboValidate](https://github.com/mattsqd/robovalidate) to run the various validations.
+ * Can be run manually locally via: `./robo.sh validate:all`
+ * Is run when any branch is pushed to GitHub via GitHub Actions. Validation on Git commits is only run remotely when a pull request is made so that only new commits are checked.
 
-To start:
-* Follow Drupal & DrupalPractice coding standards.
-* Create feature branches in the form `feature/short-description`
+### Branch Names
+
+All branches created towards tasks should be in the form `feature/DIGITAL-X-Y`. `X` is the Jira ticket number and `Y` is a short description in lower case separated by dashes.
+
+### Commits
+
+Commit messages must be in the form: `DIGITAL-X:YZ`. `X` is the Jira ticket number, `Y` is a space and `Z` is a short description of the work done.
+
+### Coding Standards
+
+See the [coding standards](https://www.drupal.org/docs/develop/standards) documentation for Drupal. The project validates against the `Drupal` and `DrupalPractice` documentation.
+
+#### IDE
+
+[Enable coding standards help in your IDE](https://www.drupal.org/docs/extending-drupal/contributed-modules/contributed-module-documentation/coder/installing-coder#s-ide-and-editor-configuration) so you're not surprised by a bunch of errors when you push up.

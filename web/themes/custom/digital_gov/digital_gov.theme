@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Functions to support theming in the Digital.gov theme.
+ */
+
 declare(strict_types=1);
 
 /**
