@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: f98c359f-6231-42dd-87b4-f6b0012bfbc8
+  bundle: landing_page
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: COMMUNITIES
+  created:
+    -
+      value: 1729527901
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  body:
+    -
+      value: '<p><strong>## What we do</strong></p><p>&nbsp;</p><p>The A&amp;#47;B Testing Community of Practice organizes meetings to discuss the latest in A&amp;#47;B testing. We invite guest speakers, share case studies, explore new tools, and provide support for new and current members trying to grow their A/B testing practice and knowledge.</p><p>&nbsp;</p><p><strong>## Who we are</strong></p><p>&nbsp;</p><p>The A&amp;#47;B Testing Community of Practice started with a team at the Consumer Financial Protection Bureau (CFPB), circa 2016. We were inspired by what we’d learned from our own tests that, and see what we could learn from case studies outside CFPB. We are driven to foster a group that can share their experiences and learn from one another.</p><p>&nbsp;</p><p><strong>**Community Managers:**</strong></p><p>&nbsp;</p><p>- [Kelley Holden](<u>mailto:kelley.holden@cfpb.gov</u>), works at the CFPB as a Digital Analytics Program Manager on the Data Science and Analytics team. She has worked on multiple projects that include SEO strategy, A&amp;#47;B and RCT testing, web analysis, analytics visualizations, data science, and user behavior analysis.</p>'
+      format: html
+      summary: ''
+  field_buttons:
+    -
+      uri: 'http://www.digital.gov'
+      title: 'Placeholder Button'
+      options: {  }
+  field_summary:
+    -
+      value: 'Collaborate and share resources with others across government.'
+      format: html

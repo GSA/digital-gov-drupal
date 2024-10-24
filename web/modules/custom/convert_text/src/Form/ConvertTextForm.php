@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Drupal\convert_text\Form;
 
-use Drupal\convert_text\ConvertText;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\convert_text\ConvertText;
 
 /**
  * Provides a Convert Text form.
@@ -57,7 +57,7 @@ final class ConvertTextForm extends FormBase {
       'reset' => [
         '#type' => 'submit',
         '#value' => $this->t('Reset'),
-      ]
+      ],
     ];
 
     return $form;

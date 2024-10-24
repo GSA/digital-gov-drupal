@@ -1,0 +1,43 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 56b9851c-8b3e-4531-8fe4-985bace94001
+  bundle: services
+  default_langcode: en
+  depends:
+    80caaa35-a22b-43ae-a72c-9a714c333a06: node
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: Analytics.USA.gov
+  created:
+    -
+      value: 1729635977
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  field_contact:
+    -
+      value: dap@gsa.gov
+  field_page_weight:
+    -
+      value: 2
+  field_summary:
+    -
+      value: 'A window into how people are interacting with the government online. Powered by the Digital Analytics Program (DAP)'
+      format: html
+  field_topics:
+    -
+      entity: 80caaa35-a22b-43ae-a72c-9a714c333a06

@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 2e0f1e02-efde-48e6-9e9e-4cc1e572feec
+  bundle: landing_page
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: GUIDES
+  created:
+    -
+      value: 1729528023
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  body:
+    -
+      value: "<p>Everyone who works on government websites has a role to play in making federal resources accessible and inclusive.</p><p>&nbsp;</p><p><strong>**This guide provides:**</strong></p><p>&nbsp;</p><p>- An overview of how each team member can contribute to a product's accessibility.</p><p>- A framework for thinking about accessibility and inclusive design in your role.</p><p>- An understanding of the human need behind accessibility practices.</p><p>&nbsp;</p><p>We focus on the issues most likely to impact government sites. These guidelines do not provide a comprehensive list of all possible issues. Your team will need additional resources and work to conduct manual audits to conform to the standards of [Section 508](<u>https://www.section508.gov/</u>), a law that ensures all web content is accessible to anybody with a disability. It aligns with the World Wide Web Consortium (W3C) Web Accessibility Initiative (WAI) [Web Content Accessibility Guidelines (WCAG) 2.0, Level AA](<u>https://www.w3.org/WAI/WCAG22/quickref/?versions=2.0&amp;currentsidebar=%23col_overview&amp;levels=a%2Caaa</u>).</p><p>&nbsp;</p><p>Choose the guide that best fits your role:</p><p>&nbsp;</p><p>1. Product management</p><p>2. Content design</p><p>3. User Experience (UX) design</p><p>4. Visual design</p><p>5. Front-end development</p><p>&nbsp;</p><p><em>_These roles are based on the roles we have at the Technology Transformation Services at GSA._</em></p>"
+      format: html
+      summary: ''
+  field_buttons:
+    -
+      uri: 'http://www.digital.gov'
+      title: 'Placeholder Button'
+      options: {  }
+  field_summary:
+    -
+      value: 'A ‘quick-start’ guide for embedding accessibility and inclusive design practices into your team’s workflow'
+      format: html

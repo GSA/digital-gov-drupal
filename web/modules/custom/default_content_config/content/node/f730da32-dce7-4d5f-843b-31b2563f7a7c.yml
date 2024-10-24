@@ -1,0 +1,43 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: f730da32-dce7-4d5f-843b-31b2563f7a7c
+  bundle: services
+  default_langcode: en
+  depends:
+    ad7aa7a5-33cf-400e-93cf-11820e467111: node
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'U.S. Web Design System'
+  created:
+    -
+      value: 1729707930
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  field_contact:
+    -
+      value: uswds@gsa.gov
+  field_page_weight:
+    -
+      value: 6
+  field_summary:
+    -
+      value: 'A toolkit of principles, guidance, and code that helps agency digital teams build accessible, mobile-friendly government websites for the American public.'
+      format: html
+  field_topics:
+    -
+      entity: ad7aa7a5-33cf-400e-93cf-11820e467111

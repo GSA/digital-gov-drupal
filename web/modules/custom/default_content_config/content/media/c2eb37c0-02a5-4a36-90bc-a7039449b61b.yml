@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: c2eb37c0-02a5-4a36-90bc-a7039449b61b
+  bundle: image
+  default_langcode: en
+  depends:
+    d4610da5-8591-45c3-a8f1-8f532b445fc9: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: guide-mobile-principles.png
+  created:
+    -
+      value: 1729464127
+  field_media_image:
+    -
+      entity: d4610da5-8591-45c3-a8f1-8f532b445fc9
+      alt: 'Guide Mobile Principles'
+      title: ''
+      width: 1200
+      height: 630

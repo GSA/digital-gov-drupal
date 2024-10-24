@@ -106,6 +106,7 @@ function buildSass() {
   return (
     src([`${PROJECT_SASS_SRC}/**/*.scss`])
       .pipe(sourcemaps.init({ largeFile: true }))
+      .pipe(rename({ suffix: ".min" }))
       .pipe(
         sass({
           includePaths: [

@@ -1,0 +1,40 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: f8ffffda-7ab8-48d7-8e20-2f5d5277ec6d
+  bundle: community
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Plain Language'
+  created:
+    -
+      value: 1729618654
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  body:
+    -
+      value: '<p>The Plain Language community is a group of government employees and contractors dedicated to the idea that citizens deserve clear communications from government. We believe that using plain language saves government agencies time and money and provides better service to the American public.</p><p>&nbsp;</p><p><strong>## What We Do</strong></p><p>&nbsp;</p><p>Throughout the year, the community provides training and hosts plain-language related events. Our community offers support and answers to members’ questions.</p><p>&nbsp;</p><p><strong>## Who We Are</strong></p><p>&nbsp;</p><p>We’re a group of plain language practitioners with varying specialties and different levels of expertise.</p><p>&nbsp;</p><p><strong>## Related Resources</strong></p><p>&nbsp;</p><p>- [Plain Writing Act of 2010](<u>https://www.plainlanguage.gov/law/</u>)</p><p>- [Federal Plain Language Guidelines](<u>https://www.plainlanguage.gov/guidelines/</u>)</p><p>- [2022 Federal Plain Language Summit](<u>https://digital.gov/event/2022/08/24/2022-federal-plain-language-summit/</u>)</p><p>- [2021 Federal Plain Language Summit](<u>https://digital.gov/event/2021/09/21/2021-federal-plain-language-summit/</u>)</p><p>- [2020 Federal Plain Language Summit](<u>https://digital.gov/event/2020/10/27/plain-language-summit-2020/</u>)</p>'
+      format: html
+      summary: ''
+  field_dg_highlight:
+    -
+      value: false
+  field_summary:
+    -
+      value: 'Promote the use of plain language to provide better service to the public.'
+      format: html

@@ -1,0 +1,126 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: ad7aa7a5-33cf-400e-93cf-11820e467111
+  bundle: topics
+  default_langcode: en
+  depends:
+    623a2982-602b-4762-a59e-9a7c30c64f36: node
+    64a78ab7-c48e-4681-9cbe-4484d7130d44: node
+    47d1784c-68a3-4a3b-a341-3e4f8d092253: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: Accessibility
+  created:
+    -
+      value: 1729614716
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  field_deck:
+    -
+      value: 'The design of products, devices, services, or environments for people with disabilities'
+      format: html
+  field_featured_communities:
+    -
+      entity: 623a2982-602b-4762-a59e-9a7c30c64f36
+  field_featured_links:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 7d157641-97d7-4af9-a130-80f9545ce1ea
+          bundle: featured_links
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1729614815
+          behavior_settings:
+            -
+              value: {  }
+          field_links:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 7f1f0a6f-e13d-47d1-bb76-90712a7237d8
+                  bundle: external_content
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1729617125
+                  behavior_settings:
+                    -
+                      value: {  }
+                  field_link:
+                    -
+                      uri: 'https://www.section508.gov/'
+                      title: 508.gov
+                      options: {  }
+                  field_summary:
+                    -
+                      value: 'To support people working to enhance access to federal information technology (IT), we identify and promote best practices for compliance with Section 508 law, and conformance to the Revised 508 Standards.'
+                      format: html
+          field_title:
+            -
+              value: 'https://www.section508.gov/'
+  field_featured_resources:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 1810f546-30ca-402e-b25d-abc55073c91b
+          bundle: internal_content
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1729616974
+          behavior_settings:
+            -
+              value: {  }
+          field_content:
+            -
+              entity: 64a78ab7-c48e-4681-9cbe-4484d7130d44
+  field_legislation:
+    -
+      uri: 'https://www.section508.gov/manage/laws-and-policies/'
+      title: 'Section 508 of the Rehabilitation Act of 1973'
+      options: {  }
+  field_page_weight:
+    -
+      value: 2
+  field_primary_image:
+    -
+      entity: 47d1784c-68a3-4a3b-a341-3e4f8d092253
+  field_summary:
+    -
+      value: "Accessibility isn't just the right thing to do; it’s the law. The guidance, resources, and community you find here will help you deliver accessible digital products and services in the federal government."
+      format: html

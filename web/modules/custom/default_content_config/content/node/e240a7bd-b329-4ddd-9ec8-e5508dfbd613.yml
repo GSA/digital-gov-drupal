@@ -1,0 +1,136 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: e240a7bd-b329-4ddd-9ec8-e5508dfbd613
+  bundle: event
+  default_langcode: en
+  depends:
+    e41f15bf-c2b5-423c-a6ad-6c201e54abf0: node
+    6bd8641f-84c6-4ddb-b8b2-9c076b017198: media
+    95077128-6d33-4445-a48a-4ad8ebb7d9b3: node
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'EVENT-all fields'
+  created:
+    -
+      value: 1729461236
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  body:
+    -
+      value: '<p>Lorem ipsum odor amet, consectetuer adipiscing elit. Dapibus facilisis tellus eleifend cras lectus diam efficitur. Porttitor aenean habitasse magna inceptos commodo litora. Magna fermentum sit phasellus taciti neque venenatis feugiat proin! Himenaeos nam leo hendrerit netus litora luctus porttitor? Congue <strong>habitasse</strong> faucibus habitasse nascetur sit. Dolor hac sagittis ligula vulputate; elit quisque mi tempor. Posuere penatibus vehicula orci suspendisse tortor netus nostra leo laoreet.</p><p>Cursus etiam metus sagittis ultricies, aliquet eget. Nostra euismod feugiat fames suspendisse hendrerit dapibus phasellus felis. Tempor tellus lacus convallis varius hac turpis. Pulvinar augue fusce accumsan suscipit molestie interdum augue porta. Consectetur maximus pulvinar ex curae nostra tellus nisi eu. Convallis mattis ex ullamcorper nisl neque mi torquent. Eros inceptos dis pretium lectus sem mus a. Faucibus proin luctus ultrices; vestibulum tincidunt rutrum.</p>'
+      format: html
+      summary: ''
+  field_authors:
+    -
+      entity: e41f15bf-c2b5-423c-a6ad-6c201e54abf0
+  field_captions:
+    -
+      uri: 'https://lorem.co'
+      title: ''
+      options: {  }
+  field_deck:
+    -
+      value: 'nulla iaculis ligula fames proin in <b>erat</b>'
+      format: html
+  field_end_date:
+    -
+      value: '2024-06-20T19:00:00'
+  field_event_organizer:
+    -
+      value: Digital.gov
+  field_event_platform:
+    -
+      value: 'nulla iaculis ligula fames proin in <b>erat</b>'
+  field_featured_image:
+    -
+      entity: 6bd8641f-84c6-4ddb-b8b2-9c076b017198
+  field_host:
+    -
+      value: 'nulla iaculis ligula fames proin in <b>erat</b>'
+  field_kicker:
+    -
+      value: 'nulla iaculis ligula fames proin in <b>erat</b>'
+  field_page_weight:
+    -
+      value: 1
+  field_primary_image:
+    -
+      entity: 6bd8641f-84c6-4ddb-b8b2-9c076b017198
+  field_registration_url:
+    -
+      uri: 'https://lorem.com'
+      title: ''
+      options: {  }
+  field_start_date:
+    -
+      value: '2024-06-20T18:00:00'
+  field_summary:
+    -
+      value: 'nulla iaculis ligula fames proin in <b>erat</b>'
+      format: html
+  field_topics:
+    -
+      entity: 95077128-6d33-4445-a48a-4ad8ebb7d9b3
+  field_venue:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: f9adc7b8-ad90-4372-930e-0669cbdbd76a
+          bundle: venue
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1729462206
+          behavior_settings:
+            -
+              value: {  }
+          field_venue_address:
+            -
+              value: '1800 F Street NW'
+          field_venue_city:
+            -
+              value: Washington
+          field_venue_country:
+            -
+              value: USA
+          field_venue_map:
+            -
+              uri: 'https://frppmap.gsa.gov/frppmap/'
+              title: ''
+              options: {  }
+          field_venue_name:
+            -
+              value: 'General Services Administration'
+          field_venue_room:
+            -
+              value: '1200'
+          field_venue_state:
+            -
+              value: DC
+          field_venue_zip:
+            -
+              value: '20006'
+  field_youtube_id:
+    -
+      value: 'nulla iaculis ligula fames proin in <b>erat</b>'

@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: e60a3199-17d7-4c13-8b76-f0bbaef67bcd
+  bundle: landing_page
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: EVENTS
+  created:
+    -
+      value: 1729527420
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  body:
+    -
+      value: '<p><strong>**Speakers**</strong></p><p>&nbsp;</p><p>* <strong>**Dan Williams**</strong> - Product Lead, USWDS</p><p>* <strong>**Matt Henry**</strong> - Engineering Lead, USWDS</p><p>* <strong>**Anne Petersen**</strong> - Experience Design Lead, USWDS</p><p>* <strong>**Amy Leadem**</strong> - Developer, USWDS contractor</p><p>&nbsp;</p><p><strong>## Join our Communities of Practice</strong></p><p>&nbsp;</p><p>* [USWDS](<u>https://designsystem.digital.gov/about/community/</u>)</p><p>* [Section 508 IT Accessibility](<u>https://www.section508.gov/manage/join-the-508-community/</u>)</p><p>&nbsp;</p><p><em>*This event is part of a monthly series that takes place on the third Thursday of each month. Don’t forget to set a placeholder on your personal calendar for our future events this year.*</em></p><p>&nbsp;</p><p><strong>## About the USWDS</strong></p><p>&nbsp;</p><p>[The U.S. Web Design System](<u>https://designsystem.digital.gov/</u>) is a toolkit of principles, guidance, and code to help government teams design and build accessible, mobile-friendly websites backed by user research and modern best practices.</p><p>&nbsp;</p><p>* [The U.S. Web Design System](<u>https://designsystem.digital.gov/</u>)</p><p>* [Contribute on GitHub](<u>https://github.com/uswds/uswds/issues</u>)</p><p>* [Email Us](<u>mailto:uswds@gsa.gov</u>)</p><p>* [Join our community](<u>https://digital.gov/communities/uswds/</u>)</p><p>* [Follow @uswds on Twitter](<u>https://twitter.com/uswds</u>)</p><p>&nbsp;</p><p>---</p><p>&nbsp;</p><p><em>*Disclaimer*</em>: All references to specific brands, products, and/or companies are used only for illustrative purposes and do not imply endorsement by the U.S. federal government or any federal government agency.</p>'
+      format: html
+      summary: ''
+  field_buttons:
+    -
+      uri: 'http://www.digital.gov'
+      title: 'Placeholder Button'
+      options: {  }
+  field_summary:
+    -
+      value: 'The U.S. Web Design System team will answer community questions and give an update on their work developing web components for the design system.'
+      format: html

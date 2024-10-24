@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 0ec3708e-1d2d-4879-8f4c-04145eb83b3a
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: kaufmann-404-page-spike.png
+  uri:
+    -
+      value: 'public://2024-10/kaufmann-404-page-spike.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 161774
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1729710809

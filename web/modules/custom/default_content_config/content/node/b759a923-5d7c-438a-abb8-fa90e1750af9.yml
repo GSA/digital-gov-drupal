@@ -1,0 +1,49 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: b759a923-5d7c-438a-abb8-fa90e1750af9
+  bundle: basic_page
+  default_langcode: en
+  depends:
+    6bd8641f-84c6-4ddb-b8b2-9c076b017198: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Contact Us'
+  created:
+    -
+      value: 1729713282
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  body:
+    -
+      value: '<p><strong>**Digital.gov**</strong> is made up of a cross-functional team of writers, editors, strategists, technologists, and designers who all work at the Technology Transformation Services (TTS) at the General Services Administration (GSA).</p><p>&nbsp;</p><p>:envelope: <strong>**Questions or feedback?**</strong> Send an email to us at [digitalgov@gsa.gov](<u>mailto:digitalgov@gsa.gov</u>).</p><p>&nbsp;</p><p>:video_camera: For all media or speaker inquiries, please [email GSA’s Office of Strategic Communication](<u>mailto:press@gsa.gov</u>) (OSC).</p><p>&nbsp;</p><p>For a wider list of contacts, see our [<strong>**Directory of services, tools, and teams**</strong>]({{&lt; ref "/services/directory.md" &gt;}}) »</p><p>&nbsp;</p><p>---</p><p>&nbsp;</p><p><strong>## On social media</strong></p><p>&nbsp;</p><p>- Follow [@digital_gov on X (Formerly Twitter)](<u>https://X.com/digital_gov</u>)</p><p>- Digital.gov on [GitHub](<u>https://github.com/GSA/digitalgov.gov</u>)</p><p>- Join our [Facebook page](<u>https://www.facebook.com/DigitalGov</u>)</p><p>- Subscribe to our [newsletter]({{&lt; ref "/about/subscribe.md" &gt;}})</p><p>- Join a [community of practice]({{&lt; ref "/communities/_index.md" &gt;}})</p><p>&nbsp;</p>'
+      format: html
+      summary: ''
+  field_deck:
+    -
+      value: 'We are human, we promise.'
+      format: html
+  field_featured_image:
+    -
+      entity: 6bd8641f-84c6-4ddb-b8b2-9c076b017198
+  field_page_weight:
+    -
+      value: 1
+  field_summary:
+    -
+      value: 'How to contact the Digital.gov team.'
+      format: html

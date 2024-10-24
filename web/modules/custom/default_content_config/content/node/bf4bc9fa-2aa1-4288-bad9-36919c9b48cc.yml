@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: bf4bc9fa-2aa1-4288-bad9-36919c9b48cc
+  bundle: basic_page
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'BASIC-PAGE-all required fields'
+  created:
+    -
+      value: 1729524930
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false

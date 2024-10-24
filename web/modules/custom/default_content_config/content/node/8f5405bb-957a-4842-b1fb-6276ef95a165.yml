@@ -1,0 +1,37 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 8f5405bb-957a-4842-b1fb-6276ef95a165
+  bundle: resources
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Plain Language Web Writing Tips'
+  created:
+    -
+      value: 1729619790
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  body:
+    -
+      value: '<p>On the web, people are in a hurry. They skim and scan, looking for fast answers to their questions, so it’s important to get to the point&amp;mdash;quickly!</p><p>&nbsp;</p><p>Help your readers complete their tasks with these Plain Language writing tips:</p><p>&nbsp;</p><p>&lt;table style="width: 100%" border="1"&gt;</p><p><span>&nbsp; </span>&lt;tr&gt;</p><p><span>&nbsp; &nbsp;&nbsp;</span>&lt;td&gt;&lt;strong&gt;Audience&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Write for your reader. Don&amp;#8217;t write for the experts, the lawyers, or your management, unless they are your intended audience.&lt;/td&gt;</p><p><span>&nbsp; </span>&lt;/tr&gt;</p><p><span>&nbsp;</span></p><p><span>&nbsp; </span>&lt;tr&gt;</p><p><span>&nbsp; &nbsp;&nbsp;</span>&lt;td&gt;&lt;strong&gt;Length&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;&lt;s&gt;Less is more!&lt;/s&gt; &lt;s&gt;Be concise.&lt;/s&gt; Eliminate ALL unnecessary words. &lt;s&gt;Challenge every word = do you need it?&lt;/s&gt;&lt;/td&gt;</p><p><span>&nbsp; </span>&lt;/tr&gt;</p><p><span>&nbsp;</span></p><p><span>&nbsp; </span>&lt;tr&gt;</p><p><span>&nbsp; &nbsp;&nbsp;</span>&lt;td&gt;&lt;strong&gt;Tone&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Use conversational pronouns (you, us, our, we). Write as if you were talking to a colleague or friend. Use contractions (we’re instead of we are).&lt;/td&gt;</p><p><span>&nbsp; </span>&lt;/tr&gt;</p><p><span>&nbsp;</span></p><p><span>&nbsp; </span>&lt;tr&gt;</p><p><span>&nbsp; &nbsp;&nbsp;</span>&lt;td&gt;&lt;strong&gt;Voice&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Use active voice with strong verbs. Say “We mailed your form on May 1” instead of “Your form was mailed by us on May 1.”&lt;/td&gt;</p><p><span>&nbsp; </span>&lt;/tr&gt;</p><p><span>&nbsp;</span></p><p><span>&nbsp; </span>&lt;tr&gt;</p><p><span>&nbsp; &nbsp;&nbsp;</span>&lt;td&gt;&lt;strong&gt;Word Choice&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Use the same words your readers use when they search for your info on the Web. Avoid acronyms and jargon.&lt;/td&gt;</p><p><span>&nbsp; </span>&lt;/tr&gt;</p><p><span>&nbsp;</span></p><p><span>&nbsp; </span>&lt;tr&gt;</p><p><span>&nbsp; &nbsp;&nbsp;</span>&lt;td&gt;&lt;strong&gt;Simplify&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Use simple, descriptive section headings; short paragraphs; and ordinary, familiar words.&lt;/td&gt;</p><p><span>&nbsp; </span>&lt;/tr&gt;</p><p><span>&nbsp;</span></p><p><span>&nbsp; </span>&lt;tr&gt;</p><p><span>&nbsp; &nbsp;&nbsp;</span>&lt;td&gt;&lt;strong&gt;Links&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Never use &amp;#8220;click here&amp;#8221;—link language should describe what your reader will get if they click that link. Include key words to help search engines.&lt;/td&gt;</p><p><span>&nbsp; </span>&lt;/tr&gt;</p><p><span>&nbsp;</span></p><p><span>&nbsp; </span>&lt;tr&gt;</p><p><span>&nbsp; &nbsp;&nbsp;</span>&lt;td&gt;&lt;strong&gt;Organization&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Put the most important information first, followed by the details.&lt;/td&gt;</p><p><span>&nbsp; </span>&lt;/tr&gt;</p><p><span>&nbsp;</span></p><p><span>&nbsp; </span>&lt;tr&gt;</p><p><span>&nbsp; &nbsp;&nbsp;</span>&lt;td&gt;&lt;strong&gt;Improve Tasks&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Organize content around your customers’ tasks, not your organization. Highlight action items (step 1, step 2, etc.).&lt;/td&gt;</p><p><span>&nbsp; </span>&lt;/tr&gt;</p><p><span>&nbsp;</span></p><p><span>&nbsp; </span>&lt;tr&gt;</p><p><span>&nbsp; &nbsp;&nbsp;</span>&lt;td&gt;&lt;strong&gt;Scannability&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Separate content into small chunks. Use lots of white space for easy scanning. In general, write no more than 5-7 lines per paragraph. Use lists and bullets, they are easy to scan.&lt;/td&gt;</p><p><span>&nbsp; </span>&lt;/tr&gt;</p><p><span>&nbsp;</span></p><p><span>&nbsp; </span>&lt;tr&gt;</p><p><span>&nbsp; &nbsp;&nbsp;</span>&lt;td&gt;&lt;strong&gt;Separate Topics&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Present each topic separately. Keep the information on each page to three (or fewer) levels.&lt;/td&gt;</p><p><span>&nbsp; </span>&lt;/tr&gt;</p><p><span>&nbsp;</span></p><p><span>&nbsp; </span>&lt;tr&gt;</p><p><span>&nbsp; &nbsp;&nbsp;</span>&lt;td&gt;&lt;strong&gt;Context&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Don’t assume your readers already know the subject or have read related pages. Each page should stand on its own. Put everything in context.&lt;/td&gt;</p><p><span>&nbsp; </span>&lt;/tr&gt;</p><p><span>&nbsp;</span></p><p><span>&nbsp; </span>&lt;tr&gt;</p><p><span>&nbsp; &nbsp;&nbsp;</span>&lt;td&gt;&lt;strong&gt;Test and Evaluate&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Test Web pages with actual customers so you can be sure real people can understand what you write.&lt;/td&gt;</p><p><span>&nbsp; </span>&lt;/tr&gt;</p><p><span>&nbsp;</span></p><p><span>&nbsp; </span>&lt;tr&gt;</p><p><span>&nbsp; &nbsp;&nbsp;</span>&lt;td&gt;&lt;strong&gt;Train&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Encourage all your colleagues (lawyers, accountants, researchers, etc.) to use plain language—because all content is potentially Web content.&lt;/td&gt;</p><p><span>&nbsp; </span>&lt;/tr&gt;</p><p>&lt;/table&gt;</p><p>&nbsp;</p><p>{{&lt; button href="https://s3.amazonaws.com/digitalgov/_legacy-img/2013/11/checklist-for-Plain-Language-Web-writing.docx" text="Download Checklist" &gt;}}</p>'
+      format: html
+      summary: ''
+  field_summary:
+    -
+      value: 'Help your readers complete their tasks with these Plain Language writing tips.'
+      format: html

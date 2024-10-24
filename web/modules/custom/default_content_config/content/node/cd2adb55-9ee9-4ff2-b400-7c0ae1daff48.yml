@@ -1,0 +1,131 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: cd2adb55-9ee9-4ff2-b400-7c0ae1daff48
+  bundle: event
+  default_langcode: en
+  depends:
+    e2e80683-d456-446a-acbd-a03ff409bf1d: node
+    6bd8641f-84c6-4ddb-b8b2-9c076b017198: media
+    ad7aa7a5-33cf-400e-93cf-11820e467111: node
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Plain Language: Accessibility for Content'
+  created:
+    -
+      value: 1729712692
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  body:
+    -
+      value: '<p>{{&lt; asset-static file="plain-accessibility-slides-march-2021.pdf" label="View the accessible slides (PDF, 186 KB, 17 pages)" &gt;}}</p><p>&nbsp;</p><p>The presentation will focus on concerns and opportunities shared by the Section 508 and plain language communities. Topics will include:</p><p>&nbsp;</p><p>* The shared goal of making it easy for everyone to understand and act on content</p><p>* Word choice</p><p>* Typography and layout</p><p>* Headings, lists, and tables</p><p>* Graphics</p><p>&nbsp;</p><p><strong>## Presenters:</strong></p><p>&nbsp;</p><p>* <strong>**Bethany Letalien**</strong>, Section 508 Program Manager, U.S. Office of Personnel Management, Office of Communications</p><p>* <strong>**Alex Wilson**</strong>, Program Analyst, U.S. General Services Administration, Office of Government-wide Policy</p><p>&nbsp;</p><p>- - -</p><p>&nbsp;</p><p><em>*The [Plain Language Action and Information Network (PLAIN)](</em><u>https://www.plainlanguage.gov/</u><em>) is a group of federal employees from different agencies and specialties who support the use of clear communication in government&nbsp;</em></p><p>&nbsp;</p>'
+      format: html
+      summary: ''
+  field_authors:
+    -
+      entity: e2e80683-d456-446a-acbd-a03ff409bf1d
+  field_captions:
+    -
+      uri: 'https://www.captionedtext.com/client/event.aspx?EventID=4718078&CustomerID=321'
+      title: ''
+      options: {  }
+  field_deck:
+    -
+      value: 'Learn what the plain language and accessibility communities share:   opportunities to help people get and understand information. Find out what you   can do to help.'
+      format: html
+  field_end_date:
+    -
+      value: '2021-03-10T20:00:00'
+  field_event_organizer:
+    -
+      value: Digital.gov
+  field_event_platform:
+    -
+      value: zoom
+  field_featured_image:
+    -
+      entity: 6bd8641f-84c6-4ddb-b8b2-9c076b017198
+  field_host:
+    -
+      value: 'Plain Language Community of Practice'
+  field_kicker:
+    -
+      value: 'Plain Language'
+  field_page_weight:
+    -
+      value: 1
+  field_primary_image:
+    -
+      entity: 6bd8641f-84c6-4ddb-b8b2-9c076b017198
+  field_registration_url:
+    -
+      uri: 'https://www.eventbrite.com/e/plain-language-and-section-508-tickets-142940070599'
+      title: ''
+      options: {  }
+  field_start_date:
+    -
+      value: '2021-03-10T19:00:00'
+  field_summary:
+    -
+      value: 'Come join us  as we focus on concerns and opportunities shared by the   Section 508 and plain language communities in Government!'
+      format: html
+  field_topics:
+    -
+      entity: ad7aa7a5-33cf-400e-93cf-11820e467111
+  field_venue:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: bc70d89f-e1d7-4f62-9113-a496e3cfd3d6
+          bundle: venue
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1729712906
+          behavior_settings:
+            -
+              value: {  }
+          field_venue_address:
+            -
+              value: '1800 F Street NW'
+          field_venue_city:
+            -
+              value: Washington
+          field_venue_country:
+            -
+              value: 'United States'
+          field_venue_name:
+            -
+              value: 'General Services Administration'
+          field_venue_room:
+            -
+              value: '1200'
+          field_venue_state:
+            -
+              value: DC
+          field_venue_zip:
+            -
+              value: '20006'
+  field_youtube_id:
+    -
+      value: n_WYcQnVOf4

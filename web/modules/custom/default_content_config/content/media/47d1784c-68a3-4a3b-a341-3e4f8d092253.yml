@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 47d1784c-68a3-4a3b-a341-3e4f8d092253
+  bundle: image
+  default_langcode: en
+  depends:
+    11b3c503-cd86-4601-883b-928b8f2cf717: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: topics-og-primary-image.jpg
+  created:
+    -
+      value: 1729472729
+  field_media_image:
+    -
+      entity: 11b3c503-cd86-4601-883b-928b8f2cf717
+      alt: topics
+      title: ''
+      width: 870
+      height: 630

@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 44a758d4-6f2e-4e59-91b1-981e85f00149
+  bundle: image
+  default_langcode: en
+  depends:
+    3fe1afd9-c476-4db6-8534-199cf543d9d5: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: communities-card-pl.png
+  created:
+    -
+      value: 1729618993
+  field_media_image:
+    -
+      entity: 3fe1afd9-c476-4db6-8534-199cf543d9d5
+      alt: 'Communities Card'
+      title: ''
+      width: 2501
+      height: 1307

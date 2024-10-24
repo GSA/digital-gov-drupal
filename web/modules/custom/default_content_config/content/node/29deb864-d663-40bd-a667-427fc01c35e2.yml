@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 29deb864-d663-40bd-a667-427fc01c35e2
+  bundle: news
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'NEWS-all required fields'
+  created:
+    -
+      value: 1729467592
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false

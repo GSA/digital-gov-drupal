@@ -1,6 +1,7 @@
 const { src, dest, series } = require("gulp");
 const webpack = require("webpack-stream");
 const compiler = require("webpack");
+const rename = require("gulp-rename");
 const TerserPlugin = require('terser-webpack-plugin');
 
 // Directories
@@ -55,6 +56,7 @@ function compile() {
         compiler
       )
     )
+    .pipe(rename({ suffix: ".min" }))
     .pipe(dest(JS_DEST, { sourcemaps: true }));
 }
 

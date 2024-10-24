@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: df325658-effa-4ff9-9e6b-abfbaf437ff9
+  bundle: image
+  default_langcode: en
+  depends:
+    93810db1-d94a-4e2f-9615-c70b44fae0de: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: pink_logo.jpeg
+  created:
+    -
+      value: 1729460198
+  field_media_image:
+    -
+      entity: 93810db1-d94a-4e2f-9615-c70b44fae0de
+      alt: 'Communities Logo'
+      title: ''
+      width: 170
+      height: 162

@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 15e82358-a177-4949-af9f-4bd344d44083
+  bundle: image
+  default_langcode: en
+  depends:
+    62ee3632-95b5-4ea0-9ec2-a666f426af5f: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 2024-uswds-monthly-call-march-title-card.png
+  created:
+    -
+      value: 1729462358
+  field_media_image:
+    -
+      entity: 62ee3632-95b5-4ea0-9ec2-a666f426af5f
+      alt: 'uswds monthly call'
+      title: ''
+      width: 2390
+      height: 1244

@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 1e945b0b-bcf5-4df7-9105-6c222eb70c13
+  bundle: image
+  default_langcode: en
+  depends:
+    34293acf-1466-49dc-a7bb-fa3c0b4742ed: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: guide-dap.png
+  created:
+    -
+      value: 1729463943
+  field_media_image:
+    -
+      entity: 34293acf-1466-49dc-a7bb-fa3c0b4742ed
+      alt: 'Guide DAP'
+      title: ''
+      width: 1200
+      height: 630

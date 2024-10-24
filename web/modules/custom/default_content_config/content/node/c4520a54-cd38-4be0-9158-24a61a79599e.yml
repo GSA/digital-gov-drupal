@@ -1,0 +1,62 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: c4520a54-cd38-4be0-9158-24a61a79599e
+  bundle: guides
+  default_langcode: en
+  depends:
+    6bd8641f-84c6-4ddb-b8b2-9c076b017198: media
+    ad7aa7a5-33cf-400e-93cf-11820e467111: node
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Understanding the Digital Analytics Program'
+  created:
+    -
+      value: 1729714414
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  body:
+    -
+      value: '<p><strong>## What is DAP?</strong></p><p>&nbsp;</p><p>The Digital Analytics Program (DAP) helps federal agencies understand how the public finds, accesses, and uses government services online.</p><p>&nbsp;</p><p>The U.S. General Services Administration (GSA) provides DAP as a shared service, so all federal agencies can use DAP’s web analytics tools, training, and support at no cost.</p><p>&nbsp;</p><p>DAP uses Google Analytics 360 to measure traffic and engagement across thousands of federal government websites and apps, reporting analytics under a single federal-wide shared account. Google Analytics 360 is the paid, enterprise version of Google Analytics 4 (GA4).</p><p>&nbsp;</p><p><strong>## Why use DAP?</strong></p><p>&nbsp;</p><p>For millions, access to digital services isn’t a luxury — it’s critical. And the public’s experiences using government websites to find unemployment support, file taxes, apply for student loans, or get assistance with housing, childcare, or food can dramatically affect how they feel about the federal government.</p><p>&nbsp;</p><p>All federal agencies can use DAP to better understand user behavior and improve their public-facing websites and digital services, which will make it easier for the public to access the information and services that they count on each and every day.</p><p>&nbsp;</p><p>Additionally, [M-23-22, Delivering a Digital-First Public Experience](<u>https://digital.gov/resources/delivering-digital-first-public-experience/</u>) requires all federal executive branch agencies to use DAP:</p><p>&nbsp;</p><p>{{&lt; quote-block text="Agencies are required to participate in GSA’s government-wide Digital Analytics Program (DAP). Participation in DAP does not preclude agencies from using other web analytics services." cite="M-23-22, Section III-A, Subsection 6" &gt;}}</p><p>&nbsp;</p><p><strong>## Learn more about DAP</strong></p><p>&nbsp;</p><p>- [Get started with DAP: Use DAP to better understand user behavior](<u>https://digital.gov/guides/dap/get-started-with-dap/#content-start</u>)</p><p>- [Make data-informed decisions: How to turn the DAP data into actionable insights](<u>https://digital.gov/guides/dap/make-data-informed-decisions/#content-start</u>)</p><p>- [Glossary of terms: Browse DAP terms](<u>https://digital.gov/guides/dap/glossary-of-terms/#content-start</u>)</p><p>- [Migration: Learn about the migration from Universal Analytics to Google Analytics 4](<u>https://digital.gov/guides/dap/migration-from-universal-analytics-to-google-analytics-4/#content-start</u>)</p><p>- [Terms of service: GSA offers DAP subject to your acceptance of these terms](<u>https://digital.gov/guides/dap/gsa-dap-terms-of-service/#content-start</u>)</p><p>&nbsp;</p><p>{{&lt; box &gt;}}</p><p><strong>**Do you have a question for the DAP team?**</strong> Send an email to [dap@gsa.gov](<u>mailto:dap@gsa.gov</u>), and they’ll get back to you.</p><p>{{&lt; /box &gt;}}</p><p>&nbsp;</p><p>&nbsp;</p>'
+      format: html
+      summary: ''
+  field_deck:
+    -
+      value: 'A free analytics tool for measuring digital services in the federal government'
+      format: html
+  field_featured_image:
+    -
+      entity: 6bd8641f-84c6-4ddb-b8b2-9c076b017198
+  field_guide_weight:
+    -
+      value: 5
+  field_page_weight:
+    -
+      value: 0
+  field_primary_image:
+    -
+      entity: 6bd8641f-84c6-4ddb-b8b2-9c076b017198
+  field_summary:
+    -
+      value: 'he Digital Analytics Program (DAP) offers advanced, easy web analytics for federal agencies.'
+      format: html
+  field_summary_box:
+    -
+      value: false
+  field_topics:
+    -
+      entity: ad7aa7a5-33cf-400e-93cf-11820e467111

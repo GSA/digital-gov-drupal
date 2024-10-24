@@ -1,0 +1,136 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 26f2d370-453e-4fdb-8b51-3f6a932fd3e9
+  bundle: topics
+  default_langcode: en
+  depends:
+    623a2982-602b-4762-a59e-9a7c30c64f36: node
+    47d1784c-68a3-4a3b-a341-3e4f8d092253: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'TOPICS-all fields'
+  created:
+    -
+      value: 1729472045
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  body:
+    -
+      value: '<p>Lorem ipsum odor amet, consectetuer adipiscing elit. Dapibus facilisis tellus eleifend cras lectus diam efficitur. Porttitor aenean habitasse magna inceptos commodo litora. Magna fermentum sit phasellus taciti neque venenatis feugiat proin! Himenaeos nam leo hendrerit netus litora luctus porttitor? Congue <strong>habitasse</strong> faucibus habitasse nascetur sit. Dolor hac sagittis ligula vulputate; elit quisque mi tempor. Posuere penatibus vehicula orci suspendisse tortor netus nostra leo laoreet.</p><p>Cursus etiam metus sagittis ultricies, aliquet eget. Nostra euismod feugiat fames suspendisse hendrerit dapibus phasellus felis. Tempor tellus lacus convallis varius hac turpis. Pulvinar augue fusce accumsan suscipit molestie interdum augue porta. Consectetur maximus pulvinar ex curae nostra tellus nisi eu. Convallis mattis ex ullamcorper nisl neque mi torquent. Eros inceptos dis pretium lectus sem mus a. Faucibus proin luctus ultrices; vestibulum tincidunt rutrum.</p>'
+      format: html
+      summary: ''
+  field_deck:
+    -
+      value: 'nulla iaculis ligula fames proin in <b>erat</b>'
+      format: html
+  field_featured_communities:
+    -
+      entity: 623a2982-602b-4762-a59e-9a7c30c64f36
+  field_featured_links:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 2322b996-a2ea-4ec5-a5e7-947bd26aec48
+          bundle: featured_links
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1729613493
+          behavior_settings:
+            -
+              value: {  }
+          field_links:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 3035f2a9-682e-4d0a-b961-dd56bfad1171
+                  bundle: external_content
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1729613533
+                  behavior_settings:
+                    -
+                      value: {  }
+                  field_link:
+                    -
+                      uri: 'https://digital.gov/2019/06/18/introducing-a-guide-paperwork-reduction-act/'
+                      title: 'Guide to the Paperwork Reduction Act'
+                      options: {  }
+                  field_summary:
+                    -
+                      value: 'The Paperwork Reduction Act (PRA) of 1995 requires that agencies obtain Office of Management and Budget (OMB) approval before requesting most types of information from the public.'
+                      format: html
+          field_title:
+            -
+              value: 'Guide to the Paperwork Reduction Act'
+  field_featured_resources:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 330f862b-6410-4c03-8a8d-7cc54869e8d3
+          bundle: external_content
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1729616185
+          behavior_settings:
+            -
+              value: {  }
+          field_link:
+            -
+              uri: 'https://www.cdc.gov/ccindex/index.html'
+              title: 'The CDC Clear Communication Index'
+              options: {  }
+          field_summary:
+            -
+              value: 'The CDC Clear Communication Index is a research-based tool to help you develop and assess public communication materials.'
+              format: html
+  field_legislation:
+    -
+      uri: 'internal:/resources/delivering-digital-first-public-experience'
+      title: 'nulla iaculis ligula fames proin in <b>erat</b>'
+      options: {  }
+  field_page_weight:
+    -
+      value: 1
+  field_primary_image:
+    -
+      entity: 47d1784c-68a3-4a3b-a341-3e4f8d092253
+  field_summary:
+    -
+      value: 'nulla iaculis ligula fames proin in <b>erat</b>'
+      format: html

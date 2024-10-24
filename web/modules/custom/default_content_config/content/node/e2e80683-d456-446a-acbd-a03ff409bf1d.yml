@@ -1,0 +1,73 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: e2e80683-d456-446a-acbd-a03ff409bf1d
+  bundle: authors
+  default_langcode: en
+  depends:
+    6bd8641f-84c6-4ddb-b8b2-9c076b017198: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: Authors
+  created:
+    -
+      value: 1729604802
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  field_agency_acronym:
+    -
+      value: GSA
+  field_agency_full_name:
+    -
+      value: 'U.S. General Services Administration'
+  field_bio:
+    -
+      value: 'Dan Williams is the program lead for the U.S. Web Design System (USWDS).'
+      format: html
+  field_bio_image:
+    -
+      entity: 6bd8641f-84c6-4ddb-b8b2-9c076b017198
+  field_bio_url:
+    -
+      uri: 'https://designsystem.digital.gov/'
+      title: ''
+      options: {  }
+  field_display_name:
+    -
+      value: 'Dan Williams'
+      format: html
+  field_email:
+    -
+      value: daniel.williams@gsa.gov
+  field_first_name:
+    -
+      value: Dan
+      format: html
+  field_github:
+    -
+      value: thisisdano
+  field_last_name:
+    -
+      value: Williams
+      format: html
+  field_location:
+    -
+      value: 'Portland, OR'
+  field_summary:
+    -
+      value: 'The people who have contributed their stories and guidance over the years.'
+      format: html
