@@ -3,7 +3,18 @@ langcode: en
 status: true
 dependencies:
   config:
-    - node.type.article
+    - node.type.authors
+    - node.type.basic_page
+    - node.type.community
+    - node.type.event
+    - node.type.guides
+    - node.type.landing_page
+    - node.type.news
+    - node.type.resources
+    - node.type.services
+    - node.type.short_post
+    - node.type.source
+    - node.type.topics
   module:
     - content_moderation
 id: editorial
@@ -21,128 +32,163 @@ type_settings:
       weight: 0
       published: false
       default_revision: false
-    federal_review:
-      label: 'Federal Review'
-      weight: 4
-      published: false
-      default_revision: false
-    peer_review:
-      label: 'Peer Review'
-      weight: 3
-      published: false
-      default_revision: false
     published:
       label: Published
       weight: 1
       published: true
       default_revision: true
+    ready_to_archive:
+      label: 'Ready to Archive'
+      weight: 7
+      published: false
+      default_revision: false
     ready_to_publish:
       label: 'Ready to Publish'
       weight: 5
       published: false
       default_revision: false
+    ready_to_review:
+      label: 'Ready to Review'
+      weight: 6
+      published: false
+      default_revision: false
   transitions:
-    archive:
-      label: Archive
+    cancel_draft:
+      label: 'Cancel draft'
       from:
         - draft
-        - federal_review
-        - peer_review
-        - published
-        - ready_to_publish
       to: archived
       weight: 3
-    back_federal_review:
-      label: 'Back: Federal Review'
+    cancel_publishing:
+      label: 'Cancel publishing'
       from:
         - ready_to_publish
-      to: federal_review
-      weight: 2
-    back_from_federal_review_draft:
-      label: 'Back from Federal Review: Draft'
+      to: archived
+      weight: 11
+    cancel_review:
+      label: 'Cancel review'
       from:
-        - federal_review
-      to: draft
-      weight: 5
-    back_from_peer_review_draft:
-      label: 'Back from Peer Review: Draft'
-      from:
-        - peer_review
-      to: draft
-      weight: 4
-    back_from_published_draft:
-      label: 'Back from Published: Draft'
-      from:
-        - published
-      to: draft
+        - ready_to_review
+      to: archived
       weight: 7
-    back_from_ready_to_publish_draft:
-      label: 'Back from Ready to Publish: Draft'
+    content_still_needed_in_draft:
+      label: 'Content still needed in draft'
       from:
-        - ready_to_publish
+        - ready_to_archive
       to: draft
-      weight: 6
-    back_peer_review:
-      label: 'Back: Peer Review'
+      weight: 15
+    content_still_needed_in_review:
+      label: 'Content still needed in review'
       from:
-        - federal_review
-      to: peer_review
-      weight: -1
-    create_new_draft:
-      label: 'Stay: Draft'
+        - ready_to_archive
+      to: ready_to_review
+      weight: 16
+    draft_ready_for_review:
+      label: 'Draft ready for review'
       from:
         - draft
-      to: draft
-      weight: -5
-    forward_federal_review:
-      label: 'Forward: Federal Review'
-      from:
-        - peer_review
-      to: federal_review
-      weight: 0
-    forward_from_archived_draft:
-      label: 'Forward from Archived: Draft'
+      to: ready_to_review
+      weight: 1
+    override_publish:
+      label: 'Override Publish'
       from:
         - archived
-      to: draft
-      weight: 8
-    forward_peer_review:
-      label: 'Forward: Peer Review'
-      from:
         - draft
-      to: peer_review
-      weight: -3
-    forward_ready_to_publish:
-      label: 'Forward: Ready to Publish'
+        - published
+        - ready_to_archive
+        - ready_to_review
+      to: published
+      weight: 18
+    publishing_failed:
+      label: 'Publishing failed'
       from:
-        - federal_review
-      to: ready_to_publish
-      weight: 1
-    publish:
-      label: Publish
+        - ready_to_publish
+      to: draft
+      weight: 9
+    publishing_passed:
+      label: 'Publishing passed'
       from:
         - ready_to_publish
       to: published
-      weight: -4
-    stay_federal_review:
-      label: 'Stay: Federal Review'
+      weight: 10
+    recommend_cancel_draft:
+      label: 'Recommend cancel draft'
       from:
-        - federal_review
-      to: federal_review
-      weight: 9
-    stay_peer_review:
-      label: 'Stay: Peer Review'
+        - draft
+      to: ready_to_archive
+      weight: 2
+    recommend_cancel_review:
+      label: 'Recommend cancel review'
       from:
-        - peer_review
-      to: peer_review
-      weight: -2
-    stay_ready_to_publish:
-      label: 'Stay: Ready to Publish'
+        - ready_to_review
+      to: ready_to_archive
+      weight: 6
+    recommended_archived_content_archived:
+      label: 'Recommended archived content archived'
+      from:
+        - ready_to_archive
+      to: archived
+      weight: 17
+    review_failed:
+      label: 'Review failed'
+      from:
+        - ready_to_review
+      to: draft
+      weight: 4
+    review_passed:
+      label: 'Review passed'
+      from:
+        - ready_to_review
+      to: ready_to_publish
+      weight: 5
+    start_draft_process_again:
+      label: 'Start draft process again'
+      from:
+        - published
+      to: draft
+      weight: 14
+    stay_in_draft:
+      label: 'Stay in draft'
+      from:
+        - draft
+      to: draft
+      weight: 0
+    stay_in_publishing:
+      label: 'Stay in publishing'
       from:
         - ready_to_publish
       to: ready_to_publish
-      weight: 10
+      weight: 12
+    stay_in_review:
+      label: 'Stay in review'
+      from:
+        - ready_to_review
+      to: ready_to_review
+      weight: 8
+    unarchive:
+      label: Unarchive
+      from:
+        - archived
+      to: draft
+      weight: 19
+    unpublish:
+      label: Unpublish
+      from:
+        - published
+      to: archived
+      weight: 13
   entity_types:
     node:
-      - article
+      - authors
+      - basic_page
+      - community
+      - event
+      - guides
+      - landing_page
+      - news
+      - resources
+      - services
+      - short_post
+      - source
+      - topics
   default_moderation_state: draft
