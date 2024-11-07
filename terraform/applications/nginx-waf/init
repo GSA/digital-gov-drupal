@@ -1,0 +1,92 @@
+#!/bin/bash
+
+declare http_proxy
+http_proxy=$(echo "${VCAP_SERVICES}" | jq -r '."user-provided"[].credentials.proxy_uri')
+
+declare https_proxy
+https_proxy=$(echo "${VCAP_SERVICES}" | jq -r '."user-provided"[].credentials.proxy_uri')
+
+## The home directory of the buildpack.
+home="/home/vcap"
+
+## The path to the application.
+app_path="${home}/app"
+
+## The path to modsecurity.
+modsecurity_path="${app_path}/modsecurity/"
+
+## THe path to the nginx binary.
+nginx_path="${home}/deps/1/nginx/sbin"
+
+## Modify the path to add nginx and other installed binarys from the apt buildpack.
+PATH="${PATH}:$(dirname ${nginx_path}):${home}/deps/0/bin/"
+
+echo "Configuring .bashrc..."
+## Updated ~/.bashrc to update $PATH when someone logs in.
+[ -z "$(cat ${home}/.bashrc | grep PATH)" ] && \
+  touch ${home}/.bashrc && \
+  echo "PATH=${PATH}" >> ${home}/.bashrc && \
+  echo "alias vi=\"VIMRUNTIME=${home}/deps/0/apt/usr/share/vim/vim82 ${home}/deps/0/bin/vim.basic\"" >> ${home}/.bashrc && \
+  echo "alias vim=\"VIMRUNTIME=${home}/deps/0/apt/usr/share/vim/vim82 ${home}/deps/0/bin/vim.basic\"" >> ${home}/.bashrc
+
+[ -z "${http_proxy}" ] && echo "export http_proxy=${http_proxy}" >> ${home}/.bashrc
+[ -z "${https_proxy}" ] && echo "export https_proxy=${https_proxy}" >> ${home}/.bashrc
+
+## Load .bashrc into this script.
+source ${home}/.bashrc
+
+echo "Configuring Nginx..."
+## Remove the comment from the load module now that the buildpack has started.
+[ -f "/home/vcap/app/modules/ngx_http_modsecurity_module.so" ] && sed -i 's/^#load_module./load_module /' ${app_path}/nginx.conf
+
+## Remove the comment for the reverse proxy configuration.
+sed -i 's/^  #include./include /' ${app_path}/nginx.conf
+
+sed -i 's/^  server./#  server /' ${app_path}/nginx.conf
+sed -i 's/^    listen./#    listen /' ${app_path}/nginx.conf
+sed -i 's/^    root./#    root /' ${app_path}/nginx.conf
+sed -i 's/^    index./#    index /' ${app_path}/nginx.conf
+sed -i 's/^  }/#  }/' ${app_path}/nginx.conf
+
+## Get rules for modsecurity.
+echo "Installing OWSAP Core Rule Set rules..."
+mkdir -p /tmp/owasp-crs ${modsecurity_path}/crs
+tar -xf "${app_path}/packages/${CRS_RULES}" --strip-components=1 -C /tmp/owasp-crs
+mv -f /tmp/owasp-crs/rules/* ${modsecurity_path}/crs
+rm -rf /tmp/owasp-crs
+
+if [ -n "${MODSECURITY_UPDATE}" ]; then
+  modsecurity_version=$(echo "${MODSECURITY_UPDATE}" | cut -d '_' -f2 | cut -d '-' -f1)
+  echo "Updating libmodsecurity..."
+  #current_path=$(pwd)
+  
+  dpkg-deb -R "${app_path}/packages/${MODSECURITY_UPDATE}" ${home}/deps/0/apt/
+  ln -s "${home}/deps/0/apt/usr/lib/x86_64-linux-gnu/libmodsecurity.so.${modsecurity_version}" "libmodsecurity.so.${modsecurity_version}"
+fi
+
+## Removing the current modsecurity directory.
+rm -rf ${home}/deps/0/apt/etc/modsecurity
+
+## Linking the ~/app/modsecurity path to the apt install path.
+ln -s ${modsecurity_path} ${home}/deps/0/apt/etc/
+
+echo "Configuring WAF ACLs..."
+## Insert the approved IP's into the WAF's configuration.
+declare IPS_ALLOWED_CMS
+IPS_ALLOWED_CMS=$(echo "${ALLOWED_IPS_CMS}" | base64 -d | jq -rc '.[] | @sh' | tr -d \' | sed 's/^/      /')
+export IPS_ALLOWED_CMS
+PATH=${PATH}; envsubst < ${app_path}/nginx/snippets/ip-restrict-cms.conf.tmpl > ${app_path}/nginx/snippets/ip-restrict-cms.conf
+
+## Insert the denied IP's into the WAF's configuration.
+declare IPS_DENYED_STATIC
+IPS_DENYED_STATIC=$(echo "${DENYED_IPS_STATIC}" | base64 -d | jq -rc '.[] | @sh' | tr -d \' | sed 's/^/      /')
+export IPS_DENYED_STATIC
+PATH=${PATH}; envsubst < ${app_path}/nginx/snippets/ip-restrict-static.conf.tmpl > ${app_path}/nginx/snippets/ip-restrict-static.conf
+
+## Move the default.conf to a temp file so it can be modified.
+mv ${app_path}/nginx/conf.d/default.conf ${app_path}/nginx/conf.d/default.conf.tmpl
+
+## Replace the default listen port to the applications port.
+PATH=${PATH}; envsubst '$VCAP_APP_PORT' < ${app_path}/nginx/conf.d/default.conf.tmpl > ${app_path}/nginx/conf.d/default.conf
+
+echo "Intialization complete!"

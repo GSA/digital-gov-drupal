@@ -1,0 +1,73 @@
+name: Deploy App
+
+on:
+  workflow_call:
+
+jobs:
+  updateApp:
+    name: Update App
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set enviornment
+        run: |
+          BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)
+          COMPOSER_DEV=1
+          case ${BRANCH} in
+            develop)
+              CF_SPACE="dev"
+              DRUPAL_MEMORY=${{ vars.DEVELOP_CMS_MEMORY }}
+              DRUPAL_INSTANCES=${{ vars.DEVELOP_INSTANCES }}
+              ;;
+            main)
+              CF_SPACE="prod"
+              COMPOSER_DEV=0
+              DRUPAL_MEMORY=${{ vars.MAIN_CMS_MEMORY }}
+              DRUPAL_INSTANCES=${{ vars.MAIN_INSTANCES }}
+              ;;
+            stage)
+              CF_SPACE="stage"
+              COMPOSER_DEV=0
+              DRUPAL_MEMORY=${{ vars.STAGE_CMS_MEMORY }}
+              DRUPAL_INSTANCES=${{ vars.STAGE_INSTANCES }}
+              ;;
+          esac
+
+          echo "APP_NAME=drupal" | tee -a $GITHUB_ENV
+          echo "BRANCH=${BRANCH}" | tee -a $GITHUB_ENV
+          echo "BUILDPACK_PORT=${{ vars.BUILDPACK_PORT }}" | tee -a $GITHUB_ENV
+          echo "CF_SPACE=${CF_SPACE}" | tee -a $GITHUB_ENV
+          echo "COMPOSER_DEV=${COMPOSER_DEV}" | tee -a $GITHUB_ENV
+          echo "DRUPAL_INSTANCES=${DRUPAL_INSTANCES}" | tee -a $GITHUB_ENV
+          echo "DRUPAL_MEMORY=${DRUPAL_MEMORY}" | tee -a $GITHUB_ENV
+          echo "HASH_SALT=${{ secrets.HASH_SALT }}" | tee -a $GITHUB_ENV
+          echo "WAF_NAME=waf"| tee -a $GITHUB_ENV
+
+          [ "${COMPOSER_DEV}" = "1" ] && sed -i 's/--no-dev //' .bp-config/options.json
+
+      - name: Set repo name
+        run: echo "REPO_NAME=${{ github.event.repository.name }}" >> $GITHUB_ENV
+      - name: Install basic dependancies
+        run: ./scripts/pipeline/deb-basic-deps.sh
+      - name: Install Cloudfoundry CLI
+        run: ./scripts/pipeline/deb-cf-install.sh
+      - name: Cloud.gov login
+        env:
+          CF_USER: "${{ secrets.CF_USER }}"
+          CF_PASSWORD: "${{ secrets.CF_PASSWORD }}"
+          CF_ORG: "${{ secrets.CF_ORG }}"
+          PROJECT: "${{ secrets.PROJECT }}"
+        run: |
+          source ./scripts/pipeline/cloud-gov-login.sh
+          cf target -s "${CF_SPACE}" >/dev/null 2>&1
+      - name: Build theme
+        run: ./orch/build_node.sh
+      - name: Deploy App
+        env:
+          PROJECT: "${{ secrets.PROJECT }}"
+        run: source ./scripts/pipeline/cloud-gov-deploy.sh
+      - name: Post Deploy
+        env:
+          PROJECT: "${{ secrets.PROJECT }}"
+        run: source ./scripts/pipeline/cloud-gov-post-deploy.sh

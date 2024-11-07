@@ -1,0 +1,19 @@
+#!/bin/bash
+
+home="/home/vcap"
+app_path="${home}/app"
+nginx_path="${home}/deps/1/nginx/sbin"
+
+echo "Intializing Nginx..."
+
+## Configure nginx.
+${app_path}/init
+[ $? -ne 0 ] && exit 1
+
+echo "Starting Nginx..."
+## Start nginx.
+${nginx_path}/nginx -p ${app_path}  -c nginx.conf &
+
+echo "Done!"
+## Simple entrypoint to hold the container open.
+${app_path}/entrypoint

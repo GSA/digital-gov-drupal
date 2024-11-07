@@ -1,0 +1,6 @@
+---
+packages:
+  - curl
+  - gettext
+  - git
+  - wget

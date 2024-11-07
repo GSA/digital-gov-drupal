@@ -1,0 +1,13 @@
+#! /bin/bash
+
+home="/home/vcap"
+app_path="${home}/app"
+
+## Start PHP FPM
+${app_path}/php/sbin/php-fpm -p "${app_path}/php/etc" -y "${app_path}/php/etc/php-fpm.conf" -c "${app_path}/php/etc" &
+
+## Start Apache
+${app_path}/httpd/bin/apachectl -f "${app_path}/httpd/conf/httpd.conf" -k start -DFOREGROUND &
+
+## Run entry point
+${app_path}/scripts/entrypoint &

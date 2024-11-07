@@ -1,0 +1,24 @@
+name: Build and deploy
+
+on:
+  push:
+    branches:
+      - develop
+      - main
+      - stage
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  deploy-infra:
+    uses: ./.github/workflows/terraform-deploy-infra.yml
+    secrets: inherit
+  deploy-app:
+    uses: ./.github/workflows/cloudgov-deploy-app.yml
+    needs: deploy-infra
+    secrets: inherit
+  validate:
+    uses: ./.github/workflows/validation-run.yml
+    secrets: inherit

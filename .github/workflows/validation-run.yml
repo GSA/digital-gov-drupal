@@ -1,15 +1,11 @@
 name: Run validation with RoboValidate
 
 on:
-    # Run on any branch so validate branch can always run.
-    push:
-    # Commit message validation requires a target branch which is only available in a PR.
-    pull_request:
+    workflow_call:
 
 jobs:
     validate:
         runs-on: ubuntu-latest
-
         steps:
             -   name: Checkout code
                 uses: actions/checkout@v4

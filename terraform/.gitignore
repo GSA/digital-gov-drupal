@@ -1,0 +1,53 @@
+## Terraform
+**.terraform*
+**terraform.tfstate.d*
+**.tfvars*
+**tfplan*
+terraform.tfstate*
+
+## Other files/folders
+*.bak
+*.jq
+*.log
+*.txt
+.DS_Store
+
+# Applications
+*.app
+*.exe
+*.war
+
+# Large media files
+*.mp4
+*.tiff
+*.avi
+*.flv
+*.mov
+*.wmv
+
+# Ignore override files as they are usually used to override resources locally and so
+# are not checked in
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore CLI configuration files
+.terraformrc
+terraform.rc
+
+!.terraform.lock.hcl
+!.terraform-docs*
+!TERRAFORM.MD
+!terraform.tfvars.tmpl
+
+## Caddy application
+applications/caddy-proxy/caddy
+applications/caddy-proxy/Caddyfile
+applications/caddy-proxy/*.acl
+
+## WAF application
+applications/nginx-waf/modules/*
+applications/nginx-waf/nginx/snippets/*.conf
+!applications/nginx-waf/nginx/snippets/owasp*.conf
+!applications/nginx-waf/packages/*

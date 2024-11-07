@@ -1,0 +1,9 @@
+---
+packages:
+  - curl
+  - gettext
+  - nmap
+  - liblinear4
+  - mysql-client
+  - postgresql-client
+  - wget

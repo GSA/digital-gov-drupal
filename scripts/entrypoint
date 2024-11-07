@@ -1,0 +1,4 @@
+#!/bin/bash
+
+## Simple script to hold the container open.
+while : ; do sleep 60m ; done

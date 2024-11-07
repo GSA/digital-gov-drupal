@@ -1,0 +1,11 @@
+name: Validation
+
+on:
+  push:
+    branches:
+      - 'feature/**'
+
+jobs:
+  validate:
+    uses: ./.github/workflows/validation-run.yml
+    secrets: inherit

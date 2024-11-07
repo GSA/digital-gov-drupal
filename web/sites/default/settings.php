@@ -886,4 +886,10 @@ $config['environment']['env_non_prod_remote'] = FALSE;
 #   include $app_root . '/' . $site_path . '/settings.local.php';
 # }
 
-include $app_root . '/' . $site_path . '/settings.drupal_env.php';
+
+// Load cloud.gov settings into Drupal.
+if ( !empty(getenv('VCAP_APPLICATION')) ) {
+  include $app_root . '/' . $site_path . '/settings.cloudgov.php';
+} else {
+  include $app_root . '/' . $site_path . '/settings.drupal_env.php';
+}

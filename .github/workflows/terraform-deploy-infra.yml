@@ -1,0 +1,133 @@
+name: Update Infrastructure
+
+on:
+  workflow_call:
+
+jobs:
+  updateInfrastructure:
+    name: Update Infrastructure
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set env.BRANCH
+        run: |
+          BRANCH=develop
+          #BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)
+          case ${BRANCH} in
+            develop)
+              CF_SPACE="dev"
+              ;;
+            main)
+              CF_SPACE="prod"
+              ;;
+          esac
+          echo "BRANCH=${BRANCH}" >> $GITHUB_ENV
+          echo "CF_SPACE=${CF_SPACE}" >> $GITHUB_ENV
+      - name: Set repo name
+        run: echo "REPO_NAME=${{ github.event.repository.name }}" >> $GITHUB_ENV
+      - name: Install basic dependancies
+        run: ./scripts/pipeline/deb-basic-deps.sh
+      - name: Install Cloudfoundry CLI
+        run: ./scripts/pipeline/deb-cf-install.sh
+      - name: Cloud.gov login
+        env:
+          CF_USER: "${{ secrets.CF_USER }}"
+          CF_PASSWORD: "${{ secrets.CF_PASSWORD }}"
+          CF_ORG: "${{ secrets.CF_ORG }}"
+          PROJECT: "${{ secrets.PROJECT }}"
+          TF_BASTION: "${{ secrets.TF_BASTION }}"
+          TF_BACKEND_SPACE: "${{ secrets.TF_BACKEND_SPACE }}"
+        run: |
+          source ./scripts/pipeline/cloud-gov-login.sh
+          cf target -s "${TF_BACKEND_SPACE}" >/dev/null 2>&1
+      - name: Start Bastion
+        env:
+          TF_BASTION: "${{ secrets.TF_BASTION }}"
+        run: |
+          cf start "${TF_BASTION}" >/dev/null 2>&1
+          ./scripts/pipeline/cloud-gov-wait-for-app-start.sh "${TF_BASTION}"
+      - name: Cloud.gov bastion git checkout
+        env:
+          TF_BASTION: "${{ secrets.TF_BASTION }}"
+        run: |
+          #declare -a commands=("rm -rf ${REPO_NAME}" "git clone https://github.com/${GITHUB_REPOSITORY_OWNER}/${REPO_NAME}.git" "cd ${REPO_NAME}" "git checkout ${BRANCH}")
+          declare -a commands=("rm -rf ${REPO_NAME}" "git clone -b "feature/dg-98-build-and-configure-pipeline" https://github.com/${GITHUB_REPOSITORY_OWNER}/${REPO_NAME}.git")
+          for command in "${commands[@]}"; do
+            ./scripts/pipeline/cloud-gov-remote-command.sh "${TF_BASTION}" "${command}" 1
+          done
+      - name: Build nginx WAF Plugin
+        env:
+          ubuntu_version: "${{ vars.UBUNTU_VERSION }}"
+          modsecurity_nginx_version: "${{ vars.MODSECURITY_NGINX_VERSION }}"
+          TF_BASTION: "${{ secrets.TF_BASTION }}"
+        run: |
+          source ./scripts/pipeline/cloud-gov-waf-version.sh
+          source ./scripts/pipeline/terraform-build-waf-plugin.sh
+      - name: Configure Terraform
+        env:
+          CF_USER: "${{ secrets.CF_USER }}"
+          CF_PASSWORD: "${{ secrets.CF_PASSWORD }}"
+          CF_ORG: "${{ secrets.CF_ORG }}"
+          PROJECT: "${{ secrets.PROJECT }}"
+          TF_BASTION: "${{ secrets.TF_BASTION }}"
+        run: |
+          CWD=$(pwd)
+          cd terraform/infra
+          envsubst < terraform.tfvars.tmpl > terraform.tfvars
+          ${CWD}/scripts/pipeline/cloud-gov-scp-file.sh "${TF_BASTION}" "terraform.tfvars" "${REPO_NAME}/terraform/infra/"
+          cd "${CWD}"
+      - name: Terraform Init
+        env:
+          TF_BASTION: "${{ secrets.TF_BASTION }}"
+        id: init
+        run: |
+          ./scripts/pipeline/cloud-gov-remote-command.sh "${TF_BASTION}" "tofu -chdir=${REPO_NAME}/terraform/infra init" 1
+          ./scripts/pipeline/cloud-gov-remote-command.sh "${TF_BASTION}" "tofu -chdir=${REPO_NAME}/terraform/infra workspace new ${CF_SPACE} || exit 0" 1
+      - name: Terraform Validate
+        env:
+          TF_BASTION: "${{ secrets.TF_BASTION }}"
+        id: validate
+        run: |
+          ./scripts/pipeline/cloud-gov-remote-command.sh ${TF_BASTION} "TF_WORKSPACE=${CF_SPACE} tofu -chdir=${REPO_NAME}/terraform/infra validate -no-color" 1
+      - name: Terraform Plan
+        env:
+          TF_BASTION: "${{ secrets.TF_BASTION }}"
+        id: plan
+        run: |
+          ./scripts/pipeline/cloud-gov-remote-command.sh "${TF_BASTION}" "TF_WORKSPACE=${CF_SPACE} tofu -chdir=${REPO_NAME}/terraform/infra plan -no-color" 1
+      - name: Terraform Apply
+        env:
+          TF_BASTION: "${{ secrets.TF_BASTION }}"
+        id: apply
+        run: |
+          ./scripts/pipeline/cloud-gov-remote-command.sh "${TF_BASTION}" "TF_WORKSPACE=${CF_SPACE} tofu -chdir=${REPO_NAME}/terraform/infra apply -auto-approve" 1
+  stopBastion:
+    name: Stop Bastion
+    runs-on: ubuntu-latest
+    needs: updateInfrastructure
+    if: ${{ always() }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set env.BRANCH
+        run: echo "BRANCH=dev" >> $GITHUB_ENV
+      - name: Install basic dependancies
+        run: ./scripts/pipeline/deb-basic-deps.sh
+      - name: Install Cloudfoundry CLI
+        run: ./scripts/pipeline/deb-cf-install.sh
+      - name: Cloud.gov login
+        env:
+          CF_USER: "${{ secrets.CF_USER }}"
+          CF_PASSWORD: "${{ secrets.CF_PASSWORD }}"
+          CF_ORG: "${{ secrets.CF_ORG }}"
+          PROJECT: "${{ secrets.PROJECT }}"
+          TF_BASTION: "${{ secrets.TF_BASTION }}"
+          TF_BACKEND_SPACE: "${{ secrets.TF_BACKEND_SPACE }}"
+        run: |
+          source ./scripts/pipeline/cloud-gov-login.sh
+          cf target -s "${TF_BACKEND_SPACE}" >/dev/null 2>&1
+      - name: Stop Bastion
+        env:
+          TF_BASTION: "${{ secrets.TF_BASTION }}"
+        run: cf stop "${TF_BASTION}"  >/dev/null 2>&1

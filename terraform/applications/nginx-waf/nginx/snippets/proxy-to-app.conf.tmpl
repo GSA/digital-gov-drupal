@@ -1,0 +1,24 @@
+set $cf_forwarded_host "$host";
+set $cf_forwarded_uri "$request_uri";
+
+set $cf_destination_host "${cms_internal_endpoint}";
+set $cf_destination_port "61443";
+
+set $base_host "$cf_forwarded_host";
+if ($cf_forwarded_host ~* ^(.*)-drupal-(.*)\.app\.cloud\.gov$) {
+  set $base_host "$1-drupal-$2";
+}
+
+proxy_http_version 1.1;
+proxy_set_header Connection "";
+proxy_redirect off;
+proxy_connect_timeout 300;
+chunked_transfer_encoding off;
+
+proxy_set_header Host $cf_forwarded_host;
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+proxy_set_header X-Real-IP $remote_addr;
+
+# Use XX-CF-APP-INSTANCE on the original request if you wish to target an instance
+proxy_set_header X-CF-APP-INSTANCE $http_xx_cf_app_instance;
+proxy_pass https://$cf_destination_host:$cf_destination_port$cf_forwarded_uri;

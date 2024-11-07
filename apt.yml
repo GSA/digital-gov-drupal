@@ -1,0 +1,11 @@
+---
+#keys:
+#  - https://download.newrelic.com/548C16BF.gpg
+#repos:
+  #- deb http://apt.newrelic.com/debian/ newrelic non-free
+packages:
+  - awscli
+  - bsdmainutils
+  - mysql-client
+  #- newrelic-php5
+  - nano

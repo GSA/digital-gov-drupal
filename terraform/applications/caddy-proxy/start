@@ -1,0 +1,12 @@
+#!/bin/bash
+
+home="/home/vcap"
+app_path="${home}/app"
+
+PATH=${app_path}:${PATH}
+
+echo ${PROXY_ALLOW} | tr " " "\n" > allow.acl
+echo ${PROXY_DENY} | tr " " "\n" > deny.acl
+
+${app_path}/caddy fmt --overwrite
+${app_path}/caddy run --config Caddyfile &
