@@ -1,0 +1,14 @@
+uuid: 88320e5b-f571-4be6-a888-764231253eb8
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: sL588ui1E_8-2c_UupwyYxcqX2OVyMFp3HTLbbFqvPc
+id: global
+label: Global
+tags:
+  canonical_url: '[current-page:url]'
+  description: 'Guidance on building better digital services in government'
+  og_description: 'Guidance on building better digital services in government'
+  og_title: '[site:name]'
+  title: '[current-page:title] | [site:name]'
