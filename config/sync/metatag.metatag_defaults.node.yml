@@ -11,4 +11,5 @@ tags:
   description: '[node:field_summary]'
   og_description: '[node:field_summary]'
   og_title: '[current-page:title]'
+  og_type: website
   title: '[node:title] | [site:name]'
