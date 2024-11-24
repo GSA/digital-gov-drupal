@@ -8,4 +8,5 @@ id: user
 label: User
 tags:
   canonical_url: '[user:url]'
+  og_type: website
   title: '[user:display-name] | [site:name]'
