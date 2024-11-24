@@ -1,0 +1,31 @@
+uuid: 88320e5b-f571-4be6-a888-764231253eb8
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: sL588ui1E_8-2c_UupwyYxcqX2OVyMFp3HTLbbFqvPc
+id: global
+label: Global
+tags:
+  article_published_time: /date_published
+  article_publisher: 'https://www.facebook.com/digital.gov'
+  canonical_url: '[current-page:url]'
+  description: 'Guidance on building better digital services in government'
+  fb_admins: '100000569454928'
+  og_description: 'Guidance on building better digital services in government'
+  og_image: /put_image_here
+  og_image_alt: ' '
+  og_locale: '[language:langcode]_'
+  og_site_name: '[site:name]'
+  og_title: '[site:name]'
+  og_type: website
+  og_url: '[current-page:url]'
+  og_video: /put_video_here
+  robots: 'index, follow'
+  title: '[current-page:title] | [site:name]'
+  twitter_cards_creator: '@Digital_gov'
+  twitter_cards_description: /image_description
+  twitter_cards_image: '[image:url]'
+  twitter_cards_site: '@Digital_gov'
+  twitter_cards_title: '[current-page:title]'
+  twitter_cards_type: summary_large_image
