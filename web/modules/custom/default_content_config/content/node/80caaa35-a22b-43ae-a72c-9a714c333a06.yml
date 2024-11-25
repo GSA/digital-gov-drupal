@@ -5,9 +5,9 @@ _meta:
   bundle: topics
   default_langcode: en
   depends:
+    6bd8641f-84c6-4ddb-b8b2-9c076b017198: media
     bd7fedff-9767-49b3-8a71-8bab51265a86: node
     3c8c1a7b-5b5b-4196-b435-1fa57ff0230b: node
-    6bd8641f-84c6-4ddb-b8b2-9c076b017198: media
 default:
   revision_uid:
     -
@@ -38,6 +38,21 @@ default:
       alias: /topics/analytics
       langcode: en
       pathauto: 0
+  field_legislation:
+    -
+      uri: 'https://www.whitehouse.gov/wp-content/uploads/legacy_drupal_files/omb/memoranda/2010/m10-23.pdf'
+      title: 'M-10-22, Guidance for Online Use of Web Measurement and Customization Technologies (PDF, 130 KB, 9 pages, June 2010)'
+      options: {  }
+  field_page_weight:
+    -
+      value: 2
+  field_primary_image:
+    -
+      entity: 6bd8641f-84c6-4ddb-b8b2-9c076b017198
+  field_summary:
+    -
+      value: 'Web analytics provide valuable insights into how users interact with a website. Use the data gained from web analytics to identify areas for improvement and make data-driven decisions. This can lead to a more user-friendly and engaging website, which can '
+      format: html
   field_deck:
     -
       value: 'easure and plan your site performance with analytics best practices and tools'
@@ -89,18 +104,3 @@ default:
           field_title:
             -
               value: 'An introduction to accessibility'
-  field_legislation:
-    -
-      uri: 'https://www.whitehouse.gov/wp-content/uploads/legacy_drupal_files/omb/memoranda/2010/m10-23.pdf'
-      title: 'M-10-22, Guidance for Online Use of Web Measurement and Customization Technologies (PDF, 130 KB, 9 pages, June 2010)'
-      options: {  }
-  field_page_weight:
-    -
-      value: 2
-  field_primary_image:
-    -
-      entity: 6bd8641f-84c6-4ddb-b8b2-9c076b017198
-  field_summary:
-    -
-      value: 'Web analytics provide valuable insights into how users interact with a website. Use the data gained from web analytics to identify areas for improvement and make data-driven decisions. This can lead to a more user-friendly and engaging website, which can '
-      format: html
