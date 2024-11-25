@@ -5,8 +5,8 @@ _meta:
   bundle: topics
   default_langcode: en
   depends:
-    623a2982-602b-4762-a59e-9a7c30c64f36: node
     47d1784c-68a3-4a3b-a341-3e4f8d092253: media
+    623a2982-602b-4762-a59e-9a7c30c64f36: node
 default:
   revision_uid:
     -
@@ -42,6 +42,21 @@ default:
       value: '<p>Lorem ipsum odor amet, consectetuer adipiscing elit. Dapibus facilisis tellus eleifend cras lectus diam efficitur. Porttitor aenean habitasse magna inceptos commodo litora. Magna fermentum sit phasellus taciti neque venenatis feugiat proin! Himenaeos nam leo hendrerit netus litora luctus porttitor? Congue <strong>habitasse</strong> faucibus habitasse nascetur sit. Dolor hac sagittis ligula vulputate; elit quisque mi tempor. Posuere penatibus vehicula orci suspendisse tortor netus nostra leo laoreet.</p><p>Cursus etiam metus sagittis ultricies, aliquet eget. Nostra euismod feugiat fames suspendisse hendrerit dapibus phasellus felis. Tempor tellus lacus convallis varius hac turpis. Pulvinar augue fusce accumsan suscipit molestie interdum augue porta. Consectetur maximus pulvinar ex curae nostra tellus nisi eu. Convallis mattis ex ullamcorper nisl neque mi torquent. Eros inceptos dis pretium lectus sem mus a. Faucibus proin luctus ultrices; vestibulum tincidunt rutrum.</p>'
       format: html
       summary: ''
+  field_legislation:
+    -
+      uri: 'internal:/resources/delivering-digital-first-public-experience'
+      title: 'nulla iaculis ligula fames proin in <b>erat</b>'
+      options: {  }
+  field_page_weight:
+    -
+      value: 1
+  field_primary_image:
+    -
+      entity: 47d1784c-68a3-4a3b-a341-3e4f8d092253
+  field_summary:
+    -
+      value: 'nulla iaculis ligula fames proin in <b>erat</b>'
+      format: html
   field_deck:
     -
       value: 'nulla iaculis ligula fames proin in <b>erat</b>'
@@ -127,18 +142,3 @@ default:
             -
               value: 'The CDC Clear Communication Index is a research-based tool to help you develop and assess public communication materials.'
               format: html
-  field_legislation:
-    -
-      uri: 'internal:/resources/delivering-digital-first-public-experience'
-      title: 'nulla iaculis ligula fames proin in <b>erat</b>'
-      options: {  }
-  field_page_weight:
-    -
-      value: 1
-  field_primary_image:
-    -
-      entity: 47d1784c-68a3-4a3b-a341-3e4f8d092253
-  field_summary:
-    -
-      value: 'nulla iaculis ligula fames proin in <b>erat</b>'
-      format: html
