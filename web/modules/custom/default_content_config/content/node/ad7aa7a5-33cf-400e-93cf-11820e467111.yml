@@ -43,18 +43,6 @@ default:
       value: '<p><a href="/node/19" data-entity-type="node" data-entity-uuid="7086f5d5-7c6f-41ef-8a60-70cd267a9860" data-entity-substitution="canonical">RESOURCES</a>&nbsp;</p>'
       format: html
       summary: ''
-  field_legislation:
-    -
-      uri: 'https://www.section508.gov/manage/laws-and-policies/'
-      title: 'Section 508 of the Rehabilitation Act of 1973'
-      options: {  }
-  field_page_weight:
-    -
-      value: 2
-  field_summary:
-    -
-      value: "Accessibility isn't just the right thing to do; it’s the law. The guidance, resources, and community you find here will help you deliver accessible digital products and services in the federal government."
-      format: html
   field_deck:
     -
       value: 'The design of products, devices, services, or environments for people with disabilities'

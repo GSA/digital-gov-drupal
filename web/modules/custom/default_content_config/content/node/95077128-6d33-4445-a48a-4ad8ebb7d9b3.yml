@@ -36,18 +36,6 @@ default:
       alias: /topics/cloud-and-infrastructure
       langcode: en
       pathauto: 0
-  field_legislation:
-    -
-      uri: 'https://www.cio.gov/policies-and-priorities/circular-a-130/'
-      title: 'Circular No. A-130 - Managing Information as a Strategic Resource'
-      options: {  }
-  field_page_weight:
-    -
-      value: 2
-  field_summary:
-    -
-      value: 'Digital infrastructure includes hardware and software components that build the foundation of information technology systems. When you save a file online instead of on your own computer, you’re saving it virtually in “the cloud.” The cloud is a network of'
-      format: html
   field_deck:
     -
       value: 'Digital infrastructure means hardware and software. It Includes physical and virtual “cloud” storage spaces.'
@@ -102,3 +90,15 @@ default:
             -
               value: 'A long-term, high-level strategy to drive cloud adoption in federal agencies. It offers a path forward for agencies to migrate to a safe and secure cloud infrastructure — supporting agencies to achieve additional savings, better security, and faster deliv'
               format: html
+  field_legislation:
+    -
+      uri: 'https://www.cio.gov/policies-and-priorities/circular-a-130/'
+      title: 'Circular No. A-130 - Managing Information as a Strategic Resource'
+      options: {  }
+  field_page_weight:
+    -
+      value: 2
+  field_summary:
+    -
+      value: 'Digital infrastructure includes hardware and software components that build the foundation of information technology systems. When you save a file online instead of on your own computer, you’re saving it virtually in “the cloud.” The cloud is a network of'
+      format: html
