@@ -1,0 +1,5 @@
+services:
+  site_wrapper.twig_extension:
+    class: Drupal\site_wrapper\Plugin\TwigExtension\SiteExtensions
+    tags:
+      - { name: twig.extension }

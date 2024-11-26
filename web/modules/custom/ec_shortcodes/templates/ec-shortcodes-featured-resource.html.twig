@@ -3,22 +3,11 @@
 	The title and summary should be able to be overriden from the form
 #}
 {% set summary = drupal_field('field_summary','node', content_reference) | field_value %}
+{% set url = path('entity.node.canonical', {'node': content_reference}) %}
+{% set title = drupal_field('title','node', content_reference) | field_value %}
 
-<div class="dg-featured-resource">
-  <a href="{{ path('entity.node.canonical', {'node': content_reference}) }}"
-     class="dg-featured-resource__body">
-    <div class="dg-featured-resource__text">
-      <p class="dg-featured-resource__kicker">
-        {{ 'Featured Resource'|t }}
-      </p>
-      <h2 class="dg-featured-resource__text-title">
-        {{ drupal_field('title','node', content_reference) | field_value }}
-      </h2>
-      {% if summary %}
-        <p class="dg-featured-resource__text-description">
-          {{ summary }}
-        </p>
-      {% endif %}
-    </div>
-  </a>
-</div>
+{{ include("@digital_gov/partials/featured-resource.html.twig", {
+  'title': title ?: '',
+  'url': url,
+  'summary': summary ?: ''
+}, with_context = false) }}

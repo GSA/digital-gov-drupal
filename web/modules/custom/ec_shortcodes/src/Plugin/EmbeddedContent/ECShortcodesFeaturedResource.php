@@ -100,7 +100,8 @@ class ECShortcodesFeaturedResource extends EmbeddedContentPluginBase implements 
       '#selection_handler' => 'default',
       '#required' => TRUE,
       '#selection_settings' => [
-        'target_bundles' => ['authors', 'basic_page', 'community', 'event', 'gide',
+        'target_bundles' => [
+          'authors', 'basic_page', 'community', 'event', 'guide',
           'news', 'resources', 'services', 'topics',
         ],
       ],

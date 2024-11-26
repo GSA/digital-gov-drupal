@@ -40,7 +40,7 @@ class ECShortCodesFeaturedResourceExt extends EmbeddedContentPluginBase implemen
       '#theme' => 'ec_shortcodes_featured_resource_ext',
       '#kicker' => $this->configuration['kicker'],
       '#url' => $this->configuration['url'],
-      '#title' => $this->configuration['text'],
+      '#title' => $this->configuration['title'],
       '#summary' => $this->configuration['summary'],
     ];
   }

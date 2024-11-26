@@ -37,3 +37,4 @@ dd4fcf0da0bbfbbdb2424df0198e3011|cathybaptista|feature/DIGITAL-95-install-breadc
 b651cd0353960c55604adaeb24ec17b6|cathybaptista|feature/DIGITAL-95-install-breadcrumbs|Sun Nov 17 20:26:00 EST 2024|./composer.sh require drupal/redirect
 e477124413638eb92702226a7d6fe68b|Matt Poole|feature/DIGITAL-95-install-breadcrumbs|Thu Nov 21 18:51:39 UTC 2024|./composer.sh update --lock
 ffbb12f89e9384a89bec33f200cc95a8|Matt Poole|feature/DIGITAL-144-tome-s3|Thu Nov 21 14:05:14 EST 2024|./composer.sh require drupal/tome drupal/s3fs drupal/config_split drupal/samlauth
+d03824c586f771f2a4c0809a4f49497d|Oscar Merida|feature/DIGITAL-37-resource-paragraphs|Fri Nov 22 14:43:08 EST 2024|./composer.sh require drupal/paragraph_view_mode

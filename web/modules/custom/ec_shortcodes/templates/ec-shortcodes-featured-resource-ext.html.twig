@@ -1,28 +1,11 @@
-{# NOT MIGRATED
-    This should be the partial for featured recources
-	Kicker should also allow html, but only a single line.
+{#
+  The partial for featured recources:
+    - Kicker should also allow html, but only a single line.
 #}
-<div class="dg-featured-resource">
-	<a href="{{ url }}" class="dg-featured-resource__body">
-		<div class="dg-featured-resource__text">
-			<p class="dg-featured-resource__kicker">
-				{% if kicker %}
-					{{ kicker }}
-				{% else %}
-					{{ 'Featured Resource'|t }}
-				{% endif %}
-			</p>
-			{% if title %}
-				<h2 class="dg-featured-resource__text-title">
-					{{ title }}
-				</h2>
-			{% endif %}
-			{% if summary %}
-				<p class="dg-featured-resource__text-description">
-					{{ summary }}
-				</p>
-			{% endif %}
-		</div>
-	</a>
-</div>
 
+{{ include("@digital_gov/partials/featured-resource.html.twig", {
+  'kicker' : kicker ?: '',
+  'url': url,
+  'title': title ?: '',
+  'summary': summary ?: ''
+}, with_context = false) }}
