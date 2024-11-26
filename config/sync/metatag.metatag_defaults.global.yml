@@ -9,16 +9,18 @@ label: Global
 tags:
   article_publisher: 'https://www.facebook.com/digital.gov'
   canonical_url: '[current-page:url]'
+  description: '[node:field_summary]'
   fb_admins: '100000569454928'
   og_image_alt: ' '
   og_locale: '[language:langcode]_'
   og_site_name: '[site:name]'
-  og_title: '[site:name]'
+  og_title: '[current-page:title]'
   og_type: website
   og_url: '[current-page:url]'
   robots: 'index, follow'
   title: '[current-page:title] | [site:name]'
   twitter_cards_creator: '@Digital_gov'
+  twitter_cards_description: '@Digital_gov'
   twitter_cards_site: '@Digital_gov'
   twitter_cards_title: '[current-page:title]'
   twitter_cards_type: summary_large_image
