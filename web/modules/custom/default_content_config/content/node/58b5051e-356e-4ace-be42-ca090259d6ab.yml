@@ -5,9 +5,9 @@ _meta:
   bundle: topics
   default_langcode: en
   depends:
-    47d1784c-68a3-4a3b-a341-3e4f8d092253: media
     623a2982-602b-4762-a59e-9a7c30c64f36: node
     cbcd65ff-8274-46c7-89bc-9f8c2bdaddd3: node
+    47d1784c-68a3-4a3b-a341-3e4f8d092253: media
 default:
   revision_uid:
     -
@@ -38,21 +38,6 @@ default:
       alias: /topics/privacy
       langcode: en
       pathauto: 0
-  field_legislation:
-    -
-      uri: 'https://www.fpc.gov/resources/omb/'
-      title: 'Privacy Act of 1974 & various OMB memos'
-      options: {  }
-  field_page_weight:
-    -
-      value: 2
-  field_primary_image:
-    -
-      entity: 47d1784c-68a3-4a3b-a341-3e4f8d092253
-  field_summary:
-    -
-      value: 'For the public to have trust in government institutions, they need to know that their personal information is secure, and will be used only for legitimate purposes. Privacy violations can put people at risk for identity theft, financial fraud, discriminat'
-      format: html
   field_deck:
     -
       value: 'As agencies carry out their diverse missions, they must also respect and protect personally identifiable information (PII)'
@@ -82,3 +67,18 @@ default:
           field_content:
             -
               entity: cbcd65ff-8274-46c7-89bc-9f8c2bdaddd3
+  field_legislation:
+    -
+      uri: 'https://www.fpc.gov/resources/omb/'
+      title: 'Privacy Act of 1974 & various OMB memos'
+      options: {  }
+  field_page_weight:
+    -
+      value: 2
+  field_primary_image:
+    -
+      entity: 47d1784c-68a3-4a3b-a341-3e4f8d092253
+  field_summary:
+    -
+      value: 'For the public to have trust in government institutions, they need to know that their personal information is secure, and will be used only for legitimate purposes. Privacy violations can put people at risk for identity theft, financial fraud, discriminat'
+      format: html

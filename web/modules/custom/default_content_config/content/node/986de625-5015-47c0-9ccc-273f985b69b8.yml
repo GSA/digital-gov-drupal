@@ -34,6 +34,14 @@ default:
       alias: /news
       langcode: en
       pathauto: 0
+  body:
+    -
+      value: '<p><a href="/node/67" data-entity-type="node" data-entity-uuid="b5f41387-ec98-4f72-964e-0a5c26612d15" data-entity-substitution="canonical">BLOG</a></p>'
+      format: html
+      summary: ''
+  field_landing_page_type:
+    -
+      value: news
   field_summary:
     -
       value: 'Government teams are improving digital experiences every day. Gain insights from their stories, case studies, and innovations.'

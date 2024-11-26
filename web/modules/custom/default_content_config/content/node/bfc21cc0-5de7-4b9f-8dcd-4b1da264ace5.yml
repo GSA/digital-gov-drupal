@@ -37,18 +37,6 @@ default:
       alias: /topics/plain-language
       langcode: en
       pathauto: 0
-  field_legislation:
-    -
-      uri: 'https://www.govinfo.gov/app/details/PLAW-111publ274'
-      title: 'Plain Writing Act of 2010'
-      options: {  }
-  field_page_weight:
-    -
-      value: 2
-  field_summary:
-    -
-      value: 'Plain language is communication that is clear and easy to understand for your target audience, regardless of the medium used to deliver it. It is communication your audience can understand the first time they encounter it. Using plain language on governme'
-      format: html
   field_featured_communities:
     -
       entity: f8ffffda-7ab8-48d7-8e20-2f5d5277ec6d
@@ -205,3 +193,15 @@ default:
             -
               value: 'A resource to help federal employees write in plain language and comply   with the Plain Writing Act of 2010.'
               format: html
+  field_legislation:
+    -
+      uri: 'https://www.govinfo.gov/app/details/PLAW-111publ274'
+      title: 'Plain Writing Act of 2010'
+      options: {  }
+  field_page_weight:
+    -
+      value: 2
+  field_summary:
+    -
+      value: 'Plain language is communication that is clear and easy to understand for your target audience, regardless of the medium used to deliver it. It is communication your audience can understand the first time they encounter it. Using plain language on governme'
+      format: html
