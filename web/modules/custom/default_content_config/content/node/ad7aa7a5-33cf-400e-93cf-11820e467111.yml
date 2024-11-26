@@ -7,6 +7,7 @@ _meta:
   depends:
     623a2982-602b-4762-a59e-9a7c30c64f36: node
     3c8c1a7b-5b5b-4196-b435-1fa57ff0230b: node
+    e164ea7f-8591-4282-a920-b11c94402fbb: media
 default:
   revision_uid:
     -
@@ -264,6 +265,9 @@ default:
   field_page_weight:
     -
       value: 2
+  field_primary_image:
+    -
+      entity: e164ea7f-8591-4282-a920-b11c94402fbb
   field_summary:
     -
       value: "Accessibility isn't just the right thing to do; it’s the law. The guidance, resources, and community you find here will help you deliver accessible digital products and services in the federal government."
