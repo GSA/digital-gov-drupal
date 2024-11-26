@@ -34,7 +34,15 @@ default:
       alias: /communities
       langcode: en
       pathauto: 0
-  field_summary:
+  body:
+    -
+      value: '<drupal-media data-entity-type="media" data-entity-uuid="e164ea7f-8591-4282-a920-b11c94402fbb">&nbsp;</drupal-media><p>&nbsp;</p><p><a href="/node/67" data-entity-type="node" data-entity-uuid="b5f41387-ec98-4f72-964e-0a5c26612d15" data-entity-substitution="canonical">BLOG</a></p>'
+      format: html
+      summary: ''
+  field_deck:
     -
       value: 'Collaborate and share resources with other communities across government who are focused on building better digital experience in government.'
       format: html
+  field_landing_page_type:
+    -
+      value: communities
