@@ -43,7 +43,10 @@ default:
       uri: 'https://digital.gov/events/#events-past'
       title: 'Past events'
       options: {  }
-  field_summary:
+  field_deck:
     -
       value: 'Digital.gov provides free webinars that highlight the innovations, case studies, tools, and resources people in government need most.'
       format: html
+  field_landing_page_type:
+    -
+      value: events
