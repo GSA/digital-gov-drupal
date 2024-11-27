@@ -19,7 +19,7 @@ default:
       value: 'Way in the future Cultivating a dynamic career in UX'
   created:
     -
-      value: 1729525999
+      value: 1725904800
   promote:
     -
       value: false
@@ -29,23 +29,19 @@ default:
   moderation_state:
     -
       value: published
+  path:
+    -
+      alias: /event/2023/09/19/cultivating-a-dynamic-career-in-ux
+      langcode: en
+      pathauto: 0
   body:
     -
-      value: '<p>Join us as we explore what success can look like in a dynamic user experience (UX) career. Speakers from the Department of the Treasury and the Library of Congress will share their insights on how their careers in UX have continued to evolve.</p><p>In this session, you’ll learn how to:</p><ul><li>Identify skills that support a quick-moving UX career</li><li>Apply these skills with career-enhancing activities</li><li>Continue to evolve your career in UX</li></ul><p><strong>This event is best suited for:</strong> UX professionals of all levels</p><h2>Speakers</h2><ul><li><strong>UX Community co-lead, Natalie Buda Smith</strong> - Director of Digital Strategy, Library of Congress</li><li><strong>Michelle Zager</strong> - TEI</li><li><strong>Carlos Alvarado</strong> - Senior UX Designer, Library of Congress</li></ul><h2>Moderator</h2><ul><li><strong>UX Community co-lead, Jaime Kern</strong> - Lead Strategist for the Federal Marketplace, GSA</li></ul><h2>Video Clips</h2><ol><li>Cultivating a dynamic career in UX - Natalie Buda Smith (time length: 12:06)</li></ol><p>{{&lt; youtube id="m9L-vJn6OlI" title="Cultivating a dynamic career in UX" &gt;}}</p><ol start="2"><li>Cultivating a dynamic career in UX - Michelle Zager (time length: 7:26)</li></ol><p>{{&lt; youtube id="It-I7gcaaBg" title="Cultivating a dynamic career in UX" &gt;}}</p><ol start="3"><li>Cultivating a dynamic career in UX - Carlos Alvarado (time length: 8:11)</li></ol><p>{{&lt; youtube id="UW8v-I8JM_U" title="Cultivating a dynamic career in UX" &gt;}}</p><hr><p><em>The UX Community of Practice is a group of managers, subject matter experts, designers, developers, writers and others interested in creating efficient, effective and useful technologies. </em><a href="https://digital.gov/communities/user-experience/"><em>Join the UX Community</em></a><em>.</em></p>'
+      value: '<drupal-media data-entity-type="media" data-entity-uuid="03862682-8fc1-4d05-a0e2-412ff6eb32dc">&nbsp;</drupal-media><p>Join us as we explore what success can look like in a dynamic user experience (UX) career. Speakers from the Department of the Treasury and the Library of Congress will share their insights on how their careers in UX have continued to evolve.</p><p>In this session, you’ll learn how to:</p><ul><li>Identify skills that support a quick-moving UX career</li><li>Apply these skills with career-enhancing activities</li><li>Continue to evolve your career in UX</li></ul><p><strong>This event is best suited for:</strong> UX professionals of all levels</p><h2>Speakers</h2><ul><li><strong>UX Community co-lead, Natalie Buda Smith</strong> - Director of Digital Strategy, Library of Congress</li><li><strong>Michelle Zager</strong> - TEI</li><li><strong>Carlos Alvarado</strong> - Senior UX Designer, Library of Congress</li></ul><h2>Moderator</h2><ul><li><strong>UX Community co-lead, Jaime Kern</strong> - Lead Strategist for the Federal Marketplace, GSA</li></ul><h2>Video Clips</h2><ol><li>Cultivating a dynamic career in UX - Natalie Buda Smith (time length: 12:06)</li></ol><drupal-media data-entity-type="media" data-entity-uuid="88d65648-8c29-4c74-a60a-8703bbfbc047">&nbsp;</drupal-media><ol start="2"><li>Cultivating a dynamic career in UX - Michelle Zager (time length: 7:26)</li></ol><drupal-media data-entity-type="media" data-entity-uuid="96a686b8-77fe-44db-a34f-97440767bf64">&nbsp;</drupal-media><ol start="3"><li>Cultivating a dynamic career in UX - Carlos Alvarado (time length: 8:11)</li></ol><drupal-media data-entity-type="media" data-entity-uuid="74d5a0a2-26c3-4f65-92a0-7717edfe50ff">&nbsp;</drupal-media><hr><p><em>The UX Community of Practice is a group of managers, subject matter experts, designers, developers, writers and others interested in creating efficient, effective and useful technologies. </em><a href="https://digital.gov/communities/user-experience/"><em>Join the UX Community</em></a><em>.</em></p>'
       format: html
       summary: ''
-  field_captions:
-    -
-      uri: 'https://www.captionedtext.com'
-      title: ''
-      options: {  }
-  field_deck:
-    -
-      value: 'This field purposely left blank'
-      format: html
   field_end_date:
     -
-      value: '2050-12-10T00:00:00'
+      value: '2023-09-19T19:00:00'
   field_event_organizer:
     -
       value: Digital.gov
@@ -73,25 +69,3 @@ default:
     -
       value: 'Join us for a discussion on how to adapt your career in user experience (UX) to a quickly changing world.'
       format: html
-  field_venue:
-    -
-      entity:
-        _meta:
-          version: '1.0'
-          entity_type: paragraph
-          uuid: efec5435-b4c0-4557-8b55-49be69c2a33f
-          bundle: venue
-          default_langcode: en
-        default:
-          status:
-            -
-              value: true
-          created:
-            -
-              value: 1729526457
-          behavior_settings:
-            -
-              value: {  }
-  field_youtube_id:
-    -
-      value: N/A

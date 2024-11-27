@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 3b383306-227a-413c-9501-18c32e2810ed
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: communities-card-analytics_w1200.png
+  uri:
+    -
+      value: 'public://2024-11/communities-card-analytics_w1200.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 49596
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1732202208

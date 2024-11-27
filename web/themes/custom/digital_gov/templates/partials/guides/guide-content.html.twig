@@ -1,0 +1,22 @@
+<section class="dg-guide__content grid-container-desktop">
+  <div>
+    [placeholder Guide Content Header]
+    {# NOT-MIGRATED
+    {{ partial "core/guides/guide-content-header.html" . }}
+    #}
+    <div class="dg-guide__content-body usa-prose">
+      {{ content }}
+    </div>
+  </div>
+</section>
+
+<section class="dg-guide__footer grid-container-desktop">
+  [placeholder Guide Prev-Next]
+  {# NOT-MIGRATED
+  {{ partial "core/guides/guide-prev-next.html" . }}
+  #}
+  {# NOT-MIGRATED
+  {{ include("@digital_gov/partials/attribution.html.twig") }}
+  #}
+  {{ include('@digital_gov/partials/touchpoints-form.html.twig') }}
+</section>

@@ -1,0 +1,43 @@
+{% set is_past_event = end_date < now ? true : false %}
+{% set title = node.label %}
+{% set summary = content.field_summary|field_value %}
+{% set deck = content.field_deck|field_value %}
+{% set date = node.created.value|format_date('custom', 'M d, Y') %}
+{% set logo = content.field_primary_image.0['#media']|file_uri|image_style('large') %}
+
+<article class="card-news--internal" aria-labelledby="{{ title }}">
+  <div class="card__content">
+      <h3 id="{{ title }}">
+        <a href="{{ internalLink }}">{{ title }}</a>
+      </h3>
+      {% if summary %}
+        <div class="summary">
+          <p>{{ summary }}</p>
+        </div>
+      {% else %}
+        <div class="deck">
+          <p>{{ deck }}</p>
+        </div>
+      {% endif %}
+
+{# todo: add back once DIGITAL-30 is merged in #}
+      {# {% if authors %}
+        {{ include('@digital_gov/partials/authors-list.html.twig', {
+                  'inline': true,
+                  'authors': content.field_authors,
+                  }, with_context = false) }}
+      {% endif %} #}
+  </div>
+
+  <div class="card__media">
+<div class="media-featured">
+  <a href="{{ node.url }}" title="{{ title }}">
+    <img src="{{ logo }}" aria-hidden="true" alt=""/>
+  </a>
+</div>
+</div>
+<div class="card__meta">
+<div class="date">{{ date }}
+</div>
+</div>
+</article>

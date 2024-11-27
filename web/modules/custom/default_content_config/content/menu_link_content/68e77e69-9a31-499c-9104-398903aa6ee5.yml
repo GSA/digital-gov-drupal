@@ -1,0 +1,33 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 68e77e69-9a31-499c-9104-398903aa6ee5
+  bundle: menu_link_content
+  default_langcode: en
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Submit GitHub issue'
+  menu_name:
+    -
+      value: footer-grow
+  link:
+    -
+      uri: 'https://github.com/GSA/digitalgov.gov/issues'
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -48
+  expanded:
+    -
+      value: false

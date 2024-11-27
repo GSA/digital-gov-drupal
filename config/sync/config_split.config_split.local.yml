@@ -1,0 +1,17 @@
+uuid: f6189d1e-017e-40eb-a705-9a9b73f47950
+langcode: en
+status: true
+dependencies: {  }
+id: local
+label: Local
+description: 'Configuration just for only local environments.'
+weight: 0
+stackable: false
+no_patching: false
+storage: folder
+folder: ../config/local
+module: {  }
+theme: {  }
+complete_list: {  }
+partial_list:
+  - samlauth.authentication

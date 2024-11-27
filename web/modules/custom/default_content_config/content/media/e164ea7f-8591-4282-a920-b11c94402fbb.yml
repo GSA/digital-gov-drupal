@@ -1,0 +1,33 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: e164ea7f-8591-4282-a920-b11c94402fbb
+  bundle: image
+  default_langcode: en
+  depends:
+    2c43712a-d752-450f-8818-7adf8234ed34: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: communities-card-pl_w1200.png
+  created:
+    -
+      value: 1732204128
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_media_image:
+    -
+      entity: 2c43712a-d752-450f-8818-7adf8234ed34
+      alt: 'Join the Plain Language Community '
+      title: ''
+      width: 1200
+      height: 627

@@ -1,0 +1,33 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: cfd18129-4c92-4a36-8959-6a0a7779fb89
+  bundle: image
+  default_langcode: en
+  depends:
+    faab014b-2c68-44ce-8b7d-ae3e8e5cd144: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: logingov-screenshot.png
+  created:
+    -
+      value: 1732201380
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_media_image:
+    -
+      entity: faab014b-2c68-44ce-8b7d-ae3e8e5cd144
+      alt: "A screenshot of a login.gov verification page reads, We've verified your social security number and state-issued ID. It has a large blue button to continue, and a small text link to cancel."
+      title: ''
+      width: 3540
+      height: 2724

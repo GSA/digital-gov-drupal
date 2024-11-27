@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 96a686b8-77fe-44db-a34f-97440767bf64
+  bundle: video
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Cultivating a dynamic career in UX - Michelle Zager'
+  created:
+    -
+      value: 1732139183
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_media_oembed_video:
+    -
+      value: 'https://youtube.com/watch?v=It-I7gcaaBg'

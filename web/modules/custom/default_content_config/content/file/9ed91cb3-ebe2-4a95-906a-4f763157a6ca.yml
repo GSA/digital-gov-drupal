@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 9ed91cb3-ebe2-4a95-906a-4f763157a6ca
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: guide-web-analytics-playbook.png
+  uri:
+    -
+      value: 'public://2024-11/guide-web-analytics-playbook.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 39058
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1732199509

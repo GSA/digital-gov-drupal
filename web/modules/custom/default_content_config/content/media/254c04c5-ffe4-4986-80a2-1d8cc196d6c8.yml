@@ -1,0 +1,33 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 254c04c5-ffe4-4986-80a2-1d8cc196d6c8
+  bundle: image
+  default_langcode: en
+  depends:
+    1e45ea2e-eb4f-4d8a-b95a-5c290628f9f3: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: login-lock-graphic_w800.png
+  created:
+    -
+      value: 1732201266
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_media_image:
+    -
+      entity: 1e45ea2e-eb4f-4d8a-b95a-5c290628f9f3
+      alt: 'An illustration of a gold padlock is surrounded by blue privacy and security icons.'
+      title: ''
+      width: 800
+      height: 722

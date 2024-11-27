@@ -1,0 +1,33 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 40b5f356-b1df-4b37-9c6f-cc381c111b23
+  bundle: menu_link_content
+  default_langcode: en
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Content schedule'
+  menu_name:
+    -
+      value: footer-about
+  link:
+    -
+      uri: 'https://digital.gov/about/manage-content/'
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -47
+  expanded:
+    -
+      value: false

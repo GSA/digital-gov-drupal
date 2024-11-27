@@ -31,6 +31,11 @@ default:
   moderation_state:
     -
       value: published
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
   body:
     -
       value: '<p>Lorem ipsum odor amet, consectetuer adipiscing elit. Imperdiet erat elit varius, suscipit parturient habitasse. Leo consectetur lectus torquent adipiscing sollicitudin etiam nulla sit suspendisse. Sagittis sodales vitae lacus tincidunt; viverra ad. Rutrum hac sollicitudin ridiculus fermentum fames nibh quisque praesent dapibus. Vel consectetur sem pellentesque ante iaculis fames nulla consectetur. Sed litora non dignissim justo pellentesque. Mauris justo habitant ligula mi eget urna auctor magna.</p><p>Elementum sed ligula, in curae viverra consectetur maecenas. Tristique potenti quisque convallis augue mus per. Massa vivamus blandit sit massa consectetur dictum sem. Mauris tincidunt maecenas metus vehicula pharetra; phasellus felis vivamus. Metus erat interdum netus; sed metus massa. Platea in convallis semper ad consectetur ante rhoncus tortor sodales. Congue ultricies et per sodales, nam sem ex. Erat risus hendrerit bibendum dignissim, sollicitudin augue feugiat fames. Adipiscing metus aliquam est et suspendisse et ornare montes. Risus augue bibendum, senectus a dapibus placerat ut per.</p><p>&nbsp;</p>'

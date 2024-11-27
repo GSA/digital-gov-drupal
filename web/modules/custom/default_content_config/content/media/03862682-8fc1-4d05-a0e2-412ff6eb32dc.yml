@@ -1,0 +1,31 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 03862682-8fc1-4d05-a0e2-412ff6eb32dc
+  bundle: document
+  default_langcode: en
+  depends:
+    1cd582a9-a399-43a9-b888-7c020861c828: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 2023-cultivating-a-dynamic-ux-career.pptx
+  created:
+    -
+      value: 1732139025
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_media_file:
+    -
+      entity: 1cd582a9-a399-43a9-b888-7c020861c828
+      display: false
+      description: ''

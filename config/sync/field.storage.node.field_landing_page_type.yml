@@ -1,0 +1,39 @@
+uuid: c8e15d30-d2bd-4b39-9d00-5462fd559df5
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_landing_page_type
+field_name: field_landing_page_type
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: communities
+      label: Communities
+    -
+      value: events
+      label: Events
+    -
+      value: guides
+      label: Guides
+    -
+      value: job_board
+      label: 'Job board'
+    -
+      value: news
+      label: News
+    -
+      value: resources
+      label: Resources
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 03a519b3-86d3-4a48-9bc0-7461816ea273
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: plain-accessibility-slides-march-2021.pdf
+  uri:
+    -
+      value: 'public://2024-11/plain-accessibility-slides-march-2021.pdf'
+  filemime:
+    -
+      value: application/pdf
+  filesize:
+    -
+      value: 190263
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1732202973

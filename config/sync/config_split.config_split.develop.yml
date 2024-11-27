@@ -1,0 +1,17 @@
+uuid: 3b60f64a-7bb3-42b3-ae27-3af99742acba
+langcode: en
+status: true
+dependencies: {  }
+id: develop
+label: Develop
+description: 'Configuration just for the develop branch / dev environment.'
+weight: 0
+stackable: false
+no_patching: false
+storage: folder
+folder: ../config/develop
+module: {  }
+theme: {  }
+complete_list: {  }
+partial_list:
+  - samlauth.authentication

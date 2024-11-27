@@ -1,0 +1,17 @@
+uuid: a2c6acc7-7164-4aad-ab43-619a12eed611
+langcode: en
+status: true
+dependencies: {  }
+id: production
+label: Production
+description: 'Configuration just for the main branch / production environment.'
+weight: 0
+stackable: false
+no_patching: false
+storage: folder
+folder: ../config/production
+module: {  }
+theme: {  }
+complete_list: {  }
+partial_list:
+  - samlauth.authentication

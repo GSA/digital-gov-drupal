@@ -32,9 +32,10 @@ $is_cloudgov = FALSE;
 
 // Default all splits to be off, then re-enable for the correct environments.
 $config['config_split.config_split.develop']['status'] = FALSE;
-$config['config_split.config_split.production']['false'] = FALSE;
-$config['config_split.config_split.stage']['false'] = FALSE;
-$config['config_split.config_split.test']['false'] = FALSE;
+$config['config_split.config_split.production']['status'] = FALSE;
+$config['config_split.config_split.stage']['status'] = FALSE;
+$config['config_split.config_split.test']['status'] = FALSE;
+$config['config_split.config_split.local']['status'] = FALSE;
 // Configuration for all remote environments.
 $config['config_split.config_split.non_local']['status'] = TRUE;
 
@@ -48,19 +49,19 @@ if (!empty($cf_application_data['space_name']) &&
       break;
 
     case "prod":
-      $config['config_split.config_split.production']['false'] = TRUE;
+      $config['config_split.config_split.production']['status'] = TRUE;
       $is_cloudgov = TRUE;
       $server_http_host = 'digital-gov-drupal-prod.app.cloud.gov';
       break;
 
     case "stage":
-      $config['config_split.config_split.stage']['false'] = TRUE;
+      $config['config_split.config_split.stage']['status'] = TRUE;
       $is_cloudgov = TRUE;
       $server_http_host = 'digital-gov-drupal-stage.app.cloud.gov';
       break;
 
     case "test":
-      $config['config_split.config_split.test']['false'] = TRUE;
+      $config['config_split.config_split.test']['status'] = TRUE;
       $is_cloudgov = TRUE;
       $server_http_host = 'digital-gov-drupal-test.app.cloud.gov';
       break;

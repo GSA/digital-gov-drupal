@@ -27,7 +27,7 @@ jobs:
               DRUPAL_INSTANCES=${{ vars.MAIN_INSTANCES }}
               ;;
             stage)
-              CF_SPACE="stage"
+              CF_SPACE="staging"
               COMPOSER_DEV=0
               DRUPAL_MEMORY=${{ vars.STAGE_CMS_MEMORY }}
               DRUPAL_INSTANCES=${{ vars.STAGE_INSTANCES }}
@@ -44,7 +44,9 @@ jobs:
           echo "HASH_SALT=${{ secrets.HASH_SALT }}" | tee -a $GITHUB_ENV
           echo "WAF_NAME=waf"| tee -a $GITHUB_ENV
 
-          [ "${COMPOSER_DEV}" = "1" ] && sed -i 's/--no-dev //' .bp-config/options.json
+          if [ "${COMPOSER_DEV}" = "1" ]; then
+            sed -i 's/--no-dev //' .bp-config/options.json || exit 0
+          fi
 
       - name: Set repo name
         run: echo "REPO_NAME=${{ github.event.repository.name }}" >> $GITHUB_ENV

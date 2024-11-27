@@ -31,10 +31,20 @@ default:
   moderation_state:
     -
       value: published
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
   field_deck:
     -
       value: "18F's Alan Atlas and Alan Brouilette cover the fundamentals of Agile."
       format: html
+  field_external_url:
+    -
+      uri: 'https://digital.gov/event/2019/11/04/foundations-agile-i/'
+      title: ''
+      options: {  }
   field_short_post_type:
     -
       value: resource

@@ -1,0 +1,35 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: bf0f62ee-f172-4c0e-8ded-3bce5628153e
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    986de625-5015-47c0-9ccc-273f985b69b8: node
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: Blogs
+  menu_name:
+    -
+      value: footer
+  link:
+    -
+      target_uuid: 986de625-5015-47c0-9ccc-273f985b69b8
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -50
+  expanded:
+    -
+      value: false

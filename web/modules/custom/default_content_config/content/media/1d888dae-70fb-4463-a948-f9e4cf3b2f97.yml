@@ -1,0 +1,33 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 1d888dae-70fb-4463-a948-f9e4cf3b2f97
+  bundle: image
+  default_langcode: en
+  depends:
+    235c64c0-8dfe-438f-8ab8-6314fe7a5a8b: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: opportunity-project_w800.png
+  created:
+    -
+      value: 1732137091
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_media_image:
+    -
+      entity: 235c64c0-8dfe-438f-8ab8-6314fe7a5a8b
+      alt: 'The Opportunity Project logo on a blue background'
+      title: ''
+      width: 800
+      height: 308

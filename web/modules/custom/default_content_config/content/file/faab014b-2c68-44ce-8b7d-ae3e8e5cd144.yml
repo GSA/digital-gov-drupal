@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: faab014b-2c68-44ce-8b7d-ae3e8e5cd144
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: logingov-screenshot.png
+  uri:
+    -
+      value: 'public://2024-11/logingov-screenshot.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 237010
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1732201380

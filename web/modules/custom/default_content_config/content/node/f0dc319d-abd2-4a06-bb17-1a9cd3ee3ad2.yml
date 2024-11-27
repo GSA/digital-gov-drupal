@@ -29,6 +29,11 @@ default:
   moderation_state:
     -
       value: published
+  path:
+    -
+      alias: /guides/guide-all-required-fields
+      langcode: en
+      pathauto: 1
   field_summary:
     -
       value: 'A ‘quick-start’ guide for embedding accessibility and inclusive design practices into your team’s workflow'

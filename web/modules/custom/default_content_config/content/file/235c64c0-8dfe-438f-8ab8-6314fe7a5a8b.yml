@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 235c64c0-8dfe-438f-8ab8-6314fe7a5a8b
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: opportunity-project_w800.png
+  uri:
+    -
+      value: 'public://2024-11/opportunity-project_w800.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 51980
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1732137091

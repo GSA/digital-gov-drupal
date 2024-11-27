@@ -4,6 +4,11 @@ _meta:
   uuid: 0d6ef939-6f83-40cf-b555-5962cc409ba6
   bundle: event
   default_langcode: en
+  depends:
+    061eb5bf-80a8-4555-80b2-fc5b3228f7b3: node
+    7acbb47b-73ed-4b5c-8dbb-5e21abccea00: node
+    988f5e88-c723-426e-a09f-40c8522f192c: media
+    4533b7eb-0c1c-4ef0-97ee-1bee41e44b82: node
 default:
   revision_uid:
     -
@@ -16,10 +21,10 @@ default:
       target_id: 1
   title:
     -
-      value: 'Way in the future Federal Crowdsourcing Webinar Series, Episode 3: The Opportunity Project'
+      value: 'Federal Crowdsourcing Webinar Series, Episode 3: The Opportunity Project'
   created:
     -
-      value: 1729525313
+      value: 1561143600
   promote:
     -
       value: false
@@ -29,18 +34,24 @@ default:
   moderation_state:
     -
       value: published
-  field_captions:
+  path:
     -
-      uri: 'https://www.captionedtext.com'
-      title: ''
-      options: {  }
-  field_deck:
+      alias: /event/2019/06/11/federal-crowdsourcing-webinar-series-episode-3-opportunity-project
+      langcode: en
+      pathauto: 0
+  body:
     -
-      value: 'This field purposely left blank'
+      value: '<p><a href="https://www.captionedtext.com/client/event.aspx?EventID=3998900&amp;CustomerID=321"><em>View Live Captioning for this Event</em></a></p><p>The Federal Crowdsourcing Webinar Series explores how federal agencies are engaging the crowd to multiply the ideas and perspectives they bring to certain issues. In this third episode, you’ll learn how The Opportunity Project is bringing together government, technologists, and communities to create digital tools that help strengthen economic opportunity.</p><drupal-media data-entity-type="media" data-entity-uuid="1d888dae-70fb-4463-a948-f9e4cf3b2f97">&nbsp;</drupal-media><p>Through <a href="https://opportunity.census.gov/">The Opportunity Project</a>, the U.S. Census Bureau connects tech developers, local leaders, and nonprofits to create digital solutions to problems faced by communities throughout the country. The results empower people with technology and make government data more accessible and user-friendly.</p><p>Since launching in 2016, The Opportunity Project has yielded dozens of new digital tools that, among other things, connect veterans and their families with jobs, increase access to services and shelter for people experiencing homelessness, and rebuild rural economies.</p><p>In this episode, The Opportunity Project Director Drew Zachary will provide:</p><ul><li>an overview of the project’s accomplishments to date,</li><li>a primer on how different organizations and people can get involved, and</li><li>Information on how it serves the broader crowdsourcing mission at Census Open Innovation Labs.</li></ul><p>She’ll also preview an exciting new venture planned for the summer when The Opportunity Project launches its first-ever prize competition to encourage product adoption and sustainability.</p><p><strong>Upcoming episodes in the Federal Crowdsourcing Webinar Series include:</strong></p><ul><li>July 9: Open Opportunities, Office of Personnel Management</li><li>August 13: History By the People, Library of Congress</li></ul><p>For information on this episode or upcoming events in the crowdsourcing series, contact <a href="mailto:team@challenge.gov">team@challenge.gov</a>.</p><hr><drupal-media data-entity-type="media" data-entity-uuid="69f23355-206e-4da4-9205-45a463bf02e0">&nbsp;</drupal-media><p><em>This talk is hosted by Challenge.gov. Managed by GSA, Challenge.gov serves as both the official listing of prize competitions across government, as well as a centralized platform for federal agencies to market and manage their problem-solving events. The program also designs resources and training, which have helped more than 100 federal agencies run over 900 prize competitions with public participation since 2010.</em></p><p>Questions about this event or future events? Send them to <a href="mailto:digitalgov@gsa.gov">digitalgov@gsa.gov</a>.</p><p>This event will be held over <a href="https://www.zoom.us/">Zoom</a> (see the Zoom <a href="https://support.zoom.us/hc/en-us/articles/201362023-System-Requirements-for-PC-Mac-and-Linux">computer and device requirements</a>, and <a href="https://support.zoom.us/hc/en-us/sections/200277708-Frequently-Asked-Questions">FAQs</a>). You can <a href="https://zoom.us/download#client_4meeting">download Zoom Client for Meetings</a> to install the Zoom web browser client beforehand.</p>'
       format: html
+      summary: ''
+  field_authors:
+    -
+      entity: 061eb5bf-80a8-4555-80b2-fc5b3228f7b3
+    -
+      entity: 7acbb47b-73ed-4b5c-8dbb-5e21abccea00
   field_end_date:
     -
-      value: '2050-11-06T15:00:00'
+      value: '2019-06-06T20:00:00'
   field_event_organizer:
     -
       value: 'DigitalGov University'
@@ -56,6 +67,9 @@ default:
   field_page_weight:
     -
       value: 0
+  field_primary_image:
+    -
+      entity: 988f5e88-c723-426e-a09f-40c8522f192c
   field_registration_url:
     -
       uri: 'https://www.eventbrite.com/e/federal-crowdsourcing-webinar-series-episode-3-the-opportunity-project-registration-59460181002 captions:'
@@ -68,25 +82,9 @@ default:
     -
       value: 'The Opportunity Project engages government, communities, and the technology industry to create digital tools that address our greatest challenges as a nation. Learn how this initiative is making government data more accessible through cross-sector collabo'
       format: html
-  field_venue:
+  field_topics:
     -
-      entity:
-        _meta:
-          version: '1.0'
-          entity_type: paragraph
-          uuid: f8fe89f1-4b73-4e50-a227-e9a2a3118ea8
-          bundle: venue
-          default_langcode: en
-        default:
-          status:
-            -
-              value: true
-          created:
-            -
-              value: 1729525817
-          behavior_settings:
-            -
-              value: {  }
+      entity: 4533b7eb-0c1c-4ef0-97ee-1bee41e44b82
   field_youtube_id:
     -
       value: ZhMgfptuiUw

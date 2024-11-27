@@ -4,6 +4,8 @@ _meta:
   uuid: 202c0f8c-2f2e-487a-8eed-e55fd949b41c
   bundle: short_post
   default_langcode: en
+  depends:
+    bbb973e8-d813-44a2-bafe-821d10f37014: node
 default:
   revision_uid:
     -
@@ -29,13 +31,26 @@ default:
   moderation_state:
     -
       value: published
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
   field_deck:
     -
       value: 'A resource for developing accessible products.'
       format: html
+  field_external_url:
+    -
+      uri: 'https://accessibility.18f.gov/'
+      title: ''
+      options: {  }
   field_short_post_type:
     -
       value: resource
+  field_source:
+    -
+      entity: bbb973e8-d813-44a2-bafe-821d10f37014
   field_summary:
     -
       value: 'A resource for developing accessible products.'

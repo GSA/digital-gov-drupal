@@ -5,7 +5,7 @@ _meta:
   bundle: guides
   default_langcode: en
   depends:
-    6bd8641f-84c6-4ddb-b8b2-9c076b017198: media
+    cdc07606-1563-4772-9b45-11fa5d99c31a: media
 default:
   revision_uid:
     -
@@ -31,6 +31,11 @@ default:
   moderation_state:
     -
       value: published
+  path:
+    -
+      alias: /guides/web-analytics-playbook
+      langcode: en
+      pathauto: 1
   body:
     -
       value: '<p>Federal websites vary greatly in content and purpose, but they all share a common objective: to deliver information or services to the public in an efficient, easy, and accessible way.</p><p>Web analytics tools play an integral role in pursuit of that goal. However, if the tool is implemented improperly or the data it collects are analyzed incorrectly, it can derail delivering information or services to the public.</p><p>Use these plays to help strategize how your team can most effectively use web analytics for your website and target audience.</p><p>1.&nbsp; [Create a foundation for your strategy]({{&lt; ref "create-a-foundation-for-your-strategy" &gt;}})</p><p>2.&nbsp; [Commit to action]({{&lt; ref "commit-to-action" &gt;}})</p><p>3.&nbsp; [Implement wisely]({{&lt; ref "implement-wisely" &gt;}})</p><p>4.&nbsp; [Configure your tool’s settings carefully]({{&lt; ref "configure-your-tools-settings-carefully" &gt;}})</p><p>5.&nbsp; [Know what you’re looking for]({{&lt; ref "know-what-youre-looking-for" &gt;}})</p><p>6.&nbsp; [Democratize the data]({{&lt; ref "democratize-the-data" &gt;}})</p><p>7.&nbsp; [Invest in training and support]({{&lt; ref "invest-in-training-and-support" &gt;}})</p><p>8.&nbsp; [Do it continuously]({{&lt; ref "do-it-continuously" &gt;}})</p>'
@@ -40,9 +45,6 @@ default:
     -
       value: 'Use web analytics to reach your strategic website goals'
       format: html
-  field_featured_image:
-    -
-      entity: 6bd8641f-84c6-4ddb-b8b2-9c076b017198
   field_guide_weight:
     -
       value: 1
@@ -51,7 +53,7 @@ default:
       value: 0
   field_primary_image:
     -
-      entity: 6bd8641f-84c6-4ddb-b8b2-9c076b017198
+      entity: cdc07606-1563-4772-9b45-11fa5d99c31a
   field_summary:
     -
       value: 'This guide provides actionable strategies for effectively using web analytics to improve federal websites and digital services.'

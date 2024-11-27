@@ -19,6 +19,11 @@ default:
   created:
     -
       value: 1729472729
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
   field_media_image:
     -
       entity: 11b3c503-cd86-4601-883b-928b8f2cf717

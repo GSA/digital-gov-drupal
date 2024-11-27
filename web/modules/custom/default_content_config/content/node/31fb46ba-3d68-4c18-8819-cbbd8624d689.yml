@@ -29,3 +29,8 @@ default:
   moderation_state:
     -
       value: published
+  path:
+    -
+      alias: /authors/authors-all-required-fields
+      langcode: en
+      pathauto: 1

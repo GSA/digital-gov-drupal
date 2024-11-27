@@ -1,0 +1,17 @@
+uuid: 9fb848c4-7570-4a07-9145-2142772e09c7
+langcode: en
+status: true
+dependencies: {  }
+id: non_local
+label: Non-Local
+description: 'Non-local environments, ie, in Cloud.gov.'
+weight: 0
+stackable: false
+no_patching: false
+storage: folder
+folder: ../config/non_local
+module:
+  s3fs: 0
+theme: {  }
+complete_list: {  }
+partial_list: {  }

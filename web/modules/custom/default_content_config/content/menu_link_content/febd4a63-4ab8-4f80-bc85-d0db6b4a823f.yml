@@ -1,0 +1,35 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: febd4a63-4ab8-4f80-bc85-d0db6b4a823f
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    5422ab63-c9a2-48cd-9816-a1892a687169: node
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Job board'
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      target_uuid: 5422ab63-c9a2-48cd-9816-a1892a687169
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -45
+  expanded:
+    -
+      value: false

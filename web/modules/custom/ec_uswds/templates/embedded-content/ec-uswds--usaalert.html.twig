@@ -1,5 +1,5 @@
-{% include '@uswds_templates/usa-alert.html.twig' with {
-  'alert_type': type,
-  'heading': heading,
-  'text': text.value | check_markup('simple_html'),
-} %}
+{{ include('@uswds_templates/usa-alert.html.twig', {
+  alert_type: type,
+  heading: heading,
+  text: text.value|check_markup('simple_html'),
+}) }}

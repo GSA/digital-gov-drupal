@@ -44,3 +44,8 @@ default:
       target_id: author
     -
       target_id: editor
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1

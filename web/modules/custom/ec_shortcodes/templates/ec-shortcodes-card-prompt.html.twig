@@ -3,13 +3,13 @@
     <div class="intro">
       <div class="icon">
         <svg class="usa-icon dg-icon dg-icon--standard margin-bottom-05" aria-hidden="true" focusable="false">
-          <use href="{{ drupal_url(theme_path ~ '/static/digitalgov/img/sprite.svg#comment' ) }}"></use>
+          <use href="{{ drupal_url(theme_path ~ '/static/digitalgov/img/sprite.svg#comment') }}"></use>
         </svg>
       </div>
       {% set intro = {
-        '#type':   'processed_text',
-        '#text':    intro.value,
-        '#format':  intro.format,
+        '#type': 'processed_text',
+        '#text': intro.value,
+        '#format': intro.format,
       } %}
       <p>{{ intro }}</p>
     </div>
@@ -18,16 +18,16 @@
   {% if prompt.value %}
     <div class="prompt">
       {% set prompt = {
-        '#type':   'processed_text',
-        '#text':    prompt.value,
-        '#format':  prompt.format,
+        '#type': 'processed_text',
+        '#text': prompt.value,
+        '#format': prompt.format,
       } %}
       {{ prompt }}
     </div>
   {% endif %}
 
   {# NOT-MIGRATED
-  	This was what was here before, when we migrate the partial, use it.
+    This was what was here before, when we migrate the partial, use it.
     {{ partial "core/usa-button.html" (dict "href" (.Get "button-url") "text" (.Get "button-text")) }}
   #}
   <a class="usa-button usa-button--outline" href="{{ url }}">

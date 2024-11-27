@@ -29,17 +29,21 @@ default:
   moderation_state:
     -
       value: published
-  body:
+  path:
     -
-      value: '<p><strong>Speakers</strong></p><ul><li><strong>Dan Williams</strong> - Product Lead, USWDS</li><li><strong>Matt Henry</strong> - Engineering Lead, USWDS</li><li><strong>Anne Petersen</strong> - Experience Design Lead, USWDS</li><li><strong>Amy Leadem</strong> - Developer, USWDS contractor</li></ul><h2>Join our Communities of Practice</h2><ul><li><a href="https://designsystem.digital.gov/about/community/">USWDS</a></li><li><a href="https://www.section508.gov/manage/join-the-508-community/">Section 508 IT Accessibility</a></li></ul><p><em>This event is part of a monthly series that takes place on the third Thursday of each month. Don’t forget to set a placeholder on your personal calendar for our future events this year.</em></p><h2>About the USWDS</h2><p><a href="https://designsystem.digital.gov/">The U.S. Web Design System</a> is a toolkit of principles, guidance, and code to help government teams design and build accessible, mobile-friendly websites backed by user research and modern best practices.</p><ul><li><a href="https://designsystem.digital.gov/">The U.S. Web Design System</a></li><li><a href="https://github.com/uswds/uswds/issues">Contribute on GitHub</a></li><li><a href="mailto:uswds@gsa.gov">Email Us</a></li><li><a href="https://digital.gov/communities/uswds/">Join our community</a></li><li><a href="https://twitter.com/uswds">Follow @uswds on Twitter</a></li></ul><hr><p><em>Disclaimer</em>: All references to specific brands, products, and/or companies are used only for illustrative purposes and do not imply endorsement by the U.S. federal government or any federal government agency.</p>'
-      format: html
-      summary: ''
+      alias: /events
+      langcode: en
+      pathauto: 0
   field_buttons:
     -
-      uri: 'http://www.digital.gov'
-      title: 'Placeholder Button'
+      uri: 'https://www.youtube.com/@DigitalGov'
+      title: 'Video library'
+      options: {  }
+    -
+      uri: 'https://digital.gov/events/#events-past'
+      title: 'Past events'
       options: {  }
   field_summary:
     -
-      value: 'The U.S. Web Design System team will answer community questions and give an update on their work developing web components for the design system.'
+      value: 'Digital.gov provides free webinars that highlight the innovations, case studies, tools, and resources people in government need most.'
       format: html

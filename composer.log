@@ -32,3 +32,9 @@ ea93266b87251a27fec5df04a3cbd5d0|Matt Poole|feature/DIGITAL-28-shortcode-embed|T
 58d882c244d0e746a3ad90844a2f361f|christian medders|feature/DIGITAL-31-sitemap-path-auto|Fri Nov  8 14:05:23 EST 2024|./composer.sh require drupal/xmlsitemap:^1.5
 94cea224856de297893b41cdaa146ef8|christian medders|feature/DIGITAL-38-migrate-shortcodes|Fri Nov  8 10:32:48 EST 2024|./composer.sh require drupal/twig_field_value
 464e1ed27d945bb31dcb7a3d79a19d13|Matt Poole|feature/DIGITAL-38-migrate-shortcodes|Tue Nov 12 16:04:45 UTC 2024|./composer.sh update --lock
+a3aae667a10facf2a874949c5870c540|cathybaptista|feature/DIGITAL-95-install-breadcrumbs|Sun Nov 17 20:16:52 EST 2024|./composer.sh require drupal/pathauto
+dd4fcf0da0bbfbbdb2424df0198e3011|cathybaptista|feature/DIGITAL-95-install-breadcrumbs|Sun Nov 17 20:25:34 EST 2024|./composer.sh require drupal/easy_breadcrumb
+b651cd0353960c55604adaeb24ec17b6|cathybaptista|feature/DIGITAL-95-install-breadcrumbs|Sun Nov 17 20:26:00 EST 2024|./composer.sh require drupal/redirect
+e477124413638eb92702226a7d6fe68b|Matt Poole|feature/DIGITAL-95-install-breadcrumbs|Thu Nov 21 18:51:39 UTC 2024|./composer.sh update --lock
+ffbb12f89e9384a89bec33f200cc95a8|Matt Poole|feature/DIGITAL-144-tome-s3|Thu Nov 21 14:05:14 EST 2024|./composer.sh require drupal/tome drupal/s3fs drupal/config_split drupal/samlauth
+2ff87810c534ec1d564420c97f248217|christian medders|feature/DIGITAL-33-add-views|Tue Nov 26 14:13:17 EST 2024|./composer.sh require --dev vincentlanglet/twig-cs-fixer

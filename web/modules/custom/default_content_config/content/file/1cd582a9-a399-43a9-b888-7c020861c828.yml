@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 1cd582a9-a399-43a9-b888-7c020861c828
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: 2023-cultivating-a-dynamic-ux-career.pptx
+  uri:
+    -
+      value: 'public://2024-11/2023-cultivating-a-dynamic-ux-career.pptx'
+  filemime:
+    -
+      value: application/vnd.openxmlformats-officedocument.presentationml.presentation
+  filesize:
+    -
+      value: 1321127
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1732139025

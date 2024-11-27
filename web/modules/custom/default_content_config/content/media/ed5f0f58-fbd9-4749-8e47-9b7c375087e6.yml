@@ -1,0 +1,33 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: ed5f0f58-fbd9-4749-8e47-9b7c375087e6
+  bundle: image
+  default_langcode: en
+  depends:
+    41e3d935-899d-4a54-b5e6-4fe711486a20: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: plain-language_w400.png
+  created:
+    -
+      value: 1732140734
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_media_image:
+    -
+      entity: 41e3d935-899d-4a54-b5e6-4fe711486a20
+      alt: 'Plain Language / plainlanguage.gov'
+      title: ''
+      width: 400
+      height: 400

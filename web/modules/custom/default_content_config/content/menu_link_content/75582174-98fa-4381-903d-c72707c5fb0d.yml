@@ -1,0 +1,35 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 75582174-98fa-4381-903d-c72707c5fb0d
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    b759a923-5d7c-438a-abb8-fa90e1750af9: node
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Contact Us'
+  menu_name:
+    -
+      value: footer-about
+  link:
+    -
+      target_uuid: b759a923-5d7c-438a-abb8-fa90e1750af9
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -48
+  expanded:
+    -
+      value: false

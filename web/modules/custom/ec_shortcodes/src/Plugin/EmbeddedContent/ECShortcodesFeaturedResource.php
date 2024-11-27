@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   description = @Translation("Renders a styled button link."),
  * )
  */
-class ECShortcodesFeaturedResource extends EmbeddedContentPluginBase implements EmbeddedContentInterface, ContainerFactoryPluginInterface {
+final class ECShortcodesFeaturedResource extends EmbeddedContentPluginBase implements EmbeddedContentInterface, ContainerFactoryPluginInterface {
 
   use StringTranslationTrait;
 
@@ -53,7 +53,7 @@ class ECShortcodesFeaturedResource extends EmbeddedContentPluginBase implements 
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static(
+    return new self(
       $configuration,
       $plugin_id,
       $plugin_definition,
@@ -86,7 +86,7 @@ class ECShortcodesFeaturedResource extends EmbeddedContentPluginBase implements 
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
     $node = NULL;
     if (!empty($this->configuration['content_reference'])) {
-      $node = \Drupal::entityTypeManager()->getStorage('node')->load($this->configuration['content_reference']);
+      $node = $this->entityTypeManager->getStorage('node')->load($this->configuration['content_reference']);
       $node = EntityAutocomplete::getEntityLabels([$node]);
     }
 

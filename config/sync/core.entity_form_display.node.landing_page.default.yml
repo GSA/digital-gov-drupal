@@ -5,11 +5,15 @@ dependencies:
   config:
     - field.field.node.landing_page.body
     - field.field.node.landing_page.field_buttons
+    - field.field.node.landing_page.field_deck
+    - field.field.node.landing_page.field_landing_page_type
     - field.field.node.landing_page.field_summary
     - node.type.landing_page
+    - workflows.workflow.editorial
   module:
     - content_moderation
     - link
+    - path
     - text
 id: node.landing_page.default
 targetEntityType: node
@@ -18,7 +22,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 3
+    weight: 4
     region: content
     settings:
       rows: 9
@@ -28,17 +32,31 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 5
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
   field_buttons:
     type: link_default
-    weight: 2
+    weight: 3
     region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
+    third_party_settings: {  }
+  field_deck:
+    type: text_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_landing_page_type:
+    type: options_select
+    weight: 2
+    region: content
+    settings: {  }
     third_party_settings: {  }
   field_summary:
     type: text_textfield
@@ -50,19 +68,19 @@ content:
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 6
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }
   path:
     type: path
-    weight: 30
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 7
+    weight: 8
     region: content
     settings:
       display_label: true
@@ -77,13 +95,18 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 4
+    weight: 5
     region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   promote: true

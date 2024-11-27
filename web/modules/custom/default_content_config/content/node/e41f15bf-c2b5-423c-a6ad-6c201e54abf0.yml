@@ -29,6 +29,11 @@ default:
   moderation_state:
     -
       value: published
+  path:
+    -
+      alias: /authors/bridget-roddy
+      langcode: en
+      pathauto: 1
   field_email:
     -
       value: roddybl@state.gov

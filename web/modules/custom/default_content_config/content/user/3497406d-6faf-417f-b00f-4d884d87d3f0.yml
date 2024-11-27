@@ -42,3 +42,8 @@ default:
   roles:
     -
       target_id: data_analyst
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1

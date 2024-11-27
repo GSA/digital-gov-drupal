@@ -49,6 +49,8 @@ class RoboFile extends Tasks
                 'node',
                 'menu_link_content',
                 'media',
+                'redirect',
+                'user',
             ],
         ]
     ): ResultData

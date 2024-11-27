@@ -1,0 +1,33 @@
+_meta:
+  version: '1.0'
+  entity_type: redirect
+  uuid: 833c8988-2f3e-4459-aef5-0c7170d3a453
+  bundle: redirect
+  default_langcode: en
+  depends:
+    fefddcf3-e162-4622-9176-a3f4c2dadd8e: node
+default:
+  hash:
+    -
+      value: p5IEy2Oe8VvHyr91G1qeDqHhFrb8_Yro2h3-3tE_5UU
+  type:
+    -
+      value: redirect
+  uid:
+    -
+      target_id: 1
+  redirect_source:
+    -
+      path: topics
+      query: {  }
+  redirect_redirect:
+    -
+      target_uuid: fefddcf3-e162-4622-9176-a3f4c2dadd8e
+      title: ''
+      options: {  }
+  status_code:
+    -
+      value: 301
+  created:
+    -
+      value: 1732212116

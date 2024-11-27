@@ -42,3 +42,8 @@ default:
   roles:
     -
       target_id: user_admin
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1

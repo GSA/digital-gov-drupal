@@ -1,0 +1,33 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: cdc07606-1563-4772-9b45-11fa5d99c31a
+  bundle: image
+  default_langcode: en
+  depends:
+    9ed91cb3-ebe2-4a95-906a-4f763157a6ca: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: guide-web-analytics-playbook.png
+  created:
+    -
+      value: 1732199509
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_media_image:
+    -
+      entity: 9ed91cb3-ebe2-4a95-906a-4f763157a6ca
+      alt: 'Illustration of man pointing to business strategy on a website'
+      title: ''
+      width: 1200
+      height: 630

@@ -6,7 +6,7 @@ _meta:
   default_langcode: en
   depends:
     623a2982-602b-4762-a59e-9a7c30c64f36: node
-    47d1784c-68a3-4a3b-a341-3e4f8d092253: media
+    3c8c1a7b-5b5b-4196-b435-1fa57ff0230b: node
 default:
   revision_uid:
     -
@@ -32,6 +32,16 @@ default:
   moderation_state:
     -
       value: published
+  path:
+    -
+      alias: /topics/accessibility
+      langcode: en
+      pathauto: 0
+  body:
+    -
+      value: '<p><a href="/node/19" data-entity-type="node" data-entity-uuid="7086f5d5-7c6f-41ef-8a60-70cd267a9860" data-entity-substitution="canonical">RESOURCES</a>&nbsp;</p>'
+      format: html
+      summary: ''
   field_deck:
     -
       value: 'The design of products, devices, services, or environments for people with disabilities'
@@ -80,22 +90,157 @@ default:
                   field_link:
                     -
                       uri: 'https://www.section508.gov/'
-                      title: 508.gov
+                      title: 'Federal website standards'
                       options: {  }
                   field_summary:
                     -
-                      value: 'To support people working to enhance access to federal information technology (IT), we identify and promote best practices for compliance with Section 508 law, and conformance to the Revised 508 Standards.'
+                      value: 'The federal website standards help agencies provide high-quality, consistent digital experiences for everyone. They cover common visual technical elements and reflect user experience best practices.'
+                      format: html
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: da591cd9-bc7c-41be-96a4-067b5efd1572
+                  bundle: external_content
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1732200717
+                  behavior_settings:
+                    -
+                      value: {  }
+                  field_link:
+                    -
+                      uri: 'https://www.section508.gov'
+                      title: Section508.gov
+                      options: {  }
+                  field_summary:
+                    -
+                      value: 'This site provides guidance for federal agencies on several topics in IT accessibility, including creating accessible websites and documents, accessibility testing, accessibility training, and accessibility in contracting and procurement.'
+                      format: html
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 83666964-6913-4820-848a-8e7273bd03f5
+                  bundle: external_content
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1732200783
+                  behavior_settings:
+                    -
+                      value: {  }
+                  field_link:
+                    -
+                      uri: 'https://digital.gov/resources/best-practices-writing-for-accessible-web'
+                      title: 'Best practices for writing for the accessible web'
+                      options: {  }
+                  field_summary:
+                    -
+                      value: 'Tips for making online information accessible for those with auditory and visual needs.'
+                      format: html
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 79091bfd-1390-4748-accc-c85959f010cb
+                  bundle: external_content
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1732200821
+                  behavior_settings:
+                    -
+                      value: {  }
+                  field_link:
+                    -
+                      uri: 'https://digital.gov/resources/advanced-accessibility'
+                      title: 'An advanced approach to accessibility"'
+                      options: {  }
+                  field_summary:
+                    -
+                      value: 'Accessibility is one of the most important values underlying all the work that we do. This is a deeper look into accessibility: what to do, how to do it, and why it matters, especially in government.'
+                      format: html
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 8aa36547-616b-4f71-9fc5-9533cf4f0acf
+                  bundle: external_content
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1732200844
+                  behavior_settings:
+                    -
+                      value: {  }
+                  field_link:
+                    -
+                      uri: 'https://designsystem.digital.gov/documentation/accessibility/#what-project-teams-should-do'
+                      title: 'Accessibility: Usability for every ability'
+                      options: {  }
+                  field_summary:
+                    -
+                      value: 'Incorporate accessibility from the start and celebrate accessibility guidelines that help build better products and services for all users.'
+                      format: html
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: f133afb9-221a-43e3-8fe9-a36b441cc611
+                  bundle: external_content
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1732200912
+                  behavior_settings:
+                    -
+                      value: {  }
+                  field_link:
+                    -
+                      uri: 'https://digital.gov/guides/accessibility-for-teams'
+                      title: 'Accessibility for Teams'
+                      options: {  }
+                  field_summary:
+                    -
+                      value: 'A quick-start guide for embedding accessibility and inclusive design practices into your team’s workflow.'
                       format: html
           field_title:
             -
-              value: 'https://www.section508.gov/'
+              value: 'Accessibility: Essential knowledge'
   field_featured_resources:
     -
       entity:
         _meta:
           version: '1.0'
           entity_type: paragraph
-          uuid: 1810f546-30ca-402e-b25d-abc55073c91b
+          uuid: 960a2001-221c-4e91-b070-ca84b18cc1cc
           bundle: internal_content
           default_langcode: en
         default:
@@ -104,10 +249,13 @@ default:
               value: true
           created:
             -
-              value: 1729616974
+              value: 1732200629
           behavior_settings:
             -
               value: {  }
+          field_content:
+            -
+              entity: 3c8c1a7b-5b5b-4196-b435-1fa57ff0230b
   field_legislation:
     -
       uri: 'https://www.section508.gov/manage/laws-and-policies/'
@@ -116,9 +264,6 @@ default:
   field_page_weight:
     -
       value: 2
-  field_primary_image:
-    -
-      entity: 47d1784c-68a3-4a3b-a341-3e4f8d092253
   field_summary:
     -
       value: "Accessibility isn't just the right thing to do; it’s the law. The guidance, resources, and community you find here will help you deliver accessible digital products and services in the federal government."

@@ -1,0 +1,33 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 988f5e88-c723-426e-a09f-40c8522f192c
+  bundle: image
+  default_langcode: en
+  depends:
+    8b551835-32b4-46db-93b7-cdde6fcc3c0d: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: challengegov-card-episode-3_w1200.png
+  created:
+    -
+      value: 1732137370
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_media_image:
+    -
+      entity: 8b551835-32b4-46db-93b7-cdde6fcc3c0d
+      alt: 'Federal Crowdsourcing Webinar Series, Episode 3: The Opportunity Project '
+      title: ''
+      width: 1200
+      height: 675

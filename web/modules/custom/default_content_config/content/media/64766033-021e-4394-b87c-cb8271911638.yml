@@ -1,0 +1,31 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 64766033-021e-4394-b87c-cb8271911638
+  bundle: document
+  default_langcode: en
+  depends:
+    03a519b3-86d3-4a48-9bc0-7461816ea273: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: plain-accessibility-slides-march-2021.pdf
+  created:
+    -
+      value: 1732202973
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_media_file:
+    -
+      entity: 03a519b3-86d3-4a48-9bc0-7461816ea273
+      display: false
+      description: ''

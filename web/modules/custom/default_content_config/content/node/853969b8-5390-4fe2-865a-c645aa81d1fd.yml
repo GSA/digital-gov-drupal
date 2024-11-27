@@ -1,0 +1,61 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 853969b8-5390-4fe2-865a-c645aa81d1fd
+  bundle: short_post
+  default_langcode: en
+  depends:
+    bbb973e8-d813-44a2-bafe-821d10f37014: node
+    26f2d370-453e-4fdb-8b51-3f6a932fd3e9: node
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'You might not be as agile as you think you are'
+  created:
+    -
+      value: 1732203237
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_deck:
+    -
+      value: 'The mandate to be agile is everywhere. But agile isn’t an on-off switch. It’s a skill and a mindset that is developed over time, through dedicated work, open teams, and lots (and lots) of practice'
+      format: html
+  field_external_url:
+    -
+      uri: 'https://18f.gsa.gov/2019/05/29/you-might-not-be-as-agile-as-you-think-you-are/'
+      title: ''
+      options: {  }
+  field_short_post_type:
+    -
+      value: news
+  field_source:
+    -
+      entity: bbb973e8-d813-44a2-bafe-821d10f37014
+  field_summary:
+    -
+      value: 'The mandate to be agile is everywhere. But agile isn’t an on-off switch. It’s a skill and a mindset that is developed over time, through dedicated work, open teams, and lots (and lots) of practice'
+      format: html
+  field_topics:
+    -
+      entity: 26f2d370-453e-4fdb-8b51-3f6a932fd3e9

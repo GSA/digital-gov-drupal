@@ -31,6 +31,11 @@ default:
   moderation_state:
     -
       value: published
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
   field_contact:
     -
       value: connectcoe@gsa.gov

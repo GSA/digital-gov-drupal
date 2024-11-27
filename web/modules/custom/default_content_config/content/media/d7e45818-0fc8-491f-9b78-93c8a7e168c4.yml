@@ -1,0 +1,33 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: d7e45818-0fc8-491f-9b78-93c8a7e168c4
+  bundle: image
+  default_langcode: en
+  depends:
+    ed83448a-5125-499c-adb3-31fce16ef482: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 18f.png
+  created:
+    -
+      value: 1732203404
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_media_image:
+    -
+      entity: ed83448a-5125-499c-adb3-31fce16ef482
+      alt: 18f
+      title: ''
+      width: 192
+      height: 192

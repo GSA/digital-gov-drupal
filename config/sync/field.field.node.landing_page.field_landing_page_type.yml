@@ -1,0 +1,21 @@
+uuid: 819799c2-e653-4805-846d-3f97e4541180
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_landing_page_type
+    - node.type.landing_page
+  module:
+    - options
+id: node.landing_page.field_landing_page_type
+field_name: field_landing_page_type
+entity_type: node
+bundle: landing_page
+label: 'Landing Page Type'
+description: 'Select which landing page template and header to use.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

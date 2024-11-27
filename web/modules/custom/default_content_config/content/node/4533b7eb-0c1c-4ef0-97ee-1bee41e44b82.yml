@@ -1,0 +1,96 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 4533b7eb-0c1c-4ef0-97ee-1bee41e44b82
+  bundle: topics
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Crowdsourcing and Citizen Science'
+  created:
+    -
+      value: 1732137805
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /topics/crowdsourcing-and-citizen-science
+      langcode: en
+      pathauto: 0
+  field_deck:
+    -
+      value: 'Crowdsourcing and citizen science can accelerate discovery across the U.S. government.'
+      format: html
+  field_featured_links:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 4f1c346d-6bc8-4e03-be1b-561cb6749054
+          bundle: featured_links
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1732138310
+          behavior_settings:
+            -
+              value: {  }
+  field_featured_resources:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 736d1555-3821-4dfc-97f1-cae240b5a7da
+          bundle: external_content
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1732138310
+          behavior_settings:
+            -
+              value: {  }
+          field_link:
+            -
+              uri: 'https://www.citizenscience.gov/'
+              title: CitizenScience.gov
+              options: {  }
+          field_summary:
+            -
+              value: 'An official government website designed to accelerate the use of crowdsourcing and citizen science across the U.S. government.'
+              format: html
+  field_legislation:
+    -
+      uri: 'https://www.whitehouse.gov/briefing-room/presidential-actions/2023/10/30/executive-order-on-the-safe-secure-and-trustworthy-development-and-use-of-artificial-intelligence/'
+      title: 'Crowdsourcing and Citizen Science Act of 2016'
+      options: {  }
+  field_summary:
+    -
+      value: 'Through citizen science and crowdsourcing, the federal government and nongovernmental organizations can engage the public in addressing societal needs and accelerating science, technology, and innovation.'
+      format: html

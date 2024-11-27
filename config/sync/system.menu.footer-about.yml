@@ -1,0 +1,8 @@
+uuid: fd904dbe-e0b2-428d-90c7-ba1f74513eb9
+langcode: en
+status: true
+dependencies: {  }
+id: footer-about
+label: 'Footer Connect'
+description: 'Site information links'
+locked: false

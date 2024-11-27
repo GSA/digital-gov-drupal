@@ -29,6 +29,11 @@ default:
   moderation_state:
     -
       value: published
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
   field_summary:
     -
       value: 'Lorem ipsum odor amet, consectetuer <b>adipi</b>'

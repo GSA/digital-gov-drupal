@@ -29,3 +29,8 @@ default:
   moderation_state:
     -
       value: published
+  path:
+    -
+      alias: /resources/resources-all-required-fields
+      langcode: en
+      pathauto: 1

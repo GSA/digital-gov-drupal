@@ -1,0 +1,33 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: d5b7c563-4023-4c09-b3b9-27c5d009ec37
+  bundle: image
+  default_langcode: en
+  depends:
+    519a88c8-4e5f-46e2-902c-cf83addac2c3: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: guide-site-scanning.png
+  created:
+    -
+      value: 1732201815
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_media_image:
+    -
+      entity: 519a88c8-4e5f-46e2-902c-cf83addac2c3
+      alt: 'A person works in front of a computer with many internet symbols on it'
+      title: ''
+      width: 1200
+      height: 630

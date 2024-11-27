@@ -46,14 +46,20 @@ jobs:
                     status1=0
                     status2=0
                     status3=0
+                    status4=0
+                    status5=0
 
                     # Run all commands and capture their exit statuses
                     vendor/bin/robo validate:branch-name || status1=$? || status1=0
                     vendor/bin/robo validate:composer-lock || status3=$? || status3=0
                     vendor/bin/robo validate:coding-standards || status2=$? || status2=0
+                    set -x
+                    vendor/bin/twig-cs-fixer lint || status4=$? || status4=0
+                    vendor/bin/phpstan --memory-limit=-1 --no-progress || status5=$? || status5=0
+                    set +x;
 
                     # Exit with a non-zero status if any command failed
-                    if [ "$status1" -ne 0 ] || [ "$status2" -ne 0 ] || [ "$status3" -ne 0 ]; then
+                    if [ "$status1" -ne 0 ] || [ "$status2" -ne 0 ] || [ "$status3" -ne 0 ] || [ "$status4" -ne 0 ] || [ "$status5" -ne 0 ]; then
                       exit 1
                     fi
 

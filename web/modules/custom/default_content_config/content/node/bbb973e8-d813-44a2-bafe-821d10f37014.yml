@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: bbb973e8-d813-44a2-bafe-821d10f37014
+  bundle: source
+  default_langcode: en
+  depends:
+    d7e45818-0fc8-491f-9b78-93c8a7e168c4: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 18f
+  created:
+    -
+      value: 1732203299
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_logo:
+    -
+      entity: d7e45818-0fc8-491f-9b78-93c8a7e168c4

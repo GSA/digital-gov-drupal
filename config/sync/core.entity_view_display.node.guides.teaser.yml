@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.guides.field_deck
     - field.field.node.guides.field_featured_image
     - field.field.node.guides.field_guide_weight
+    - field.field.node.guides.field_kicker
     - field.field.node.guides.field_page_weight
     - field.field.node.guides.field_primary_image
     - field.field.node.guides.field_summary
@@ -30,6 +31,11 @@ content:
     third_party_settings: {  }
     weight: 101
     region: content
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
   links:
     settings: {  }
     third_party_settings: {  }
@@ -39,6 +45,7 @@ hidden:
   field_deck: true
   field_featured_image: true
   field_guide_weight: true
+  field_kicker: true
   field_page_weight: true
   field_primary_image: true
   field_summary: true

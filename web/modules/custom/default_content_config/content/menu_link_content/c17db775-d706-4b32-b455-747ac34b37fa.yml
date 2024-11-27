@@ -1,0 +1,35 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: c17db775-d706-4b32-b455-747ac34b37fa
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    f98c359f-6231-42dd-87b4-f6b0012bfbc8: node
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: Communities
+  menu_name:
+    -
+      value: footer
+  link:
+    -
+      target_uuid: f98c359f-6231-42dd-87b4-f6b0012bfbc8
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -47
+  expanded:
+    -
+      value: false

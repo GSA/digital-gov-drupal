@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 2c43712a-d752-450f-8818-7adf8234ed34
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: communities-card-pl_w1200.png
+  uri:
+    -
+      value: 'public://2024-11/communities-card-pl_w1200.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 48687
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1732204128

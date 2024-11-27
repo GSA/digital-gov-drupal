@@ -70,7 +70,7 @@ content:
     third_party_settings: {  }
   field_featured_links:
     type: paragraphs
-    weight: 28
+    weight: 13
     region: content
     settings:
       title: Paragraph
@@ -90,7 +90,7 @@ content:
     third_party_settings: {  }
   field_featured_resources:
     type: paragraphs
-    weight: 26
+    weight: 12
     region: content
     settings:
       title: Paragraph
@@ -129,6 +129,14 @@ content:
     region: content
     settings:
       media_types: {  }
+    third_party_settings: {  }
+  field_slug:
+    type: string_textfield
+    weight: 14
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_summary:
     type: text_textfield
@@ -183,8 +191,12 @@ content:
       revision: false
       removed_reference: optional
     third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
-  field_slug: true
   promote: true
   publish_on: true
   publish_state: true

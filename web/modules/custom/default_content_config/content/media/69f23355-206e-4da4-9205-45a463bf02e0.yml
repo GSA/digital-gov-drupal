@@ -1,0 +1,33 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 69f23355-206e-4da4-9205-45a463bf02e0
+  bundle: image
+  default_langcode: en
+  depends:
+    3171b5a4-7d9f-4556-be48-f0aca4b86c7c: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: challenge-gov-logo_w800.png
+  created:
+    -
+      value: 1732137145
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_media_image:
+    -
+      entity: 3171b5a4-7d9f-4556-be48-f0aca4b86c7c
+      alt: 'Challenge.gov 2019 logo'
+      title: ''
+      width: 800
+      height: 800

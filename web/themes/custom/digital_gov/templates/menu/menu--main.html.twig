@@ -39,7 +39,7 @@
     {% for item in items %}
       <li{{ item.attributes }}>
         {# OVERRIDE: This menu was overrided just to set the usa-nav__link class #}
-        {{ link(item.title, item.url, create_attribute({'class': ['usa-nav__link']})) }}
+        {{ link(item.title, item.url, create_attribute({class: ['usa-nav__link']})) }}
         {% if item.below %}
           {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
         {% endif %}

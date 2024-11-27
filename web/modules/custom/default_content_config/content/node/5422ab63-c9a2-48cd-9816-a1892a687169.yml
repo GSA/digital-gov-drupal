@@ -29,17 +29,12 @@ default:
   moderation_state:
     -
       value: published
-  body:
+  path:
     -
-      value: '<p>body text</p>'
-      format: html
-      summary: ''
-  field_buttons:
-    -
-      uri: 'http://www.digital.gov'
-      title: 'Placeholder Button'
-      options: {  }
+      alias: /job-board
+      langcode: en
+      pathauto: 0
   field_summary:
     -
-      value: n/a
+      value: 'Discover community- and technology-related job openings in the federal government.'
       format: html

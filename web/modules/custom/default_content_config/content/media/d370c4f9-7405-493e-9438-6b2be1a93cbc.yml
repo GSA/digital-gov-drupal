@@ -1,0 +1,33 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: d370c4f9-7405-493e-9438-6b2be1a93cbc
+  bundle: image
+  default_langcode: en
+  depends:
+    a0d21cee-0675-4e1b-b7b6-ad1981d15b54: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: login-gov-launch.png
+  created:
+    -
+      value: 1732201500
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_media_image:
+    -
+      entity: a0d21cee-0675-4e1b-b7b6-ad1981d15b54
+      alt: 'How login.gov incorporated human centered design and continuous discovery into their product development process to improve the user experience.'
+      title: ''
+      width: 600
+      height: 400

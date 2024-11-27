@@ -1,0 +1,40 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: fefddcf3-e162-4622-9176-a3f4c2dadd8e
+  bundle: landing_page
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: Resources
+  created:
+    -
+      value: 1732126747
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /resources
+      langcode: en
+      pathauto: 0
+  field_summary:
+    -
+      value: "Don't know where to start with a federal requirement? Aren't sure how to adopt a new technology with your team? Start here! We have resources for every level. Our collections are organized by popular topics, and they will help you meet the requirements of"
+      format: html

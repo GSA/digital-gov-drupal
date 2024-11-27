@@ -7,7 +7,6 @@ _meta:
   depends:
     f8ffffda-7ab8-48d7-8e20-2f5d5277ec6d: node
     8f5405bb-957a-4842-b1fb-6276ef95a165: node
-    47d1784c-68a3-4a3b-a341-3e4f8d092253: media
 default:
   revision_uid:
     -
@@ -33,6 +32,11 @@ default:
   moderation_state:
     -
       value: published
+  path:
+    -
+      alias: /topics/plain-language
+      langcode: en
+      pathauto: 0
   field_featured_communities:
     -
       entity: f8ffffda-7ab8-48d7-8e20-2f5d5277ec6d
@@ -61,6 +65,33 @@ default:
                 _meta:
                   version: '1.0'
                   entity_type: paragraph
+                  uuid: ce667c5a-09f5-423e-92af-1fc6e8892e63
+                  bundle: external_content
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1732202395
+                  behavior_settings:
+                    -
+                      value: {  }
+                  field_link:
+                    -
+                      uri: 'https://digital.gov/resources/an-introduction-to-plain-language'
+                      title: 'An introduction to plain language'
+                      options: {  }
+                  field_summary:
+                    -
+                      value: 'Using plain language is required on all government websites and also creates a better user experience.'
+                      format: html
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
                   uuid: 41217f56-b5f3-4137-88f3-7673414e12af
                   bundle: internal_content
                   default_langcode: en
@@ -77,9 +108,63 @@ default:
                   field_content:
                     -
                       entity: 8f5405bb-957a-4842-b1fb-6276ef95a165
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 7ce72556-e9f2-4b31-8a66-0c6cbc075d45
+                  bundle: external_content
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1732202418
+                  behavior_settings:
+                    -
+                      value: {  }
+                  field_link:
+                    -
+                      uri: 'https://digital.gov/resources/lessons-from-the-2021-federal-plain-language-report-card/'
+                      title: 'Lessons from the 2021 Federal Plain Language Report Card'
+                      options: {  }
+                  field_summary:
+                    -
+                      value: 'What we learned from examples of web content that received both high and low scores.'
+                      format: html
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 8efd5d09-613e-409c-9175-6bc3ae050ff4
+                  bundle: external_content
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1732202441
+                  behavior_settings:
+                    -
+                      value: {  }
+                  field_link:
+                    -
+                      uri: 'https://digital.gov/resources/omb-final-guidance-on-implementing-the-plain-writing-act-of-2010-m-11-15/'
+                      title: 'OMB Final Guidance on Implementing the Plain Writing Act of 2010 (M-11-15)'
+                      options: {  }
+                  field_summary:
+                    -
+                      value: 'This memorandum provides final guidance on implementing the Act and is designed to promote the goals of the President’s Open Government Initiative.'
+                      format: html
           field_title:
             -
-              value: 'Plain Language Web Writing Tips'
+              value: 'Plain language: Essential knowledge'
   field_featured_resources:
     -
       entity:
@@ -115,10 +200,7 @@ default:
       options: {  }
   field_page_weight:
     -
-      value: 1
-  field_primary_image:
-    -
-      entity: 47d1784c-68a3-4a3b-a341-3e4f8d092253
+      value: 2
   field_summary:
     -
       value: 'Plain language is communication that is clear and easy to understand for your target audience, regardless of the medium used to deliver it. It is communication your audience can understand the first time they encounter it. Using plain language on governme'

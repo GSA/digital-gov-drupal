@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 519a88c8-4e5f-46e2-902c-cf83addac2c3
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: guide-site-scanning.png
+  uri:
+    -
+      value: 'public://2024-11/guide-site-scanning.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 48507
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1732201815

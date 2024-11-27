@@ -1,0 +1,50 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 061eb5bf-80a8-4555-80b2-fc5b3228f7b3
+  bundle: authors
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Drew Zachary'
+  created:
+    -
+      value: 1732137622
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /authors/drew-zachary
+      langcode: en
+      pathauto: 1
+  field_agency_acronym:
+    -
+      value: USCB
+  field_agency_full_name:
+    -
+      value: 'U.S. Census Bureau'
+  field_first_name:
+    -
+      value: Drew
+      format: html
+  field_last_name:
+    -
+      value: Zachary
+      format: html

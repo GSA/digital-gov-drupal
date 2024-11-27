@@ -1,0 +1,50 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 7acbb47b-73ed-4b5c-8dbb-5e21abccea00
+  bundle: authors
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Lorena Molina-Irizarry'
+  created:
+    -
+      value: 1732137677
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /authors/lorena-molinairizarry
+      langcode: en
+      pathauto: 0
+  field_agency_acronym:
+    -
+      value: Census
+  field_agency_full_name:
+    -
+      value: 'U.S. Census Bureau'
+  field_first_name:
+    -
+      value: Lorena
+      format: html
+  field_last_name:
+    -
+      value: Molina-Irizarry
+      format: html

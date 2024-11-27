@@ -4,6 +4,8 @@ _meta:
   uuid: f8ffffda-7ab8-48d7-8e20-2f5d5277ec6d
   bundle: community
   default_langcode: en
+  depends:
+    e164ea7f-8591-4282-a920-b11c94402fbb: media
 default:
   revision_uid:
     -
@@ -16,7 +18,7 @@ default:
       target_id: 1
   title:
     -
-      value: 'Plain Language'
+      value: 'Join the Plain Language'
   created:
     -
       value: 1729618654
@@ -29,14 +31,35 @@ default:
   moderation_state:
     -
       value: published
+  path:
+    -
+      alias: /communities/plain-language
+      langcode: en
+      pathauto: 0
   body:
     -
-      value: '<p>The Plain Language community is a group of government employees and contractors dedicated to the idea that citizens deserve clear communications from government. We believe that using plain language saves government agencies time and money and provides better service to the American public.</p><h2>What We Do</h2><p>Throughout the year, the community provides training and hosts plain-language related events. Our community offers support and answers to members’ questions.</p><h2>Who We Are</h2><p>We’re a group of plain language practitioners with varying specialties and different levels of expertise.</p><h2>Related Resources</h2><ul><li><a href="https://www.plainlanguage.gov/law/">Plain Writing Act of 2010</a></li><li><a href="https://www.plainlanguage.gov/guidelines/">Federal Plain Language Guidelines</a></li><li><a href="https://digital.gov/event/2022/08/24/2022-federal-plain-language-summit/">2022 Federal Plain Language Summit</a></li><li><a href="https://digital.gov/event/2021/09/21/2021-federal-plain-language-summit/">2021 Federal Plain Language Summit</a></li><li><a href="https://digital.gov/event/2020/10/27/plain-language-summit-2020/">2020 Federal Plain Language Summit</a></li></ul>'
+      value: '<p>Government professionals from all levels come together in this community to promote the use of plain language to provide better services to the public.</p><p>Become a member to collaborate with colleagues who are dedicated to the idea that the public deserves clear communications from government.</p><p>Digital.gov fosters this engaging community by providing spaces designed to empower members on their communication and plain language journeys. Remember, when participating in this community, you must follow <a href="https://digital.gov/communities/community-guidelines/">Digital.gov community guidelines</a>.</p><embedded-content data-plugin-config="{&quot;content_reference&quot;:&quot;63&quot;}" data-plugin-id="ec_shortcodes_featured_resource" data-button-id="default">&nbsp;</embedded-content>'
       format: html
       summary: ''
+  field_deck:
+    -
+      value: 'Share and learn with plain language practitioners.'
+      format: html
+  field_dg_acronym:
+    -
+      value: PL
   field_dg_highlight:
     -
-      value: false
+      value: true
+  field_dg_shortname:
+    -
+      value: 'Plain Language'
+  field_page_weight:
+    -
+      value: 1
+  field_primary_image:
+    -
+      entity: e164ea7f-8591-4282-a920-b11c94402fbb
   field_summary:
     -
       value: 'Promote the use of plain language to provide better service to the public.'

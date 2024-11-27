@@ -31,10 +31,20 @@ default:
   moderation_state:
     -
       value: published
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
   field_deck:
     -
       value: 'At the Department of Justice, Access DOJ and the Office of the Pardon Attorney (PARDON) partnered to simplify and streamline the presidential pardon application process. By conducting usability testing and gathering feedback, they identified key issues wi'
       format: html
+  field_external_url:
+    -
+      uri: 'https://www.justice.gov/atj/access-doj/case-studies/removing-barriers-applying-presidential-pardon'
+      title: ''
+      options: {  }
   field_short_post_type:
     -
       value: news

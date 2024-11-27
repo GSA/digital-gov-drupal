@@ -7,8 +7,8 @@
         <li class="dg-checklist__item">
           {# {{ list_item | json_encode(constant('JSON_PRETTY_PRINT')) }} #}
           {% set build_checkbox = {
-            '#type':   'processed_text',
-            '#text':    list_item.checkbox,
+            '#type': 'processed_text',
+            '#text': list_item.checkbox,
             '#format': 'single_inline_html',
           } %}
           {{ build_checkbox }}
@@ -19,8 +19,8 @@
               {% for sublist_item in sublist %}
                 <li class="dg-checklist__sublist-item">
                   {% set build_sublist_item = {
-                    '#type':   'processed_text',
-                    '#text':    sublist_item,
+                    '#type': 'processed_text',
+                    '#text': sublist_item,
                     '#format': 'multiline_inline_html',
                   } %}
                   {{ build_sublist_item }}

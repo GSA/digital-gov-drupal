@@ -121,6 +121,11 @@ content:
       revision: false
       removed_reference: optional
     third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   field_slug: true
   promote: true

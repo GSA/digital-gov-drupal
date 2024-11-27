@@ -1,0 +1,33 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 4b7306f9-5109-4517-b4f1-6a69fd1e4e8d
+  bundle: menu_link_content
+  default_langcode: en
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Host an event'
+  menu_name:
+    -
+      value: footer-grow
+  link:
+    -
+      uri: 'https://digital.gov/digitalgov-university/'
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -49
+  expanded:
+    -
+      value: false

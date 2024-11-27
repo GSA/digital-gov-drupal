@@ -42,3 +42,8 @@ default:
   roles:
     -
       target_id: author
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1

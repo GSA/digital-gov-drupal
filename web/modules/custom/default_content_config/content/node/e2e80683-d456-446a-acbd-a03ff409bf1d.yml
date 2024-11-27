@@ -29,6 +29,11 @@ default:
   moderation_state:
     -
       value: published
+  path:
+    -
+      alias: /authors/dan-williams
+      langcode: en
+      pathauto: 1
   field_agency_acronym:
     -
       value: GSA

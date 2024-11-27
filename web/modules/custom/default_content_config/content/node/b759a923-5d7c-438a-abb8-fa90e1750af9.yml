@@ -4,8 +4,6 @@ _meta:
   uuid: b759a923-5d7c-438a-abb8-fa90e1750af9
   bundle: basic_page
   default_langcode: en
-  depends:
-    6bd8641f-84c6-4ddb-b8b2-9c076b017198: media
 default:
   revision_uid:
     -
@@ -31,6 +29,11 @@ default:
   moderation_state:
     -
       value: published
+  path:
+    -
+      alias: /about/contact
+      langcode: en
+      pathauto: 0
   body:
     -
       value: '<p><strong>Digital.gov</strong> is made up of a cross-functional team of writers, editors, strategists, technologists, and designers who all work at the Technology Transformation Services (TTS) at the General Services Administration (GSA).</p><p>:envelope: <strong>Questions or feedback?</strong> Send an email to us at <a href="mailto:digitalgov@gsa.gov">digitalgov@gsa.gov</a>.</p><p>:video_camera: For all media or speaker inquiries, please <a href="mailto:press@gsa.gov">email GSA’s Office of Strategic Communication</a> (OSC).</p><p>For a wider list of contacts, see our [<strong>Directory of services, tools, and teams</strong>]({{&lt; ref "/services/directory.md" &gt;}}) »</p><hr><h2>On social media</h2><ul><li>Follow <a href="https://X.com/digital_gov">@digital_gov on X (Formerly Twitter)</a></li><li>Digital.gov on <a href="https://github.com/GSA/digitalgov.gov">GitHub</a></li><li>Join our <a href="https://www.facebook.com/DigitalGov">Facebook page</a></li><li>Subscribe to our [newsletter]({{&lt; ref "/about/subscribe.md" &gt;}})</li><li>Join a [community of practice]({{&lt; ref "/communities/_index.md" &gt;}})</li></ul>'
@@ -40,9 +43,6 @@ default:
     -
       value: 'We are human, we promise.'
       format: html
-  field_featured_image:
-    -
-      entity: 6bd8641f-84c6-4ddb-b8b2-9c076b017198
   field_page_weight:
     -
       value: 1

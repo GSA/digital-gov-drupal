@@ -1,31 +1,30 @@
-{% set selectedType = type | lower %}
+{% set selectedType = type|lower %}
 {% set icons = {
-  'activity': 'assessment',
-  'action': 'campaign',
-  'alert':'report',
-  'comment': 'comment',
-  'video': 'fast_forward',
-  'join': 'groups',
-  'note': 'notifications',
-  'disclaimer': 'info',
+  activity: 'assessment',
+  action: 'campaign',
+  alert: 'report',
+  comment: 'comment',
+  video: 'fast_forward',
+  join: 'groups',
+  note: 'notifications',
+  disclaimer: 'info',
 } %}
-{% set icon = icons[selectedType | lower] %}
-
+{% set icon = icons[selectedType|lower] %}
 
 <article class="dg-note {{ selectedType ? 'dg-note--' ~ type : '' }}">
-	<h4 class="dg-note__heading">
-		<svg class="dg-note__icon usa-icon dg-icon dg-icon--large" aria-hidden="true" focusable="false">
-			<use href="{{ drupal_url(theme_path ~ '/static/digitalgov/img/sprite.svg#' ~ icon ) }}"></use>
-		</svg>
-			{{ heading }}
-	</h4>
+  <h4 class="dg-note__heading">
+    <svg class="dg-note__icon usa-icon dg-icon dg-icon--large" aria-hidden="true" focusable="false">
+      <use href="{{ drupal_url(theme_path ~ '/static/digitalgov/img/sprite.svg#' ~ icon) }}"></use>
+    </svg>
+      {{ heading }}
+  </h4>
     {% if text_override %}
       {{ text_override }}
     {% else %}
       {% set text = {
-          '#type':   'processed_text',
-          '#text':    text.value,
-          '#format':  text.format,
+          '#type': 'processed_text',
+          '#text': text.value,
+          '#format': text.format,
         } %}
       {{ text }}
     {% endif %}

@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: ed83448a-5125-499c-adb3-31fce16ef482
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: 18f.png
+  uri:
+    -
+      value: 'public://2024-11/18f.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 2424
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1732203404

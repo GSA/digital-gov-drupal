@@ -6,6 +6,8 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.landing_page.body
     - field.field.node.landing_page.field_buttons
+    - field.field.node.landing_page.field_deck
+    - field.field.node.landing_page.field_landing_page_type
     - field.field.node.landing_page.field_summary
     - node.type.landing_page
   module:
@@ -24,6 +26,11 @@ content:
     third_party_settings: {  }
     weight: 101
     region: content
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
   links:
     settings: {  }
     third_party_settings: {  }
@@ -31,4 +38,6 @@ content:
     region: content
 hidden:
   field_buttons: true
+  field_deck: true
+  field_landing_page_type: true
   field_summary: true

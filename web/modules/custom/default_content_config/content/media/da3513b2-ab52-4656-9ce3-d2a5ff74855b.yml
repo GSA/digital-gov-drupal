@@ -1,0 +1,33 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: da3513b2-ab52-4656-9ce3-d2a5ff74855b
+  bundle: image
+  default_langcode: en
+  depends:
+    665bd481-1af5-4d8c-a707-0bd57c55dab9: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: login-vault-door_w400.png
+  created:
+    -
+      value: 1732201323
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_media_image:
+    -
+      entity: 665bd481-1af5-4d8c-a707-0bd57c55dab9
+      alt: 'An illustration of a blue and red vault door has the red and white login.gov logo in the center.'
+      title: ''
+      width: 400
+      height: 371

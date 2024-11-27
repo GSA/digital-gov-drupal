@@ -40,7 +40,7 @@ third_party_settings:
       label: 'Social Media'
       region: content
       parent_name: ''
-      weight: 20
+      weight: 19
       format_type: details
       format_settings:
         classes: ''
@@ -73,7 +73,7 @@ content:
     third_party_settings: {  }
   field_agency_acronym:
     type: string_textfield
-    weight: 15
+    weight: 14
     region: content
     settings:
       size: 60
@@ -81,7 +81,7 @@ content:
     third_party_settings: {  }
   field_agency_full_name:
     type: string_textfield
-    weight: 14
+    weight: 13
     region: content
     settings:
       size: 60
@@ -89,7 +89,7 @@ content:
     third_party_settings: {  }
   field_bio:
     type: text_textfield
-    weight: 17
+    weight: 16
     region: content
     settings:
       size: 60
@@ -97,7 +97,7 @@ content:
     third_party_settings: {  }
   field_bio_url:
     type: link_default
-    weight: 18
+    weight: 17
     region: content
     settings:
       placeholder_url: ''
@@ -105,7 +105,7 @@ content:
     third_party_settings: {  }
   field_email:
     type: email_default
-    weight: 12
+    weight: 11
     region: content
     settings:
       placeholder: ''
@@ -121,7 +121,7 @@ content:
     third_party_settings: {  }
   field_first_name:
     type: text_textfield
-    weight: 9
+    weight: 8
     region: content
     settings:
       size: 60
@@ -145,7 +145,7 @@ content:
     third_party_settings: {  }
   field_last_name:
     type: text_textfield
-    weight: 10
+    weight: 9
     region: content
     settings:
       size: 60
@@ -161,7 +161,7 @@ content:
     third_party_settings: {  }
   field_location:
     type: string_textfield
-    weight: 16
+    weight: 15
     region: content
     settings:
       size: 60
@@ -169,7 +169,15 @@ content:
     third_party_settings: {  }
   field_pronouns:
     type: string_textfield
-    weight: 11
+    weight: 10
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_slug:
+    type: string_textfield
+    weight: 18
     region: content
     settings:
       size: 60
@@ -177,7 +185,7 @@ content:
     third_party_settings: {  }
   field_summary:
     type: text_textfield
-    weight: 13
+    weight: 12
     region: content
     settings:
       size: 60
@@ -250,8 +258,12 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
-  field_slug: true
   publish_on: true
   publish_state: true
   unpublish_on: true

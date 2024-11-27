@@ -7,6 +7,7 @@
 
 declare(strict_types=1);
 
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Template\Attribute;
 
 /**
@@ -32,7 +33,79 @@ function digital_gov_preprocess_page(array &$variables): void {
  * Implements hook_preprocess_HOOK() for node.html.twig.
  */
 function digital_gov_preprocess_node(array &$variables): void {
+  $variables['attributes']['class'] = 'grid-container-desktop';
+  $created = DrupalDateTime::createFromTimestamp($variables['node']->getCreatedTime());
+  $variables['created'] = $created->format('M j, Y');
 
+  switch ($variables['node']->bundle()) {
+    case 'news':
+      $before_date = new DrupalDateTime('5 years ago');
+      $variables['show_archive_warning'] = $created->getPhpDateTime() <= $before_date->getPhpDateTime();
+      break;
+
+    case 'event':
+      $now = new DrupalDateTime();
+      $startDate = $variables['node']->field_start_date->date;
+      $variables['start_date'] = $startDate->format('l, F j, Y', ['timezone' => date_default_timezone_get()]);
+      $variables['start_time'] = $startDate->format('g:i A', ['timezone' => date_default_timezone_get()]);
+      $variables['is_future_event'] = $startDate->getPhpDateTime() > $now->getPhpDateTime();
+
+      if ($variables["node"]->field_end_date->value) {
+        $endDate = $variables["node"]->field_end_date->date;
+        $variables['end_time'] = $endDate->format('g:i A T', ['timezone' => date_default_timezone_get()]);
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function digital_gov_theme(): array {
+  return [
+    'author_image' => [
+      'variables' => [
+        'author' => NULL,
+      ],
+    ],
+  ];
+}
+
+/**
+ * Preprocessor for author_image theme function.
+ */
+function digital_gov_preprocess_author_image(array &$vars): void {
+  $profile_source = $vars["author"]["#entity"]->field_profile_source->value ?? NULL;
+  $github = $vars["author"]["#entity"]->field_github->value ?? NULL;
+
+  $slug = $vars["author"]["#entity"]->field_slug->value;
+  switch (TRUE) {
+    case $profile_source === 'github' && $github:
+      // Author has selected GitHub and specified a GitHub user ID.
+      $vars['icon_path'] = sprintf('https://github.com/%s.png?size=50', $github);
+      break;
+
+    case $profile_source === 'digit-light':
+    case $profile_source === 'digit-dark':
+    case $profile_source === 'digit-pride':
+      $vars['icon_path'] = sprintf('img/%s.png', $profile_source);
+      break;
+
+    default:
+      if ($github) {
+        // Author did not select GitHub but use a GitHUB ID if they have one.
+        $vars['icon_path'] = sprintf('https://github.com/%s.png?size=50', $github);
+      }
+      else {
+        // No source selected OR they picked GitHub without a GitHub ID
+        // choose between light and dark based on length of the slug.
+        $vars['icon_path'] = sprintf(
+          'img/digit-%s.png',
+          strlen($slug ?? $vars['author']['#title']) % 2 ? 'dark' : 'light'
+        );
+      }
+      break;
+  }
 }
 
 /**
@@ -76,7 +149,7 @@ function digital_gov_preprocess_menu(&$variables, $hook) {
   $menu_item_attributes = NULL;
   switch ($variables['menu_name']) {
     case 'footer':
-    case 'footer-learn':
+    case 'footer-about':
     case 'footer-grow':
       $menu_attributes = new Attribute();
       $menu_attributes->addClass([
@@ -109,5 +182,21 @@ function digital_gov_preprocess_menu(&$variables, $hook) {
     foreach ($variables['items'] as &$item) {
       $item['attributes'] = $menu_item_attributes;
     }
+  }
+}
+
+/**
+ * Implements hook_preprocess_theme_suggestions_node_alter().
+ */
+function digital_gov_theme_suggestions_node_alter(array &$suggestions, array $variables) {
+  $node = $variables["elements"]["#node"];
+
+  switch ($node->getType()) {
+    case 'landing_page':
+      if ($landing_type = $node->field_landing_page_type->value) {
+        $suggestions[] = 'node__landing_page__' . $landing_type;
+        $suggestions[] = 'node__landing_page__' . $landing_type . '__' . $variables["elements"]["#view_mode"];
+      }
+      break;
   }
 }

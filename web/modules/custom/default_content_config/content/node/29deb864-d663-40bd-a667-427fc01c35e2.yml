@@ -29,3 +29,8 @@ default:
   moderation_state:
     -
       value: published
+  path:
+    -
+      alias: /2024/10/20/news-all-required-fields
+      langcode: en
+      pathauto: 1

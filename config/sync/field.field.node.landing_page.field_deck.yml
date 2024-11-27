@@ -1,0 +1,24 @@
+uuid: 503bd964-010e-432a-aa2d-ed7fa61d0e56
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_deck
+    - filter.format.html
+    - node.type.landing_page
+  module:
+    - text
+id: node.landing_page.field_deck
+field_name: field_deck
+entity_type: node
+bundle: landing_page
+label: Deck
+description: "Think of this as the sentence you'd most like to tweet. Do not repeat the headline. You need to be able to read it outloud in a single breath."
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - html
+field_type: text

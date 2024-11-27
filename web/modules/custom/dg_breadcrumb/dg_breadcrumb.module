@@ -1,0 +1,66 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for Digital.gov Breadcrumb module.
+ */
+
+use Drupal\Core\Breadcrumb\Breadcrumb;
+use Drupal\Core\Link;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\node\Entity\Node;
+
+/**
+ * Implements hook_system_breadcrumb_alter().
+ */
+function dg_breadcrumb_system_breadcrumb_alter(Breadcrumb &$breadcrumb, RouteMatchInterface $route_match, array $context) {
+  /** @var \Drupal\node\NodeInterface $current_node */
+  $current_node = $route_match->getParameter('node');
+  if (!$current_node) {
+    return;
+  }
+  switch ($current_node->getType()) {
+    case 'news':
+      $eq = \Drupal::entityQuery('node');
+      $eq->condition('type', 'landing_page');
+      // @todo When this field is in place, uncomment this out.
+      // $eq->condition('field_type', 'news');
+      $eq->accessCheck();
+      $landing_page_nids = $eq->execute();
+      if (empty($landing_page_nids)) {
+        return;
+      }
+      $landing_page_nid = array_shift($landing_page_nids);
+      $landing_page = Node::load($landing_page_nid);
+      $links = $breadcrumb->getLinks();
+
+      // If there are already breadcrumbs, that means the 'min length' easy
+      // breadcrumb did not nuke all the results.
+      if (!empty($links)) {
+        // Insert element at the desired position.
+        array_splice($links, 1, 0, [$landing_page->toLink()]);
+      }
+      else {
+        $breadcrumb->addLink(Link::createFromRoute('Home', '<front>'));
+        $breadcrumb->addLink($landing_page->toLink());
+        $breadcrumb->addLink($current_node->toLink());
+        $links = $breadcrumb->getLinks();
+      }
+      $new_breadcrumb = new Breadcrumb();
+      $new_breadcrumb->setLinks($links);
+      $breadcrumb = $new_breadcrumb;
+      break;
+
+    case 'topics':
+      $links = $breadcrumb->getLinks();
+      foreach ($links as $link) {
+        // /topics is a redirect to /resources but the breadcrumb on just topics
+        // should still say 'Topics'.
+        if ($link->getText() === 'Resources') {
+          $link->setText(t('Topics'));
+        }
+      }
+      break;
+
+  }
+}

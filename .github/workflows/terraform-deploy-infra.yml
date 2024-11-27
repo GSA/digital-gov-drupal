@@ -12,14 +12,16 @@ jobs:
         uses: actions/checkout@v4
       - name: Set env.BRANCH
         run: |
-          BRANCH=develop
-          #BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)
+          BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)
           case ${BRANCH} in
             develop)
               CF_SPACE="dev"
               ;;
             main)
               CF_SPACE="prod"
+              ;;
+            stage)
+              CF_SPACE="staging"
               ;;
           esac
           echo "BRANCH=${BRANCH}" >> $GITHUB_ENV
@@ -51,8 +53,7 @@ jobs:
         env:
           TF_BASTION: "${{ secrets.TF_BASTION }}"
         run: |
-          #declare -a commands=("rm -rf ${REPO_NAME}" "git clone https://github.com/${GITHUB_REPOSITORY_OWNER}/${REPO_NAME}.git" "cd ${REPO_NAME}" "git checkout ${BRANCH}")
-          declare -a commands=("rm -rf ${REPO_NAME}" "git clone -b "feature/dg-98-build-and-configure-pipeline" https://github.com/${GITHUB_REPOSITORY_OWNER}/${REPO_NAME}.git")
+          declare -a commands=("rm -rf ${REPO_NAME}" "git clone -b ${BRANCH} https://github.com/${GITHUB_REPOSITORY_OWNER}/${REPO_NAME}.git")
           for command in "${commands[@]}"; do
             ./scripts/pipeline/cloud-gov-remote-command.sh "${TF_BASTION}" "${command}" 1
           done

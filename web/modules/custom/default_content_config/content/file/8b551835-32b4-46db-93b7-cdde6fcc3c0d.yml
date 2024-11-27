@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 8b551835-32b4-46db-93b7-cdde6fcc3c0d
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: challengegov-card-episode-3_w1200.png
+  uri:
+    -
+      value: 'public://2024-11/challengegov-card-episode-3_w1200.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 187764
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1732137370

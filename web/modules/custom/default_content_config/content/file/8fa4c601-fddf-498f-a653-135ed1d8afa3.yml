@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 8fa4c601-fddf-498f-a653-135ed1d8afa3
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: guide-dap.png
+  uri:
+    -
+      value: 'public://2024-11/guide-dap.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 47058
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1732202654

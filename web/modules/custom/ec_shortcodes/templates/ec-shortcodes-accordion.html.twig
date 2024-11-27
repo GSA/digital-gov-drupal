@@ -1,40 +1,40 @@
 <div class="usa-accordion accordion">
-	<h3 class="usa-accordion__heading">
-		<button class="usa-accordion__button" title="View {{ title }}" aria-expanded="false" aria-controls="accordion-{{ count }}">
-			{% if icon %}
-				<span class="icon">
-					<svg class="usa-icon dg-icon dg-icon--standard margin-bottom-05" aria-hidden="true" focusable="false">
-						<use href="{{ drupal_url(theme_path ~ '/static/digitalgov/img/sprite.svg#' ~ icon ) }}"></use>
-					</svg>
-				</span>
-			{% else %}
-				<span class="icon">
-					<svg class="usa-icon dg-icon dg-icon--standard margin-bottom-05" aria-hidden="true" focusable="false" role="img">
-						<use href="{{ drupal_url(theme_path ~ '/static/digitalgov/img/sprite.svg#unfold_more') }}"></use>
-					</svg>
-				</span>
-			{% endif %}
-			<span class="src">
-				{% if kicker %}
-					<strong class="kicker">{{ kicker }}</strong>
-				{% endif %}
-				{{ title }}
-				{% if pdf %}
-					<em>{{ pdf }}</em>
-				{% endif %}
-			</span>
-		</button>
-	</h3>
+  <h3 class="usa-accordion__heading">
+    <button class="usa-accordion__button" title="View {{ title }}" aria-expanded="false" aria-controls="accordion-{{ count }}">
+      {% if icon %}
+        <span class="icon">
+          <svg class="usa-icon dg-icon dg-icon--standard margin-bottom-05" aria-hidden="true" focusable="false">
+            <use href="{{ drupal_url(theme_path ~ '/static/digitalgov/img/sprite.svg#' ~ icon) }}"></use>
+          </svg>
+        </span>
+      {% else %}
+        <span class="icon">
+          <svg class="usa-icon dg-icon dg-icon--standard margin-bottom-05" aria-hidden="true" focusable="false" role="img">
+            <use href="{{ drupal_url(theme_path ~ '/static/digitalgov/img/sprite.svg#unfold_more') }}"></use>
+          </svg>
+        </span>
+      {% endif %}
+      <span class="src">
+        {% if kicker %}
+          <strong class="kicker">{{ kicker }}</strong>
+        {% endif %}
+        {{ title }}
+        {% if pdf %}
+          <em>{{ pdf }}</em>
+        {% endif %}
+      </span>
+    </button>
+  </h3>
 
-	{% if text.value %}
-		<div id="accordion-{{ count }}" class="accordion-body usa-accordion__content usa-prose">
-			{% set text = {
-        '#type':   'processed_text',
-        '#text':    text.value,
-        '#format':  text.format,
+  {% if text.value %}
+    <div id="accordion-{{ count }}" class="accordion-body usa-accordion__content usa-prose">
+      {% set text = {
+        '#type': 'processed_text',
+        '#text': text.value,
+        '#format': text.format,
       } %}
-			{{ text }}
-		</div>
-	{% endif %}
+      {{ text }}
+    </div>
+  {% endif %}
 
 </div>

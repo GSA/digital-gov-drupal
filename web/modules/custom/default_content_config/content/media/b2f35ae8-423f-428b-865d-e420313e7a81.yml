@@ -1,0 +1,33 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: b2f35ae8-423f-428b-865d-e420313e7a81
+  bundle: image
+  default_langcode: en
+  depends:
+    8fa4c601-fddf-498f-a653-135ed1d8afa3: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: guide-dap.png
+  created:
+    -
+      value: 1732202654
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_media_image:
+    -
+      entity: 8fa4c601-fddf-498f-a653-135ed1d8afa3
+      alt: 'Business people working on data analytics for the web'
+      title: ''
+      width: 1200
+      height: 630

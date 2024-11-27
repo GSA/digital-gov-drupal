@@ -29,17 +29,12 @@ default:
   moderation_state:
     -
       value: published
-  body:
+  path:
     -
-      value: '<p>Everyone who works on government websites has a role to play in making federal resources accessible and inclusive.</p><p><strong>This guide provides:</strong></p><ul><li>An overview of how each team member can contribute to a product''s accessibility.</li><li>A framework for thinking about accessibility and inclusive design in your role.</li><li>An understanding of the human need behind accessibility practices.</li></ul><p>We focus on the issues most likely to impact government sites. These guidelines do not provide a comprehensive list of all possible issues. Your team will need additional resources and work to conduct manual audits to conform to the standards of <a href="https://www.section508.gov/">Section 508</a>, a law that ensures all web content is accessible to anybody with a disability. It aligns with the World Wide Web Consortium (W3C) Web Accessibility Initiative (WAI) <a href="https://www.w3.org/WAI/WCAG22/quickref/?versions=2.0&amp;currentsidebar=%23col_overview&amp;levels=a%2Caaa">Web Content Accessibility Guidelines (WCAG) 2.0, Level AA</a>.</p><p>Choose the guide that best fits your role:</p><ol><li>Product management</li><li>Content design</li><li>User Experience (UX) design</li><li>Visual design</li><li>Front-end development</li></ol><p><em>These roles are based on the roles we have at the Technology Transformation Services at GSA.</em></p>'
-      format: html
-      summary: ''
-  field_buttons:
-    -
-      uri: 'http://www.digital.gov'
-      title: 'Placeholder Button'
-      options: {  }
+      alias: /guides
+      langcode: en
+      pathauto: 0
   field_summary:
     -
-      value: 'A ‘quick-start’ guide for embedding accessibility and inclusive design practices into your team’s workflow'
+      value: 'Go beyond the basics with these expert-level how-to guides. Think of these guides as digital textbooks that provide comprehensive information and tactics for building excellent digital experiences.'
       format: html

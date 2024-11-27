@@ -1,0 +1,59 @@
+{# ======================================
+Related Communities
+======================================
+#}
+
+{# Communities ====================== #}
+
+{# gets all pages in the site that are related #}
+{# $related_pages := .Site.Pages.Related  . #}
+
+{# gets only the related community pages #}
+{# $.Scratch.Set "communities" (where $related_pages "Section" "communities") #}
+
+{# Now conditionally shuffle the community pages and pick the first 5 #}
+{# if gt (len ($.Scratch.Get "communities")) 5) #}
+  {# $.Scratch.Set "communities" (first 5 ($.Scratch.Get "communities") | shuffle) #}
+{# endif #}
+{# $communities := ($.Scratch.Get "communities") #}
+
+{# If there are community pages... #}
+{# with $communities #}
+<article class="dg-promos dg-related-communities">
+  <h3 class="dg-promos__heading">Join a Community</h3>
+
+  <ul class="dg-promos__list">
+    {# range $communities #}
+    <li class="promo dg-promos__list-item">
+      <a
+        href="{# .Permalink #}?promo"
+        title="Visit {# .Title #} community page"
+        class="dg-promos__link"
+      >
+        {# .Title #}
+      </a>
+    </li>
+    {# endif #}
+  </ul>
+
+  <footer class="dg-promos__footer">
+    {# $communityCount := len (where $.Site.RegularPages "Section" "communities") #}
+
+    <a
+      href="{# "communities" | relURL #}"
+      class="dg-promos__more-link dg-more-link"
+    >
+      <span> See all {# communityCount #} communities </span>
+      <svg
+        class="usa-icon dg-icon dg-icon--small margin-bottom-05"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <use
+          xlink:href="/{{ active_theme_path() }}/static/uswds/img/sprite.svg#arrow_forward"
+        ></use>
+      </svg>
+    </a>
+  </footer>
+</article>
+{# end #}

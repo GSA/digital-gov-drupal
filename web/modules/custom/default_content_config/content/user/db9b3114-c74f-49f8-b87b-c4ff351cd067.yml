@@ -44,3 +44,8 @@ default:
       target_id: publisher
     -
       target_id: editor
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1

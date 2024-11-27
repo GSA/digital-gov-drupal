@@ -4,6 +4,8 @@ _meta:
   uuid: bd7fedff-9767-49b3-8a71-8bab51265a86
   bundle: community
   default_langcode: en
+  depends:
+    96a9987a-5ad5-4232-9265-69edbaeab690: media
 default:
   revision_uid:
     -
@@ -16,7 +18,7 @@ default:
       target_id: 1
   title:
     -
-      value: 'Web Analytics and Optimization'
+      value: 'Join the Web Analytics'
   created:
     -
       value: 1729636289
@@ -29,15 +31,32 @@ default:
   moderation_state:
     -
       value: published
+  path:
+    -
+      alias: /communities/web-analytics-and-optimization
+      langcode: en
+      pathauto: 0
   body:
     -
-      value: '<p>In government, those with analytics as part of their duties are faced with a fast-paced, ever-changing environment. Technologies, strategies, and tools change regularly. This community aims to uncover best practices, case studies, tips, and tools for web analytics and optimization.</p><h2>What We Do</h2><p>We run meetings and trainings, engage in collaborative discussion, and send general emails with updates on new technology and trends.</p><h2>Who We Are</h2><p>We’re government website analysts, developers, content strategists, user experience (UX) designers, communications professionals, or any and everyone else who use data to improve the public’s interaction with government sites.</p><h2>Related Resources</h2><ul><li><a href="https://digital.gov/guides/dap/">Digital Analytics Program</a></li><li><a href="https://search.gov/">Search.gov</a></li><li><a href="https://designsystem.digital.gov/">U.S. Web Design System</a></li><li><a href="https://digital.gov/guides/web-analytics-playbook/">Web Analytics Playbook</a></li></ul>'
+      value: '<p>Government professionals from all levels come together in this community to make better decisions using web analytics and other optimization strategies.</p><p>Become a member to uncover best practices, tips, and tools for web analytics, search, and search engine optimization.</p><p>Digital.gov fosters this dynamic community by providing spaces to engage in collaborative discussion and share new technology and trends. Remember, when participating in this community, you must follow <a href="https://digital.gov/communities/community-guidelines/">Digital.gov community guidelines</a>.</p><embedded-content data-plugin-config="{&quot;content_reference&quot;:&quot;54&quot;}" data-plugin-id="ec_shortcodes_featured_resource" data-button-id="default">&nbsp;</embedded-content>'
       format: html
       summary: ''
+  field_dg_acronym:
+    -
+      value: WAO
   field_dg_highlight:
     -
-      value: false
+      value: true
+  field_dg_shortname:
+    -
+      value: 'Web Analytics'
+  field_page_weight:
+    -
+      value: 1
+  field_primary_image:
+    -
+      entity: 96a9987a-5ad5-4232-9265-69edbaeab690
   field_summary:
     -
-      value: 'Make better decisions using web analytics and other optimization strategies'
+      value: 'Make better decisions using web analytics and other optimization strategies.'
       format: html

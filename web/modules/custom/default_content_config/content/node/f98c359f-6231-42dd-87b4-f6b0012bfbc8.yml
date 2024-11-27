@@ -16,7 +16,7 @@ default:
       target_id: 1
   title:
     -
-      value: Communities
+      value: 'Digital.gov Communities of Practice'
   created:
     -
       value: 1729527901
@@ -29,17 +29,12 @@ default:
   moderation_state:
     -
       value: published
-  body:
+  path:
     -
-      value: '<h2>What we do</h2><p>The A/B Testing Community of Practice organizes meetings to discuss the latest in A/B testing. We invite guest speakers, share case studies, explore new tools, and provide support for new and current members trying to grow their A/B testing practice and knowledge.</p><h2>Who we are</h2><p>The A/B Testing Community of Practice started with a team at the Consumer Financial Protection Bureau (CFPB), circa 2016. We were inspired by what we’d learned from our own tests that, and see what we could learn from case studies outside CFPB. We are driven to foster a group that can share their experiences and learn from one another.</p><p><strong>Community Managers:</strong></p><ul><li><a href="mailto:kelley.holden@cfpb.gov">Kelley Holden</a>, works at the CFPB as a Digital Analytics Program Manager on the Data Science and Analytics team. She has worked on multiple projects that include SEO strategy, A/B and RCT testing, web analysis, analytics visualizations, data science, and user behavior analysis.</li></ul>'
-      format: html
-      summary: ''
-  field_buttons:
-    -
-      uri: 'http://www.digital.gov'
-      title: 'Placeholder Button'
-      options: {  }
+      alias: /communities
+      langcode: en
+      pathauto: 0
   field_summary:
     -
-      value: 'Collaborate and share resources with others across government.'
+      value: 'Collaborate and share resources with other communities across government who are focused on building better digital experience in government.'
       format: html

@@ -1,0 +1,35 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: df4e7e5f-cd7d-4fe4-b7c8-492900351d5e
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    2e0f1e02-efde-48e6-9e9e-4cc1e572feec: node
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: Guides
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      target_uuid: 2e0f1e02-efde-48e6-9e9e-4cc1e572feec
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -46
+  expanded:
+    -
+      value: false

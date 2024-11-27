@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.guides.field_deck
     - field.field.node.guides.field_featured_image
     - field.field.node.guides.field_guide_weight
+    - field.field.node.guides.field_kicker
     - field.field.node.guides.field_page_weight
     - field.field.node.guides.field_primary_image
     - field.field.node.guides.field_summary
@@ -27,6 +28,11 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 101
+    region: content
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
     region: content
   field_deck:
     type: text_default
@@ -52,6 +58,14 @@ content:
       prefix_suffix: true
     third_party_settings: {  }
     weight: 127
+    region: content
+  field_kicker:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 116
     region: content
   field_page_weight:
     type: number_integer

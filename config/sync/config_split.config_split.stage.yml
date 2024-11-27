@@ -1,0 +1,17 @@
+uuid: 30d63477-4fda-4fc7-849c-9adaedab6a6b
+langcode: en
+status: true
+dependencies: {  }
+id: stage
+label: Stage
+description: 'Configuration just for the stage branch / stage environment.'
+weight: 0
+stackable: false
+no_patching: false
+storage: folder
+folder: ../config/stage
+module: {  }
+theme: {  }
+complete_list: {  }
+partial_list:
+  - samlauth.authentication

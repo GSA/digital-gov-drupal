@@ -1,0 +1,5 @@
+name: 'Digital.gov Breadcrumb'
+type: module
+description: 'Alters core breadcrumb functionality.'
+package: Custom
+core_version_requirement: ^10 || ^11

@@ -1,0 +1,18 @@
+{% if youtube_id %}
+<section class="dg-youtube">
+  <div class="grid-row">
+    <div class="grid-col-12">
+      <section class="video-box">
+        <div class="youtube-player">
+          <iframe
+            src="https://www.youtube.com/embed/{{ youtube_id }}"
+            title="{{ youtube_title }}"
+            frameborder="0"
+            allowfullscreen="1"
+          ></iframe>
+        </div>
+      </section>
+    </div>
+  </div>
+</section>
+{% endif %}

@@ -29,3 +29,8 @@ default:
   moderation_state:
     -
       value: published
+  path:
+    -
+      alias: /basic-page-all-required-fields
+      langcode: en
+      pathauto: 1

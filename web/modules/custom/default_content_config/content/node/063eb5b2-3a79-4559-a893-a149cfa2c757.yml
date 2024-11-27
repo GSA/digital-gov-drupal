@@ -31,6 +31,11 @@ default:
   moderation_state:
     -
       value: published
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
   field_logo:
     -
       entity: a562cb6c-d534-46b3-bf5d-4b21e0422e4b

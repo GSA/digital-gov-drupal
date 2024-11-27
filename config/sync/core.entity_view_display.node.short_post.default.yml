@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.short_post.field_deck
+    - field.field.node.short_post.field_external_url
     - field.field.node.short_post.field_short_post_type
     - field.field.node.short_post.field_slug
     - field.field.node.short_post.field_source
@@ -11,62 +12,19 @@ dependencies:
     - field.field.node.short_post.field_topics
     - node.type.short_post
   module:
-    - options
-    - text
     - user
 id: node.short_post.default
 targetEntityType: node
 bundle: short_post
 mode: default
-content:
-  field_deck:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 108
-    region: content
-  field_short_post_type:
-    type: list_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 127
-    region: content
-  field_slug:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 106
-    region: content
-  field_source:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 126
-    region: content
-  field_summary:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 104
-    region: content
-  field_topics:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 125
-    region: content
-  links:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 100
-    region: content
-hidden: {  }
+content: {  }
+hidden:
+  content_moderation_control: true
+  field_deck: true
+  field_external_url: true
+  field_short_post_type: true
+  field_slug: true
+  field_source: true
+  field_summary: true
+  field_topics: true
+  links: true

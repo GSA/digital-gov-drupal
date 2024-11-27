@@ -6,6 +6,14 @@
  */
 $lando_info = json_decode(getenv('LANDO_INFO'));
 
+// Disable all splits not meant for local.
+$config['config_split.config_split.non_local']['status'] = FALSE;
+$config['config_split.config_split.develop']['status'] = FALSE;
+$config['config_split.config_split.stage']['status'] = FALSE;
+$config['config_split.config_split.production']['status'] = FALSE;
+// Enable local splits.
+$config['config_split.config_split.local']['status'] = TRUE;
+
 if (isset($lando_info->database)) {
   $databases['default']['default'] = [
     'database' => $lando_info->database->creds->database,

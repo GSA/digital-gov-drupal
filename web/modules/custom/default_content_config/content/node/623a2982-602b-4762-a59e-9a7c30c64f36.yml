@@ -19,7 +19,7 @@ default:
       target_id: 1
   title:
     -
-      value: 'Web Managers'
+      value: 'Join the Web Managers'
   created:
     -
       value: 1729615048
@@ -32,9 +32,14 @@ default:
   moderation_state:
     -
       value: published
+  path:
+    -
+      alias: /communities/web-content-managers
+      langcode: en
+      pathauto: 0
   body:
     -
-      value: '<p>We are a group for those who create, manage, and contribute to government websites and digital services. We are working to create a trusted, seamless online experience for all. You do not need to be a “manager” to be a part of this community; we are all managing different aspects of the digital experience and all have something to contribute — and something to learn — from one another.</p><h2>What We Do</h2><p>Together, everyone achieves more. We recognize the expert in each of us. Our primary purpose is to collaborate and share ideas, challenges, lessons learned, and best practices in managing government websites and digital services—from all levels of skills and knowledge.</p><p>We support efforts to implement the <a href="https://digital.gov/resources/21st-century-integrated-digital-experience-act/">21st Century Integrated Digital Experience Act</a> (21st Century IDEA) and other requirements for government websites and digital services.</p><p>We meet several times a year and maintain an active LISTSERV. We also work with other <a href="https://digital.gov/communities">communities of practice</a> and the <a href="https://digital.gov/resources/federal-web-council/">Federal Web Council</a> to publish case studies, blog posts, and other resources on Digital.gov.</p><p>We want to help our community find the answers to questions, to consider questions they perhaps haven’t thought to ask, and to learn from this diverse community.</p><h2>Who We Are</h2><p>We held our <a href="https://web.archive.org/web/20010609224356/http://www.hud.gov/library/bookshelf15/webcontentmgr.cfm">first community meeting in October 2000</a>. The web content managers group was started as a way for content managers, not techies, to get together to discuss web content and management issues facing the federal government. We have evolved over the past 20 years to include everyone who has a role in building websites and digital services.</p><h2>Related Resources</h2><ul><li><a href="https://www.digitalgov.gov/resources/checklist-of-requirements-for-federal-digital-services/">Checklist of Requirements for Federal Websites and Digital Services</a> — The relevant laws, policies, and regulations for federal agencies.</li><li><a href="https://digital.gov/resources/required-web-content-and-links">Required Web Content and Links</a> — A list of required links that all federal websites need to have.</li><li><a href="https://designsystem.digital.gov/website-standards/">Website Standards</a> — Adopt the U.S. Web Design System incrementally, and prioritize implementation to align with the modernization plans and priorities.</li></ul>'
+      value: '<p>p&gt;Government professionals from all levels come together in this community to create a better online experience for the public.</p><p>&nbsp;</p><p>Become a member to learn more about creating, managing, and contributing to government websites and digital services.</p><p>Digital.gov fosters this fundamental community by providing spaces for sharing ideas, challenges, lessons learned, and best practices for managing government websites and digital services. Remember, when participating in this community, you must follow <a href="https://digital.gov/communities/community-guidelines/">Digital.gov community guidelines</a>.</p><embedded-content data-plugin-config="{&quot;content_reference&quot;:&quot;57&quot;}" data-plugin-id="ec_shortcodes_featured_resource" data-button-id="default">&nbsp;</embedded-content>'
       format: html
       summary: ''
   field_dg_acronym:
@@ -51,7 +56,7 @@ default:
       value: 'Web Managers'
   field_members:
     -
-      value: 2166
+      value: 2225
   field_page_weight:
     -
       value: 2

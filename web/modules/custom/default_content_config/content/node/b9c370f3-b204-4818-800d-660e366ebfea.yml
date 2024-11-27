@@ -5,7 +5,7 @@ _meta:
   bundle: guides
   default_langcode: en
   depends:
-    6bd8641f-84c6-4ddb-b8b2-9c076b017198: media
+    d5b7c563-4023-4c09-b3b9-27c5d009ec37: media
     58b5051e-356e-4ace-be42-ca090259d6ab: node
 default:
   revision_uid:
@@ -32,6 +32,11 @@ default:
   moderation_state:
     -
       value: published
+  path:
+    -
+      alias: /guides/site-scanning
+      langcode: en
+      pathauto: 0
   body:
     -
       value: '<p><strong>The Site Scanning program</strong> automates a wide range of scans of public federal websites and generates data about website health, policy compliance, and best practices.</p><p>The program is a shared service provided at no cost for federal agencies and the public to use. At its core is the Federal Website Index, a reference dataset listing all public federal .gov sites by agency/department. Daily scans generate over 1.5 million fields of data about 26,000 federal .gov websites, made publicly available via API and bulk download.</p><p><strong>We scan federal domains for:</strong></p><ul><li>The presence of agency websites and subdomains</li><li>Digital Analytics Program participation</li><li>Use of the US Web Design System</li><li>Search engine optimization</li><li>Third party services</li><li>IPv6 compliance</li><li>Other best practices</li></ul><h2>Access the data directly</h2><p>All scan data can be downloaded directly as a <a href="data/">CSV or JSON file</a> or accessed through the <a href="https://open.gsa.gov/api/site-scanning-api/">Site Scanning API</a>.</p><h2>Learn more about the program, the scans, and the underlying data</h2><p>Much deeper program detail can be found in the program''s <a href="https://github.com/gsa/site-scanning-documentation">documentation hub</a>. The major sections include:</p><ul><li><a href="https://github.com/gsa/site-scanning-documentation#about">About the program</a></li><li><a href="https://github.com/gsa/site-scanning-documentation#understanding-the-data">Understanding the data</a></li><li><a href="https://github.com/gsa/site-scanning-documentation#program-management">Program management</a></li></ul><p>The creation of the underlying website index is explained in the separate <a href="https://github.com/GSA/federal-website-index">Federal Website Index repository</a>. It includes links to the original datasets, as well as descriptions of how they are assembled and filtered in order to create the list of URLs that are then scanned.</p><h2>Contact the Site Scanning team</h2><p><strong>Questions?</strong> Email the Site Scanning team at <a href="mailto:site-scanning@gsa.gov">site-scanning@gsa.gov</a>.</p>'
@@ -41,9 +46,6 @@ default:
     -
       value: 'A set of daily scans of the federal web presence.'
       format: html
-  field_featured_image:
-    -
-      entity: 6bd8641f-84c6-4ddb-b8b2-9c076b017198
   field_guide_weight:
     -
       value: 3
@@ -52,7 +54,7 @@ default:
       value: 1
   field_primary_image:
     -
-      entity: 6bd8641f-84c6-4ddb-b8b2-9c076b017198
+      entity: d5b7c563-4023-4c09-b3b9-27c5d009ec37
   field_summary:
     -
       value: 'This program is available to automatically generate data about the health and best practices of federal websites.'

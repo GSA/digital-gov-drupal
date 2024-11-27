@@ -18,7 +18,7 @@ locals {
   tf_backend = {
     type = "pg"
     name_pattern_psql = "${local.project}-terraform-backend-bootstrap"
-    name_pattern_secrets = "${local.project}--pg-secrets-bootstrap"
+    name_pattern_secrets = "${local.project}-pg-secrets-bootstrap"
     space = "prod"
   }
 
@@ -178,7 +178,7 @@ locals {
           services_external = [
             "${local.project}-mysql-${terraform.workspace}",
             "${local.project}-backup-${terraform.workspace}",
-            terraform.workspace == local.tf_backend.space ? "${local.project}-terraform-backend-default" : null
+            terraform.workspace == local.tf_backend.space ? "${local.project}-terraform-backend-bootstrap" : null
           ]
 
           ## The source file should be a directory or a zip file.
@@ -316,18 +316,11 @@ locals {
   external_applications = {
     drupal = {
 
-        environement = "dev"
+        environement = terraform.workspace
 
         ## Port is the application listening on.
         port = var.mtls_port
-      },
-    drupal = {
-
-      environement = "main"
-
-      ## Port is the application listening on.
-      port = var.mtls_port
-    }
+      }
   }
 
   ## The various environment settings to be deployed.
@@ -459,7 +452,7 @@ locals {
     #################################
 
 
-    main = merge(
+    prod = merge(
       {
         ## Applications to deploy.
         apps = local.globals.apps
@@ -479,16 +472,53 @@ locals {
         }
       }
     )
+
+    #################################
+    ##
+    ##  __ _                   
+    ## / _\ |_ __ _  __ _  ___ 
+    ## \ \| __/ _` |/ _` |/ _ \
+    ## _\ \ || (_| | (_| |  __/
+    ## \__/\__\__,_|\__, |\___|
+    ##              |___/              
+    ##
+    #################################              
+  
+    staging = merge(
+      {
+        ## Applications to deploy.
+        apps = local.globals.apps
+        services = local.globals.services
+      },
+      {
+        ## Passwords that need to be generated for this environment.
+        ## These will actually use the sha256 result from the random module.
+        passwords = {
+          hash_salt = {
+            length = 32
+          }
+          cron_key = {
+            length = 32
+          }
+        }
+      }
+    )
   }
 
   ## Map of the 'all' environement and the current workspace settings.
-  env = merge(try(local.envs.all, {}), try(local.envs[terraform.workspace], {}))
+  env = merge(
+    try(
+      local.envs.all, {}
+    ),
+    try(
+      local.envs[terraform.workspace], {}
+    )
+  )
 
-   service_bindings = merge(
+  service_bindings = merge(
     flatten(
       [ 
         for key, value in try(local.env.services, {}) : {
-          #svc_value.name => svc_value
           "${key}" = value
         }
       ]

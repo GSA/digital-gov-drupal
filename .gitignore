@@ -2,6 +2,7 @@
 
 web/themes/custom/digital_gov/static/dist
 web/themes/custom/digital_gov/static/uswds
+.twig-cs-fixer.cache
 
 #### End Digital.gov Specific
 

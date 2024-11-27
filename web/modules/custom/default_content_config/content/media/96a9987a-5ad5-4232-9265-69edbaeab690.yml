@@ -1,0 +1,33 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 96a9987a-5ad5-4232-9265-69edbaeab690
+  bundle: image
+  default_langcode: en
+  depends:
+    3b383306-227a-413c-9501-18c32e2810ed: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: communities-card-analytics_w1200.png
+  created:
+    -
+      value: 1732202208
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_media_image:
+    -
+      entity: 3b383306-227a-413c-9501-18c32e2810ed
+      alt: 'Join the Web Analytics Community'
+      title: ''
+      width: 1200
+      height: 627
