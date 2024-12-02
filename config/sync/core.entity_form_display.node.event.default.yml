@@ -23,6 +23,7 @@ dependencies:
     - field.field.node.event.field_venue
     - field.field.node.event.field_youtube_id
     - node.type.event
+    - workflows.workflow.editorial
   module:
     - content_moderation
     - datetime
@@ -30,6 +31,7 @@ dependencies:
     - link
     - media_library
     - paragraphs
+    - path
     - text
 id: node.event.default
 targetEntityType: node
@@ -114,7 +116,10 @@ content:
     region: content
     settings:
       media_types: {  }
-    third_party_settings: {  }
+    third_party_settings:
+      media_library_edit:
+        show_edit: '1'
+        edit_form_mode: default
   field_host:
     type: string_textfield
     weight: 10

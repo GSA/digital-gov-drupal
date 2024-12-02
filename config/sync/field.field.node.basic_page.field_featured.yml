@@ -1,0 +1,31 @@
+uuid: f9a741a1-7b8f-4293-9c09-a2521c26ee8c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_featured
+    - media.type.image
+    - media.type.video
+    - node.type.basic_page
+id: node.basic_page.field_featured
+field_name: field_featured
+entity_type: node
+bundle: basic_page
+label: Featured
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+      video: video
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: image
+field_type: entity_reference

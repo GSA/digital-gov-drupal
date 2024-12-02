@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.basic_page.body
     - field.field.node.basic_page.field_deck
+    - field.field.node.basic_page.field_featured
     - field.field.node.basic_page.field_featured_image
     - field.field.node.basic_page.field_page_weight
     - field.field.node.basic_page.field_slug
@@ -24,6 +25,11 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 101
+    region: content
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
     region: content
   field_deck:
     type: text_default
@@ -70,4 +76,5 @@ content:
     third_party_settings: {  }
     weight: 100
     region: content
-hidden: {  }
+hidden:
+  field_featured: true

@@ -16,10 +16,13 @@ dependencies:
     - field.field.node.community.field_subscribe_email_subject
     - field.field.node.community.field_summary
     - node.type.community
+    - workflows.workflow.editorial
   module:
     - content_moderation
     - field_group
     - media_library
+    - media_library_edit
+    - path
     - text
 third_party_settings:
   field_group:
@@ -92,7 +95,10 @@ content:
     region: content
     settings:
       media_types: {  }
-    third_party_settings: {  }
+    third_party_settings:
+      media_library_edit:
+        show_edit: '1'
+        edit_form_mode: default
   field_dg_shortname:
     type: string_textfield
     weight: 35
@@ -121,7 +127,10 @@ content:
     region: content
     settings:
       media_types: {  }
-    third_party_settings: {  }
+    third_party_settings:
+      media_library_edit:
+        show_edit: '1'
+        edit_form_mode: default
   field_subscribe_email_subject:
     type: string_textfield
     weight: 36

@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.basic_page.body
     - field.field.node.basic_page.field_deck
+    - field.field.node.basic_page.field_featured
     - field.field.node.basic_page.field_featured_image
     - field.field.node.basic_page.field_page_weight
     - field.field.node.basic_page.field_slug
@@ -27,6 +28,11 @@ content:
     third_party_settings: {  }
     weight: 101
     region: content
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
   links:
     settings: {  }
     third_party_settings: {  }
@@ -34,6 +40,7 @@ content:
     region: content
 hidden:
   field_deck: true
+  field_featured: true
   field_featured_image: true
   field_page_weight: true
   field_slug: true

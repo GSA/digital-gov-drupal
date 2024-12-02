@@ -1,0 +1,30 @@
+uuid: 8c0fb760-a595-46c3-bd0e-d622ada64523
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.dg_large_scale_to_1200_convert_to_webp
+    - image.style.dg_medium_800_max_convert_to_webp
+    - image.style.dg_small
+  theme:
+    - digital_gov
+id: brothers
+label: 'DG Responsive Images'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: dg_large_scale_to_1200_convert_to_webp
+    breakpoint_id: digital_gov.large
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: dg_medium_800_max_convert_to_webp
+    breakpoint_id: digital_gov.medium
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: dg_small
+    breakpoint_id: digital_gov.small
+    multiplier: 1x
+breakpoint_group: digital_gov
+fallback_image_style: dg_large_scale_to_1200_convert_to_webp

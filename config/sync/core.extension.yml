@@ -21,6 +21,7 @@ module:
   dynamic_page_cache: 0
   easy_breadcrumb: 0
   ec_shortcodes: 0
+  edit_media_modal: 0
   editor: 0
   embedded_content: 0
   entity_reference_revisions: 0
@@ -40,6 +41,7 @@ module:
   mailsystem: 0
   media: 0
   media_library: 0
+  media_library_edit: 0
   memcache: 0
   menu_link_content: 0
   menu_ui: 0
@@ -55,6 +57,7 @@ module:
   redirect: 0
   remove_username: 0
   require_revision_log_message: 0
+  responsive_image: 0
   samlauth: 0
   scheduler: 0
   scheduler_content_moderation_integration: 0

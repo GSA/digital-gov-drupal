@@ -5,10 +5,11 @@ dependencies:
   config:
     - core.entity_form_mode.media.media_library
     - field.field.media.image.field_media_image
-    - image.style.thumbnail
+    - image.style.responsive_image_set
     - media.type.image
   module:
     - image
+    - path
 id: media.image.media_library
 targetEntityType: media
 bundle: image
@@ -20,7 +21,7 @@ content:
     region: content
     settings:
       progress_indicator: throbber
-      preview_image_style: thumbnail
+      preview_image_style: responsive_image_set
     third_party_settings: {  }
   path:
     type: path

@@ -14,12 +14,15 @@ dependencies:
     - field.field.node.topics.field_slug
     - field.field.node.topics.field_summary
     - node.type.topics
+    - workflows.workflow.editorial
   module:
     - content_moderation
     - inline_entity_form
     - link
     - media_library
+    - media_library_edit
     - paragraphs
+    - path
     - text
 id: node.topics.default
 targetEntityType: node
@@ -129,7 +132,10 @@ content:
     region: content
     settings:
       media_types: {  }
-    third_party_settings: {  }
+    third_party_settings:
+      media_library_edit:
+        show_edit: '1'
+        edit_form_mode: default
   field_slug:
     type: string_textfield
     weight: 14

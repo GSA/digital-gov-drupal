@@ -4,6 +4,7 @@ status: true
 dependencies:
   module:
     - linkit
+    - media
 name: 'Multiline Inline HTML'
 format: multiline_inline_html
 weight: 0
@@ -14,7 +15,7 @@ filters:
     status: true
     weight: -10
     settings:
-      allowed_html: '<br> <p> <strong> <em> <a href data-entity-type data-entity-uuid data-entity-substitution>'
+      allowed_html: '<br> <p> <strong> <em> <a href data-entity-type data-entity-uuid data-entity-substitution> <drupal-media data-entity-type data-entity-uuid alt>'
       filter_html_help: true
       filter_html_nofollow: false
   filter_htmlcorrector:
@@ -30,3 +31,12 @@ filters:
     weight: 0
     settings:
       title: true
+  media_embed:
+    id: media_embed
+    provider: media
+    status: true
+    weight: 100
+    settings:
+      default_view_mode: default
+      allowed_view_modes: {  }
+      allowed_media_types: {  }
