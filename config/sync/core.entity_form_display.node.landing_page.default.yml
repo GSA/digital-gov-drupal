@@ -7,12 +7,14 @@ dependencies:
     - field.field.node.landing_page.field_buttons
     - field.field.node.landing_page.field_deck
     - field.field.node.landing_page.field_landing_page_type
+    - field.field.node.landing_page.field_primary_image
     - field.field.node.landing_page.field_summary
     - node.type.landing_page
     - workflows.workflow.editorial
   module:
     - content_moderation
     - link
+    - media_library
     - path
     - text
 id: node.landing_page.default
@@ -57,6 +59,13 @@ content:
     weight: 2
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_primary_image:
+    type: media_library_widget
+    weight: 8
+    region: content
+    settings:
+      media_types: {  }
     third_party_settings: {  }
   field_summary:
     type: text_textfield

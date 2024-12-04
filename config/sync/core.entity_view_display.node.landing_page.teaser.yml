@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.landing_page.field_buttons
     - field.field.node.landing_page.field_deck
     - field.field.node.landing_page.field_landing_page_type
+    - field.field.node.landing_page.field_primary_image
     - field.field.node.landing_page.field_summary
     - node.type.landing_page
   module:
@@ -40,4 +41,5 @@ hidden:
   field_buttons: true
   field_deck: true
   field_landing_page_type: true
+  field_primary_image: true
   field_summary: true

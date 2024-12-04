@@ -1,0 +1,29 @@
+uuid: 88320e5b-f571-4be6-a888-764231253eb8
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: sL588ui1E_8-2c_UupwyYxcqX2OVyMFp3HTLbbFqvPc
+id: global
+label: Global
+tags:
+  article_publisher: 'https://www.facebook.com/digitalgov'
+  canonical_url: '[current-page:url]'
+  description: '[dg:meta_description]'
+  fb_admins: '100000569454928'
+  og_description: '[dg:meta_description]'
+  og_image: '[dg:meta_image]'
+  og_image_alt: ' '
+  og_locale: en_US
+  og_site_name: '[site:name]'
+  og_title: '[current-page:title]'
+  og_type: '[dg:og_type]'
+  og_url: '[current-page:url]'
+  robots: 'index, follow'
+  title: '[current-page:title] | [site:name]'
+  twitter_cards_creator: '@Digital_gov'
+  twitter_cards_description: '[dg:meta_description]'
+  twitter_cards_image: '[dg:meta_image]'
+  twitter_cards_site: '@Digital_gov'
+  twitter_cards_title: '[current-page:title]'
+  twitter_cards_type: summary_large_image

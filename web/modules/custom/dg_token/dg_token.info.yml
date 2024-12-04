@@ -1,0 +1,7 @@
+name: 'Digital.gov Token'
+type: module
+description: 'Alters token functionality.'
+package: Custom
+core_version_requirement: ^10 || ^11
+dependencies:
+  - token:token

@@ -6,7 +6,7 @@ _meta:
   default_langcode: en
   depends:
     623a2982-602b-4762-a59e-9a7c30c64f36: node
-    3c8c1a7b-5b5b-4196-b435-1fa57ff0230b: node
+    cbcd65ff-8274-46c7-89bc-9f8c2bdaddd3: node
 default:
   revision_uid:
     -
@@ -37,11 +37,6 @@ default:
       alias: /topics/accessibility
       langcode: en
       pathauto: 0
-  body:
-    -
-      value: '<p><a href="/node/19" data-entity-type="node" data-entity-uuid="7086f5d5-7c6f-41ef-8a60-70cd267a9860" data-entity-substitution="canonical">RESOURCES</a>&nbsp;</p>'
-      format: html
-      summary: ''
   field_deck:
     -
       value: 'The design of products, devices, services, or environments for people with disabilities'
@@ -255,7 +250,7 @@ default:
               value: {  }
           field_content:
             -
-              entity: 3c8c1a7b-5b5b-4196-b435-1fa57ff0230b
+              entity: cbcd65ff-8274-46c7-89bc-9f8c2bdaddd3
   field_legislation:
     -
       uri: 'https://www.section508.gov/manage/laws-and-policies/'

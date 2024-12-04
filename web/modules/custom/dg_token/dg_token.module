@@ -1,0 +1,238 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for Digital.gov Token module.
+ */
+
+use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\Core\Url;
+use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_tokens_alter().
+ */
+function dg_token_tokens_alter(array &$replacements, array $context, BubbleableMetadata $bubbleable_metadata) {
+  if ($context['type'] == 'node' && !empty($context['data']['node'])) {
+    $node = $context['data']['node'];
+    // If token field_summary is empty, use the slogan. This is for the meta
+    // tags.
+    if (isset($context['tokens']['field_summary']) && $node->hasField('field_summary') && $node->get('field_summary')->isEmpty()) {
+      $replacements[$context['tokens']['field_summary']] = \Drupal::config('system.site')->get('slogan');
+    }
+  }
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function dg_token_token_info(): array {
+  $type = [
+    'name' => t('Digital.gov Tokens'),
+    'description' => t('Custom tokens for Digital.gov.'),
+    'needs-data' => 'node',
+  ];
+
+  $dg['og_type'] = [
+    'name' => t("OG: Type"),
+    'description' => t("Custom logic to create OG Type."),
+    'type' => 'node',
+  ];
+  $dg['meta_image'] = [
+    'name' => t("Meta Tag: Image"),
+    'description' => t("Image used for og:image and twitter:image:src meta tags."),
+    'type' => 'node',
+  ];
+  $dg['meta_video'] = [
+    'name' => t("Meta Tag: Video"),
+    'description' => t("Image used for og:video."),
+    'type' => 'node',
+  ];
+  $dg['meta_description'] = [
+    'name' => t("Meta Tag: Description"),
+    'description' => t("Image used for og:description, twitter description, and description."),
+    'type' => 'node',
+  ];
+
+  return [
+    'types' => ['dg' => $type],
+    'tokens' => [
+      'dg' => $dg,
+    ],
+  ];
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function dg_token_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata) {
+  $replacements = [];
+
+  if ($type == 'dg') {
+    $node = NULL;
+    if (!empty($data['node'])) {
+      /** @var \Drupal\node\NodeInterface $node */
+      $node = $data['node'];
+    }
+
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'og_type':
+          $replacements[$original] = _dg_token_is_page($node) ? 'article' : 'website';
+          break;
+
+        case 'meta_image':
+          $replacements[$original] = _dg_token_meta_image($node);
+          break;
+
+        case 'meta_video':
+          $replacements[$original] = _dg_token_meta_video($node);
+          break;
+
+        case 'meta_description':
+          $replacements[$original] = _dg_token_meta_description($node);
+          break;
+
+      }
+    }
+  }
+
+  return $replacements;
+}
+
+/**
+ * For a given node or null, return the meta tag description.
+ *
+ * @param \Drupal\node\NodeInterface|null $node
+ *   The node that will have the description.
+ *
+ * @return string
+ *   The URL to the meta tag description.
+ */
+function _dg_token_meta_description(?NodeInterface $node): string {
+  if ($node && $node->hasField('field_summary') && !$node->get('field_summary')->isEmpty()) {
+    return $node->get('field_summary')->processed;
+  }
+  $config = \Drupal::config('system.site');
+  return $config->get('slogan') ?: '';
+}
+
+/**
+ * For a given node or null, return the meta tag video URL.
+ *
+ * @param \Drupal\node\NodeInterface|null $node
+ *   The node that will have the video.
+ *
+ * @return string
+ *   The URL to the meta tag video.
+ */
+function _dg_token_meta_video(?NodeInterface $node): string {
+  if ($node && $node->hasField('field_youtube_id') && !$node->get('field_youtube_id')->isEmpty()) {
+    return 'https://www.youtube.com/v/' . $node->get('field_youtube_id')->getString();
+  }
+  return '';
+}
+
+/**
+ * For a given node or null, return the meta tag image URL.
+ *
+ * @param \Drupal\node\NodeInterface|null $node
+ *   The node that will have the image.
+ *
+ * @return string
+ *   The URL to the meta tag image.
+ */
+function _dg_token_meta_image(?NodeInterface $node): string {
+  $media = NULL;
+  // Use primary image first.
+  if ($node && $node->hasField('field_primary_image') && !$node->get('field_primary_image')->isEmpty()) {
+    $media = $node->get('field_primary_image')->entity;
+  }
+  // Featured image second.
+  elseif ($node && $node->hasField('field_featured_image') && !$node->get('field_featured_image')->isEmpty()) {
+    $media = $node->get('field_featured_image')->entity;
+  }
+  if ($media) {
+    $file_uri = $media->get('field_media_image')->entity->getFileUri();
+    /** @var \Drupal\Core\File\FileUrlGeneratorInterface $file_url_generator */
+    $file_url_generator = \Drupal::service('file_url_generator');
+    $url = $file_url_generator->generate($file_uri);
+  }
+  else {
+    // If no primary or featured image, and this is a topic, get the the topics
+    // landing page primary image.
+    if ($node && $node->bundle() === 'topics') {
+      $nids = \Drupal::entityQuery('node')
+        ->accessCheck()
+        ->condition('type', 'landing_page')
+        ->condition('field_landing_page_type', 'resources')
+        ->execute();
+      if (!empty($nids)) {
+        $landing_page_nid = array_shift($nids);
+        $landing_page = \Drupal::entityTypeManager()->getStorage('node')->load($landing_page_nid);
+        return _dg_token_meta_image($landing_page);
+      }
+
+    }
+    // If no image field, then default to a static image.
+    $url = Url::fromUserInput('/' . \Drupal::theme()
+      ->getActiveTheme()
+      ->getPath() . '/static/digitalgov/img/meta/digitalgov-2022-card-v3.png');
+  }
+  // @todo Use the 1200 width style always instead of the original file.
+  return $url->toString();
+}
+
+/**
+ * For a given node or null, whether .isPage is TRUE.
+ *
+ * This can be seen on old digital.gov when looking at og:type. It is 'website'
+ * for false, and 'article' for true.
+ *
+ * @param \Drupal\node\NodeInterface|null $node
+ *   An optional node.
+ *
+ * @see https://gohugo.io/methods/page/ispage/
+ *
+ * @return bool
+ *   Whether this was a page.
+ */
+function _dg_token_is_page(?NodeInterface $node): bool {
+  if (NULL === $node) {
+    return FALSE;
+  }
+  // Use this to capture any 'true' blocks, otherwise fall down to the end.
+  switch ($node->getType()) {
+    case 'basic_page':
+      // view-source:https://digital.gov/about/: FALSE.
+      // view-source:https://digital.gov/policies/: TRUE.
+      if ($node->label() !== 'About us') {
+        return TRUE;
+      }
+      break;
+
+    // view-source:https://digital.gov/guides/web-analytics-playbook/: FALSE.
+    // view-source:https://digital.gov/guides/web-analytics-playbook/create-a-foundation-for-your-strategy/#content-start:
+    // TRUE.
+    case 'guides':
+      // @todo This will be effected by whatever field we add for the guide nav.
+      // If this is a 'parent' guide, then this should be FALSE.
+      return TRUE;
+
+    // view-source:https://digital.gov/event/2024/11/21/uswds-monthly-call-november-2024/.
+    case 'event':
+      // view-source:https://digital.gov/communities/contact-center/.
+    case 'community':
+      // view-source:https://digital.gov/2024/11/26/navigating-digital-acquisitions/.
+    case 'news':
+      // view-source:https://digital.gov/resources/customer-experience-toolkit/.
+    case 'resources':
+      return TRUE;
+
+  }
+
+  // Topics: view-source:https://digital.gov/topics/accessibility/: FALSE.
+  // Landing pages: https://digital.gov/resources/: FALSE.
+  // Authors: view-source:https://digital.gov/authors/ashley-owens/ FALSE.
+  return FALSE;
+}
