@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Template\Attribute;
+use Drupal\file\Entity\File;
 
 /**
  * @file
@@ -106,6 +107,26 @@ function digital_gov_preprocess_author_image(array &$vars): void {
       }
       break;
   }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function digital_gov_preprocess_block__site_wrapper_usa_identifier(&$variables) {
+  $config_page = \Drupal\config_pages\Entity\ConfigPages::config('identifier');
+
+  $media_id = $config_page->field_stupid_icon->getValue()[0]['target_id'];
+  $media = \Drupal::entityTypeManager()->getStorage('media')->load($media_id);
+  $field = $media->field_media_image->getValue();
+  $fid = $field[0]['target_id'];
+  $file = \Drupal::entityTypeManager()->getStorage('file')->load($fid);
+  $image = $file->createFileUrl(TRUE);
+  $variables['src'] = $image;
+  $variables['tagline'] = $config_page->get('field_tagline')->value;
+  $variables['about_link_title'] = $config_page->get('field_about_link')->title;
+  $variables['about_link'] = $config_page->get('field_about_link')->uri;
+  $variables['site_name'] = $config_page->get('field_site_name')->value;
+
 }
 
 /**

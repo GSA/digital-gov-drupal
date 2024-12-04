@@ -28,10 +28,9 @@
  * @ingroup themeable
  */
  #}
-[Placeholder: USA Identifier. Use config_pages to drive this data.]
 {# NOT-MIGRATED
 # USWDS Identifier component data
-# See usa-identifier.html for the template
+# See block--site-wrapper-usa-identifier.html.twig for the template
 identifier_data:
   aria_label: Agency identifier
   domain: Digital.gov
@@ -64,28 +63,24 @@ identifier_data:
     link:
       label: Visit USA.gov
       url: https://www.usa.gov/
-
+#}
 
 <!-- USWDS Identifier component -->
 <!-- Data is stored in /data/usa_identifier.yml -->
 
-{{ range .Site.Data.usa_identifier }}
-
 <div class="usa-identifier">
   <section
       class="usa-identifier__section usa-identifier__section--masthead"
-      aria-label="{{ .aria_label }}"
+      aria-label="Agency Identifier"
   >
     <div class="usa-identifier__container">
       <div class="usa-identifier__logos">
-        <a href="{{ .parent_agency.url }}" class="usa-identifier__logo">
+        <a href={{ site_name }} class="usa-identifier__logo">
           <img
               class="usa-identifier__logo-img"
-              src="{{ .parent_agency.logo | relURL }}"
-              alt="{{ .parent_agency.acronym }} logo"
+              src={{ src }}
+              alt="GSA logo"
               role="img"
-              width="100"
-              height="100"
           />
         </a>
       </div>
@@ -93,15 +88,15 @@ identifier_data:
           class="usa-identifier__identity"
           aria-label="Agency description"
       >
-        <p class="usa-identifier__identity-domain">{{ .domain }}</p>
+        <p class="usa-identifier__identity-domain">{{ domain }}</p>
         <p class="usa-identifier__identity-disclaimer">
           An official website of the
-          <a href="{{ .parent_agency.url }}">{{ .parent_agency.name }}</a>
+          {#<a href="{{ .parent_agency.url }}">{{ .parent_agency.name }}</a>#}
         </p>
       </section>
     </div>
   </section>
-  <nav
+  {#<nav
       class="usa-identifier__section usa-identifier__section--required-links"
       aria-label="Important links"
   >
@@ -134,5 +129,4 @@ identifier_data:
     </div>
   </section>
 </div>
-{{ end }}
 #}
