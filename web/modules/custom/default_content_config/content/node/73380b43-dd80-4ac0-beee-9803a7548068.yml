@@ -10,7 +10,7 @@ default:
       target_id: 1
   status:
     -
-      value: false
+      value: true
   uid:
     -
       target_id: 1
@@ -28,7 +28,7 @@ default:
       value: false
   moderation_state:
     -
-      value: draft
+      value: published
   path:
     -
       alias: /about
