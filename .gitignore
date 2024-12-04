@@ -3,6 +3,8 @@
 web/themes/custom/digital_gov/static/dist
 web/themes/custom/digital_gov/static/uswds
 .twig-cs-fixer.cache
+# Ignore Tome static generated files.
+html
 
 #### End Digital.gov Specific
 
