@@ -738,9 +738,9 @@ display:
             editorial-draft: editorial-draft
             editorial-published: editorial-published
             editorial-archived: editorial-archived
-            editorial-peer_review: editorial-peer_review
-            editorial-federal_review: editorial-federal_review
             editorial-ready_to_publish: editorial-ready_to_publish
+            editorial-ready_to_review: editorial-ready_to_review
+            editorial-ready_to_archive: editorial-ready_to_archive
           group: 1
           exposed: true
           expose:
@@ -759,9 +759,11 @@ display:
               authenticated: authenticated
               anonymous: '0'
               publisher: '0'
-              drafter: '0'
-              peer_reviewer: '0'
-              federal_reviewer: '0'
+              author: '0'
+              editor: '0'
+              content_admin: '0'
+              data_analyst: '0'
+              user_admin: '0'
             reduce: true
           is_grouped: false
           group_info:
