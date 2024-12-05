@@ -9,6 +9,7 @@ dependencies:
     - field.field.config_pages.identifier.field_logo_icon
     - field.field.config_pages.identifier.field_office_link
     - field.field.config_pages.identifier.field_parent_agency
+    - field.field.config_pages.identifier.field_parent_link
     - field.field.config_pages.identifier.field_performance_link
     - field.field.config_pages.identifier.field_policy_link
     - field.field.config_pages.identifier.field_requests_link
@@ -58,6 +59,14 @@ content:
   field_parent_agency:
     type: link_default
     weight: 12
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_parent_link:
+    type: link_default
+    weight: 16
     region: content
     settings:
       placeholder_url: ''
