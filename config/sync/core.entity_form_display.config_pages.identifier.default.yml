@@ -6,6 +6,7 @@ dependencies:
     - config_pages.type.identifier
     - field.field.config_pages.identifier.field_about_link
     - field.field.config_pages.identifier.field_act_link
+    - field.field.config_pages.identifier.field_logo_icon
     - field.field.config_pages.identifier.field_office_link
     - field.field.config_pages.identifier.field_parent_agency
     - field.field.config_pages.identifier.field_performance_link
@@ -13,14 +14,11 @@ dependencies:
     - field.field.config_pages.identifier.field_requests_link
     - field.field.config_pages.identifier.field_site_name
     - field.field.config_pages.identifier.field_statement_link
-    - field.field.config_pages.identifier.field_stupid_icon
     - field.field.config_pages.identifier.field_subtext
-    - field.field.config_pages.identifier.field_tagline
     - field.field.config_pages.identifier.field_visit_link
   module:
     - link
     - media_library
-    - text
 id: config_pages.identifier.default
 targetEntityType: config_pages
 bundle: identifier
@@ -41,6 +39,13 @@ content:
     settings:
       placeholder_url: ''
       placeholder_title: ''
+    third_party_settings: {  }
+  field_logo_icon:
+    type: media_library_widget
+    weight: 15
+    region: content
+    settings:
+      media_types: {  }
     third_party_settings: {  }
   field_office_link:
     type: link_default
@@ -98,24 +103,9 @@ content:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
-  field_stupid_icon:
-    type: media_library_widget
-    weight: 4
-    region: content
-    settings:
-      media_types: {  }
-    third_party_settings: {  }
   field_subtext:
     type: string_textfield
     weight: 14
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_tagline:
-    type: text_textfield
-    weight: 5
     region: content
     settings:
       size: 60

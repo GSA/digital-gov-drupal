@@ -6,6 +6,7 @@ dependencies:
     - config_pages.type.identifier
     - field.field.config_pages.identifier.field_about_link
     - field.field.config_pages.identifier.field_act_link
+    - field.field.config_pages.identifier.field_logo_icon
     - field.field.config_pages.identifier.field_office_link
     - field.field.config_pages.identifier.field_parent_agency
     - field.field.config_pages.identifier.field_performance_link
@@ -13,13 +14,10 @@ dependencies:
     - field.field.config_pages.identifier.field_requests_link
     - field.field.config_pages.identifier.field_site_name
     - field.field.config_pages.identifier.field_statement_link
-    - field.field.config_pages.identifier.field_stupid_icon
     - field.field.config_pages.identifier.field_subtext
-    - field.field.config_pages.identifier.field_tagline
     - field.field.config_pages.identifier.field_visit_link
   module:
     - link
-    - text
 id: config_pages.identifier.default
 targetEntityType: config_pages
 bundle: identifier
@@ -48,6 +46,15 @@ content:
       target: ''
     third_party_settings: {  }
     weight: 8
+    region: content
+  field_logo_icon:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 15
     region: content
   field_office_link:
     type: link
@@ -129,15 +136,6 @@ content:
     third_party_settings: {  }
     weight: 6
     region: content
-  field_stupid_icon:
-    type: entity_reference_entity_view
-    label: hidden
-    settings:
-      view_mode: default
-      link: false
-    third_party_settings: {  }
-    weight: 4
-    region: content
   field_subtext:
     type: string
     label: above
@@ -145,13 +143,6 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 14
-    region: content
-  field_tagline:
-    type: text_default
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    weight: 5
     region: content
   field_visit_link:
     type: link

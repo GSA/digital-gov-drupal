@@ -1,12 +1,12 @@
-uuid: de957f56-2311-4dee-8499-58369c44c8e2
+uuid: 75aa0c1c-0a6b-42d8-a3d0-27b7e1b1e7d5
 langcode: en
 status: true
 dependencies:
   module:
     - config_pages
     - media
-id: config_pages.field_stupid_icon
-field_name: field_stupid_icon
+id: config_pages.field_logo_icon
+field_name: field_logo_icon
 entity_type: config_pages
 type: entity_reference
 settings:
