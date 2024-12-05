@@ -1,0 +1,69 @@
+{% set title = node.label %}
+{% set summary = content.field_summary|field_value %}
+{% set member_count = content.field_members|field_value %}
+{% set logo = content.field_dg_logo.0['#entity']|file_uri|image_style('large') %}
+{% set dg_acronym = content.field_dg_acronym|field_value %}
+{% set redirect = content.field_redirect_to.0['#title'] %}
+{% set highlight = content.field_dg_highlight.0['#markup'] %}
+{% set page_weight = content.field_page_weight.0['#markup'] %}
+{% set url = url('entity.node.canonical', {node: node.id}) %}
+
+{# todo: if high is on and page weight is 1? #}
+{# {% if highlight == "On" and page_weight == '1' %} #}
+  <div class="dg-featured-communities dg-featured-communities--has-image">
+    <div class="usa-card cop-card--{{ dg_acronym }}">
+      <div class="usa-card__container">
+        {% if title %}
+          <div class="usa-card__header">
+            <h2 class="usa-card__heading">{{ title }}</h2>
+          </div>
+        {% endif %}
+        {% if logo %}
+          <div class="usa-card__media usa-card__media--indent">
+            <div class="usa-card__img">
+              <img src="{{ logo }}" alt="{{ title }} logo"/>
+            </div>
+          </div>
+        {% endif %}
+        {% if member_count %}
+          <div class="usa-card__members">
+            <span class="usa-card__member-count">
+              <svg class="usa-card__members-icon usa-icon dg-icon dg-icon--large margin-bottom-05" aria-hidden="true" focusable="false">
+                <use xlink:href="/{{ active_theme_path() }}/static/uswds/img/sprite.svg#groups"></use>
+              </svg>
+              {{ member_count }}
+              {{ 'Members'|t }}
+            </span>
+          </div>
+        {% endif %}
+        {% if summary %}
+          <div class="usa-card__body">
+            <p>{{ summary }}</p>
+          </div>
+        {% endif %}
+        <div
+          class="usa-card__footer">
+          <a href="{{ url }}" class="usa-button usa-button--outline">
+            {{ 'Connect with'|t }}
+            {{ title }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+{# {% elseif highlight == "Off" and page_weight == '1' %}
+  <ul class="communities-of-practice--list usa-collection">
+    <li class="usa-collection__item">
+      <div class="usa-collection__body">
+        <h2 class="usa-collection__heading">
+          <a class="usa-link usa-link--external" href="{{ redirect }}" title="{{ title }}">
+            {{ title }}
+          </a>
+        </h2>
+        <p class="usa-collection__description">
+          {{ summary }}
+        </p>
+      </div>
+    </li>
+  </ul>
+{% endif %} #}

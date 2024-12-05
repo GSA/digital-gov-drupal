@@ -85,23 +85,15 @@
   <section class="upcoming-events article-list">
     <div class="grid-container grid-container-desktop">
       <h2>Upcoming Events</h2>
-
-      [placeholder Show upcoming events up until event ends ]
-      {# NOT-MIGRATED
-      {{ range where .Site.Pages.Reverse "Params.End_date" ">=" $now }}
-      {{ if .Params.registration_url }}
-      {{ .Render "card-event" }}
-      {{ end }}
-      {{ else }}
-      {{/* @TODO Add as an option for card refactor */}}
-      <div class="upcoming-events__placeholder card card--placeholder">
+{{ drupal_view('events', 'block_1') }}
+{# todo: this is set when there are no upcoming events renders a placeholder text #}
+      {# <div class="upcoming-events__placeholder card card--placeholder">
         <h3>Upcoming events will be added soon.</h3>
         To be notified of new events,
         <a href="{{ "subscribe" | relURL }}">subscribe to our newsletter</a
         >!
-      </div>
-      {{ end }}
-      #}
+      </div> #}
+
     </div>
   </section>
 
@@ -113,16 +105,7 @@
     </header>
     <div class="article-list">
       <div class="grid-container grid-container-desktop">
-        [placeholder Past Events]
-        {# NOT-MIGRATED
-        {{ $events := where .Site.RegularPages.ByDate "Section" "events" }}
-        {{ range where $events.Reverse ".Date.Unix" "<" now.Unix }}
-        {{ $endDate := .Params.End_date | time.Format "2006-01-02" }}
-        {{ if lt $endDate $now }}
-        {{ .Render "card-event" }}
-        {{ end }}
-        {{ end }}
-        #}
+          {{ drupal_view('past_events', 'block_1') }}
       </div>
     </div>
   </section>
