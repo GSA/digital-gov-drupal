@@ -1,0 +1,10 @@
+removing:
+  settings:
+    client_id: 0oadl1uyc8ET4DYav4h7
+    iss_allowed_domains: "digital-gov-drupal-dev.app.cloud.gov\r\ndigital-gov-drupal-staging.app.cloud.gov\r\ndigital-gov-drupal-test.app.cloud.gov\r\ndigitalgov.lndo.site\r\ndigital.vm"
+    okta_domain: auth-preprod.gsa.gov
+adding:
+  settings:
+    client_id: 0oadl2z7pcKOtN3zz4h7
+    iss_allowed_domains: "cms.digital.gov"
+    okta_domain: auth.gsa.gov

@@ -36,6 +36,8 @@ $config['config_split.config_split.production']['status'] = FALSE;
 $config['config_split.config_split.stage']['status'] = FALSE;
 $config['config_split.config_split.test']['status'] = FALSE;
 $config['config_split.config_split.local']['status'] = FALSE;
+// Only for non-prod.
+$config['config_split.config_split.non_production']['status'] = TRUE;
 // Configuration for all remote environments.
 $config['config_split.config_split.non_local']['status'] = TRUE;
 
@@ -49,6 +51,7 @@ if (!empty($cf_application_data['space_name']) &&
       break;
 
     case "prod":
+      $config['config_split.config_split.non_production']['status'] = FALSE;
       $config['config_split.config_split.production']['status'] = TRUE;
       $is_cloudgov = TRUE;
       $server_http_host = 'digital-gov-drupal-prod.app.cloud.gov';

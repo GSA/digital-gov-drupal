@@ -15,7 +15,6 @@ module:
   dblog: 0
   default_content: 0
   default_content_config: 0
-  devel: 0
   dg_breadcrumb: 0
   dg_token: 0
   disable_user_1_edit: 0
@@ -25,7 +24,6 @@ module:
   editor: 0
   embedded_content: 0
   entity_reference_revisions: 0
-  externalauth: 0
   field: 0
   field_group: 0
   field_permissions: 0
@@ -51,6 +49,8 @@ module:
   multivalue_form_element: 0
   mysql: 0
   node: 0
+  noreqnewpass: 0
+  openid_connect: 0
   options: 0
   override_node_options: 0
   page_cache: 0
@@ -60,7 +60,7 @@ module:
   redirect: 0
   remove_username: 0
   require_revision_log_message: 0
-  samlauth: 0
+  role_delegation: 0
   scheduler: 0
   scheduler_content_moderation_integration: 0
   serialization: 0
@@ -75,6 +75,7 @@ module:
   twig_tweak: 0
   update: 0
   user: 0
+  userprotect: 0
   uswds_templates: 0
   vbo_workflow_transition: 0
   views_bulk_operations: 0
@@ -82,6 +83,7 @@ module:
   workflows: 0
   pathauto: 1
   xmlsitemap: 1
+  externalauth: 10
   views: 10
   paragraphs: 11
   minimal: 1000

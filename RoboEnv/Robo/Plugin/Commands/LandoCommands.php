@@ -3,6 +3,7 @@
 namespace RoboEnv\Robo\Plugin\Commands;
 
 use Cocur\Slugify\Slugify;
+use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Yaml\Yaml;
 
@@ -1376,6 +1377,36 @@ class LandoCommands extends CommonCommands
             ],
         ];
 
+    }
+
+    /**
+     * Set an environment variable.
+     *
+     * This is a new method for Digital.gov, don't remove.
+     *
+     * @command lando:set-env
+     *
+     * @param string $name
+     *   The name of the environment variable, usually all caps.
+     * @param string $value
+     *   The optional value of the environment variable
+     */
+    public function setEnv(SymfonyStyle $io, string $name, string $value = ''): void {
+        $this->isLandoInit();
+        if (!strlen($value)) {
+            $question = new Question("What value would you like to set for '$name'? Hit enter for a blank value.");
+            $value = $io->askQuestion($question);
+        }
+        $yml_file = $this->getLandoLocalYml();
+        $yml_value =& $yml_file['services']['appserver']['overrides']['environment'][$name];
+        if ($yml_value === $value) {
+            $this->yell("Environment variable '$name' already set to '$value'.");
+            return;
+        }
+        $this->yell("Environment variable '$name' set to '$value' in $this->lando_local_yml_path.");
+        $yml_value = $value;
+        $this->saveLandoLocalYml($yml_file);
+        $this->rebuildRequired($io, TRUE);
     }
 
 }

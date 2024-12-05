@@ -1,0 +1,41 @@
+uuid: 9ed01579-d85d-4990-b213-ac6586c5c56b
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.admin
+  module:
+    - user
+name: protect_admin_role
+label: "Protect 'Admin' role"
+protectedEntityTypeId: user_role
+protectedEntityId: admin
+protections:
+  user_name:
+    id: user_name
+    provider: userprotect
+    status: true
+  user_status:
+    id: user_status
+    provider: userprotect
+    status: true
+  user_edit:
+    id: user_edit
+    provider: userprotect
+    status: true
+  user_delete:
+    id: user_delete
+    provider: userprotect
+    status: true
+  user_roles:
+    id: user_roles
+    provider: userprotect
+    status: true
+  user_mail:
+    id: user_mail
+    provider: userprotect
+    status: true
+  user_pass:
+    id: user_pass
+    provider: userprotect
+    status: true

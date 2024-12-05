@@ -886,6 +886,9 @@ $config['environment']['env_non_prod_remote'] = FALSE;
 #   include $app_root . '/' . $site_path . '/settings.local.php';
 # }
 
+if (FALSE !== getenv('GSA_AUTH_CLIENT_SECRET')) {
+  $config['openid_connect.client.gsa_auth']['settings']['client_secret'] = getenv('GSA_AUTH_CLIENT_SECRET');
+}
 
 // Load cloud.gov settings into Drupal.
 if ( !empty(getenv('VCAP_APPLICATION')) ) {

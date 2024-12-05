@@ -44,6 +44,9 @@ default:
       target_id: publisher
     -
       target_id: editor
+  role_change:
+    -
+      target_id: __role_delegation_empty_field_value__
   path:
     -
       alias: ''

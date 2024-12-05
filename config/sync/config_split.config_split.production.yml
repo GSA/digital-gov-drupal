@@ -14,4 +14,4 @@ module: {  }
 theme: {  }
 complete_list: {  }
 partial_list:
-  - samlauth.authentication
+  - openid_connect.client.gsa_auth

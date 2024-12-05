@@ -42,6 +42,9 @@ default:
   roles:
     -
       target_id: data_analyst
+  role_change:
+    -
+      target_id: __role_delegation_empty_field_value__
   path:
     -
       alias: ''

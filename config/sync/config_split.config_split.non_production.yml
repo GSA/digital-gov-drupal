@@ -1,0 +1,18 @@
+uuid: a3a0cdec-2d2e-4cd0-9a54-1f48fa8dcf91
+langcode: en
+status: true
+dependencies: {  }
+id: non_production
+label: Non-Production
+description: 'Every environment except production.'
+weight: 0
+stackable: false
+no_patching: false
+storage: folder
+folder: ../config/non_production
+module:
+  devel: 0
+  masquerade: 0
+theme: {  }
+complete_list: {  }
+partial_list: {  }

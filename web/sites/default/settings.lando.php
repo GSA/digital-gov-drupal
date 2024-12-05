@@ -13,6 +13,7 @@ $config['config_split.config_split.stage']['status'] = FALSE;
 $config['config_split.config_split.production']['status'] = FALSE;
 // Enable local splits.
 $config['config_split.config_split.local']['status'] = TRUE;
+$config['config_split.config_split.non_production']['status'] = TRUE;
 
 if (isset($lando_info->database)) {
   $databases['default']['default'] = [

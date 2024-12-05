@@ -1,26 +1,18 @@
 _meta:
   version: '1.0'
   entity_type: user
-  uuid: 80fb0cef-6bbf-490e-9c2e-bbc0a8eeb6c0
+  uuid: cb568d39-2141-4ac9-b6f2-b99bc4373fe1
   default_langcode: en
 default:
   preferred_langcode:
     -
       value: en
-  preferred_admin_langcode:
-    -
-      value: en
   name:
     -
-      value: editor@example.com
-  pass:
-    -
-      value: $2y$10$2RNv1YFgwgD25lBQEAj7mem94FPKcXCYqZzw/1XDHfe66uLz/byIC
-      existing: ''
-      pre_hashed: true
+      value: bonnie.cameron@gsa.gov
   mail:
     -
-      value: editor@example.com
+      value: bonnie.cameron@gsa.gov
   timezone:
     -
       value: America/New_York
@@ -29,19 +21,16 @@ default:
       value: true
   created:
     -
-      value: 1730820512
+      value: 1733422482
   access:
     -
-      value: 1730903367
+      value: 0
   login:
     -
-      value: 1730821394
-  init:
-    -
-      value: editor@example.com
+      value: 0
   roles:
     -
-      target_id: editor
+      target_id: admin
   role_change:
     -
       target_id: __role_delegation_empty_field_value__

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "75a4f68153d05486b64baa73388c2d3b",
+    "content-hash": "61ef6e4efe6787147a415e272f326505",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1725,29 +1725,29 @@
             "extra": {
                 "drupal-scaffold": {
                     "file-mapping": {
-                        "[project-root]/.editorconfig": "assets/scaffold/files/editorconfig",
-                        "[project-root]/.gitattributes": "assets/scaffold/files/gitattributes",
-                        "[web-root]/.csslintrc": "assets/scaffold/files/csslintrc",
-                        "[web-root]/.eslintignore": "assets/scaffold/files/eslintignore",
-                        "[web-root]/.eslintrc.json": "assets/scaffold/files/eslintrc.json",
-                        "[web-root]/.ht.router.php": "assets/scaffold/files/ht.router.php",
                         "[web-root]/.htaccess": "assets/scaffold/files/htaccess",
-                        "[web-root]/example.gitignore": "assets/scaffold/files/example.gitignore",
-                        "[web-root]/index.php": "assets/scaffold/files/index.php",
-                        "[web-root]/INSTALL.txt": "assets/scaffold/files/drupal.INSTALL.txt",
                         "[web-root]/README.md": "assets/scaffold/files/drupal.README.md",
+                        "[web-root]/index.php": "assets/scaffold/files/index.php",
+                        "[web-root]/.csslintrc": "assets/scaffold/files/csslintrc",
                         "[web-root]/robots.txt": "assets/scaffold/files/robots.txt",
                         "[web-root]/update.php": "assets/scaffold/files/update.php",
                         "[web-root]/web.config": "assets/scaffold/files/web.config",
+                        "[web-root]/INSTALL.txt": "assets/scaffold/files/drupal.INSTALL.txt",
+                        "[web-root]/.eslintignore": "assets/scaffold/files/eslintignore",
+                        "[web-root]/.eslintrc.json": "assets/scaffold/files/eslintrc.json",
+                        "[web-root]/.ht.router.php": "assets/scaffold/files/ht.router.php",
                         "[web-root]/sites/README.txt": "assets/scaffold/files/sites.README.txt",
-                        "[web-root]/sites/development.services.yml": "assets/scaffold/files/development.services.yml",
-                        "[web-root]/sites/example.settings.local.php": "assets/scaffold/files/example.settings.local.php",
-                        "[web-root]/sites/example.sites.php": "assets/scaffold/files/example.sites.php",
-                        "[web-root]/sites/default/default.services.yml": "assets/scaffold/files/default.services.yml",
-                        "[web-root]/sites/default/default.settings.php": "assets/scaffold/files/default.settings.php",
+                        "[project-root]/.editorconfig": "assets/scaffold/files/editorconfig",
+                        "[web-root]/example.gitignore": "assets/scaffold/files/example.gitignore",
+                        "[web-root]/themes/README.txt": "assets/scaffold/files/themes.README.txt",
+                        "[project-root]/.gitattributes": "assets/scaffold/files/gitattributes",
                         "[web-root]/modules/README.txt": "assets/scaffold/files/modules.README.txt",
                         "[web-root]/profiles/README.txt": "assets/scaffold/files/profiles.README.txt",
-                        "[web-root]/themes/README.txt": "assets/scaffold/files/themes.README.txt"
+                        "[web-root]/sites/example.sites.php": "assets/scaffold/files/example.sites.php",
+                        "[web-root]/sites/development.services.yml": "assets/scaffold/files/development.services.yml",
+                        "[web-root]/sites/example.settings.local.php": "assets/scaffold/files/example.settings.local.php",
+                        "[web-root]/sites/default/default.services.yml": "assets/scaffold/files/default.services.yml",
+                        "[web-root]/sites/default/default.settings.php": "assets/scaffold/files/default.settings.php"
                     }
                 }
             },
@@ -2367,7 +2367,7 @@
             ],
             "authors": [
                 {
-                    "name": "Berdir",
+                    "name": "berdir",
                     "homepage": "https://www.drupal.org/user/214652"
                 },
                 {
@@ -2869,6 +2869,77 @@
             }
         },
         {
+            "name": "drupal/masquerade",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/masquerade.git",
+                "reference": "8.x-2.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/masquerade-8.x-2.0.zip",
+                "reference": "8.x-2.0",
+                "shasum": "3af711878f5f7a06a2c837440cb90fbcba8db0e1"
+            },
+            "require": {
+                "drupal/core": "^9.2 || ^10 || ^11.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-2.0",
+                    "datestamp": "1723165789",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Andrey Postnikov (andypost)",
+                    "homepage": "https://www.drupal.org/u/andypost",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "David Norman (deekayen)",
+                    "homepage": "https://www.drupal.org/u/deekayen",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Mark Shropshire (shrop)",
+                    "homepage": "https://www.drupal.org/u/shrop",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Daniel Kudwien (sun)",
+                    "homepage": "https://www.drupal.org/u/sun",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Andrew Berry (deviantintegral)",
+                    "homepage": "https://www.drupal.org/u/deviantintegral",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "sun",
+                    "homepage": "https://www.drupal.org/user/54136"
+                }
+            ],
+            "description": "Allows privileged users to masquerade as another user.",
+            "homepage": "https://www.drupal.org/project/masquerade",
+            "support": {
+                "source": "https://git.drupal.org/project/masquerade.git",
+                "issues": "https://www.drupal.org/project/issues/masquerade",
+                "irc": "irc://irc.freenode.org/drupal-contribute"
+            }
+        },
+        {
             "name": "drupal/memcache",
             "version": "2.7.0",
             "source": {
@@ -3070,6 +3141,131 @@
             }
         },
         {
+            "name": "drupal/noreqnewpass",
+            "version": "1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/noreqnewpass.git",
+                "reference": "8.x-1.4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/noreqnewpass-8.x-1.4.zip",
+                "reference": "8.x-1.4",
+                "shasum": "b3fd5499d8a371ff1c259e371284c48602b9dbc3"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9 || ^10 || ^11"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.4",
+                    "datestamp": "1727698112",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Neslee Canil Pinto",
+                    "homepage": "https://www.drupal.org/u/neslee-canil-pinto",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "neslee canil pinto",
+                    "homepage": "https://www.drupal.org/user/3580850"
+                },
+                {
+                    "name": "pedrofaria",
+                    "homepage": "https://www.drupal.org/user/27805"
+                },
+                {
+                    "name": "University of Colorado Boulder",
+                    "homepage": "https://www.drupal.org/user/3299791"
+                }
+            ],
+            "description": "Disable link to request a new password.",
+            "homepage": "https://www.drupal.org/project/noreqnewpass",
+            "support": {
+                "source": "https://git.drupalcode.org/project/noreqnewpass",
+                "issues": "https://www.drupal.org/project/issues/noreqnewpass"
+            }
+        },
+        {
+            "name": "drupal/openid_connect",
+            "version": "3.0.0-alpha3",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/openid_connect.git",
+                "reference": "3.0.0-alpha3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/openid_connect-3.0.0-alpha3.zip",
+                "reference": "3.0.0-alpha3",
+                "shasum": "002616dc2bfeb6b23204297e77d1f7a5369e69b3"
+            },
+            "require": {
+                "drupal/core": "^9.3 || ^10",
+                "drupal/externalauth": "^2.0",
+                "ext-json": "*",
+                "php": ">=7.1.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "3.0.0-alpha3",
+                    "datestamp": "1710708951",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Alpha releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "bojanz",
+                    "homepage": "https://www.drupal.org/user/86106"
+                },
+                {
+                    "name": "jcnventura",
+                    "homepage": "https://www.drupal.org/user/122464"
+                },
+                {
+                    "name": "pfrilling",
+                    "homepage": "https://www.drupal.org/user/169695"
+                },
+                {
+                    "name": "pjcdawkins",
+                    "homepage": "https://www.drupal.org/user/1025236"
+                },
+                {
+                    "name": "sanduhrs",
+                    "homepage": "https://www.drupal.org/user/28074"
+                }
+            ],
+            "description": "A pluggable client implementation for the OpenID Connect protocol.",
+            "homepage": "https://www.drupal.org/project/openid_connect",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "https://git.drupalcode.org/project/openid_connect",
+                "issues": "https://www.drupal.org/project/issues/openid_connect"
+            }
+        },
+        {
             "name": "drupal/override_node_options",
             "version": "2.8.0",
             "source": {
@@ -3165,7 +3361,7 @@
             ],
             "authors": [
                 {
-                    "name": "Berdir",
+                    "name": "berdir",
                     "homepage": "https://www.drupal.org/user/214652"
                 },
                 {
@@ -3185,7 +3381,7 @@
                     "homepage": "https://www.drupal.org/user/227761"
                 },
                 {
-                    "name": "Primsi",
+                    "name": "primsi",
                     "homepage": "https://www.drupal.org/user/282629"
                 }
             ],
@@ -3478,6 +3674,63 @@
             }
         },
         {
+            "name": "drupal/role_delegation",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/role_delegation.git",
+                "reference": "8.x-1.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/role_delegation-8.x-1.3.zip",
+                "reference": "8.x-1.3",
+                "shasum": "e03d9c82d509a2630750e50a3452bd70ca1c55a6"
+            },
+            "require": {
+                "drupal/core": "^10.3 || ^11"
+            },
+            "require-dev": {
+                "drupal/action": "^0.2"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.3",
+                    "datestamp": "1726236826",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Jeroen Tubex",
+                    "homepage": "https://www.drupal.org/u/jeroent",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "benjy",
+                    "homepage": "https://www.drupal.org/user/1852732"
+                },
+                {
+                    "name": "jeroent",
+                    "homepage": "https://www.drupal.org/user/2228934"
+                }
+            ],
+            "description": "Allows site administrators to grant some roles the authority to assign selected roles to users.",
+            "homepage": "http://drupal.org/project/role_delegation",
+            "support": {
+                "source": "https://git.drupalcode.org/project/role_delegation",
+                "issues": "http://drupal.org/project/role_delegation"
+            }
+        },
+        {
             "name": "drupal/s3fs",
             "version": "3.6.0",
             "source": {
@@ -3558,68 +3811,6 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/s3fs",
                 "issues": "https://www.drupal.org/project/issues/s3fs"
-            }
-        },
-        {
-            "name": "drupal/samlauth",
-            "version": "3.10.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/samlauth.git",
-                "reference": "8.x-3.10"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/samlauth-8.x-3.10.zip",
-                "reference": "8.x-3.10",
-                "shasum": "c7112aa6b765ed9b6879d8d0f39dd9bf5b2c7270"
-            },
-            "require": {
-                "drupal/core": "^9.5 || ^10 || ^11",
-                "drupal/externalauth": "^1.3 || ^2.0.6",
-                "onelogin/php-saml": "^3.3.1 || ^4"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-3.10",
-                    "datestamp": "1723060564",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                },
-                "branch-alias": {
-                    "dev-8.x-3.x": "3.x-dev"
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "cweagans",
-                    "homepage": "https://www.drupal.org/user/404732"
-                },
-                {
-                    "name": "japerry",
-                    "homepage": "https://www.drupal.org/user/45640"
-                },
-                {
-                    "name": "roderik",
-                    "homepage": "https://www.drupal.org/user/8841"
-                },
-                {
-                    "name": "smfsh",
-                    "homepage": "https://www.drupal.org/user/3348892"
-                }
-            ],
-            "description": "Allows users to authenticate against an external SAML identity provider.",
-            "homepage": "http://drupal.org/project/samlauth",
-            "support": {
-                "source": "http://cgit.drupalcode.org/samlauth",
-                "issues": "http://drupal.org/project/samlauth"
             }
         },
         {
@@ -4136,6 +4327,62 @@
             }
         },
         {
+            "name": "drupal/userprotect",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/userprotect.git",
+                "reference": "8.x-1.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/userprotect-8.x-1.3.zip",
+                "reference": "8.x-1.3",
+                "shasum": "93a34941254e687e8ca0c0a131336867e426cbf5"
+            },
+            "require": {
+                "drupal/core": "^8.8 || ^9 || ^10 || ^11"
+            },
+            "require-dev": {
+                "drupal/role_delegation": "^1.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.3",
+                    "datestamp": "1720107439",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "karschsp",
+                    "homepage": "https://www.drupal.org/user/138216"
+                },
+                {
+                    "name": "megachriz",
+                    "homepage": "https://www.drupal.org/user/654114"
+                }
+            ],
+            "description": "Allows admins to protect users from being edited or cancelled, on a per-user basis.",
+            "homepage": "https://www.drupal.org/project/userprotect",
+            "keywords": [
+                "Drupal",
+                "User Management"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/userprotect",
+                "issues": "https://www.drupal.org/project/issues/userprotect"
+            }
+        },
+        {
             "name": "drupal/uswds_templates",
             "version": "dev-3.0.x",
             "source": {
@@ -4340,7 +4587,7 @@
                     "homepage": "https://www.drupal.org/user/2628879"
                 },
                 {
-                    "name": "Dave Reid",
+                    "name": "dave reid",
                     "homepage": "https://www.drupal.org/user/53892"
                 },
                 {
@@ -5593,10 +5840,9 @@
                 "drupal-scaffold": {
                     "gitignore": false,
                     "file-mapping": {
-                        "[web-root]/sites/default/settings.lando.php": {
-                            "mode": "replace",
-                            "path": "scaffolding/drupal_config/settings.lando.php",
-                            "overwrite": true
+                        "[project-root]/.gitignore": {
+                            "append": "scaffolding/gitignore-additions.txt",
+                            "force-append": true
                         },
                         "[project-root]/.lando.dist.yml": {
                             "mode": "replace",
@@ -5608,14 +5854,15 @@
                             "path": "scaffolding/php_config/php.ini",
                             "overwrite": true
                         },
+                        "[web-root]/sites/default/settings.lando.php": {
+                            "mode": "replace",
+                            "path": "scaffolding/drupal_config/settings.lando.php",
+                            "overwrite": true
+                        },
                         "[project-root]/RoboEnv/Robo/Plugin/Commands/LandoCommands.php": {
                             "mode": "replace",
                             "path": "scaffolding/Robo/LandoCommands.php",
                             "overwrite": true
-                        },
-                        "[project-root]/.gitignore": {
-                            "append": "scaffolding/gitignore-additions.txt",
-                            "force-append": true
                         }
                     }
                 }
@@ -6010,70 +6257,6 @@
                 "source": "https://github.com/nikic/PHP-Parser/tree/v5.3.1"
             },
             "time": "2024-10-08T18:51:32+00:00"
-        },
-        {
-            "name": "onelogin/php-saml",
-            "version": "4.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/SAML-Toolkits/php-saml.git",
-                "reference": "d3b5172f137db2f412239432d77253ceaaa1e939"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/SAML-Toolkits/php-saml/zipball/d3b5172f137db2f412239432d77253ceaaa1e939",
-                "reference": "d3b5172f137db2f412239432d77253ceaaa1e939",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.3",
-                "robrichards/xmlseclibs": "^3.1"
-            },
-            "require-dev": {
-                "pdepend/pdepend": "^2.8.0",
-                "php-coveralls/php-coveralls": "^2.0",
-                "phploc/phploc": "^4.0 || ^5.0 || ^6.0 || ^7.0",
-                "phpunit/phpunit": "^9.5",
-                "sebastian/phpcpd": "^4.0 || ^5.0 || ^6.0 ",
-                "squizlabs/php_codesniffer": "^3.5.8"
-            },
-            "suggest": {
-                "ext-curl": "Install curl lib to be able to use the IdPMetadataParser for parsing remote XMLs",
-                "ext-dom": "Install xml lib",
-                "ext-openssl": "Install openssl lib in order to handle with x509 certs (require to support sign and encryption)",
-                "ext-zlib": "Install zlib"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "OneLogin\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "PHP SAML Toolkit",
-            "homepage": "https://github.com/SAML-Toolkits/php-saml",
-            "keywords": [
-                "Federation",
-                "SAML2",
-                "SSO",
-                "identity",
-                "saml"
-            ],
-            "support": {
-                "email": "sixto.martin.garcia@gmail.com",
-                "issues": "https://github.com/onelogin/SAML-Toolkits/issues",
-                "source": "https://github.com/onelogin/SAML-Toolkits/"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/SAML-Toolkits",
-                    "type": "github"
-                }
-            ],
-            "time": "2024-05-30T15:10:40+00:00"
         },
         {
             "name": "pear/archive_tar",
@@ -6860,12 +7043,12 @@
             ],
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-main": "0.12.x-dev"
-                },
                 "bamarni-bin": {
                     "bin-links": false,
                     "forward-command": false
+                },
+                "branch-alias": {
+                    "dev-main": "0.12.x-dev"
                 }
             },
             "autoload": {
@@ -6944,48 +7127,6 @@
                 "source": "https://github.com/ralouphie/getallheaders/tree/develop"
             },
             "time": "2019-03-08T08:55:37+00:00"
-        },
-        {
-            "name": "robrichards/xmlseclibs",
-            "version": "3.1.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/robrichards/xmlseclibs.git",
-                "reference": "2bdfd742624d739dfadbd415f00181b4a77aaf07"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/robrichards/xmlseclibs/zipball/2bdfd742624d739dfadbd415f00181b4a77aaf07",
-                "reference": "2bdfd742624d739dfadbd415f00181b4a77aaf07",
-                "shasum": ""
-            },
-            "require": {
-                "ext-openssl": "*",
-                "php": ">= 5.4"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "RobRichards\\XMLSecLibs\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "A PHP library for XML Security",
-            "homepage": "https://github.com/robrichards/xmlseclibs",
-            "keywords": [
-                "security",
-                "signature",
-                "xml",
-                "xmldsig"
-            ],
-            "support": {
-                "issues": "https://github.com/robrichards/xmlseclibs/issues",
-                "source": "https://github.com/robrichards/xmlseclibs/tree/3.1.3"
-            },
-            "time": "2024-11-20T21:13:56+00:00"
         },
         {
             "name": "sebastian/diff",
@@ -10431,13 +10572,13 @@
             ],
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-main": "2.8-dev"
-                },
                 "phpstan": {
                     "includes": [
                         "phpstan/rules.neon"
                     ]
+                },
+                "branch-alias": {
+                    "dev-main": "2.8-dev"
                 }
             },
             "autoload": {
@@ -15388,8 +15529,8 @@
             "type": "symfony-bridge",
             "extra": {
                 "thanks": {
-                    "name": "phpunit/phpunit",
-                    "url": "https://github.com/sebastianbergmann/phpunit"
+                    "url": "https://github.com/sebastianbergmann/phpunit",
+                    "name": "phpunit/phpunit"
                 }
             },
             "autoload": {
@@ -15618,10 +15759,10 @@
             },
             "type": "composer-plugin",
             "extra": {
+                "class": "Nevay\\SPI\\Composer\\Plugin",
                 "branch-alias": {
                     "dev-main": "0.2.x-dev"
                 },
-                "class": "Nevay\\SPI\\Composer\\Plugin",
                 "plugin-optional": true
             },
             "autoload": {
@@ -15839,6 +15980,7 @@
         "drupal/inline_entity_form": 5,
         "drupal/maillog": 20,
         "drupal/multivalue_form_element": 10,
+        "drupal/openid_connect": 15,
         "drupal/scheduler_content_moderation_integration": 10,
         "drupal/uswds_templates": 20,
         "drupal/vbo_workflow_transition": 20,

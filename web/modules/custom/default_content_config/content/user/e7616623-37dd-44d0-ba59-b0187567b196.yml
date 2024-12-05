@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: e7616623-37dd-44d0-ba59-b0187567b196
+  default_langcode: en
+default:
+  preferred_langcode:
+    -
+      value: en
+  name:
+    -
+      value: matthew.poole@gsa.gov
+  mail:
+    -
+      value: matthew.poole@gsa.gov
+  timezone:
+    -
+      value: America/Los_Angeles
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1733422132
+  access:
+    -
+      value: 1733424419
+  login:
+    -
+      value: 1733422644
+  roles:
+    -
+      target_id: admin
+  role_change:
+    -
+      target_id: __role_delegation_empty_field_value__
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1

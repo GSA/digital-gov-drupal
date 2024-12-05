@@ -1,10 +1,17 @@
 uuid: 549c4dda-ac45-4dcf-b560-2fde12d46b49
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - role_delegation
 id: user_admin
 label: 'User Admin'
 weight: 7
 is_admin: null
 permissions:
   - 'administer users'
+  - 'assign content_admin role'
+  - 'assign data_analyst role'
+  - 'assign editor role'
+  - 'assign publisher role'
+  - 'assign user_admin role'

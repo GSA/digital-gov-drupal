@@ -13,5 +13,4 @@ folder: ../config/develop
 module: {  }
 theme: {  }
 complete_list: {  }
-partial_list:
-  - samlauth.authentication
+partial_list: {  }
