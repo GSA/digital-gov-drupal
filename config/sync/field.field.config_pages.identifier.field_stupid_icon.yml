@@ -1,0 +1,29 @@
+uuid: 1bbc22c6-e6aa-47ea-8c6a-58f5e27aff94
+langcode: en
+status: true
+dependencies:
+  config:
+    - config_pages.type.identifier
+    - field.storage.config_pages.field_stupid_icon
+    - media.type.image
+id: config_pages.identifier.field_stupid_icon
+field_name: field_stupid_icon
+entity_type: config_pages
+bundle: identifier
+label: 'logo Icon'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

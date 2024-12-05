@@ -1,0 +1,17 @@
+uuid: 397e09f6-7ea9-4ebf-a10a-4944fa067445
+langcode: en
+status: true
+dependencies: {  }
+id: identifier
+label: Identifier
+token: false
+context:
+  show_warning: true
+  group:
+    language: false
+  fallback:
+    language: ''
+menu:
+  path: /admin/config/system/identifier
+  weight: 0
+  description: 'Configure Identifier'

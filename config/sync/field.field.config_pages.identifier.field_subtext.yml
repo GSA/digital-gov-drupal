@@ -1,0 +1,19 @@
+uuid: 4721d42e-3f82-4488-91b1-a19a2d9fa03d
+langcode: en
+status: true
+dependencies:
+  config:
+    - config_pages.type.identifier
+    - field.storage.config_pages.field_subtext
+id: config_pages.identifier.field_subtext
+field_name: field_subtext
+entity_type: config_pages
+bundle: identifier
+label: subtext
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

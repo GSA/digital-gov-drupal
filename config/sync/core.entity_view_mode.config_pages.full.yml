@@ -1,0 +1,13 @@
+uuid: 7b40e729-0592-4e5d-abeb-aa3e89143ebf
+langcode: en
+status: true
+dependencies:
+  module:
+    - config_pages
+_core:
+  default_config_hash: VYERDzPNi1-oUm7KMLjol4oLcjbHr-onKbitt4dZuN0
+id: config_pages.full
+label: Full
+description: ''
+targetEntityType: config_pages
+cache: true

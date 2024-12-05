@@ -1,0 +1,23 @@
+uuid: bda7df7d-68ee-4765-8b41-b101476e28c9
+langcode: en
+status: true
+dependencies:
+  config:
+    - config_pages.type.identifier
+    - field.storage.config_pages.field_parent_agency
+  module:
+    - link
+id: config_pages.identifier.field_parent_agency
+field_name: field_parent_agency
+entity_type: config_pages
+bundle: identifier
+label: 'parent agency'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 17
+field_type: link

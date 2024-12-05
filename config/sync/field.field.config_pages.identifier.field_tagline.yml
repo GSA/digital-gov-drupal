@@ -1,0 +1,22 @@
+uuid: bbe0a0bf-1678-49d9-bb04-c4df276f4bb6
+langcode: en
+status: true
+dependencies:
+  config:
+    - config_pages.type.identifier
+    - field.storage.config_pages.field_tagline
+  module:
+    - text
+id: config_pages.identifier.field_tagline
+field_name: field_tagline
+entity_type: config_pages
+bundle: identifier
+label: tagline
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text
