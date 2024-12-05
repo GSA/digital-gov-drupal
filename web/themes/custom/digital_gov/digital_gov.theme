@@ -114,19 +114,44 @@ function digital_gov_preprocess_author_image(array &$vars): void {
  */
 function digital_gov_preprocess_block__site_wrapper_usa_identifier(&$variables) {
   $config_page = \Drupal\config_pages\Entity\ConfigPages::config('identifier');
+  $variables['config_entity'] = $config_page->toArray();
+ 
+ /** icon there has got to be a better way. **/
+    $media_id = $config_page->field_stupid_icon->getValue()[0]['target_id'];
+    $media = \Drupal::entityTypeManager()->getStorage('media')->load($media_id);
+    $field = $media->field_media_image->getValue();
+    $fid = $field[0]['target_id'];
+    $file = \Drupal::entityTypeManager()->getStorage('file')->load($fid);
+    $image = $file->createFileUrl(TRUE);
+    $variables['src'] = $image;
+  /********/
+  
+  // TODO: we should be able to do this looping through an array, hardcode for now just to get it working.
 
-  $media_id = $config_page->field_stupid_icon->getValue()[0]['target_id'];
-  $media = \Drupal::entityTypeManager()->getStorage('media')->load($media_id);
-  $field = $media->field_media_image->getValue();
-  $fid = $field[0]['target_id'];
-  $file = \Drupal::entityTypeManager()->getStorage('file')->load($fid);
-  $image = $file->createFileUrl(TRUE);
-  $variables['src'] = $image;
-  $variables['tagline'] = $config_page->get('field_tagline')->value;
+  $variables['site_name'] = $config_page->get('field_site_name')->value;
+  $variables['parent_agency_link_title'] = $config_page->get('field_parent_agency')->title;
+  $variables['parent_agency_link'] = $config_page->get('field_parent_agency')->uri;
+  $variables['visit_link_title'] = $config_page->get('field_visit_link')->title;
+  $variables['visit_link'] = $config_page->get('field_visit_link')->uri;
+  $variables['subtext'] = $config_page->get('field_subtext')->value;
+
+  // row 1
   $variables['about_link_title'] = $config_page->get('field_about_link')->title;
   $variables['about_link'] = $config_page->get('field_about_link')->uri;
-  $variables['site_name'] = $config_page->get('field_site_name')->value;
+  $variables['requests_link_title'] = $config_page->get('field_requests_link')->title;
+  $variables['requests_link'] = $config_page->get('field_requests_link')->uri;
+  $variables['office_link_title'] = $config_page->get('field_office_link')->title;
+  $variables['office_link'] = $config_page->get('field_office_link')->uri;
+  $variables['policy_link_title'] = $config_page->get('field_policy_link')->title;
+  $variables['policy_link'] = $config_page->get('field_policy_link')->uri;
 
+  //row 2
+  $variables['statement_link_title'] = $config_page->get('field_statement_link')->title;
+  $variables['statement_link'] = $config_page->get('field_statement_link')->uri;
+  $variables['act_link_title'] = $config_page->get('field_act_link')->title;
+  $variables['act_link'] = $config_page->get('field_act_link')->uri;
+  $variables['performance_link_title'] = $config_page->get('field_performance_link')->title;
+  $variables['performance_link'] = $config_page->get('field_performance_link')->uri;
 }
 
 /**
