@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: c5b9a273-5baa-4677-a3ea-fdece4d4b1c3
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: gsa.png
+  uri:
+    -
+      value: 'public://2024-12/gsa.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 9462
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1733241123
