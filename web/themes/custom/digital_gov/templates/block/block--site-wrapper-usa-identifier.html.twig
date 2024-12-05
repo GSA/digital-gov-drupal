@@ -75,7 +75,7 @@ identifier_data:
   >
     <div class="usa-identifier__container">
       <div class="usa-identifier__logos">
-        <a href={{ parent_agency_link }} class="usa-identifier__logo">
+        <a href={{ parent_link }} class="usa-identifier__logo">
           <img
               class="usa-identifier__logo-img"
               src={{ src }}
@@ -102,27 +102,27 @@ identifier_data:
   >
     <div class="usa-identifier__container">
       <ul class="usa-identifier__required-links-list">
-        <!--TODO: put these links into an array and write them out-->
+        <!--TODO: put these links into an array and write them out in alphabetical order-->
         <li class="usa-identifier__required-links-item">
           <a href={{ about_link }} class="usa-identifier__required-link usa-link">{{ about_link_title }}</a>
-        </li>
-        <li class="usa-identifier__required-links-item">
-          <a href={{ requests_link }} class="usa-identifier__required-link usa-link">{{ requests_link_title }}</a>
-        </li>
-        <li class="usa-identifier__required-links-item">
-          <a href={{ office_link }} class="usa-identifier__required-link usa-link">{{ office_link_title }}</a>
-        </li>
-        <li class="usa-identifier__required-links-item">
-          <a href={{ policy_link }} class="usa-identifier__required-link usa-link">{{ policy_link_title }}</a>
         </li>
         <li class="usa-identifier__required-links-item">
           <a href={{ statement_link }} class="usa-identifier__required-link usa-link">{{ statement_link_title }}</a>
         </li>
         <li class="usa-identifier__required-links-item">
+          <a href={{ requests_link }} class="usa-identifier__required-link usa-link">{{ requests_link_title }}</a>
+        </li>
+        <li class="usa-identifier__required-links-item">
           <a href={{ act_link }} class="usa-identifier__required-link usa-link">{{ act_link_title }}</a>
         </li>
         <li class="usa-identifier__required-links-item">
+          <a href={{ office_link }} class="usa-identifier__required-link usa-link">{{ office_link_title }}</a>
+        </li>
+        <li class="usa-identifier__required-links-item">
           <a href={{ performance_link }} class="usa-identifier__required-link usa-link">{{ performance_link_title }}</a>
+        </li>
+        <li class="usa-identifier__required-links-item">
+          <a href={{ policy_link }} class="usa-identifier__required-link usa-link">{{ policy_link_title }}</a>
         </li>
       </ul>
     </div>

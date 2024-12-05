@@ -156,9 +156,10 @@ function digital_gov_preprocess_block__site_wrapper_usa_identifier(&$variables) 
   'performance_link' => 'field_performance_link',
 ];
 
-
   foreach ($field_map as $variable_name => $field_name) {
-    $value = $config_page->get($field_name)->getValue();
+   
+   $value = $config_page->get($field_name)->getValue();
+   
     if (strpos($variable_name, 'title') !== false) {
       $new_string = 'field_' . str_replace('_title', '', $variable_name);
       $variables[$variable_name] = $config_page->get($new_string)->title;
@@ -166,12 +167,15 @@ function digital_gov_preprocess_block__site_wrapper_usa_identifier(&$variables) 
       $new_string = 'field_' . $variable_name;
       $variables[$variable_name] = $config_page->get('field_about_link')->uri;
     } else {
+      
       $new_string = 'field_' . $variable_name;
       $variables[$variable_name] = $config_page->get($new_string)->value;
     }
+    
   }
 
 }
+
 
 /*
  * Implements hook_preprocess_HOOK().
