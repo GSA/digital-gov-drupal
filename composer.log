@@ -46,3 +46,4 @@ f43373d6992ea1ba98d866f92bfad209|John Franklin|feature/DIGITAL-195-sso-configura
 a8e36d32c49aca75de1d6f5efc57a38e|Matt Poole|feature/DIGITAL-195-sso-configuration|Thu Dec  5 12:49:28 EST 2024|./composer.sh require drupal/role_delegation:^1.3
 1d751b05ff3fe3ed6f8dda8a9c160d78|Matt Poole|feature/DIGITAL-195-sso-configuration|Thu Dec  5 12:53:54 EST 2024|./composer.sh require drupal/userprotect
 375ea7aa8ac9c84f804100548773e80a|Matt Poole|feature/DIGITAL-195-sso-configuration|Thu Dec  5 13:06:09 EST 2024|./composer.sh require drupal/masquerade:^2.0
+0b4ef597697c875ef45a1f9cfa04a064|cathybaptista|delete_me|Thu Dec  5 16:06:35 EST 2024|./composer.sh require drupal/config_pages
