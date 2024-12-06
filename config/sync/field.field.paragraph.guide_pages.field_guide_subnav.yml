@@ -1,0 +1,31 @@
+uuid: 32def57a-bc71-4768-93cb-29078940de3b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_guide_subnav
+    - node.type.guides
+    - paragraphs.paragraphs_type.guide_pages
+  module:
+    - entity_reference_revisions
+id: paragraph.guide_pages.field_guide_subnav
+field_name: field_guide_subnav
+entity_type: paragraph
+bundle: guide_pages
+label: 'Guide Subnav'
+description: 'Sub-navigation links to display under parent link'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      guides: guides
+    sort:
+      field: title
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference_revisions
