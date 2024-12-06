@@ -6,6 +6,8 @@ dependencies:
     - field.field.node.guides.body
     - field.field.node.guides.field_deck
     - field.field.node.guides.field_featured_image
+    - field.field.node.guides.field_guide_nav_ref
+    - field.field.node.guides.field_guide_nav_title
     - field.field.node.guides.field_guide_weight
     - field.field.node.guides.field_kicker
     - field.field.node.guides.field_page_weight
@@ -15,6 +17,7 @@ dependencies:
     - field.field.node.guides.field_topics
     - node.type.guides
   module:
+    - entity_reference_revisions
     - text
     - user
 id: node.guides.default
@@ -49,6 +52,23 @@ content:
       link: false
     third_party_settings: {  }
     weight: 119
+    region: content
+  field_guide_nav_ref:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 128
+    region: content
+  field_guide_nav_title:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 129
     region: content
   field_guide_weight:
     type: number_integer
