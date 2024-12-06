@@ -1,0 +1,23 @@
+uuid: c36be690-a6ee-475c-bea3-414f2216ed1f
+langcode: en
+status: true
+dependencies:
+  config:
+    - config_pages.type.identifier
+    - field.storage.config_pages.field_parent_link
+  module:
+    - link
+id: config_pages.identifier.field_parent_link
+field_name: field_parent_link
+entity_type: config_pages
+bundle: identifier
+label: 'parent link'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 17
+field_type: link

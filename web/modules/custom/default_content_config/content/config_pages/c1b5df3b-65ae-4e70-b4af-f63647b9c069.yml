@@ -1,0 +1,76 @@
+_meta:
+  version: '1.0'
+  entity_type: config_pages
+  uuid: c1b5df3b-65ae-4e70-b4af-f63647b9c069
+  bundle: identifier
+  depends:
+    b31e3388-9cda-4b8d-9a29-0f6009da22c0: media
+default:
+  label:
+    -
+      value: Identifier
+  type:
+    -
+      target_id: identifier
+  context:
+    -
+      value: 'a:0:{}'
+  field_about_link:
+    -
+      uri: 'http://www.gsa.gov/about'
+      title: 'About GSA'
+      options: {  }
+  field_act_link:
+    -
+      uri: 'https://www.gsa.gov/reference/freedom-of-information-act-foia'
+      title: 'No FEAR Act data'
+      options: {  }
+  field_logo_icon:
+    -
+      entity: b31e3388-9cda-4b8d-9a29-0f6009da22c0
+  field_office_link:
+    -
+      uri: 'https://www.gsaig.gov/'
+      title: 'Office of the Inspector General'
+      options: {  }
+  field_parent_agency:
+    -
+      uri: 'https://www.gsa.gov'
+      title: 'U.S. General Services Administration'
+      options: {  }
+  field_parent_link:
+    -
+      uri: 'https://www.gsa.gov'
+      title: 'U.S. General Services Administration'
+      options: {  }
+  field_performance_link:
+    -
+      uri: 'https://www.gsa.gov/reference/reports/budget-performance'
+      title: 'Performance reports'
+      options: {  }
+  field_policy_link:
+    -
+      uri: 'https://www.gsa.gov/website-information/website-policies'
+      title: 'Privacy policy'
+      options: {  }
+  field_requests_link:
+    -
+      uri: 'https://www.gsa.gov/reference/freedom-of-information-act-foia'
+      title: 'FOIA requests'
+      options: {  }
+  field_site_name:
+    -
+      value: Digital.gov
+  field_statement_link:
+    -
+      uri: 'https://www.gsa.gov/website-information/accessibility-statement'
+      title: 'Accessibility statement'
+      options: {  }
+  field_subtext:
+    -
+      value: 'Looking for U.S. government information and services?'
+  field_visit_link:
+    -
+      uri: 'https://www.usa.gov/'
+      title: 'Visit USA.gov'
+      options: {  }

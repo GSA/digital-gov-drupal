@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Template\Attribute;
+use Drupal\config_pages\Entity\ConfigPages;
 
 /**
  * @file
@@ -105,6 +106,63 @@ function digital_gov_preprocess_author_image(array &$vars): void {
         );
       }
       break;
+  }
+}
+
+/**
+ * Retrieve the icon using the image id.
+ */
+function get_icon_url($config_page) {
+  $mediaId = $config_page->field_logo_icon->getValue()[0]['target_id'];
+  $media = \Drupal::entityTypeManager()->getStorage('media')->load($mediaId);
+  $fileId = $media->get('field_media_image')->getValue()[0]['target_id'];
+  $file = \Drupal::entityTypeManager()->getStorage('file')->load($fileId);
+  return $file->createFileUrl(TRUE);
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function digital_gov_preprocess_block__site_wrapper_usa_identifier(&$variables) {
+  $config_page = ConfigPages::config('identifier');
+  $variables['config_entity'] = $config_page->toArray();
+  $icon_url = get_icon_url($config_page);
+  $variables['src'] = $icon_url;
+  $field_map = [
+    'site_name' => 'field_site_name',
+    'parent_link_title' => 'field_parent_link',
+    'parent_link' => 'field_parent_link',
+    'visit_link_title' => 'field_visit_link',
+    'visit_link' => 'field_visit_link',
+    'subtext' => 'field_subtext',
+    'about_link_title' => 'field_about_link',
+    'about_link' => 'field_about_link',
+    'requests_link_title' => 'field_requests_link',
+    'requests_link' => 'field_requests_link',
+    'office_link_title' => 'field_office_link',
+    'office_link' => 'field_office_link',
+    'policy_link_title' => 'field_policy_link',
+    'policy_link' => 'field_policy_link',
+    'statement_link_title' => 'field_statement_link',
+    'statement_link' => 'field_statement_link',
+    'act_link_title' => 'field_act_link',
+    'act_link' => 'field_act_link',
+    'performance_link_title' => 'field_performance_link',
+    'performance_link' => 'field_performance_link',
+  ];
+  foreach ($field_map as $variable_name => $field_name) {
+    if (strpos($variable_name, 'title') !== FALSE) {
+      $new_string = 'field_' . str_replace('_title', '', $variable_name);
+      $variables[$variable_name] = $config_page->get($new_string)->title;
+    }
+    elseif (strpos($variable_name, 'link') !== FALSE) {
+      $new_string = 'field_' . $variable_name;
+      $variables[$variable_name] = $config_page->get($new_string)->uri;
+    }
+    else {
+      $new_string = 'field_' . $variable_name;
+      $variables[$variable_name] = $config_page->get($new_string)->value;
+    }
   }
 }
 

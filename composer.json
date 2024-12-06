@@ -18,6 +18,7 @@
         "composer/installers": "^2.0",
         "cweagans/composer-patches": "^1.7",
         "drupal/admin_toolbar": "^3.4",
+        "drupal/config_pages": "^2.16",
         "drupal/config_split": "^2.0",
         "drupal/content_moderation_notifications": "^3.6",
         "drupal/core-composer-scaffold": "^10.2",

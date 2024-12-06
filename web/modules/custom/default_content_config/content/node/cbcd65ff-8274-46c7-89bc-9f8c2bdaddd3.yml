@@ -5,7 +5,6 @@ _meta:
   bundle: resources
   default_langcode: en
   depends:
-    58b5051e-356e-4ace-be42-ca090259d6ab: node
     80caaa35-a22b-43ae-a72c-9a714c333a06: node
 default:
   revision_uid:
@@ -54,7 +53,5 @@ default:
       value: 'Introductory guidance on implementing privacy protections for users of federal websites.'
       format: html
   field_topics:
-    -
-      entity: 58b5051e-356e-4ace-be42-ca090259d6ab
     -
       entity: 80caaa35-a22b-43ae-a72c-9a714c333a06

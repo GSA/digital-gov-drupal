@@ -1,0 +1,23 @@
+uuid: 35621cd4-0e77-45cf-9ffe-0e3928419796
+langcode: en
+status: true
+dependencies:
+  config:
+    - config_pages.type.identifier
+    - field.storage.config_pages.field_about_link
+  module:
+    - link
+id: config_pages.identifier.field_about_link
+field_name: field_about_link
+entity_type: config_pages
+bundle: identifier
+label: 'about link'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 17
+field_type: link

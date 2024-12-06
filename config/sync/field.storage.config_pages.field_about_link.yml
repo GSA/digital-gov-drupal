@@ -1,0 +1,19 @@
+uuid: 4134dae3-20ca-44cd-bcdd-33ebcc59153f
+langcode: en
+status: true
+dependencies:
+  module:
+    - config_pages
+    - link
+id: config_pages.field_about_link
+field_name: field_about_link
+entity_type: config_pages
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

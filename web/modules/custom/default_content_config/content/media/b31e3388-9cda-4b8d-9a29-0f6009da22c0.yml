@@ -1,0 +1,33 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: b31e3388-9cda-4b8d-9a29-0f6009da22c0
+  bundle: image
+  default_langcode: en
+  depends:
+    c5b9a273-5baa-4677-a3ea-fdece4d4b1c3: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: gsa.png
+  created:
+    -
+      value: 1733241123
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_media_image:
+    -
+      entity: c5b9a273-5baa-4677-a3ea-fdece4d4b1c3
+      alt: GSA
+      title: ''
+      width: 152
+      height: 152

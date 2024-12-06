@@ -1,0 +1,19 @@
+uuid: 9f96a202-b525-4c3a-bcde-77a33cc463b4
+langcode: en
+status: true
+dependencies:
+  module:
+    - config_pages
+    - link
+id: config_pages.field_parent_agency
+field_name: field_parent_agency
+entity_type: config_pages
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

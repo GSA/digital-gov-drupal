@@ -1,0 +1,19 @@
+uuid: 6cfad34c-3ba0-46ec-b918-b8ebc74c82b4
+langcode: en
+status: true
+dependencies:
+  module:
+    - config_pages
+    - link
+id: config_pages.field_statement_link
+field_name: field_statement_link
+entity_type: config_pages
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

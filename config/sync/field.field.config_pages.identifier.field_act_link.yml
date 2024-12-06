@@ -1,0 +1,23 @@
+uuid: eb88dbd7-f837-4914-8744-9d679acb2704
+langcode: en
+status: true
+dependencies:
+  config:
+    - config_pages.type.identifier
+    - field.storage.config_pages.field_act_link
+  module:
+    - link
+id: config_pages.identifier.field_act_link
+field_name: field_act_link
+entity_type: config_pages
+bundle: identifier
+label: 'act link'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 17
+field_type: link

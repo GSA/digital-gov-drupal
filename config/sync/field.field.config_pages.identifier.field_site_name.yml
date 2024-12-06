@@ -1,0 +1,21 @@
+uuid: 86f86914-2d34-4eaa-aaa3-1742f9d12021
+langcode: en
+status: true
+dependencies:
+  config:
+    - config_pages.type.identifier
+    - field.storage.config_pages.field_site_name
+id: config_pages.identifier.field_site_name
+field_name: field_site_name
+entity_type: config_pages
+bundle: identifier
+label: 'site name'
+description: 'Enter the sites name that will appear in the identifier'
+required: false
+translatable: false
+default_value:
+  -
+    value: Digital.gov
+default_value_callback: ''
+settings: {  }
+field_type: string

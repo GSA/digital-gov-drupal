@@ -1,7 +1,7 @@
 _meta:
   version: '1.0'
   entity_type: file
-  uuid: 17077071-fff8-41c6-b77a-fed6c26eaee7
+  uuid: 3ba4ed8d-23fd-4e62-a5b8-bee532b86165
   default_langcode: en
 default:
   uid:
@@ -9,10 +9,10 @@ default:
       target_id: 1
   filename:
     -
-      value: QAhebymBW5ODyxGpj4xaRO7toRZSNMbyHOpyH86OmYU.jpg
+      value: Jgi9onFSn5VIiakJqtM9jw4Uc9oSkiTHUyHQSrWOL-U.jpg
   uri:
     -
-      value: 'public://oembed_thumbnails/2024-11/QAhebymBW5ODyxGpj4xaRO7toRZSNMbyHOpyH86OmYU.jpg'
+      value: 'public://oembed_thumbnails/2024-11/Jgi9onFSn5VIiakJqtM9jw4Uc9oSkiTHUyHQSrWOL-U.jpg'
   filemime:
     -
       value: image/jpeg
@@ -24,4 +24,4 @@ default:
       value: true
   created:
     -
-      value: 1732139222
+      value: 1733188190

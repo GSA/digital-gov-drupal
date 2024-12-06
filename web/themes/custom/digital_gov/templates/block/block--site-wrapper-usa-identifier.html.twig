@@ -28,10 +28,9 @@
  * @ingroup themeable
  */
  #}
-[Placeholder: USA Identifier. Use config_pages to drive this data.]
 {# NOT-MIGRATED
 # USWDS Identifier component data
-# See usa-identifier.html for the template
+# See block--site-wrapper-usa-identifier.html.twig for the template
 identifier_data:
   aria_label: Agency identifier
   domain: Digital.gov
@@ -64,28 +63,24 @@ identifier_data:
     link:
       label: Visit USA.gov
       url: https://www.usa.gov/
-
+#}
 
 <!-- USWDS Identifier component -->
 <!-- Data is stored in /data/usa_identifier.yml -->
 
-{{ range .Site.Data.usa_identifier }}
-
 <div class="usa-identifier">
   <section
       class="usa-identifier__section usa-identifier__section--masthead"
-      aria-label="{{ .aria_label }}"
+      aria-label="Agency Identifier"
   >
     <div class="usa-identifier__container">
       <div class="usa-identifier__logos">
-        <a href="{{ .parent_agency.url }}" class="usa-identifier__logo">
+        <a href={{ parent_link }} class="usa-identifier__logo">
           <img
               class="usa-identifier__logo-img"
-              src="{{ .parent_agency.logo | relURL }}"
-              alt="{{ .parent_agency.acronym }} logo"
+              src={{ src }}
+              alt="GSA logo"
               role="img"
-              width="100"
-              height="100"
           />
         </a>
       </div>
@@ -93,10 +88,10 @@ identifier_data:
           class="usa-identifier__identity"
           aria-label="Agency description"
       >
-        <p class="usa-identifier__identity-domain">{{ .domain }}</p>
+        <p class="usa-identifier__identity-domain">{{ site_name }}</p>
         <p class="usa-identifier__identity-disclaimer">
           An official website of the
-          <a href="{{ .parent_agency.url }}">{{ .parent_agency.name }}</a>
+          <a href={{ parent_link }}>{{ parent_link_title }}</a>
         </p>
       </section>
     </div>
@@ -107,32 +102,42 @@ identifier_data:
   >
     <div class="usa-identifier__container">
       <ul class="usa-identifier__required-links-list">
-        {{ range .required_links.links }}
+        <!--TODO: put these links into an array and write them out in alphabetical order-->
         <li class="usa-identifier__required-links-item">
-          <a
-              href="{{ .url }}"
-              class="usa-identifier__required-link usa-link"
-          >
-            {{ .label }}
-          </a>
+          <a href={{ about_link }} class="usa-identifier__required-link usa-link">{{ about_link_title }}</a>
         </li>
-        {{ end }}
+        <li class="usa-identifier__required-links-item">
+          <a href={{ statement_link }} class="usa-identifier__required-link usa-link">{{ statement_link_title }}</a>
+        </li>
+        <li class="usa-identifier__required-links-item">
+          <a href={{ requests_link }} class="usa-identifier__required-link usa-link">{{ requests_link_title }}</a>
+        </li>
+        <li class="usa-identifier__required-links-item">
+          <a href={{ act_link }} class="usa-identifier__required-link usa-link">{{ act_link_title }}</a>
+        </li>
+        <li class="usa-identifier__required-links-item">
+          <a href={{ office_link }} class="usa-identifier__required-link usa-link">{{ office_link_title }}</a>
+        </li>
+        <li class="usa-identifier__required-links-item">
+          <a href={{ performance_link }} class="usa-identifier__required-link usa-link">{{ performance_link_title }}</a>
+        </li>
+        <li class="usa-identifier__required-links-item">
+          <a href={{ policy_link }} class="usa-identifier__required-link usa-link">{{ policy_link_title }}</a>
+        </li>
       </ul>
     </div>
   </nav>
   <section
       class="usa-identifier__section usa-identifier__section--usagov"
-      aria-label="{{ .usagov.label }}"
+      aria-label="{{ subtext }}"
   >
     <div class="usa-identifier__container">
       <div class="usa-identifier__usagov-description">
-        {{ .usagov.description }}
+        {{ subtext }}
       </div>
-      <a href="{{ .usagov.link.url }}" class="usa-link">
-        {{ .usagov.link.label }}
+      <a href="{{ visit_link }}" class="usa-link">
+        {{ visit_link_title }}
       </a>
     </div>
   </section>
 </div>
-{{ end }}
-#}
