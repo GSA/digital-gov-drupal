@@ -14,6 +14,7 @@ jobs:
         run: |
           BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)
           COMPOSER_DEV=1
+          GSA_AUTH_KEY=${{ secrets.GSA_AUTH_DEVELOPMENT_KEY }}
           case ${BRANCH} in
             develop)
               CF_SPACE="dev"
@@ -25,6 +26,7 @@ jobs:
               COMPOSER_DEV=0
               DRUPAL_MEMORY=${{ vars.MAIN_CMS_MEMORY }}
               DRUPAL_INSTANCES=${{ vars.MAIN_INSTANCES }}
+              GSA_AUTH_KEY=${{ secrets.GSA_AUTH_PRODUCTION_KEY }}
               ;;
             stage)
               CF_SPACE="staging"
@@ -41,6 +43,7 @@ jobs:
           echo "COMPOSER_DEV=${COMPOSER_DEV}" | tee -a $GITHUB_ENV
           echo "DRUPAL_INSTANCES=${DRUPAL_INSTANCES}" | tee -a $GITHUB_ENV
           echo "DRUPAL_MEMORY=${DRUPAL_MEMORY}" | tee -a $GITHUB_ENV
+          echo "GSA_AUTH_KEY=${GSA_AUTH_KEY}" | tee -a $GITHUB_ENV
           echo "HASH_SALT=${{ secrets.HASH_SALT }}" | tee -a $GITHUB_ENV
           echo "WAF_NAME=waf"| tee -a $GITHUB_ENV
 
