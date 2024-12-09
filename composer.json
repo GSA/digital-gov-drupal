@@ -49,6 +49,7 @@
         "drupal/s3fs": "^3.6",
         "drupal/scheduler": "^2.0",
         "drupal/scheduler_content_moderation_integration": "^2.0@beta",
+        "drupal/seckit": "^2.0",
         "drupal/tome": "^1.12",
         "drupal/twig_field_value": "^2.0",
         "drupal/twig_tweak": "^3.3",

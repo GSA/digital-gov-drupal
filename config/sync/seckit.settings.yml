@@ -1,0 +1,59 @@
+_core:
+  default_config_hash: zzgpgFFYVnDh4Bu8k2ZNyNtoVeOOmmjTKvv41SWyRXo
+seckit_xss:
+  csp:
+    checkbox: true
+    vendor-prefix:
+      x: false
+      webkit: false
+    report-only: false
+    default-src: ''
+    script-src: ''
+    object-src: ''
+    style-src: ''
+    img-src: ''
+    media-src: ''
+    frame-src: ''
+    frame-ancestors: "'self'"
+    child-src: ''
+    font-src: ''
+    connect-src: ''
+    report-uri: ''
+    upgrade-req: false
+    policy-uri: ''
+  x_xss:
+    select: 0
+    seckit_x_xss_option_disable: Disabled
+    seckit_x_xss_option_0: '0'
+    seckit_x_xss_option_1: 1;
+    seckit_x_xss_option_1_block: '1; mode=block'
+seckit_csrf:
+  origin: false
+  origin_whitelist: ''
+seckit_clickjacking:
+  js_css_noscript: false
+  noscript_message: 'Sorry, you need to enable JavaScript to visit this website.'
+  x_frame: '1'
+  x_frame_allow_from: ''
+seckit_ssl:
+  hsts: true
+  hsts_subdomains: false
+  hsts_max_age: 31536000
+  hsts_preload: false
+seckit_ct:
+  expect_ct: false
+  max_age: 86400
+  report_uri: ''
+  enforce: false
+seckit_fp:
+  feature_policy: true
+  feature_policy_policy: "geolocation 'none'; camera='none'; microphone='none'"
+seckit_various:
+  from_origin: false
+  from_origin_destination: same
+  referrer_policy: true
+  referrer_policy_policy: same-origin
+  disable_autocomplete: false
+seckit_pp:
+  permissions_policy: 1
+  permissions_policy_policy: 'geolocation=(), camera=(), microphone=()'

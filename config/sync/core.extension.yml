@@ -63,6 +63,7 @@ module:
   role_delegation: 0
   scheduler: 0
   scheduler_content_moderation_integration: 0
+  seckit: 0
   serialization: 0
   site_wrapper: 0
   system: 0
