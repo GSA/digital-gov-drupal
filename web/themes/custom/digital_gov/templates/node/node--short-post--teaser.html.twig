@@ -1,37 +1,45 @@
-{% set is_past_event = end_date < now ? true : false %}
 {% set title = node.label %}
 {% set summary = content.field_summary|field_value %}
+{% set deck = content.field_deck|field_value %}
 {% set kicker = content.field_kicker|field_value %}
 {% set youtube_id = content.field_youtube_id|field_value %}
 {% set registration_url = content.field_registration_url|render|trim %}
-{% set month = content.field_start_date.value|date('M') %}
-{% set day = content.field_start_date.value|date('d') %}
-{% set year = content.field_start_date.value|date('Y') %}
+{% set external_link = content.field_external_url.0['#title'] %}
+{# {% set logo = content.field_primary_image.0['#media']|file_uri|image_style('large') %} #}
 
-<article class="card-news--external" aria-labelledby="{{ title }}">
+<article class="card card-news--external" aria-labelledby="{{ title }}">
   <div class="card__content">
     <div class="card__summary">
       <h3 id="{{ title }}">
-        {# todo: update once ext link file is added to shortpost #}
-        {# <a href="{{- $externalLink -}}">{{- $title | markdownify -}}</a> #}<a>
-        {{ title }}
+        <a href="{{ external_link }}">{{ title }}</a><a>
       </a>
       </h3>
-        <p>
           {% if deck %}
+        <p>
         {{ deck }}
-        {% endif %}
-          {# todo: update once ext link file is added to shortpost #}
-          {# {% if sourcePage %}
+        {% else %}
+        {{ summary }}
+          {# todo: update to take in source name #}
+          {# {% if sourcePage %} #}
             <em class="card__source source"> — via
-            <a href="{{ $externalLink }}" title="Read at {{ sourceName }}">{{ sourceName }}</a>
+            <a href="{{ external_link }}" title="Read at {{ sourceName }}">{{ sourceName }}</a>
           </em>
-        {% endif %} #}
+        {# {% endif %} #}
       </p>
+        {% endif %}
     </div>
   </div>
+<div class="card__media">
+  {% if logo %}
+    <img src="{{ logo }}" alt="{{ title }} logo"/>
+    {% else %}
+  {# {{/* Otherwise, use the Favicon that Google stores for the site. */}} #}
+  {# <img src="https://www.google.com/s2/favicons?domain={{ title }}.gov" alt="{{ title }} logo"/> #}
+{% endif %}
+</div>
+
   <div class="card__meta">
-    <div class="date">{{ date }}
+    <div class="date">{{ created }}
     </div>
   </div>
 </article>

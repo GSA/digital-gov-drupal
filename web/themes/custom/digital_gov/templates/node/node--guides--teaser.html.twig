@@ -1,0 +1,39 @@
+{% set title = node.label %}
+{% set summary = content.field_summary|field_value %}
+{% set member_count = content.field_members|field_value %}
+{% set image = content.field_featured_image.0['#entity']|file_uri|image_style('large') %}
+{% set page_weight = content.field_page_weight.0['#markup'] %}
+{% set kicker = content.field_kicker|field_value %}
+{% set url = url('entity.node.canonical', {node: node.id}) %}
+
+{# todo: get around collon limitatin in drupal classes #}
+<div class="usa-card__container">
+  <div class="usa-card__header">
+    {% if kicker %}
+      <span class="usa-card__kicker margin-bottom-2">{{ kicker }}</span>
+    {% endif %}
+    <h2 class="usa-card__heading">{{ title }}</h2>
+  </div>
+
+  {% if image %}
+    <div class="usa-card__media usa-card__media--indent">
+      <div class="usa-card__img">
+        <img src="{{ image }}" alt="{{ title }} image"/>
+      </div>
+    </div>
+  {% endif %}
+
+  {% if summary %}
+    <div class="usa-card__body">
+      <p>{{ summary }}</p>
+    </div>
+  {% endif %}
+
+  <div
+    class="usa-card__footer">
+    {# todo: follow up on this node id thing #}
+    <a href="{{ url }}" class="usa-button">
+      {{ title }}
+    </a>
+  </div>
+</div>

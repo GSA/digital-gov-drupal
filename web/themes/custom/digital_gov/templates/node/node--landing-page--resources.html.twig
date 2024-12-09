@@ -79,6 +79,7 @@
       <h2 class="margin-top-0">Browse by topic</h2>
       <div class="dg-resource-topics-grid">
         [placeholder resource topics views]
+        {# todo: update topics to have this as an option for it to be listed as #}
         {# NOT-MIGRATED
         {{ template "topics-list" (dict "title" "Design" "data" $design_topics "scope" .) }}
         {{ template "topics-list" (dict "title" "Data & analysis" "data" $data_analysis_topics "scope" .) }}
@@ -87,6 +88,23 @@
         {{ template "topics-list" (dict "title" "Technology" "data" $technology_topics "scope" .) }}
         {{ template "topics-list" (dict "title" "Strategic development" "data" $strategic_development_topics "scope" .) }}
         #}
+
+{# ! below is the code from hugo #}
+{# <div class="dg-resource-topics-list">
+  <h3 class="dg-resource-topics-list__header">
+    {{ .title }}
+    test data
+  </h3>
+  <ul class="dg-resource-topics-list__list usa-list usa-list--unstyled">
+    {{ range $data }}
+      <li class="dg-resource-topics-list__list-item">
+        {{ $page := $scope.GetPage (printf "/topics/%s" . ) }}
+        <a class="dg-resource-topics-list__link" href="{{ link }}">{{ title }}</a>
+      </li>
+    {{ end }}
+  </ul>
+</div> #}
+
       </div>
     </div>
   </section>
