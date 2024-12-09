@@ -21,6 +21,7 @@ dependencies:
     - embedded_content
     - file
     - media
+    - menu_admin_per_menu
     - node
     - override_node_options
     - paragraphs_type_permissions
@@ -33,6 +34,10 @@ permissions:
   - 'access content overview'
   - 'access files overview'
   - 'access media overview'
+  - 'administer footer menu items'
+  - 'administer footer-about menu items'
+  - 'administer footer-grow menu items'
+  - 'administer main menu items'
   - 'bypass paragraphs type content access'
   - 'create authors content'
   - 'create basic_page content'

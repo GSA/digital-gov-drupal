@@ -81,6 +81,7 @@ module:
   views_bulk_operations: 0
   views_ui: 0
   workflows: 0
+  menu_admin_per_menu: 1
   pathauto: 1
   xmlsitemap: 1
   externalauth: 10

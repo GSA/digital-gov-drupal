@@ -35,6 +35,7 @@
         "drupal/mailsystem": "^4.4",
         "drupal/masquerade": "^2.0",
         "drupal/memcache": "^2.5",
+        "drupal/menu_admin_per_menu": "^1.6",
         "drupal/metatag": "^2.1",
         "drupal/multivalue_form_element": "@beta",
         "drupal/noreqnewpass": "^1.4",
