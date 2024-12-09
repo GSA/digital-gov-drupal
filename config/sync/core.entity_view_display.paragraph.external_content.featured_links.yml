@@ -1,18 +1,19 @@
-uuid: 42ee85aa-00ee-4f68-be73-55a0209cc2f7
+uuid: 7ebac564-9b60-4ebc-bf4f-b1c7e387dc7c
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.paragraph.featured_links
     - field.field.paragraph.external_content.field_link
     - field.field.paragraph.external_content.field_summary
     - paragraphs.paragraphs_type.external_content
   module:
     - link
     - text
-id: paragraph.external_content.default
+id: paragraph.external_content.featured_links
 targetEntityType: paragraph
 bundle: external_content
-mode: default
+mode: featured_links
 content:
   field_link:
     type: link

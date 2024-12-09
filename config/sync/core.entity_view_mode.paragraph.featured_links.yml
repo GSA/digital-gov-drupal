@@ -1,0 +1,11 @@
+uuid: 1fc042bc-9ce1-468f-a7f5-c626b6201d31
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.featured_links
+label: 'Featured Links'
+description: ''
+targetEntityType: paragraph
+cache: true

@@ -50,14 +50,14 @@ content:
     type: entity_reference_revisions_entity_view
     label: hidden
     settings:
-      view_mode: default
+      view_mode: featured_links
       link: ''
     third_party_settings: {  }
     weight: 8
     region: content
   field_featured_resources:
     type: entity_reference_revisions_entity_view
-    label: hidden
+    label: above
     settings:
       view_mode: default
       link: ''

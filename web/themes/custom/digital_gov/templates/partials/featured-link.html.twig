@@ -1,0 +1,40 @@
+{#
+Include in another template:
+
+{{ include("@digital_gov/partials/featured-link.html.twig", {
+  'url' : link destination
+  'title': text of link
+  'summary': optional summary description
+  'logo_source': optional image to use for bullet
+}, with_context = false) }}
+
+If logo_source is not supplied, custom twig function figures out what logo to use.
+#}
+
+{% set logo_source = logo_source ?: dg_logo_source(url, '/' ~ active_theme_path()) %}
+
+<li class="usa-collection__item">
+  <div class="usa-collection__img-wrapper">
+    <img
+      class="usa-collection__img"
+      src="{{ logo_source }}"
+      alt=""
+      aria-hidden="true"
+    />
+  </div>
+  <div class="usa-collection__body">
+    <h3>
+      <a class="usa-link"
+         href="{{ url }}" class="usa-collection__header"
+         title="{{ title }} ">
+        {{ title }}
+      </a>
+    </h3>
+
+    {% if summary %}
+      <p class="usa-collection__description">
+        {{ summary }}
+      </p>
+    {% endif %}
+  </div>
+</li>
