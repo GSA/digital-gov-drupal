@@ -1,0 +1,174 @@
+name: Database Backup
+
+on:
+#  push:
+#    branches:
+#      - feature/DIGITAL-178-database-backup
+  workflow_call:
+    secrets:
+      CF_USER:
+        required: true
+      CF_PASSWORD:
+        required: true
+      CF_ORG:
+        required: true
+      PROJECT:
+        required: true
+      DATABASE_BACKUP_BASTION_NAME:
+        required: true
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  backup-database:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    #if: github.ref_protected == true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set env
+        run: |
+          #BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)
+          BRANCH=develop
+          COMPOSER_DEV=1
+          GSA_AUTH_KEY=${{ secrets.GSA_AUTH_DEVELOPMENT_KEY }}
+          case ${BRANCH} in
+            develop)
+              CF_SPACE="dev"
+              DRUPAL_MEMORY=${{ vars.DEVELOP_CMS_MEMORY }}
+              DRUPAL_INSTANCES=${{ vars.DEVELOP_INSTANCES }}
+              ;;
+            main)
+              CF_SPACE="prod"
+              COMPOSER_DEV=0
+              DRUPAL_MEMORY=${{ vars.MAIN_CMS_MEMORY }}
+              DRUPAL_INSTANCES=${{ vars.MAIN_INSTANCES }}
+              GSA_AUTH_KEY=${{ secrets.GSA_AUTH_PRODUCTION_KEY }}
+              ;;
+            stage)
+              CF_SPACE="staging"
+              COMPOSER_DEV=0
+              DRUPAL_MEMORY=${{ vars.STAGE_CMS_MEMORY }}
+              DRUPAL_INSTANCES=${{ vars.STAGE_INSTANCES }}
+              ;;
+          esac
+
+          echo "APP_NAME=drupal" | tee -a $GITHUB_ENV
+          echo "BRANCH=${BRANCH}" | tee -a $GITHUB_ENV
+          echo "BUILDPACK_PORT=${{ vars.BUILDPACK_PORT }}" | tee -a $GITHUB_ENV
+          echo "CF_SPACE=${CF_SPACE}" | tee -a $GITHUB_ENV
+          echo "COMPOSER_DEV=${COMPOSER_DEV}" | tee -a $GITHUB_ENV
+          echo "DRUPAL_INSTANCES=${DRUPAL_INSTANCES}" | tee -a $GITHUB_ENV
+          echo "DRUPAL_MEMORY=${DRUPAL_MEMORY}" | tee -a $GITHUB_ENV
+          echo "GSA_AUTH_KEY=${GSA_AUTH_KEY}" | tee -a $GITHUB_ENV
+          echo "HASH_SALT=${{ secrets.HASH_SALT }}" | tee -a $GITHUB_ENV
+          echo "WAF_NAME=waf"| tee -a $GITHUB_ENV
+
+          if [ "${COMPOSER_DEV}" = "1" ]; then
+            sed -i 's/--no-dev //' .bp-config/options.json || exit 0
+          fi
+      - name: Install basic dependancies
+        run: ./scripts/pipeline/deb-basic-deps.sh
+      - name: Install AWSCLI
+        run: ./scripts/pipeline/deb-awscli.sh
+      - name: Install MySQL Client
+        run: ./scripts/pipeline/deb-mysql-client-install.sh
+      - name: Install Cloudfoundry CLI
+        run: ./scripts/pipeline/deb-cf-install.sh
+      - name: Cloud.gov login
+        env:
+          CF_USER: "${{ secrets.CF_USER }}"
+          CF_PASSWORD: "${{ secrets.CF_PASSWORD }}"
+          CF_ORG: "${{ secrets.CF_ORG }}"
+          PROJECT: "${{ secrets.PROJECT }}"
+        run: |
+          source ./scripts/pipeline/cloud-gov-login.sh
+      - name: Start Bastion
+        env:
+          DATABASE_BACKUP_BASTION_NAME: "${{ secrets.DATABASE_BACKUP_BASTION_NAME }}"
+          PROJECT: "${{ secrets.PROJECT }}"
+        run: |
+          cf start "${PROJECT}-${DATABASE_BACKUP_BASTION_NAME}-${CF_SPACE}" >/dev/null 2>&1
+          ./scripts/pipeline/cloud-gov-wait-for-app-start.sh "${PROJECT}-${DATABASE_BACKUP_BASTION_NAME}-${CF_SPACE}"
+      - name: Backup Database
+        id: backup
+        shell: bash
+        env:
+          CF_USER: "${{ secrets.CF_USER }}"
+          CF_PASSWORD: "${{ secrets.CF_PASSWORD }}"
+          CF_ORG: "${{ secrets.CF_ORG }}"
+          PROJECT: "${{ secrets.PROJECT }}"
+          DATABASE_BACKUP_BASTION_NAME: "${{ secrets.DATABASE_BACKUP_BASTION_NAME }}"
+        run: |
+          export TIMESTAMP=$(date --utc +%FT%TZ | tr ':', '-')
+          source ./scripts/pipeline/database-backup.sh
+          #source ./scripts/pipeline/s3-backup-upload.sh
+  stopBastion:
+    name: Stop Bastion
+    runs-on: ubuntu-latest
+    needs: backup-database
+    #if: github.ref_protected == true && ${{ always() }}
+    if: ${{ always() }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set env
+        run: |
+          #BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)
+          BRANCH=develop
+          COMPOSER_DEV=1
+          GSA_AUTH_KEY=${{ secrets.GSA_AUTH_DEVELOPMENT_KEY }}
+          case ${BRANCH} in
+            develop)
+              CF_SPACE="dev"
+              DRUPAL_MEMORY=${{ vars.DEVELOP_CMS_MEMORY }}
+              DRUPAL_INSTANCES=${{ vars.DEVELOP_INSTANCES }}
+              ;;
+            main)
+              CF_SPACE="prod"
+              COMPOSER_DEV=0
+              DRUPAL_MEMORY=${{ vars.MAIN_CMS_MEMORY }}
+              DRUPAL_INSTANCES=${{ vars.MAIN_INSTANCES }}
+              GSA_AUTH_KEY=${{ secrets.GSA_AUTH_PRODUCTION_KEY }}
+              ;;
+            stage)
+              CF_SPACE="staging"
+              COMPOSER_DEV=0
+              DRUPAL_MEMORY=${{ vars.STAGE_CMS_MEMORY }}
+              DRUPAL_INSTANCES=${{ vars.STAGE_INSTANCES }}
+              ;;
+          esac
+
+          echo "APP_NAME=drupal" | tee -a $GITHUB_ENV
+          echo "BRANCH=${BRANCH}" | tee -a $GITHUB_ENV
+          echo "BUILDPACK_PORT=${{ vars.BUILDPACK_PORT }}" | tee -a $GITHUB_ENV
+          echo "CF_SPACE=${CF_SPACE}" | tee -a $GITHUB_ENV
+          echo "COMPOSER_DEV=${COMPOSER_DEV}" | tee -a $GITHUB_ENV
+          echo "DRUPAL_INSTANCES=${DRUPAL_INSTANCES}" | tee -a $GITHUB_ENV
+          echo "DRUPAL_MEMORY=${DRUPAL_MEMORY}" | tee -a $GITHUB_ENV
+          echo "GSA_AUTH_KEY=${GSA_AUTH_KEY}" | tee -a $GITHUB_ENV
+          echo "HASH_SALT=${{ secrets.HASH_SALT }}" | tee -a $GITHUB_ENV
+          echo "WAF_NAME=waf"| tee -a $GITHUB_ENV
+
+          if [ "${COMPOSER_DEV}" = "1" ]; then
+            sed -i 's/--no-dev //' .bp-config/options.json || exit 0
+          fi
+      - name: Install basic dependancies
+        run: ./scripts/pipeline/deb-basic-deps.sh
+      - name: Install Cloudfoundry CLI
+        run: ./scripts/pipeline/deb-cf-install.sh
+      - name: Cloud.gov login
+        env:
+          CF_USER: "${{ secrets.CF_USER }}"
+          CF_PASSWORD: "${{ secrets.CF_PASSWORD }}"
+          CF_ORG: "${{ secrets.CF_ORG }}"
+          PROJECT: "${{ secrets.PROJECT }}"
+        run: |
+          source ./scripts/pipeline/cloud-gov-login.sh
+      - name: Stop Bastion
+        env:
+          PROJECT: "${{ secrets.PROJECT }}"
+          DATABASE_BACKUP_BASTION_NAME: "${{ secrets.DATABASE_BACKUP_BASTION_NAME }}"
+        run: |
+          cf stop "${PROJECT}-${DATABASE_BACKUP_BASTION_NAME}-${CF_SPACE}" >/dev/null 2>&1
