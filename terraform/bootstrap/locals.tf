@@ -160,6 +160,16 @@ locals {
           key = "tf_bastion"
           value = "${local.project}-tf-bastion-bootstrap"
         }
+        gsa_auth_development_key = {
+          encrypted = false
+          key = "gsa_auth_development_key"
+          value = var.gsa_auth_development_key
+        }
+        gsa_auth_production_key = {
+          encrypted = false
+          key = "gsa_auth_production_key"
+          value = var.gsa_auth_production_key
+        }
         hash_salt = {
           encrypted = false
           key = "hash_salt"
@@ -262,6 +272,8 @@ locals {
 
           space = local.production_space
 
+          stopped = true
+
           ## Templates take templated files and fill them in with sensitive data.
           templates = []
         }
@@ -271,8 +283,4 @@ locals {
 
   ## Map of the 'all' environement and the current workspace settings.
   env = merge(try(local.envs.all, {}), try(local.envs.bootstrap, {}))
-}
-
-output "name" {
-  value = local.env.passwords
 }

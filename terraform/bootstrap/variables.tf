@@ -33,6 +33,18 @@ variable "github_token" {
   sensitive   = true
 }
 
+variable "gsa_auth_development_key" {
+  description = "The GSA Auth key for development environments."
+  type = string
+  sensitive = true
+}
+
+variable "gsa_auth_production_key" {
+  description = "The GSA Auth key for production environments."
+  type = string
+  sensitive = true
+}
+
 variable "mtls_port" {
   description = "The default port to direct traffic to. Envoy proxy listens on 61443 and redirects to 8080, which the application should listen on."
   type        = number
