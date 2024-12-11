@@ -48,3 +48,5 @@ a8e36d32c49aca75de1d6f5efc57a38e|Matt Poole|feature/DIGITAL-195-sso-configuratio
 375ea7aa8ac9c84f804100548773e80a|Matt Poole|feature/DIGITAL-195-sso-configuration|Thu Dec  5 13:06:09 EST 2024|./composer.sh require drupal/masquerade:^2.0
 242e11a4450398bd561ee3cd44612692|Oscar Merida|feature/DIGITAL-37-resource-paragraphs|Thu Dec  5 15:56:55 EST 2024|./composer.sh require drupal/paragraph_view_mode
 6666e18e6102d15f7bb8b271da64f9b8|Matt Poole|feature/DIGITAL-37-resource-paragraphs|Tue Dec 10 14:32:53 EST 2024|./composer.sh require drupal/maxlength:^3.1
+391e94a75931ce58483b7f4992b5ed10|cathybaptista|feature/DIGITAL-119-configure-images|Wed Dec 11 14:44:08 EST 2024|./composer.sh require drupal/media_library_edit
+dc6077d55d62f2f46a59b1f9773a45ab|cathybaptista|feature/DIGITAL-119-configure-images|Wed Dec 11 14:44:17 EST 2024|./composer.sh require drupal/edit_media_modal

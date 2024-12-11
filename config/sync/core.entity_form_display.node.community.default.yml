@@ -22,6 +22,7 @@ dependencies:
     - field_group
     - maxlength
     - media_library
+    - media_library_edit
     - path
     - text
 third_party_settings:
@@ -99,7 +100,10 @@ content:
     region: content
     settings:
       media_types: {  }
-    third_party_settings: {  }
+    third_party_settings:
+      media_library_edit:
+        show_edit: '1'
+        edit_form_mode: default
   field_dg_shortname:
     type: string_textfield
     weight: 35
@@ -128,7 +132,10 @@ content:
     region: content
     settings:
       media_types: {  }
-    third_party_settings: {  }
+    third_party_settings:
+      media_library_edit:
+        show_edit: '1'
+        edit_form_mode: default
   field_subscribe_email_subject:
     type: string_textfield
     weight: 36

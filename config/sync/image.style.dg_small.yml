@@ -1,0 +1,21 @@
+uuid: 36e708bb-6dd8-4996-91e7-1d9ce055e779
+langcode: en
+status: true
+dependencies: {  }
+name: dg_small
+label: 'DG Small (scale 400 w max convert to webp)'
+effects:
+  cd6d305c-07cd-4ef5-9c59-4ea56eee3543:
+    uuid: cd6d305c-07cd-4ef5-9c59-4ea56eee3543
+    id: image_scale
+    weight: 1
+    data:
+      width: 400
+      height: null
+      upscale: true
+  2b7654d1-17f3-4671-a269-f6c9faf76e92:
+    uuid: 2b7654d1-17f3-4671-a269-f6c9faf76e92
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp
