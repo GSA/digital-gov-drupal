@@ -55,6 +55,12 @@ if (!empty($cf_application_data['space_name']) &&
       $config['config_split.config_split.production']['status'] = TRUE;
       $is_cloudgov = TRUE;
       $server_http_host = 'digital-gov-drupal-prod.app.cloud.gov';
+      /**
+       * Ensure that google tag is disabled on non-prod envs.
+      */
+      if (getenv('PLATFORM_BRANCH') !== 'main') {
+      $config['google_tag.container.GTM-MZCKZPQ.675b35536672a7.15039879']['status'] = FALSE;
+      }
       break;
 
     case "stage":
