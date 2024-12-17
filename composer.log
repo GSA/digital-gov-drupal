@@ -56,3 +56,4 @@ b4d1a71ae39798e387fe895acb3c924c|Oscar Merida|feature/DIGITAL-140-security-kit|T
 9d4dae55a60e19d5e5ea7f13f204c7bc|christian medders|feature/DIGITAL-150-limit-menu-access|Thu Dec 12 10:52:20 EST 2024|./composer.sh require drupal/menu_admin_per_menu:^1.6
 >>>>>>> origin/develop
 5edafbefb51bfd7b7c83148644878a50|Matt Poole|feature/DIGITAL-154-autologout|Thu Dec 12 11:35:44 EST 2024|./composer.sh require drupal/autologout:^2.0
+3296aba794ea4b768454d91540f5731c|christian medders|feature/DIGITAL-40-gtm|Thu Dec 12 13:29:51 EST 2024|./composer.sh require drupal/google_tag:^2.0
