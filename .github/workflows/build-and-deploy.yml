@@ -3,6 +3,7 @@ name: Build and deploy
 on:
   push:
     branches:
+      - feature/DIGITAL-000-ensure-deployment
       - develop
       - main
       - stage
