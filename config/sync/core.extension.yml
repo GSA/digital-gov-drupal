@@ -4,6 +4,7 @@ module:
   admin_toolbar: 0
   admin_toolbar_search: 0
   admin_toolbar_tools: 0
+  autologout: 0
   block: 0
   breakpoint: 0
   ckeditor5: 0
@@ -33,6 +34,7 @@ module:
   filter: 0
   image: 0
   inline_entity_form: 0
+  js_cookie: 0
   layout_discovery: 0
   link: 0
   linkit: 0
