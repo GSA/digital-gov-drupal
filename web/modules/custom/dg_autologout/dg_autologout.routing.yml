@@ -1,0 +1,41 @@
+dg_autologout.set_admin:
+  path: '/admin/config/people/dg_autologout'
+  defaults:
+    _form: '\Drupal\dg_autologout\Form\AutologoutSettingsForm'
+    _title: 'Automated logout settings'
+  requirements:
+    _permission: 'administer dg_autologout'
+
+dg_autologout.alt_logout:
+  path: '/dg_autologout_alt_logout'
+  defaults:
+    _controller: '\Drupal\dg_autologout\Controller\AutologoutController::altLogout'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
+dg_autologout.ajax_logout:
+  path: '/dg_autologout_ajax_logout'
+  defaults:
+    _controller: '\Drupal\dg_autologout\Controller\AutologoutController::ajaxLogout'
+  options:
+    _theme: ajax_base_page
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
+dg_autologout.ajax_set_last:
+  path: '/dg_autologout_ajax_set_last'
+  defaults:
+    _controller: '\Drupal\dg_autologout\Controller\AutologoutController::ajaxSetLast'
+  options:
+    _theme: ajax_base_page
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
+dg_autologout.ajax_get_time_left:
+  path: '/dg_autologout_ajax_get_time_left'
+  defaults:
+    _controller: '\Drupal\dg_autologout\Controller\AutologoutController::ajaxGetRemainingTime'
+  options:
+    _theme: ajax_base_page
+  requirements:
+    _user_is_logged_in: 'TRUE'
