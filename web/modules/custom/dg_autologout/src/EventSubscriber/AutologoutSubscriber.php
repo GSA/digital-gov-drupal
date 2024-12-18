@@ -1,5 +1,4 @@
 <?php
-// todo: come back to this file
 
 namespace Drupal\dg_autologout\EventSubscriber;
 
@@ -26,7 +25,7 @@ class AutologoutSubscriber implements EventSubscriberInterface {
    *
    * @var \Drupal\dg_autologout\DgAutologoutManagerInterface
    */
-  protected DgAutologoutManagerInterface $AutologoutManager;
+  protected DgAutologoutManagerInterface $autologoutManager;
 
   /**
    * The user account service.

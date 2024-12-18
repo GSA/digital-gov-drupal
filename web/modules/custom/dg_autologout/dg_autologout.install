@@ -24,7 +24,8 @@ function dg_autologout_update_8001(&$sandbox) {
   $result = array_slice($result, $sandbox['current'], $limit);
   foreach ($result as $row) {
     $key = $row->name;
-    // User uid is a part of the key after. E.g. dg_autologout.user.1 for user 1.
+    // User uid is a part of the key after.
+    // E.g. dg_autologout.user.1 for user 1.
     $user_id = (substr($key, 16));
     $data = unserialize($row->data);
     \Drupal::service('user.data')->set('dg_autologout', $user_id, 'timeout', $data['timeout']);

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Drupal\dg_autologout\Controller;
 
 use Drupal\Component\Datetime\TimeInterface;

@@ -10,7 +10,8 @@
  *
  * This allows other modules to indicate that a page should not be included
  * in the dg_autologout checks. This works in the same way as not ticking the
- * enforce on admin pages option for dg_autologout which stops a user being logged
+ * enforce on admin pages option for
+ * dg_autologout which stops a user being logged
  * out of admin pages.
  *
  * @return bool

@@ -10,14 +10,14 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Provides a settings for autologout module.
  */
-class dg_AutologoutBlockForm extends FormBase {
+class AutologoutBlockForm extends FormBase {
 
   /**
    * The autologout manager service.
    *
    * @var \Drupal\dg_autologout\DgAutologoutManagerInterface
    */
-  protected $AutologoutManager;
+  protected $autologoutManager;
 
   /**
    * {@inheritdoc}
