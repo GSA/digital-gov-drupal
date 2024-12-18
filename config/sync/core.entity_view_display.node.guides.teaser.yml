@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.guides.field_deck
     - field.field.node.guides.field_featured_image
     - field.field.node.guides.field_guide_weight
+    - field.field.node.guides.field_hcd_glossary
     - field.field.node.guides.field_kicker
     - field.field.node.guides.field_page_weight
     - field.field.node.guides.field_primary_image
@@ -45,6 +46,7 @@ hidden:
   field_deck: true
   field_featured_image: true
   field_guide_weight: true
+  field_hcd_glossary: true
   field_kicker: true
   field_page_weight: true
   field_primary_image: true
