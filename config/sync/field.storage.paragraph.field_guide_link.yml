@@ -1,0 +1,20 @@
+uuid: 30e8adf0-be45-4eaf-bd9f-43d254771eb8
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - paragraphs
+id: paragraph.field_guide_link
+field_name: field_guide_link
+entity_type: paragraph
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

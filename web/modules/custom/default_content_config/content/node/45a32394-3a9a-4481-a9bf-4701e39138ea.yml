@@ -6,6 +6,7 @@ _meta:
   default_langcode: en
   depends:
     c2eb37c0-02a5-4a36-90bc-a7039449b61b: media
+    258cf431-4a0c-4489-807e-c87087c87cf9: node
     1e945b0b-bcf5-4df7-9105-6c222eb70c13: media
 default:
   revision_uid:
@@ -49,6 +50,9 @@ default:
   field_featured_image:
     -
       entity: c2eb37c0-02a5-4a36-90bc-a7039449b61b
+  field_guide_nav_ref:
+    -
+      entity: 258cf431-4a0c-4489-807e-c87087c87cf9
   field_guide_weight:
     -
       value: 5
