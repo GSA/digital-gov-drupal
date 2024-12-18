@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\dg_dg_autologout\Plugin\Block;
+namespace Drupal\dg_autologout\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Config\Config;

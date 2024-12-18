@@ -9,7 +9,7 @@ use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Theme\ThemeManager;
 use Drupal\Core\Url;
-use Drupal\dg_autologout\dg_AutologoutManagerInterface;
+use Drupal\dg_autologout\DgAutologoutManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -24,9 +24,9 @@ class AutologoutSubscriber implements EventSubscriberInterface {
   /**
    * The autologout manager service.
    *
-   * @var \Drupal\dg_autologout\dg_AutologoutManagerInterface
+   * @var \Drupal\dg_autologout\DgAutologoutManagerInterface
    */
-  protected dg_AutologoutManagerInterface $dg_autoLogoutManager;
+  protected DgAutologoutManagerInterface $AutologoutManager;
 
   /**
    * The user account service.
@@ -73,7 +73,7 @@ class AutologoutSubscriber implements EventSubscriberInterface {
   /**
    * Constructs an AutologoutSubscriber object.
    *
-   * @param \Drupal\dg_autologout\dg_AutologoutManagerInterface $dg_autologout
+   * @param \Drupal\dg_autologout\DgAutologoutManagerInterface $dg_autologout
    *   The autologout manager service.
    * @param \Drupal\Core\Session\AccountInterface $account
    *   The user account service.
@@ -88,8 +88,8 @@ class AutologoutSubscriber implements EventSubscriberInterface {
    * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
    *   The language manager.
    */
-  public function __construct(dg_AutologoutManagerInterface $dg_autologout, AccountInterface $account, ConfigFactory $config, ThemeManager $theme, TimeInterface $time, RequestStack $requestStack, LanguageManagerInterface $language_manager) {
-    $this->dg_autoLogoutManager = $dg_autologout;
+  public function __construct(DgAutologoutManagerInterface $dg_autologout, AccountInterface $account, ConfigFactory $config, ThemeManager $theme, TimeInterface $time, RequestStack $requestStack, LanguageManagerInterface $language_manager) {
+    $this->AutologoutManager = $dg_autologout;
     $this->currentUser = $account;
     $this->config = $config;
     $this->theme = $theme;
@@ -105,7 +105,7 @@ class AutologoutSubscriber implements EventSubscriberInterface {
    *   The request event.
    */
   public function onRequest(RequestEvent $event) {
-    $dg_autologout_manager = $this->dg_autoLogoutManager;
+    $dg_autologout_manager = $this->AutologoutManager;
 
     $uid = $this->currentUser->id();
 
@@ -139,7 +139,7 @@ class AutologoutSubscriber implements EventSubscriberInterface {
       }
     }
 
-    if ($this->dg_autoLogoutManager->preventJs()) {
+    if ($this->AutologoutManager->preventJs()) {
       return;
     }
 

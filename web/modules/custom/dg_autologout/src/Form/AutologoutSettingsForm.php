@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Provides settings for autologout module.
  */
-class dg_AutologoutSettingsForm extends ConfigFormBase {
+class AutologoutSettingsForm extends ConfigFormBase {
 
   /**
    * Defines the timeout limit.

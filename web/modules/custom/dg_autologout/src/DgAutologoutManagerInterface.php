@@ -5,9 +5,9 @@ namespace Drupal\dg_autologout;
 use Drupal\user\UserInterface;
 
 /**
- * Interface for dg_AutologoutManager.
+ * Interface for AutologoutManager.
  */
-interface dg_AutologoutManagerInterface {
+interface DgAutologoutManagerInterface {
 
   /**
    * Get the timer HTML markup.

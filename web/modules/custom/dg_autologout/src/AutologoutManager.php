@@ -2,6 +2,7 @@
 
 namespace Drupal\dg_autologout;
 
+// use Drupal\dg_autologout\DgAutologoutManagerInterface as test;
 use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Component\Utility\Xss;
 use Drupal\Core\Config\Config;
@@ -23,7 +24,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 /**
  * Defines an AutologoutManager service.
  */
-class AutologoutManager implements AutologoutManagerInterface {
+class AutologoutManager implements DgAutologoutManagerInterface {
 
   use StringTranslationTrait;
 

@@ -7,6 +7,6 @@ services:
 
   dg_autologout.manager:
     class: Drupal\dg_autologout\AutologoutManager
-    tags:
-      - {name: dg_autologout_manager}
+    # tags:
+      # - {name: autologout_manager}
     arguments: ['@module_handler', '@config.factory', '@messenger', '@current_user', '@logger.factory', '@session_manager', '@user.data', '@datetime.time', '@entity_type.manager', '@request_stack']

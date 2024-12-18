@@ -1,7 +1,7 @@
 drupal.dg_autologout:
   version: VERSION
   js:
-    js/dg_autologout.js: {}
+    js/autologout.js: {}
 
   dependencies:
     - core/drupal.dialog

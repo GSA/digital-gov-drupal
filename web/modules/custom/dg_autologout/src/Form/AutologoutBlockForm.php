@@ -4,7 +4,7 @@ namespace Drupal\dg_autologout\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\dg_autologout\dg_AutologoutManagerInterface;
+use Drupal\dg_autologout\DgAutologoutManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -15,9 +15,9 @@ class dg_AutologoutBlockForm extends FormBase {
   /**
    * The autologout manager service.
    *
-   * @var \Drupal\dg_autologout\dg_AutologoutManagerInterface
+   * @var \Drupal\dg_autologout\DgAutologoutManagerInterface
    */
-  protected $dg_autoLogoutManager;
+  protected $AutologoutManager;
 
   /**
    * {@inheritdoc}
@@ -29,11 +29,11 @@ class dg_AutologoutBlockForm extends FormBase {
   /**
    * Constructs an AutologoutBlockForm object.
    *
-   * @param \Drupal\dg_autologout\dg_AutologoutManagerInterface $dg_autologout
+   * @param \Drupal\dg_autologout\DgAutologoutManagerInterface $dg_autologout
    *   The autologout manager service.
    */
-  public function __construct(dg_AutologoutManagerInterface $dg_autologout) {
-    $this->dg_autoLogoutManager = $dg_autologout;
+  public function __construct(DgAutologoutManagerInterface $dg_autologout) {
+    $this->AutologoutManager = $dg_autologout;
   }
 
   /**
@@ -61,7 +61,7 @@ class dg_AutologoutBlockForm extends FormBase {
     ];
 
     $form['timer'] = [
-      '#markup' => $this->dg_autoLogoutManager->createTimer(),
+      '#markup' => $this->AutologoutManager->createTimer(),
     ];
 
     return $form;

@@ -1,6 +1,5 @@
 <?php
 
-// todo: come back to this file
 
 namespace Drupal\dg_autologout\Controller;
 
@@ -10,8 +9,7 @@ use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Ajax\SettingsCommand;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Url;
-// ! this is one needed?
-use Drupal\autologout\dg_AutologoutManagerInterface;
+use Drupal\dg_autologout\DgAutologoutManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -19,14 +17,14 @@ use Symfony\Component\HttpFoundation\RequestStack;
 /**
  * Returns responses for autologout module routes.
  */
-class dg_AutologoutController extends ControllerBase {
+class AutologoutController extends ControllerBase {
 
   /**
    * The autologout manager service.
    *
-   * @var \Drupal\dg_autologout\dg_AutologoutManagerInterface
+   * @var \Drupal\dg_autologout\DgAutologoutManagerInterface
    */
-  protected $dg_autoLogoutManager;
+  protected $autoLogoutManager;
 
 
   /**
@@ -46,15 +44,15 @@ class dg_AutologoutController extends ControllerBase {
   /**
    * Constructs an AutologoutSubscriber object.
    *
-   * @param \Drupal\dg_autologout\dg_AutologoutManagerInterface $dg_autologout
+   * @param \Drupal\dg_autologout\DgAutologoutManagerInterface $autologout
    *   The autologout manager service.
    * @param \Drupal\Component\Datetime\TimeInterface $time
    *   The time service.
    * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
    *   The request stack.
    */
-  public function __construct(dg_AutologoutManagerInterface $dg_autologout, TimeInterface $time, RequestStack $requestStack) {
-    $this->dg_autoLogoutManager = $dg_autologout;
+  public function __construct(DgAutologoutManagerInterface $autologout, TimeInterface $time, RequestStack $requestStack) {
+    $this->autoLogoutManager = $autologout;
     $this->time = $time;
     $this->requestStack = $requestStack;
   }
@@ -74,8 +72,8 @@ class dg_AutologoutController extends ControllerBase {
    * Alternative logout.
    */
   public function altLogout() {
-    $redirect_url = $this->dg_autoLogoutManager->getUserRedirectUrl();
-    $this->dg_autoLogoutManager->logout();
+    $redirect_url = $this->autoLogoutManager->getUserRedirectUrl();
+    $this->autoLogoutManager->logout();
     $url = Url::fromUserInput(
       $redirect_url,
       [
@@ -93,7 +91,7 @@ class dg_AutologoutController extends ControllerBase {
    * AJAX logout.
    */
   public function ajaxLogout() {
-    $this->dg_autoLogoutManager->logout();
+    $this->autoLogoutManager->logout();
     $response = new AjaxResponse();
     $response->setStatusCode(200);
 
@@ -136,7 +134,7 @@ class dg_AutologoutController extends ControllerBase {
     $time_remaining_ms = $this->autoLogoutManager->getRemainingTime() * 1000;
 
     // Reset the timer.
-    $markup = $this->dg_autoLogoutManager->createTimer();
+    $markup = $this->autoLogoutManager->createTimer();
 
     $response->addCommand(new ReplaceCommand('#timer', $markup));
     $response->addCommand(new SettingsCommand([
