@@ -75,11 +75,6 @@
     {{ $guideData = index $.Site.Data.guidenav (.Params.guide) }}
     {% endif %}
     #}
-    {# this sets up the button to call the JS to show the glossary #}
-    {% if content.field_hcd_glossary['#title'] is not null %}
-      <button id="my-button">{{ content.field_hcd_glossary['#title'] }}</button>
-    {% endif %}
-
     {% if guideData.showInPageNav %}
     <div class="dg-guide__container">
       <aside class="dg-guide__nav">
