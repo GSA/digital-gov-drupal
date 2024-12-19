@@ -1,0 +1,23 @@
+uuid: 051af63b-df7a-49f4-8609-9600eb7ec67f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_hcd_glossary
+    - node.type.guides
+id: node.guides.field_hcd_glossary
+field_name: field_hcd_glossary
+entity_type: node
+bundle: guides
+label: 'HCD Glossary'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_vocabulary'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+field_type: entity_reference

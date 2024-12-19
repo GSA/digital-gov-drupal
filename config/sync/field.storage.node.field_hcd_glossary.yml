@@ -1,0 +1,20 @@
+uuid: 582cdc00-7855-441f-b6f4-6b0efe4f403d
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_hcd_glossary
+field_name: field_hcd_glossary
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_vocabulary
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
