@@ -1,0 +1,66 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 62fdaf72-5449-4312-a82e-b87b9b406f36
+  bundle: guides
+  default_langcode: en
+  depends:
+    b2f35ae8-423f-428b-865d-e420313e7a81: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Introduction to human-centered design'
+  created:
+    -
+      value: 1734454179
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /guides/introduction-human-centered-design
+      langcode: en
+      pathauto: 1
+  body:
+    -
+      value: '<p style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:inherit;color:rgb(27, 27, 27);font-family:&quot;Public Sans Web&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;;font-size:16.96px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;line-height:1.5;margin-bottom:0px;margin-top:0px;max-width:88ex;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">Human-centered design (HCD) is a qualitative research method that helps groups solve problems and seek solutions that prioritize customer needs over a system’s needs. It’s also a design and management framework to develop solutions to problems by involving the human perspective in all steps of the problem-solving process.</p><p style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:inherit;color:rgb(27, 27, 27);font-family:&quot;Public Sans Web&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;;font-size:16.96px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;line-height:1.5;margin-bottom:0px;margin-top:1em;max-width:88ex;orphans:2;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;">HCD involves four phases of sequential work: <strong style="box-sizing:inherit;font-weight:bolder;">discovery, design, delivery,</strong> and <strong style="box-sizing:inherit;font-weight:bolder;">measurement</strong>. HCD is also cyclical. Once a design solution is launched, you should measure its effectiveness against initial and intended aims, and continually tweak it to improve the solution over time. HCD recognizes that people and their needs are dynamic and changing, and so solutions must also adapt to changing needs.</p>'
+      format: html
+      summary: ''
+  field_deck:
+    -
+      value: '<p>Everything you need to know to get started with our human-centered design series</p>'
+      format: single_inline_html
+  field_guide_weight:
+    -
+      value: 5
+  field_hcd_glossary:
+    -
+      target_id: hcd_glossary
+  field_page_weight:
+    -
+      value: 0
+  field_primary_image:
+    -
+      entity: b2f35ae8-423f-428b-865d-e420313e7a81
+  field_summary:
+    -
+      value: '<p>Everything you need to know to get started with our human-centered design series</p>'
+      format: single_inline_html
+  field_summary_box:
+    -
+      value: false
