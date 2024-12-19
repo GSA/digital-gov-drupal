@@ -1,0 +1,355 @@
+<?php
+
+/**
+ * @file
+ * Automated Logout - Module.
+ */
+
+use Drupal\Component\Utility\Xss;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
+use Drupal\user\Entity\User;
+
+/**
+ * Implements hook_help().
+ */
+function dg_autologout_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.dg_autologout':
+      $seconds = \Drupal::service('dg_autologout.manager')->getUserTimeout();
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t("This module allows you to force site users to be logged out after a given amount of time due to inactivity after first being presented with a confirmation dialog. Your current logout threshold is %seconds seconds.", ['%seconds' => $seconds]) . '</p>';
+      return $output;
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Adds a field to user/edit to change that users logout.
+ */
+function dg_autologout_form_user_form_alter(&$form, FormStateInterface $form_state) {
+  $user = \Drupal::currentUser();
+  $account = $form_state->getFormObject()->getEntity();
+  $user_id = $account->id();
+  $access = FALSE;
+
+  // If user-specific thresholds are enabled (the default), and user has access
+  // to change and they are changing their own and only
+  // their own timeout, or they are an admin.
+  if (!\Drupal::config('dg_autologout.settings')->get('no_individual_logout_threshold') && !\Drupal::currentUser()->isAnonymous() && (($user->hasPermission('change own logout threshold') && $user->id() == $user_id) || $user->hasPermission('administer dg_autologout'))) {
+    $access = TRUE;
+
+    if ($user_id !== NULL) {
+      $dg_autologout_data = \Drupal::service('user.data')->get('dg_autologout', $user_id, 'timeout');
+    }
+  }
+
+  if ($access) {
+    $max_timeout = \Drupal::config('dg_autologout.settings')->get('max_timeout');
+    $form['user_' . $user_id] = [
+      '#type' => 'textfield',
+      '#title' => t('Your current logout threshold'),
+      '#default_value' => $dg_autologout_data ?? '',
+      '#size' => 8,
+      '#description' => t('The length of inactivity time, in seconds, before automated log out. Must be between 60 and @max_timeout seconds.', ['@max_timeout' => $max_timeout]),
+      '#element_validate' => ['_dg_autologout_user_uid_timeout_validate'],
+    ];
+
+    $form['actions']['submit']['#submit'][] = 'dg_autologout_user_profile_submit';
+  }
+}
+
+/**
+ * Form validation.
+ */
+function _dg_autologout_user_uid_timeout_validate($element, FormStateInterface $form_state) {
+  $max_timeout = \Drupal::config('dg_autologout.settings')->get('max_timeout');
+  $timeout = $element['#value'];
+
+  // Set error if timeout isn't strictly a number between 60 and max.
+  if ($timeout != "" && ($timeout < 10 || ($timeout > 0 && $timeout < 60) || $timeout > $max_timeout || !is_numeric($timeout))) {
+    $form_state->setError($element, t('The timeout must be an integer greater than 60, and less then %max.', ['%max' => $max_timeout]));
+  }
+}
+
+/**
+ * Handle submission of timeout threshold in user/edit.
+ */
+function dg_autologout_user_profile_submit(&$form, FormStateInterface $form_state) {
+  $user = \Drupal::currentUser();
+  $user_id = $form_state->getFormObject()->getEntity()->id();
+  $access = FALSE;
+
+  // If user-specific thresholds are enabled (the default), and user has access
+  // to change and they are changing their own and only
+  // their own timeout, or they are an admin.
+  if (!\Drupal::currentUser()->isAnonymous() && (($user->hasPermission('change own logout threshold') && $user->id() == $user_id) || $user->hasPermission('administer dg_autologout'))) {
+    $access = TRUE;
+  }
+
+  // Access is reused here as a security measure. Not only will the element not
+  // display but wont submit without access.
+  // Do not store config if setting to not store config for every user is TRUE.
+  if ($access && !\Drupal::config('dg_autologout.settings')->get('no_individual_logout_threshold')) {
+    $timeout = $form_state->getValue('user_' . $user_id);
+    \Drupal::service('user.data')->set('dg_autologout', $user_id, 'timeout', $timeout);
+  }
+  else {
+    $timeout = \Drupal::config('dg_autologout.settings')->get('timeout');
+    \Drupal::service('user.data')->set('dg_autologout', $user_id, 'timeout', $timeout);
+  }
+}
+
+/**
+ * Implements hook_dg_autologout_prevent().
+ */
+function dg_autologout_dg_autologout_prevent() {
+  $user = \Drupal::currentUser();
+  $user_ip = \Drupal::request()->getClientIp();
+
+  // Don't include dg_autologout JS checks on ajax callbacks.
+  $paths = [
+    'system',
+    'dg_autologout_ajax_get_time_left',
+    'dg_autologout_ajax_logout',
+    'dg_autologout_ajax_set_last',
+  ];
+  // getPath is used because Url::fromRoute('<current>')->toString() doesn't
+  // give correct path for XHR request.
+  $url = \Drupal::service('path.current')->getPath();
+  $path_args = explode('/', $url);
+
+  // Check if user IP address is in the whitelist.
+  $ip_address_whitelist = array_map('trim',
+      explode("\n", trim(\Drupal::config('dg_autologout.settings')->get('whitelisted_ip_addresses') ?: ''))
+  );
+
+  if (in_array($path_args[1], $paths)) {
+    return TRUE;
+  }
+
+  // If user is anonymous.
+  if ($user->id() == 0) {
+    return TRUE;
+  }
+
+  // If user has no timeout set.
+  if (\Drupal::service('dg_autologout.manager')->getUserTimeout() === 0) {
+    dg_autologout_check_session_variable();
+    return TRUE;
+  }
+
+  // If the user has checked remember_me via the remember_me module.
+  $remember_me = \Drupal::service('user.data')->get('remember_me', $user->id(), 'remember_me');
+  if (!empty($remember_me)) {
+    return TRUE;
+  }
+  // If the user has checked Remember me on the login page via
+  // the persistent_login module.
+  if (\Drupal::hasService('persistent_login.token_manager')) {
+    $request = \Drupal::request();
+    // Get cookie from request.
+    $cookie = \Drupal::service('persistent_login.cookie_helper')->getCookieValue($request);
+    if (isset($cookie)) {
+      // Get all user's tokens.
+      $rememberPersistentTokens = \Drupal::service('persistent_login.token_manager')->getTokensForUser(User::load($user->id()));
+      $count = count($rememberPersistentTokens);
+      if ($count > 0) {
+        // Get current token.
+        $currentToken = \Drupal::service('persistent_login.token_handler')->getTokenFromCookie($request);
+        foreach ($rememberPersistentTokens as $value) {
+          if (1 == $value->getStatus() && $value->getSeries() == $currentToken->getSeries()) {
+            return TRUE;
+          }
+        }
+      }
+    }
+  }
+  if (in_array($user_ip, $ip_address_whitelist)) {
+    dg_autologout_check_session_variable();
+    return TRUE;
+  }
+
+  return FALSE;
+}
+
+/**
+ * Helper function to unset the dg_autologout session variable if present.
+ */
+function dg_autologout_check_session_variable() {
+  $currentRequest = \Drupal::service('request_stack')->getCurrentRequest();
+  $session = $currentRequest->getSession()->get('dg_autologout_last');
+  if (isset($session)) {
+    $currentRequest->getSession()->remove('dg_autologout_last');
+  }
+}
+
+/**
+ * Implements hook_dg_autologout_refresh_only().
+ */
+function dg_autologout_dg_autologout_refresh_only() {
+  if (!\Drupal::config('dg_autologout.settings')->get('enforce_admin') && \Drupal::service('router.admin_context')->isAdminRoute(\Drupal::routeMatch()->getRouteObject())) {
+    return TRUE;
+  }
+}
+
+/**
+ * Implements hook_page_attachments().
+ *
+ * Add a form element to every page which is used to detect if the page was
+ * loaded from browser cache. This happens when the browser's back button is
+ * pressed for example. The JS will set the value of the hidden input element
+ * to 1 after initial load. If this is 1 on subsequent loads, the page was
+ * loaded from cache and an dg_autologout timeout refresh needs to be triggered.
+ */
+function dg_autologout_page_attachments_alter(array &$attachments) {
+  $dg_autologout_manager = \Drupal::service('dg_autologout.manager');
+
+  // Check if JS should be included on this request.
+  if ($dg_autologout_manager->preventJs()) {
+    return;
+  }
+
+  // Check if anything wants to be refresh only. This URL would include the
+  // javascript but will keep the login alive whilst that page is opened.
+  $refresh_only = $dg_autologout_manager->refreshOnly();
+
+  $settings = \Drupal::config('dg_autologout.settings');
+
+  // Get all settings JS will need for dialog.
+  $timeout = $dg_autologout_manager->getUserTimeout();
+  $timeout_padding = $settings->get('padding');
+  $redirect_url = $dg_autologout_manager->getUserRedirectUrl();
+  $redirect_query = [];
+  if ($settings->get('include_destination')) {
+    $redirect_query[] = \Drupal::service('redirect.destination')->getAsArray();
+  }
+  $redirect_query += ['dg_autologout_timeout' => 1];
+  $no_dialog = $settings->get('no_dialog');
+  $disable_buttons = $settings->get('disable_buttons');
+  $yes_button = $settings->get('yes_button');
+  if (empty($yes_button)) {
+    $yes_button = t('Yes');
+  }
+  $no_button = $settings->get('no_button');
+  if (empty($no_button)) {
+    $no_button = t('No');
+  }
+  $use_alt_logout_method = $settings->get('use_alt_logout_method');
+  $title = $settings->get('dialog_title');
+  if (!$title) {
+    $title = \Drupal::config('system.site')->get('name') . ' Alert';
+  }
+  // phpcs:ignore
+  $msg = t(Xss::filter($settings->get('message')));
+  $logout_regardless_of_activity = $settings->get('logout_regardless_of_activity');
+
+  $settings = [
+    'timeout' => $refresh_only ? ($timeout * 500) : ($timeout * 1000),
+    'timeout_padding' => $timeout_padding * 1000,
+    'message' => $msg,
+    'redirect_url' => Url::fromUserInput($redirect_url, ['query' => $redirect_query])->toString(),
+    // phpcs:ignore
+    'title' => t($title),
+    'refresh_only' => $refresh_only,
+    'no_dialog' => $no_dialog,
+    'disable_buttons' => $disable_buttons,
+    'yes_button' => $yes_button,
+    'no_button' => $no_button,
+    'use_alt_logout_method' => $use_alt_logout_method,
+    'logout_regardless_of_activity' => $logout_regardless_of_activity,
+    'modal_width' => $settings->get('modal_width') ? (int) $settings->get('modal_width') : 'auto',
+  ];
+  // If this is an AJAX request, then the logout redirect url should still be
+  // referring to the page that generated this request.
+  $current_request = \Drupal::request();
+  if ($current_request->isXmlHttpRequest()) {
+    $base_url = Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString();
+    $referer = $current_request->headers->get('referer');
+    if ($referer) {
+      $destination = str_replace($base_url . '/', '', $referer);
+    }
+    else {
+      $destination = $base_url;
+    }
+    $settings['redirect_url'] = Url::fromUserInput($redirect_url, [
+      'query' => ['destination' => urlencode($destination)],
+      'dg_autologout_timeout' => 1,
+    ]);
+  }
+
+  dg_autologout_attach_js($attachments, $settings);
+}
+
+/**
+ * Implements hook_page_bottom().
+ */
+function dg_autologout_page_bottom(array &$page_bottom) {
+  if (!\Drupal::service('dg_autologout.manager')->preventJs()) {
+    $page_bottom['dg_autologout'] = [
+      '#markup' => '<form id="dg_autologout-cache-check"><input type="hidden" id="dg_autologout-cache-check-bit" value="0" /></form>',
+    ];
+  }
+}
+
+/**
+ * Adds the necessary js and libraries.
+ *
+ * @param array $element
+ *   The renderable array element to #attach the js to.
+ * @param array $settings
+ *   The JS Settings.
+ */
+function dg_autologout_attach_js(array &$element, array $settings) {
+  $element['#attached']['drupalSettings']['dg_autologout'] = $settings;
+  $element['#attached']['library'][] = 'dg_autologout/drupal.dg_autologout';
+  $element['#cache']['tags'][] = 'config:dg_autologout.settings';
+}
+
+/**
+ * Implements hook_user_login().
+ *
+ * Delete stale sessions for the user on login. This stops
+ * session_limit module thinking the user has reached their
+ * session limit.
+ */
+function dg_autologout_user_login($account): void {
+  // Cleanup old sessions.
+  $dg_autologout_manager = \Drupal::service('dg_autologout.manager');
+  $timeout = \Drupal::service('dg_autologout.manager')->getUserTimeout($account->id());
+
+  // Do not clear sessions if dg_autologout prevent is triggered.
+  if ($dg_autologout_manager->preventJs()) {
+    return;
+  }
+  // Now Sessions table is no longer defined in system_schema().
+  // Do not clear session if there is no sessions table.
+  // @see https://www.drupal.org/node/3431286
+  if (\Drupal::database()->schema()->tableExists('sessions')) {
+    $timeout_padding = \Drupal::config('dg_autologout.settings')->get('padding');
+    $timestamp = \Drupal::time()->getRequestTime() - ($timeout + $timeout_padding);
+
+    // Find all stale sessions.
+    $database = \Drupal::database();
+    $sids = $database->select('sessions', 's')
+      ->fields('s', ['sid'])
+      ->condition('uid', $account->id())
+      ->condition('timestamp', $timestamp, '<')
+      ->orderBy('timestamp', 'DESC')
+      ->execute()
+      ->fetchCol();
+
+    if (!empty($sids)) {
+      // Delete stale sessions at login.
+      $database->delete('sessions')
+        ->condition('sid', $sids, 'IN')
+        ->execute();
+    }
+  }
+
+  // Add login time cookie.
+  user_cookie_save(['dg_autologout_login' => \Drupal::time()->getCurrentTime()]);
+}
