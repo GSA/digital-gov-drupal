@@ -1,0 +1,10 @@
+uuid: 4d91e8be-ac51-4431-a7cf-bd94b7ab37be
+langcode: en
+status: true
+dependencies: {  }
+id: guide_pages
+label: 'Guide Pages'
+icon_uuid: null
+icon_default: null
+description: 'Collection of pages to use in navigation for a guide.'
+behavior_plugins: {  }

@@ -1,0 +1,31 @@
+{% set subnav_links = guide_nav[guide_current_index].subnav %}
+{% set subnav_main = guide_nav[guide_current_index].link %}
+
+<nav aria-label="Secondary navigation" class="dg-guide__nav-container">
+  <ul class="usa-sidenav dg-guide__nav-list">
+    <li class="usa-sidenav__item">
+      <a
+        href="{{ subnav_main.url }}#content-start"
+        title="{{ subnav_main.text }}"
+        {% if url == subnav_main.url.toString() %}class="usa-current"{% endif %}
+      >
+        {{ subnav_main.text }}
+      </a>
+    </li>
+
+    {% if subnav_links %}
+      {% for sub_item in subnav_links %}
+        <li class="usa-sidenav__item">
+          <a
+            href="{{ sub_item.url }}#content-start"
+            title="{{ sub_item.text }}"
+            {% if url == sub_item.url.toString() %}class="usa-current"{% endif %}
+          >
+            {{ sub_item.text }}
+          </a>
+        </li>
+      {% endfor %}
+    {% endif %}
+
+  </ul>
+</nav>
