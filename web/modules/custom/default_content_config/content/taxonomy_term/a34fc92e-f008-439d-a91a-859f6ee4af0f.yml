@@ -13,7 +13,7 @@ default:
       value: Synthesis/synthesizing
   description:
     -
-      value: '<p><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">To combine a number of things into a coherent whole. In design thinking, this refers to the collection and integration of pieces of research into a logical and meaningful collection.</span></p>'
+      value: '<p>To combine a number of things into a coherent whole. In design thinking, this refers to the collection and integration of pieces of research into a logical and meaningful collection.</p>'
       format: html
   weight:
     -

@@ -13,7 +13,7 @@ default:
       value: 'Customer Experience (CX)'
   description:
     -
-      value: '<p><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">Customer experience (CX) is an individual''s perception of all their interactions with an organization. While </span><em><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">customer service</span></em><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;"> focuses on improving a </span><em><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">single</span></em><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;"> interaction, CX is the sum of direct customer service, plus all the ways customers interact with an organization, including websites, buildings, and physical or digital products.</span></p>'
+      value: "<p>Customer experience (CX) is an individual's perception of all their interactions with an organization. While <em>customer service</em> focuses on improving a <em>single</em> interaction, CX is the sum of direct customer service, plus all the ways customers interact with an organization, including websites, buildings, and physical or digital products.</p>"
       format: html
   weight:
     -

@@ -13,7 +13,7 @@ default:
       value: 'Intercept interviews'
   description:
     -
-      value: '<p><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">Intercept interviews are conducted on-site with customers, directly interacting with services at the research site.</span></p>'
+      value: '<p>Intercept interviews are conducted on-site with customers, directly interacting with services at the research site.</p>'
       format: html
   weight:
     -

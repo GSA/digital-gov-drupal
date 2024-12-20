@@ -13,7 +13,7 @@ default:
       value: 'Qualitative research'
   description:
     -
-      value: '<p><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">Primarily exploratory research used to gain an understanding of underlying reasons, opinions, and motivations. It provides insights into the problem or helps to develop ideas or hypotheses for potential quantitative research.</span></p>'
+      value: '<p>Primarily exploratory research used to gain an understanding of underlying reasons, opinions, and motivations. It provides insights into the problem or helps to develop ideas or hypotheses for potential quantitative research.</p>'
       format: html
   weight:
     -

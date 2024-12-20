@@ -13,7 +13,7 @@ default:
       value: '5 Whys, aka, Laddering'
   description:
     -
-      value: '<p><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">A method by which an interviewer derives additional detail and undercurrents from an interviewee. Typically characterized by the interviewer repeatedly asking “why” about a qualified or abstract word or phrase used during an interview. A common metric is for the interviewer to do this five times in a line of questions.</span></p>'
+      value: '<p>A method by which an interviewer derives additional detail and undercurrents from an interviewee. Typically characterized by the interviewer repeatedly asking “why” about a qualified or abstract word or phrase used during an interview. A common metric is for the interviewer to do this five times in a line of questions.</p>'
       format: html
   weight:
     -

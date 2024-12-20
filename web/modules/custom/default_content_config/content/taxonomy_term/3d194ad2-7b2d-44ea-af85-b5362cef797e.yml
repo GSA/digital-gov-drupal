@@ -13,7 +13,7 @@ default:
       value: '3 Es'
   description:
     -
-      value: '<p><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">Effectiveness, Ease, and Emotion are three core qualities to measure customer experience; based on a Forrester Research Inc. pyramid model of customer experience.</span></p>'
+      value: '<p>Effectiveness, Ease, and Emotion are three core qualities to measure customer experience; based on a Forrester Research Inc. pyramid model of customer experience.</p>'
       format: html
   weight:
     -

@@ -13,7 +13,7 @@ default:
       value: 'Guided Tour'
   description:
     -
-      value: '<p><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">A research methodology during which a participant shows researcher(s) their physical space, collections, or other assets so that the researcher(s) understand the participant’s context and reality through the participant’s point of view</span></p>'
+      value: '<p>A research methodology during which a participant shows researcher(s) their physical space, collections, or other assets so that the researcher(s) understand the participant’s context and reality through the participant’s point of view.</p>'
       format: html
   weight:
     -

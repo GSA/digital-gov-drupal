@@ -13,7 +13,7 @@ default:
       value: Stakeholders
   description:
     -
-      value: '<p><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">Persons, groups or organizations that have a direct or indirect stake in an organization because it can affect or be affected by the organization’s actions, objectives and policies.</span></p>'
+      value: '<p>Persons, groups or organizations that have a direct or indirect stake in an organization because it can affect or be affected by the organization’s actions, objectives and policies</p>'
       format: html
   weight:
     -

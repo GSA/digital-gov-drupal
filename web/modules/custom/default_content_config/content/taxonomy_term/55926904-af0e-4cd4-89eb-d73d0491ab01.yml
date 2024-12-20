@@ -13,7 +13,7 @@ default:
       value: 'Human-Centered Design (HCD)'
   description:
     -
-      value: '<p><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">Human-centered design is a design and management framework that develops solutions to problems by involving the human perspective in all steps of the problem-solving process. Human involvement typically takes place in observing the problem within context, brainstorming, conceptualizing, developing, and implementing the solution.</span></p>'
+      value: '<p>Human-centered design is a design and management framework that develops solutions to problems by involving the human perspective in all steps of the problem-solving process. Human involvement typically takes place in observing the problem within context, brainstorming, conceptualizing, developing, and implementing the solution.</p>'
       format: html
   weight:
     -

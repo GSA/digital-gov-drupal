@@ -13,7 +13,7 @@ default:
       value: 'Problem frame'
   description:
     -
-      value: '<p><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">The area of research around a particular problem</span></p>'
+      value: '<p>The area of research around a particular problem</p>'
       format: html
   weight:
     -

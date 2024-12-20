@@ -13,7 +13,7 @@ default:
       value: Touchpoints
   description:
     -
-      value: '<p><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">Any point of contact between a customer and a service or service provider. This could be the design of a receipt, the comfort of a waiting room, or the usability of a web page.</span></p>'
+      value: '<p>Any point of contact between a customer and a service or service provider. This could be the design of a receipt, the comfort of a waiting room, or the usability of a web page.</p>'
       format: html
   weight:
     -

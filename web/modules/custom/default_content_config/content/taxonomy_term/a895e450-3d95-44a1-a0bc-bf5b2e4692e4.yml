@@ -13,7 +13,7 @@ default:
       value: Snapshots
   description:
     -
-      value: '<p><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">A representative sample of research. In design-oriented presentations, this refers to a collection of photographs, quotations, and synthesized research that is formatted to tell the story of the research endeavor.</span></p>'
+      value: '<p>A representative sample of research. In design-oriented presentations, this refers to a collection of photographs, quotations, and synthesized research that is formatted to tell the story of the research endeavor.</p>'
       format: html
   weight:
     -

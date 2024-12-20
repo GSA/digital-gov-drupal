@@ -13,7 +13,7 @@ default:
       value: 'Pain points'
   description:
     -
-      value: '<p><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">In experience design, pain points are real or perceived problems experienced by customers within a system.</span></p>'
+      value: '<p>In experience design, pain points are real or perceived problems experienced by customers within a system.</p>'
       format: html
   weight:
     -

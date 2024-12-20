@@ -13,7 +13,7 @@ default:
       value: 'Design thinking'
   description:
     -
-      value: '<p><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">A way to connect and integrate useful knowledge from the arts and sciences alike that is suited to the problems and purposes of the present.</span></p>'
+      value: '<p>A way to connect and integrate useful knowledge from the arts and sciences alike that is suited to the problems and purposes of the present.</p>'
       format: html
   weight:
     -

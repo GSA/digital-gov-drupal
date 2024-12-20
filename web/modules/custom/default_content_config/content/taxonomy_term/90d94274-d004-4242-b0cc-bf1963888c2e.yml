@@ -13,7 +13,7 @@ default:
       value: 'Fail early, fail fast, fail small'
   description:
     -
-      value: '<p><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">A design research principle expressing the ethos that, through quickly making and testing small solutions to big problems in quick succession, drawing lessons for what works or does not work from those tests, and revising the next solution accordingly, more effective and successful end solutions can be reached than if a single large solution was launched once and without testing</span></p>'
+      value: '<p>A design research principle expressing the ethos that, through quickly making and testing small solutions to big problems in quick succession, drawing lessons for what works or does not work from those tests, and revising the next solution accordingly, more effective and successful end solutions can be reached than if a single large solution was launched once and without testing.</p>'
       format: html
   weight:
     -

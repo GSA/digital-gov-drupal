@@ -13,7 +13,7 @@ default:
       value: Sensemaking
   description:
     -
-      value: '<p><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">To make sense of; to understand.</span></p>'
+      value: '<p>To make sense of; to understand</p>'
       format: html
   weight:
     -

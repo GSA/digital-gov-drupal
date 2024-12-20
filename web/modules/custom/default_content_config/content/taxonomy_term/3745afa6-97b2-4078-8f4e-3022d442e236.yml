@@ -13,7 +13,7 @@ default:
       value: Accessibility
   description:
     -
-      value: '<p><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">The extent to which content is available, understandable, and usable by all audiences, regardless of sensory, physical, cognitive, intellectual, or situational disabilities or impairments.</span></p>'
+      value: '<p>The extent to which content is available, understandable, and usable by all audiences, regardless of sensory, physical, cognitive, intellectual, or situational disabilities or impairments</p>'
       format: html
   weight:
     -

@@ -13,7 +13,7 @@ default:
       value: Ideate
   description:
     -
-      value: '<p><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">To form an idea of; imagine or conceive. In design thinking, this refers to imagining or conceiving of multiple ideas for solutions to problems, usually in succession and building off each idea.</span></p>'
+      value: '<p>To form an idea of; imagine or conceive. In design thinking, this refers to imagining or conceiving of multiple ideas for solutions to problems, usually in succession and building off each idea.</p>'
       format: html
   weight:
     -

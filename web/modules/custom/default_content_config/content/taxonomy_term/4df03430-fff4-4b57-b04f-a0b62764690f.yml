@@ -13,7 +13,7 @@ default:
       value: Decode
   description:
     -
-      value: '<p><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">To understand; to analyze in order to find meaning</span></p>'
+      value: '<p>To understand; to analyze in order to find meaning</p>'
       format: html
   weight:
     -

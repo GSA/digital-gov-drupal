@@ -13,7 +13,7 @@ default:
       value: 'Ethnographic research'
   description:
     -
-      value: '<p><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">Ethnographic research tries to understand how people live their lives. Unlike traditional researchers, who ask specific, highly practical questions, ethnographers may visit homes or offices to observe and listen in a non-directed way. While this observational method may appear inefficient, it enlightens us about the context in which customers see their own environment.</span></p>'
+      value: '<p>Ethnographic research tries to understand how people live their lives. Unlike traditional researchers, who ask specific, highly practical questions, ethnographers may visit homes or offices to observe and listen in a non-directed way. While this observational method may appear inefficient, it enlightens us about the context in which customers see their own environment.</p>'
       format: html
   weight:
     -

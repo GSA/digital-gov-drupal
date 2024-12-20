@@ -13,7 +13,7 @@ default:
       value: 'Yes, And'
   description:
     -
-      value: '<p><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">In design thinking, the logical opposition to the statement, “No, But...” Meant to set up acceptance and integration, this form of reply to statements can allow for expansive conversation instead of a negation of opinions and options.</span></p>'
+      value: '<p>In design thinking, the logical opposition to the statement, “No, But...” Meant to set up acceptance and integration, this form of reply to statements can allow for expansive conversation instead of a negation of opinions and options.</p>'
       format: html
   weight:
     -

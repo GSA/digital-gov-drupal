@@ -13,7 +13,7 @@ default:
       value: Empathy
   description:
     -
-      value: '<p><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">The action of understanding, being aware of, being sensitive to, and vicariously experiencing the feelings, thoughts, and experience of another through a shared experience.</span></p>'
+      value: '<p>The action of understanding, being aware of, being sensitive to, and vicariously experiencing the feelings, thoughts, and experience of another through a shared experience.</p>'
       format: html
   weight:
     -

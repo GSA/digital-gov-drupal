@@ -13,7 +13,7 @@ default:
       value: 'Best Practice'
   description:
     -
-      value: '<p><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">Procedures or approaches that are accepted or prescribed as being correct or most effective</span></p>'
+      value: '<p>Procedures or approaches that are accepted or prescribed as being correct or most effective.</p>'
       format: html
   weight:
     -

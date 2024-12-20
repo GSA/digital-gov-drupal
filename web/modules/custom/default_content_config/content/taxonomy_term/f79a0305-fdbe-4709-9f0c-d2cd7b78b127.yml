@@ -13,7 +13,7 @@ default:
       value: 'How Might We Question'
   description:
     -
-      value: '<p><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">A “How Might We” (HMW) question serves two purposes. First, it is the frame of inquiry, or the area of research. Second, it should spur and inspire the research team. A good HMW research question will focus but also leave room for exploration.</span></p>'
+      value: '<p>A “How Might We” (HMW) question serves two purposes. First, it is the frame of inquiry, or the area of research. Second, it should spur and inspire the research team. A good HMW research question will focus but also leave room for exploration.</p>'
       format: html
   weight:
     -

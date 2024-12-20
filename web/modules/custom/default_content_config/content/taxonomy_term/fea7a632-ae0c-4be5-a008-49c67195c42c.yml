@@ -13,7 +13,7 @@ default:
       value: Innovation
   description:
     -
-      value: '<p><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">A new idea, method, or device. In design thinking, usually characterized by a break from traditional or institutionalized methods, production methods, or products.</span></p>'
+      value: '<p>A new idea, method, or device. In design thinking, usually characterized by a break from traditional or institutionalized methods, production methods, or products.</p>'
       format: html
   weight:
     -

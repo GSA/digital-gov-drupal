@@ -13,7 +13,7 @@ default:
       value: Shadowing
   description:
     -
-      value: '<p><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">A research methodology during which the researcher follows the participant through the participant’s activities. These activities show the researcher the participant’s physical context, as well as their interactions within that context.</span></p>'
+      value: '<p>A research methodology during which the researcher follows the participant through the participant’s activities. These activities show the researcher the participant’s physical context, as well as their interactions within that context.</p>'
       format: html
   weight:
     -

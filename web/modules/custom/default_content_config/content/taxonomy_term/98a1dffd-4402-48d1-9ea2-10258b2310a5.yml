@@ -13,7 +13,7 @@ default:
       value: 'Internal bias'
   description:
     -
-      value: '<p><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">A universal situation in which humans feel or show inclination or prejudice for or against someone or something. In design thinking, the inherency of internal bias is accepted, and we correct for these biases through awareness and acknowledgment of them.</span></p>'
+      value: '<p>A universal situation in which humans feel or show inclination or prejudice for or against someone or something. In design thinking, the inherency of internal bias is accepted, and we correct for these biases through awareness and acknowledgment of them.</p>'
       format: html
   weight:
     -

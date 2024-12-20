@@ -13,7 +13,7 @@ default:
       value: 'Front Stage / Back Stage'
   description:
     -
-      value: '<p><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">Parts of a service that is visible to the user of that service are called front stage. Parts of a service with which the service provider interacts, but which are not visible to the user of the service, are called back stage</span></p>'
+      value: '<p>Parts of a service that is visible to the user of that service are called front stage. Parts of a service with which the service provider interacts, but which are not visible to the user of the service, are called back stage.</p>'
       format: html
   weight:
     -

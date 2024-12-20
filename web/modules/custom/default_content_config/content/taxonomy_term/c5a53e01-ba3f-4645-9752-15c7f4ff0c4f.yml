@@ -13,7 +13,7 @@ default:
       value: ROI
   description:
     -
-      value: '<p><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">Acronym for </span><em><span style="font-family:&quot;Aptos&quot;,sans-serif;font-size:12.0pt;">Return on Investment</span></em></p>'
+      value: '<p>Acronym for <em>Return on Investment</em>.</p>'
       format: html
   weight:
     -
