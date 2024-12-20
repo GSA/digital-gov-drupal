@@ -51,7 +51,8 @@ class RoboFile extends Tasks
                 'media',
                 'redirect',
                 'user',
-                'taxonomy_term',
+                'config_pages',
+                'taxonomy',
             ],
         ]
     ): ResultData
