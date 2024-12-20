@@ -53,3 +53,4 @@ b4d1a71ae39798e387fe895acb3c924c|Oscar Merida|feature/DIGITAL-140-security-kit|T
 142970354860260a21a9a93d4c5b2fe0|christian medders|feature/DIGITAL-150-limit-menu-access|Thu Dec 19 12:39:17 EST 2024|./composer.sh require drupal/menu_admin_per_menu:^1.6
 bd7840ebd67d69715dbd07eef9ceb742|cathybaptista|feature/DIGITAL-114-implement-identifier-block|Thu Dec 19 12:41:31 EST 2024|./composer.sh require drupal/config_pages
 72cca00bd0b4403e0db152c489a8e0a1|Matt Poole|feature/DIGITAL-114-implement-identifier-block|Thu Dec 19 15:32:32 EST 2024|./composer.sh require drupal/link_class
+bacba6f18da55115fe3ba341387f2524|Matt Poole|feature/DIGITAL-158-log-stdout|Fri Dec 20 10:38:00 EST 2024|./composer.sh require drupal/log_stdout:^1.5

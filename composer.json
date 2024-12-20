@@ -34,6 +34,7 @@
         "drupal/inline_entity_form": "^3.0@RC",
         "drupal/link_class": "^2.1",
         "drupal/linkit": "^6.1",
+        "drupal/log_stdout": "^1.5",
         "drupal/maillog": "dev-1.x",
         "drupal/mailsystem": "^4.4",
         "drupal/masquerade": "^2.0",
