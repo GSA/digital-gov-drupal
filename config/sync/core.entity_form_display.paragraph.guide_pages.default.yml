@@ -1,0 +1,36 @@
+uuid: 873ef0b3-fe5e-40e5-85a4-40aaec2cb332
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.guide_pages.field_guide_link
+    - field.field.paragraph.guide_pages.field_guide_subnav
+    - paragraphs.paragraphs_type.guide_pages
+id: paragraph.guide_pages.default
+targetEntityType: paragraph
+bundle: guide_pages
+mode: default
+content:
+  field_guide_link:
+    type: entity_reference_autocomplete
+    weight: 0
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_guide_subnav:
+    type: entity_reference_autocomplete
+    weight: 1
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
