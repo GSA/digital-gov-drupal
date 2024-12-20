@@ -6,6 +6,7 @@ on:
       - develop
       - main
       - stage
+      - feature/DIGITAL-158-log-stdout
 
 permissions:
   contents: read
