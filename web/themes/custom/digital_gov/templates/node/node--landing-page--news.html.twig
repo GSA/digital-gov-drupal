@@ -67,24 +67,25 @@
   <div class="grid-container grid-container-desktop">
     <div class="grid-row">
       <div class="grid-col-12">
-        <header class="page-head page-head-{# NOT-MIGRATED {{ .Type }} #}">
+        <header class="page-head page-head-{{ Type }}">
           {# Page Title #}
-          <h1>{{ node.title.value }}</h1>
+          <h1>{{ label|field_value }}</h1>
 
           {# Deck #}
-          {% if content.field_deck %}
+          {# todo: check to see if we need to take the summary field out since they are seem to be using deck for landing page #}
+          {% if content.field_deck|field_value %}
             <h2 class="deck">{{ content.field_deck|field_value }}</h2>
           {% endif %}
-
         </header>
       </div>
     </div>
   </div>
-
   <section class="stream">
     <div class="grid-container grid-container-desktop">
-      [placeholder Blog Posts by Topic —
-      List all of the blog posts and events tagged with this topic]
+
+{# {{ drupal_view('news_posts', 'block_1') }} #}
+
+      {{ drupal_view('news_and_events', 'block_1') }}
 
       {# NOT-MIGRATED #}
       {# Gets the past events #}

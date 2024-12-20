@@ -1,0 +1,14 @@
+uuid: eb1897da-b879-463d-a24c-37394c85692e
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.identifier_admin
+  module:
+    - user
+id: user_add_role_action.identifier_admin
+label: 'Add the Identifier Admin role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: identifier_admin

@@ -71,41 +71,8 @@
         <h2 class="deck">{{ content.field_deck|field_value }}</h2>
       {% endif %}
     </header>
-    <section class="dg-guides">
-      <ul class="usa-card-group">
-        [placeholder for Guide cards]
+    [Place holder for guides list]
+    {# NOT-MIGRATED https://github.com/GSA/digitalgov.gov/blob/19d2145fc1c559db978cf3328f8211549786a207/themes/digital.gov/layouts/guides/list.html #}
 
-        {# NOT-MIGRATED
-        {{ range $guidePages.ByParam "guide_weight" }}
-        {{ $image := .Params.image }}
-        {{ $layout := "" }}
-        {{ if $image }}
-        {{ $layout = "has-image" }}
-        {{ else }}
-        {{ $layout = "no-image" }}
-        {{ end }}
-        {{ $kicker := "Digital.gov Guide" }}
-        {{ if .Params.guide_weight }}
-        <li class="usa-card tablet:grid-col-4 dg-guides-card">
-          {{ $card_data := (dict
-          "header" .Title
-          "body" .Params.summary
-          "link" (.Permalink | relURL)
-          "link_title" .Title
-          "image" $image
-          "alt" "Test Alt"
-          "layout" $layout
-          "kicker" $kicker
-          "site" .Site
-          )
-          }}
-
-          {{ partial "core/usa-card.html" (dict "card_data" $card_data) }}
-        </li>
-        {{ end }}
-        {{ end }}
-        #}
-      </ul>
-    </section>
   </div>
 </main>

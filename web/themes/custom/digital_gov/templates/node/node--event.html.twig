@@ -90,11 +90,12 @@
           ></use>
         </svg>
 
-        {{ start_date }}
-        <span>{{ start_time }}
-          {% if (end_time) %}
-            – {{ end_time }}
+        {{ node.getCreatedTime|format_date('digital_gov_date') }}
+        <span>{{ node.getCreatedTime|format_date('digital_gov_time') }}
+          {% if content.field_end_date|field_value %}
+            – {{ content.field_end_date|field_value }}
           {% endif %}
+          {{ 'now'|date('T') }}
       </span>
       </p>
       {% if (node.field_host.value) %}
@@ -103,9 +104,9 @@
 
     </header>
     {# EVENT Actions — REGISTER and Add to Calendar #}
-    {% if is_future_event and node.field_registration_url %}
+    {% if is_future_event and content.field_registration_url|field_value %}
       <div class="dg-register">
-        {{ _self.registration_link(node) }}
+        {{ _self.registration_link(content) }}
       </div>
     {% endif %}
 
@@ -155,13 +156,11 @@
           }, with_context=false) }}
         {% endif %}
 
-        {% if node.field_event_platform.value == 'youtube_live' %}
-          {% if is_future_event %}
-            <div class="actions actions-stacked">
-              {# Register #}
-              {{ _self.registration_link(node) }}
-            </div>
-          {% endif %}
+        {% if node.field_event_platform.value == 'youtube_live' and is_future_event and content.field_registration_url|field_value %}
+          <div class="actions actions-stacked">
+            {# Register #}
+            {{ _self.registration_link(content) }}
+          </div>
         {% endif %}
 
         {# Display Primary Communities #}
@@ -183,12 +182,12 @@
   </article>
 
 </main>
-{% macro registration_link(node) %}
+{% macro registration_link(content) %}
   <a
-    aria-label="Register for {{ node.getTitle() }}"
+    aria-label="Register for {{ content.label }}"
     class="btn btn-register"
-    href="{{ node.field_registration_url.value[0].uri }}"
-    onclick="__gaTracker('send', 'event', 'outbound-article', '{{ node.field_registration_url.value[0].uri }}', 'REGISTER NOW');"
-  >Register</a
+    href="{{ content.field_registration_url|field_value }}"
+    onclick="__gaTracker('send', 'event', 'outbound-article', '{{ content.field_registration_url|field_value }}', '{{ 'REGISTER NOW'|t }}');"
+  >{{ 'Register'|t }}</a
   >
 {% endmacro %}

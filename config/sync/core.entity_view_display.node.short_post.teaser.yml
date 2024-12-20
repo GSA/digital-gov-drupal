@@ -36,13 +36,13 @@ content:
     region: content
   field_external_url:
     type: link
-    label: above
+    label: hidden
     settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
+      trim_length: null
+      url_only: true
+      url_plain: true
+      rel: '0'
+      target: '0'
     third_party_settings: {  }
     weight: 1
     region: content
@@ -62,10 +62,11 @@ content:
     weight: 3
     region: content
   field_source:
-    type: entity_reference_label
+    type: entity_reference_entity_view
     label: above
     settings:
-      link: true
+      view_mode: teaser
+      link: false
     third_party_settings: {  }
     weight: 4
     region: content

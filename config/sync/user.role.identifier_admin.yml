@@ -1,0 +1,12 @@
+uuid: ad7141fe-cc44-4094-9643-ad3bc5fc3850
+langcode: en
+status: true
+dependencies:
+  module:
+    - config_pages
+id: identifier_admin
+label: 'Identifier Admin'
+weight: 9
+is_admin: null
+permissions:
+  - 'edit identifier config page entity'

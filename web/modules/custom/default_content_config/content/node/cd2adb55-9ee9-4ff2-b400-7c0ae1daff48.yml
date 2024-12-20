@@ -78,9 +78,6 @@ default:
       uri: 'https://www.eventbrite.com/e/plain-language-and-section-508-tickets-142940070599'
       title: ''
       options: {  }
-  field_start_date:
-    -
-      value: '2021-03-10T19:00:00'
   field_summary:
     -
       value: 'Come join us  as we focus on concerns and opportunities shared by the   Section 508 and plain language communities in Government!'

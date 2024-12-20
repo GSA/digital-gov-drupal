@@ -1,0 +1,8 @@
+uuid: 16a28556-69ed-4072-9013-1b27b6c03d28
+langcode: en
+status: true
+dependencies: {  }
+id: digital_gov_date
+label: 'Digital.gov Date'
+locked: false
+pattern: 'l, F j, Y'

@@ -1,0 +1,8 @@
+uuid: 460f73d0-1cde-4992-ad1a-2fc731af2e85
+langcode: en
+status: true
+dependencies: {  }
+id: digital_gov_time
+label: 'Digital.gov Time'
+locked: false
+pattern: 'g:i A'

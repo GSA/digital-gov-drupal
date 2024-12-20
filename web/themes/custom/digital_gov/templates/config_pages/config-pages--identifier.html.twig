@@ -1,0 +1,76 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a config_page.
+ *
+ * @see template_preprocess_config_pages()
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+  'config_pages',
+  'config_pages--type--' ~ config_pages.bundle|clean_class,
+  view_mode ? 'config_pages--view-mode--' ~ view_mode|clean_class,
+  view_mode ? 'config_pages--' ~ config_pages.bundle|clean_class ~ '--' ~ view_mode|clean_class,
+]
+%}
+<div class="usa-identifier">
+  <section
+    class="usa-identifier__section usa-identifier__section--masthead"
+    aria-label="{{ 'Agency identifier,'|t }}"
+  >
+    <div class="usa-identifier__container">
+      {% if content.field_logo_icon|field_value %}
+        <div class="usa-identifier__logos">
+          <a href="{{ content.field_parent_link[0]['#url'] }}" class="usa-identifier__logo">
+            {{ drupal_image(
+              config_pages.field_logo_icon|file_uri,
+              '',
+              {
+                height: 100,
+                width: 100,
+                role: 'img',
+                class: 'usa-identifier__logo-img',
+                alt: content.field_acronym|field_value|render ~ ' logo',
+              },
+            ) }}
+          </a>
+        </div>
+      {% endif %}
+      {% if content.field_site_name|field_value or content.field_parent_link|field_value %}
+        <section
+          class="usa-identifier__identity"
+          aria-label="Agency description,"
+        >
+          {% if content.field_site_name|field_value %}
+            <p class="usa-identifier__identity-domain">{{ content.field_site_name|field_value }}</p>
+          {% endif %}
+          {% if content.field_parent_link|field_value %}
+            <p class="usa-identifier__identity-disclaimer">
+              {{ 'An official website of the'|t }}
+              {{ content.field_parent_link|field_value }}
+            </p>
+          {% endif %}
+        </section>
+      {% endif %}
+    </div>
+  </section>
+  {{ content.field_links }}
+  {% if content.field_subtext|field_value or content.field_visit_link|field_value %}
+    <section
+      class="usa-identifier__section usa-identifier__section--usagov"
+      aria-label="{{ 'U.S. government information and services'|t }}"
+    >
+      <div class="usa-identifier__container">
+        {% if content.field_subtext|field_value %}
+          <div class="usa-identifier__usagov-description">
+            {{ content.field_subtext|field_value }}
+          </div>
+        {% endif %}
+        {{ content.field_visit_link|field_value }}
+      </div>
+    </section>
+  {% endif %}
+</div>

@@ -17,7 +17,6 @@ dependencies:
     - field.field.node.event.field_primary_image
     - field.field.node.event.field_registration_url
     - field.field.node.event.field_slug
-    - field.field.node.event.field_start_date
     - field.field.node.event.field_summary
     - field.field.node.event.field_topics
     - field.field.node.event.field_venue
@@ -39,12 +38,12 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 101
+    weight: 2
     region: content
   content_moderation_control:
     settings: {  }
     third_party_settings: {  }
-    weight: -20
+    weight: 0
     region: content
   field_authors:
     type: entity_reference_label
@@ -52,7 +51,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 126
+    weight: 18
     region: content
   field_captions:
     type: link
@@ -64,23 +63,23 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    weight: 123
+    weight: 15
     region: content
   field_deck:
     type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 108
+    weight: 6
     region: content
   field_end_date:
     type: datetime_default
     label: above
     settings:
       timezone_override: ''
-      format_type: medium
+      format_type: digital_gov_time
     third_party_settings: {  }
-    weight: 124
+    weight: 16
     region: content
   field_event_organizer:
     type: string
@@ -88,7 +87,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 117
+    weight: 12
     region: content
   field_event_platform:
     type: string
@@ -96,7 +95,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 113
+    weight: 9
     region: content
   field_featured_image:
     type: entity_reference_entity_view
@@ -105,7 +104,7 @@ content:
       view_mode: default
       link: false
     third_party_settings: {  }
-    weight: 119
+    weight: 13
     region: content
   field_host:
     type: string
@@ -113,7 +112,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 109
+    weight: 7
     region: content
   field_kicker:
     type: string
@@ -121,7 +120,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 116
+    weight: 11
     region: content
   field_page_weight:
     type: number_integer
@@ -130,7 +129,7 @@ content:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 102
+    weight: 3
     region: content
   field_primary_image:
     type: entity_reference_entity_view
@@ -139,19 +138,19 @@ content:
       view_mode: default
       link: false
     third_party_settings: {  }
-    weight: 114
+    weight: 10
     region: content
   field_registration_url:
     type: link
     label: above
     settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
+      trim_length: null
+      url_only: true
+      url_plain: true
+      rel: '0'
+      target: '0'
     third_party_settings: {  }
-    weight: 110
+    weight: 8
     region: content
   field_slug:
     type: string
@@ -159,23 +158,14 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 106
-    region: content
-  field_start_date:
-    type: datetime_default
-    label: above
-    settings:
-      timezone_override: ''
-      format_type: medium
-    third_party_settings: {  }
-    weight: 111
+    weight: 5
     region: content
   field_summary:
     type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 104
+    weight: 4
     region: content
   field_topics:
     type: entity_reference_label
@@ -183,7 +173,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 125
+    weight: 17
     region: content
   field_venue:
     type: entity_reference_revisions_entity_view
@@ -192,7 +182,7 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 128
+    weight: 19
     region: content
   field_youtube_id:
     type: string
@@ -200,11 +190,11 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 122
+    weight: 14
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 1
     region: content
 hidden: {  }

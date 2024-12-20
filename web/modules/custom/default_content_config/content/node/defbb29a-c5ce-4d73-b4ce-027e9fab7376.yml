@@ -31,15 +31,12 @@ default:
       value: published
   path:
     -
-      alias: /event/9999/09/09/event-all-required-fields
+      alias: /event/2024/10/23/event-all-required-fields
       langcode: en
       pathauto: 1
-  field_start_date:
-    -
-      value: '9999-09-09T13:09:09'
   field_summary:
     -
-      value: 'nulla iaculis ligula fames proin in <b>erat</b>'
+      value: '<p>nulla iaculis ligula fames proin in <strong>erat</strong></p>'
       format: single_inline_html
   field_venue:
     -

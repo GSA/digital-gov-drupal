@@ -34,7 +34,10 @@ default:
       alias: /guides
       langcode: en
       pathauto: 0
-  field_summary:
+  field_deck:
     -
-      value: 'Go beyond the basics with these expert-level how-to guides. Think of these guides as digital textbooks that provide comprehensive information and tactics for building excellent digital experiences.'
+      value: '<p>Go beyond the basics with these expert-level how-to guides. Think of these guides as digital textbooks that provide comprehensive information and tactics for building excellent digital experiences.</p>'
       format: single_inline_html
+  field_landing_page_type:
+    -
+      value: guides

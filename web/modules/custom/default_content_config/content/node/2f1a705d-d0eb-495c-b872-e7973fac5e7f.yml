@@ -1,0 +1,48 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 2f1a705d-d0eb-495c-b872-e7973fac5e7f
+  bundle: short_post
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Cloud and Infrastructure'
+  created:
+    -
+      value: 1734554823
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_external_url:
+    -
+      uri: 'https://www.cio.gov/about/members-and-leadership/cloud-infrastructure-cop/'
+      title: ''
+      options: {  }
+  field_short_post_type:
+    -
+      value: community
+  field_summary:
+    -
+      value: '<p>A community for those who support their agency’s IT modernization efforts, and want to learn about application rationalization, data center optimization, and federal cloud computing.</p>'
+      format: single_inline_html

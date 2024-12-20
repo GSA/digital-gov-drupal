@@ -1,0 +1,8 @@
+uuid: c50d23c1-d28c-47cc-906b-161d73c550f6
+langcode: en
+status: true
+dependencies: {  }
+id: digital_gov_short_date
+label: 'Digital.gov Short Date'
+locked: false
+pattern: 'M j, Y'

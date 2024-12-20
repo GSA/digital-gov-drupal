@@ -1,37 +1,118 @@
-{% set is_past_event = end_date < now ? true : false %}
+{#
+/**
+ * @file
+ * Default theme implementation to display a node.
+ *
+ * Available variables:
+ * - node: The node entity with limited access to object properties and methods.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - node.getCreatedTime() will return the node creation timestamp.
+ *   - node.hasField('field_example') returns TRUE if the node bundle includes
+ *     field_example. (This does not indicate the presence of a value in this
+ *     field.)
+ *   - node.isPublished() will return whether the node is published or not.
+ *   Calling other methods, such as node.delete(), will result in an exception.
+ *   See \Drupal\node\Entity\Node for a full list of public properties and
+ *   methods for the node object.
+ * - label: (optional) The title of the node.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
+ * - metadata: Metadata for this node.
+ * - date: (optional) Themed creation date field.
+ * - author_name: (optional) Themed author name field.
+ * - url: Direct URL of the current node.
+ * - display_submitted: Whether submission information should be displayed.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - node: The current template type (also known as a "theming hook").
+ *   - node--type-[type]: The current node type. For example, if the node is an
+ *     "Article" it would result in "node--type-article". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   The following are controlled through the node publishing options.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - author_attributes: Same as attributes, except applied to the author of
+ *   the node tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ *
+ * @see template_preprocess_node()
+ *
+ * @ingroup themeable
+ */
+#}
 {% set title = node.label %}
 {% set summary = content.field_summary|field_value %}
+{% set deck = content.field_deck|field_value %}
 {% set kicker = content.field_kicker|field_value %}
 {% set youtube_id = content.field_youtube_id|field_value %}
 {% set registration_url = content.field_registration_url|render|trim %}
-{% set month = content.field_start_date.value|date('M') %}
-{% set day = content.field_start_date.value|date('d') %}
-{% set year = content.field_start_date.value|date('Y') %}
+{% set external_link = content.field_external_url|field_value %}
+{% set unique_id = title|clean_unique_id %}
 
-<article class="card-news--external" aria-labelledby="{{ title }}">
+{% if content.field_source|field_value %}
+  {% set source = content.field_source.0['#node'] %}
+  {% set source_name %}{% apply spaceless %}
+    {{ drupal_field('title', 'node', source.id)|field_value }}
+  {% endapply %}{% endset %}
+  {% if drupal_field('field_logo', 'node', source.id)|field_value %}
+    {% set source_logo_url %}{% apply spaceless %}
+      {{ source.field_logo|file_uri|image_style('thumbnail') }}
+    {% endapply %}{% endset %}
+  {% endif %}
+{% endif %}
+<article class="card card-news--external" aria-labelledby="{{ unique_id }}">
   <div class="card__content">
     <div class="card__summary">
-      <h3 id="{{ title }}">
-        {# todo: update once ext link file is added to shortpost #}
-        {# <a href="{{- $externalLink -}}">{{- $title | markdownify -}}</a> #}<a>
-        {{ title }}
-      </a>
+      <h3 id="{{ unique_id }}">
+        <a href="{{ external_link }}">{{ title }}</a>
       </h3>
-        <p>
-          {% if deck %}
+      <p>
         {{ deck }}
-        {% endif %}
-          {# todo: update once ext link file is added to shortpost #}
-          {# {% if sourcePage %}
-            <em class="card__source source"> — via
-            <a href="{{ $externalLink }}" title="Read at {{ sourceName }}">{{ sourceName }}</a>
+        {% if source_name %}
+          <em class="card__source source"> — via
+            <a href="{{ external_link }}" title="Read at {{ source_name }}">{{ source_name }}</a>
           </em>
-        {% endif %} #}
+        {% endif %}
       </p>
     </div>
   </div>
+  {# This cannot be the content.field_source rendered as the teaser template
+  because the card__media needs the external link which is from the referring
+  node (short post) #}
+  <div class="card__media">
+    {% if source_logo_url %}
+      {# todo: new image style for logo #}
+      <img src="{{ source_logo_url }}" alt="{{ source_name }} logo"/>
+    {% else %}
+      {# {{/* Otherwise, use the Favicon that Google stores for the site. */}} #}
+      {# todo: follow up on this getting the favicon from the agency need to use the source title #}
+      <img src="{{ dg_local_logo_fallback_lookup_favicon(external_link|render) }}" alt="{{ source_name }} logo"/>
+    {% endif %}
+  </div>
+
   <div class="card__meta">
-    <div class="date">{{ date }}
-    </div>
+    <div class="date">{{ created }}</div>
   </div>
 </article>

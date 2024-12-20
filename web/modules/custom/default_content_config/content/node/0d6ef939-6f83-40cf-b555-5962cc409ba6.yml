@@ -75,9 +75,6 @@ default:
       uri: 'https://www.eventbrite.com/e/federal-crowdsourcing-webinar-series-episode-3-the-opportunity-project-registration-59460181002 captions:'
       title: ''
       options: {  }
-  field_start_date:
-    -
-      value: '2050-11-06T14:00:00'
   field_summary:
     -
       value: 'The Opportunity Project engages government, communities, and the technology industry to create digital tools that address our greatest challenges as a nation. Learn how this initiative is making government data more accessible through cross-sector collabo'

@@ -70,9 +70,6 @@ default:
       uri: 'https://www.eventbrite.com/e/100304240684'
       title: ''
       options: {  }
-  field_start_date:
-    -
-      value: '2020-04-15T18:00:00'
   field_summary:
     -
       value: 'We’ll discuss how plain language intersects with 508 compliance requirements to make federal electronic documents and information technology accessible to people with disabilities.'

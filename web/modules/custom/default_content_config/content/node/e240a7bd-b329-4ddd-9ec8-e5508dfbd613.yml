@@ -23,7 +23,7 @@ default:
       value: 'Event-all fields'
   created:
     -
-      value: 1729461236
+      value: 1760997236
   promote:
     -
       value: false
@@ -35,7 +35,7 @@ default:
       value: published
   path:
     -
-      alias: /event/2024/06/20/event-all-fields
+      alias: /event/2025/10/20/event-all-fields
       langcode: en
       pathauto: 1
   body:
@@ -53,11 +53,11 @@ default:
       options: {  }
   field_deck:
     -
-      value: 'nulla iaculis ligula fames proin in <b>erat</b>'
+      value: '<p>nulla iaculis ligula fames proin in <strong>erat</strong></p>'
       format: single_inline_html
   field_end_date:
     -
-      value: '2024-06-20T19:00:00'
+      value: '2025-10-21T02:00:00'
   field_event_organizer:
     -
       value: Digital.gov
@@ -84,12 +84,9 @@ default:
       uri: 'https://lorem.com'
       title: ''
       options: {  }
-  field_start_date:
-    -
-      value: '2024-06-20T18:00:00'
   field_summary:
     -
-      value: 'nulla iaculis ligula fames proin in <b>erat</b>'
+      value: '<p>nulla iaculis ligula fames proin in <strong>erat</strong></p>'
       format: single_inline_html
   field_topics:
     -

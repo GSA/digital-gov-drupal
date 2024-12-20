@@ -1,0 +1,22 @@
+uuid: 5a3489b8-36a8-487d-a864-27f0b8b96f87
+langcode: en
+status: true
+dependencies:
+  module:
+    - config_pages
+  theme:
+    - digital_gov
+id: digital_gov_config_pages
+theme: digital_gov
+region: footer
+weight: 0
+provider: null
+plugin: config_pages_block
+settings:
+  id: config_pages_block
+  label: 'ConfigPages Block: Identifier'
+  label_display: '0'
+  provider: config_pages
+  config_page_type: identifier
+  config_page_view_mode: full
+visibility: {  }

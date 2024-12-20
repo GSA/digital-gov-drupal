@@ -48,11 +48,8 @@ a8e36d32c49aca75de1d6f5efc57a38e|Matt Poole|feature/DIGITAL-195-sso-configuratio
 375ea7aa8ac9c84f804100548773e80a|Matt Poole|feature/DIGITAL-195-sso-configuration|Thu Dec  5 13:06:09 EST 2024|./composer.sh require drupal/masquerade:^2.0
 242e11a4450398bd561ee3cd44612692|Oscar Merida|feature/DIGITAL-37-resource-paragraphs|Thu Dec  5 15:56:55 EST 2024|./composer.sh require drupal/paragraph_view_mode
 6666e18e6102d15f7bb8b271da64f9b8|Matt Poole|feature/DIGITAL-37-resource-paragraphs|Tue Dec 10 14:32:53 EST 2024|./composer.sh require drupal/maxlength:^3.1
-<<<<<<< HEAD
-5ab5e54194bdb2b45dc4370192ff16d1|christian medders|feature/DIGITAL-154-autologout|Tue Dec 10 13:11:08 EST 2024|./composer.sh require drupal/autologout:^2.0
-||||||| ed814d0
-=======
+142970354860260a21a9a93d4c5b2fe0|christian medders|feature/DIGITAL-154-autologout|Thu Dec 19 12:37:04 EST 2024|./composer.sh require drupal/autologout:^2.0
 b4d1a71ae39798e387fe895acb3c924c|Oscar Merida|feature/DIGITAL-140-security-kit|Thu Dec 12 10:06:04 EST 2024|./composer.sh require drupal/seckit
-9d4dae55a60e19d5e5ea7f13f204c7bc|christian medders|feature/DIGITAL-150-limit-menu-access|Thu Dec 12 10:52:20 EST 2024|./composer.sh require drupal/menu_admin_per_menu:^1.6
->>>>>>> origin/develop
-5edafbefb51bfd7b7c83148644878a50|Matt Poole|feature/DIGITAL-154-autologout|Thu Dec 12 11:35:44 EST 2024|./composer.sh require drupal/autologout:^2.0
+142970354860260a21a9a93d4c5b2fe0|christian medders|feature/DIGITAL-150-limit-menu-access|Thu Dec 19 12:39:17 EST 2024|./composer.sh require drupal/menu_admin_per_menu:^1.6
+bd7840ebd67d69715dbd07eef9ceb742|cathybaptista|feature/DIGITAL-114-implement-identifier-block|Thu Dec 19 12:41:31 EST 2024|./composer.sh require drupal/config_pages
+72cca00bd0b4403e0db152c489a8e0a1|Matt Poole|feature/DIGITAL-114-implement-identifier-block|Thu Dec 19 15:32:32 EST 2024|./composer.sh require drupal/link_class

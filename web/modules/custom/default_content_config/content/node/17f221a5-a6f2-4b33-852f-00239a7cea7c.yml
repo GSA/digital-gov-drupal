@@ -62,9 +62,6 @@ default:
       uri: 'https://gsa.zoomgov.com/meeting/register/vJItdOmpqTgpEygCPS5a5zwjlr-_nNeqAR4'
       title: ''
       options: {  }
-  field_start_date:
-    -
-      value: '2050-12-09T22:00:00'
   field_summary:
     -
       value: 'Join us for a discussion on how to adapt your career in user experience (UX) to a quickly changing world.'

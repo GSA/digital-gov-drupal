@@ -1,0 +1,11 @@
+uuid: c1a0aa17-295f-42c7-90e1-b3cd6c047a47
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.collection_item
+label: 'Collection Item'
+description: 'Display as a USA Collection Item.'
+targetEntityType: node
+cache: true

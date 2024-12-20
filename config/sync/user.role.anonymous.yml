@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   module:
+    - config_pages
     - media
     - system
 _core:
@@ -13,4 +14,5 @@ weight: 0
 is_admin: false
 permissions:
   - 'access content'
+  - 'view identifier config page entity'
   - 'view media'

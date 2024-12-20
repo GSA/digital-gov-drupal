@@ -20,6 +20,9 @@ settings:
     -
       value: news
       label: News
+    -
+      value: community
+      label: Community
   allowed_values_function: ''
 module: options
 locked: false

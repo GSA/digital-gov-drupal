@@ -1,0 +1,14 @@
+uuid: 5ebc895b-f3ff-46e1-940d-3d1d5d10ab6d
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.identifier_admin
+  module:
+    - user
+id: user_remove_role_action.identifier_admin
+label: 'Remove the Identifier Admin role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: identifier_admin

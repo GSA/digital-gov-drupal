@@ -16,6 +16,7 @@ dependencies:
     - node.type.topics
     - workflows.workflow.editorial
   module:
+    - config_pages
     - content_moderation
     - embedded_content
     - file
@@ -62,6 +63,7 @@ permissions:
   - 'edit any short_post content'
   - 'edit any source content'
   - 'edit any topics content'
+  - 'edit identifier config page entity'
   - 'override all authored by option'
   - 'override all authored on option'
   - 'schedule publishing of nodes'

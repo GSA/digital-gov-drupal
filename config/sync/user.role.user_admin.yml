@@ -13,5 +13,6 @@ permissions:
   - 'assign content_admin role'
   - 'assign data_analyst role'
   - 'assign editor role'
+  - 'assign identifier_admin role'
   - 'assign publisher role'
   - 'assign user_admin role'

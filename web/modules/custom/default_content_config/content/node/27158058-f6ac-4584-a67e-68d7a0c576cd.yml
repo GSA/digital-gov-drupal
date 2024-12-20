@@ -1,0 +1,48 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 27158058-f6ac-4584-a67e-68d7a0c576cd
+  bundle: short_post
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Crowdsourcing and Citizen Science'
+  created:
+    -
+      value: 1734554763
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_external_url:
+    -
+      uri: 'https://www.citizenscience.gov/about/community-of-practice/'
+      title: ''
+      options: {  }
+  field_short_post_type:
+    -
+      value: community
+  field_summary:
+    -
+      value: '<p>We work across government develop best practices for designing, implementing, and evaluating crowdsourcing and citizen science initiatives.</p>'
+      format: single_inline_html
