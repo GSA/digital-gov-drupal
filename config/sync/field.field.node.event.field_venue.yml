@@ -13,7 +13,7 @@ field_name: field_venue
 entity_type: node
 bundle: event
 label: Venue
-description: 'Physical location for the event.'
+description: 'This field is not currently displaying on pages. It may be brought back in the future when in-person events start again.'
 required: false
 translatable: false
 default_value: {  }
@@ -25,17 +25,14 @@ settings:
       venue: venue
     negate: 0
     target_bundles_drag_drop:
-      featured_resources:
+      external_content:
+        weight: 5
+        enabled: false
+      featured_links:
         weight: 6
         enabled: false
-      featured_resources_card:
+      internal_content:
         weight: 7
-        enabled: false
-      featured_resources_links:
-        weight: 8
-        enabled: false
-      featured_resources_title:
-        weight: 9
         enabled: false
       venue:
         weight: 10

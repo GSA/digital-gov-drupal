@@ -30,7 +30,6 @@ dependencies:
     - link
     - maxlength
     - media_library
-    - paragraphs
     - path
     - text
 id: node.event.default
@@ -190,24 +189,17 @@ content:
       removed_reference: optional
     third_party_settings: {  }
   field_venue:
-    type: paragraphs
+    type: inline_entity_form_simple
     weight: 21
     region: content
     settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: closed
-      closed_mode: summary
-      autocollapse: none
-      closed_mode_threshold: 0
-      add_mode: dropdown
-      form_display_mode: default
-      default_paragraph_type: venue
-      features:
-        add_above: '0'
-        collapse_edit_all: collapse_edit_all
-        convert: '0'
-        duplicate: duplicate
+      form_mode: default
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      collapsible: true
+      collapsed: true
+      revision: false
     third_party_settings: {  }
   field_youtube_id:
     type: string_textfield
