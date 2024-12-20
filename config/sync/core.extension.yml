@@ -40,6 +40,7 @@ module:
   link: 0
   link_class: 0
   linkit: 0
+  log_stdout: 0
   maillog: 0
   mailsystem: 0
   maxlength: 0
