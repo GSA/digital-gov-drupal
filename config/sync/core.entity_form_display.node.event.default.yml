@@ -172,22 +172,14 @@ content:
         maxlength_js_label: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
         maxlength_js_enforce: true
   field_topics:
-    type: inline_entity_form_complex
+    type: entity_reference_autocomplete
     weight: 19
     region: content
     settings:
-      form_mode: default
-      override_labels: false
-      label_singular: ''
-      label_plural: ''
-      allow_new: true
-      allow_existing: true
       match_operator: CONTAINS
-      allow_duplicate: false
-      collapsible: true
-      collapsed: true
-      revision: false
-      removed_reference: optional
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_venue:
     type: paragraphs
@@ -197,12 +189,12 @@ content:
       title: Paragraph
       title_plural: Paragraphs
       edit_mode: closed
-      closed_mode: preview
+      closed_mode: summary
       autocollapse: none
       closed_mode_threshold: 0
       add_mode: dropdown
       form_display_mode: default
-      default_paragraph_type: _none
+      default_paragraph_type: venue
       features:
         add_above: '0'
         collapse_edit_all: collapse_edit_all
