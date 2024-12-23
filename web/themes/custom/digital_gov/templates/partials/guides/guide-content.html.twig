@@ -4,11 +4,21 @@
     {# NOT-MIGRATED
     {{ partial "core/guides/guide-content-header.html" . }}
     #}
-    <div class="dg-guide__content-body usa-prose">
-      {{ content }}
-    </div>
-  </div>
-</section>
+  <section class="grid-row tablet-lg:grid-gap-4">
+     <div class="grid-col-12 tablet:grid-col-9">
+       <div class="dg-guide__content-body usa-prose">  
+          {{ content }}
+       </div>
+     </div>
+     <div class="dg-sidebar grid-col-12 tablet:grid-col-3">
+       <div class="dg-guide__content-body usa-prose">
+        {% if node.field_hcd_glossary.value %}
+          {% set entity = drupal_entity('block', 'digital_gov_views_block__hcd_glossary_block_1', check_access=false) %}
+          {{ entity }}
+        {% endif %}
+      </div>
+     </div>
+ </section>
 
 <section class="dg-guide__footer grid-container-desktop">
   [placeholder Guide Prev-Next]

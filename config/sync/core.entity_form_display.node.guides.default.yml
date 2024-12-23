@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.guides.field_deck
     - field.field.node.guides.field_featured_image
     - field.field.node.guides.field_guide_weight
+    - field.field.node.guides.field_hcd_glossary
     - field.field.node.guides.field_kicker
     - field.field.node.guides.field_page_weight
     - field.field.node.guides.field_primary_image
@@ -68,6 +69,12 @@ content:
     region: content
     settings:
       placeholder: ''
+    third_party_settings: {  }
+  field_hcd_glossary:
+    type: options_select
+    weight: 51
+    region: content
+    settings: {  }
     third_party_settings: {  }
   field_kicker:
     type: string_textfield

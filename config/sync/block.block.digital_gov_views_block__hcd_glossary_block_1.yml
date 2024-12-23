@@ -1,0 +1,24 @@
+uuid: a6436420-b2d7-44c3-8b86-b2c7bd4fb0f6
+langcode: en
+status: false
+dependencies:
+  config:
+    - views.view.hcd_glossary
+  module:
+    - views
+  theme:
+    - digital_gov
+id: digital_gov_views_block__hcd_glossary_block_1
+theme: digital_gov
+region: content
+weight: 0
+provider: null
+plugin: 'views_block:hcd_glossary-block_1'
+settings:
+  id: 'views_block:hcd_glossary-block_1'
+  label: ''
+  label_display: '0'
+  provider: views
+  views_label: ''
+  items_per_page: none
+visibility: {  }

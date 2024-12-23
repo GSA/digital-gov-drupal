@@ -63,10 +63,11 @@
  */
 
 #}
+  {% if node.field_hcd_glossary.value %} {{ guideData.showInPageNav }} {% endif %}
+
 <main role="main" id="main-content">
   <article class="dg-guide">
     {{ include('@digital_gov/partials/guides/guide-header.html.twig') }}
-
     {# NOT - MIGRATED
     {-- partial "core/guides/guide-menu-bar.html" . -}
     #}
@@ -75,7 +76,6 @@
     {{ $guideData = index $.Site.Data.guidenav (.Params.guide) }}
     {% endif %}
     #}
-
     {% if guideData.showInPageNav %}
     <div class="dg-guide__container">
       <aside class="dg-guide__nav">
