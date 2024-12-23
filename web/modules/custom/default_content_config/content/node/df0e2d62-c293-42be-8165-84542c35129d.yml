@@ -1,0 +1,39 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: df0e2d62-c293-42be-8165-84542c35129d
+  bundle: landing_page
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Better websites. Better government.'
+  created:
+    -
+      value: 1734639806
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /better-websites-better-government-0
+      langcode: en
+      pathauto: 1
+  field_landing_page_type:
+    -
+      value: homepage
