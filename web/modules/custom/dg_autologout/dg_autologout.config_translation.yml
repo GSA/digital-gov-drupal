@@ -1,0 +1,5 @@
+dg_autologout.config:
+  title: 'Digital.gov Autologout'
+  base_route_name: dg_autologout.set_admin
+  names:
+    - dg_autologout.settings

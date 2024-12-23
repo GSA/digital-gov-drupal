@@ -1,0 +1,27 @@
+_core:
+  default_config_hash: ou29sK1fi0MGjbVgsIAp1n-2_yofUuGcszRhDDPwpYo
+enabled: true
+timeout: 43200
+max_timeout: 43200
+padding: null
+logout_regardless_of_activity: true
+no_individual_logout_threshold: true
+role_logout: false
+role_logout_max: false
+redirect_url: /user/login
+include_destination: true
+no_dialog: true
+message: 'We are about to log you out for inactivity. If we do, you will lose any unsaved work. Do you need more time?'
+inactivity_message: 'You have been logged out due to inactivity.'
+inactivity_message_type: status
+modal_width: 450
+enforce_admin: true
+jstimer_format: '%hours%:%mins%:%secs%'
+jstimer_js_load_option: false
+use_alt_logout_method: false
+use_watchdog: true
+dialog_title: 'Digital.gov Alert'
+disable_buttons: false
+yes_button: ''
+no_button: ''
+whitelisted_ip_addresses: ''

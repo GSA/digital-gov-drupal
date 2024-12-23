@@ -17,6 +17,7 @@ module:
   dblog: 0
   default_content: 0
   default_content_config: 0
+  dg_autologout: 0
   dg_breadcrumb: 0
   dg_fields: 0
   dg_token: 0

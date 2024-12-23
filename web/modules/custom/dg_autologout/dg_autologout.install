@@ -1,0 +1,65 @@
+<?php
+
+/**
+ * @file
+ * Install and update functions for the dg_autologout module.
+ */
+
+use Drupal\Core\Database\Database;
+
+/**
+ * Transfer logouts time settings from configs to states.
+ */
+function dg_autologout_update_8001(&$sandbox) {
+  $result = Database::getConnection()
+    ->select('config', 'c')
+    ->fields('c', ['name', 'data'])
+    ->condition('name', 'dg_autologout.user.%', 'LIKE')
+    ->execute()->fetchAll();
+  if (!isset($sandbox['current'])) {
+    $sandbox['current'] = 0;
+    $sandbox['max'] = count($result);
+  }
+  $limit = 5;
+  $result = array_slice($result, $sandbox['current'], $limit);
+  foreach ($result as $row) {
+    $key = $row->name;
+    // User uid is a part of the key after.
+    // E.g. dg_autologout.user.1 for user 1.
+    $user_id = (substr($key, 16));
+    $data = serialize($row->data);
+    \Drupal::service('user.data')->set('dg_autologout', $user_id, 'timeout', $data['timeout']);
+    \Drupal::service('user.data')->set('dg_autologout', $user_id, 'enabled', $data['enabled']);
+    $sandbox['current']++;
+  }
+  $sandbox['#finished'] = empty($sandbox['max']) ? 1 : ($sandbox['current'] / $sandbox['max']);
+  if ($sandbox['#finished'] >= 1) {
+    return t('Autologout settings are successfully updated. Updated @users', ["@users" => $sandbox['max']]);
+  }
+}
+
+/**
+ * Configure default value for dialog title.
+ */
+function dg_autologout_update_8002(&$sandbox) {
+  $dg_autologout_settings = \Drupal::service('config.factory')->getEditable('dg_autologout.settings');
+  $default_dialog_title = \Drupal::config('system.site')->get('name') . ' Alert';
+  $dg_autologout_settings->set('dialog_title', $default_dialog_title)->save();
+}
+
+/**
+ * Store default value for setting 'Disable user-specific logout thresholds'.
+ */
+function dg_autologout_update_8003(&$sandbox) {
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('dg_autologout.settings');
+  $config->set('no_individual_logout_threshold', FALSE);
+  $config->save(TRUE);
+}
+
+/**
+ * Make sure the js_cookie dependency is enabled.
+ */
+function dg_autologout_update_9201(&$sandbox): void {
+  \Drupal::service('module_installer')->install(['js_cookie']);
+}
