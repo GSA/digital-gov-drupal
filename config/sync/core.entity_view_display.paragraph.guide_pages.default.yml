@@ -1,0 +1,30 @@
+uuid: 37db2c21-cb3e-4961-b3b7-ef7c0c848f88
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.guide_pages.field_guide_link
+    - field.field.paragraph.guide_pages.field_guide_subnav
+    - paragraphs.paragraphs_type.guide_pages
+id: paragraph.guide_pages.default
+targetEntityType: paragraph
+bundle: guide_pages
+mode: default
+content:
+  field_guide_link:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_guide_subnav:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden: {  }
