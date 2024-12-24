@@ -5,6 +5,7 @@ _meta:
   bundle: guides
   default_langcode: en
   depends:
+    258cf431-4a0c-4489-807e-c87087c87cf9: node
     d5b7c563-4023-4c09-b3b9-27c5d009ec37: media
     58b5051e-356e-4ace-be42-ca090259d6ab: node
 default:
@@ -46,6 +47,9 @@ default:
     -
       value: 'A set of daily scans of the federal web presence.'
       format: single_inline_html
+  field_guide_nav_ref:
+    -
+      entity: 258cf431-4a0c-4489-807e-c87087c87cf9
   field_guide_weight:
     -
       value: 3
