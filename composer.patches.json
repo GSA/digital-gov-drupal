@@ -1,5 +1,8 @@
 {
   "patches": {
+    "drupal/core":{
+      "project/drupal/issues/2916377: Allow more characters in CSS identifiers": "https://www.drupal.org/files/issues/2024-11-11/2916377-53.patch"
+    },
     "drupal/core-composer-scaffold": {
       "Disable drupal/core from scaffolding without being in composer.extra.drupal-scaffold.allowed-packages in that way one has more control of when new scaffolding is added.": "./patches/drupal.core-composer-scaffold.implicit-drupal-core-disable.patch"
     },
