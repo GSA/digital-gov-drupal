@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: a5dc01bb-31a7-4130-a768-98c6373644d1
+  bundle: hcd_glossary
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'Intercept interviews'
+  description:
+    -
+      value: '<p>Intercept interviews are conducted on-site with customers, directly interacting with services at the research site.</p>'
+      format: single_inline_html
+  weight:
+    -
+      value: 18
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

@@ -90,7 +90,7 @@ resource "cloudfoundry_app" "this" {
   docker_credentials = try(each.value.docker_credentials, null)
   docker_image = try(each.value.docker_image, null)
   enable_ssh = try(each.value.enable_ssh, try(var.env.defaults.enable_ssh, true))
-  environment = try(each.value.environment, {})
+  environment = merge(try(each.value.environment, {}), try(var.additional_environmental_variables, {}))
   health_check_http_endpoint = try(each.value.health_check_http_endpoint, try(var.env.defaults.health_check_http_endpoint, null))
   health_check_invocation_timeout = try(each.value.health_check_invocation_timeout, try(var.env.defaults.health_check_invocation_timeout, 5))
   health_check_timeout = try(each.value.health_check_timeout, try(var.env.defaults.health_check_timeout, 180))

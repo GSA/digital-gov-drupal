@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: e3518b4f-e0e6-4d67-8224-eae3f5b17d98
+  bundle: hcd_glossary
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: Sensemaking
+  description:
+    -
+      value: '<p>To make sense of; to understand</p>'
+      format: single_inline_html
+  weight:
+    -
+      value: 28
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

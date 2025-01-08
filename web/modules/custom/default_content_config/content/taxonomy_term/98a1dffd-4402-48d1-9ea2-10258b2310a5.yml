@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 98a1dffd-4402-48d1-9ea2-10258b2310a5
+  bundle: hcd_glossary
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'Internal bias'
+  description:
+    -
+      value: '<p>A universal situation in which humans feel or show inclination or prejudice for or against someone or something. In design thinking, the inherency of internal bias is accepted, and we correct for these biases through awareness and acknowledgment of them.</p>'
+      format: single_inline_html
+  weight:
+    -
+      value: 19
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

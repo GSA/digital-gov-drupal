@@ -1,3 +1,9 @@
+variable "additional_environmental_variables" {
+  description = "Additional environmental variables for the application Useful for dynamic information, like Terraform generated variables."
+  type = map(string)
+  default = {}
+}
+
 variable "cloudfoundry" {
   description = "Cloudfoundry settings."
   type = object(

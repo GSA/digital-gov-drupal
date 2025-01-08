@@ -1,0 +1,66 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 62fdaf72-5449-4312-a82e-b87b9b406f36
+  bundle: guides
+  default_langcode: en
+  depends:
+    b2f35ae8-423f-428b-865d-e420313e7a81: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Introduction to human-centered design'
+  created:
+    -
+      value: 1734454179
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /guides/introduction-human-centered-design
+      langcode: en
+      pathauto: 1
+  body:
+    -
+      value: '<p>Human-centered design (HCD) is a qualitative research method that helps groups solve problems and seek solutions that prioritize customer needs over a system’s needs. It’s also a design and management framework to develop solutions to problems by involving the human perspective in all steps of the problem-solving process. HCD involves four phases of sequential work: discovery, design, delivery, and measurement. HCD is also cyclical. Once a design solution is launched, you should measure its effectiveness against initial and intended aims, and continually tweak it to improve the solution over time. HCD recognizes that people and their needs are dynamic and changing, and so solutions must also adapt to changing needs.</p>'
+      format: html
+      summary: ''
+  field_deck:
+    -
+      value: '<p>Everything you need to know to get started with our human-centered design series</p>'
+      format: single_inline_html
+  field_glossary:
+    -
+      target_id: hcd_glossary
+  field_guide_weight:
+    -
+      value: 5
+  field_page_weight:
+    -
+      value: 0
+  field_primary_image:
+    -
+      entity: b2f35ae8-423f-428b-865d-e420313e7a81
+  field_summary:
+    -
+      value: '<p>Everything you need to know to get started with our human-centered design series</p>'
+      format: single_inline_html
+  field_summary_box:
+    -
+      value: false

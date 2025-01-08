@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 3c75b701-635f-45ca-9ada-1791d84d06de
+  bundle: hcd_glossary
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'Best Practice'
+  description:
+    -
+      value: '<p>Procedures or approaches that are accepted or prescribed as being correct or most effective.</p>'
+      format: single_inline_html
+  weight:
+    -
+      value: 3
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

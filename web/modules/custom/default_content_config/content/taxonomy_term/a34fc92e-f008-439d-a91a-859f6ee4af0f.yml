@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: a34fc92e-f008-439d-a91a-859f6ee4af0f
+  bundle: hcd_glossary
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: Synthesis/synthesizing
+  description:
+    -
+      value: '<p>To combine a number of things into a coherent whole. In design thinking, this refers to the collection and integration of pieces of research into a logical and meaningful collection.</p>'
+      format: single_inline_html
+  weight:
+    -
+      value: 33
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 3cacb367-aaa9-4bf3-b418-777535f2706a
+  bundle: hcd_glossary
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'Customer Experience (CX)'
+  description:
+    -
+      value: "<p>Customer experience (CX) is an individual's perception of all their interactions with an organization. While <em>customer service</em> focuses on improving a <em>single</em> interaction, CX is the sum of direct customer service, plus all the ways customers interact with an organization, including websites, buildings, and physical or digital products.</p>"
+      format: single_inline_html
+  weight:
+    -
+      value: 6
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

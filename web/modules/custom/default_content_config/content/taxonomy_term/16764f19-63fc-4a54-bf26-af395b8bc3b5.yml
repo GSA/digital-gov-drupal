@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 16764f19-63fc-4a54-bf26-af395b8bc3b5
+  bundle: hcd_glossary
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'No wrong ideas'
+  description:
+    -
+      value: '<p>In design thinking, the principle that, in order to forward innovative thinking, the group or individual performing the thinking session must accept and consider all ideas as possible solutions.</p>'
+      format: single_inline_html
+  weight:
+    -
+      value: 21
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

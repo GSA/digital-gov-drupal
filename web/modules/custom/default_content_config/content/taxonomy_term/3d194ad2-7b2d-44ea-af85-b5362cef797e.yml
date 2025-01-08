@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 3d194ad2-7b2d-44ea-af85-b5362cef797e
+  bundle: hcd_glossary
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: '3 Es'
+  description:
+    -
+      value: '<p>Effectiveness, Ease, and Emotion are three core qualities to measure customer experience; based on a Forrester Research Inc. pyramid model of customer experience.</p>'
+      format: single_inline_html
+  weight:
+    -
+      value: 0
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

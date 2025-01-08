@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.topics.field_legislation
     - field.field.node.topics.field_page_weight
     - field.field.node.topics.field_primary_image
+    - field.field.node.topics.field_resource_topics
     - field.field.node.topics.field_slug
     - field.field.node.topics.field_summary
     - node.type.topics
@@ -77,7 +78,7 @@ content:
     third_party_settings: {  }
   field_featured_links:
     type: paragraphs
-    weight: 13
+    weight: 14
     region: content
     settings:
       title: Paragraph
@@ -97,7 +98,7 @@ content:
     third_party_settings: {  }
   field_featured_resources:
     type: paragraphs
-    weight: 12
+    weight: 13
     region: content
     settings:
       title: Paragraph
@@ -137,9 +138,15 @@ content:
     settings:
       media_types: {  }
     third_party_settings: {  }
+  field_resource_topics:
+    type: options_buttons
+    weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_slug:
     type: string_textfield
-    weight: 14
+    weight: 15
     region: content
     settings:
       size: 60
@@ -165,7 +172,7 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 30
+    weight: 16
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -203,7 +210,7 @@ content:
       removed_reference: optional
     third_party_settings: {  }
   url_redirects:
-    weight: 50
+    weight: 17
     region: content
     settings: {  }
     third_party_settings: {  }

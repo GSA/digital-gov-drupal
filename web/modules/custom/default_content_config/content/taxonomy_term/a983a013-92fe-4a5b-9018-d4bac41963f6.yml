@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: a983a013-92fe-4a5b-9018-d4bac41963f6
+  bundle: hcd_glossary
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'Design thinking'
+  description:
+    -
+      value: '<p>A way to connect and integrate useful knowledge from the arts and sciences alike that is suited to the problems and purposes of the present.</p>'
+      format: single_inline_html
+  weight:
+    -
+      value: 8
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

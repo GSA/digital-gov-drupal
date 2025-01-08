@@ -1,0 +1,21 @@
+uuid: fb40b5b7-673e-4a23-9db2-5b211be2c3b6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_show_next_previous
+    - node.type.guide_navigation
+id: node.guide_navigation.field_show_next_previous
+field_name: field_show_next_previous
+entity_type: node
+bundle: guide_navigation
+label: 'Show Next/Previous'
+description: 'If selected, show links at the bottom of the guides allow navigation between the previous and next page.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

@@ -1,0 +1,21 @@
+uuid: e9ed03e7-d570-4b50-8af8-64fdb8815f6e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_show_in_page_nav
+    - node.type.guide_navigation
+id: node.guide_navigation.field_show_in_page_nav
+field_name: field_show_in_page_nav
+entity_type: node
+bundle: guide_navigation
+label: 'Show In-page Nav'
+description: 'If selected, this will show the left hand navigation that has links to all headers of the current page as well as links to the subnav links for the current guide.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

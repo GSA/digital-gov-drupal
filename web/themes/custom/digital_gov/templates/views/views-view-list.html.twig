@@ -18,10 +18,10 @@
  * @ingroup themeable
  */
 #}
-{% if attributes -%}
+{% if attributes.storage %}
   {# override: changed div to section #}
   <section{{ attributes }}>
-  {% endif %}
+{% endif %}
   {% if title %}
     <h3>{{ title }}</h3>
   {% endif %}
@@ -36,6 +36,6 @@
 
   </{{ list.type }}>
 
-  {% if attributes -%}
+{% if attributes.storage %}
   </section>
 {% endif %}

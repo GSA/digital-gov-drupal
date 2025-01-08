@@ -12,7 +12,6 @@ drush cr
 # drush s3fs-rc
 # drush s3fs-cl -y --scheme=public --condition=newer
 
-export DRUPAL_UPDATE_OR_INSTALL=update
 cd /home/vcap/app/ || exit
 ./orch/deploy.sh
 

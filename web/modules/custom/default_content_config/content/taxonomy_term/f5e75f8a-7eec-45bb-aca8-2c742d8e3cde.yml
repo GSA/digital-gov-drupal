@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: f5e75f8a-7eec-45bb-aca8-2c742d8e3cde
+  bundle: hcd_glossary
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: Ideate
+  description:
+    -
+      value: '<p>To form an idea of; imagine or conceive. In design thinking, this refers to imagining or conceiving of multiple ideas for solutions to problems, usually in succession and building off each idea.</p>'
+      format: single_inline_html
+  weight:
+    -
+      value: 16
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

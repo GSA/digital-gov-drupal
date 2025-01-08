@@ -1,0 +1,33 @@
+uuid: d65626fa-5008-48d1-a279-ee4746275ae7
+langcode: en
+status: true
+dependencies: {  }
+id: GTM-MZCKZPQ.675b35536672a7.15039879
+label: GTM-MZCKZPQ
+weight: 0
+tag_container_ids:
+  - GTM-MZCKZPQ
+  - ''
+advanced_settings:
+  consent_mode: false
+  gtm:
+    GTM-MZCKZPQ:
+      data_layer: dataLayer
+      include_classes: false
+      allowlist_classes: ''
+      blocklist_classes: ''
+      include_environment: false
+      environment_id: ''
+      environment_token: ''
+dimensions_metrics: {  }
+conditions: {  }
+events:
+  generate_lead:
+    value: ''
+    currency: ''
+  search: {  }
+  custom: {  }
+  login:
+    method: CMS
+  sign_up:
+    method: CMS

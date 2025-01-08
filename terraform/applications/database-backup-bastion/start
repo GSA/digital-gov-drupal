@@ -59,6 +59,23 @@ if [ -n "${PG_CONN_STR}" ]; then
   } >> "${home}/exports.sh"
 fi
 
+## Fix psql symlinks
+symlinks=($(find /home/vcap/deps/0/bin | awk 'NR > 1 {print $NF}' | grep pg_) /home/vcap/deps/0/bin/psql)
+psql_binaries=($(find /home/vcap/deps/0/apt/usr/lib/postgresql/*/bin | awk 'NR > 1 {print $NF}'))
+
+for symlink in "${symlinks[@]}"; do
+  for binary in "${psql_binaries[@]}"; do
+    
+    symlink_file=$(basename "${symlink}")
+    binary_file=$(basename "${binary}")
+
+    if [ "${symlink_file}" = "${binary_file}" ]; then
+      rm "${symlink}"
+      ln -s "${binary}" "${symlink}"
+    fi
+  done
+done
+
 echo "source exports.sh" >> "${home}/.bashrc"
 
 while : ; do sleep 500 ; done

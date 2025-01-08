@@ -1,0 +1,12 @@
+uuid: facd069e-16bc-4925-9264-0accc72d8357
+langcode: en
+status: true
+dependencies: {  }
+id: user
+entity_type_id: user
+entity_id: null
+action: page_not_found
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

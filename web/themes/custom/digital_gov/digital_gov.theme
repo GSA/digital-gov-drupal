@@ -8,7 +8,10 @@
 declare(strict_types=1);
 
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Link;
 use Drupal\Core\Template\Attribute;
+use Drupal\node\Entity\Node;
+use Drupal\paragraphs\Entity\Paragraph;
 
 /**
  * @file
@@ -37,6 +40,9 @@ function digital_gov_preprocess_node(array &$variables): void {
   $created = DrupalDateTime::createFromTimestamp($variables['node']->getCreatedTime());
   $variables['created'] = $created->format('M j, Y');
 
+  $site_config = \Drupal::config('system.site');
+  $variables['site_name'] = $site_config->get('name');
+
   switch ($variables['node']->bundle()) {
     case 'news':
       $before_date = new DrupalDateTime('5 years ago');
@@ -47,7 +53,155 @@ function digital_gov_preprocess_node(array &$variables): void {
       $variables['is_future_event'] = $variables['node']->getCreatedTime() > \Drupal::time()->getRequestTime();
       break;
 
+    case 'guides':
+      digital_gov_preprocess_node_guides($variables);
+      break;
   }
+}
+
+/**
+ * Preprocess function for guide nodes.
+ */
+function digital_gov_preprocess_node_guides(&$variables): void {
+  $guide = $variables['node'];
+  // Set defaults.
+  $variables['show_reading_time'] = FALSE;
+  $variables['show_next_previous'] = FALSE;
+  $variables['show_in_page_nav'] = FALSE;
+  $variables['is_guide_overview'] = FALSE;
+  $variables['show_summary_box'] = $guide->get('field_summary_box')[0]->get('value')->getCastedValue();
+
+  if (
+      ($nav_nid = (int) $guide->field_guide_nav_ref[0]?->target_id)
+      && $nav_node = Node::load($nav_nid)
+  ) {
+    $links = digital_gov_get_guidenav_links($nav_node, $variables['url']);
+    $variables = array_merge($variables, $links);
+
+    $variables['show_next_previous'] = $nav_node->field_show_next_previous?->value === "1";
+    $variables['show_reading_time'] = $nav_node->field_show_read_time?->value === "1";
+    $variables['show_in_page_nav'] = $nav_node->field_show_in_page_nav?->value === "1";
+    $variables['is_guide_overview'] = FALSE;
+
+    if ($links['guide_start_link']) {
+      $variables['is_guide_overview'] = ($variables['url'] === $links['guide_start_link']->getUrl()->toString());
+    }
+  }
+
+  if ($variables['show_reading_time']) {
+    // @todo Fix - where does reading time value come from?
+    $reading_time = 1;
+    $variables['reading_time'] = $reading_time . ' minute' . ($reading_time > 1 ? 's' : '');
+
+  }
+
+}
+
+/**
+ * Builds an array we can add to $variables with guide navigation info.
+ */
+function digital_gov_get_guidenav_links(Node $node, string $current): array {
+  // Anonymous helper for getting node links.
+  $makeLink = function (Node $page): Link {
+    // Override the navigation title if set in the node.
+    return $page->toLink($page->get('field_guide_nav_title')->getString()
+      ?: $page->label());
+  };
+
+  // The guide_nav is an array that holds items with the following keys
+  // - 'link': A Link object the main link used the menu bar
+  // - 'subnav': an array of Link objects of links if the sidenav is shown.
+  $links['guide_nav'] = [];
+
+  if ($start_page = $node->get('field_guide_start_page')->first()->get('entity')->getTarget()->getValue()) {
+    $links['guide_start_node'] = $start_page;
+    $links['guide_start_link'] = $makeLink($start_page);
+    $links['guide_start_link']->setText(\t('Overview'));
+
+    // Assume this is open unless we find out otherwise later.
+    $links['guide_current_index'] = 0;
+    if ($featured_image = $start_page->get('field_featured_image')->first()->get('entity')->getTarget()->getValue()) {
+      $media = $featured_image->get('field_media_image')->first();
+      $links['guide_featured_image'] = $media;
+    }
+
+    $links['guide_nav'][] = ['link' => $links['guide_start_link']];
+  }
+
+  if ($parent_guide = $node->get('field_parent_guide')->first()?->get('entity')->getValue()) {
+    $links['guide_parent_link'] = $makeLink($parent_guide);
+  }
+
+  if ($node->field_guide_navigation) {
+    // Generate the two-levels of nav links for this guide.
+    ;
+    foreach ($node->field_guide_navigation as $ref) {
+      // This field points at a paragraph entity.
+      $para = Paragraph::load($ref->target_revision_id);
+
+      if ($para->field_guide_link->target_id) {
+        $guidePage = $para->get('field_guide_link')->referencedEntities()[0];
+        if (!$guidePage->isPublished()) {
+          continue;
+        }
+
+        // Add the link to the navigation.
+        $link = $makeLink($guidePage);
+
+        $item['link'] = $link;
+
+        if ($para->field_guide_subnav) {
+          $subNavNodes = $para->get('field_guide_subnav')->referencedEntities();
+          $subNavNodes = array_filter($subNavNodes, fn(Node $node) => $node->isPublished());
+          if ($subNavNodes) {
+            $item['subnav'] = array_map($makeLink, $subNavNodes);
+            // If the current page is in the subnav, mark the parent as current.
+            $current_in_subnav = array_filter($item['subnav'], function (Link $subItem) use ($current) {
+              return $subItem->getUrl()->toString() === $current;
+            });
+            if ($current_in_subnav) {
+              // We haven't added our item to the guidenav, add 1 to the index.
+              $links['guide_current_index'] = isset($links['guide_nav']) ? array_key_last($links['guide_nav']) + 1 : 0;
+            }
+          }
+        }
+        $links['guide_nav'][] = $item;
+        if ($item['link']->getUrl()->toString() === $current) {
+          // Mark which top-level page is open.
+          $links['guide_current_index'] = array_key_last($links['guide_nav']);
+        }
+      }
+    }
+  }
+
+  // Here, figure out the next/previous links.
+  // We need a flat list of all the URLs in the guide nav keyed by URL.
+  $allTheUrls = [];
+  if ($links['guide_start_link']) {
+    $allTheUrls[$links['guide_start_link']->getUrl()->toString()] = $links['guide_start_link'];
+  }
+  array_walk_recursive(
+    $links['guide_nav'],
+    function ($link) use (&$allTheUrls) {
+      $allTheUrls[$link->getUrl()->toString()] = $link;
+    }
+  );
+
+  // $keyMap tells us what numeric slot each URL is found in.
+  $keyMap = array_keys($allTheUrls);
+  if ($allTheUrls && FALSE !== ($currentKey = array_search($current, $keyMap))) {
+    if (isset($keyMap[$currentKey - 1])) {
+      $prevKey = $keyMap[$currentKey - 1];
+      $links['guide_prev'] = $allTheUrls[$prevKey];
+    }
+
+    if (isset($keyMap[$currentKey + 1])) {
+      $nextKey = $keyMap[$currentKey + 1];
+      $links['guide_next'] = $allTheUrls[$nextKey];
+    }
+  }
+
+  return $links;
 }
 
 /**
@@ -190,5 +344,22 @@ function digital_gov_theme_suggestions_node_alter(array &$suggestions, array $va
         $suggestions[] = 'node__landing_page__' . $landing_type . '__' . $variables["elements"]["#view_mode"];
       }
       break;
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_user_alter().
+ */
+function digital_gov_theme_suggestions_container_alter(array &$suggestions, array $variables) {
+  if (!isset($variables['element']['#name'])) {
+    return $suggestions;
+  }
+  // A list of view names in which to exclude the container markup.
+  $exclude_views = [
+    'resource_topics_list',
+  ];
+
+  if (in_array($variables['element']['#name'], $exclude_views)) {
+    $suggestions[] = 'container__no_wrapper';
   }
 }

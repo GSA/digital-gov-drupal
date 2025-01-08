@@ -154,6 +154,7 @@ variable "env" {
             service_key  = optional(bool, true)
             service_plan = optional(string, "basic")
             service_type = optional(string, "s3")
+            spaces       = optional(list(string), [])
             tags         = optional(list(string), [])
           }
         )

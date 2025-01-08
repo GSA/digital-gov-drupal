@@ -65,23 +65,21 @@
 #}
 <main role="main" id="main-content">
   <article class="dg-guide">
-    {{ include('@digital_gov/partials/guides/guide-header.html.twig') }}
-
-    {# NOT - MIGRATED
-    {-- partial "core/guides/guide-menu-bar.html" . -}
-    #}
-    {# NOT - MIGRATED
-    {% if .Params.guide %}
-    {{ $guideData = index $.Site.Data.guidenav (.Params.guide) }}
+    {% if (guide_start_node) %}
+    {{ include('@digital_gov/partials/guides/guide-header.html.twig', {
+        node: guide_start_node,
+        parent_link: guide_parent_link,
+        featured_image: guide_featured_image,
+      }, with_context=false)
+    }}
     {% endif %}
-    #}
 
-    {% if guideData.showInPageNav %}
+    {{ include('@digital_gov/partials/guides/guide-menu-bar.html.twig') }}
+
+    {% if show_in_page_nav %}
     <div class="dg-guide__container">
       <aside class="dg-guide__nav">
-        [placeholder guide side bav]
-        {# NOT - MIGRATED #}
-        {# partial "core/guides/guide-sidenav.html" . #}
+        {{ include('@digital_gov/partials/guides/guide-sidenav.html.twig') }}
       </aside>
       <div class="dg-guide__content">
         {{ include('@digital_gov/partials/guides/guide-content.html.twig') }}
@@ -90,9 +88,9 @@
     {% else %}
       {{ include('@digital_gov/partials/guides/guide-content.html.twig') }}
     {% endif %}
-    {# NOT-MIGRATED #}
-    {# if .Parent.Params.glossary #}
-    {# partial "core/glossary.html" . #}
-    {# endif #}
+
+    {% if node.field_glossary.target_id %}
+      {{ drupal_view('glossary_sidebar', 'accordion', node.field_glossary.target_id) }}
+    {% endif %}
   </article>
 </main>

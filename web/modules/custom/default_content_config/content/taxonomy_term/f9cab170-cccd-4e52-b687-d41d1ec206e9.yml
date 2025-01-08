@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: f9cab170-cccd-4e52-b687-d41d1ec206e9
+  bundle: hcd_glossary
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'Pain points'
+  description:
+    -
+      value: '<p>In experience design, pain points are real or perceived problems experienced by customers within a system.</p>'
+      format: single_inline_html
+  weight:
+    -
+      value: 22
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

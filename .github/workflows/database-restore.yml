@@ -1,0 +1,84 @@
+name: Database restore
+
+on:
+  workflow_dispatch:
+    inputs:
+      database_file_override:
+        description: "Path on S3 bucket to a specific database file to restore."
+        required: false
+jobs:
+  restore-database:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set env.BRANCH
+        run: |
+          echo "BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)" >> $GITHUB_ENV
+      - name: Install basic dependancies
+        run: ./scripts/pipeline/deb-basic-deps.sh
+      - name: Install AWSCLI
+        run: ./scripts/pipeline/awscli-install.sh
+      - name: Install MySQL Client
+        run: ./scripts/pipeline/deb-mysql-client-install.sh
+      - name: Install Cloudfoundry CLI
+        run: ./scripts/pipeline/deb-cf-install.sh
+      - name: Cloud.gov login
+        env:
+          CF_USER: "${{ secrets.CF_USER }}"
+          CF_PASSWORD: "${{ secrets.CF_PASSWORD }}"
+          CF_ORG: "${{ secrets.CF_ORG }}"
+          PROJECT: "${{ secrets.PROJECT }}"
+        run: |
+          source ./scripts/pipeline/cloud-gov-login.sh
+      - name: Start Bastion
+        env:
+          DATABASE_BACKUP_BASTION_NAME: "${{ secrets.DATABASE_BACKUP_BASTION_NAME }}"
+          PROJECT: "${{ secrets.PROJECT }}"
+        run: |
+          echo "BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)" >> $GITHUB_ENV
+          cf start "${PROJECT}-${DATABASE_BACKUP_BASTION_NAME}-${BRANCH}" #>/dev/null 2>&1
+          ./scripts/pipeline/cloud-gov-wait-for-app-start.sh "${PROJECT}-${DATABASE_BACKUP_BASTION_NAME}-${BRANCH}"
+      - name: Restore database
+        shell: bash
+        env:
+          CF_USER: "${{ secrets.CF_USER }}"
+          CF_PASSWORD: "${{ secrets.CF_PASSWORD }}"
+          CF_ORG: "${{ secrets.CF_ORG }}"
+          PROJECT: "${{ secrets.PROJECT }}"
+          DATABASE_BACKUP_BASTION_NAME: "${{ secrets.DATABASE_BACKUP_BASTION_NAME }}"
+        run: |
+          export S3_FILE_PATH=${{ github.event.inputs.database_file_override }}
+          source ./scripts/pipeline/s3-backup-download.sh
+          source ./scripts/pipeline/database-restore.sh
+          source ./scripts/pipeline/cloud-gov-post-deploy.sh
+          source ./scripts/pipeline/s3-backup-post-restore.sh
+  stopBastion:
+    name: Stop Bastion
+    runs-on: ubuntu-latest
+    needs: restore-database
+    if: ${{ always() }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set env.BRANCH
+        run: echo "BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)" >> $GITHUB_ENV
+      - name: Install basic dependancies
+        run: ./scripts/pipeline/deb-basic-deps.sh
+      - name: Install Cloudfoundry CLI
+        run: ./scripts/pipeline/deb-cf-install.sh
+      - name: Cloud.gov login
+        env:
+          CF_USER: "${{ secrets.CF_USER }}"
+          CF_PASSWORD: "${{ secrets.CF_PASSWORD }}"
+          CF_ORG: "${{ secrets.CF_ORG }}"
+          PROJECT: "${{ secrets.PROJECT }}"
+        run: |
+          source ./scripts/pipeline/cloud-gov-login.sh
+      - name: Stop Bastion
+        env:
+          DATABASE_BACKUP_BASTION_NAME: "${{ secrets.DATABASE_BACKUP_BASTION_NAME }}"
+          PROJECT: "${{ secrets.PROJECT }}"
+        run: |
+          echo "BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)" >> $GITHUB_ENV
+          cf stop "${PROJECT}-${DATABASE_BACKUP_BASTION_NAME}-${BRANCH}" >/dev/null 2>&1

@@ -7,6 +7,7 @@ dependencies:
     - node.type.basic_page
     - node.type.community
     - node.type.event
+    - node.type.guide_navigation
     - node.type.guides
     - node.type.landing_page
     - node.type.news
@@ -43,6 +44,7 @@ permissions:
   - 'create basic_page content'
   - 'create community content'
   - 'create event content'
+  - 'create guide_navigation content'
   - 'create guides content'
   - 'create landing_page content'
   - 'create media'
@@ -51,11 +53,13 @@ permissions:
   - 'create short_post content'
   - 'create source content'
   - 'create topics content'
+  - 'delete any guide_navigation content'
   - 'delete any media'
   - 'edit any authors content'
   - 'edit any basic_page content'
   - 'edit any community content'
   - 'edit any event content'
+  - 'edit any guide_navigation content'
   - 'edit any guides content'
   - 'edit any landing_page content'
   - 'edit any news content'
@@ -66,6 +70,7 @@ permissions:
   - 'edit identifier config page entity'
   - 'override all authored by option'
   - 'override all authored on option'
+  - 'override guide_navigation published option'
   - 'schedule publishing of nodes'
   - 'update any media'
   - 'use default embedded content button'

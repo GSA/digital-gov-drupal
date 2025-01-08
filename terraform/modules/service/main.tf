@@ -18,8 +18,20 @@ locals {
             value.service_type == "user-provided"
     ])
   ...)
-}
 
+  # service_accounts = transpose(
+  #   merge(
+  #     flatten(
+  #       [
+  #         for service_key, service_value in try(var.env.services, {}) : {
+            
+  #           nonsensitive(cloudfoundry_service_key.this[service_key].id) = try(service_value.spaces, [])
+  #           } if try(var.env.org_manager, false) && service_value.service_type == "cloud-gov-service-account"
+  #       ]
+  #     )
+  #   ...)
+  # )
+}
 
 resource "cloudfoundry_service_key" "this" {
   for_each = {
@@ -59,3 +71,19 @@ resource "cloudfoundry_user_provided_service" "this" {
   credentials_json  = jsonencode(try(each.value.credentials, {}))
   tags              = try(each.value.tags, [])
 }
+
+# resource "cloudfoundry_space_users" "this" {
+#   for_each = local.service_accounts
+#   space = data.cloudfoundry_space.this[each.key].id
+
+#   developers = each.value
+
+#   force = true
+  
+# }
+
+# data "cloudfoundry_space" "this" {
+#   for_each = toset(keys(local.service_accounts))
+#   name  = each.value
+#   org   = var.cloudfoundry.organization.id
+# }

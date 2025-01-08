@@ -7,6 +7,7 @@ _meta:
   depends:
     f8ffffda-7ab8-48d7-8e20-2f5d5277ec6d: node
     8f5405bb-957a-4842-b1fb-6276ef95a165: node
+    7712d589-8810-410e-b508-33104dbb9393: taxonomy_term
 default:
   revision_uid:
     -
@@ -201,7 +202,10 @@ default:
   field_page_weight:
     -
       value: 2
+  field_resource_topics:
+    -
+      entity: 7712d589-8810-410e-b508-33104dbb9393
   field_summary:
     -
-      value: 'Plain language is communication that is clear and easy to understand for your target audience, regardless of the medium used to deliver it. It is communication your audience can understand the first time they encounter it. Using plain language on governme'
+      value: '<p>Plain language is communication that is clear and easy to understand for your target audience, regardless of the medium used to deliver it. It is communication your audience can understand the first time they encounter it. Using plain language on governme</p>'
       format: single_inline_html

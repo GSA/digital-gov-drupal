@@ -5,6 +5,7 @@ _meta:
   bundle: guides
   default_langcode: en
   depends:
+    258cf431-4a0c-4489-807e-c87087c87cf9: node
     b2f35ae8-423f-428b-865d-e420313e7a81: media
     ad7aa7a5-33cf-400e-93cf-11820e467111: node
     80caaa35-a22b-43ae-a72c-9a714c333a06: node
@@ -45,8 +46,14 @@ default:
       summary: ''
   field_deck:
     -
-      value: 'A free analytics tool for measuring digital services in the federal government'
+      value: '<p>A free analytics tool for measuring digital services in the federal government</p>'
       format: single_inline_html
+  field_glossary:
+    -
+      target_id: hcd_glossary
+  field_guide_nav_ref:
+    -
+      entity: 258cf431-4a0c-4489-807e-c87087c87cf9
   field_guide_weight:
     -
       value: 5
@@ -58,7 +65,7 @@ default:
       entity: b2f35ae8-423f-428b-865d-e420313e7a81
   field_summary:
     -
-      value: 'he Digital Analytics Program (DAP) offers advanced, easy web analytics for federal agencies.'
+      value: '<p>The Digital Analytics Program (DAP) offers advanced, easy web analytics for federal agencies.</p>'
       format: single_inline_html
   field_summary_box:
     -

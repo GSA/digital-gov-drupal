@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * @file
+ * This is the module to export default content.
+ */
+
+use Drupal\file\FileInterface;
+use Drupal\user\UserInterface;
+
+/**
+ * Implements hook_default_content_exclude_entity().
+ */
+function default_content_config_default_content_exclude_entity($entity) {
+  // These oembed files get regenerated and change UUID, no need to export.
+  if ($entity instanceof FileInterface) {
+    if (str_contains($entity->getFileUri(), 'oembed_thumbnails')) {
+      return TRUE;
+    }
+  }
+  // Exporting user 1 and 0 will break fresh site installs.
+  if ($entity instanceof UserInterface) {
+    if (in_array((int) $entity->id(), [0, 1])) {
+      return TRUE;
+    }
+  }
+  return FALSE;
+}

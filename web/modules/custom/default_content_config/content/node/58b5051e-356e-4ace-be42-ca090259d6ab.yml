@@ -8,6 +8,7 @@ _meta:
     623a2982-602b-4762-a59e-9a7c30c64f36: node
     cbcd65ff-8274-46c7-89bc-9f8c2bdaddd3: node
     47d1784c-68a3-4a3b-a341-3e4f8d092253: media
+    748e020d-b8c3-4080-851d-225c789cc64f: taxonomy_term
 default:
   revision_uid:
     -
@@ -40,7 +41,7 @@ default:
       pathauto: 0
   field_deck:
     -
-      value: 'As agencies carry out their diverse missions, they must also respect and protect personally identifiable information (PII)'
+      value: '<p>As agencies carry out their diverse missions, they must also respect and protect personally identifiable information (PII)</p>'
       format: single_inline_html
   field_featured_communities:
     -
@@ -78,7 +79,10 @@ default:
   field_primary_image:
     -
       entity: 47d1784c-68a3-4a3b-a341-3e4f8d092253
+  field_resource_topics:
+    -
+      entity: 748e020d-b8c3-4080-851d-225c789cc64f
   field_summary:
     -
-      value: 'For the public to have trust in government institutions, they need to know that their personal information is secure, and will be used only for legitimate purposes. Privacy violations can put people at risk for identity theft, financial fraud, discriminat'
+      value: '<p>For the public to have trust in government institutions, they need to know that their personal information is secure, and will be used only for legitimate purposes. Privacy violations can put people at risk for identity theft, financial fraud, discriminat</p>'
       format: single_inline_html

@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: fea7a632-ae0c-4be5-a008-49c67195c42c
+  bundle: hcd_glossary
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: Innovation
+  description:
+    -
+      value: '<p>A new idea, method, or device. In design thinking, usually characterized by a break from traditional or institutionalized methods, production methods, or products.</p>'
+      format: single_inline_html
+  weight:
+    -
+      value: 17
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

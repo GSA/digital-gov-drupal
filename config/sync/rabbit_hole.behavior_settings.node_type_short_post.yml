@@ -1,0 +1,14 @@
+uuid: e0003873-f144-4454-9f45-9aac7623e22c
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.short_post
+id: node_type_short_post
+entity_type_id: node_type
+entity_id: short_post
+action: access_denied
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

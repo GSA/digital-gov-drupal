@@ -1,0 +1,19 @@
+uuid: 71eab602-c462-4dec-95e7-2c7a234d9915
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_parent_guide
+field_name: field_parent_guide
+entity_type: node
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

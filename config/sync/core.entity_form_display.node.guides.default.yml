@@ -6,6 +6,9 @@ dependencies:
     - field.field.node.guides.body
     - field.field.node.guides.field_deck
     - field.field.node.guides.field_featured_image
+    - field.field.node.guides.field_glossary
+    - field.field.node.guides.field_guide_nav_ref
+    - field.field.node.guides.field_guide_nav_title
     - field.field.node.guides.field_guide_weight
     - field.field.node.guides.field_kicker
     - field.field.node.guides.field_page_weight
@@ -16,12 +19,32 @@ dependencies:
     - node.type.guides
     - workflows.workflow.editorial
   module:
+    - autocomplete_deluxe
     - content_moderation
+    - field_group
     - inline_entity_form
     - maxlength
     - media_library
     - path
     - text
+third_party_settings:
+  field_group:
+    group_guide_navigation:
+      children:
+        - field_guide_nav_title
+        - field_guide_nav_ref
+      label: 'Guide Navigation'
+      region: content
+      parent_name: ''
+      weight: 14
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        description: ''
+        required_fields: true
 id: node.guides.default
 targetEntityType: node
 bundle: guides
@@ -29,7 +52,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 3
+    weight: 4
     region: content
     settings:
       rows: 9
@@ -39,7 +62,7 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 6
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -57,21 +80,41 @@ content:
         maxlength_js_enforce: true
   field_featured_image:
     type: media_library_widget
-    weight: 12
+    weight: 13
     region: content
     settings:
       media_types: {  }
     third_party_settings: {  }
+  field_glossary:
+    type: options_select
+    weight: 52
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_guide_nav_ref:
+    type: options_select
+    weight: 26
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_guide_nav_title:
+    type: string_textfield
+    weight: 18
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_guide_weight:
     type: number
-    weight: 10
+    weight: 11
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_kicker:
     type: string_textfield
-    weight: 1
+    weight: 2
     region: content
     settings:
       size: 60
@@ -79,21 +122,21 @@ content:
     third_party_settings: {  }
   field_page_weight:
     type: number
-    weight: 9
+    weight: 10
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_primary_image:
     type: media_library_widget
-    weight: 11
+    weight: 12
     region: content
     settings:
       media_types: {  }
     third_party_settings: {  }
   field_summary:
     type: text_textarea
-    weight: 2
+    weight: 3
     region: content
     settings:
       rows: 1
@@ -105,44 +148,43 @@ content:
         maxlength_js_enforce: true
   field_summary_box:
     type: boolean_checkbox
-    weight: 4
+    weight: 5
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_topics:
-    type: inline_entity_form_complex
+    type: autocomplete_deluxe
     weight: 13
     region: content
     settings:
-      form_mode: default
-      override_labels: false
-      label_singular: ''
-      label_plural: ''
-      allow_new: true
-      allow_existing: true
       match_operator: CONTAINS
-      allow_duplicate: false
-      collapsible: true
-      collapsed: true
-      revision: false
-      removed_reference: optional
+      autocomplete_route_name: autocomplete_deluxe.autocomplete
+      size: 60
+      selection_handler: default
+      match_limit: 0
+      min_length: 0
+      delimiter: ''
+      not_found_message_allow: false
+      not_found_message: "The term '@term' will be added"
+      new_terms: false
+      no_empty_message: 'No terms could be found. Please type in order to add a new term.'
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 7
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
   path:
     type: path
-    weight: 30
+    weight: 16
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 8
+    weight: 9
     region: content
     settings:
       display_label: true
@@ -157,7 +199,7 @@ content:
     third_party_settings: {  }
   uid:
     type: inline_entity_form_complex
-    weight: 5
+    weight: 6
     region: content
     settings:
       form_mode: default
@@ -174,7 +216,7 @@ content:
       removed_reference: optional
     third_party_settings: {  }
   url_redirects:
-    weight: 50
+    weight: 17
     region: content
     settings: {  }
     third_party_settings: {  }

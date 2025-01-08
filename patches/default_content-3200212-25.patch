@@ -1,0 +1,32 @@
+diff --git a/src/Importer.php b/src/Importer.php
+index b3035db..3a5b167 100644
+--- a/src/Importer.php
++++ b/src/Importer.php
+@@ -316,7 +316,7 @@ class Importer implements ImporterInterface {
+               if (\file_exists($file_source)) {
+                 $target_directory = dirname($entity->getFileUri());
+                 $this->fileSystem->prepareDirectory($target_directory, FileSystemInterface::CREATE_DIRECTORY);
+-                $new_uri = $this->fileSystem->copy($file_source, $entity->getFileUri());
++                $new_uri = $this->fileSystem->copy($file_source, $entity->getFileUri(), FileSystemInterface::EXISTS_REPLACE);
+                 $entity->setFileUri($new_uri);
+               }
+             }
+diff --git a/tests/src/Kernel/DefaultContentYamlImportTest.php b/tests/src/Kernel/DefaultContentYamlImportTest.php
+index ed93b3b..aae0957 100644
+--- a/tests/src/Kernel/DefaultContentYamlImportTest.php
++++ b/tests/src/Kernel/DefaultContentYamlImportTest.php
+@@ -141,12 +141,12 @@ class DefaultContentYamlImportTest extends KernelTestBase {
+     $this->assertEquals($term->id(), $node->get('field_tags')->target_id);
+ 
+     // Assert the files, since a file already existed at that location, one has
+-    // been renamed and the URI adjusted.
++    // been overwritten.
+     $files = \Drupal::entityTypeManager()->getStorage('file')->loadByProperties(['filename' => 'test-file.txt']);
+     $this->assertCount(1, $files);
+     /** @var \Drupal\file\FileInterface $file */
+     $file = reset($files);
+-    $this->assertEquals('public://test-file_0.txt', $file->getFileUri());
++    $this->assertEquals('public://test-file.txt', $file->getFileUri());
+     $this->assertFileExists($file->getFileUri());
+     $files = \Drupal::entityTypeManager()->getStorage('file')->loadByProperties(['filename' => 'test-file1.txt']);
+     $this->assertCount(1, $files);

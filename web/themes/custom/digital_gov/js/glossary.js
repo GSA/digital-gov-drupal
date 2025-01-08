@@ -1,6 +1,5 @@
 // This code was adapted from the 18F glossary component
 // https://github.com/18F/glossary/tree/master
-
 const List = require("list.js");
 
 const cssClasses = {
@@ -222,21 +221,16 @@ function initializeEventListeners() {
  * @param {string} path relative path to the json file with terms
  */
 
-async function initializeGlossary(path) {
+async function initializeGlossary() {
   initializeElements();
-
-  const response = await fetch(path);
-  if (!response.ok) return;
-  const terms = await response.json();
-
-  generateListMarkup(terms);
-
+  // This was modified for Drupal. Instead of retrieve the markup from a JSON
+  // file, the markup is placed directly into the page.
+  // generateListMarkup(terms);
   initializeList();
-
   initializeEventListeners();
 }
 
 /* eslint-disable no-undef */
-if (glossaryBody && glossaryPath) {
-  initializeGlossary(glossaryPath);
+if (glossaryBody) {
+  initializeGlossary();
 }

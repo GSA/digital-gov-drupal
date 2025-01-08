@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 752040b8-8263-4afb-841f-7ca1ab43f286
+  bundle: hcd_glossary
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: '5 Whys, aka, Laddering'
+  description:
+    -
+      value: '<p>A method by which an interviewer derives additional detail and undercurrents from an interviewee. Typically characterized by the interviewer repeatedly asking “why” about a qualified or abstract word or phrase used during an interview. A common metric is for the interviewer to do this five times in a line of questions.</p>'
+      format: single_inline_html
+  weight:
+    -
+      value: 1
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

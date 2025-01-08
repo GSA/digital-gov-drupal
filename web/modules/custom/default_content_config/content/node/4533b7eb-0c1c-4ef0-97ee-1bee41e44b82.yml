@@ -4,6 +4,8 @@ _meta:
   uuid: 4533b7eb-0c1c-4ef0-97ee-1bee41e44b82
   bundle: topics
   default_langcode: en
+  depends:
+    f8550cd7-fdea-4a8e-b1cf-6a3e2b4fa3aa: taxonomy_term
 default:
   revision_uid:
     -
@@ -36,7 +38,7 @@ default:
       pathauto: 0
   field_deck:
     -
-      value: 'Crowdsourcing and citizen science can accelerate discovery across the U.S. government.'
+      value: '<p>Crowdsourcing and citizen science can accelerate discovery across the U.S. government.</p>'
       format: single_inline_html
   field_featured_links:
     -
@@ -90,7 +92,10 @@ default:
       uri: 'https://www.whitehouse.gov/briefing-room/presidential-actions/2023/10/30/executive-order-on-the-safe-secure-and-trustworthy-development-and-use-of-artificial-intelligence/'
       title: 'Crowdsourcing and Citizen Science Act of 2016'
       options: {  }
+  field_resource_topics:
+    -
+      entity: f8550cd7-fdea-4a8e-b1cf-6a3e2b4fa3aa
   field_summary:
     -
-      value: 'Through citizen science and crowdsourcing, the federal government and nongovernmental organizations can engage the public in addressing societal needs and accelerating science, technology, and innovation.'
+      value: '<p>Through citizen science and crowdsourcing, the federal government and nongovernmental organizations can engage the public in addressing societal needs and accelerating science, technology, and innovation.</p>'
       format: single_inline_html

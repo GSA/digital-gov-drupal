@@ -1,0 +1,51 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: df0e2d62-c293-42be-8165-84542c35129d
+  bundle: landing_page
+  default_langcode: en
+  depends:
+    e60a3199-17d7-4c13-8b76-f0bbaef67bcd: node
+    f98c359f-6231-42dd-87b4-f6b0012bfbc8: node
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Better websites. Better government.'
+  created:
+    -
+      value: 1734639806
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /better-websites-better-government
+      langcode: en
+      pathauto: 1
+  field_buttons:
+    -
+      target_uuid: e60a3199-17d7-4c13-8b76-f0bbaef67bcd
+      title: 'View Events'
+      options: {  }
+    -
+      target_uuid: f98c359f-6231-42dd-87b4-f6b0012bfbc8
+      title: 'Join Communities'
+      options: {  }
+  field_landing_page_type:
+    -
+      value: homepage

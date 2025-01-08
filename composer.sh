@@ -47,6 +47,21 @@ if [ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" = "true" ]; then
       exit "${EXIT_STATUS}"
     fi
     branch=$(git rev-parse --abbrev-ref HEAD)
+    # If rebasing, the branch name will be HEAD. Use another method to get it.\
+    # Digital.gov custom change.
+    if [[ "$branch" = 'HEAD' ]]; then
+      rebasing-branch() {
+          for location in rebase-merge rebase-apply; do
+              path=$(git rev-parse --git-path ${location})
+              if test -d ${path}; then
+                  revision=$(<${path}/head-name)
+                  echo ${revision##refs/heads/}
+                  return 0
+              fi
+          done
+      }
+      branch=$(rebasing-branch)
+    fi
     date=$(date)
     email=$(git config user.name)
     echo -e "$hash|$email|$branch|$date|./composer.sh $*" >> composer.log

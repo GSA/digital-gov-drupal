@@ -1,0 +1,52 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: 1bf4378c-65c0-4058-a19a-936293a7f99e
+  default_langcode: en
+default:
+  preferred_langcode:
+    -
+      value: en
+  preferred_admin_langcode:
+    -
+      value: en
+  name:
+    -
+      value: identifieradmin@example.com
+  pass:
+    -
+      value: $2y$10$Ja6HIAHhUtvQoANzF8v.9eODuE7S5MXdfEErjNq5mLOHzZMWxG0Zq
+      existing: ''
+      pre_hashed: true
+  mail:
+    -
+      value: identifieradmin@example.com
+  timezone:
+    -
+      value: America/New_York
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1735751282
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  init:
+    -
+      value: identifieradmin@example.com
+  roles:
+    -
+      target_id: identifier_admin
+  role_change:
+    -
+      target_id: __role_delegation_empty_field_value__
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

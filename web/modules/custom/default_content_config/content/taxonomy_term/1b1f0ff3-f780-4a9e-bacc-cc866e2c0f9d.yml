@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 1b1f0ff3-f780-4a9e-bacc-cc866e2c0f9d
+  bundle: hcd_glossary
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'Front Stage / Back Stage'
+  description:
+    -
+      value: '<p>Parts of a service that is visible to the user of that service are called front stage. Parts of a service with which the service provider interacts, but which are not visible to the user of the service, are called back stage.</p>'
+      format: single_inline_html
+  weight:
+    -
+      value: 12
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

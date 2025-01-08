@@ -12,11 +12,11 @@ jobs:
         uses: actions/checkout@v4
       - name: Set enviornment
         run: |
-          BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)
+          BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3-)
           COMPOSER_DEV=1
           GSA_AUTH_KEY=${{ secrets.GSA_AUTH_DEVELOPMENT_KEY }}
           case ${BRANCH} in
-            develop)
+            develop | *deploydev)
               CF_SPACE="dev"
               DRUPAL_MEMORY=${{ vars.DEVELOP_CMS_MEMORY }}
               DRUPAL_INSTANCES=${{ vars.DEVELOP_INSTANCES }}
@@ -28,9 +28,8 @@ jobs:
               DRUPAL_INSTANCES=${{ vars.MAIN_INSTANCES }}
               GSA_AUTH_KEY=${{ secrets.GSA_AUTH_PRODUCTION_KEY }}
               ;;
-            stage)
+            stage | release/* | hotfix/*)
               CF_SPACE="staging"
-              COMPOSER_DEV=0
               DRUPAL_MEMORY=${{ vars.STAGE_CMS_MEMORY }}
               DRUPAL_INSTANCES=${{ vars.STAGE_INSTANCES }}
               ;;

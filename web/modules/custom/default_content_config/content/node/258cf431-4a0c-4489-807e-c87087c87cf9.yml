@@ -1,0 +1,121 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 258cf431-4a0c-4489-807e-c87087c87cf9
+  bundle: guide_navigation
+  default_langcode: en
+  depends:
+    45a32394-3a9a-4481-a9bf-4701e39138ea: node
+    f0dc319d-abd2-4a06-bb17-1a9cd3ee3ad2: node
+    c4520a54-cd38-4be0-9158-24a61a79599e: node
+    b9c370f3-b204-4818-800d-660e366ebfea: node
+    91b1798f-4dec-49d6-bfee-38ed0a4f5e49: node
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Test Guide Nav'
+  created:
+    -
+      value: 1734120032
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_guide_navigation:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 18b88ea3-c9ac-436e-ac79-79a33caea223
+          bundle: guide_pages
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1734120046
+          behavior_settings:
+            -
+              value: {  }
+          field_guide_link:
+            -
+              entity: 45a32394-3a9a-4481-a9bf-4701e39138ea
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 21048a0c-5ff8-43c6-87cd-8fe32802938c
+          bundle: guide_pages
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1734120046
+          behavior_settings:
+            -
+              value: {  }
+          field_guide_link:
+            -
+              entity: f0dc319d-abd2-4a06-bb17-1a9cd3ee3ad2
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: ec229ab5-d55b-4f98-a2b1-ad5a31d63c33
+          bundle: guide_pages
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1734120051
+          behavior_settings:
+            -
+              value: {  }
+          field_guide_link:
+            -
+              entity: c4520a54-cd38-4be0-9158-24a61a79599e
+          field_guide_subnav:
+            -
+              entity: b9c370f3-b204-4818-800d-660e366ebfea
+  field_guide_start_page:
+    -
+      entity: 91b1798f-4dec-49d6-bfee-38ed0a4f5e49
+  field_parent_guide:
+    -
+      entity: c4520a54-cd38-4be0-9158-24a61a79599e
+  field_show_in_page_nav:
+    -
+      value: true
+  field_show_next_previous:
+    -
+      value: true
+  field_show_read_time:
+    -
+      value: true

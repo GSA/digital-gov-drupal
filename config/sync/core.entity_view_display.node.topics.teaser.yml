@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.topics.field_legislation
     - field.field.node.topics.field_page_weight
     - field.field.node.topics.field_primary_image
+    - field.field.node.topics.field_resource_topics
     - field.field.node.topics.field_slug
     - field.field.node.topics.field_summary
     - node.type.topics
@@ -49,5 +50,6 @@ hidden:
   field_legislation: true
   field_page_weight: true
   field_primary_image: true
+  field_resource_topics: true
   field_slug: true
   field_summary: true

@@ -1,0 +1,25 @@
+uuid: e52fac26-5aa5-45b6-a870-c98f5e32b81b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_guide_start_page
+    - node.type.guide_navigation
+id: node.guide_navigation.field_guide_start_page
+field_name: field_guide_start_page
+entity_type: node
+bundle: guide_navigation
+label: 'Start Page'
+description: "The guide that will be as the 'Header' for all guides that use this guide navigation."
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: parent_guide_nav_pages_ref
+      display_name: entity_reference_1
+      arguments: {  }
+field_type: entity_reference

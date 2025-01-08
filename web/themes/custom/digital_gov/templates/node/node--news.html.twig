@@ -77,12 +77,12 @@
         title: node.title.value,
         kicker: node.field_kicker.value,
         deck: node.field_deck.value,
-      }, with_context=false) }}
+      }, with_context: false) }}
 
       {{ include('@digital_gov/partials/authors-list.html.twig', {
         inline: true,
         authors: content.field_authors,
-      }, with_context=false) }}
+      }, with_context: false) }}
 
       <div class="meta">
         <div class="date">
@@ -108,7 +108,7 @@
           {{ include('@digital_gov/partials/authors-list.html.twig', {
             inline: false,
             authors: content.field_authors,
-          }, with_context=false) }}
+          }, with_context: false) }}
 
           <div class="meta">
             <div class="date">
@@ -122,7 +122,7 @@
           {{ include('@digital_gov/partials/get-sharetools.html.twig', {
             share_path: url,
             mailto_subject: node.label,
-          }, with_context=false) }}
+          }, with_context: false) }}
 
         </div>
       </div>

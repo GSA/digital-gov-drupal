@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.source.field_logo
     - node.type.source
+    - workflows.workflow.editorial
   module:
     - content_moderation
     - media_library

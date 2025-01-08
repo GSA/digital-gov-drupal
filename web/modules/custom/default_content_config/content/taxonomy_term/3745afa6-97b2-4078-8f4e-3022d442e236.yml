@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 3745afa6-97b2-4078-8f4e-3022d442e236
+  bundle: hcd_glossary
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: Accessibility
+  description:
+    -
+      value: '<p>The extent to which content is available, understandable, and usable by all audiences, regardless of sensory, physical, cognitive, intellectual, or situational disabilities or impairments</p>'
+      format: single_inline_html
+  weight:
+    -
+      value: 2
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

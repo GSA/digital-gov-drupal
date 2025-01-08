@@ -886,8 +886,18 @@ $config['environment']['env_non_prod_remote'] = FALSE;
 #   include $app_root . '/' . $site_path . '/settings.local.php';
 # }
 
+/**
+ * Set the key required to make successful SSO calls with GSA Auth.
+ */
 if (FALSE !== getenv('GSA_AUTH_KEY')) {
   $config['openid_connect.client.gsa_auth']['settings']['client_secret'] = getenv('GSA_AUTH_KEY');
+}
+
+/**
+ * Ensure that google tag is disabled on non-prod envs.
+ */
+if (empty(getenv('VCAP_APPLICATION')) || getenv('environment') !== 'prod') {
+  $config['google_tag.container.GTM-MZCKZPQ.675b35536672a7.15039879']['status'] = FALSE;
 }
 
 // Load cloud.gov settings into Drupal.

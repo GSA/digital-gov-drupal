@@ -6,6 +6,9 @@ on:
       - develop
       - main
       - stage
+      - feature/DIGITAL-*-deploydev
+      - release/*
+      - hotfix/*
 
 permissions:
   contents: read

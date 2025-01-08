@@ -10,7 +10,7 @@ field_name: field_kicker
 entity_type: node
 bundle: guides
 label: Kicker
-description: 'Highlight the relevant topic. This displays above the title on the /gudes/ page. Should always be included. Use only one or two words.'
+description: 'Highlight the relevant topic. This displays above the title on the /guides/ page. Should always be included. Use only one or two words.'
 required: false
 translatable: false
 default_value: {  }

@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 4df03430-fff4-4b57-b04f-a0b62764690f
+  bundle: hcd_glossary
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: Decode
+  description:
+    -
+      value: '<p>To understand; to analyze in order to find meaning</p>'
+      format: single_inline_html
+  weight:
+    -
+      value: 7
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

@@ -59,4 +59,7 @@ fi
 # Clear cache after installation
 drush cr
 
+# Set the homepage. Custom functionality for Digital.gov.
+drush set-hp -y
+
 ./orch/show_file.sh $0 end

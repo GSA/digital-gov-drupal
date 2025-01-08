@@ -1,0 +1,10 @@
+drupal.dg_autologout:
+  version: VERSION
+  js:
+    js/autologout.js: {}
+
+  dependencies:
+    - core/drupal.dialog
+    - core/drupal.ajax
+    - core/drupalSettings
+    - js_cookie/js-cookie

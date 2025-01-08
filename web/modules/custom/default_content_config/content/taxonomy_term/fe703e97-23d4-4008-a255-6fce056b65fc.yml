@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: fe703e97-23d4-4008-a255-6fce056b65fc
+  bundle: hcd_glossary
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'LEAN (process)'
+  description:
+    -
+      value: '<p>An approach that focuses on people, process and purpose, and the alignment between the three.</p>'
+      format: single_inline_html
+  weight:
+    -
+      value: 20
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

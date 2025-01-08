@@ -6,136 +6,96 @@ See our [CONTRIBUTING.md](CONTRIBUTING.md) for Git configuration and working wit
 
 ### Contents
 
-- [Software Requirements](#software-requirements)
-- [Getting Starting](#getting-started)
-- [Single Sign On](#single-sign-on)
-- [Auto Logout](#auto-logout)
-- [Common Development Tasks](#common-development-tasks)
+- [Software requirements](#software-requirements)
+- [QuickStart installation](#quickstart-installation)
+- [Working with the codebase](#working-with-the-codebase)
+- [Basic command reference](#basic-command-reference)
+- [Additional developer documentation](#additional-developer-documentation)
 
-## Software Requirements
+## Software requirements
 
 * PHP 8.3: Used to run `./robo.sh` / `./composer.sh` tasks
 * Composer Version 2: https://getcomposer.org/, much faster to run composer locally than through docker
 * Lando: https://lando.dev/download/
 
-## Getting Started
+See our [Install Help documentation](docs/install-help.md) for a guide to installing the PHP and Composer
+requirements locally.
 
-The local environment is configured to use the [Lando Drupal Plugin](https://docs.lando.dev/plugins/drupal/getting-started.html). However, you cannot just `lando start` the first time you start the site. Instead, please `./robo.sh lando:init`. Following that, you can interact with the environment like a normal Lando site.
+## QuickStart installation
+
+The local environment is configured to use
+the [Lando Drupal Plugin](https://docs.lando.dev/plugins/drupal/getting-started.html). However, you cannot
+just `lando start` the first time you start the site.
+
+Once you have confirmed that you have PHP 8.3 and Composer 2 installed locally run the following CLI commands to get your
+site running locally.
+
+```
+composer install
+./robo.sh lando:init
+# Installing a Drupal site from config (no DB needed).
+lando si
+```
+
+Following that, you can interact with the environment like a normal Lando site using standard `lando` commands.
+
+## Working with the codebase
 
 There is some custom functionality apart from what's in the base Lando installation.
-* Installing a Drupal site from config (no DB needed): `lando si`
-* If switching to a new branch, always: `lando rebuild -y && lando si` to start off completely fresh.
+
 * See a list of shortcuts (Drush, Composer, etc.): `./robo.sh common:shortcuts-help`
-* Use `./composer.sh` instead of `composer` or `lando composer`. `./composer.sh` will cause entries `composer.log` to be made so we can replay composer commands on conflicts.
-* Sign in as admin: `./drush.sh uli`.
-* Export content as configuration `./robo.sh drupal-project:export-content`. See [Exporting Content as Configuration](#exporting-content-as-configuration).
+* When switching to a new branch, always: `lando rebuild -y && lando si` to start off completely fresh.
+* Export content as configuration `./robo.sh drupal-project:export-content`.
+  See [Exporting Content as Configuration](docs/backend#exporting-content-as-configuration).
 
-## Single Sign On
+## Compiling theme assets
 
-The site uses GSA Auth for authentication. You can always use `./drush.sh uli` to create a one time login link.
+See our [Frontend documentation](docs/frontend.md) for working with the `digital_gov` custom theme.
 
-If you would like to use SSO:
+## Basic command reference
 
-* Your account must be initialized in the pre-production GSA Auth site.
+### Composer commands
+Instead of using `lando composer` we use `./composer.sh` which generate entries in `composer.log` so we can replay composer commands on conflicts.
 
-Visit https://auth-preprod.gsa.gov/ and use your normal GSA credentials to authenticate your account. Once you sign in and get to your dashboard, you can close the site.
+| **Command**                                  | **Use case**                  |
+|----------------------------------------------|-------------------------------|
+| `./composer.sh require drupal/<MODULE_NAME>` | Download a drupal module      |
+| `./composer.sh remove drupal/<MODULE_NAME>`  | Remove a drupal module        |
+| `./composer.sh update --lock`                | Regenerate composer lock hash |
 
-* Your user account must exist first, SSO will never create your account.
+### Drush commands
 
-Many users are created in default content, but if you're not in there:
-```
-./drush.sh user:create my.name@gsa.gov --mail=my.name@gsa.gov
-./drush.sh user:role:add admin --mail=my.name@gsa.gov
-```
-* Only .gsa.gov emails can authenticate.
-* You must use the [https version](https://digitalgov.lndo.site) of the site, http will not work.
-* You must get the GSA Auth Client Secret value from another developer / lead.
+| **Command**       | **Use case**                 |
+|-------------------|------------------------------|
+| `lando drush cr`  | Clearing Drupal cache        |
+| `lando drush uli` | Log into Drupal as Superuser |
+| `lando drush cim` | Import Drupal configuration  |
+| `lando drush cex` | Export Drupal configuration  |
 
-To set the value run the following command then paste in the value when asked. Make sure to respond with 'yes' to rebuilding the environment:
+### Lando commands
 
-`./robo.sh lando:set-env GSA_AUTH_KEY` (GSA_AUTH_KEY is not the value, it's the name of the env variable).
+| **Command**     | **Use case**                                         |
+|-----------------|------------------------------------------------------|
+| `lando start`   | Start the container                                  |
+| `lando stop`    | Stop the container                                   |
+| `lando rebuild` | Rebuild the container (retains your db)              |
+| `lando destroy` | Destroys container and your db (when all else fails) |
 
-* Visit https://digitalgov.lndo.site/user and click the login button.
+### Custom Lando commands
 
-## Auto Logout
+| **Command**            | **Use case**                                                                |
+|------------------------|-----------------------------------------------------------------------------|
+| `lando si`             | Install a fresh Drupal site from configuration                              |
+| `lando su`             | Run updates, import configuration, run cron, etc (Install if not installed) |
+| `lando xdebug-on`      | Enable Xdebug                                                               |
+| `lando xdebug-off`     | Disable Xdebug                                                              |
+| `lando patch`          | Apply composer patches or regenerate lock hash                              |
+| `lando be`             | Builds backend (composer) dependencies                                      |
+| `lando fe`             | Builds front end site (dependencies & compilation)                          |
+| `lando export-content` | Export content as configuration                                             |
 
-The autologout module will log you out after 30 minutes of inactivity or after 12 hours regardless of activity. This can get annoying when developing locally and having multiple tabs open.
+For additional details of custom lando commands review the tooling settings within the [Lando base file](.lando.dist.yml).
 
-To disable this, add the following to your `settings.local.php`:
+## Additional developer documentation
 
-```
-/**
- * Disable autologout from running.
- */
-$config['autologout.settings']['enabled'] = FALSE;
-$config['dg_autologout.settings']['enabled'] = FALSE;
-```
-
-## Common Development Tasks
-
-### Exporting Content as Configuration
-
-The content for development is created via the [Default Content](https://www.drupal.org/project/default_content) module.
-
-How do I install the content?
-
-Content is created from the config stored at `web/modules/custom/default_content_config/content` when the site is installed (`lando si`).
-
-How do I create more content?
-
-Simply edit or add new content, then run `./robo.sh drupal-project:export-content`
-
-:exclamation: Make sure that only content you meant to edit or add is exported. The default content module is not perfect, it can get confused with things like files and users.
-
-### Updating Dependencies
-
-#### Ensure that your local is OK to destroy:
-
-`git status`
-
-If you are working on something right now:
-`git stash && lando db-export backup.sql`
-
-When finished updating dependencies:
-`git checkout feature/my-old-branch && git stash pop && lando db-import backup.sql`
-
-#### Updating Composer Dependencies
-```
-git fetch
-git checkout develop
-git reset --hard origin/develop
-lando rebuild -y
-lando si
-git checkout -b feature/DIGITAL-[TICKET-NUMBER]-update-dependencies
-./composer.sh update
-./drush.sh updb -y
-./drush.sh cex -y
-```
-
-Commit the changes to composer.* and any config files updated from database updates.
-
-The next step is to run scaffolding:
-
-`./robo.sh drupal-env:scaffold-all`
-
-Not everything in here needs to be committed. Somethings that will show as updates will be the overrides added in the past. Make sure to revert any changes that were not intended.
-
-Commit the scaffolding changes.
-
-The final step is to run validation. This is important as part of the dependency updates might be new coding standards rules that will need to be fixed.
-
-`./robo.sh validate:all`
-
-Fix any validation errors and commit.
-
-`git push origin`
-
-### Fixing Merge Conflicts with Composer
-
-If, when rebasing or merging the `develop` branch, you get conflicts with composer.lock the composer.log file will help you replay your changes.
-
-When the merge conflict occurs:
-
-* `git checkout origin/develop -- composer.*` to get the composer files as in develop.
-* `./composer.sh install`
-* Then you can replay the composer commands you wanted to make before.
+Please take a look at the `./docs` directory for more information.

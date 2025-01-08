@@ -77,7 +77,7 @@
         title: node.title.value,
         kicker: node.field_kicker.value,
         deck: node.field_deck.value,
-      }, with_context=false) }}
+      }, with_context: false) }}
 
       <p class="datetime">
         <svg
@@ -116,14 +116,14 @@
         youtube_id: node.field_youtube_id.value,
         youtube_title: node.label,
         captions: node.field_captions.0.uri,
-      }, with_context=false) }}
+      }, with_context: false) }}
     {% endif %}
 
     {% if not is_future_event and node.field_youtube_id.value %}
       {{ include('@digital_gov/partials/events/stage-youtube.html.twig', {
         youtube_id: node.field_youtube_id.value,
         youtube_title: node.label,
-      }, with_context=false) }}
+      }, with_context: false) }}
     {% endif %}
 
     <section class="grid-row tablet-lg:grid-gap-4">
@@ -134,7 +134,7 @@
             youtube_id: node.field_youtube_id.value,
             youtube_title: node.label,
             captions: node.field_captions.0.uri,
-          }, with_context=false) }}
+          }, with_context: false) }}
         {% endif %}
 
         {# Main Content #}
@@ -153,7 +153,7 @@
           {{ include('@digital_gov/partials/authors-list.html.twig', {
             inline: false,
             authors: content.field_authors,
-          }, with_context=false) }}
+          }, with_context: false) }}
         {% endif %}
 
         {% if node.field_event_platform.value == 'youtube_live' and is_future_event and content.field_registration_url|field_value %}
@@ -175,7 +175,7 @@
         {{ include('@digital_gov/partials/get-sharetools.html.twig', {
           share_path: url,
           mailto_subject: node.label,
-        }, with_context=false) }}
+        }, with_context: false) }}
 
       </div>
     </section>

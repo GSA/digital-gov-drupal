@@ -1,0 +1,29 @@
+uuid: 2e907097-408b-473f-8086-4fb7ba955204
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_resource_topics
+    - node.type.topics
+    - taxonomy.vocabulary.resource_topics
+id: node.topics.field_resource_topics
+field_name: field_resource_topics
+entity_type: node
+bundle: topics
+label: 'Resource Topics'
+description: 'Promote the current resource on the resources landing page under the selected resource topics heading(s) in the "Browse by topic" section.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      resource_topics: resource_topics
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

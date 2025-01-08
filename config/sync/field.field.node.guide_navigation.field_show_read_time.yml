@@ -1,0 +1,21 @@
+uuid: d214ed7e-b3f9-43e7-be71-da1197e36d91
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_show_read_time
+    - node.type.guide_navigation
+id: node.guide_navigation.field_show_read_time
+field_name: field_show_read_time
+entity_type: node
+bundle: guide_navigation
+label: 'Show Read Time'
+description: 'If selected, the average time to read the current guide will be created and shown.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

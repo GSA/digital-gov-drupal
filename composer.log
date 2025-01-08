@@ -53,3 +53,8 @@ b4d1a71ae39798e387fe895acb3c924c|Oscar Merida|feature/DIGITAL-140-security-kit|T
 142970354860260a21a9a93d4c5b2fe0|christian medders|feature/DIGITAL-150-limit-menu-access|Thu Dec 19 12:39:17 EST 2024|./composer.sh require drupal/menu_admin_per_menu:^1.6
 bd7840ebd67d69715dbd07eef9ceb742|cathybaptista|feature/DIGITAL-114-implement-identifier-block|Thu Dec 19 12:41:31 EST 2024|./composer.sh require drupal/config_pages
 72cca00bd0b4403e0db152c489a8e0a1|Matt Poole|feature/DIGITAL-114-implement-identifier-block|Thu Dec 19 15:32:32 EST 2024|./composer.sh require drupal/link_class
+b9a62f1676c64c163727b0feef5db80f|christian medders|feature/DIGITAL-40-gtm|Fri Dec 20 15:46:24 EST 2024|./composer.sh require drupal/google_tag:^2.0
+0e651880d7500538af3077d6462f9562|Matt Poole|feature/DIGITAL-158-log-stdout|Fri Jan  3 15:16:26 EST 2025|./composer.sh require drupal/log_stdout:^1.5
+cfff5655249d219415af160348b125c3|christian medders|feature/DIGITAL-143-topics-field-update|Mon Jan  6 09:55:32 EST 2025|./composer.sh require drupal/autocomplete_deluxe:^2.1
+652fb1da8ec252a44bd251452e4d5782|Oscar Merida|feature/DIGITAL-141-rabbit-hole-config|Mon Jan  6 10:29:35 EST 2025|./composer.sh require drupal/rabbit_hole
+24a55f780e267a896fddfcfa70ca8d55|christian medders|feature/DIGITAL-46-config-ignore|Mon Jan  6 14:17:36 EST 2025|./composer.sh require drupal/config_ignore:^3.3

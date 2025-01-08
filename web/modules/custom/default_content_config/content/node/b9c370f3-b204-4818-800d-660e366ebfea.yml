@@ -5,6 +5,7 @@ _meta:
   bundle: guides
   default_langcode: en
   depends:
+    258cf431-4a0c-4489-807e-c87087c87cf9: node
     d5b7c563-4023-4c09-b3b9-27c5d009ec37: media
     58b5051e-356e-4ace-be42-ca090259d6ab: node
 default:
@@ -44,8 +45,11 @@ default:
       summary: ''
   field_deck:
     -
-      value: 'A set of daily scans of the federal web presence.'
+      value: '<p>A set of daily scans of the federal web presence.</p>'
       format: single_inline_html
+  field_guide_nav_ref:
+    -
+      entity: 258cf431-4a0c-4489-807e-c87087c87cf9
   field_guide_weight:
     -
       value: 3
@@ -57,7 +61,7 @@ default:
       entity: d5b7c563-4023-4c09-b3b9-27c5d009ec37
   field_summary:
     -
-      value: 'This program is available to automatically generate data about the health and best practices of federal websites.'
+      value: '<p>This program is available to automatically generate data about the health and best practices of federal websites.</p>'
       format: single_inline_html
   field_summary_box:
     -

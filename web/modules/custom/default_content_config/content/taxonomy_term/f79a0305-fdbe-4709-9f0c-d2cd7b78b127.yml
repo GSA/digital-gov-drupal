@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: f79a0305-fdbe-4709-9f0c-d2cd7b78b127
+  bundle: hcd_glossary
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'How Might We Question'
+  description:
+    -
+      value: '<p>A “How Might We” (HMW) question serves two purposes. First, it is the frame of inquiry, or the area of research. Second, it should spur and inspire the research team. A good HMW research question will focus but also leave room for exploration.</p>'
+      format: single_inline_html
+  weight:
+    -
+      value: 14
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

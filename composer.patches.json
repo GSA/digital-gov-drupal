@@ -1,13 +1,17 @@
 {
   "patches": {
+    "drupal/core":{
+      "project/drupal/issues/2916377: Allow more characters in CSS identifiers": "https://www.drupal.org/files/issues/2024-11-11/2916377-53.patch"
+    },
     "drupal/core-composer-scaffold": {
       "Disable drupal/core from scaffolding without being in composer.extra.drupal-scaffold.allowed-packages in that way one has more control of when new scaffolding is added.": "./patches/drupal.core-composer-scaffold.implicit-drupal-core-disable.patch"
     },
     "drupal/default_content": {
-      "/project/default_content/issues/2698425:: Do not reimport existing entities (patch download b/c of it being from an MR)": "patches/deafult_content_2698425.patch",
       "/project/default_content/issues/3203014: BaseFieldOverride cause inconsistencies during export": "https://www.drupal.org/files/issues/2022-12-13/base_field_override_inconsistencies-3203014-9.patch",
-      "/project/default_content/issues/3200212: Import should overwrite files": "https://www.drupal.org/files/issues/2024-08-27/default_content-3200212-25.patch",
-      "/project/default_content/issues/2943458: Exporting passwords": "https://www.drupal.org/files/issues/2022-02-18/default_content-2943458-9.patch"
+      "/project/default_content/issues/2943458: Exporting passwords": "https://www.drupal.org/files/issues/2022-02-18/default_content-2943458-9.patch",
+      "/project/default_content/issues/3180348: Profile entities have circular dependencies": "https://www.drupal.org/files/issues/2025-01-01/default_content-profile-entities-have-circular-dependencies-3180348-7.patch",
+      "/project/default_content/issues/3200212: Import should overwrite files": "patches/default_content-3200212-25.patch",
+      "Created hook to exclude content from being exported": "patches/default_content-hook-exclude-content.patch"
     },
     "drupal/embedded_content": {
       "Convert html to valid xml": "patches/embedded_content-convert-html-valid-xml.patch"

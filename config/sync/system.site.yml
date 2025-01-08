@@ -8,7 +8,7 @@ slogan: 'Guidance on building better digital services in government'
 page:
   403: ''
   404: ''
-  front: /user/login
+  front: DO-NOT-CHANGE-SET-BY-DRUSH-SET-HP
 admin_compact_mode: false
 weight_select_max: 100
 default_langcode: en

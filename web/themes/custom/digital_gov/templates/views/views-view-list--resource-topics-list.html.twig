@@ -1,0 +1,12 @@
+<div class="dg-resource-topics-list">
+  <h3 class="dg-resource-topics-list__header">
+    {{ title }}
+  </h3>
+  <ul class="dg-resource-topics-list__list usa-list usa-list--unstyled">
+    {% for item in rows %}
+    <li class="dg-resource-topics-list__list-item">
+      {{ item.content }}
+    </li>
+    {% endfor %}
+  </ul>
+</div>
