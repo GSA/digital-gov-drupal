@@ -116,29 +116,20 @@ class RoboFile extends Tasks
     }
 
     /**
-     * Create a release.
-     *
-     * @command drupal-project:create-release
-     *
-     * @aliases create-release
+     * Shared functionality to help create and re-tag a release.
      *
      * @param string $hotfix_or_release
-     *   Either 'hotfix' or 'release'.
-     *
+     *    Either 'hotfix' or 'release'.
      * @param string $semantic_version
-     *   A semantic version number in the form x.y.z. Release must end in 0.
+     *    A semantic version number in the form x.y.z. Release must end in 0.
      *
-     * @return \Robo\ResultData
+     * @return array
+     *    An indexed array of [$tag_description, $new_branch_name].
      *
      * @throws \Exception
      */
-    public function createRelease(
-        InputInterface $input,
-        OutputInterface $output,
-        string $hotfix_or_release,
-        string $semantic_version,
-    ): ResultData
-    {
+
+    protected function initializeGitEnvForRelease(string $hotfix_or_release, string $semantic_version) {
         if (!in_array($hotfix_or_release, ['hotfix', 'release'])) {
             throw new InvalidArgumentException("hotfix_or_release must be either 'hotfix' or 'release', '$hotfix_or_release' given.");
         }
@@ -177,10 +168,91 @@ class RoboFile extends Tasks
         // also wipe out your changes.
         `git reset --hard origin/$source_branch`;
 
+        return [$tag_description, $new_branch_name];
+    }
+
+    /**
+     * Create a release.
+     *
+     * @command drupal-project:create-release
+     *
+     * @aliases create-release
+     *
+     * @param string $hotfix_or_release
+     *   Either 'hotfix' or 'release'.
+     * @param string $semantic_version
+     *   A semantic version number in the form x.y.z. Release must end in 0.
+     *
+     * @return \Robo\ResultData
+     *
+     * @throws \Exception
+     */
+    public function createRelease(
+        InputInterface $input,
+        OutputInterface $output,
+        string $hotfix_or_release,
+        string $semantic_version,
+    ): ResultData
+    {
+        [$tag_description, $new_branch_name] = $this->initializeGitEnvForRelease($hotfix_or_release, $semantic_version);
+
         `git checkout -b $new_branch_name`;
         $this->taskGitStack()
             ->stopOnFail()
             ->push('origin', $new_branch_name)
+            ->tag("v$semantic_version", $tag_description)
+            ->push('origin', "v$semantic_version")
+            ->run();
+
+        return new ResultData();
+    }
+
+    /**
+     * Re-creates the tag for a release after updates have been pushed.
+     *
+     * The release branch will already be up to date because a feature branch
+     * should have been pushed to it, but the initial tag will be out of date
+     * now. This checks out the current version of the release, deletes the tag
+     * then pushes back up the tag.
+     *
+     * @command drupal-project:re-tag-release
+     *
+     * @aliases re-tag
+     *
+     * @param string $hotfix_or_release
+     *   Either 'hotfix' or 'release'.
+     * @param string $semantic_version
+     *   A semantic version number in the form x.y.z. Release must end in 0.
+     *
+     * @return \Robo\ResultData
+     *
+     * @throws \Exception
+     */
+    public function reTagRelease(
+        InputInterface $input,
+        OutputInterface $output,
+        string $hotfix_or_release,
+        string $semantic_version,
+    ): ResultData
+    {
+        [$tag_description, $new_branch_name] = $this->initializeGitEnvForRelease($hotfix_or_release, $semantic_version);
+
+        // Delete the old tag locally and remotely.
+        `git tag --delete v$semantic_version`;
+        `git push origin --delete v$semantic_version`;
+
+        // Check back out the release branch.
+        `git checkout $new_branch_name`;
+        $this->taskGitStack()
+            ->stopOnFail()
+            ->checkout($new_branch_name)
+            ->pull('origin', $new_branch_name)
+            ->run();
+
+        // Create a new tag of the same named based on the updated release
+        // branch.
+        $this->taskGitStack()
+            ->stopOnFail()
             ->tag("v$semantic_version", $tag_description)
             ->push('origin', "v$semantic_version")
             ->run();
