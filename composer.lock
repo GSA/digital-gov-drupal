@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ce92bed5df5d2a11871f71ac88fc16a2",
+    "content-hash": "a7ae67aee55911ee02065f23cee17a3b",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1545,6 +1545,66 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/admin_toolbar",
                 "issues": "https://www.drupal.org/project/issues/admin_toolbar"
+            }
+        },
+        {
+            "name": "drupal/auto_heading_ids",
+            "version": "2.0.0-beta3",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/auto_heading_ids.git",
+                "reference": "2.0.0-beta3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/auto_heading_ids-2.0.0-beta3.zip",
+                "reference": "2.0.0-beta3",
+                "shasum": "9751077cf706f27bc06b2a1de0ed00a420251e37"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9 || ^10 || ^11"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.0.0-beta3",
+                    "datestamp": "1713363447",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "bart88",
+                    "homepage": "https://www.drupal.org/user/3198481"
+                },
+                {
+                    "name": "caseyfw",
+                    "homepage": "https://www.drupal.org/user/3150611"
+                },
+                {
+                    "name": "pingers",
+                    "homepage": "https://www.drupal.org/user/56282"
+                },
+                {
+                    "name": "singularo",
+                    "homepage": "https://www.drupal.org/user/143"
+                }
+            ],
+            "description": "This module provides a filter to automatically apply identifiers to headings in content.",
+            "homepage": "https://www.drupal.org/project/auto_heading_ids",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/auto_heading_ids",
+                "issues": "https://www.drupal.org/project/issues/auto_heading_ids"
             }
         },
         {
@@ -16957,6 +17017,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "drupal/auto_heading_ids": 10,
         "drupal/default_content": 15,
         "drupal/inline_entity_form": 5,
         "drupal/maillog": 20,

@@ -4,6 +4,7 @@ module:
   admin_toolbar: 0
   admin_toolbar_search: 0
   admin_toolbar_tools: 0
+  auto_heading_ids: 0
   autocomplete_deluxe: 0
   autologout: 0
   block: 0

@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.media.full
   module:
+    - auto_heading_ids
     - editor
     - embedded_content
     - linkit
@@ -83,6 +84,12 @@ filters:
     weight: -49
     settings:
       filter_url_length: 72
+  heading_id_filter:
+    id: heading_id_filter
+    provider: auto_heading_ids
+    status: true
+    weight: 10
+    settings: {  }
   linkit:
     id: linkit
     provider: linkit

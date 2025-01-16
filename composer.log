@@ -63,3 +63,4 @@ d9b88c3355f947a0ad6b677dfb2bd984|Matt Poole|feature/DIGITAL-307-update-deps|Fri 
 f5f559ecad3217a6dfc5db9f3157e5ca|Ray Estrada|feature/DIGITAL-283-security-modules|Mon Jan 13 12:13:10 EST 2025|./composer.sh require drupal/role_watchdog
 cd50d2b2b036edaa3a002881cf1b50ce|Ray Estrada|feature/DIGITAL-283-security-modules|Mon Jan 13 12:15:05 EST 2025|./composer.sh require drupal/upgrade_status
 406c28be9e70355b9cfbbe1df58bb7ef|Ray Estrada|feature/DIGITAL-283-security-modules|Mon Jan 13 12:16:28 EST 2025|./composer.sh require drupal/database_ssl_check
+d98faa3510b31a6f67a80dcf97758928|Ray Estrada|develop|Wed Jan 15 16:20:08 PST 2025|./composer.sh require drupal/auto_heading_ids:^2.0@beta

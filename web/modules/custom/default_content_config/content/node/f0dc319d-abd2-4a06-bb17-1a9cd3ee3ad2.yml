@@ -36,6 +36,20 @@ default:
       alias: /guides/guide-all-required-fields
       langcode: en
       pathauto: 1
+  rh_action:
+    -
+      value: bundle_default
+  rh_redirect_response:
+    -
+      value: 301
+  rh_redirect_fallback_action:
+    -
+      value: bundle_default
+  body:
+    -
+      value: '<h2>Test heading level 2</h2><p>Nunc hendrerit maximus arcu diam tincidunt dictum vitae platea pulvinar pretium porttitor. Porta molestie massa pede quisque ornare. Nostra potenti vitae rutrum iaculis consectetuer in erat auctor. Himenaeos lacinia nibh nunc hendrerit libero neque ante.</p><h3>Test heading level 3</h3><p>Leo pulvinar vulputate tempus elementum id. Ultrices aenean sociosqu platea aliquam vehicula neque aliquet in. Odio maximus sociosqu fusce fermentum magnis. Auctor pharetra natoque maecenas est tempor lectus molestie luctus. Semper dictumst tempus himenaeos lobortis nunc fringilla tincidunt parturient. Suscipit imperdiet praesent consectetuer bibendum laoreet. Erat enim accumsan posuere tortor pulvinar.</p>'
+      format: html
+      summary: ''
   field_guide_nav_ref:
     -
       entity: 258cf431-4a0c-4489-807e-c87087c87cf9

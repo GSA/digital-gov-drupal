@@ -18,6 +18,7 @@
         "composer/installers": "^2.0",
         "cweagans/composer-patches": "^1.7",
         "drupal/admin_toolbar": "^3.4",
+        "drupal/auto_heading_ids": "^2.0@beta",
         "drupal/autocomplete_deluxe": "^2.1",
         "drupal/autologout": "^2.0",
         "drupal/config_ignore": "^3.3",
