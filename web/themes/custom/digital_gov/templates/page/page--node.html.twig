@@ -45,11 +45,11 @@
  * @ingroup themeable
  */
 #}
-<div class="layout-container">
+<div class="paper">
 
-  <header role="banner">
-    {{ page.header }}
-  </header>
+  <a class="usa-skipnav" href="#main-content">Skip to main content</a>
+
+  {{ page.header }}
 
   {{ page.primary_menu }}
   {{ page.secondary_menu }}
@@ -60,10 +60,7 @@
 
   {{ page.content }}
 
-  {% if page.footer %}
-    <footer role="contentinfo">
-      {{ page.footer }}
-    </footer>
-  {% endif %}
+  {{ page.footer }}
+</div>
 
-</div>{# /.layout-container #}
+<div id="clicks_iframe" class="display-none"></div>
