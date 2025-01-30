@@ -14,7 +14,7 @@
   // Select all the links with href that start with "http" and do not contain ".gov"
   // See https://css-tricks.com/attribute-selectors/
   a[href^="http"]:not([href*=".gov"])::after {
-    background: url("../uswds/img/external-link.svg") no-repeat 0 0;
+    background: url("#{$theme-image-path}/external-link.svg") no-repeat 0 0;
     background-size: 100%;
     content: "";
     display: inline-block;

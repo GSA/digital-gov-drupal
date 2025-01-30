@@ -21,8 +21,8 @@ i.e.
 */
 
 @use "uswds-core" with (
-  $theme-image-path: "../uswds/img",
-  $theme-font-path: "../uswds/fonts",
+  $theme-image-path: "/themes/custom/digital_gov/static/uswds/img",
+  $theme-font-path: "/themes/custom/digital_gov/static/uswds/fonts",
   $theme-show-compile-warnings: false,
   $theme-show-notifications: false,
   $theme-focus-color: "blue-50v",
