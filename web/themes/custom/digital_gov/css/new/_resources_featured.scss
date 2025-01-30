@@ -42,6 +42,7 @@
 
     @include at-media("tablet-lg") {
       @include u-radius-top("lg");
+      @include u-height('full');
     }
   }
 }

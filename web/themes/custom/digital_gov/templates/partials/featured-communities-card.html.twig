@@ -1,0 +1,55 @@
+{# Digital.gov Communities Card Component
+  Renders a card display of a Digital.gov community
+
+  @param {string} acronym - acronym string
+  @param {string} heading - card heading
+  @param {string} logo - renderable array or string of logo image
+  @param {string} member_count - numeric string
+  @param {string| summary - summary of community
+  @param {string} url - link to community
+  @param {bool} has_image - enable the display of the logo
+  @param {bool} outline - enable the outline button display
+#}
+
+{% set classes = [
+  'usa-card',
+  acronym ? 'cop-card--' ~ acronym|render|trim,
+] %}
+
+<div{{ create_attribute().addClass(classes) }}>
+  <div class="usa-card__container">
+    <div class="usa-card__header">
+      <h2 class="usa-card__heading">{{ heading }}</h2>
+    </div>
+    {% if has_image and logo %}
+      <div class="usa-card__media usa-card__media--indent">
+        <div class="usa-card__img">
+          {{ logo }}
+        </div>
+      </div>
+    {% endif %}
+    {% if member_count %}
+      <div class="usa-card__members">
+        <span class="usa-card__member-count">
+          <svg class="usa-card__members-icon usa-icon dg-icon dg-icon--large margin-bottom-05" aria-hidden="true" focusable="false">
+            <use xlink:href="/{{ active_theme_path() }}/static/uswds/img/sprite.svg#groups"></use>
+          </svg>
+          {{ member_count }}
+          {{ 'Members'|t }}
+        </span>
+      </div>
+    {% endif %}
+    {% if summary %}
+      <div class="usa-card__body">
+        <p>{{ summary }}</p>
+      </div>
+    {% endif %}
+    <div
+      class="usa-card__footer">
+      <a href="{{ url }}" class="usa-button {{ outline ? 'usa-button--outline' }}">
+        {{ 'Connect with'|t }}<br>
+        {{ heading }}
+      </a>
+    </div>
+  </div>
+</div>

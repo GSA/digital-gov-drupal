@@ -1,0 +1,31 @@
+{# Digital.gov Communities Component
+  Renders a list of Digital.gov communities on both the home page and communities page
+
+  @param {string} heading - section heading
+  @param {string} deck - subhead deck
+  @param {string} layout - string defining
+  @param {string} communities - array of nodes
+  @param {string| display - machine name of display mode
+  @param {bool} has_image - card image display state
+#}
+
+<div class="page-head">
+  <h1>{{ heading }}</h1>
+  {% if deck %}
+    <div class="deck">{{ deck }}</div>
+  {% endif %}
+</div>
+
+{% set classes = [
+  'dg-featured-communities',
+  has_image ? 'dg-featured-communities--has-image',
+  layout ? 'dg-featured-communities--' ~ layout,
+] %}
+
+<div{{ create_attribute().addClass(classes) }}>
+  {% for community in communities %}
+    {% if community._entity.id() %}
+      {{ drupal_entity('node', community._entity.id(), display) }}
+    {% endif %}
+  {% endfor %}
+</div>

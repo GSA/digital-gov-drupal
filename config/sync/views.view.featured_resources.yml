@@ -1,15 +1,15 @@
-uuid: f1574dd3-c616-4f42-a7d3-cfecb8856bd0
+uuid: 6cfd9931-31a4-4839-b03a-76d130a4fd0f
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser
-    - node.type.community
+    - node.type.guides
+    - node.type.resources
   module:
     - node
     - user
-id: featured_communities
-label: 'Featured Communities'
+id: featured_resources
+label: 'Featured Resources'
 module: views
 description: ''
 tag: ''
@@ -22,33 +22,52 @@ display:
     display_plugin: default
     position: 0
     display_options:
+      title: ''
       fields:
-        title:
-          id: title
+        nid:
+          id: nid
           table: node_field_data
-          field: title
+          field: nid
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: node
-          entity_field: title
+          entity_field: nid
           plugin_id: field
           label: ''
           exclude: false
           alter:
             alter_text: false
+            text: ''
             make_link: false
+            path: ''
             absolute: false
-            word_boundary: false
-            ellipsis: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
             strip_tags: false
             trim: false
+            preserve_tags: ''
             html: false
           element_type: ''
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
+          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -57,9 +76,10 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: string
+          type: number_integer
           settings:
-            link_to_entity: true
+            thousand_separator: ''
+            prefix_suffix: false
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -93,15 +113,15 @@ display:
         options: {  }
       empty: {  }
       sorts:
-        field_dg_shortname_value:
-          id: field_dg_shortname_value
-          table: node__field_dg_shortname
-          field: field_dg_shortname_value
+        field_page_weight_value:
+          id: field_page_weight_value
+          table: node__field_page_weight
+          field: field_page_weight_value
           relationship: none
           group_type: group
           admin_label: ''
           plugin_id: standard
-          order: ASC
+          order: DESC
           expose:
             label: ''
             field_identifier: ''
@@ -123,23 +143,57 @@ display:
           id: type
           table: node_field_data
           field: type
-          entity_type: node
-          entity_field: type
-          plugin_id: bundle
-          value:
-            community: community
-          group: 1
-        field_dg_highlight_value:
-          id: field_dg_highlight_value
-          table: node__field_dg_highlight
-          field: field_dg_highlight_value
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          operator: in
+          value:
+            resources: resources
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        status_1:
+          id: status_1
+          table: node_field_data
+          field: status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: status
           plugin_id: boolean
           operator: '='
           value: '1'
-          group: 1
+          group: 2
           exposed: false
           expose:
             operator_id: ''
@@ -167,6 +221,92 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        type_1:
+          id: type_1
+          table: node_field_data
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          operator: in
+          value:
+            guides: guides
+          group: 2
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        field_page_weight_value_1:
+          id: field_page_weight_value_1
+          table: node__field_page_weight
+          field: field_page_weight_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: numeric
+          operator: '>='
+          value:
+            min: ''
+            max: ''
+            value: '6'
+          group: 2
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
         field_page_weight_value:
           id: field_page_weight_value
           table: node__field_page_weight
@@ -175,11 +315,11 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: numeric
-          operator: '>'
+          operator: '>='
           value:
             min: ''
             max: ''
-            value: '1'
+            value: '3'
           group: 1
           exposed: false
           expose:
@@ -212,21 +352,23 @@ display:
             default_group_multiple: {  }
             group_items: {  }
       filter_groups:
-        operator: AND
+        operator: OR
         groups:
           1: AND
+          2: AND
       style:
         type: default
         options:
           grouping: {  }
           row_class: ''
-          default_row_class: true
-          uses_fields: false
+          default_row_class: false
       row:
-        type: 'entity:node'
+        type: fields
         options:
-          relationship: none
-          view_mode: teaser
+          default_field_elements: false
+          inline: {  }
+          separator: ''
+          hide_empty: false
       query:
         type: views_query
         options:
@@ -238,6 +380,22 @@ display:
       relationships: {  }
       header: {  }
       footer: {  }
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  homepage:
+    id: homepage
+    display_title: 'Homepage Featured Resources'
+    display_plugin: embed
+    position: 1
+    display_options:
+      display_description: ''
       display_extenders: {  }
     cache_metadata:
       max-age: -1
