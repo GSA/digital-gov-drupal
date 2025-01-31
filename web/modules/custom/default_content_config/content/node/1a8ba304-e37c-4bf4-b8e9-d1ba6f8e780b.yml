@@ -11,7 +11,6 @@ _meta:
     e4f2f38f-24e0-479e-9378-d93836307746: node
     c9faf441-8dd2-47a5-bf96-eeb8571f0dc8: node
     b743d576-35d5-47bf-9152-f9d59f783a3f: node
-    7ed0eb3a-0a1e-4626-b8f0-8394b19a8f72: node
     86452891-0ee7-49db-9753-b677f2522ee1: media
 default:
   revision_uid:
@@ -112,11 +111,6 @@ default:
           field_guide_subnav:
             -
               entity: b743d576-35d5-47bf-9152-f9d59f783a3f
-  field_kicker_link:
-    -
-      target_uuid: 7ed0eb3a-0a1e-4626-b8f0-8394b19a8f72
-      title: 'HCD Guide Series'
-      options: {  }
   field_overview_image:
     -
       entity: 86452891-0ee7-49db-9753-b677f2522ee1

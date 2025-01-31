@@ -39,7 +39,7 @@ default:
       pathauto: 0
   body:
     -
-      value: '<p><a href="/node/19" data-entity-type="node" data-entity-uuid="7086f5d5-7c6f-41ef-8a60-70cd267a9860" data-entity-substitution="canonical">RESOURCES</a>&nbsp;</p>'
+      value: '<p><a href="/node/14" data-entity-type="node" data-entity-uuid="fefddcf3-e162-4622-9176-a3f4c2dadd8e" data-entity-substitution="canonical">RESOURCES</a>&nbsp;</p>'
       format: html
       summary: ''
   field_deck:
@@ -234,25 +234,6 @@ default:
           field_title:
             -
               value: 'Accessibility: Essential knowledge'
-  field_featured_resources:
-    -
-      entity:
-        _meta:
-          version: '1.0'
-          entity_type: paragraph
-          uuid: 960a2001-221c-4e91-b070-ca84b18cc1cc
-          bundle: internal_content
-          default_langcode: en
-        default:
-          status:
-            -
-              value: true
-          created:
-            -
-              value: 1732200629
-          behavior_settings:
-            -
-              value: {  }
   field_legislation:
     -
       uri: 'https://www.section508.gov/manage/laws-and-policies/'

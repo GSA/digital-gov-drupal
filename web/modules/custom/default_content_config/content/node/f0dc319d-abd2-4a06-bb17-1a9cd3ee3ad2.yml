@@ -4,6 +4,8 @@ _meta:
   uuid: f0dc319d-abd2-4a06-bb17-1a9cd3ee3ad2
   bundle: guides
   default_langcode: en
+  depends:
+    2f1a705d-d0eb-495c-b872-e7973fac5e7f: node
 default:
   revision_uid:
     -
@@ -34,6 +36,9 @@ default:
       alias: /guides/guide-all-required-fields
       langcode: en
       pathauto: 1
+  field_guide_nav_ref:
+    -
+      entity: 2f1a705d-d0eb-495c-b872-e7973fac5e7f
   field_summary:
     -
       value: '<p>A ‘quick-start’ guide for embedding accessibility and inclusive design practices into your team’s workflow</p>'

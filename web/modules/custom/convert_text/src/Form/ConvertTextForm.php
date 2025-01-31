@@ -32,6 +32,26 @@ final class ConvertTextForm extends FormBase {
         '#default_value' => $converted_text,
         '#disabled' => TRUE,
       ];
+
+      switch ($form_state->getValue('dest')) {
+        case 'html':
+          $form['html_filter'] = [
+            '#markup' => '<h5>HTML Filter</h5>' . check_markup($converted_text, 'html'),
+          ];
+          $form['multiline_filter'] = [
+            '#markup' => '<h5>Multiline HTML Filter</h5>' . check_markup($converted_text, 'multiline_inline_html'),
+          ];
+          $form['single_inline_filter'] = [
+            '#markup' => '<h5>Single Inline Filter</h5>' . check_markup($converted_text, 'single_inline_html'),
+          ];
+          break;
+
+        case 'plain_text':
+          $form['Plain text'] = [
+            '#markup' => '<h5>Plain text</h5>' . check_markup($converted_text, 'plain_text'),
+          ];
+          break;
+      }
     }
 
     $form['source_text'] = [

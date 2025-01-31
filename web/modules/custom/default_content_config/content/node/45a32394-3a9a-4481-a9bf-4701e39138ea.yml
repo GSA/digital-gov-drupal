@@ -5,6 +5,7 @@ _meta:
   bundle: guides
   default_langcode: en
   depends:
+    2f1a705d-d0eb-495c-b872-e7973fac5e7f: node
     1e945b0b-bcf5-4df7-9105-6c222eb70c13: media
 default:
   revision_uid:
@@ -45,6 +46,9 @@ default:
     -
       value: '<p>A ‘quick-start’ guide for embedding accessibility and inclusive design practices into your team’s workflow</p>'
       format: single_inline_html
+  field_guide_nav_ref:
+    -
+      entity: 2f1a705d-d0eb-495c-b872-e7973fac5e7f
   field_guide_nav_title:
     -
       value: 'GUIDE-all fields (Overriden)'
