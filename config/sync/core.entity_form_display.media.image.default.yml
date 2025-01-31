@@ -6,7 +6,7 @@ dependencies:
     - field.field.media.image.field_caption
     - field.field.media.image.field_credit
     - field.field.media.image.field_media_image
-    - image.style.thumbnail
+    - image.style.responsive_image_set
     - media.type.image
   module:
     - image
@@ -45,7 +45,7 @@ content:
     region: content
     settings:
       progress_indicator: throbber
-      preview_image_style: thumbnail
+      preview_image_style: responsive_image_set
     third_party_settings: {  }
   name:
     type: string_textfield

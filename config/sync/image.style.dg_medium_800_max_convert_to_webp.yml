@@ -1,0 +1,21 @@
+uuid: 2aafc2ab-3bd9-4535-956e-02295504af41
+langcode: en
+status: true
+dependencies: {  }
+name: dg_medium_800_max_convert_to_webp
+label: 'DG Medium (scale 800 w max convert to webp)'
+effects:
+  42c4c7a7-f686-4c2e-bf04-e5198d8d0079:
+    uuid: 42c4c7a7-f686-4c2e-bf04-e5198d8d0079
+    id: image_scale
+    weight: -10
+    data:
+      width: 800
+      height: null
+      upscale: true
+  c93b3ec1-9090-4844-8f86-6077b6f5e6fd:
+    uuid: c93b3ec1-9090-4844-8f86-6077b6f5e6fd
+    id: image_convert
+    weight: -8
+    data:
+      extension: webp
