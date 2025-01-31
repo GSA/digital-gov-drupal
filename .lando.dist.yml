@@ -50,6 +50,7 @@ tooling:
     service: appserver
     description: Install a fresh Drupal site from configuration.
     cmd:
+      - "./composer.sh install --no-interaction"
       - "env DRUPAL_UPDATE_OR_INSTALL=install ./orch/deploy_install.sh"
       - "env DRUPAL_SOLR_SITE_HASH=abcdef ./orch/post_deploy.sh"
       - "drush uli"
