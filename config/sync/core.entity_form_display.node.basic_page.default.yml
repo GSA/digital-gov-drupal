@@ -15,6 +15,7 @@ dependencies:
     - content_moderation
     - maxlength
     - media_library
+    - media_library_edit
     - path
     - text
 id: node.basic_page.default
@@ -56,7 +57,10 @@ content:
     region: content
     settings:
       media_types: {  }
-    third_party_settings: {  }
+    third_party_settings:
+      media_library_edit:
+        show_edit: '1'
+        edit_form_mode: default
   field_page_weight:
     type: number
     weight: 8
@@ -119,6 +123,7 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_featured: true
   field_slug: true
   promote: true
   publish_on: true

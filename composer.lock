@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3ad4f30267485d671263c3d201bf528c",
+    "content-hash": "96ae549a173d424336e66f5b30a82bed",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2717,6 +2717,57 @@
             }
         },
         {
+            "name": "drupal/edit_media_modal",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/edit_media_modal.git",
+                "reference": "2.0.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/edit_media_modal-2.0.1.zip",
+                "reference": "2.0.1",
+                "shasum": "ae27d0e29d234d726de2dee210b18d305ddc4063"
+            },
+            "require": {
+                "drupal/core": "^10.0 || ^11.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.0.1",
+                    "datestamp": "1736099783",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Alex Sharkov",
+                    "homepage": "https://www.drupal.org/u/blade_ukraine",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "The module provide ability to edit Media entity embedded via CKEditor in a modal window.",
+            "homepage": "https://www.drupal.org/project/edit_media_modal",
+            "keywords": [
+                "CKEditor",
+                "Drupal",
+                "Media"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/edit_media_modal",
+                "issues": "https://www.drupal.org/project/issues/edit_media_modal"
+            }
+        },
+        {
             "name": "drupal/embedded_content",
             "version": "2.0.2",
             "source": {
@@ -3668,6 +3719,54 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/maxlength",
                 "issues": "https://www.drupal.org/project/issues/maxlength"
+            }
+        },
+        {
+            "name": "drupal/media_library_edit",
+            "version": "3.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/media_library_edit.git",
+                "reference": "3.0.4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/media_library_edit-3.0.4.zip",
+                "reference": "3.0.4",
+                "shasum": "92f1c1f58b5579363a9f18ffb5632cc368066dfe"
+            },
+            "require": {
+                "drupal/core": "^9.2 || ^10 || ^11"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "3.0.4",
+                    "datestamp": "1724358009",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "ahebrank",
+                    "homepage": "https://www.drupal.org/user/3190515"
+                }
+            ],
+            "description": "Add an edit button to the Media Library widget when an item is selected.",
+            "homepage": "https://www.drupal.org/project/media_library_edit",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/media_library_edit",
+                "issues": "https://www.drupal.org/project/issues/media_library_edit"
             }
         },
         {
@@ -17139,7 +17238,7 @@
     },
     "prefer-stable": true,
     "prefer-lowest": false,
-    "platform": {},
-    "platform-dev": {},
+    "platform": [],
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }

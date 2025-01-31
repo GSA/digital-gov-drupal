@@ -1,0 +1,23 @@
+uuid: 04e3fbc4-5f13-4ce7-b324-e616dd2593f4
+langcode: en
+status: true
+dependencies: {  }
+name: responsive_image_set
+label: 'DG Responsive Image Set'
+effects:
+  c5b89838-41f1-428c-957f-6f2abd9b035f:
+    uuid: c5b89838-41f1-428c-957f-6f2abd9b035f
+    id: image_scale
+    weight: 1
+    data:
+      width: 800
+      height: null
+      upscale: false
+  6e0ee9d0-be22-4c26-a2d0-9c131bcc7b80:
+    uuid: 6e0ee9d0-be22-4c26-a2d0-9c131bcc7b80
+    id: image_scale
+    weight: 2
+    data:
+      width: 1200
+      height: null
+      upscale: false

@@ -24,6 +24,7 @@ dependencies:
     - inline_entity_form
     - maxlength
     - media_library
+    - media_library_edit
     - path
     - text
 third_party_settings:
@@ -125,7 +126,10 @@ content:
     region: content
     settings:
       media_types: {  }
-    third_party_settings: {  }
+    third_party_settings:
+      media_library_edit:
+        show_edit: '1'
+        edit_form_mode: default
   field_summary:
     type: text_textarea
     weight: 3

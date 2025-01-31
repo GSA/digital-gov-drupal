@@ -24,7 +24,7 @@ filters:
     id: embedded_content
     provider: embedded_content
     status: true
-    weight: 100
+    weight: -48
     settings: {  }
   filter_align:
     id: filter_align
@@ -48,7 +48,7 @@ filters:
     id: filter_html
     provider: filter
     status: false
-    weight: -48
+    weight: -45
     settings:
       allowed_html: '<span class="highlight-text"> <div class="box"> <a class="usa-button usa-button--outline">'
       filter_html_help: true
@@ -81,7 +81,7 @@ filters:
     id: filter_url
     provider: filter
     status: false
-    weight: -49
+    weight: -46
     settings:
       filter_url_length: 72
   heading_id_filter:
@@ -94,14 +94,14 @@ filters:
     id: linkit
     provider: linkit
     status: true
-    weight: -47
+    weight: -49
     settings:
       title: true
   media_embed:
     id: media_embed
     provider: media
     status: true
-    weight: -45
+    weight: -47
     settings:
       default_view_mode: full
       allowed_view_modes: {  }

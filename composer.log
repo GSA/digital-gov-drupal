@@ -65,3 +65,5 @@ cd50d2b2b036edaa3a002881cf1b50ce|Ray Estrada|feature/DIGITAL-283-security-module
 406c28be9e70355b9cfbbe1df58bb7ef|Ray Estrada|feature/DIGITAL-283-security-modules|Mon Jan 13 12:16:28 EST 2025|./composer.sh require drupal/database_ssl_check
 699e8eda61efbe69e1f9a75fe81a3bf4|Oscar Merida|feature/DIGITAL-299-auto-headings|Tue Jan 14 14:23:14 EST 2025|./composer.sh require drupal/auto_heading_ids:^2.0@beta
 c4f5d0dc96584bd1dc808fd112b6e516|Ray Estrada|feature/DIGITAL-252-community-review|Thu Jan 16 10:51:08 EST 2025|./composer.sh require drupal/svg_image
+511e487e902df9d510dd82a84182db25|cathybaptista|feature/DIGITAL-119-configure-images|Thu Jan 30 17:07:59 EST 2025|./composer.sh require drupal/media_library_edit
+857e71e647f08b694da43edfa1f80218|cathybaptista|feature/DIGITAL-119-configure-images|Thu Jan 30 17:08:26 EST 2025|./composer.sh require drupal/edit_media_modal

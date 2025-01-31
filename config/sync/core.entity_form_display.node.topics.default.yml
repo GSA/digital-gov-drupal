@@ -22,6 +22,7 @@ dependencies:
     - link
     - maxlength
     - media_library
+    - media_library_edit
     - paragraphs
     - path
     - text
