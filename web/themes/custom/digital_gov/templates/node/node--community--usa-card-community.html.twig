@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Theme implementation to display a Commuinity node as a teaser.
+ * Theme implementation to display a Commuinity node as a card with image.
  */
 #}
 {# Caching the data in content object #}
@@ -13,4 +13,6 @@
   member_count: content.field_members|field_value,
   summary: content.field_summary|field_value,
   acronym: content.field_dg_acronym|field_value,
+  has_image: true,
+  outline: true,
 }) }}

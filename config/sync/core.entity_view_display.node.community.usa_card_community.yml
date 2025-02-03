@@ -1,9 +1,9 @@
-uuid: 0b801a2f-20af-4a82-8808-a6f47521c927
+uuid: 5b3f5230-0e60-4686-8da2-6e6a0a0192d7
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser
+    - core.entity_view_mode.node.usa_card_community
     - field.field.node.community.body
     - field.field.node.community.field_deck
     - field.field.node.community.field_dg_acronym
@@ -23,30 +23,17 @@ dependencies:
     - svg_image
     - text
     - user
-id: node.community.teaser
+id: node.community.usa_card_community
 targetEntityType: node
 bundle: community
-mode: teaser
+mode: usa_card_community
 content:
-  body:
-    type: text_summary_or_trimmed
-    label: hidden
-    settings:
-      trim_length: 600
-    third_party_settings: {  }
-    weight: 2
-    region: content
-  content_moderation_control:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 0
-    region: content
   field_dg_acronym:
     type: list_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 5
+    weight: 0
     region: content
   field_dg_logo:
     type: image
@@ -55,13 +42,13 @@ content:
       image_link: ''
       image_style: ''
       image_loading:
-        attribute: lazy
+        attribute: eager
       svg_attributes:
         width: null
         height: null
       svg_render_as_image: true
     third_party_settings: {  }
-    weight: 8
+    weight: 1
     region: content
   field_dg_shortname:
     type: string
@@ -69,15 +56,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 7
-    region: content
-  field_kicker:
-    type: string
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 6
+    weight: 4
     region: content
   field_members:
     type: number_integer
@@ -86,24 +65,23 @@ content:
       thousand_separator: ','
       prefix_suffix: false
     third_party_settings: {  }
-    weight: 3
+    weight: 2
     region: content
   field_summary:
     type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 4
-    region: content
-  links:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 1
+    weight: 3
     region: content
 hidden:
+  body: true
+  content_moderation_control: true
   field_deck: true
   field_dg_highlight: true
+  field_kicker: true
   field_page_weight: true
   field_primary_image: true
   field_slug: true
   field_subscribe_email_subject: true
+  links: true

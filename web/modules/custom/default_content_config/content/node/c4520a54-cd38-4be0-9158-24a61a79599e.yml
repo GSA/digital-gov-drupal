@@ -56,7 +56,7 @@ default:
       value: 5
   field_page_weight:
     -
-      value: 0
+      value: 9
   field_primary_image:
     -
       entity: b2f35ae8-423f-428b-865d-e420313e7a81
