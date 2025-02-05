@@ -67,3 +67,4 @@ cd50d2b2b036edaa3a002881cf1b50ce|Ray Estrada|feature/DIGITAL-283-security-module
 c4f5d0dc96584bd1dc808fd112b6e516|Ray Estrada|feature/DIGITAL-252-community-review|Thu Jan 16 10:51:08 EST 2025|./composer.sh require drupal/svg_image
 ce36fc2d9e87105d1ab7eda27ea9d434|Oscar Merida|develop|Mon Feb  3 14:30:03 EST 2025|./composer.sh require drupal/ckeditor_emoji
 b2b17cbb32ac57e73928af9f52acb537|Oscar Merida|feature/DIGITAL-96-ckeditor-emoji|Mon Feb  3 15:14:17 EST 2025|./composer.sh require elvanto/litemoji
+c73ec25d5b68a3e0e1bdfc83c24312ba|Matt Poole|feature/DIGITAL-396-update-deps-8-0|Wed Feb  5 15:32:16 EST 2025|./composer.sh update
