@@ -72,3 +72,5 @@ d0ca998c567e8cc218ee57bb5c9b6679|cathybaptista|feature/DIGITAL-119-configure-ima
 6b5963bf3c6740285c129be6d6273aed|cathybaptista|feature/DIGITAL-119-configure-images|Thu Feb  6 11:06:14 EST 2025|./composer.sh require drupal/edit_media_modal
 caeb4cc7f30e1f80c7425f9c3fcf8a98|Oscar Merida|feature/DIGITAL-89-linkit|Wed Feb  5 16:40:40 EST 2025|./composer.sh require drupal/linkit:^7.0
 c063010712247ba9dfd709c97fccb648|Oscar Merida|feature/DIGITAL-89-linkit|Thu Feb  6 16:27:25 EST 2025|./composer.sh require drupal/linkit:^7.0
+8a0e2fbc7c8d8969f83b20ea067a05a6|Matt Poole|feature/DIGITAL-378-first-migration|Tue Feb 11 12:49:26 EST 2025|./composer.sh require drupal/migrate_plus
+1304bcdfbde5e6d8aa096511afec9212|Matt Poole|feature/DIGITAL-378-first-migration|Tue Feb 11 15:37:48 EST 2025|./composer.sh require drupal/migrate_conditions
