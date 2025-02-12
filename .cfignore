@@ -1,1 +1,15 @@
+.git/**
+.github/**
+.run/**
+.vscode/**
+docs/**
+lando-config/**
+orch/**
+robo**
+Robo*/**
 terraform/**
+web/themes/custom/digital_gov/*.js
+web/themes/custom/digital_gov/*.json
+web/themes/custom/digital_gov/css/**
+web/themes/custom/digital_gov/gulp**
+web/themes/custom/digital_gov/js/**

@@ -95,6 +95,9 @@ foreach ($cf_service_data as $service_list) {
       if (!empty($service['credentials']['newrelic_key'])) {
         $settings['new_relic_rpm.api_key'] = $service['credentials']['newrelic_key'];
         $config['new_relic_rpm.settings']['api_key'] = $service['credentials']['newrelic_key'];
+      } elseif (!empty(getenv('NEWRELIC_KEY'))) {
+        $settings['new_relic_rpm.api_key'] = getenv('NEWRELIC_KEY');
+        $config['new_relic_rpm.settings']['api_key'] = getenv('NEWRELIC_KEY');
       }
       $settings['cron_key'] = hash('sha256', $service['credentials']['cron_key']);
     }

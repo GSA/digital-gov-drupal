@@ -7,7 +7,6 @@ set -uo pipefail
 
 export home="/home/vcap"
 export app_path="${home}/app"
-export apt_path="${home}/deps/0/apt"
 
 #echo "${VCAP_SERVICES" | jq -r '."user-provided"[].credentials.ca_certificate' | base64 -d > ${app_path}/ca_certificate.pem
 #echo "${VCAP_SERVICES" jq -r '."user-provided"[].credentials.ca_key' | base64 -d > ${app_path}/ca_key.pem
@@ -20,22 +19,24 @@ if [ -z "${VCAP_SERVICES:-}" ]; then
     exit 1;
 fi
 
+export apt_path="${home}/deps/0/apt"
+export apt_bin_path="${home}/deps/0/bin"
+
 ## NewRelic configuration
-# export newrelic_apt="${apt_path}/usr/lib/newrelic-php5"
-# export newrelic_app="${app_path}/newrelic/"
+export newrelic_apt="${apt_path}/usr/lib/newrelic-php5"
+export newrelic_app="${app_path}/newrelic"
 
-# rm -rf ${newrelic_app}/agent
-# ln -s ${newrelic_apt}/agent ${newrelic_app}/agent
+rm -rf ${newrelic_app}
+ln -s "${newrelic_apt}" "${newrelic_app}"
 
-# rm -f ${newrelic_app}/daemon/newrelic-daemon.x64
-# ln -s ${apt_path}/usr/bin/newrelic-daemon ${newrelic_app}/daemon/newrelic-daemon.x64
+mkdir -p "${newrelic_app}/daemon"
 
-# rm -f ${app_path}/newrelic/scripts/newrelic-iutil.x64
-# ln -s ${newrelic_apt}/scripts/newrelic-iutil.x64 ${newrelic_app}/scripts/newrelic-iutil.x64
+ln -s ${apt_bin_path}/newrelic-daemon ${newrelic_app}/daemon/newrelic-daemon.x64
 
-#echo 'newrelic.daemon.collector_host=gov-collector.newrelic.com' >> ${app_path}/php/etc/php.ini
+echo -e "\n" | tee -a ${app_path}/php/etc/php.ini
+echo 'newrelic.daemon.collector_host=gov-collector.newrelic.com' | tee -a ${app_path}/php/etc/php.ini
 
-source ${app_path}/scripts/bash_exports.sh
+source "${app_path}/scripts/bash_exports.sh"
 
 if [ ! -f ./container_start_timestamp ]; then
   touch ./container_start_timestamp
@@ -56,8 +57,6 @@ done
 ## Updated ~/.bashrc to update $PATH when someone logs in.
 [ -z "$(cat ${home}/.bashrc | grep PATH)" ] && \
   touch ${home}/.bashrc && \
-  #echo "export http_proxy=${http_proxy}" >> ${home}/.bashrc && \
-  #echo "export https_proxy=${https_proxy}" >> ${home}/.bashrc && \
   echo "alias nano=\"${home}/deps/0/apt/bin/nano\"" >> ${home}/.bashrc && \
   echo "PATH=$PATH:/home/vcap/app/php/bin:/home/vcap/app/vendor/drush/drush" >> /home/vcap/.bashrc
 

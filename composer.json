@@ -51,6 +51,7 @@
         "drupal/menu_admin_per_menu": "^1.6",
         "drupal/metatag": "^2.1",
         "drupal/multivalue_form_element": "@beta",
+        "drupal/new_relic_rpm": "^2.1",
         "drupal/noreqnewpass": "^1.4",
         "drupal/openid_connect": "^3.0@alpha",
         "drupal/override_node_options": "^2.8",

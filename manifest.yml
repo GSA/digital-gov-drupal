@@ -11,6 +11,7 @@ default_config: &defaults
     GSA_AUTH_KEY: ${GSA_AUTH_KEY}
     HASH_SALT: ${HASH_SALT}
     LD_LIBRARY_PATH: /home/vcap/app/php/lib/
+    NEWRELIC_KEY: ${NEWRELIC_KEY}
     PHP_INI_SCAN_DIR: /home/vcap/app/php/etc/:/home/vcap/app/php/etc/php.ini.d/
     waf_external_endpoint: ${PROJECT}-${WAF_NAME}-${CF_SPACE}.app.cloud.gov
   timeout: 180
