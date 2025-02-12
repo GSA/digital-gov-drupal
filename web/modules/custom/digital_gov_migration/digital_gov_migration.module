@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for Digital.gov Migration module.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\redirect\Entity\Redirect;
+
+/**
+ * Implements hook_entity_insert().
+ */
+function digital_gov_migration_entity_insert(EntityInterface $entity) {
+  // Check if the entity is a node.
+  if ($entity->getEntityTypeId() !== 'node' || empty($entity->redirects)) {
+    return;
+  }
+  // Create redirects on nodes as they are migrated. If the migration is rolled
+  // back, the redirects are removed automatically by Drupal.
+  // This is not needed once the migration is over.
+  $nid = $entity->id();
+  $node_url = '/node/' . $nid;
+
+  foreach ($entity->redirects as $redirect) {
+    if (empty($redirect['redirect_source']['path'])) {
+      throw new \Exception('Cannot save redirect without a source/path ' . $node_url);
+    }
+    $redirect['redirect_source']['path'] = ltrim($redirect['redirect_source']['path'], '/');
+    // Create a redirect entity.
+    $redirect = Redirect::create([
+      'redirect_source' => $redirect['redirect_source'],
+      'redirect_redirect' => ['uri' => 'internal:' . $node_url],
+      'status_code' => $redirect['status_code'] ?? 301,
+    ]);
+
+    // Save the redirect.
+    $redirect->save();
+  }
+
+}

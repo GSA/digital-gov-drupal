@@ -47,6 +47,9 @@ source:
     - name: field_agency_full_name
       label: 'Full Agency Name'
       selector: field_agency_full_name
+    - name: redirects
+      label: 'Redirects'
+      selector: redirects
   ids:
     src_unique_id:
       type: string
@@ -90,6 +93,15 @@ process:
   path/pathauto:
     plugin: default_value
     default_value: false
+  # See digital_gov_migration_entity_insert().
+  redirects:
+    plugin: sub_process
+    source: redirects
+    process:
+      redirect_source/path: from
+      status_code:
+        plugin: default_value
+        default_value: 301
 destination:
   plugin: entity:node
   default_bundle: authors
