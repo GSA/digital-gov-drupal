@@ -4,6 +4,9 @@ _meta:
   uuid: 7086f5d5-7c6f-41ef-8a60-70cd267a9860
   bundle: resources
   default_langcode: en
+  depends:
+    061eb5bf-80a8-4555-80b2-fc5b3228f7b3: node
+    220a49de-e1ee-4314-ba79-39e0b3cf552a: node
 default:
   revision_uid:
     -
@@ -39,6 +42,11 @@ default:
       value: '<p>Lorem ipsum odor amet, consectetuer adipiscing elit. Dapibus facilisis tellus eleifend cras lectus diam efficitur. Porttitor aenean habitasse magna inceptos commodo litora. Magna fermentum sit phasellus taciti neque venenatis feugiat proin! Himenaeos nam leo hendrerit netus litora luctus porttitor? Congue <strong>habitasse</strong> faucibus habitasse nascetur sit. Dolor hac sagittis ligula vulputate; elit quisque mi tempor. Posuere penatibus vehicula orci suspendisse tortor netus nostra leo laoreet.</p><p>Cursus etiam metus sagittis ultricies, aliquet eget. Nostra euismod feugiat fames suspendisse hendrerit dapibus phasellus felis. Tempor tellus lacus convallis varius hac turpis. Pulvinar augue fusce accumsan suscipit molestie interdum augue porta. Consectetur maximus pulvinar ex curae nostra tellus nisi eu. Convallis mattis ex ullamcorper nisl neque mi torquent. Eros inceptos dis pretium lectus sem mus a. Faucibus proin luctus ultrices; vestibulum tincidunt rutrum.</p>'
       format: html
       summary: ''
+  field_authors:
+    -
+      entity: 061eb5bf-80a8-4555-80b2-fc5b3228f7b3
+    -
+      entity: 220a49de-e1ee-4314-ba79-39e0b3cf552a
   field_deck:
     -
       value: 'nulla iaculis ligula fames proin in <b>erat</b>'
