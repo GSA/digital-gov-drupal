@@ -1,0 +1,7 @@
+services:
+  convert_text.shortcode_to_equiv:
+    class: Drupal\convert_text\ShortcodeToEquiv
+    arguments: ['@migrate.lookup', '@path_alias.manager', '@entity_type.manager', '@logger.channel.shortcode_to_equiv']
+  logger.channel.shortcode_to_equiv:
+    parent: logger.channel_base
+    arguments: ['shortcode_to_equiv']

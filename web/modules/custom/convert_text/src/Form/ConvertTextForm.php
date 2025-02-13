@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Drupal\convert_text\Form;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\convert_text\ShortcodeToEquiv;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\convert_text\ConvertText;
@@ -12,6 +14,39 @@ use Drupal\convert_text\ConvertText;
  * Provides a Convert Text form.
  */
 final class ConvertTextForm extends FormBase {
+
+  /**
+   * ConvertText service.
+   *
+   * @var \Drupal\convert_text\ConvertText
+   */
+  protected ConvertText $convertText;
+
+  /**
+   * ShortcodeToEquiv service.
+   *
+   * @var \Drupal\convert_text\ShortcodeToEquiv
+   */
+  protected ShortcodeToEquiv $shortcodeToEquiv;
+
+  /**
+   * Create the ConvertTextForm class.
+   *
+   * @param \Drupal\convert_text\ShortcodeToEquiv $shortcode_to_equiv
+   *   The shortcode to equivalent service.
+   */
+  public function __construct(ShortcodeToEquiv $shortcode_to_equiv) {
+    $this->shortcodeToEquiv = $shortcode_to_equiv;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('convert_text.shortcode_to_equiv')
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -91,6 +126,9 @@ final class ConvertTextForm extends FormBase {
       return;
     }
     $source_text = $form_state->getValue('source_text');
+
+    // Convert shortcodes to their equivalent Drupal form.
+    $source_text = $this->shortcodeToEquiv->convert('/just/a/test', $source_text);
 
     switch ($form_state->getValue('dest')) {
       case 'plain_text':

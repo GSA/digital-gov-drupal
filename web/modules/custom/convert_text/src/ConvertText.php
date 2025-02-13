@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\convert_text;
 
+use Drupal\Component\Utility\Html;
 use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Term;
@@ -32,16 +33,24 @@ class ConvertText {
     // Remove extra spaces before new lines.
     $source_text = preg_replace('/\n\s+n/', "\n", $source_text);
 
+    if (!strlen($source_text)) {
+      return '';
+    }
+
     switch ($field_type) {
       case 'plain_text':
         return html_entity_decode($source_text, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401, 'UTF-8');
 
       case 'html':
-
+      case 'html_no_breaks':
         $converter = new CommonMarkConverter();
         $html = $converter->convert($source_text)->getContent();
         $html = LitEmoji::encodeUnicode($html);
-        return self::addLinkItMarkup($html);
+        $html = self::addLinkItMarkup($html);
+        if ($field_type === 'html_no_breaks') {
+          $html = str_replace(['<p>', '</p>', '<br>', '<br />', '<br/>'], '', $html);
+        }
+        return $html;
 
       default:
         throw new \Exception("Invalid \$field_type of $field_type given");
@@ -56,8 +65,7 @@ class ConvertText {
     // Consider these domains local.
     $base_domains = [\Drupal::request()->getHost(), 'digital.gov', 'www.digital.gov'];
 
-    $dom = new \DOMDocument();
-    $dom->loadHTML($source_text);
+    $dom = Html::load($source_text);
 
     foreach ($dom->getElementsByTagName('a') as $link) {
       $href = $link->getAttribute('href');
@@ -182,10 +190,7 @@ class ConvertText {
       }
     }
 
-    $body = $dom->getElementsByTagName('body')->item(0);
-    $html = $dom->saveHTML($body);
-    // No good way to keep white space AND omit the body tag automatically.
-    return preg_replace(['/^<body>/', '/<\/body>$/'], '', $html);
+    return Html::serialize($dom);
   }
 
   /**
@@ -212,6 +217,19 @@ class ConvertText {
    */
   public static function htmlText(string $source_text): string {
     return self::convert($source_text, 'html');
+  }
+
+  /**
+   * Gets text ready to be stored in html text fields without breaks.
+   *
+   * @var string $source_text
+   *   The original source value.
+   *
+   * @return string
+   *   The converted text.
+   */
+  public static function htmlNoBreaksText(string $source_text): string {
+    return self::convert($source_text, 'html_no_breaks');
   }
 
 }

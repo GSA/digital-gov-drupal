@@ -59,7 +59,7 @@ class ECShortcodesCardPrompt extends EmbeddedContentPluginBase implements Embedd
    * {@inheritdoc}
    */
   public function build(): array {
-    $url = $this->configuration['url'];
+    $url = $this->configuration['url'] ?? '';
     // A URL starting with two slashes is a protocol relative external link.
     if (str_starts_with($url, '/') && !str_starts_with($url, '//')) {
       $url = $this->aliasManager->getAliasByPath($url);

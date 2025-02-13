@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 13c15f68-496c-418b-a226-2173161735de
+  bundle: video
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'U.S. Federal #SocialGov: 2 Years of Smashing Silos + Elevating Citizen Services with Social Media'
+  created:
+    -
+      value: 1738592305
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_media_oembed_video:
+    -
+      value: 'https://www.youtube.com/watch?v=hfgllf1L9_4'
