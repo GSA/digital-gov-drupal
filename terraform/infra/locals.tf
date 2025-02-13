@@ -252,6 +252,11 @@ locals {
           "storage_secret_access_key"
         ]
 
+        github = [
+          terraform.workspace == "prod" ? "gsa_auth_production_key" : "gsa_auth_development_key",
+          "hash_salt"
+        ]
+
         ## The type of service to be deployed.
         service_type = "user-provided"
 

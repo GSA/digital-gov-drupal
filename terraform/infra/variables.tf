@@ -10,6 +10,17 @@ variable "cloudgov_password" {
   sensitive   = true
 }
 
+variable "github_organization" {
+  description = "The organization to use with GitHub."
+  type = string
+  default = "GSA"
+}
+variable "github_token" {
+  description = "The token used authenticate with GitHub."
+  type        = string
+  sensitive   = true
+}
+
 variable "terraform_working_dir" {
   description = "Working directory for Terraform."
   type = string

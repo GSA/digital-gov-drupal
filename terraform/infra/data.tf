@@ -57,3 +57,10 @@ data "cloudfoundry_asg" "trusted_local_networks_egress" {
 data "cloudfoundry_asg" "public_networks_egress" {
     name = "public_networks_egress"
 }
+
+data "github_actions_secrets" "this" {
+  for_each = {
+    for key, value in try(local.env.services.secrets.github) : value => value
+  }
+   name = each.value
+}

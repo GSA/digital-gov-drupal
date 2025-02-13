@@ -17,3 +17,9 @@ provider "cloudfoundry" {
   user      = var.cloudgov_username
   password  = var.cloudgov_password
 }
+
+# Configure the GitHub Provider
+provider "github" {
+  owner = var.github_organization
+  token = var.github_token
+}
