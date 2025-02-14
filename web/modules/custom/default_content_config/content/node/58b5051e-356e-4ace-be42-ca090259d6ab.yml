@@ -6,7 +6,6 @@ _meta:
   default_langcode: en
   depends:
     623a2982-602b-4762-a59e-9a7c30c64f36: node
-    cbcd65ff-8274-46c7-89bc-9f8c2bdaddd3: node
     47d1784c-68a3-4a3b-a341-3e4f8d092253: media
     748e020d-b8c3-4080-851d-225c789cc64f: taxonomy_term
 default:
@@ -46,28 +45,6 @@ default:
   field_featured_communities:
     -
       entity: 623a2982-602b-4762-a59e-9a7c30c64f36
-  field_featured_resources:
-    -
-      entity:
-        _meta:
-          version: '1.0'
-          entity_type: paragraph
-          uuid: 7557eb54-5141-4cd0-9240-475ebe96a753
-          bundle: internal_content
-          default_langcode: en
-        default:
-          status:
-            -
-              value: true
-          created:
-            -
-              value: 1732213954
-          behavior_settings:
-            -
-              value: {  }
-          field_content:
-            -
-              entity: cbcd65ff-8274-46c7-89bc-9f8c2bdaddd3
   field_legislation:
     -
       uri: 'https://www.fpc.gov/resources/omb/'

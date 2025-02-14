@@ -17,6 +17,7 @@ dependencies:
     - field.field.node.community.field_slug
     - field.field.node.community.field_subscribe_email_subject
     - field.field.node.community.field_summary
+    - field.field.node.community.field_topics
     - node.type.community
   module:
     - options
@@ -84,4 +85,5 @@ hidden:
   field_primary_image: true
   field_slug: true
   field_subscribe_email_subject: true
+  field_topics: true
   links: true

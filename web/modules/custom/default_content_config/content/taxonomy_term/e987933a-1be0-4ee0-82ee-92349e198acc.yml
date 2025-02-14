@@ -1,7 +1,7 @@
 _meta:
   version: '1.0'
   entity_type: taxonomy_term
-  uuid: 748e020d-b8c3-4080-851d-225c789cc64f
+  uuid: e987933a-1be0-4ee0-82ee-92349e198acc
   bundle: resource_topics
   default_langcode: en
 default:
@@ -10,10 +10,10 @@ default:
       value: true
   name:
     -
-      value: Operations
+      value: 'Strategic development'
   weight:
     -
-      value: 2
+      value: 5
   parent:
     -
       target_id: 0

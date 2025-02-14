@@ -450,8 +450,10 @@ function digital_gov_theme_suggestions_container_alter(array &$suggestions, arra
   }
   // A list of view names in which to exclude the container markup.
   $exclude_views = [
-    'resource_topics_list',
+    'communities_for_topic',
     'guide_cards',
+    'resource_topics_list',
+    'resources_for_topic',
   ];
 
   if (in_array($variables['element']['#name'], $exclude_views)) {

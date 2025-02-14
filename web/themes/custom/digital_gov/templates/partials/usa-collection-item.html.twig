@@ -1,0 +1,27 @@
+{% set with_icon = with_icon ?: false %}
+{% set header_level = header_level ?: 3 %}
+{% if with_icon %}
+  <div class="usa-collection__img-wrapper">
+    <img
+      class="usa-collection__img"
+      src="{{ dg_local_logo_fallback_lookup_favicon(url, '/' ~ active_theme_path()) }}"
+      alt=""
+      aria-hidden="true"
+    />
+  </div>
+{% endif %}
+<div class="usa-collection__body">
+  <h{{ header_level }} class="usa-collection__header">
+    <a
+      class="usa-link"
+      href="{{ url }}"
+      title="{{ link_title }}"
+    >
+      {{ link_title }}
+    </a>
+  </h{{ header_level }}>
+
+  <p class="usa-collection__description">
+    {{ summary }}
+  </p>
+</div>

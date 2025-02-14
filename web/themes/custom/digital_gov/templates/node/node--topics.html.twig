@@ -123,24 +123,31 @@
     {{ content.field_featured_links|field_value }}
   {% else %}
     {# Only show these sections when on page 1, otherwise hide to show only More News and Events #}
-    {% if is_first_page %}
-      {# Default - Related resources, services, and communities #}
-      <div class="grid-container-desktop usa-section">
-        <a href="https://cm-jira.usa.gov/browse/DIGITAL-356">[placeholder for Resources on & Join a Community of Practice]</a>
-        {# NOT-MIGRATED #}
-        {# $resource_settings := ( dict "header_title" (print "Resources on " .Title) "header_size" 2 "variant" "media" "list_header" 3) #}
-        {# partial "partials/core/collection/collection.html" (dict "collection_data" $resources "settings" $resource_settings ) #}
 
-        {# NOT-MIGRATED #}
-        {# WILL NOT MIGRATE THIS, SERVICES DO NOT EXIST ANY MORE #}
-        {# $services_settings := ( dict "header_title" "Tools and Services" "header_size" 2 "variant" "media" "list_header" 3) #}
-        {# partial "partials/core/collection/collection.html" (dict "collection_data" $services "settings" $services_settings) #}
+    {# Default - Related resources, services, and communities #}
+    <div class="grid-container-desktop usa-section">
+      {% if drupal_view_result('resources_for_topic', 'default', node.nid.value) is not empty %}
+        <div class="dg-collection">
+          <h2 class="dg-collection__header">Resources on {{ node.label }}</h2>
+          {{ drupal_view('resources_for_topic', 'default', node.nid.value) }}
 
-        {# NOT-MIGRATED #}
-        {# $community_settings := ( dict "header_title" "Join a Community of Practice" "header_size" 2 "variant" "media" "list_header" 3) #}
-        {# partial "partials/core/collection/collection.html" (dict "collection_data" $communities "settings" $community_settings) #}
-      </div>
-    {% endif %}
+        </div>
+      {% endif %}
+
+      {# NOT-MIGRATED #}
+      {# WILL NOT MIGRATE THIS, SERVICES DO NOT EXIST ANY MORE #}
+      {# $services_settings := ( dict "header_title" "Tools and Services" "header_size" 2 "variant" "media" "list_header" 3) #}
+      {# partial "partials/core/collection/collection.html" (dict "collection_data" $services "settings" $services_settings) #}
+
+      {% if drupal_view_result('communities_for_topic', 'default', node.nid.value) is not empty %}
+        <div class="dg-collection">
+          <h2 class="dg-collection__header">Join a Community of Practice</h2>
+          {{ drupal_view('communities_for_topic', 'default', node.nid.value) }}
+
+        </div>
+      {% endif %}
+    </div>
+
   {% endif %}
 
   <a href="https://cm-jira.usa.gov/browse/DIGITAL-357">[Placeholder for news & events]</a>

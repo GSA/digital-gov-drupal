@@ -13,7 +13,7 @@ default:
       value: 'Content & communication'
   weight:
     -
-      value: 0
+      value: 3
   parent:
     -
       target_id: 0

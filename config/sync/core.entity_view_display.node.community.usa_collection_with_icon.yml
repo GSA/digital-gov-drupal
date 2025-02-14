@@ -1,9 +1,9 @@
-uuid: 6cdc0cf3-1185-4ee6-9c18-f3d66191495f
+uuid: e57d66c1-e6c5-4b0f-b986-93e67e4938d6
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.usa_card_community_no_icon
+    - core.entity_view_mode.node.usa_collection_with_icon
     - field.field.node.community.body
     - field.field.node.community.field_deck
     - field.field.node.community.field_dg_acronym
@@ -20,67 +20,37 @@ dependencies:
     - field.field.node.community.field_topics
     - node.type.community
   module:
-    - options
-    - svg_image
     - text
     - user
-id: node.community.usa_card_community_no_icon
+id: node.community.usa_collection_with_icon
 targetEntityType: node
 bundle: community
-mode: usa_card_community_no_icon
+mode: usa_collection_with_icon
 content:
-  field_dg_acronym:
-    type: list_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 0
-    region: content
-  field_dg_logo:
-    type: image
-    label: above
-    settings:
-      image_link: ''
-      image_style: ''
-      image_loading:
-        attribute: eager
-      svg_attributes:
-        width: null
-        height: null
-      svg_render_as_image: true
-    third_party_settings: {  }
-    weight: 1
-    region: content
   field_dg_shortname:
     type: string
-    label: above
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 4
-    region: content
-  field_members:
-    type: number_integer
-    label: above
-    settings:
-      thousand_separator: ','
-      prefix_suffix: false
-    third_party_settings: {  }
-    weight: 3
+    weight: 0
     region: content
   field_summary:
     type: text_default
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 2
+    weight: 1
     region: content
 hidden:
   body: true
   content_moderation_control: true
   field_deck: true
+  field_dg_acronym: true
   field_dg_highlight: true
+  field_dg_logo: true
   field_kicker: true
+  field_members: true
   field_page_weight: true
   field_primary_image: true
   field_slug: true
