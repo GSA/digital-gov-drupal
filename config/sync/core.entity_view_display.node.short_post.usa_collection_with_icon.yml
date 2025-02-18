@@ -1,0 +1,52 @@
+uuid: 6ccc9567-a791-49b1-965f-c4babcef79f6
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.usa_collection_with_icon
+    - field.field.node.short_post.field_deck
+    - field.field.node.short_post.field_external_url
+    - field.field.node.short_post.field_kicker
+    - field.field.node.short_post.field_short_post_type
+    - field.field.node.short_post.field_slug
+    - field.field.node.short_post.field_source
+    - field.field.node.short_post.field_summary
+    - field.field.node.short_post.field_topics
+    - node.type.short_post
+  module:
+    - link
+    - text
+    - user
+id: node.short_post.usa_collection_with_icon
+targetEntityType: node
+bundle: short_post
+mode: usa_collection_with_icon
+content:
+  field_external_url:
+    type: link_separate
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_summary:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  content_moderation_control: true
+  field_deck: true
+  field_kicker: true
+  field_short_post_type: true
+  field_slug: true
+  field_source: true
+  field_topics: true
+  links: true

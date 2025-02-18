@@ -1,7 +1,7 @@
 _meta:
   version: '1.0'
   entity_type: node
-  uuid: 27158058-f6ac-4584-a67e-68d7a0c576cd
+  uuid: 024c88d0-5a3a-4f93-adbe-9d3a1243a93f
   bundle: short_post
   default_langcode: en
   depends:
@@ -19,10 +19,10 @@ default:
       target_id: 1
   title:
     -
-      value: 'Crowdsourcing and Citizen Science'
+      value: 'Challenge & Prize'
   created:
     -
-      value: 1734554763
+      value: 1739550754
   promote:
     -
       value: false
@@ -39,7 +39,7 @@ default:
       pathauto: 1
   field_external_url:
     -
-      uri: 'https://www.citizenscience.gov/about/community-of-practice/'
+      uri: 'https://www.challenge.gov/community/'
       title: ''
       options: {  }
   field_short_post_type:
@@ -47,7 +47,7 @@ default:
       value: community
   field_summary:
     -
-      value: '<p>We work across government develop best practices for designing, implementing, and evaluating crowdsourcing and citizen science initiatives.</p>'
+      value: '<p>We encourage public participation in crowdsourcing competitions to find innovative government solutions.</p>'
       format: single_inline_html
   field_topics:
     -
