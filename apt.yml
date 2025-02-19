@@ -7,5 +7,4 @@ repos:
 packages:
   #- awscli
   - bsdmainutils
-  - mysql-client
   #- newrelic-php5

@@ -33,7 +33,15 @@ locals {
           "${key}" = value.result
         }
       ])
-    ...)
+    ...),
+    {
+      cloudgov_organization     = var.cloudgov_organization
+      cloudgov_production_space = var.cloudgov_production_space
+      cloudgov_password         = var.cloudgov_password
+      cloudgov_username         = var.cloudgov_username
+      github_token              = var.github_token
+      newrelic_key              = var.newrelic_key
+    }
   )
 
   ## List of the workspaces defined in the configuration above.

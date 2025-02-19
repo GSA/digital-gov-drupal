@@ -240,16 +240,12 @@ locals {
 
         ## Credentials that should be added to the json blob.
         credentials = [
-          "cron_key",
-          "hash_salt",
-          "static_bucket",
-          "static_fips_endpoint",
-          "static_access_key_id",
-          "static_secret_access_key",
-          "storage_bucket",
-          "storage_fips_endpoint",
-          "storage_access_key_id",
-          "storage_secret_access_key"
+          "cloudgov_organization",
+          "cloudgov_production_space",
+          "cloudgov_password",
+          "cloudgov_username",
+          "github_token",
+          "newrelic_key",
         ]
 
         ## The type of service to be deployed.
