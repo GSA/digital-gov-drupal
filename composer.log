@@ -73,4 +73,7 @@ d0ca998c567e8cc218ee57bb5c9b6679|cathybaptista|feature/DIGITAL-119-configure-ima
 caeb4cc7f30e1f80c7425f9c3fcf8a98|Oscar Merida|feature/DIGITAL-89-linkit|Wed Feb  5 16:40:40 EST 2025|./composer.sh require drupal/linkit:^7.0
 c063010712247ba9dfd709c97fccb648|Oscar Merida|feature/DIGITAL-89-linkit|Thu Feb  6 16:27:25 EST 2025|./composer.sh require drupal/linkit:^7.0
 baf396b85c3bcb4a0f123cfa702e1088|Matt Poole|feature/DIGITAL-99-robo-standards|Mon Feb 10 14:12:29 EST 2025|./composer.sh update mattsqd/robovalidate
-25da01734657bf481150e51330bdde06|Ray Estrada|feature/DIGITAL-359-implement-new-relic-deploydev|Wed Feb 19 09:07:32 PST 2025|./composer.sh require drupal/new_relic_rpm
+a80a7c65cb0d9d62c454119c82bdf82e|Matt Poole|feature/DIGITAL-402-dep-update|Thu Feb 13 16:31:15 EST 2025|./composer.sh update
+543ba2f44c5ed46843de6cd6bc75f5fb|Matt Poole|feature/DIGITAL-378-first-migration|Tue Feb 18 16:27:54 EST 2025|./composer.sh require drupal/migrate_plus
+95f916020ef4ef3b476e92c4e7d7b998|Matt Poole|feature/DIGITAL-378-first-migration|Tue Feb 18 16:28:02 EST 2025|./composer.sh require drupal/migrate_conditions
+4b13271c5cf656c6cf445c2a1cdba54b|Ray Estrada|feature/DIGITAL-359-implement-new-relic-deploydev|Wed Feb 19 09:28:47 PST 2025|./composer.sh require drupal/new_relic_rpm

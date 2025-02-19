@@ -50,6 +50,8 @@
         "drupal/memcache": "^2.5",
         "drupal/menu_admin_per_menu": "^1.6",
         "drupal/metatag": "^2.1",
+        "drupal/migrate_conditions": "^2.2",
+        "drupal/migrate_plus": "^6.0",
         "drupal/multivalue_form_element": "@beta",
         "drupal/new_relic_rpm": "*",
         "drupal/noreqnewpass": "^1.4",
