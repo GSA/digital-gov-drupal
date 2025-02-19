@@ -11,6 +11,7 @@ no_patching: false
 storage: folder
 folder: ../config/non_local
 module:
+  new_relic_rpm: -20
   s3fs: 0
 theme: {  }
 complete_list: {  }
