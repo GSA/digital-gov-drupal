@@ -12,7 +12,7 @@ default:
       value: en
   name:
     -
-      value: ray.estrada@bixal.com
+      value: raymond.estrada@gsa.gov
   pass:
     -
       value: $2y$10$I6KM/OQbPASsF0FAb8GbU.AyJBhtiMVY3oT380Nk3cDQ4ei2Hjtqm
@@ -20,7 +20,7 @@ default:
       pre_hashed: true
   mail:
     -
-      value: ray.estrada@bixal.com
+      value: raymond.estrada@gsa.gov
   timezone:
     -
       value: America/Vancouver
