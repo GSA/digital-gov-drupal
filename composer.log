@@ -78,3 +78,4 @@ a80a7c65cb0d9d62c454119c82bdf82e|Matt Poole|feature/DIGITAL-402-dep-update|Thu F
 95f916020ef4ef3b476e92c4e7d7b998|Matt Poole|feature/DIGITAL-378-first-migration|Tue Feb 18 16:28:02 EST 2025|./composer.sh require drupal/migrate_conditions
 e85fe7addd55a02c6c3cd5ad9de215eb|afemath|feature/DIGITAL-377-sitewide-alerts|Fri Feb 21 15:35:03 EST 2025|./composer.sh require drupal/sitewide_alert
 1ba6c265cc7f91fb185e3563577e8e50|Ray Estrada|feature/DIGITAL-359-implement-new-relic-deploydev|Wed Feb 26 09:31:54 EST 2025|./composer.sh require drupal/new_relic_rpm
+a54147f103e6230eb7128b45b55e4ba4|afemath|feature/DIGITAL-457-update-dependencies|Wed Feb 26 14:09:52 EST 2025|./composer.sh update
