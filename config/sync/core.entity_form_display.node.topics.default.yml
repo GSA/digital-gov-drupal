@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.topics.body
     - field.field.node.topics.field_deck
     - field.field.node.topics.field_featured_communities
     - field.field.node.topics.field_featured_links
@@ -31,16 +30,6 @@ targetEntityType: node
 bundle: topics
 mode: default
 content:
-  body:
-    type: text_textarea_with_summary
-    weight: 3
-    region: content
-    settings:
-      rows: 9
-      summary_rows: 3
-      placeholder: ''
-      show_summary: false
-    third_party_settings: {  }
   created:
     type: datetime_timestamp
     weight: 9
