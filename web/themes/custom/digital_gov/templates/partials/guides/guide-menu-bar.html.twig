@@ -50,8 +50,8 @@ Displays an optional glossary sidemenu on the right side if glossary is selected
       <div class="guide-mobile-menu__image-container">
         <a
           class="guide-mobile-menu__image-dg-icon"
-          href="{{ Site.BaseURL }}"
-          title="{{ Site.Title }} Home"
+          href="{{ path('<front>') }}"
+          title="{{ site_name }} Home""
         >
           <picture class="guide-mobile-menu__image">
             <source
@@ -101,7 +101,7 @@ Displays an optional glossary sidemenu on the right side if glossary is selected
       <nav class="guide-mobile-menu__nav" aria-label="Secondary menu bar">
         {% for item in guide_nav %}
           {{ _self.link_item(item.link, path('<current>')) }}
-        {% endfor %}`
+        {% endfor %}
       </nav>
     </div>
   </div>
