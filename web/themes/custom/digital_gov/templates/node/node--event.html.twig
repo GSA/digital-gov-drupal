@@ -183,7 +183,7 @@
 {% macro registration_link(content) %}
   <a
     aria-label="Register for {{ content.label }}"
-    class="btn btn-register"
+    class="dg-register__button btn"
     href="{{ content.field_registration_url|field_value }}"
     onclick="__gaTracker('send', 'event', 'outbound-article', '{{ content.field_registration_url|field_value }}', '{{ 'REGISTER NOW'|t }}');"
   >{{ 'Register'|t }}</a
