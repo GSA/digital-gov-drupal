@@ -144,7 +144,8 @@ destination:
 
 migration_dependencies:
   required:
-    - json_authors
-    - json_topics
     - json_images_to_media
-  optional: { }
+    - json_topics
+  optional:
+    # https://www.drupal.org/project/drupal/issues/2797505#comment-12129356
+    - json_authors

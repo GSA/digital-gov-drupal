@@ -22,8 +22,10 @@ class JsonGuides extends JsonTamperer {
    */
   protected function alterFeed(&$feed): void {
     foreach ($this->sourceData['items'] as &$item) {
-      if ($item['filepath'] == "/content/guides/_index.md") {
-        // Don't import this index page.
+      if ($item['filepath'] === "/content/guides/_index.md"
+        || $item['filepath'] === "/content/guides/hcd/_index.md"
+      ) {
+        // Don't import these index pages, they're different node type.
         $item = NULL;
         continue;
       }
@@ -34,6 +36,9 @@ class JsonGuides extends JsonTamperer {
         $item['field_glossary_name'] = $name;
       }
     }
+
+    $this->sourceData['items'] = array_filter($this->sourceData['items']);
+    $this->sourceData['count'] = count($this->sourceData['items']);
   }
 
 }

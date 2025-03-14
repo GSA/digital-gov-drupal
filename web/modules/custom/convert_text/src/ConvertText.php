@@ -77,7 +77,7 @@ class ConvertText {
   /**
    * Runs conversions that must happen after all content is migrated.
    */
-  protected static function afterMigrate(string $source_text, string $field_type): string {
+  protected static function afterMigrate(string $source_text, string $field_type, string $baseURL = ''): string {
     switch ($field_type) {
       case 'plain_text':
         // Doesn't do anything yet, stubbed here in case we need it later.
@@ -85,7 +85,17 @@ class ConvertText {
 
       case 'html':
       case 'html_no_breaks':
-        return self::addLinkItMarkup($source_text);
+        $source_text = self::fixShortCodes($source_text);
+        $source_text = self::addLinkItMarkup($source_text, $baseURL);
+        // Doesn't like when new lines are in the source text. Autop filter?
+        $source_text = preg_replace('/\R/', "", $source_text);
+        // Or p-tags around embedded content.
+        $source_text = str_replace(
+          ['<p><embedded-content', '</embedded-content></p>'],
+          ['<embedded-content', '</embedded-content>'],
+          $source_text
+        );
+        return $source_text;
 
       default:
         throw new \Exception("Invalid \$field_type of $field_type given");
@@ -103,6 +113,31 @@ class ConvertText {
     // Remove line breaks at the start of href.
     $source_text = preg_replace('/href="(\R|\s)+/', 'href="', $source_text);
 
+    // Need to turn the link and ref shortcodes into regular markdown links.
+    if (str_contains($source_text, '{{< ref') || str_contains($source_text, '{{< link')) {
+      $source_text = preg_replace_callback(
+        '/{{<\s+(ref|link)\s+\"?([^">]+).*}}/i',
+        function ($match): string {
+          $href = $match[2];
+          if (str_starts_with($href, 'resources/')) {
+            // It should be an absolute link.
+            $href = '/' . $href;
+          }
+
+          if (str_starts_with($href, '/') && str_ends_with($href, '/_index.md')) {
+            return str_replace('/_index.md', '/', $href);
+          }
+
+          if (!preg_match('/^https?\:\/\//', $href) && str_ends_with($href, '.md')) {
+            return preg_replace('/\.md$/', '', $href);
+          }
+
+          // Either a full URL or something we can't readily fix.
+          return $href;
+        }, $source_text
+      );
+    }
+
     // When the source text has raw HTML, leading spaces are mistaken for
     // code blocks.
     $lines = array_map(function (string $line): string {
@@ -115,8 +150,7 @@ class ConvertText {
   /**
    * Update local link tags with LinkIt data attributes.
    */
-  protected static function addLinkItMarkup(string $source_text): string {
-
+  protected static function addLinkItMarkup(string $source_text, string $baseURL = ''): string {
     // Consider these domains local.
     $base_domains = [\Drupal::request()->getHost(), 'digital.gov', 'www.digital.gov'];
 
@@ -131,6 +165,17 @@ class ConvertText {
       $anchor = '';
       if (preg_match('/\#(.*)$/', $href, $matches)) {
         $anchor = $matches[0];
+      }
+
+      // Prepend base URL to relative links.
+      // Starts with a letter or number but no protocol.
+      if ($baseURL
+        && !str_starts_with($href, '/')
+        && preg_match('/^(?![A-Za-z]+?:\/\/)([[:alnum:]]+)/', $href)
+      ) {
+        $href = $baseURL
+          . (!str_ends_with($baseURL, '/') ? '/' : '')
+          . $href;
       }
 
       // Add a trailing slash for links with just the domain w/o trailing slash.
@@ -249,6 +294,14 @@ class ConvertText {
   }
 
   /**
+   * Helper for calling the short code fixer service.
+   */
+  public static function fixShortCodes(string $source_text): string {
+    return \Drupal::service('convert_text.shortcode_to_equiv')
+      ->convert(md5($source_text), $source_text);
+  }
+
+  /**
    * Gets text ready to be stored in plain text fields.
    *
    * @param string $source_text
@@ -284,8 +337,8 @@ class ConvertText {
   /**
    * Runs post-migration cleanup for HTML fields.
    */
-  public static function htmlTextAfterMigrate(string $source_text): string {
-    return self::afterMigrate($source_text, 'html');
+  public static function htmlTextAfterMigrate(string $source_text, string $baseURL = ''): string {
+    return self::afterMigrate($source_text, 'html', $baseURL);
   }
 
   /**
@@ -304,7 +357,7 @@ class ConvertText {
   /**
    * Runs post-migration cleanup for HTML-no-breaks fields.
    */
-  public static function htmlNoBreaksAfterMigrate(string $source_text): string {
+  public static function htmlNoBreaksAfterMigrate(string $source_text, string $baseURL = ''): string {
     return self::afterMigrate($source_text, 'html_no_breaks');
   }
 

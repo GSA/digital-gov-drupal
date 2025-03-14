@@ -148,7 +148,7 @@ destination:
 
 migration_dependencies:
   required:
-    - json_authors
     - json_topics
     - json_images_to_media
-  optional: { }
+  optional:
+    - json_authors

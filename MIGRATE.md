@@ -32,3 +32,12 @@ This is handy when developing. This script also allows passing arguments to the 
 `./migrate.sh json_images --limit=5`
 
 So you don't have to migrate everything.
+
+## Clean up migrated content
+
+Fix short codes and add link it markup:
+
+```
+./drush.sh digitalgov:update-nodes
+./drush.sh digitalgov:update-paragraphs
+```
