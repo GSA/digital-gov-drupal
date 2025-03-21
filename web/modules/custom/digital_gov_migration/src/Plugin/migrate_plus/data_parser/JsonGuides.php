@@ -30,6 +30,15 @@ class JsonGuides extends JsonTamperer {
         continue;
       }
 
+      if (
+        isset($item['field_primary_image'])
+          && $item['field_primary_image'] === 'hcd-guide-intro'
+          && $item['url'] === '/guides/hcd/introduction/'
+      ) {
+        // The feed for guides has the wrong image slug.
+        $item['field_primary_image'] = 'hcd-intro';
+      }
+
       if (isset($item['field_glossary'])) {
         // Generate the machine name for the term ID.
         $name = str_replace(['-', '.json'], ['_', ''], $item['field_glossary']);

@@ -1,0 +1,244 @@
+id: json_guide_navs
+label: 'Create Guide Nav nodes'
+migration_tags:
+  - 'digitalgov-guidenav'
+source:
+  plugin: embedded_data
+  data_rows:
+    -
+      uid: "accessibility-for-teams"
+      title: "Accessibility for Teams navigation"
+      show_next_prev: true
+      show_in_page_nav: false
+      overview_image: 'accessibility-for-teams-guide'
+      # Paragraph UIDs
+      navigation:
+        - pg_uid: "accessibility-for-teams:/guides/accessibility-for-teams"
+        - pg_uid: "accessibility-for-teams:/guides/accessibility-for-teams/product-management"
+        - pg_uid: "accessibility-for-teams:/guides/accessibility-for-teams/content-design"
+        - pg_uid: "accessibility-for-teams:/guides/accessibility-for-teams/ux-design"
+        - pg_uid: "accessibility-for-teams:/guides/accessibility-for-teams/visual-design"
+        - pg_uid: "accessibility-for-teams:/guides/accessibility-for-teams/front-end-development"
+    -
+      uid: "dap"
+      title: "DAP navigation"
+      show_next_prev: true
+      show_in_page_nav: false
+      overview_image: "guide-dap"
+      navigation:
+        - pg_uid: "dap:/guides/dap/_index"
+        - pg_uid: "dap:/guides/dap/get-started-with-dap"
+        - pg_uid: "dap:/guides/dap/make-data-informed-decisions"
+        - pg_uid: "dap:/guides/dap/glossary-of-terms"
+        - pg_uid: "dap:/guides/dap/gsa-dap-terms-of-service"
+
+    -
+      uid: "hcd-design-concepts"
+      title: "HCD Design Concepts navigation"
+      show_next_prev: true
+      show_in_page_nav: true
+      landing_url: "/guides/hcd"
+      landing_title: "HCD Guide Series"
+      overview_image: "hcd-design-concepts"
+      navigation:
+        - pg_uid: "hcd-design-concepts:/guides/hcd/design-concepts/_index"
+        - pg_uid: "hcd-design-concepts:/guides/hcd/design-concepts/design-phase-principles"
+        - pg_uid: "hcd-design-concepts:/guides/hcd/design-concepts/designed-things"
+        - pg_uid: "hcd-design-concepts:/guides/hcd/design-concepts/communicating-ideas"
+        - pg_uid: "hcd-design-concepts:/guides/hcd/design-concepts/design-and-implementation"
+        - pg_uid: "hcd-design-concepts:/guides/hcd/design-concepts/up-next"
+    -
+      uid: "hcd-design-operations"
+      title: "HCD Design Operations navigation"
+      show_next_prev: true
+      show_in_page_nav: true
+      landing_url: "/guides/hcd"
+      landing_title: "HCD Guide Series"
+      overview_image: "hcd-design-operations"
+      navigation:
+        - pg_uid: "hcd-design-operations:/guides/hcd/design-operations/_index"
+        - pg_uid: "hcd-design-operations:/guides/hcd/design-operations/thinking"
+        - pg_uid: "hcd-design-operations:/guides/hcd/design-operations/building"
+        - pg_uid: "hcd-design-operations:/guides/hcd/design-operations/making"
+        - pg_uid: "hcd-design-operations:/guides/hcd/design-operations/testing"
+        - pg_uid: "hcd-design-operations:/guides/hcd/design-operations/up-next"
+    -
+      uid: "hcd-discovery-concepts"
+      title: "HCD Discovery Concepts navigation"
+      show_next_prev: true
+      show_in_page_nav: true
+      landing_url: "/guides/hcd"
+      landing_title: "HCD Guide Series"
+      overview_image: "hcd-discovery-concepts"
+      navigation:
+        - pg_uid: "hcd-discovery-concepts:/guides/hcd/discovery-concepts/_index"
+        - pg_uid: "hcd-discovery-concepts:/guides/hcd/discovery-concepts/plan"
+        - pg_uid: "hcd-discovery-concepts:/guides/hcd/discovery-concepts/recruit-participants"
+        - pg_uid: "hcd-discovery-concepts:/guides/hcd/discovery-concepts/plan-research"
+        - pg_uid: "hcd-discovery-concepts:/guides/hcd/discovery-concepts/synthesize"
+        - pg_uid: "hcd-discovery-concepts:/guides/hcd/discovery-concepts/find-opportunities"
+        - pg_uid: "hcd-discovery-concepts:/guides/hcd/discovery-concepts/present"
+        - pg_uid: "hcd-discovery-concepts:/guides/hcd/discovery-concepts/up-next"
+    -
+      uid: "hcd-discovery-operations"
+      title: "HCD Discover Operations navigation"
+      show_next_prev: true
+      show_in_page_nav: true
+      landing_url: "/guides/hcd"
+      landing_title: "HCD Guide Series"
+      overview_image: "hcd-discovery-operations"
+      navigation:
+        - pg_uid: "hcd-discovery-operations:/guides/hcd/discovery-operations/_index"
+        - pg_uid: "hcd-discovery-operations:/guides/hcd/discovery-operations/framing"
+        - pg_uid: "hcd-discovery-operations:/guides/hcd/discovery-operations/team-building"
+        - pg_uid: "hcd-discovery-operations:/guides/hcd/discovery-operations/overview-planning"
+        - pg_uid: "hcd-discovery-operations:/guides/hcd/discovery-operations/research-planning"
+        - pg_uid: "hcd-discovery-operations:/guides/hcd/discovery-operations/interviews"
+        - pg_uid: "hcd-discovery-operations:/guides/hcd/discovery-operations/observation"
+        - pg_uid: "hcd-discovery-operations:/guides/hcd/discovery-operations/synthesis"
+        - pg_uid: "hcd-discovery-operations:/guides/hcd/discovery-operations/present"
+    -
+      uid: "hcd-introduction"
+      title: "HCD Introductions navigation"
+      show_next_prev: true
+      show_in_page_nav: false
+      landing_url: "/guides/hcd"
+      landing_title: "HCD Guide Series"
+      overview_image: "hcd-intro"
+      navigation:
+        - pg_uid: "hcd-introduction:/guides/hcd/introduction/_index"
+        - pg_uid: "hcd-introduction:/guides/hcd/introduction/approach"
+        - pg_uid: "hcd-introduction:/guides/hcd/introduction/principles"
+        - pg_uid: "hcd-introduction:/guides/hcd/introduction/background"
+
+    -
+      uid: "mobile-principles"
+      title: "Mobile Principles navigation"
+      show_next_prev: true
+      show_in_page_nav: false
+      overview_image: "guide-mobile-principles"
+      navigation:
+        - pg_uid: "mobile-principles:/guides/mobile-principles/_index"
+        - pg_uid: "mobile-principles:/guides/mobile-principles/principles-javascript"
+        - pg_uid: "mobile-principles:/guides/mobile-principles/principles-viewport"
+        - pg_uid: "mobile-principles:/guides/mobile-principles/principles-tap-targets"
+        - pg_uid: "mobile-principles:/guides/mobile-principles/principles-plugins"
+        - pg_uid: "mobile-principles:/guides/mobile-principles/principles-cache"
+        - pg_uid: "mobile-principles:/guides/mobile-principles/principles-optimize-minify-compression"
+        - pg_uid: "mobile-principles:/guides/mobile-principles/principles-configuration"
+        - pg_uid: "mobile-principles:/guides/mobile-principles/principles-accessibility"
+    -
+      uid: "public-participation"
+      title: "Public Participation navigation"
+      show_next_prev: true
+      show_in_page_nav: false
+      overview_image: "guide-public-participation"
+      navigation:
+        - pg_uid: "public-participation:/guides/public-participation/_index"
+        - pg_uid: "public-participation:/guides/public-participation/establish-goals"
+        - pg_uid: "public-participation:/guides/public-participation/understand"
+        - pg_uid: "public-participation:/guides/public-participation/design-participation"
+        - pg_uid: "public-participation:/guides/public-participation/facilitate-participation"
+        - pg_uid: "public-participation:/guides/public-participation/evaluate-report"
+    -
+      uid: "rpa"
+      title: "RPA navigation"
+      show_next_prev: true
+      show_in_page_nav: false
+      overview_image: "guide-rpa"
+      navigation:
+        - pg_uid: "rpa:/guides/rpa/_index"
+        - pg_uid: "rpa:/guides/rpa/rpa-playbook"
+        - pg_uid: "rpa:/guides/rpa/rpa-playbook-internal-controls"
+        - pg_uid: "rpa:/guides/rpa/rpa-use-case-inventory"
+        - pg_uid: "rpa:/guides/rpa/state-of-federal-rpa"
+    -
+      uid: "site-scanning"
+      title: "Site Scanning navigation"
+      show_next_prev: true
+      show_in_page_nav: false
+      overview_image: "guide-site-scanning"
+      navigation:
+        - pg_uid: "site-scanning:/guides/site-scanning/_index"
+        - pg_uid: "site-scanning:/guides/site-scanning/data"
+        - pg_uid: "site-scanning:/guides/site-scanning/understand-the-data"
+        - pg_uid: "site-scanning:/guides/site-scanning/technical-details"
+        - pg_uid: "site-scanning:/guides/site-scanning/learn-more-about-the-program"
+    -
+      uid: "web-analytics-playbook"
+      title: "Web Analytics Playbook navigation"
+      show_next_prev: true
+      show_in_page_nav: false
+      overview_image: "guide-web-analytics-playbook"
+      navigation:
+        - pg_uid: "web-analytics-playbook:/guides/web-analytics-playbook/_index"
+        - pg_uid: "web-analytics-playbook:/guides/web-analytics-playbook/create-a-foundation-for-your-strategy"
+        - pg_uid: "web-analytics-playbook:/guides/web-analytics-playbook/commit-to-action"
+        - pg_uid: "web-analytics-playbook:/guides/web-analytics-playbook/implement-wisely"
+        - pg_uid: "web-analytics-playbook:/guides/web-analytics-playbook/configure-your-tools-settings-carefully"
+        - pg_uid: "web-analytics-playbook:/guides/web-analytics-playbook/know-what-youre-looking-for"
+        - pg_uid: "web-analytics-playbook:/guides/web-analytics-playbook/democratize-the-data"
+        - pg_uid: "web-analytics-playbook:/guides/web-analytics-playbook/invest-in-training-and-support"
+        - pg_uid: "web-analytics-playbook:/guides/web-analytics-playbook/do-it-continuously"
+
+  ids:
+    uid:
+      type: string
+  constants:
+    FORMAT_HTML: 'html'
+    FORMAT_EMBEDDED: 'html_embedded_content'
+    FORMAT_MULTI: 'multiline_inline_html'
+    FORMAT_SINGLE: 'single_inline_html'
+    FORMAT_PLAIN: 'plain_text'
+destination:
+  plugin: entity:node
+  default_bundle: guide_navigation
+process:
+  title: title
+  field_kicker_link/uri:
+    - plugin: skip_on_condition
+      condition: empty
+      source: landing_url
+      method: process
+    - plugin: link_uri
+      validate_route: false
+      source: landing_url
+  field_kicker_link/title: landing_title
+  field_overview_image:
+    plugin: migration_lookup
+    source: overview_image
+    source_ids: src_unique_id
+    migration: json_images_to_media
+  field_show_in_page_nav: show_in_page_nav
+  field_show_next_previous: show_next_prev
+  field_guide_navigation:
+    - plugin: skip_on_condition
+      condition: empty
+      source: navigation
+      method: process
+    - plugin: sub_process
+      source: navigation
+      include_source: true
+      source_key: root
+      process:
+        target_id:
+          - plugin: migration_lookup
+            migration: json_guide_navs__navigation
+            source: pg_uid
+          - plugin: extract
+            index: [ 0 ]
+        target_revision_id:
+          - plugin: migration_lookup
+            migration: json_guide_navs__navigation
+            source: pg_uid
+          - plugin: extract
+            index: [ 1 ]
+  status:
+    plugin: default_value
+    default_value: true
+migration_dependencies:
+  required:
+    - json_guide_navs__navigation
+    - json_images_to_media
+    - json_guides
+    - json_hcd_landing

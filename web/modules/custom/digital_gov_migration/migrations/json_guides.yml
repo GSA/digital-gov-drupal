@@ -66,6 +66,9 @@ source:
     - name: redirects
       label: 'Redirects'
       selector: redirects
+    - name: field_guide
+      label: "Guide"
+      selector: field_guide
   ids:
     src_unique_id:
       type: string
@@ -97,7 +100,11 @@ process:
     source: field_image
     source_ids: src_unique_id
     migration: json_images_to_media
-  # field_guide
+  field_guide_nav_ref:
+    plugin: migration_lookup
+    source: field_guide
+    source_ids: uid
+    migration: json_guide_navs
   field_page_weight: field_page_weight
   body/value:
     - plugin: dg_convert_text
@@ -106,7 +113,13 @@ process:
   body/format: constants/FORMAT_HTML
   field_guide_nav_title: field_guide_nav_title
   field_guide_weight: field_guide_weight
-  field_glossary: field_glossary_name
+  field_glossary:
+    - plugin: skip_on_condition
+      condition: empty
+      source: landing_url
+      method: process
+    - plugin: default_value
+      default_value: field_glossary_name
   field_topics:
     plugin: migration_lookup
     source: field_topics
@@ -129,12 +142,12 @@ process:
   moderation_state:
     plugin: default_value
     default_value: published
-  path/alias:
-    plugin: callback
-    callable: str_replace
-    # The federalist build puts a relative path that is too much.
-    source: [ constants/ALIAS_SEARCH, constants/ALIAS_REPLACE, alias ]
-    unpack_source: true
+  path/alias: alias
+#    plugin: callback
+#    callable: str_replace
+#    # The federalist build puts a relative path that is too much.
+#    source: [ constants/ALIAS_SEARCH, constants/ALIAS_REPLACE, alias ]
+#    unpack_source: true
   # Must disable auto-creating path auto in order to set alias explicitly.
   path/pathauto:
     plugin: default_value

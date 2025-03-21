@@ -76,9 +76,11 @@ function dg_get_broad_body_class(NodeInterface $node): string {
       // This field points at a paragraph entity.
       if ($ref = $navNode->get('field_guide_navigation')->referencedEntities()[0]) {
         // Is the first node in the guide navigation this node?
-        $overview = $ref->get('field_guide_link')->referencedEntities()[0];
-        if ($overview->id() === $node->id()) {
-          return 'section';
+        if ($ref->get('field_guide_link')->referencedEntities()) {
+          $overview = $ref->get('field_guide_link')->referencedEntities()[0];
+          if ($overview->id() === $node->id()) {
+            return 'section';
+          }
         }
       }
     }
@@ -202,7 +204,7 @@ function digital_gov_preprocess_node_guides(&$variables): void {
   $variables['is_guide_overview'] = FALSE;
   $variables['show_summary_box'] = $guide->get('field_summary_box')[0]?->get('value')->getCastedValue();
 
-  if ($nav_node = $guide->get('field_guide_nav_ref')->first()?->get('entity')->getTarget()->getValue()) {
+  if ($nav_node = $guide->get('field_guide_nav_ref')->first()?->get('entity')->getTarget()?->getValue()) {
     $links = digital_gov_get_guidenav_links($nav_node, $variables['url']);
     $variables = array_merge($variables, $links);
 

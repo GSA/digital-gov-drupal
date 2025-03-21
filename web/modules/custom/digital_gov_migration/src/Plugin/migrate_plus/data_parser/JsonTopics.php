@@ -79,7 +79,7 @@ class JsonTopics extends JsonTamperer {
 
       'accessibility' => 'Design',
       'customer-experience' => 'Design',
-      'Design' => 'Design',
+      'design' => 'Design',
       'digital-service-delivery' => 'Design',
       'human-centered-design' => 'Design',
       'information-architecture' => 'Design',
@@ -89,6 +89,7 @@ class JsonTopics extends JsonTamperer {
       'acquisition' => 'Operations',
       'budgeting-and-performance' => 'Operations',
       'contact-centers' => 'Operations',
+      'intellectual-property' => 'Operations',
       'product-and-project-management' => 'Operations',
       'privacy' => 'Operations',
       'records-management' => 'Operations',

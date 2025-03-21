@@ -28,7 +28,9 @@ fi
 ${DRUSH_BIN} cr
 # Throws notices that kill the script.
 ${DRUSH_BIN} migrate:rollback --tag="digitalgov"
+${DRUSH_BIN} migrate:rollback --tag="digitalgov-guidenav"
 ${DRUSH_BIN} migrate:import --tag="digitalgov"
+${DRUSH_BIN} migrate:import --tag="digitalgov-guidenav"
 
 if [ -n "$VCAP_APPLICATION" ]; then
   drush s3fs-rc
