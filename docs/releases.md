@@ -3,10 +3,10 @@
 * A release can be either a release or a hotfix.
 * A release (release/x.x.0) is created off of the `develop` branch. Merging this release branch into `main` will constitute a release deployment.
 * A hotfix release (hotfix/x.x.x) is created off of the `main` branch. Merging this hotfix release branch into `main` will constitute a hotfix deployment.
-* When release or hotfix branches are created, they should be pushed so that they overwrite the `stage` branch so that they can be tested.
+* When release or hotfix branches are created, they deploy to the staging environment automatically.
 
 ## Creating a Release
-Each release is represented by a [git tag](https://www.atlassian.com/git/tutorials/inspecting-a-repository/git-tag#:~:text=Tags%20are%20ref's%20that%20point,no%20further%20history%20of%20commits.), which points to a particular commit in the `prod` branch's git history – this allows us to be very specific about what the release includes, instead of  just saying that we released the latest version of the `dev` branch. Checking out a particular release's git tag will always restore the codebase to the state it was in when that release was created, regardless of any new commits that have since been added to the `dev` branch (or other branches).
+Each release is represented by a [git tag](https://www.atlassian.com/git/tutorials/inspecting-a-repository/git-tag#:~:text=Tags%20are%20ref's%20that%20point,no%20further%20history%20of%20commits.), which points to a particular commit in the `main` branch's git history – this allows us to be very specific about what the release includes, instead of  just saying that we released the latest version of the `develop` branch. Checking out a particular release's git tag will always restore the codebase to the state it was in when that release was created, regardless of any new commits that have since been added to the `develop` branch (or other branches).
 - Each release is assigned a unique **Release Version**, which is used to name the git tag and indicates whether the release contains a major update, a minor update, or a hotfix. See the next section below for details on how to generate a new Release Version and use it in the release's git tag name.
 - New releases are created by [adding a new release in the Github UI](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository?tool=webui); this  creates a git tag for the release and allows release notes to be attached to it. The project's most recent release and a list of all its releases can be found on the main github repo page, in the "Releases" section.
 - When a new release is created, we must generate the release notes for it, containing a Changelog of all commits included in the release (with their associated owners). These release notes can be manually edited later, in order to include additional details, such as the sprint number(s) the release corresponds to or a list of security issues addressed.
@@ -62,7 +62,7 @@ The release history for this project is documented on the repo's Github page (un
 At the end of the active sprint a "release candidate" PR is create from approved and merged work from the `develop` branch with the target branch set to `main`, that branch should be frozen (no new commits or PRs merged in) until it has been merged. If possible, this code freeze / merge should occur 2 or 3 days prior to the **PROD** deployment, so there is adequate time to properly test the release candidate code in the **STAGE** environment.
 
 ### Deploying to STAGE
-The `stage` branch should be overwritten with the release candidate (`release/x.x.0` or `hotfix/x.x.x`).
+There is a `stage` branch and changes to it will be deployed to the staging environment, however, the preferred method is to create a release or hotfix branch (`release/x.x.0` or `hotfix/x.x.x`). Every new release or hotfix branch and changes to them will be deployed to the staging environment.
 
 Before a release can be created and deployed to the **PROD** environment, the approved "release candidate" PR must be deployed to the **STAGE** environment and tested there.
 
@@ -83,9 +83,45 @@ After deploying a normal release to the **PROD** site, it's possible that a bug 
 - If the bug found on **PROD** is not urgent enough to necessitate an immediate fix (and can be addressed in the next scheduled release cycle), the fix for this bug is NOT considered a hotfix.
 - If a bug is found after deploying "release candidate" code to **STAGE**, this should be fixed and merged into the `develop` branch, then deployed to **STAGE** again; this type of bug fix is NOT considered a hotfix (and should not be handled as a Hotfix Release).
 
-### To create a Hotfix Release:
-- All hotfix code should be submitted as PR(s) against the `main` branch. Because we want to avoid deploying non-hotfix code in the Hotfix Release, hotfix PRs should NOT be created against the `develop` branch.
-- Once all hotfix PRs have been merged into `hotfix/x.x.x` branch, they should be deployed to the **STAGE** environment and tested there.
-- After all hotfixes have been successfully tested on **STAGE**:
-  - A single hotfix PR should be created to merge the `hotfix/x.x.x` branch into the `main` branch.
-  - An additional PR should be created to merge all hotfixes from `hotfix/x.x.x` branch back into the `develop` branch.
+## Creating a release via helper scripts
+There are scripts written in our RoboFile that can help you create and update releases very easily.
+
+- You should have a clean (git status shows no changes) before you do this (It will stop you if you don't)
+- The branch you are on does not matter, the script checks out the appropriate branch
+
+`./robo.sh create-release --help`
+
+This command accepts two required arguments.
+
+- `hotfix_or_release` Valid values are `hotfix` or `release`, depending on what type of release you ar creating.
+- `semantic_version` Valid values for `hotfix` are `int.int.int>0` (example: `3.14.1`), for `release` are `int.int.0` (example: `3.14.0`). Visit https://github.com/GSA/digital-gov-drupal/releases to see the last release to determine the next.
+
+This command will create both a release / hotfix branch and a tag and push both up to GitHub.
+
+This will [kick off](https://github.com/GSA/digital-gov-drupal/actions) the deployment of your new release or hotfix to the staging environment. Once the staging deployment finishes, the release can be tested there.
+
+### Creating a GitHub release
+Now you can create a [GitHub release](https://github.com/GSA/digital-gov-drupal/releases/new). Choose the new tag created in the 'Choose a tag' dropdown. Then click 'Generate release notes'. That will populate all merge commits since the last release tag. Uncheck 'Set as the latest release' and click 'Save draft'.
+
+### Creating a release pull request
+The GitHub release, is merely informational. It does nothing to the site. The PR is what does the deployment when merged.
+[Create a new PR](https://github.com/GSA/digital-gov-drupal/compare) using `main` as the base and the new release / hotfix branch as the compare. There are no need for pull request notes, remove and create.
+
+### An issue has been found when testing on staging
+All is not lost, [create tickets](https://cm-jira.usa.gov/secure/CreateIssue!default.jspa) as needed. However, the PRs should not target `develop`, they should target the new release or hotfix branch. After the PR is merged into the release branch, the release tag is now incorrect. It needs to be re-created.
+
+`./robo.sh drupal-project:re-tag-release --help`
+
+This command accept two required arguments, they are the same as the previous command and you must pass the same values when you created the release.
+
+This command will do two things:
+
+- Delete your old tag
+- Create a new tag with the same old name from the current value of your release branch
+
+Now you can go back through the same process you did the first time to create the GitHub release.
+
+### Staging is approved and it's time to deploy and finalize the release
+
+You can now merge your release pull request into `main` which will deploy the release to production. The last step is to create a new PR from `main` with `develop` as the target. This will ensure that there are no commits on `main` that are not on `develop`. This includes the merge commit from the deployment.
+
