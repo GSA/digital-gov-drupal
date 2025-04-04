@@ -5,7 +5,6 @@ _meta:
   bundle: news
   default_langcode: en
   depends:
-    0176effb-53bf-4d6d-8b33-908d097803e7: user
     10a75c69-1036-40db-ab4a-02ccaa1e0cce: node
     31fb46ba-3d68-4c18-8819-cbbd8624d689: node
     a562cb6c-d534-46b3-bf5d-4b21e0422e4b: media
@@ -16,13 +15,13 @@ _meta:
 default:
   revision_uid:
     -
-      target_id: 1
+      target_id: 0
   status:
     -
       value: true
   uid:
     -
-      entity: 0176effb-53bf-4d6d-8b33-908d097803e7
+      target_id: 0
   title:
     -
       value: 'Cloud Incassum Ludus Nutus'
