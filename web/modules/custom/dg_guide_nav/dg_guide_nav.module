@@ -78,6 +78,7 @@ function dg_guide_nav_get_links(Node $guideNav, string $current, Node $currentPa
         $count++;
 
         if ($para->field_guide_subnav) {
+          $item['subnav'] = [];
           $subNavNodes = $para->get('field_guide_subnav')->referencedEntities();
           $subNavNodes = array_filter($subNavNodes, fn(Node $node) => $guideNav->isPublished());
           if ($subNavNodes) {
