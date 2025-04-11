@@ -33,6 +33,15 @@ class TomeEventSubscriber implements EventSubscriberInterface {
   }
 
   /**
+   * Adds site-wide alert path.
+   */
+  public function addAlertPaths(CollectPathsEvent $event): void {
+    $event->addPath(
+      '/sitewide_alert/load',
+    );
+  }
+
+  /**
    * Prevent exporting paths Tome might discover after the collect paths event.
    */
   public function excludeInvalidPaths(PathPlaceholderEvent $event): void {
@@ -78,6 +87,7 @@ class TomeEventSubscriber implements EventSubscriberInterface {
    */
   public static function getSubscribedEvents() {
     $events[TomeStaticEvents::COLLECT_PATHS][] = ['excludePaths'];
+    $events[TomeStaticEvents::COLLECT_PATHS][] = ['addAlertPaths'];
     $events[TomeStaticEvents::PATH_PLACEHOLDER][] = ['excludeInvalidPaths'];
     return $events;
   }
