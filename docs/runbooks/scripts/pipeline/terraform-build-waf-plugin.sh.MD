@@ -1,4 +1,4 @@
-### Runbook for `pipeline_wrapper.sh`
+### Runbook for `terraform-build-waf-plugin.sh`
 
 #### Introduction
 This runbook is for the `terraform-build-waf-plugin.sh` script, which involves building, moving, and deploying a Web Application Firewall (WAF) module for the Nginx web server. The script handles both the local building of the module and, via SSH commands to a remote server, ensures directory structures are in place and moves the built module to a bastion host for further deployment. At a high level, the script checks the presence of required version variables, builds the WAF module using a Makefile, and copies the resulting module to a specified path on the remote server.
