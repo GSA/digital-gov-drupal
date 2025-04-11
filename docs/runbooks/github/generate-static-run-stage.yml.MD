@@ -1,4 +1,4 @@
-### Runbook for `generate-static-run-staging.yml`
+### Runbook for `generate-static-run-stage.yml`
 
 ### Introduction
 This runbook is for a GitHub Actions workflow defined in `generate-static-run-staging.yml`. This workflow is configured to be triggered either by a workflow call with required secrets or by a schedule-based event. The workflow is designed to generate static content in the `staging` environment and requires certain secrets for authentication and project details. 
