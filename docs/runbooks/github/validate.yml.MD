@@ -1,4 +1,4 @@
-### Runbook for `validation.yml`
+### Runbook for `validate.yml`
 
 #### Introduction
 
