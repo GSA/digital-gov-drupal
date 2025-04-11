@@ -14,8 +14,8 @@ export STATIC_URI="${!STATIC_URI_VAR_NAME}"
 CMS_URI_VAR_NAME="${CF_SPACE_UPPER}_CMS_URL"
 export CMS_URI="${!CMS_URI_VAR_NAME}"
 
-STATIC_FQDN=$(sed -E 's/^\s*.*:\/\///g' "${STATIC_URI}")
-CMS_FQDN=$(sed -E 's/^\s*.*:\/\///g' "${CMS_URI}")
+STATIC_FQDN=$(echo "${STATIC_URI}" | sed -E 's/^\s*.*:\/\///g')
+CMS_FQDN=$(echo "${CMS_URI}" | sed -E 's/^\s*.*:\/\///g')
 
 envsubst < manifest.tmp > manifest.yml
 cat manifest.tmp
