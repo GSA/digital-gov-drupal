@@ -8,6 +8,19 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
+if [ -n "$VCAP_APPLICATION" ] && [ "$environment" != "dev" ]; then
+  echo "Migrations should only run locally or in dev not in {$environment}".
+  exit 1;
+fi
+
+echo "You are about to migrate content, this will delete existing content in this instance."
+read -p "Are you sure you want to proceed (Y/y to proceed)? " CONFIRM
+
+if [ "$CONFIRM" != "Y" ] && [ "$CONFIRM" != "y" ]; then
+  echo "Migrations skipped."
+  exit 1;
+fi
+
 migrate_id="$1"      # Store the first argument
 shift                # Shift arguments to the left, removing $1
 remaining_args="$*"  # Capture all remaining arguments as a single string

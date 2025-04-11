@@ -1,4 +1,4 @@
-name: 'dg_guide_nav'
+name: 'Digital.gov Guide Navigation'
 type: module
 description: 'Guide navigation helper module'
 package: Custom

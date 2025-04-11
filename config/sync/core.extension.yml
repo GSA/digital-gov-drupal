@@ -29,8 +29,6 @@ module:
   dg_guide_nav: 0
   dg_sitewide_alert: 0
   dg_token: 0
-  dg_tome: 100
-  digital_gov_migration: 0
   disable_user_1_edit: 0
   dynamic_page_cache: 0
   easy_breadcrumb: 0
@@ -127,6 +125,7 @@ module:
   externalauth: 10
   views: 10
   paragraphs: 11
+  dg_tome: 100
   minimal: 1000
 theme:
   stark: 0
