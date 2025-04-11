@@ -45,6 +45,7 @@ jobs:
           echo "GSA_AUTH_KEY=${GSA_AUTH_KEY}" | tee -a $GITHUB_ENV
           echo "HASH_SALT=${{ secrets.HASH_SALT }}" | tee -a $GITHUB_ENV
           echo "NEWRELIC_KEY=${{ secrets.NEWRELIC_KEY }}" | tee -a $GITHUB_ENV
+          echo "STATIC_NAME=static" | tee -a $GITHUB_ENV
           echo "WAF_NAME=waf"| tee -a $GITHUB_ENV
 
           if [ "${COMPOSER_DEV}" = "1" ]; then
