@@ -1,4 +1,4 @@
-name: Database restore
+name: Database Restore
 
 on:
   workflow_dispatch:
@@ -97,7 +97,6 @@ jobs:
           source ./scripts/pipeline/s3-backup-download.sh
           source ./scripts/pipeline/database-restore.sh
           source ./scripts/pipeline/cloud-gov-post-deploy.sh
-          source ./scripts/pipeline/s3-backup-post-restore.sh
   stop-bastion:
     name: Stop Bastion
     runs-on: ubuntu-latest
