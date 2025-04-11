@@ -16,7 +16,7 @@ if [ "$CONFIRM" != "Y" ] && [ "$CONFIRM" != "y" ]; then
 fi
 
 echo "OK";
-exit 0;
+
 # Ensure in the app directory.
 cd "$(dirname "$0")"
 
