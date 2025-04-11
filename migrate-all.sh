@@ -2,6 +2,21 @@
 
 set -xe
 
+if [ -n "$VCAP_APPLICATION" ] && [ "$environment" != "dev" ]; then
+  echo "Migrations should only run locally or in dev not in {$environment}".
+  exit 1;
+fi
+
+echo "You are about to migrate all content, this will delete existing content in this instance."
+read -p "Are you sure you want to proceed (Y/y to proceed)? " CONFIRM
+
+if [ "$CONFIRM" != "Y" ] && [ "$CONFIRM" != "y" ]; then
+  echo "Migrations skipped."
+  exit 1;
+fi
+
+echo "OK";
+exit 0;
 # Ensure in the app directory.
 cd "$(dirname "$0")"
 
