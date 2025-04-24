@@ -11,12 +11,9 @@ use Drupal\Component\Serialization\Yaml;
 use Drupal\Component\Utility\Html;
 use Drupal\convert_text\ConvertText;
 use Drupal\Core\Datetime\DrupalDateTime;
-use Drupal\Core\Link;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Url;
-use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
-use Drupal\paragraphs\Entity\Paragraph;
 
 /**
  * @file
@@ -28,6 +25,9 @@ use Drupal\paragraphs\Entity\Paragraph;
  */
 function digital_gov_preprocess_html(array &$variables): void {
   $is_front = \Drupal::service('path.matcher')->isFrontPage();
+  $variables['theme_path'] = \Drupal::theme()->getActiveTheme()->getPath();
+  $variables['theme_path_absolute'] = Url::fromUri('base://' . $variables['theme_path'], ['absolute' => TRUE])->toString();
+
   // @todo Authors landing page? authors + term.
   if ($is_front) {
     $variables['attributes']['class'][] = 'home';
@@ -64,14 +64,20 @@ function dg_get_specific_body_class(NodeInterface $node): string {
 function dg_get_broad_body_class(NodeInterface $node): string {
 
   if ($node->getType() === 'guides') {
+
+    if (!$node->get('field_guide_nav_ref')->referencedEntities()) {
+      return '';
+    }
     // Need to check if this is the Overview page.
     if ($navNode = $node->get('field_guide_nav_ref')->referencedEntities()[0]) {
       // This field points at a paragraph entity.
       if ($ref = $navNode->get('field_guide_navigation')->referencedEntities()[0]) {
         // Is the first node in the guide navigation this node?
-        $overview = $ref->get('field_guide_link')->referencedEntities()[0];
-        if ($overview->id() === $node->id()) {
-          return 'section';
+        if ($ref->get('field_guide_link')->referencedEntities()) {
+          $overview = $ref->get('field_guide_link')->referencedEntities()[0];
+          if ($overview->id() === $node->id()) {
+            return 'section';
+          }
         }
       }
     }
@@ -139,6 +145,10 @@ function digital_gov_preprocess_node(array &$variables): void {
       digital_gov_preprocess_node_guide_landing($variables);
       break;
 
+    case 'short_post':
+      digital_gov_preprocess_node_short_post($variables);
+      break;
+
     case 'authors':
       if ($variables['view_mode'] !== 'image') {
         break;
@@ -175,6 +185,13 @@ function digital_gov_preprocess_node(array &$variables): void {
       }
       break;
   }
+
+  $request = \Drupal::service('request_stack')->getCurrentRequest();
+  $page_param = $request->query->get('page');
+
+  // Ensure it's a number and sanitize it.
+  $variables['page_param'] = (is_numeric($page_param)) ? Html::escape($page_param) : NULL;
+  $variables['is_first_page'] = $variables['page_param'] === '0' || $variables['page_param'] === NULL;
 }
 
 /**
@@ -186,13 +203,19 @@ function digital_gov_preprocess_node_guides(&$variables): void {
   $variables['show_next_previous'] = FALSE;
   $variables['show_in_page_nav'] = FALSE;
   $variables['is_guide_overview'] = FALSE;
-  $variables['show_summary_box'] = $guide->get('field_summary_box')[0]->get('value')->getCastedValue();
+  $variables['show_summary_box'] = $guide->get('field_summary_box')[0]?->get('value')->getCastedValue();
 
-  if ($nav_node = $guide->get('field_guide_nav_ref')->first()?->get('entity')->getTarget()->getValue()) {
-    $links = digital_gov_get_guidenav_links($nav_node, $variables['url']);
+  if ($guideRef = $guide->get('field_guide_nav_ref')) {
+    if ($guideRef->count() === 0) {
+      trigger_error("No guide nav ref set for this page.", E_USER_WARNING);
+      return;
+    }
+
+    $navNode = $guideRef->referencedEntities()[0];
+    $links = dg_guide_nav_get_links($navNode, $variables['url'], $guide);
     $variables = array_merge($variables, $links);
 
-    if ($overview_image = $nav_node->get('field_overview_image')->first()?->get('entity')->getTarget()->getValue()) {
+    if ($overview_image = $navNode->get('field_overview_image')->first()?->get('entity')->getTarget()->getValue()) {
       $media = $overview_image->get('field_media_image')->first();
       $variables['guide_overview_image'] = $media;
 
@@ -204,8 +227,8 @@ function digital_gov_preprocess_node_guides(&$variables): void {
         $variables['guide_overview_caption'] = $caption->view();
       }
     }
-    $variables['show_next_previous'] = $nav_node->field_show_next_previous?->value === "1";
-    $variables['show_in_page_nav'] = $nav_node->field_show_in_page_nav?->value === "1";
+    $variables['show_next_previous'] = $navNode->field_show_next_previous?->value === "1";
+    $variables['show_in_page_nav'] = $navNode->field_show_in_page_nav?->value === "1";
     if ($links['guide_nav']) {
       $variables['is_guide_overview'] = ($variables['url'] === $links['guide_nav'][0]['link']?->getUrl()->toString());
     }
@@ -216,7 +239,7 @@ function digital_gov_preprocess_node_guides(&$variables): void {
  * Preprocess function for guide landing nodes.
  */
 function digital_gov_preprocess_node_guide_landing(&$variables): void {
-  if ($hero_image = $variables['node']->get('field_primary_image')->first()->get('entity')->getTarget()->getValue()) {
+  if ($hero_image = $variables['node']->get('field_primary_image')->first()?->get('entity')->getTarget()->getValue()) {
     $media = $hero_image->get('field_media_image')->first();
     $variables['hero_image'] = $media;
 
@@ -231,108 +254,36 @@ function digital_gov_preprocess_node_guide_landing(&$variables): void {
 }
 
 /**
- * Builds an array we can add to $variables with guide navigation info.
+ * Preprocess function for short post nodes.
  */
-function digital_gov_get_guidenav_links(Node $node, string $current): array {
-  // Anonymous helper for getting node links.
-  $makeLink = function (Node $page, ?string $override = NULL): Link {
-    $label = $page->label();
+function digital_gov_preprocess_node_short_post(&$variables): void {
+  $short_post = $variables['node'];
+  $is_external = TRUE;
+  // Some external URLs are to ourselves.
+  if ($external_url = $short_post->get('field_external_url')->getValue()) {
+    $url = $external_url[0]['uri'];
+    $is_external = digital_gov_is_external_url($url);
+  }
+  $variables['is_external_short_post'] = $is_external;
+}
 
-    // Allow caller to specify the title to use, unless it's been set in the CMS
-    // Mainly to label the starting page as the Overview page.
-    if ($node_nav_title = $page->get('field_guide_nav_title')->getString()) {
-      $label = $node_nav_title;
-    }
-    elseif ($override) {
-      $label = $override;
-    }
-
-    return $page->toLink($label);
-  };
-
-  // The guide_nav is an array that holds items with the following keys
-  // - 'link': A Link object the main link used the menu bar
-  // - 'subnav': an array of Link objects of links if the sidenav is shown.
-  $links['guide_nav'] = [];
-
-  if ($kicker_link = $node->get('field_kicker_link')?->first()) {
-    $links['guide_kicker_title'] = $kicker_link->getValue()['title'];
-    $links['guide_kicker_url'] = Url::fromUri($kicker_link->getValue()['uri']);
+/**
+ * Tests if a URL is to an external domain.
+ */
+function digital_gov_is_external_url(string $url): bool {
+  $host = parse_url($url, PHP_URL_HOST);
+  if (
+    // Readable domains.
+    ($host === 'digital.gov' || $host === 'cms.digital.gov')
+    // Cloud.dov environments.
+    || (str_starts_with($host, 'digital-gov') && str_ends_with($host, '.cloud.gov'))
+    // Local Dev.
+    || ($host === 'https://digitalgov.lndo.site')
+  ) {
+    return FALSE;
   }
 
-  if ($node->field_guide_navigation) {
-    // Track the count separately in case the first item is not published.
-    $count = 0;
-    // Generate the two-levels of nav links for this guide.
-    foreach ($node->field_guide_navigation as $ref) {
-      // This field points at a paragraph entity.
-      $para = Paragraph::load($ref->target_revision_id);
-
-      if ($para->field_guide_link->target_id) {
-        $guidePage = $para->get('field_guide_link')->referencedEntities()[0];
-        if (!$guidePage->isPublished()) {
-          continue;
-        }
-
-        if ($count === 0) {
-          $links['guide_overview_node'] = $guidePage;
-        }
-        // Add the link to the navigation.
-        $link = $makeLink($guidePage, $count === 0 ? 'Overview' : NULL);
-        $item['link'] = $link;
-
-        $count++;
-
-        if ($para->field_guide_subnav) {
-          $subNavNodes = $para->get('field_guide_subnav')->referencedEntities();
-          $subNavNodes = array_filter($subNavNodes, fn(Node $node) => $node->isPublished());
-          if ($subNavNodes) {
-            $item['subnav'] = array_map($makeLink, $subNavNodes);
-            // If the current page is in the subnav, mark the parent as current.
-            $current_in_subnav = array_filter($item['subnav'], function (Link $subItem) use ($current) {
-              return $subItem->getUrl()->toString() === $current;
-            });
-            if ($current_in_subnav) {
-              // We haven't added our item to the guidenav, add 1 to the index.
-              $links['guide_current_index'] = $links['guide_nav'] ? array_key_last($links['guide_nav']) + 1 : 0;
-            }
-          }
-        }
-        $links['guide_nav'][] = $item;
-        if ($item['link']->getUrl()->toString() === $current) {
-          // Mark which top-level page is open.
-          $links['guide_current_index'] = array_key_last($links['guide_nav']);
-        }
-      }
-    }
-  }
-
-  // Here, figure out the next/previous links.
-  // We need a flat list of all the URLs in the guide nav keyed by URL.
-  $allTheUrls = [];
-
-  array_walk_recursive(
-    $links['guide_nav'],
-    function ($link) use (&$allTheUrls) {
-      $allTheUrls[$link->getUrl()->toString()] = $link;
-    }
-  );
-
-  // $keyMap tells us what numeric slot each URL is found in.
-  $keyMap = array_keys($allTheUrls);
-  if ($allTheUrls && FALSE !== ($currentKey = array_search($current, $keyMap))) {
-    if (isset($keyMap[$currentKey - 1])) {
-      $prevKey = $keyMap[$currentKey - 1];
-      $links['guide_prev'] = $allTheUrls[$prevKey];
-    }
-
-    if (isset($keyMap[$currentKey + 1])) {
-      $nextKey = $keyMap[$currentKey + 1];
-      $links['guide_next'] = $allTheUrls[$nextKey];
-    }
-  }
-
-  return $links;
+  return TRUE;
 }
 
 /**
@@ -450,8 +401,10 @@ function digital_gov_theme_suggestions_container_alter(array &$suggestions, arra
   }
   // A list of view names in which to exclude the container markup.
   $exclude_views = [
-    'resource_topics_list',
+    'communities_for_topic',
     'guide_cards',
+    'resource_topics_list',
+    'resources_for_topic',
   ];
 
   if (in_array($variables['element']['#name'], $exclude_views)) {
@@ -491,4 +444,30 @@ function digital_gov_preprocess_node__landing_page__job_board(&$variables, $hook
     }
   }
   $variables['job_board'] = $filtered_array;
+}
+
+/**
+ * Implements hook_preprocess_pager().
+ */
+function digital_gov_preprocess_pager__past_events__block(&$variables) {
+  // Appends fragment to pager links on past events to maintain scroll position.
+  $anchor = '#events-past';
+
+  if (!empty($variables['items'])) {
+    // Iterate through all items in the pager.
+    foreach ($variables['items'] as $key => &$item) {
+      // Handle numbered pages separately from navigation items.
+      if ($key === 'pages') {
+        foreach ($item as &$page) {
+          if (isset($page['href'])) {
+            $page['href'] .= $anchor;
+          }
+        }
+      }
+      // Handle navigation items (first, previous, next, last).
+      elseif (isset($item['href'])) {
+        $item['href'] .= $anchor;
+      }
+    }
+  }
 }

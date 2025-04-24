@@ -20,6 +20,9 @@ a.btn {
       @include u-border-bottom("2px", "white", "solid");
     }
   }
+  &:focus {
+    outline-offset: units(0.5);
+  }
   @include u-padding-y("105");
   @include u-padding-x(2);
   @include u-display("inline-block");
@@ -58,6 +61,11 @@ a.btn-home {
     span {
       @include u-border-bottom("2px", "black", "solid");
     }
+  }
+
+  &:focus {
+    outline: .25rem solid #0395F0;
+    outline-offset: units(0.5);
   }
 }
 
@@ -120,6 +128,10 @@ a.btn-sm {
     &:hover {
       @include u-bg("primary-vivid");
       @include u-text("white");
+    }
+
+    &:focus {
+      outline-offset: units(0.5);
     }
 
     img {
@@ -204,6 +216,22 @@ a.btn-sm {
       }
     }
   }
+}
+
+.dg-register {
+  display: flex;
+  margin-bottom: units(3);
+}
+
+a.dg-register__button {
+  border-radius: 0;
+  font-family: font-family("sans");
+  font-size: font-size("sans", "md");
+  font-weight: font-weight(200);
+  padding-left: units(4);
+  padding-right: units(4);
+  text-transform: uppercase;
+  width: auto;
 }
 
 .actions-stacked {

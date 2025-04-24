@@ -1,0 +1,70 @@
+id: json_sources
+label: 'Import sources from Digital.gov Hugo'
+migration_tags:
+  - 'digitalgov'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json_sources
+  urls:
+    - https://federalist-466b7d92-5da1-4208-974f-d61fd4348571.sites.pages.cloud.gov/preview/gsa/digitalgov.gov/nl-json-endpoints/sources/index.json
+    # First value from wsl.exe hostname -I
+    #- http://172.20.60.7:1313/events/index.json
+  # This is the path to where the data are in the JSON.
+  item_selector: items
+  # Under 'fields', we list the data items to be imported. The first level keys
+  # are the source field names we want to populate (the names to be used as
+  # sources in the process configuration below). For each field we're importing,
+  # we provide a label (optional - this is for display in migration tools) and
+  # an xpath for retrieving that value. It's important to note that this xpath
+  # is relative to the elements retrieved by item_selector.
+  fields:
+    - name: src_unique_id
+      label: 'Unique ID'
+      selector: uid
+    - name: field_name
+      label: 'Name'
+      selector: field_name
+    - name: field_logo
+      label: 'Name'
+      selector: field_logo
+    - name: logo_basename
+      label: "Filename"
+      selector: logo_basename
+  ids:
+    src_unique_id:
+      type: string
+  constants:
+    ALIAS_SEARCH: '/preview/gsa/digitalgov.gov/nl-json-endpoints'
+    ALIAS_REPLACE: ''
+    FORMAT_HTML: 'html'
+    FORMAT_EMBEDDED: 'html_embedded_content'
+    FORMAT_MULTI: 'multiline_inline_html'
+    FORMAT_SINGLE: 'single_inline_html'
+    FORMAT_PLAIN: 'plain_text'
+process:
+  skip_empty_required_fields:
+    plugin: skip_on_condition
+    condition:
+      plugin: empty
+    source: field_name
+    method: row
+    message: 'Missing field_name which sets title field'
+  title: field_name
+  field_logo:
+    plugin: migration_lookup
+    source: field_logo
+    source_ids: logo_basename
+    migration: json_sources__media
+  # Setting the moderation state to published will automatically set status=1.
+  moderation_state:
+    plugin: default_value
+    default_value: published
+destination:
+  plugin: entity:node
+  default_bundle: source
+
+migration_dependencies:
+  # https://www.drupal.org/project/drupal/issues/2797505#comment-12129356
+  optional:
+    - json_sources__media

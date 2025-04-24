@@ -33,7 +33,11 @@ locals {
           "${key}" = value.result
         }
       ])
-    ...)
+    ...),
+    {
+      gsa_auth_key              = var.gsa_auth_key
+      newrelic_key              = var.newrelic_key
+    }
   )
 
   ## List of the workspaces defined in the configuration above.

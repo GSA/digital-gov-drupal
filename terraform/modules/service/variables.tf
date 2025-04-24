@@ -150,6 +150,7 @@ variable "env" {
         object(
           {
             applications = optional(list(string), [])
+            credentials  = optional(list(string), [])
             environement = optional(string, "dev")
             service_key  = optional(bool, true)
             service_plan = optional(string, "basic")

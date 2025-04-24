@@ -116,7 +116,7 @@
 
   <div class="card-event__aside">
     <div class="card-event__date">
-      <time class="card-event__datetime" datetime="{{ created }}">
+      <time class="card-event__datetime" datetime="{{ created|date('Y-m-d') }}">
         <span class="card-event__datetime-month">{{ month }}</span>
         <span class="card-event__datetime-day">{{ day }}
           <span class="card-event__datetime-comma">,</span>

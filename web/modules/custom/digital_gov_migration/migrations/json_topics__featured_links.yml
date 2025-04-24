@@ -1,0 +1,63 @@
+id: json_topics__featured_links
+label: 'Import communities from Digital.gov Hugo'
+migration_tags:
+  - 'digitalgov'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json_topic_featured_links
+  urls:
+    - https://federalist-466b7d92-5da1-4208-974f-d61fd4348571.sites.pages.cloud.gov/preview/gsa/digitalgov.gov/nl-json-endpoints/topics/index.json
+  # This is the path to where the data are in the JSON.
+  item_selector: items
+  ids:
+    src_unique_id:
+      type: string
+  fields:
+    - name: src_unique_id
+      label: 'Unique ID'
+      selector: uid
+    - name: links_title
+      label: 'Featured Link Title'
+      selector: field_featured_links_title
+    - name: field_featured_links
+      label: 'Featured Links'
+      selector: field_featured_links
+
+process:
+  field_title: links_title
+  psf_debug: field_featured_links
+  field_links:
+    - plugin: skip_on_condition
+      condition: empty
+      source: field_featured_links
+      method: process
+    - plugin: sub_process
+      source: field_featured_links
+      include_source: true
+      source_key: root
+      process:
+        target_id:
+          - plugin: migration_lookup
+            migration: json_topics__featured_links_ext
+            # source here is the key inside featured_links array
+            source: link_uid
+          # get the entity ID
+          - plugin: extract
+            index: [ 0 ]
+        target_revision_id:
+          - plugin: migration_lookup
+            migration: json_topics__featured_links_ext
+            source: link_uid
+          # get the entity Revision ID
+          - plugin: extract
+            index: [ 1 ]
+
+destination:
+  # It's a paragraph entity
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: featured_links
+
+migration_dependencies:
+  required:
+    - json_topics__featured_links_ext

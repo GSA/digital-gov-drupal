@@ -1,5 +1,7 @@
 id: json_events
 label: 'Import events from Digital.gov Hugo'
+migration_tags:
+  - 'digitalgov'
 source:
   plugin: url
   data_fetcher_plugin: http
@@ -17,9 +19,10 @@ source:
   # an xpath for retrieving that value. It's important to note that this xpath
   # is relative to the elements retrieved by item_selector.
   fields:
+    # The event feed uses slug for UID but slugs are reused on some events
     - name: src_unique_id
       label: 'Unique ID'
-      selector: uid
+      selector: url
     - name: title
       label: 'Title'
       selector: field_title
@@ -96,6 +99,11 @@ source:
   constants:
     ALIAS_SEARCH: '/preview/gsa/digitalgov.gov/nl-json-endpoints'
     ALIAS_REPLACE: ''
+    FORMAT_HTML: 'html'
+    FORMAT_EMBEDDED: 'html_embedded_content'
+    FORMAT_MULTI: 'multiline_inline_html'
+    FORMAT_SINGLE: 'single_inline_html'
+    FORMAT_PLAIN: 'plain_text'
 process:
   skip_empty_required_fields:
     plugin: skip_on_condition
@@ -104,14 +112,24 @@ process:
     source: title
     method: row
     message: 'Missing field_title which sets title field'
-  title: title
+  title:
+    - plugin: callback
+      callable: digital_gov_migration_html_entity_decode
+      source: title
   field_authors:
     plugin: migration_lookup
     source: field_authors
     source_ids: src_unique_id
     migration: json_authors
+    no_stub: true
   field_captions: field_captions
-  field_deck: field_deck
+
+  field_deck/value:
+    - plugin: callback
+      callable: digital_gov_migration_html_entity_decode
+      source: field_deck
+  field_deck/format: constants/FORMAT_SINGLE
+
   field_end_date:
     plugin: callback
     callable: digital_gov_migration_convert_to_utc
@@ -123,8 +141,14 @@ process:
     source: field_featured_image
     source_ids: src_unique_id
     migration: json_images_to_media
-  field_host: field_host
-  field_kicker: field_kicker
+  field_host:
+    - plugin: callback
+      callable: digital_gov_migration_html_entity_decode
+      source: field_host
+  field_kicker:
+    - plugin: callback
+      callable: digital_gov_migration_html_entity_decode
+      source: field_kicker
   field_page_weight: field_page_weight
   field_primary_image:
     plugin: migration_lookup
@@ -133,15 +157,28 @@ process:
     migration: json_images_to_media
   field_registration_url: field_registration_url
   field_slug: field_slug
-  field_summary: field_summary
-  #field_topics: field_topics
+  field_summary/value:
+    - plugin: callback
+      callable: digital_gov_migration_html_entity_decode
+      source: field_summary
+  field_summary/format: constants/FORMAT_SINGLE
+  field_topics:
+    plugin: migration_lookup
+    source: field_topics
+    source_ids: src_unique_id
+    migration: json_topics
+    no_stub: true
   #field_venue/field_venue_name: venue_name
   # See digital_gov_migration_entity_presave().
   # Instead of doing a separate migration, these are inline so had to do it
   # manually.
   venue: field_venue
   field_youtube_id: field_youtube_id
-  body/value: body
+  body/value:
+    plugin: dg_convert_text
+    source: body
+    field_type: 'html'
+  body/format: constants/FORMAT_HTML
   created:
     plugin: callback
     callable: strtotime
@@ -179,6 +216,6 @@ destination:
 
 migration_dependencies:
   required:
-    - json_authors
     - json_images_to_media
-  optional: { }
+  optional:
+    - json_authors

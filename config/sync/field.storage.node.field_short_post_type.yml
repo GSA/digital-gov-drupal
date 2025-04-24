@@ -15,9 +15,6 @@ settings:
       value: resource
       label: Resource
     -
-      value: service
-      label: Service
-    -
       value: news
       label: News
     -

@@ -1,0 +1,62 @@
+{#
+/**
+ * @file sitewide_alert.html.twig
+ * Default theme implementation to present Sitewide Alert data.
+ *
+ * This template is used when viewing Sitewide Alert messages.
+ *
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ * - attributes: HTML attributes for the container element. This should contain the `data-uuid` attribute needed for
+ *   the loading to work.
+ * - uuid: The UUID of the sitewide alert.
+ * - is_dismissible: True if this alert is dismissable, false otherwise.
+ * - style: The alert style.
+ * - style_class: A style class derived from the style.
+ * - sitewide_alert: The sitewide alert entity.
+ *
+ * @see template_preprocess_sitewide_alert()
+ *
+ * @ingroup themeable
+ */
+#}
+{% set has_icon = content.field_show_icon|field_value|render == 'On' ? true %}
+{% set is_slim = content.field_slim|field_value|render == 'On' ? true %}
+
+{% set classes = [
+  'dg-site-alert',
+  'usa-site-alert',
+  style ? 'usa-site-alert--' ~ style : 'usa-site-alert--info',
+  not has_icon ? 'usa-site-alert--no-icon',
+  is_slim ? 'usa-site-alert--slim',
+] %}
+
+<section
+    {{ attributes.addClass(classes).removeClass('sitewide-alert') }}
+    aria-label="Site alert"
+  >
+  <div class="usa-alert grid-row">
+    <div class="usa-alert__body grid-col-fill">
+      {% if content.field_heading|field_value -%}
+        <h3 class="usa-alert__heading">{{- content.field_heading -}}</h3>
+      {%- endif %}
+      <div class="usa-prose">{{- content.message -}}</div>
+    </div>
+  {% if is_dismissible -%}
+  <div class="grid-col-auto">
+      {# The dismiss (close) button must have the class js-dismiss-button in order to work. #}
+      <button class="close js-dismiss-button  usa-button usa-button--outline usa-button--unstyled {{ style == 'emergency' ? 'text-base-lighter hover:text-base-lightest' }}" aria-label="{{ 'close'|t }}">
+        <svg
+          class="usa-icon dg-icon dg-icon--standard"
+          aria-hidden="false"
+          focusable="false"
+          role="img"
+        >
+          <use xlink:href="/{{ active_theme_path() }}/static/uswds/img/sprite.svg#close"></use>
+        </svg>
+      </button>
+    </div>
+  {%- endif %}
+  </div>
+</section>

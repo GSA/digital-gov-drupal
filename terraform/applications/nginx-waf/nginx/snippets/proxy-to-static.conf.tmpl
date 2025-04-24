@@ -9,6 +9,6 @@ proxy_hide_header       x-amz-server-side-encryption;
 proxy_hide_header       Set-Cookie;
 proxy_ignore_headers    Set-Cookie;
 proxy_intercept_errors  on;
-#add_header              Cache-Control max-age=31536000;
+add_header              Strict-Transport-Security "max-age=31536000; includeSubDomains preload";
 add_header              Cache-Control max-age=60;
 proxy_pass              https://${static_bucket}.${static_fips_endpoint};

@@ -36,6 +36,20 @@
     <title>{{ head_title|safe_join(' | ') }}</title>
     <css-placeholder token="{{ placeholder_token }}">
     <js-placeholder token="{{ placeholder_token }}">
+
+  <!-- Favicons & Icons -->
+  {% set img_path = theme_path_absolute ~ '/static/digitalgov/img' %}
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ img_path }}/apple-touch-icon.png?v=3">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ img_path }}/favicon-32x32.png?v=3">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ img_path }}/favicon-16x16.png?v=3">
+  <link rel="manifest" href="{{ img_path }}/site.webmanifest?v=3">
+  <link rel="mask-icon" href="{{ img_path }}/safari-pinned-tab.svg?v=3" color="#0076d6">
+  <meta name="msapplication-TileColor" content="#0076d6">
+  <meta name="theme-color" content="#656bd7">
+  {# favicon.ico set by Drupal. File is at theme root. #}
+
+  <!-- Bing Validation -->
+  <meta name="msvalidate.01" content="A662823C2F59EB4F55F752CC752AC299" />
 </head>
 <body{{ attributes.addClass(body_classes) }}>
 {#

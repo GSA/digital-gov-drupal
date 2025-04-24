@@ -1,0 +1,6 @@
+:root {
+  --ck-z-default: 1260 !important;
+}
+/* Leave this at the end of the file without a opening/closing bracket.
+ We are processing the file using a script found in package.json and this must not be changed.*/
+.ck.ck-content

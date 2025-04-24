@@ -1,0 +1,107 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 7ff882f9-4001-4ab5-8738-987f1ef3c18b
+  bundle: topics
+  default_langcode: en
+  depends:
+    e987933a-1be0-4ee0-82ee-92349e198acc: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Challenges and prize competitions'
+  created:
+    -
+      value: 1739549671
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /topics/challenges-and-prize-competitions
+      langcode: en
+      pathauto: 1
+  field_deck:
+    -
+      value: '<p>Prize competitions can advance the missions of federal agencies.</p>'
+      format: single_inline_html
+  field_featured_links:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: a165ed6e-be55-433c-a80f-c242754ffc1f
+          bundle: featured_links
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1739549728
+          behavior_settings:
+            -
+              value: {  }
+  field_featured_resources:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: f7cf2958-8ece-4ae5-9b17-141fd960eaf9
+          bundle: external_content
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1739549913
+          behavior_settings:
+            -
+              value: {  }
+          field_link:
+            -
+              uri: 'https://www.challenge.gov/'
+              title: Challenge.gov
+              options: {  }
+          field_summary:
+            -
+              value: '<p>Where competition delivers innovation for the public good.</p>'
+              format: single_inline_html
+  field_legislation:
+    -
+      uri: 'https://www.congress.gov/bill/114th-congress/senate-bill/3084/text'
+      title: 'American Innovation and Competitiveness Act (Public Law 114-329)'
+      options: {  }
+  field_page_weight:
+    -
+      value: 2
+  field_resource_topics:
+    -
+      entity: e987933a-1be0-4ee0-82ee-92349e198acc
+  field_slug:
+    -
+      value: challenges-and-prize-competitions
+  field_summary:
+    -
+      value: '<p>Agencies can use prize competitions to connect with the public braintrust, tapping into diverse expertise and perspectives to solve complex problems. Prize competitions often lead to unconventional and efficient solutions that might not be found within tr</p>'
+      format: single_inline_html

@@ -97,14 +97,15 @@
                   }, with_context: false) }}
     {% endif %}
   </div>
-
-  <div class="card__media">
-    <div class="media-featured">
-      <a href="{{ url }}" title="{{ title }}">
-        <img src="{{ image_url }}" aria-hidden="true" alt=""/>
-      </a>
+  {% if image_url %}
+    <div class="card__media">
+      <div class="media-featured">
+        <a href="{{ url }}" title="{{ title }}">
+          <img src="{{ image_url }}" aria-hidden="true" alt=""/>
+        </a>
+      </div>
     </div>
-  </div>
+  {% endif %}
   <div class="card__meta">
     <div class="date">{{ date }}
     </div>

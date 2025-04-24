@@ -1,0 +1,7 @@
+name: Digital.gov Tome Integration
+description: Tome event listeners, tweaks, and more
+package: Custom
+core_version_requirement: ^10 || ^11
+type: module
+dependencies:
+  - tome:tome_static

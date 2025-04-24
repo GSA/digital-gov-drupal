@@ -13,7 +13,7 @@ default:
       value: Technology
   weight:
     -
-      value: 0
+      value: 4
   parent:
     -
       target_id: 0

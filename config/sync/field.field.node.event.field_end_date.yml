@@ -12,7 +12,7 @@ field_name: field_end_date
 entity_type: node
 bundle: event
 label: 'End Date'
-description: ''
+description: "Looking for the start date? It is in the right hand column of the page under the heading 'Authoring information', see 'Authored on'. 'Authored on' doubles as the start date and created date."
 required: false
 translatable: false
 default_value: {  }

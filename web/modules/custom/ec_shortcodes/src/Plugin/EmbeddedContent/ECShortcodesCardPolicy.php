@@ -49,7 +49,7 @@ class ECShortcodesCardPolicy extends EmbeddedContentPluginBase implements Embedd
   public function defaultConfiguration(): array {
     return [
       'kicker' => NULL,
-      'title' => NULL,
+      'card_title' => NULL,
       'src' => NULL,
       'text' => NULL,
     ];
@@ -68,7 +68,7 @@ class ECShortcodesCardPolicy extends EmbeddedContentPluginBase implements Embedd
     return [
       '#theme' => 'ec_shortcodes_card_policy',
       '#kicker' => $this->configuration['kicker'],
-      '#title' => $this->configuration['title'],
+      '#card_title' => $this->configuration['card_title'],
       '#url' => $url,
       '#text' => $this->configuration['text'],
     ];
@@ -84,15 +84,18 @@ class ECShortcodesCardPolicy extends EmbeddedContentPluginBase implements Embedd
       '#default_value' => $this->configuration['kicker'],
       '#required' => TRUE,
     ];
-    $form['title'] = [
-      '#type' => 'textfield',
+    $form['card_title'] = [
+      '#type' => 'text_format',
       '#title' => $this->t('Title'),
-      '#default_value' => $this->configuration['title'],
+      '#default_value' => $this->configuration['card_title']['value'] ?? '',
+      '#format' => 'single_inline_html',
+      '#allowed_formats' => ['single_inline_html'],
+      '#rows' => 1,
       '#required' => TRUE,
     ];
     $form['url'] = [
       '#title' => $this->t('URL'),
-      '#description' => $this->t('Used in link at end of card.. Enter a title to find an internal page or enter an external URL.'),
+      '#description' => $this->t('Used in link at end of card. Enter a title to find an internal page or enter an external URL.'),
       '#default_value' => $this->configuration['url'] ?? '',
       '#required' => TRUE,
       '#type' => 'linkit',
@@ -105,8 +108,8 @@ class ECShortcodesCardPolicy extends EmbeddedContentPluginBase implements Embedd
       '#type' => 'text_format',
       '#title' => $this->t('Body'),
       '#default_value' => $this->configuration['text']['value'] ?? '',
-      '#format' => 'multiline_inline_html',
-      '#allowed_formats' => ['multiline_inline_html'],
+      '#format' => 'html_embedded_content',
+      '#allowed_formats' => ['html_embedded_content'],
     ];
 
     return $form;

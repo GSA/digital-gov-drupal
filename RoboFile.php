@@ -61,10 +61,22 @@ class RoboFile extends Tasks
             $io->info('Doing an incremental update');
         }
 
-        $this->_exec('./drush.sh state:set xmlsitemap_base_url http://127.0.0.1:8080');
+        $cms_url = $this->taskExec('./drush.sh state:get xmlsitemap_base_url')->printOutput(false)->run()->getOutputData() ?: getenv('DRUSH_OPTIONS_URI') ?: 'http://digitalgov.lndo.site';
+        $static_url = getenv('STATIC_URI') ?: 'http://127.0.0.1:8080';
+        $theme_name = "digital_gov";
+        $theme_path = "themes/custom/{$theme_name}";
+        $this->_exec('./drush.sh state:set xmlsitemap_base_url ' . $static_url);
         $this->_exec('./drush.sh xmlsitemap:regenerate');
-        $this->_exec('./drush.sh tome:static');
-        $this->_exec('./drush.sh state:set xmlsitemap_base_url http://digitalgov.lndo.site');
+        $this->_exec('./drush.sh tome:static --path-count=1 --retry-count=3 -y --uri=' . $static_url);
+        if (is_dir("web/$theme_path/static")) {
+            $io->info('Copy static assets to static site -> $theme_path/static');
+            $this->_copyDir("web/$theme_path/static", "html/$theme_path/static");
+        }
+        if (is_file("web/robots.txt")) {
+            $io->info('Copy Robots.txt to static site');
+            $this->_copy("web/robots.txt", "html/robots.txt");
+        }
+        $this->_exec('./drush.sh state:set xmlsitemap_base_url ' . $cms_url);
         $this->_exec('./drush.sh xmlsitemap:regenerate');
         if ($start_server) {
             $this->_exec('npm install && npx http-server html');
@@ -98,6 +110,7 @@ class RoboFile extends Tasks
                 'user',
                 'config_pages',
                 'taxonomy_term',
+                'sitewide_alert'
             ],
         ]
     ): ResultData

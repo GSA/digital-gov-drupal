@@ -14,10 +14,15 @@
 ## Environments and Git branches
 List of development environments and their equivalent Git branches.
 
-| **Static**        | **CMS**            | **Cloud.gov environments** | **Git branch** | **Use case**                                             |
-|-------------------|--------------------|----------------------------|----------------|----------------------------------------------------------|
-| drupal-gov-static-dev.app.cloud.gov  | drupal-gov-drupal-dev.app.cloud.gov   | dev            | develop            | App work that is ready for testing in cloud.gov          |
-| drupal-gov-static-staging.app.cloud.gov  | drupal-gov-drupal-staging.app.cloud.gov   | staging            | stage            | All work that is ready for release/UAT testing          |
-| drupal-gov-static-prod.app.cloud.gov  | drupal-gov-drupal-prod.app.cloud.gov   | prod            | main            | All work that is approved and released          |
+| **Static**                                             | **CMS**                                                | **Cloud.gov Environments** | **Git branch** | **Use case**                   |
+|--------------------------------------------------------|--------------------------------------------------------|----------------------------|----------------|--------------------------------|
+| [digital-gov-static-dev.app.cloud.gov][static-dev]     | [digital-gov-drupal-dev.app.cloud.gov][drupal-dev]     | dev                        | develop        | Ready for testing in cloud.gov |
+| [digital-gov-static-staging.app.cloud.gov][static-stg] | [digital-gov-drupal-staging.app.cloud.gov][drupal-stg] | staging                    | stage          | Ready for release/UAT testing  |
+| [digital-gov-static-prod.app.cloud.gov][static-prod]   | [digital-gov-drupal-prod.app.cloud.gov][drupal-prod]   | prod                       | main           | Approved and released          |
 
-
+[static-dev]: https://digital-gov-static-dev.app.cloud.gov
+[drupal-dev]: https://digital-gov-drupal-dev.app.cloud.gov
+[static-stg]: https://digital-gov-static-staging.app.cloud.gov
+[drupal-stg]: https://digital-gov-drupal-staging.app.cloud.gov
+[static-prod]: https://digital-gov-static-prod.app.cloud.gov
+[drupal-prod]: https://digital-gov-drupal-prod.app.cloud.gov

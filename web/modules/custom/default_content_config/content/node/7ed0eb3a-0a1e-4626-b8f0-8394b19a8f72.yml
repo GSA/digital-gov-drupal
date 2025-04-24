@@ -30,11 +30,23 @@ default:
   sticky:
     -
       value: false
+  moderation_state:
+    -
+      value: published
   path:
     -
       alias: /guides/hcd
       langcode: en
       pathauto: 0
+  rh_action:
+    -
+      value: bundle_default
+  rh_redirect_response:
+    -
+      value: 301
+  rh_redirect_fallback_action:
+    -
+      value: bundle_default
   body:
     -
       value: '<h1 id="welcome">Welcome!</h1><p>The Human-Centered Design (HCD) Guides are intended to enhance the understanding and practice of human-centered design throughout the federal government. In this guide series, we will explore the four phases of HCD work: <strong>discovery, design, delivery,</strong> and <strong>measurement</strong>.</p><p>You can think of the HCD Guides like a travel series through design. In the same way you can collect travel guides to Kyoto and Tokyo and Nagasaki instead of a single, lengthy all-Japan travel guide, our HCD Guide series provides two volumes for each phase of the HCD process: a concept guide, focusing on why the phase works the way it does, and an operations guide with checklists and frameworks to help with the how of the phase.</p><p><strong>Ready to get started? Check out the guides below!</strong></p>'

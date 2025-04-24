@@ -133,12 +133,14 @@ final class ConvertTextForm extends FormBase {
     switch ($form_state->getValue('dest')) {
       case 'plain_text':
         $decoded_entities = ConvertText::plainText($source_text);
+        $decoded_entities = ConvertText::plainTextAfterMigrate($decoded_entities);
         $form_state->setValue('converted_text', $decoded_entities);
         $this->messenger()->addStatus($this->t('Copy the converted text field into a plain text field.'));
         break;
 
       case 'html':
         $html = ConvertText::htmlText($source_text);
+        $html = ConvertText::htmlTextAfterMigrate($html);
         $form_state->setValue('converted_text', $html);
         $this->messenger()->addStatus($this->t('Copy the converted text field into an HTML field. If using a WYSIWYG, click "source" first.'));
         break;

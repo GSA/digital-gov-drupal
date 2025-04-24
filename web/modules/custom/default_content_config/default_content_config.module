@@ -14,8 +14,14 @@ use Drupal\user\UserInterface;
 function default_content_config_default_content_exclude_entity($entity) {
   // These oembed files get regenerated and change UUID, no need to export.
   if ($entity instanceof FileInterface) {
-    if (str_contains($entity->getFileUri(), 'oembed_thumbnails')) {
-      return TRUE;
+    $strings_to_exclude = [
+      'media-icons/generic',
+      'oembed_thumbnails',
+    ];
+    foreach ($strings_to_exclude as $string_to_exclude) {
+      if (str_contains($entity->getFileUri(), $string_to_exclude)) {
+        return TRUE;
+      }
     }
   }
   // Exporting user 1 and 0 will break fresh site installs.

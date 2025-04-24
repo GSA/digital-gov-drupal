@@ -33,3 +33,14 @@ matchers:
       limit: 100
       include_unpublished: false
     weight: 0
+  154ead9d-a311-4f05-9370-d85a080bae44:
+    id: 'entity:media'
+    uuid: 154ead9d-a311-4f05-9370-d85a080bae44
+    settings:
+      metadata: ''
+      bundles:
+        document: document
+      group_by_bundle: false
+      substitution_type: media
+      limit: 100
+    weight: 0

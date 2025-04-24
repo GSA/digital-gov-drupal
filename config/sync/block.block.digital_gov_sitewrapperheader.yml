@@ -9,7 +9,7 @@ dependencies:
 id: digital_gov_sitewrapperheader
 theme: digital_gov
 region: header
-weight: 0
+weight: 1
 provider: null
 plugin: site_wrapper_header
 settings:

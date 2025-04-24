@@ -1,5 +1,7 @@
 id: json_images
 label: 'Import images from Digital.gov Hugo'
+migration_tags:
+  - 'digitalgov'
 source:
   constants:
     DRUPAL_FILE_DIRECTORY: 'public://m-images/'

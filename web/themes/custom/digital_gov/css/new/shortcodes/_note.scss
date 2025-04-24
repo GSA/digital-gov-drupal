@@ -41,6 +41,10 @@
     font-weight: font-weight("medium");
   }
 
+  p {
+    max-width: measure(6);
+  }
+
   p:last-child {
     margin-bottom: 0;
   }

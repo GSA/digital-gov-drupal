@@ -36,7 +36,12 @@ function digital_gov_migration_entity_insert(EntityInterface $entity) {
       ]);
 
       // Save the redirect.
-      $redirect->save();
+      try {
+        $redirect->save();
+      }
+      catch (\Exception $ex) {
+        trigger_error($ex->getMessage(), E_USER_WARNING);
+      }
     }
   }
 
@@ -115,4 +120,45 @@ function digital_gov_migration_convert_to_utc(string $timestamp): ?string {
   $date->setTimezone(new DateTimeZone("UTC"));
 
   return $date->format("Y-m-d\TH:i:s");
+}
+
+/**
+ * Takes JSON string value and returns bool equivalent.
+ *
+ * Converts "true", "yes", "y", and "1" to TRUE, all else is FALSE.
+ */
+function digital_gov_migration_convert_to_boolean(string $raw): bool {
+  $raw = strtolower(trim($raw));
+
+  return $raw === 'true' || $raw === 'yes' || $raw === 'y' || $raw === "1";
+}
+
+/**
+ * Cleans up internal links.
+ *
+ * Helper to turn links hard-coded to digital.gov domains into URLs with the
+ * local domain.
+ */
+function digital_gov_migration_make_url_local(string $url): string {
+  // CLI thinks local uses http:// but those don't load in browser.
+  $current = 'https://' . \Drupal::request()->getHttpHost() . '/';
+  $url = preg_replace('/^https?:\/\/digital.gov\//i', $current, $url);
+  return $url;
+}
+
+/**
+ * Callback to decode HTML entities during migration.
+ */
+function digital_gov_migration_html_entity_decode(?string $in): string {
+  if ($in) {
+    // Some stuff in authors particularly is doubly encode.
+    $in = str_replace(
+      ['&amp;#39;', '&amp;eacute;'],
+      ['&#39;', '&eacute;'],
+      $in
+    );
+
+    return html_entity_decode($in, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, 'UTF-8');
+  }
+  return '';
 }

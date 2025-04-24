@@ -7,6 +7,7 @@ namespace Drupal\convert_text;
 use Drupal\Component\Serialization\Json;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Url;
 use Drupal\migrate\MigrateLookupInterface;
 use Drupal\path_alias\AliasManagerInterface;
 use Psr\Log\LoggerInterface;
@@ -89,6 +90,17 @@ class ShortcodeToEquiv {
 
     // Start by removing space before and after.
     $source_text = trim($source_text);
+    // Running source text through markdown converter encodes the brackets in
+    // the shortcode, we need to undo that (and hopefully just that).
+    $source_text = str_replace(['{{&lt;', '&gt;}}'], ['{{<', '>}}'], $source_text);
+    // Decode quotes inside any short code tags.
+    $source_text = preg_replace_callback(
+      '/\{\{<(.*)>\}\}/',
+      function ($in) {
+        return str_replace('&quot;', '"', $in[0]);
+      },
+      $source_text
+    );
 
     // A structured array of the types of shortcodes that are allowed.
     // These two arrays didn't need to be separate, as the 'body' attribute
@@ -177,7 +189,10 @@ class ShortcodeToEquiv {
           $body = '';
           if ($get_body) {
             $body = trim($matches[2][$key] ?? '');
-            if (!empty($body) && $options['body'] === TRUE || !empty($options['children'])) {
+            if (
+              (!empty($body) && $options['body'] === TRUE)
+              || !empty($options['children'])
+            ) {
               $body = $this->convert($alias_of_item, $body, $options['children'] ?? $shortcodes);
             }
           }
@@ -212,7 +227,9 @@ class ShortcodeToEquiv {
 
     foreach ($matches as $match) {
       if (!empty($match[1])) {
-        $attributes[$match[1]] = $match[2];
+        // Attributes can be empty. Also, if an attribute is not quoted,
+        // the match is in capture group 4.
+        $attributes[$match[1]] = $match[2] ?: $match[4] ?? '';
       }
       else {
         // Unnamed attribute only.
@@ -242,9 +259,16 @@ class ShortcodeToEquiv {
     static $building_array = [];
     switch ($shortcode) {
       case 'accordion':
+        // Undo encoding of HTML tags in attributes to allow the shortcode
+        // regex to work.
+        $title = $this->decodeTagsInAttributes($attributes['title'] ?? '');
+
         $config = [
           'kicker' => ConvertText::htmlNoBreaksText($attributes['kicker'] ?? ''),
-          'title' => ConvertText::htmlNoBreaksText($attributes['title'] ?? ''),
+          'accordion_title' => $this->formattedFieldValue(
+            $this->decodeTagsInAttributes($title),
+            'single_inline_html'
+          ),
           'icon' => $attributes['icon'] ?? '',
         ];
         $config['text'] = $this->formattedFieldValue($body);
@@ -254,9 +278,15 @@ class ShortcodeToEquiv {
         return sprintf('<div class="box">%s</div>', ConvertText::htmlText($body));
 
       case 'card-policy':
+        // Undo encoding of HTML tags in attributes.
+        $title = $this->decodeTagsInAttributes($attributes['title'] ?? '');
+
         $config = [
           'kicker' => ConvertText::htmlNoBreaksText($attributes['kicker'] ?? ''),
-          'title' => ConvertText::htmlNoBreaksText($attributes['title'] ?? ''),
+          'card_title' => $this->formattedFieldValue(
+            $this->decodeTagsInAttributes($title),
+            'single_inline_html'
+          ),
           'url' => $attributes['src'] ?? '',
         ];
         $config['text'] = $this->formattedFieldValue($body);
@@ -266,8 +296,12 @@ class ShortcodeToEquiv {
         if (empty($attributes['intro']) || empty($attributes['button-text']) || empty($attributes['button-url']) || empty($body)) {
           return $this->error($shortcode, 'intro, button-text, button-url, and some body text is required.');
         }
+
+        // Undo encoding of HTML tags in attributes.
+        $intro = $this->decodeTagsInAttributes($attributes['intro']);
+
         $config = [
-          'intro' => $this->formattedFieldValue($attributes['intro']),
+          'intro' => $this->formattedFieldValue($intro),
           'text' => $attributes['button-text'],
           'url' => $attributes['button-url'],
         ];
@@ -365,16 +399,40 @@ class ShortcodeToEquiv {
         return $this->media($video->uuid());
 
       case 'asset-static':
-        // @todo Do a migration lookup by file UID.
-        // $uuid = $this->migrateLookup->lookup('file_migration_id',
-        // [$attributes['file']]);
-        // $uuid = '';
-        // $this->media($uuid);
-        return 'Place holder till migrations are created';
+        // The src for the migration is the filename without the extension.
+        $src_uid = preg_replace('/\.(.*)$/', '', $attributes['file']);
+        $uuid = $this->migrateLookup
+          ->lookup(['json_files_to_media', 'json_s3_files_to_media'], [$src_uid]);
+        if ($uuid) {
+          $media = $this->entityTypeManager
+            ->getStorage('media')
+            ->load($uuid[0]['mid']);
+          if ($media) {
+            if (isset($attributes['button']) && strtolower($attributes['button']) === 'true') {
+              return sprintf(
+                '<a class="usa-button%s" href="%s" '
+                . 'data-entity-type="media" data-entity-uuid="%s" data-entity-substitution="media"'
+                . '>%s</a>',
+                ($attributes['button-variant'] ?? FALSE) ? ' usa-button--outline' : '',
+                "/media/" . $media->id(),
+                $media->uuid(),
+                $attributes['label'] ?? $attributes['href']
+              );
+            }
+            else {
+              if ($attributes['label'] ?? FALSE) {
+                $media->setName($attributes['label']);
+                $media->save();
+              }
+              return $this->media($media->uuid());
+            }
+          }
+        }
+        return $this->error($shortcode, 'Could not find file for: ' . $src_uid);
 
       case 'button':
         if (empty($attributes['href'])) {
-          return $this->error($shortcode, 'Href is required.');
+          return $this->error($shortcode, 'Href is required.' . $attributes['text'] ?? '');
         }
         return sprintf(
           '<a href="%s" class="usa-button usa-button--outline">%s</a>',
@@ -406,7 +464,10 @@ class ShortcodeToEquiv {
           $config = [
             'content_reference' => $nid,
             // @todo Kicker is being added in https://cm-jira.usa.gov/browse/DIGITAL-384.
-            'kicker' => ConvertText::htmlNoBreaksText($attributes['kicker'] ?? ''),
+            'kicker' => [
+              'value' => trim(ConvertText::htmlNoBreaksText($attributes['kicker'] ?? '')),
+              'format' => 'single_inline_html',
+            ],
           ];
           return $this->embeddedContent($config, 'ec_shortcodes_featured_resource');
         }
@@ -421,17 +482,28 @@ class ShortcodeToEquiv {
       case 'img':
       case 'img-flexible':
       case 'img-right':
-        // @todo img flexible does not have an equivalent yet.
-        // @todo Do a migration lookup by image UID.
-        // $uuid = $this->migrateLookup->lookup('file_migration_id',
-        // [$attributes['src']]);
-        // $attributes = [];
-        // if ($shortcode === 'img-right') {
-        // $attributes['data-align'] = 'right';
-        // }
-        // $uuid = '';
-        // return $this->media($uuid, $attributes);
-        return 'Place holder till migrations are created';
+
+        // As long as this runs after json_images_to_media has been imported,
+        // we should be able to create the equivalent markup.
+        $uuid = $this->migrateLookup
+          ->lookup('json_images_to_media', [$attributes['src']]);
+        if ($uuid) {
+          $media = $this->entityTypeManager
+            ->getStorage('media')
+            ->load($uuid[0]['mid']);
+          $orig_attributes = $attributes;
+          $attributes = [];
+
+          if ($shortcode === 'img-right' || ($orig_attributes['align'] ?? '') === 'right') {
+            $attributes['data-align'] = 'right';
+          }
+          // Is there a Drupal equivalent for incoming inline=true?
+          if (($orig_attributes['align'] ?? '') === 'center') {
+            $attributes['data-align'] = 'center';
+          }
+          return $this->media($media->uuid(), $attributes);
+        }
+        return $this->error($shortcode, 'Could not find image for: .' . $attributes['src']);
 
       // Link is used in combination with markdown url syntax, so it is
       // important that shortcodes are replaced before markdown to HTMl is
@@ -443,21 +515,16 @@ class ShortcodeToEquiv {
           return $this->error($shortcode, 'No URL can be found.');
         }
         // @todo Use migration lookup to find URL of content.
+        // https://cm-jira.usa.gov/browse/DIGITAL-555
         // This is a reference to a piece of content in Hugo, use migration
         // lookup to find it.
         // @codingStandardsIgnoreStart
         if (str_ends_with($url, '.md') || ($shortcode === 'ref' && !str_starts_with($url, '/') && !str_starts_with($url, 'http'))) {
-          // Must look through every node migration.
-          // @codingStandardsIgnoreStart
-          /*foreach (['resource_migration_id', 'topics_migration_id', 'etc...'] as $migration_id) {
-            $nids = $this->migrateLookup->lookup($migration_id, [$url]);
-            if (!empty($nids)) {
-              return Url::fromRoute('entity.node.canonical', ['node' => $nids[0]])->toString();
-            }
+          $alias = preg_replace('/.md$/', '', $url);
+          if ($url = Url::fromUserInput($alias)) {
+            return  $url->toString();
           }
-          return $this->error($shortcode, 'The markdown reference to ' . $url . ' could not find a corresponding node.');*/
-          // @codingStandardsIgnoreEnd
-          return 'Place holder till migrations are created: ' . $url;
+          return $alias;
         }
         // @codingStandardsIgnoreEnd
         // It's just a plain URL, return it.
@@ -476,8 +543,8 @@ class ShortcodeToEquiv {
         }
         $dark = !empty($attributes['bg']) && $attributes['bg'] === 'dark';
         $config = [
-          'cite' => $this->formattedFieldValue($attributes['cite'], 'single_inline_html'),
-          'text' => $this->formattedFieldValue($attributes['text'], 'single_inline_html'),
+          'cite' => $this->formattedFieldValue($attributes['cite'] ?? '', 'single_inline_html'),
+          'text' => $this->formattedFieldValue($attributes['text'] ?? '', 'single_inline_html'),
           'dark' => $dark ? 1 : 0,
         ];
         return $this->embeddedContent($config, 'ec_shortcodes_card_quote');
@@ -515,6 +582,13 @@ class ShortcodeToEquiv {
   protected function embeddedContent(array $config, string $plugin_id): string {
     $config = Html::escape(Json::encode(array_filter($config)));
     return sprintf('<embedded-content data-plugin-config="%s" data-plugin-id="%s" data-button-id="default">&nbsp;</embedded-content>', $config, $plugin_id);
+  }
+
+  /**
+   * Decode UTF-8 encoded < > in a string.
+   */
+  protected function decodeTagsInAttributes(string $in): string {
+    return str_replace(['\u003C', '\u003E'], ['<', '>'], $in);
   }
 
   /**
@@ -574,7 +648,7 @@ class ShortcodeToEquiv {
   protected function error(string $shortcode_id, string $message): string {
     // The alias of the item will tell us where to look for the message in the
     // return.
-    $this->logger->error(
+    $this->logger->warning(
       sprintf('ShortCodeToEquiv error with type: "%s". An alias of "%s". Message: "%s"',
         $shortcode_id,
         $this->aliasOfItem,

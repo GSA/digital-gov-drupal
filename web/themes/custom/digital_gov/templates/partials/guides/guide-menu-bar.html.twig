@@ -2,8 +2,12 @@
 
 Generates a horizontal menu for desktop and a vertical menu for mobile on all guide pages.
 Displays an optional glossary sidemenu on the right side if glossary is selected for this node.
+dg_guide_nav_get_links() prepares the variables used here.
 
   Requires a variable "guide_nav". See digital_gov_get_guidenav_links() in theme preprocess node function.
+  Requires a "node" variable that is the current guide page being viewed.
+  Requires a variable "guide_menubar_current". Sets which of the parent menubar items is marked as current..
+
 #}
 
 {% if guide_nav %}
@@ -20,7 +24,7 @@ Displays an optional glossary sidemenu on the right side if glossary is selected
             />
           </picture>
         </a>
-        {% if glossary %}
+        {% if node.field_glossary.value %}
           <button title="Show glossary" class="dg-glossary__toggle">
             <svg
               class="dg-glossary__toggle-icon"
@@ -39,7 +43,8 @@ Displays an optional glossary sidemenu on the right side if glossary is selected
       </div>
       <nav class="dg-guide__menu-bar-links" aria-label="Secondary menu bar">
         {% for item in guide_nav %}
-          {{ _self.link_item(item.link, path('<current>')) }}
+          {% set isCurrent = loop.index == guide_menubar_current %}
+          {{ _self.link_item(item.link, isCurrent) }}
         {% endfor %}
       </nav>
     </div>
@@ -50,17 +55,17 @@ Displays an optional glossary sidemenu on the right side if glossary is selected
       <div class="guide-mobile-menu__image-container">
         <a
           class="guide-mobile-menu__image-dg-icon"
-          href="{{ Site.BaseURL }}"
-          title="{{ Site.Title }} Home"
+          href="{{ path('<front>') }}"
+          title="{{ site_name }} Home"
         >
           <picture class="guide-mobile-menu__image">
             <source
-              srcset="/{{ active_theme_path() }}/static/digitalgov/img/logos/digit-50.png"
+              srcset="/{{ active_theme_path() }}/static/digitalgov/img/digit-50.png"
               media="(min-width: 480px)"
             />
             <img
               class="guide-mobile-menu__image-icon"
-              src="/{{ active_theme_path() }}/static/digitalgov/img/logos/digit-100.svg"
+              src="/{{ active_theme_path() }}/static/digitalgov/img/digit-100.svg"
               alt="Digital Gov Logo"
             />
           </picture>
@@ -100,16 +105,17 @@ Displays an optional glossary sidemenu on the right side if glossary is selected
     >
       <nav class="guide-mobile-menu__nav" aria-label="Secondary menu bar">
         {% for item in guide_nav %}
-          {{ _self.link_item(item.link, path('<current>')) }}
-        {% endfor %}`
+          {% set isCurrent = loop.index == guide_menubar_current %}
+          {{ _self.link_item(item.link, isCurrent) }}
+        {% endfor %}
       </nav>
     </div>
   </div>
 {% endif %}
 
-{% macro link_item(link, current) %}
+{% macro link_item(link, isCurrent) %}
   <a
-    class="dg-guide__menu-bar-link {{ current == link.url.toString() ? 'dg-current' : '' }}"
+    class="dg-guide__menu-bar-link {{ isCurrent ? 'dg-current' : '' }}"
     href="{{ link.url }}#content-start"
     title="{{ link.text }}"
   >{{ link.text }}</a

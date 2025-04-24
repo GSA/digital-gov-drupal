@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for Digital.gov Sitewide Alert module.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_alter().
+ */
+function dg_sitewide_alert_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  $forms_to_alter = [
+    'sitewide_alert_edit_form',
+    'sitewide_alert_add_form',
+  ];
+  // Hide Scheduling options because it does not work with TOME.
+  // If this feature is requested in new work, we can re-enable. Then,
+  // add the custom functionality needed to generate the data.
+  if (in_array($form_id, $forms_to_alter)) {
+    unset($form['scheduling_options']);
+    unset($form['scheduled_alert']);
+    unset($form['scheduled_date']);
+
+    // Restrict the format to multiline_html_limited.
+    $form['message']['widget'][0]['#format'] = 'multiline_html_limited';
+    $form['message']['widget'][0]['#allowed_formats'] = ['multiline_html_limited'];
+  }
+}

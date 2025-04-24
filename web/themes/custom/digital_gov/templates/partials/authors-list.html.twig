@@ -7,5 +7,8 @@
 
 #}
 <div class="authors-list {{ inline ? 'authors-list--inline' : '' }}">
-  {{ authors }}
+  {% for author in authors %}
+    {% set display_mode = inline ? 'teaser_inline' : 'teaser' %}
+    {{ drupal_entity('node', author['#node'].id(), display_mode) }}
+  {% endfor %}
 </div>

@@ -8,6 +8,7 @@ dependencies:
     - node.type.basic_page
     - node.type.community
     - node.type.event
+    - node.type.guide_landing
     - node.type.guides
     - node.type.news
     - node.type.resources
@@ -32,6 +33,7 @@ settings:
       community: community
       event: event
       guides: guides
+      guide_landing: guide_landing
       news: news
       resources: resources
       topics: topics

@@ -1,0 +1,56 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 024c88d0-5a3a-4f93-adbe-9d3a1243a93f
+  bundle: short_post
+  default_langcode: en
+  depends:
+    4533b7eb-0c1c-4ef0-97ee-1bee41e44b82: node
+    7ff882f9-4001-4ab5-8738-987f1ef3c18b: node
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Challenge & Prize'
+  created:
+    -
+      value: 1739550754
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_external_url:
+    -
+      uri: 'https://www.challenge.gov/community/'
+      title: ''
+      options: {  }
+  field_short_post_type:
+    -
+      value: community
+  field_summary:
+    -
+      value: '<p>We encourage public participation in crowdsourcing competitions to find innovative government solutions.</p>'
+      format: single_inline_html
+  field_topics:
+    -
+      entity: 4533b7eb-0c1c-4ef0-97ee-1bee41e44b82
+    -
+      entity: 7ff882f9-4001-4ab5-8738-987f1ef3c18b

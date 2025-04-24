@@ -1,0 +1,44 @@
+id: json_sources__media
+label: 'Import source logo images to media from Digital.gov Hugo'
+migration_tags:
+  - 'digitalgov'
+source:
+  constants:
+    SOURCE_URL: 'https://federalist-466b7d92-5da1-4208-974f-d61fd4348571.sites.pages.cloud.gov/preview/gsa/digitalgov.gov/nl-json-endpoints/'
+    DG_LOGO_DIR: 'public://'
+
+  plugin: url
+  data_fetcher_plugin: file
+  data_parser_plugin: json_sources
+  urls:
+    - https://federalist-466b7d92-5da1-4208-974f-d61fd4348571.sites.pages.cloud.gov/preview/gsa/digitalgov.gov/nl-json-endpoints/sources/index.json
+
+  item_selector: items
+
+  fields:
+    # "/static/logos/10x-logo.png"
+    - name: field_logo
+      label: "Filepath"
+      selector: field_logo
+    - name: logo_basename
+      label: "Filename"
+      selector: logo_basename
+  ids:
+    field_logo:
+      type: string
+
+process:
+  name: logo_basename
+  field_media_image/target_id:
+    plugin: migration_lookup
+    migration: json_sources__logos
+    source: field_logo
+
+destination:
+  plugin: 'entity:media'
+  default_bundle: image
+
+migration_dependencies:
+  # https://www.drupal.org/project/drupal/issues/2797505#comment-12129356
+  optional:
+    - json_sources__logos

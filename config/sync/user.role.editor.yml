@@ -7,6 +7,7 @@ dependencies:
     - node.type.basic_page
     - node.type.community
     - node.type.event
+    - node.type.guide_landing
     - node.type.guides
     - node.type.landing_page
     - node.type.news
@@ -23,6 +24,7 @@ dependencies:
     - node
     - override_node_options
     - paragraphs_type_permissions
+    - path
 id: editor
 label: Editor
 weight: 4
@@ -33,10 +35,12 @@ permissions:
   - 'access media overview'
   - 'bypass paragraphs type content access'
   - 'create media'
+  - 'create url aliases'
   - 'edit any authors content'
   - 'edit any basic_page content'
   - 'edit any community content'
   - 'edit any event content'
+  - 'edit any guide_landing content'
   - 'edit any guides content'
   - 'edit any landing_page content'
   - 'edit any news content'

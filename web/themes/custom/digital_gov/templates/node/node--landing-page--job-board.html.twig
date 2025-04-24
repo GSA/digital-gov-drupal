@@ -101,9 +101,8 @@
           </div>
           <div
             class="card-job__apply"
-            aria-labelledby="Apply for {{ item.title }}"
           >
-            <a class="usa-button" href="{{ item.apply_link }}" target="__blank">
+            <a class="usa-button" href="{{ item.apply_link }}" target="__blank" aria-label="Apply for {{ item.title|striptags|trim }}">
               {{ 'Apply'|t }}
             </a>
           </div>

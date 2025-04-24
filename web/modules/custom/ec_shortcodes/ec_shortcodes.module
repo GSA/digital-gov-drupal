@@ -31,7 +31,7 @@ function ec_shortcodes_theme($existing, $type, $theme, $path) {
     'ec_shortcodes_accordion' => [
       'variables' => [
         'kicker' => NULL,
-        'title' => NULL,
+        'accordion_title' => NULL,
         'icon' => NULL,
         'text' => NULL,
       ],
@@ -39,7 +39,7 @@ function ec_shortcodes_theme($existing, $type, $theme, $path) {
     'ec_shortcodes_card_policy' => [
       'variables' => [
         'kicker' => NULL,
-        'title' => NULL,
+        'card_title' => NULL,
         'url' => NULL,
         'text' => NULL,
       ],
@@ -76,6 +76,7 @@ function ec_shortcodes_theme($existing, $type, $theme, $path) {
     'ec_shortcodes_featured_resource' => [
       'variables' => [
         'content_reference' => NULL,
+        'kicker' => NULL,
       ],
     ],
     'ec_shortcodes_note' => [

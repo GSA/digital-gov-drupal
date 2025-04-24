@@ -1,0 +1,32 @@
+{# ====
+Search.gov form displayed in the header
+
+The form action (https://find.digitalgov.gov/search) is a masked domain for search.gov (https://search.usa.gov/search).
+The Search.gov program website used to be hosted on search.digitalgov.gov, so Digitalgov set up masking for 'find' to get around this issue.
+#}
+<form
+  accept-charset="UTF-8"
+  action="https://find.digitalgov.gov/search"
+  id="search_form"
+  method="get"
+  class="usa-search usa-search--small"
+>
+  <input name="utf8" type="hidden" value="&#x2713;" />
+  <input
+    id="affiliate"
+    name="affiliate"
+    type="hidden"
+    value="digitalgov"
+  />
+  <div role="search">
+    <label class="usa-sr-only" for="query">Search small</label>
+    <input class="usa-input" id="query" type="search" name="query" />
+    <button class="usa-button" name="commit" type="submit">
+      <img
+        src="{{ drupal_url('/' ~ active_theme_path() ~ '/static/uswds/img/usa-icons-bg/search--white.svg') }}"
+        class="usa-search__submit-icon"
+        alt="Search"
+      />
+    </button>
+  </div>
+</form>

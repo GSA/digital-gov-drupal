@@ -5,6 +5,7 @@
   "main": "gulpfile.js",
   "scripts": {
     "federalist": "export NODE_ENV=production && gulp buildAssets",
+    "ckeditor": "rm -rf ./static/dist/ckeditor.min.css && { cat ./css/ckeditor.css ; echo '.ck.ck-content{' ; cat ./static/dist/styles.min.css ; echo '}' ; } > ./static/dist/ckeditor.min.css",
     "lint:json": "find public/**/v1/json/index.html -print0 | xargs -0I {} jsonlint '{}'",
     "lint:js": "eslint './js/*.js'",
     "lint:js:fix": "eslint --fix './js/*.js'",

@@ -1,9 +1,5 @@
 name: Generate Static (stage)
 
-env:
-  BRANCH: stage
-  CF_SPACE: staging
-
 on:
   workflow_call:
     secrets:
@@ -17,8 +13,8 @@ on:
         required: true
       DATABASE_BACKUP_BASTION_NAME:
         required: true
-  #schedule:
-  #  - cron: "30 * * * *"
+  schedule:
+    - cron: "30 * * * *"
 
 permissions:
   contents: read
@@ -27,4 +23,6 @@ permissions:
 jobs:
   generate-static:
     uses: ./.github/workflows/generate-static.yml
+    with:
+      CF_SPACE: staging
     secrets: inherit

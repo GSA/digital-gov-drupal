@@ -11,7 +11,7 @@ _core:
 id: digital_gov_messages
 theme: digital_gov
 region: header
-weight: -6
+weight: -4
 provider: null
 plugin: system_messages_block
 settings:

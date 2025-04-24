@@ -1,0 +1,170 @@
+id: json_communities
+label: 'Import communities from Digital.gov Hugo'
+migration_tags:
+  - 'digitalgov'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  urls:
+    - https://federalist-466b7d92-5da1-4208-974f-d61fd4348571.sites.pages.cloud.gov/preview/gsa/digitalgov.gov/nl-json-endpoints/communities/index.json
+    # First value from wsl.exe hostname -I
+    #- http://172.20.60.7:1313/events/index.json
+  # This is the path to where the data are in the JSON.
+  item_selector: items
+  # Under 'fields', we list the data items to be imported. The first level keys
+  # are the source field names we want to populate (the names to be used as
+  # sources in the process configuration below). For each field we're importing,
+  # we provide a label (optional - this is for display in migration tools) and
+  # an xpath for retrieving that value. It's important to note that this xpath
+  # is relative to the elements retrieved by item_selector.
+  fields:
+    - name: src_unique_id
+      label: 'Unique ID'
+      selector: uid
+    - name: title
+      label: 'Title'
+      selector: field_title
+    - name: field_kicker
+      label: 'Kicker'
+      selector: field_kicker
+    - name: field_deck
+      label: 'Deck'
+      selector: field_deck
+    - name: field_summary
+      label: 'Summary'
+      selector: field_summary
+    - name: created
+      label: 'Created Time'
+      selector: field_date
+    - name: changed
+      label: 'Modified Time'
+      selector: date_modified
+    - name: field_page_weight
+      label: 'Weight'
+      selector: field_page_weight
+    - name: body
+      label: 'Body'
+      selector: field_body
+    - name: field_primary_image
+      label: 'Primary Image'
+      selector: field_primary_image
+    - name: field_dg_highlight
+      label: 'Highlight'
+      selector: field_dg_highlight
+    - name: field_dg_shortname
+      label: 'Shortname'
+      selector: field_dg_shortname
+    - name: field_dg_acronym
+      label: 'Acronym'
+      selector: field_dg_acronym
+    - name: field_dg_logo
+      label: 'Logo'
+      selector: field_dg_logo
+    - name: field_members
+      label: 'Member Count'
+      selector: field_members
+    - name: field_subscribe_email_subject
+      label: 'Subscribe Email Subject'
+      selector: field_subscribe_email_subject
+    - name: field_slug
+      label: 'Slug'
+      selector: slug
+    - name: redirects
+      label: 'Redirects'
+      selector: redirects
+    - name: alias
+      label: 'URL Alias'
+      selector: url
+  ids:
+    src_unique_id:
+      type: string
+  constants:
+    ALIAS_SEARCH: '/preview/gsa/digitalgov.gov/nl-json-endpoints'
+    ALIAS_REPLACE: ''
+    FORMAT_HTML: 'html'
+    FORMAT_EMBEDDED: 'html_embedded_content'
+    FORMAT_MULTI: 'multiline_inline_html'
+    FORMAT_SINGLE: 'single_inline_html'
+    FORMAT_PLAIN: 'plain_text'
+process:
+  skip_empty_required_fields:
+    plugin: skip_on_condition
+    condition:
+      plugin: empty
+    source: title
+    method: row
+    message: 'Missing field_title which sets title field'
+  title: title
+  field_kicker: field_kicker
+  field_deck/value: field_deck
+  field_deck/format: constants/FORMAT_SINGLE
+  field_summary/value: field_summary
+  field_summary/format: constants/FORMAT_SINGLE
+  field_page_weight: field_page_weight
+  body/value:
+    - plugin: dg_convert_text
+      source: body
+      field_type: 'html'
+  body/format: constants/FORMAT_HTML
+
+  field_primary_image:
+    plugin: migration_lookup
+    source: field_primary_image
+    source_ids: src_unique_id
+    migration: json_images_to_media
+  field_dg_highlight:
+    plugin: callback
+    callable: digital_gov_migration_convert_to_boolean
+    source: field_dg_highlight
+  field_dg_logo:
+    plugin: migration_lookup
+    source: field_dg_logo
+    source_ids: src_unique_id
+    migration: json_community_logos
+  field_dg_shortname: field_dg_shortname
+  field_subscribe_email_subject: field_subscribe_email_subject
+  field_members: field_members
+  field_dg_acronym: field_dg_acronym
+  field_slug: field_slug
+  created:
+    plugin: callback
+    callable: strtotime
+    source: created
+  changed:
+    plugin: callback
+    callable: strtotime
+    source: changed
+  # Setting the moderation state to published will automatically set status=1.
+  moderation_state:
+    plugin: default_value
+    default_value: published
+  path/alias:
+    plugin: callback
+    callable: str_replace
+    # The federalist build puts a relative path that is too much.
+    source: [constants/ALIAS_SEARCH, constants/ALIAS_REPLACE, alias]
+    unpack_source: true
+  # Must disable auto-creating path auto in order to set alias explicitly.
+  path/pathauto:
+    plugin: default_value
+    default_value: false
+  # See digital_gov_migration_entity_insert().
+  redirects:
+    plugin: sub_process
+    source: redirects
+    process:
+      redirect_source/path: from
+      status_code:
+        plugin: default_value
+        default_value: 301
+
+destination:
+  plugin: entity:node
+  default_bundle: community
+
+migration_dependencies:
+  required:
+    - json_images_to_media
+    - json_community_logos
+  optional: { }

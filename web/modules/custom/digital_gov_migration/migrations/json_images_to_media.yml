@@ -1,5 +1,7 @@
 id: json_images_to_media
 label: 'Create media from images on Digital.gov Hugo'
+migration_tags:
+  - 'digitalgov'
 source:
   plugin: url
   data_fetcher_plugin: file

@@ -37,11 +37,6 @@ default:
       alias: /topics/accessibility
       langcode: en
       pathauto: 0
-  body:
-    -
-      value: '<p><a href="/node/14" data-entity-type="node" data-entity-uuid="fefddcf3-e162-4622-9176-a3f4c2dadd8e" data-entity-substitution="canonical">RESOURCES</a>&nbsp;</p>'
-      format: html
-      summary: ''
   field_deck:
     -
       value: '<p>The design of products, devices, services, or environments for people with disabilities</p>'

@@ -1,0 +1,85 @@
+id: json_hcd_landing
+label: 'Create HCD guides landing page'
+migration_tags:
+  - 'digitalgov'
+source:
+  plugin: embedded_data
+  data_rows:
+    -
+      title: "Human-Centered Design Guide Series"
+      alias: "/guides/hcd/"
+      summary: "A series of guides to help you understand and practice human-centered design."
+      primary_image: "hcd-guide-landing-resized"
+      glossary: "hcd_glossary"
+      guide_weight: 2
+      guides:
+        # Matches the src_unique_id field from json_guides
+        - /guides/hcd/introduction/
+        - /guides/hcd/discovery-concepts/
+        - /guides/hcd/discovery-operations/
+        - /guides/hcd/design-concepts/
+        - /guides/hcd/design-operations/
+      body: |
+        <h1 id="welcome">
+        Welcome!
+        </h1>
+        <p>
+        The Human-Centered Design (HCD) Guides are intended to enhance the understanding and practice of human-centered design throughout the federal government. In this guide series, we will explore the four phases of HCD work: <strong>discovery, design, delivery,</strong> and <strong>measurement</strong>.
+        </p>
+        <p>
+        You can think of the HCD Guides like a travel series through design. In the same way you can collect travel guides to Kyoto and Tokyo and Nagasaki instead of a single, lengthy all-Japan travel guide, our HCD Guide series provides two volumes for each phase of the HCD process: a concept guide, focusing on why the phase works the way it does, and an operations guide with checklists and frameworks to help with the how of the phase.
+        </p>
+        <p>
+        <strong>Ready to get started? Check out the guides below!</strong>
+        </p>
+      bottom_content: |
+        <embedded-content data-plugin-config="{&quot;heading&quot;:&quot;Additional Resources&quot;,&quot;text&quot;:{&quot;value&quot;:&quot;\u003Cp\u003EIf you encounter unfamiliar words or concepts in these guides, you can find definitions and explanations in the \u003Cbutton class=\u0022dg-glossary__toggle\u0022\u003Eglossary\u003C\/button\u003E\u003C\/p\u003E\u003Cp\u003EYou may also wish to review these additional research methods:\u003C\/p\u003E\u003Cul\u003E\u003Cli\u003E\u003Ca href=\u0022https:\/\/methods.18f.gov\/\u0022\u003E18F Methods\u003C\/a\u003E\u003C\/li\u003E\u003Cli\u003ENYC Civic Service Design Group \u003Ca href=\u0022https:\/\/www1.nyc.gov\/assets\/servicedesign\/\u0022\u003ETools \u0026amp; Tactics\u003C\/a\u003E\u003C\/li\u003E\u003Cli\u003EUK Design Group \u003Ca href=\u0022https:\/\/www.designcouncil.org.uk\/resources\/search\u0022\u003ECase Studies\u003C\/a\u003E\u003C\/li\u003E\u003Cli\u003EThe Book Apart Series, specifically \u003Ca href=\u0022https:\/\/abookapart.com\/products\/design-for-real-life\u0022\u003EDesign for Real Life\u003C\/a\u003E by Eric Meyer \u0026amp; Sara Wachter-Boettcher\u003C\/li\u003E\u003C\/ul\u003E&quot;,&quot;format&quot;:&quot;html_embedded_content&quot;}}" data-plugin-id="ec_shortcodes_ring" data-button-id="default">&nbsp;</embedded-content>
+  ids:
+    alias:
+      type: string
+  constants:
+    FORMAT_HTML: 'html'
+    FORMAT_EMBEDDED: 'html_embedded_content'
+    FORMAT_MULTI: 'multiline_inline_html'
+    FORMAT_SINGLE: 'single_inline_html'
+    FORMAT_PLAIN: 'plain_text'
+process:
+  title: title
+  body/value: body
+  body/format: constants/FORMAT_HTML
+  field_bottom_content/value: bottom_content
+  field_bottom_content/format: constants/FORMAT_HTML
+  field_glossary: glossary
+  field_guide_weight: guide_weight
+  field_summary/value: summary
+  field_summary/format: constants/FORMAT_SINGLE
+  field_primary_image:
+    plugin: migration_lookup
+    source: primary_image
+    source_ids: src_unique_id
+    migration: json_images_to_media
+  field_guides:
+    plugin: migration_lookup
+    source: guides
+    source_ids: src_unique_id
+    migration: json_guides
+  # Setting the moderation state to published will automatically set status=1.
+  moderation_state:
+    plugin: default_value
+    default_value: published
+  path/alias:
+    plugin: default_value
+    source: alias
+  # Must disable auto-creating path auto in order to set alias explicitly.
+  path/pathauto:
+    plugin: default_value
+    default_value: false
+
+destination:
+  plugin: entity:node
+  default_bundle: guide_landing
+
+migration_dependencies:
+  optional:
+    - json_images_to_media
+    - json_guides

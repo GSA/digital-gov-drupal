@@ -1,0 +1,11 @@
+uuid: 2018a231-5a9e-4cba-9cc0-c584e1482a54
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.usa_collection_with_icon
+label: 'USA Collection - with icon'
+description: ''
+targetEntityType: node
+cache: true

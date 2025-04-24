@@ -7,8 +7,8 @@ dependencies:
 id: node_type_short_post
 entity_type_id: node_type
 entity_id: short_post
-action: access_denied
+action: page_redirect
 allow_override: 0
-redirect: ''
+redirect: '[node:field_external_url]'
 redirect_code: 301
-redirect_fallback_action: access_denied
+redirect_fallback_action: page_not_found

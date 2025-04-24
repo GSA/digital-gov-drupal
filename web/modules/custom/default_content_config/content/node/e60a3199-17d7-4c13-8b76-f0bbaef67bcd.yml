@@ -40,7 +40,7 @@ default:
       title: 'Video library'
       options: {  }
     -
-      uri: 'https://digital.gov/events/#events-past'
+      uri: 'internal:/events/#events-past'
       title: 'Past events'
       options: {  }
   field_deck:

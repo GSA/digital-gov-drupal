@@ -72,5 +72,10 @@
        rel="author"
        aria-label="Read more articles by {{ label|field_value }}"
     >{{ label|field_value }}</a>
+    {% if not inline and node.field_agency_full_name.value %}
+      <p class="author__details-agency">
+        {{ node.field_agency_full_name.value }}
+      </p>
+    {% endif %}
   </div>
 </div>

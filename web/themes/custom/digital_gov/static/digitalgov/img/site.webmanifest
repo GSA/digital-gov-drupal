@@ -1,0 +1,19 @@
+{
+    "name": "",
+    "short_name": "",
+    "icons": [
+        {
+            "src": "/themes/custom/digital_gov/static/digitalgov/img/android-chrome-192x192.png?v=3",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/themes/custom/digital_gov/static/digitalgov/img/android-chrome-512x512.png?v=3",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "display": "standalone"
+}

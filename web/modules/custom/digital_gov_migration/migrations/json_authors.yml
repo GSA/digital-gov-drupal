@@ -1,9 +1,11 @@
 id: json_authors
 label: 'Import authors from Digital.gov Hugo'
+migration_tags:
+  - 'digitalgov'
 source:
   plugin: url
   data_fetcher_plugin: http
-  data_parser_plugin: json
+  data_parser_plugin: json_authors
   urls:
     - https://federalist-466b7d92-5da1-4208-974f-d61fd4348571.sites.pages.cloud.gov/preview/gsa/digitalgov.gov/nl-json-endpoints/authors/v1/json/
     # First value from wsl.exe hostname -I
@@ -64,13 +66,25 @@ process:
     source: title
     method: row
     message: 'Missing field_display_name which sets title field'
-  title: title
-  field_first_name: field_first_name
-  field_last_name: field_last_name
+  title:
+    - plugin: callback
+      callable: digital_gov_migration_html_entity_decode
+      source: title
+  field_first_name:
+    - plugin: callback
+      callable: digital_gov_migration_html_entity_decode
+      source: field_first_name
+  field_last_name:
+    - plugin: callback
+      callable: digital_gov_migration_html_entity_decode
+      source: field_last_name
   field_github: field_github
   field_profile_source: field_profile_source
   field_slug: field_slug
-  field_agency_full_name: field_agency_full_name
+  field_agency_full_name:
+    - plugin: callback
+      callable: digital_gov_migration_html_entity_decode
+      source: field_agency_full_name
   created:
     plugin: callback
     callable: strtotime

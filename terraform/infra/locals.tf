@@ -54,6 +54,7 @@ locals {
           ALLOWED_IPS_CMS = base64encode(
             jsonencode([
               "allow 0.0.0.0/0;"
+              #"allow 159.142.0.0/16;"
             ])
           )
 
@@ -242,14 +243,8 @@ locals {
         credentials = [
           "cron_key",
           "hash_salt",
-          "static_bucket",
-          "static_fips_endpoint",
-          "static_access_key_id",
-          "static_secret_access_key",
-          "storage_bucket",
-          "storage_fips_endpoint",
-          "storage_access_key_id",
-          "storage_secret_access_key"
+          "gsa_auth_key",
+          "newrelic_key",
         ]
 
         ## The type of service to be deployed.
