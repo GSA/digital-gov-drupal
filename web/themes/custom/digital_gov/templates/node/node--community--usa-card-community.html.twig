@@ -1,0 +1,18 @@
+{#
+/**
+ * @file
+ * Theme implementation to display a Commuinity node as a card with image.
+ */
+#}
+{# Caching the data in content object #}
+{% set savedCache = content|render %}
+
+{{ include('@digital_gov/partials/featured-communities-card.html.twig', {
+  heading: content.field_dg_shortname|field_value|default(label|field_value),
+  logo: content.field_dg_logo|field_value,
+  member_count: content.field_members|field_value,
+  summary: content.field_summary|field_value,
+  acronym: content.field_dg_acronym|field_value,
+  has_image: true,
+  outline: true,
+}) }}

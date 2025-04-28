@@ -1,0 +1,21 @@
+uuid: a01b4d3b-bf07-4cda-a4bc-d46b2abb0c39
+langcode: en
+status: true
+dependencies: {  }
+name: dg_large_scale_to_1200_convert_to_webp
+label: 'DG Large (scale 1200 w max convert to webp)'
+effects:
+  28063fb5-20a6-4237-86ac-6c714dca1cfd:
+    uuid: 28063fb5-20a6-4237-86ac-6c714dca1cfd
+    id: image_scale
+    weight: -10
+    data:
+      width: 1200
+      height: null
+      upscale: true
+  d8d19018-df8f-4792-a58c-2dd13c17c7f1:
+    uuid: d8d19018-df8f-4792-a58c-2dd13c17c7f1
+    id: image_convert
+    weight: -9
+    data:
+      extension: webp

@@ -62,21 +62,11 @@
  * @ingroup themeable
  */
 #}
-{% set title = node.label %}
-{% set summary = content.field_summary|field_value %}
-{% set external_link = content.field_external_url|field_value %}
-{% set unique_id = title|clean_unique_id %}
-<div class="usa-collection__body">
-  <h2 class="usa-collection__heading">
-    <a
-      class="usa-link usa-link--external"
-      href="{{ external_link }}"
-      title="{{ title }}"
-    >
-      {{ title }}
-    </a>
-  </h2>
-  <p class="usa-collection__description">
-    {{ summary }}
-  </p>
-</div>
+{{ include('@digital_gov/partials/usa-collection-item.html.twig', {
+  link_title: node.label,
+  summary: content.field_summary|field_value,
+  url: content.field_external_url|field_value,
+  header_level: 2,
+  header_class: 'usa-collection__heading',
+  is_external: is_external_short_post,
+}, with_context: false) }}

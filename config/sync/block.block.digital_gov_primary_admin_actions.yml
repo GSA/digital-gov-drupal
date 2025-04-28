@@ -9,7 +9,7 @@ _core:
 id: digital_gov_primary_admin_actions
 theme: digital_gov
 region: header
-weight: -7
+weight: -5
 provider: null
 plugin: local_actions_block
 settings:

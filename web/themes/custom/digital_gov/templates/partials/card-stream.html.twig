@@ -1,0 +1,50 @@
+{# Generic card for displaying in a stream
+
+  @param {string} kicker - formatted string
+  @param {string} url - url string
+  @param {string} label - string
+  @param {string} summary - formatted string
+  @param {array} authors - array of authors
+  @param {string} media - renderable image string
+  @param {string} date - formatted date string
+#}
+
+{% set heading_id = ('title-' ~ label)|clean_id %}
+
+<article class="card card-linked" aria-labelledby="{{ heading_id }}">
+    <div class="card__content">
+        {% if kicker %}
+            <div class="kicker">
+                <span>{{ kicker }}</span>
+            </div>
+        {% endif %}
+        <h3 id="{{ heading_id }}">
+            <a href="{{ url }}">{{ label }}</a>
+        </h3>
+
+        {% if summary %}
+            <div class="summary">
+                {{ summary }}
+            </div>
+        {% endif %}
+
+        {% if authors %}
+            {{ include('@digital_gov/partials/authors-list.html.twig', {
+                inline: true,
+                authors: authors,
+            }, with_context: false) }}
+        {% endif %}
+    </div>
+
+    {% if media %}
+        <div class="card__media">
+            <div class="media-featured">
+                {{ media }}
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="card__meta">
+        <div class="date">{{ date }}</div>
+    </div>
+</article>

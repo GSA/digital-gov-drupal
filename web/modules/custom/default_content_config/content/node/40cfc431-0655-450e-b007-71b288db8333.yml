@@ -1,0 +1,88 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 40cfc431-0655-450e-b007-71b288db8333
+  bundle: news
+  default_langcode: en
+  depends:
+    a45f5a48-6b2b-4273-8aae-b57c128c7de7: user
+    38cd1f1f-47ba-4e50-bc50-9cc1d8916638: node
+    10a75c69-1036-40db-ab4a-02ccaa1e0cce: node
+    7acbb47b-73ed-4b5c-8dbb-5e21abccea00: node
+    a562cb6c-d534-46b3-bf5d-4b21e0422e4b: media
+    261021f8-1c56-4529-b0fe-e008bb65d033: media
+    58b5051e-356e-4ace-be42-ca090259d6ab: node
+    ad7aa7a5-33cf-400e-93cf-11820e467111: node
+    95077128-6d33-4445-a48a-4ad8ebb7d9b3: node
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      entity: a45f5a48-6b2b-4273-8aae-b57c128c7de7
+  title:
+    -
+      value: 'Inhibeo Cloud'
+  created:
+    -
+      value: 1740360394
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /2025/02/23/inhibeo-cloud
+      langcode: en
+      pathauto: 1
+  body:
+    -
+      value: '<p>Et secundum ut vulpes. Exputo hendrerit jus lenis mauris oppeto os pneum utrum validus. Esca esse mauris verto. Ad iustum odio. Aptent interdico nimis nulla ut venio.</p><p>Autem commodo conventio duis inhibeo jus typicus uxor vulpes. Ideo praemitto probo quidem similis tamen. Appellatio exputo imputo nobis. Sit ulciscor velit vulpes.</p><p>Abbas esca haero suscipere typicus. Abbas comis commoveo damnum distineo jus lenis magna os secundum. Accumsan ibidem interdico neque pagus singularis. Autem commoveo imputo. Accumsan facilisis neo saepius si vindico vulpes. Accumsan cogo exputo humo ratis saluto sed. Augue eligo eros lobortis pertineo populus zelus.</p><p>Adipiscing capto oppeto quae vel. Blandit meus patria qui veniam. Capto ille usitas. Cogo jus pala pneum sed utinam. Hos luctus modo olim ulciscor volutpat.</p><p>Aptent esca importunus odio rusticus validus. Accumsan consequat euismod iusto neque oppeto sino velit volutpat vulpes. Consequat enim esse jugis mos roto sudo ut venio.</p><p>Distineo duis laoreet ludus nibh paulatim. Brevitas distineo et ludus mauris si sudo suscipit virtus. Humo macto utinam. Adipiscing augue gilvus tego uxor velit. Aptent gemino hos imputo patria saluto. Autem capto et luptatum nutus patria vereor. Eu feugiat magna neo rusticus uxor. Fere huic interdico probo turpis. Brevitas comis iriure plaga validus. Ea elit jus meus pala persto.</p><p>Cui dignissim sed ulciscor. Duis elit facilisis os qui voco. Amet ea facilisis minim nunc saluto secundum te vulputate. Acsi conventio immitto luctus molior refoveo.</p><p>At fere plaga pneum probo tation typicus veniam vulputate. Camur lobortis refero virtus. Ad adipiscing et exerci feugiat neque plaga tincidunt. Commoveo dolore luctus mos sudo. Aliquam facilisis haero immitto luctus nobis odio olim probo utinam.</p><p>Capto esse hos ludus magna nostrud nunc secundum turpis. Esca jumentum pala vel. Abigo commodo consectetuer eligo iaceo iustum modo neque valetudo. Eros et nimis rusticus. Distineo erat genitus hendrerit ideo metuo sagaciter tamen uxor validus. Abigo conventio eligo typicus ulciscor ullamcorper. Abico abluo antehabeo nostrud vereor. Esca macto quis tego valetudo. Abluo gravis metuo nunc obruo quia te velit verto zelus.</p><p>Abbas appellatio comis conventio eligo enim sed si similis typicus. Conventio inhibeo jus metuo nostrud pagus refero sagaciter sed. Autem nostrud persto. Esse melior sagaciter singularis. Pala scisco usitas.</p><p>Abbas gemino qui utrum. Acsi causa eros nostrud roto. Caecus et facilisi nunc ulciscor vel. Et exputo luptatum natu qui. Blandit damnum gilvus molior roto tamen. Causa euismod in letalis paulatim ratis ymo.</p><p>Acsi dolus patria pertineo similis utrum. Ad aliquip commoveo immitto luptatum nibh tincidunt. Antehabeo eros immitto lucidus. Acsi ad eros iriure lucidus pagus quis ullamcorper volutpat vulpes. Eu os sed validus venio. Ibidem oppeto si similis tation vero. Esca gilvus iaceo immitto tamen valetudo vereor. Abdo facilisis similis. Erat nobis paulatim rusticus usitas. Capto ea ullamcorper.</p><p>&nbsp;</p>'
+      format: html
+      summary: ''
+  field_authors:
+    -
+      entity: 38cd1f1f-47ba-4e50-bc50-9cc1d8916638
+    -
+      entity: 10a75c69-1036-40db-ab4a-02ccaa1e0cce
+    -
+      entity: 7acbb47b-73ed-4b5c-8dbb-5e21abccea00
+  field_deck:
+    -
+      value: '<p>Amet autem decet ludus modo mos praemitto si valetudo.&nbsp;</p>'
+      format: single_inline_html
+  field_featured_image:
+    -
+      entity: a562cb6c-d534-46b3-bf5d-4b21e0422e4b
+  field_kicker:
+    -
+      value: 'Gemino letalis quis. Accumsan bene dolus nostrud praemitto.'
+  field_page_weight:
+    -
+      value: 870
+  field_primary_image:
+    -
+      entity: 261021f8-1c56-4529-b0fe-e008bb65d033
+  field_slug:
+    -
+      value: 'Euismod illum mos similis tation uxor vindico. Conventio facilisis hos lenis praemitto usitas.'
+  field_summary:
+    -
+      value: '<p>Amet enim humo tego vereor. Consequat eu molior sagaciter venio. Enim olim saepius wisi. Comis jumentum loquor luctus. Abluo acsi appellatio jumentum. Imputo incassum nisl.&nbsp;</p>'
+      format: single_inline_html
+  field_topics:
+    -
+      entity: 58b5051e-356e-4ace-be42-ca090259d6ab
+    -
+      entity: ad7aa7a5-33cf-400e-93cf-11820e467111
+    -
+      entity: 95077128-6d33-4445-a48a-4ad8ebb7d9b3

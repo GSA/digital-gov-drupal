@@ -5,6 +5,7 @@
  * Primary module hooks for Digital.gov Breadcrumb module.
  */
 
+use Drupal\Core\Block\BlockPluginInterface;
 use Drupal\Core\Breadcrumb\Breadcrumb;
 use Drupal\Core\Link;
 use Drupal\Core\Routing\RouteMatchInterface;
@@ -53,13 +54,36 @@ function dg_breadcrumb_system_breadcrumb_alter(Breadcrumb &$breadcrumb, RouteMat
     case 'topics':
       $links = $breadcrumb->getLinks();
       foreach ($links as $link) {
-        // /topics is a redirect to /resources but the breadcrumb on just topics
-        // should still say 'Topics'.
-        if ($link->getText() === 'Resources') {
-          $link->setText(t('Topics'));
+        if ($link->getText() === 'Topics' && $link->getUrl()->toString() === '/topics') {
+          // Link this crumb to the resources landing page if we have it.
+          $eq = \Drupal::entityQuery('node');
+          $eq->condition('type', 'landing_page');
+          $eq->condition('field_landing_page_type', 'resources');
+          $eq->accessCheck();
+          $landing_page_nids = $eq->execute();
+          if (empty($landing_page_nids)) {
+            return;
+          }
+
+          $landing_page_nid = array_shift($landing_page_nids);
+          if ($landing_page = Node::load($landing_page_nid)) {
+            $link->setUrl($landing_page->toUrl());
+            $link->setText(t('Topics'));
+          }
         }
       }
       break;
 
   }
+}
+
+/**
+ * Implements hook_block_build_alter().
+ */
+function dg_breadcrumb_block_build_system_breadcrumb_block_alter(array &$build, BlockPluginInterface $block) {
+  // Ensure drupal knows this block should be cached per path
+  // and when the menu changes.
+  $build['#cache']['contexts'][] = 'url.path';
+  $build['#cache']['contexts'][] = 'url.query_args';
+  $build['#cache']['tags'][] = 'config:system.menu.main';
 }

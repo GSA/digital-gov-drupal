@@ -73,7 +73,7 @@
 
       {{ include('@digital_gov/partials/page-header.html.twig', {
         title: node.title.value,
-        deck: node.field_deck.value,
+        deck: content.field_deck|field_value,
       }, with_context: false) }}
     </header>
 
@@ -94,12 +94,11 @@
         aria-label="Related content"
         data-heading-elements="h2"
       >
-        [placeholder Get Related]
-        {# {# NOT-MIGRATED
-          <div class="dg-related-items" data-related-items>
-          {{ include('@digital_gov/partials/get-related.html.twig') }}
-          </div>
-        #}
+
+      <div class="dg-related-items" data-related-items>
+        {{ include('@digital_gov/partials/primary-communities.html.twig') }}
+      </div>
+
       </aside>
     </section>
   </article>

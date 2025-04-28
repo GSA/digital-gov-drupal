@@ -45,4 +45,4 @@ default:
       value: Molina-Irizarry
   field_profile_source:
     -
-      value: digit-light
+      value: digit-dark

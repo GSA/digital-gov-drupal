@@ -97,16 +97,17 @@
     </div>
   </section>
 
-  <section id="news">
-    <div class="grid-container-desktop">
-      <div class="grid-row tablet-lg:grid-gap-4">
+  {# Get News and Events related to author. #}
+  {% set stream = drupal_view_result('author_items', 'block_1') %}
+  {% if stream|length %}
+    <section id="news">
+      <div class="grid-container-desktop">
         <section class="stream">
-          <h2>Latest Content by {{ node.title.value }}</h2>
-
-          [placeholder for latest content]
+          <h2>{{ 'Latest content by'|t }} {{ node.title.value }}</h2>
+          {{ drupal_view('author_items', 'block_1') }}
         </section>
+        {{ include('@digital_gov/partials/see-all-footer.html.twig') }}
       </div>
-      {{ include('@digital_gov/partials/see-all-footer.html.twig') }}
-    </div>
-  </section>
+    </section>
+  {% endif %}
 </main>

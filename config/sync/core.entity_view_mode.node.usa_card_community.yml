@@ -1,0 +1,11 @@
+uuid: 66b55398-4c9c-4764-80fb-0d6ad0cfd172
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.usa_card_community
+label: 'USA Card - Community with icon'
+description: ''
+targetEntityType: node
+cache: true

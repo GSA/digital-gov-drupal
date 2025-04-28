@@ -1,0 +1,72 @@
+id: json_images_to_media
+label: 'Create media from images on Digital.gov Hugo'
+migration_tags:
+  - 'digitalgov'
+source:
+  plugin: url
+  data_fetcher_plugin: file
+  data_parser_plugin: json
+
+  urls:
+    # The host may have to change, depending on your local. For example, in
+    # WSL2, I had ot replace this with my WSL2 instances IP since Drupal is
+    # running inside a Docker Lando container, so localhost is the container
+    # not WSL2, where Hugo is. This shouldn't matter if this is a remote host.
+    # Another host to try is host.docker.internal or find your local machine's
+    # IP address.
+    #- http://172.20.60.7:1313/images/index.json
+    #- http://localhost:1313/images/index.json
+    - https://federalist-466b7d92-5da1-4208-974f-d61fd4348571.sites.pages.cloud.gov/preview/gsa/digitalgov.gov/nl-json-endpoints/images/index.json
+
+
+  # XPath-like selector. The slash (/) at the beginning is optional.
+  # This is needed if the content is not at the root.
+  item_selector:
+  fields:
+    - name: src_image_id
+      label: 'Image ID'
+      selector: uid
+    - name: src_image_url
+      label: 'Image URL'
+      selector: source-url
+    - name: alt
+      label: 'Alternate text'
+      selector: alt
+    - name: caption
+      label: 'Caption'
+      selector: caption
+    - name: credit
+      label: 'Credit'
+      selector: credit
+  ids:
+    src_image_id:
+      type: string
+process:
+  name: src_image_id
+  field_media_image/target_id:
+    plugin: migration_lookup
+    migration: json_images
+    source: src_image_id
+  field_media_image/alt:
+    plugin: truncate
+    callable: substr
+    source: alt
+    length: 255
+  field_caption/value:
+    plugin: truncate
+    callable: substr
+    source: caption
+    length: 255
+  field_credit:
+    plugin: truncate
+    callable: substr
+    source: credit
+    length: 255
+
+destination:
+  plugin: 'entity:media'
+  default_bundle: image
+
+migration_dependencies:
+  required:
+    - json_images

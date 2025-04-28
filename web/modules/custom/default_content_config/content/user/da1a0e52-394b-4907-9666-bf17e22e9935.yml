@@ -1,0 +1,52 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: da1a0e52-394b-4907-9666-bf17e22e9935
+  default_langcode: en
+default:
+  preferred_langcode:
+    -
+      value: en
+  preferred_admin_langcode:
+    -
+      value: en
+  name:
+    -
+      value: sitewidealertmanager@example.com
+  pass:
+    -
+      value: $2y$10$EyFuBGAdQDPQx8hUiAUCQ.qQcdqLpZjO2ReqGLEkT3U7mSkzm3Fse
+      existing: ''
+      pre_hashed: true
+  mail:
+    -
+      value: sitewidealertmanager@example.com
+  timezone:
+    -
+      value: America/New_York
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1740145528
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  init:
+    -
+      value: sitewidealertmanager@example.com
+  roles:
+    -
+      target_id: site_wide_alert_manager
+  role_change:
+    -
+      target_id: __role_delegation_empty_field_value__
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

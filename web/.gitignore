@@ -4,6 +4,7 @@
 /libraries
 /*/contrib
 /sites/*/files
+robots.txt
 # Ignore test environment.
 /sites/simpletest
 /sites/*/settings.local.php

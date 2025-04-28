@@ -26,7 +26,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Set env
         run: |
-          BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)
+          #BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)
+          BRANCH=main
           COMPOSER_DEV=1
           GSA_AUTH_KEY=${{ secrets.GSA_AUTH_DEVELOPMENT_KEY }}
           case ${BRANCH} in
@@ -93,7 +94,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Set env
         run: |
-          BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)
+          #BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)
+          BRANCH=main
           COMPOSER_DEV=1
           GSA_AUTH_KEY=${{ secrets.GSA_AUTH_DEVELOPMENT_KEY }}
           case ${BRANCH} in
@@ -169,7 +171,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Set env
         run: |
-          BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)
+          #BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)
+          BRANCH=main
           COMPOSER_DEV=1
           GSA_AUTH_KEY=${{ secrets.GSA_AUTH_DEVELOPMENT_KEY }}
           case ${BRANCH} in

@@ -9,7 +9,6 @@ dependencies:
     - paragraphs.paragraphs_type.internal_content
   module:
     - field_group
-    - inline_entity_form
     - maxlength
     - text
 third_party_settings:
@@ -37,22 +36,14 @@ bundle: internal_content
 mode: default
 content:
   field_content:
-    type: inline_entity_form_complex
+    type: entity_reference_autocomplete
     weight: 0
     region: content
     settings:
-      form_mode: default
-      override_labels: false
-      label_singular: ''
-      label_plural: ''
-      allow_new: true
-      allow_existing: true
       match_operator: CONTAINS
-      allow_duplicate: false
-      collapsible: false
-      collapsed: false
-      revision: false
-      removed_reference: optional
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_override_summary:
     type: text_textarea
@@ -65,7 +56,7 @@ content:
       maxlength:
         maxlength_js: 255
         maxlength_js_label: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
-        maxlength_js_enforce: true
+        maxlength_js_enforce: false
   field_override_title:
     type: string_textfield
     weight: 2

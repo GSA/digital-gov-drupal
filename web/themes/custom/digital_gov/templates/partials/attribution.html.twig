@@ -1,8 +1,4 @@
-<p class="dg-attribution">
-  Header image credit:&nbsp;
-  {% if credit %}
-  {{ credit }}
-  {% elseif caption %}
-  {{ caption }}
-  {% endif %}
-</p>
+{% set attribution = credit ?: caption|render|striptags %}
+{% if attribution %}
+  <p class="dg-attribution">Header image credit: {{ attribution }}</p>
+{% endif %}

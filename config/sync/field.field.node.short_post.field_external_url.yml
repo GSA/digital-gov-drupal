@@ -12,7 +12,7 @@ field_name: field_external_url
 entity_type: node
 bundle: short_post
 label: 'External URL'
-description: ''
+description: "Requests to this short post's alias will redirect anonymous users to this URL."
 required: true
 translatable: false
 default_value: {  }

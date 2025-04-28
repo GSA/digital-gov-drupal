@@ -14,7 +14,7 @@ entity_type: node
 bundle: guides
 label: Summary
 description: '1-sentence description that does not repeat the headline'
-required: true
+required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''

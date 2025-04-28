@@ -1,0 +1,17 @@
+uuid: 29822c38-e891-485d-bf24-37a0c3c46bce
+langcode: en
+status: true
+dependencies: {  }
+id: job_board
+label: 'Job Board'
+token: false
+context:
+  show_warning: true
+  group:
+    language: false
+  fallback:
+    language: ''
+menu:
+  path: /admin/content/job-board
+  weight: 0
+  description: ''

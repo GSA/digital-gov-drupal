@@ -1,9 +1,19 @@
 uuid: 53110726-a7bd-4396-973c-bef409bde442
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - google_tag
+    - metatag
+    - path
+    - pathauto
 id: data_analyst
 label: 'Data Analyst'
 weight: 6
 is_admin: null
-permissions: {  }
+permissions:
+  - 'administer google_tag_container'
+  - 'administer meta tags'
+  - 'administer pathauto'
+  - 'administer url aliases'
+  - 'create url aliases'

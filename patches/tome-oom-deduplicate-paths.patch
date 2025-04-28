@@ -1,0 +1,17 @@
+Index: modules/tome_static/src/Commands/StaticCommand.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/modules/tome_static/src/Commands/StaticCommand.php b/modules/tome_static/src/Commands/StaticCommand.php
+--- a/modules/tome_static/src/Commands/StaticCommand.php
++++ b/modules/tome_static/src/Commands/StaticCommand.php	(date 1744253494377)
+@@ -199,7 +199,7 @@
+           }
+         }
+         if ($json = json_decode($output, TRUE)) {
+-          $invoke_paths = array_merge($invoke_paths, $json);
++          $invoke_paths = array_unique(array_merge($invoke_paths, $json));
+         }
+       }
+     });

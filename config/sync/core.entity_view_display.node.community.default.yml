@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.community.field_slug
     - field.field.node.community.field_subscribe_email_subject
     - field.field.node.community.field_summary
+    - field.field.node.community.field_topics
     - node.type.community
   module:
     - options
@@ -91,6 +92,14 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 7
+    region: content
+  field_topics:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 17
     region: content
   links:
     settings: {  }

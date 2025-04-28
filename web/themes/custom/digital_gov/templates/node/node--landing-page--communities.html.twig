@@ -64,18 +64,17 @@
 #}
 
 <main role="main" id="main-content" class="grid-container-desktop">
-  <div class="page-head">
-    <h1>{{ node.title.value }}</h1>
+  {% set featured_communities = drupal_view_result('featured_communities', 'default') %}
 
-    {% if content.field_deck %}
-      <div class="deck">{{ content.field_deck|field_value }}</div>
-    {% endif %}
-  </div>
-
-  [placeholder Featured Communities]
-  <div class="dg-featured-communities dg-featured-communities--has-image">
-    {{ drupal_view('featured_communities', 'default') }}
-  </div>
+  {% if featured_communities|length %}
+    {{ include('@digital_gov/partials/featured-communities.html.twig', {
+      heading: label|field_value,
+      deck: content.field_deck|field_value,
+      communities: featured_communities,
+      has_image: true,
+      display: 'usa_card_community',
+    }) }}
+  {% endif %}
 
   {# Other Communities of Practice #}
   <div class="page-head">

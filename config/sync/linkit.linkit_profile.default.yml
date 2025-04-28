@@ -15,9 +15,32 @@ matchers:
     uuid: 556010a3-e317-48b3-b4ed-854c10f4b950
     settings:
       metadata: '[node:content-type:name] #[node:nid] | [node:created:medium] by [node:author]'
-      bundles: {  }
+      bundles:
+        authors: authors
+        basic_page: basic_page
+        community: community
+        event: event
+        guides: guides
+        guide_landing: guide_landing
+        landing_page: landing_page
+        news: news
+        resources: resources
+        short_post: short_post
+        source: source
+        topics: topics
       group_by_bundle: false
       substitution_type: canonical
       limit: 100
       include_unpublished: false
+    weight: 0
+  154ead9d-a311-4f05-9370-d85a080bae44:
+    id: 'entity:media'
+    uuid: 154ead9d-a311-4f05-9370-d85a080bae44
+    settings:
+      metadata: ''
+      bundles:
+        document: document
+      group_by_bundle: false
+      substitution_type: media
+      limit: 100
     weight: 0

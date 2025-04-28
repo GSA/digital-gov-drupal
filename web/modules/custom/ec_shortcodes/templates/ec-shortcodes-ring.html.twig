@@ -2,5 +2,5 @@
   <h2 id="rh-{{ heading|clean_class }}" class="dg-ring__title">
     {{ heading }}
   </h2>
-  {{ text }}
+  {{ text.value|check_markup(text.format) }}
 </article>

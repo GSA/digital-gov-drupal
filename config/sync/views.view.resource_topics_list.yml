@@ -228,6 +228,21 @@ display:
         options: {  }
       empty: {  }
       sorts:
+        weight:
+          id: weight
+          table: taxonomy_term_field_data
+          field: weight
+          relationship: field_resource_topics
+          group_type: group
+          admin_label: ''
+          entity_type: taxonomy_term
+          entity_field: weight
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
         title:
           id: title
           table: node_field_data
@@ -338,7 +353,16 @@ display:
           distinct: false
           replica: false
           query_tags: {  }
-      relationships: {  }
+      relationships:
+        field_resource_topics:
+          id: field_resource_topics
+          table: node__field_resource_topics
+          field: field_resource_topics
+          relationship: none
+          group_type: group
+          admin_label: 'field_resource_topics: Taxonomy term'
+          plugin_id: standard
+          required: true
       header: {  }
       footer: {  }
       display_extenders: {  }

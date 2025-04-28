@@ -1,0 +1,24 @@
+uuid: 12635d84-e89e-473d-9d37-3419274c608c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.sitewide_alert.field_show_icon
+  module:
+    - sitewide_alert
+id: sitewide_alert.sitewide_alert.field_show_icon
+field_name: field_show_icon
+entity_type: sitewide_alert
+bundle: sitewide_alert
+label: 'Show Icon'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

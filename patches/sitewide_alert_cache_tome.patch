@@ -1,0 +1,13 @@
+diff --git a/js/init.js b/js/init.js
+index 799fba6..c1a94e1 100644
+--- a/js/init.js
++++ b/js/init.js
+@@ -91,6 +91,7 @@
+         drupalSettings.path.baseUrl +
+         drupalSettings.path.pathPrefix
+       }sitewide_alert/load`,
++      {cache: 'reload'}
+     )
+       .then((res) => res.json())
+       .then(
+

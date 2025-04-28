@@ -36,6 +36,15 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
+  field_authors:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    weight: 7
+    region: content
   field_deck:
     type: text_default
     label: hidden
@@ -74,7 +83,6 @@ content:
     weight: 1
     region: content
 hidden:
-  field_authors: true
   field_kicker: true
   field_page_weight: true
   field_slug: true

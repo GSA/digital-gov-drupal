@@ -1,0 +1,22 @@
+uuid: e53d3e1d-be3d-4b5f-8cf7-f04ab781566d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.sitewide_alert.field_slim
+  module:
+    - sitewide_alert
+id: sitewide_alert.sitewide_alert.field_slim
+field_name: field_slim
+entity_type: sitewide_alert
+bundle: sitewide_alert
+label: Slim
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

@@ -71,8 +71,8 @@
         <h2 class="deck">{{ content.field_deck|field_value }}</h2>
       {% endif %}
     </header>
-    [Place holder for guides list]
-    {# NOT-MIGRATED https://github.com/GSA/digitalgov.gov/blob/19d2145fc1c559db978cf3328f8211549786a207/themes/digital.gov/layouts/guides/list.html #}
+
+    {{ drupal_view('guide_cards', 'block_1') }}
 
   </div>
 </main>

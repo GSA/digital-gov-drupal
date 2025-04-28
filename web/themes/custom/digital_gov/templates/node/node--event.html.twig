@@ -75,8 +75,8 @@
       {# @TODO kicker and deck fields can contain HTML tags but use the plain text filter... #}
       {{ include('@digital_gov/partials/page-header.html.twig', {
         title: node.title.value,
-        kicker: node.field_kicker.value,
-        deck: node.field_deck.value,
+        kicker: content.field_kicker|field_value,
+        deck: content.field_deck|field_value,
       }, with_context: false) }}
 
       <p class="datetime">
@@ -148,12 +148,11 @@
 
       <div class="dg-sidebar grid-col-12 tablet:grid-col-3">
         {# Authors #}
-        {% if content.field_authors %}
-        [Todo: add images from authors]
+        {% if content.field_authors|field_value %}
           <h4>In this talk</h4>
           {{ include('@digital_gov/partials/authors-list.html.twig', {
             inline: false,
-            authors: content.field_authors,
+            authors: content.field_authors|field_value,
           }, with_context: false) }}
         {% endif %}
 
@@ -167,10 +166,8 @@
         {# Display Primary Communities #}
         {{ include('@digital_gov/partials/primary-communities.html.twig') }}
 
-        {# partial "core/primary-communities.html" . #}
-
         {# Topics #}
-        {{ content.field_topics|field_value }}
+        {{ content.field_topics }}
 
         {# Share Tools #}
         {{ include('@digital_gov/partials/get-sharetools.html.twig', {
@@ -186,7 +183,7 @@
 {% macro registration_link(content) %}
   <a
     aria-label="Register for {{ content.label }}"
-    class="btn btn-register"
+    class="dg-register__button btn"
     href="{{ content.field_registration_url|field_value }}"
     onclick="__gaTracker('send', 'event', 'outbound-article', '{{ content.field_registration_url|field_value }}', '{{ 'REGISTER NOW'|t }}');"
   >{{ 'Register'|t }}</a

@@ -1,0 +1,190 @@
+id: json_guides
+label: 'Import Guides from Digital.gov Hugo'
+migration_tags:
+  - 'digitalgov'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json_guides
+  urls:
+    - https://federalist-466b7d92-5da1-4208-974f-d61fd4348571.sites.pages.cloud.gov/preview/gsa/digitalgov.gov/nl-json-endpoints/guides/index.json
+  # This is the path to where the data are in the JSON.
+  item_selector: items
+  fields:
+    - name: src_unique_id
+      label: 'Unique ID'
+      # The guides feed uses title for UID but titles reused on some pages.
+      selector: url
+    - name: title
+      label: 'Title'
+      selector: field_title
+    - name: field_kicker
+      label: 'Kicker'
+      selector: field_kicker
+    - name: field_deck
+      label: 'Deck'
+      selector: field_deck
+    - name: field_summary
+      label: 'Summary'
+      selector: field_summary
+    - name: created
+      label: 'Created Time'
+      selector: field_date
+    - name: changed
+      label: 'Modified Time'
+      selector: date_modified
+    - name: field_image
+      label: Image
+      selector: field_image
+    - name: field_page_weight
+      label: 'Weight'
+      selector: field_page_weight
+    - name: body
+      label: 'Body'
+      selector: field_body
+    - name: field_glossary
+      label: 'Glossary'
+      selector: field_glossary
+    - name: field_glossary_name
+      label: 'Glossary Vocab'
+      selector: field_glossary_name
+    - name: field_guide_weight
+      label: 'Guide Weight'
+      selector: field_guide_weight
+    - name: field_primary_image
+      label: 'Primary Image'
+      selector: field_primary_image
+    - name: field_guide_nav_title
+      label: 'Guide Nav Title'
+      selector: field_guide_nav_title
+    - name: field_summary_box
+      label: "Show summary box"
+      selector: field_summary_box
+    - name: field_topics
+      label: 'Topics'
+      selector: field_topics
+    - name: alias
+      label: 'URL Alias'
+      selector: url
+    - name: redirects
+      label: 'Redirects'
+      selector: redirects
+    - name: field_guide
+      label: "Guide"
+      selector: field_guide
+  ids:
+    src_unique_id:
+      type: string
+  constants:
+    ALIAS_SEARCH: '/preview/gsa/digitalgov.gov/nl-json-endpoints'
+    ALIAS_REPLACE: ''
+    FORMAT_HTML: 'html'
+    FORMAT_EMBEDDED: 'html_embedded_content'
+    FORMAT_MULTI: 'multiline_inline_html'
+    FORMAT_SINGLE: 'single_inline_html'
+    FORMAT_PLAIN: 'plain_text'
+
+process:
+  skip_empty_required_fields:
+    plugin: skip_on_condition
+    condition:
+      plugin: empty
+    source: title
+    method: row
+    message: 'Missing field_title which sets title field'
+  field_kicker: field_kicker
+  title:
+    - plugin: callback
+      callable: digital_gov_migration_html_entity_decode
+      source: title
+  field_deck/value:
+    - plugin: callback
+      callable: digital_gov_migration_html_entity_decode
+      source: field_deck
+  field_deck/format: constants/FORMAT_SINGLE
+  field_summary/value:
+    - plugin: callback
+      callable: digital_gov_migration_html_entity_decode
+      source: field_summary
+  field_summary/format: constants/FORMAT_SINGLE
+  field_image:
+    plugin: migration_lookup
+    source: field_image
+    source_ids: src_unique_id
+    migration: json_images_to_media
+  field_guide_nav_ref:
+    plugin: migration_lookup
+    source: field_guide
+    source_ids: uid
+    migration: json_guide_navs
+  field_page_weight: field_page_weight
+  body/value:
+    - plugin: dg_convert_text
+      source: body
+      field_type: 'html'
+  body/format: constants/FORMAT_HTML
+  field_guide_nav_title: field_guide_nav_title
+  field_guide_weight: field_guide_weight
+  field_glossary:
+    - plugin: skip_on_condition
+      condition: empty
+      source: field_glossary_name
+      method: process
+    - plugin: default_value
+      default_value: field_glossary_name
+  field_topics:
+    plugin: migration_lookup
+    source: field_topics
+    source_ids: src_unique_id
+    migration: json_topics
+    no_stub: true
+  field_summary_box:
+    plugin: callback
+    callable: digital_gov_migration_convert_to_boolean
+    source: field_summary_box
+  field_primary_image:
+    plugin: migration_lookup
+    source: field_primary_image
+    source_ids: src_unique_id
+    migration: json_images_to_media
+  created:
+    plugin: callback
+    callable: strtotime
+    source: created
+  changed:
+    plugin: callback
+    callable: strtotime
+    source: changed
+  # Setting the moderation state to published will automatically set status=1.
+  moderation_state:
+    plugin: default_value
+    default_value: published
+  path/alias: alias
+#    plugin: callback
+#    callable: str_replace
+#    # The federalist build puts a relative path that is too much.
+#    source: [ constants/ALIAS_SEARCH, constants/ALIAS_REPLACE, alias ]
+#    unpack_source: true
+  # Must disable auto-creating path auto in order to set alias explicitly.
+  path/pathauto:
+    plugin: default_value
+    default_value: false
+  # See digital_gov_migration_entity_insert().
+  redirects:
+    plugin: sub_process
+    source: redirects
+    process:
+      redirect_source/path: from
+      status_code:
+        plugin: default_value
+        default_value: 301
+
+destination:
+  plugin: entity:node
+  default_bundle: guides
+
+migration_dependencies:
+  required:
+    - json_images_to_media
+    - json_topics
+  optional: { }

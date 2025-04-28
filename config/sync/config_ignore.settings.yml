@@ -4,4 +4,6 @@ mode: simple
 ignored_config_entities:
   - 'google_tag.*'
   - 'metatag.*'
+  - 'pathauto.pattern.*'
+  - 'pathauto.settings.*'
   - system.site

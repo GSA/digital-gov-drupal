@@ -21,9 +21,9 @@ dependencies:
     - autocomplete_deluxe
     - content_moderation
     - field_group
-    - inline_entity_form
     - maxlength
     - media_library
+    - media_library_edit
     - path
     - text
 third_party_settings:
@@ -76,7 +76,7 @@ content:
       maxlength:
         maxlength_js: 255
         maxlength_js_label: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
-        maxlength_js_enforce: true
+        maxlength_js_enforce: false
   field_glossary:
     type: options_select
     weight: 52
@@ -125,7 +125,10 @@ content:
     region: content
     settings:
       media_types: {  }
-    third_party_settings: {  }
+    third_party_settings:
+      media_library_edit:
+        show_edit: '1'
+        edit_form_mode: default
   field_summary:
     type: text_textarea
     weight: 3
@@ -137,7 +140,7 @@ content:
       maxlength:
         maxlength_js: 255
         maxlength_js_label: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
-        maxlength_js_enforce: true
+        maxlength_js_enforce: false
   field_summary_box:
     type: boolean_checkbox
     weight: 5
@@ -190,22 +193,14 @@ content:
       placeholder: ''
     third_party_settings: {  }
   uid:
-    type: inline_entity_form_complex
+    type: entity_reference_autocomplete
     weight: 6
     region: content
     settings:
-      form_mode: default
-      override_labels: false
-      label_singular: ''
-      label_plural: ''
-      allow_new: true
-      allow_existing: true
       match_operator: CONTAINS
-      allow_duplicate: false
-      collapsible: true
-      collapsed: true
-      revision: false
-      removed_reference: optional
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   url_redirects:
     weight: 17

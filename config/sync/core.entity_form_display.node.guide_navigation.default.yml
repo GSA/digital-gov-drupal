@@ -14,13 +14,13 @@ dependencies:
     - field_group
     - link
     - media_library
+    - media_library_edit
     - paragraphs
 third_party_settings:
   field_group:
     group_settings:
       children:
         - field_show_next_previous
-        - field_show_read_time
         - field_show_in_page_nav
       label: Settings
       region: content
@@ -108,7 +108,10 @@ content:
     region: content
     settings:
       media_types: {  }
-    third_party_settings: {  }
+    third_party_settings:
+      media_library_edit:
+        show_edit: '1'
+        edit_form_mode: default
   field_show_in_page_nav:
     type: boolean_checkbox
     weight: 4

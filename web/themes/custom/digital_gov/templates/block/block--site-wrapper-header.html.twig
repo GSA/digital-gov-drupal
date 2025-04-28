@@ -57,7 +57,7 @@
           focusable="false"
           role="img"
       >
-        <use xlink:href="{{ drupal_url(theme_path ~ '/static/digitalgov/img/sprite.svg#menu') }}"></use>
+        <use xlink:href="{{ drupal_url(theme_path ~ '/static/uswds/img/sprite.svg#menu') }}"></use>
       </svg>
       Menu
     </button>
@@ -65,66 +65,19 @@
   <nav aria-label="Primary navigation" class="usa-nav">
     <div class="usa-nav__inner">
       <button class="usa-nav__close">
-        <img src="{{ drupal_url(theme_path ~ '/static/digitalgov/img/close.svg') }}" alt="close" />
+        <img src="{{ drupal_url(theme_path ~ '/static/uswds/img/usa-icons/close.svg') }}" alt="close" />
       </button>
       {{ drupal_menu('main') }}
-      [secondary Menu placeholder] (This is just /subscribe and search, maybe not a menu)]
-      {# NOT-MIGRATED
-      {{- $currentNode := . -}}
-      {{- $menuClasses := "usa-nav__primary-item" -}}
-      <ul class="usa-nav__primary usa-accordion">
-
-        {{- range .Site.Menus.primary -}}
-        <li
-            class="usa-nav__primary-item {{ if or ($currentNode.IsMenuCurrent "primary" .) ($currentNode.HasMenuCurrent "primary" .) }}
-              usa-current
-            {{ end }}"
-        >
-          <a class="usa-nav__link" href="{{- .URL -}}"
-          ><span>{{- .Name -}}</span></a
-          >
-        </li>
-        {{- end -}}
-      </ul>
-      <!-- .nav -->
-
       <div class="usa-nav__secondary">
         <ul class="usa-nav__secondary-links">
           <li class="usa-nav__secondary-item">
-            <a href="{{- "subscribe" | relURL -}}"
+            <a href="{{ drupal_url('subscribe') }}"
             ><span>Subscribe to our newsletter</span></a
             >
           </li>
         </ul>
-
-        <form
-            accept-charset="UTF-8"
-            action="https://find.digitalgov.gov/search"
-            id="search_form"
-            method="get"
-            class="usa-search usa-search--small"
-        >
-          <input name="utf8" type="hidden" value="&#x2713;" />
-          <input
-              id="affiliate"
-              name="affiliate"
-              type="hidden"
-              value="digitalgov"
-          />
-          <div role="search">
-            <label class="usa-sr-only" for="query">Search small</label>
-            <input class="usa-input" id="query" type="search" name="query" />
-            <button class="usa-button" name="commit" type="submit">
-              <img
-                  src="{{- "uswds/img/usa-icons-bg/search--white.svg" | relURL -}}"
-                  class="usa-search__submit-icon"
-                  alt="Search"
-              />
-            </button>
-          </div>
-        </form>
+        {{ include('@digital_gov/partials/search-gov-form.html.twig') }}
       </div>
-      #}
     </div>
   </nav>
 </header>

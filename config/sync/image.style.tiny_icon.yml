@@ -1,0 +1,21 @@
+uuid: d196d387-3355-4e2e-9edc-11e6fce9f07d
+langcode: en
+status: true
+dependencies: {  }
+name: tiny_icon
+label: 'DG Tiny Icon (scale and crop 16 x 16, convert to webp)'
+effects:
+  a28a7ae7-84d2-4554-9cac-5ca9507a3b0c:
+    uuid: a28a7ae7-84d2-4554-9cac-5ca9507a3b0c
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 16
+      height: 16
+      anchor: center-center
+  4f4c7b72-d6f0-4621-9b42-54b90a3be55d:
+    uuid: 4f4c7b72-d6f0-4621-9b42-54b90a3be55d
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

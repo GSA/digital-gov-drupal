@@ -20,10 +20,10 @@ tags:
   og_type: '[dg:og_type]'
   og_url: '[current-page:url]'
   robots: 'index, follow'
-  title: '[current-page:title] | [site:name]'
-  twitter_cards_creator: '@Digital_gov'
+  title: '[current-page:title] – [site:name]'
+  twitter_cards_creator: '@Digital_Gov'
   twitter_cards_description: '[dg:meta_description]'
   twitter_cards_image: '[dg:meta_image]'
-  twitter_cards_site: '@Digital_gov'
+  twitter_cards_site: '@Digital_Gov'
   twitter_cards_title: '[current-page:title]'
   twitter_cards_type: summary_large_image

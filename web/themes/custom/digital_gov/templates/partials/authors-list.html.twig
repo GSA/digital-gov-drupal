@@ -6,20 +6,9 @@
     - authors: render array of author nodes
 
 #}
-
 <div class="authors-list {{ inline ? 'authors-list--inline' : '' }}">
-  {% for author in authors|children %}
-    <div class="author usa-media-block">
-      {{ render_var({'#theme': 'author_image', '#author': author}) }}
-      <div class="usa-media-block__body">
-        <a class="author__name"
-           href="{{ drupal_url('node/' ~ author['#node'].nid.value) }}"
-           title="Posts by {{ author['#node'].title.value }}"
-           rel="author"
-           aria-label="Read more articles by {{ author['#node'].title.value }}"
-        >{{ author['#node'].title.value }}</a
-        >
-      </div>
-    </div>
+  {% for author in authors %}
+    {% set display_mode = inline ? 'teaser_inline' : 'teaser' %}
+    {{ drupal_entity('node', author['#node'].id(), display_mode) }}
   {% endfor %}
 </div>

@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Set enviornment
+      - name: Set environment
         run: |
           BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3-)
           COMPOSER_DEV=1
@@ -28,7 +28,7 @@ jobs:
               DRUPAL_INSTANCES=${{ vars.MAIN_INSTANCES }}
               GSA_AUTH_KEY=${{ secrets.GSA_AUTH_PRODUCTION_KEY }}
               ;;
-            stage | release/* | hotfix/*)
+            stage | release/* | hotfix/* | *deploystaging)
               CF_SPACE="staging"
               DRUPAL_MEMORY=${{ vars.STAGE_CMS_MEMORY }}
               DRUPAL_INSTANCES=${{ vars.STAGE_INSTANCES }}
@@ -44,6 +44,8 @@ jobs:
           echo "DRUPAL_MEMORY=${DRUPAL_MEMORY}" | tee -a $GITHUB_ENV
           echo "GSA_AUTH_KEY=${GSA_AUTH_KEY}" | tee -a $GITHUB_ENV
           echo "HASH_SALT=${{ secrets.HASH_SALT }}" | tee -a $GITHUB_ENV
+          echo "NEWRELIC_KEY=${{ secrets.NEWRELIC_KEY }}" | tee -a $GITHUB_ENV
+          echo "STATIC_NAME=static" | tee -a $GITHUB_ENV
           echo "WAF_NAME=waf"| tee -a $GITHUB_ENV
 
           if [ "${COMPOSER_DEV}" = "1" ]; then
@@ -70,18 +72,23 @@ jobs:
       - name: Deploy App
         env:
           PROJECT: "${{ secrets.PROJECT }}"
-        run: source ./scripts/pipeline/cloud-gov-deploy.sh
+          DEV_CMS_URL: "${{ vars.DEV_CMS_URL }}"
+          DEV_STATIC_URL: "${{ vars.DEV_STATIC_URL }}"
+          STAGING_CMS_URL: "${{ vars.STAGING_CMS_URL }}"
+          STAGING_STATIC_URL: "${{ vars.STAGING_STATIC_URL }}"
+          PROD_CMS_URL: "${{ vars.PROD_CMS_URL }}"
+          PROD_STATIC_URL: "${{ vars.PROD_STATIC_URL }}"
+        run: |
+          app_guid=$(cf app --guid ${PROJECT}-drupal-${CF_SPACE}) || true
+          cf curl -X POST /v3/apps/${app_guid}/actions/clear_buildpack_cache || true
+          source ./scripts/pipeline/cloud-gov-deploy.sh
       - name: Post Deploy
         env:
           PROJECT: "${{ secrets.PROJECT }}"
+          INSTALL_DRUPAL_SPACES: "${{ vars.INSTALL_DRUPAL_SPACES }}"
         run: source ./scripts/pipeline/cloud-gov-post-deploy.sh
       - name: Build Static Site
         env:
           PROJECT: "${{ secrets.PROJECT }}"
-        run: |
-          if [[ "${CF_SPACE}" = "dev" || "${CF_SPACE}" = "staging" ]]; then
-            echo "${CF_SPACE} is building the static site now..."
-            cf run-task "${PROJECT}-drupal-${CF_SPACE}" --command "/home/vcap/app/scripts/upkeep" --wait -m 1G
-          else
-            echo "${CF_SPACE} does not need to build static site on deployment"
-          fi
+        if: contains(vars.GENERATE_STATIC_SITE_ON_DEPLOY_SPACES, env.CF_SPACE)
+        run: source ./scripts/pipeline/pipeline_wrapper.sh upkeep

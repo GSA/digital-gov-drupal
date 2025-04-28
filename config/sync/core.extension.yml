@@ -10,6 +10,7 @@ module:
   block: 0
   breakpoint: 0
   ckeditor5: 0
+  ckeditor_emoji: 0
   config_ignore: 0
   config_pages: 0
   config_split: 0
@@ -18,17 +19,21 @@ module:
   convert_text: 0
   database_ssl_check: 0
   datetime: 0
+  datetime_range: 0
   dblog: 0
   default_content: 0
   default_content_config: 0
   dg_autologout: 0
   dg_breadcrumb: 0
   dg_fields: 0
+  dg_guide_nav: 0
+  dg_sitewide_alert: 0
   dg_token: 0
   disable_user_1_edit: 0
   dynamic_page_cache: 0
   easy_breadcrumb: 0
   ec_shortcodes: 0
+  edit_media_modal: 0
   editor: 0
   embedded_content: 0
   entity_reference_revisions: 0
@@ -40,18 +45,19 @@ module:
   filter: 0
   google_tag: 0
   image: 0
-  inline_entity_form: 0
   js_cookie: 0
   layout_discovery: 0
   link: 0
   link_class: 0
   linkit: 0
+  linkit_media_library: 0
   log_stdout: 0
   maillog: 0
   mailsystem: 0
   maxlength: 0
   media: 0
   media_library: 0
+  media_library_edit: 0
   memcache: 0
   menu_link_content: 0
   menu_ui: 0
@@ -59,6 +65,11 @@ module:
   metatag_facebook: 0
   metatag_open_graph: 0
   metatag_twitter_cards: 0
+  migrate: 0
+  migrate_conditions: 0
+  migrate_plus: 0
+  migrate_source_csv: 0
+  migrate_tools: 0
   multivalue_form_element: 0
   mysql: 0
   node: 0
@@ -71,10 +82,12 @@ module:
   paragraphs_type_permissions: 0
   path: 0
   path_alias: 0
+  path_redirect_import: 0
   rabbit_hole: 0
   redirect: 0
   remove_username: 0
   require_revision_log_message: 0
+  responsive_image: 0
   rh_node: 0
   rh_taxonomy: 0
   rh_user: 0
@@ -85,6 +98,8 @@ module:
   seckit: 0
   serialization: 0
   site_wrapper: 0
+  sitewide_alert: 0
+  sitewide_alert_block: 0
   svg_image: 0
   system: 0
   taxonomy: 0
@@ -110,6 +125,7 @@ module:
   externalauth: 10
   views: 10
   paragraphs: 11
+  dg_tome: 100
   minimal: 1000
 theme:
   stark: 0

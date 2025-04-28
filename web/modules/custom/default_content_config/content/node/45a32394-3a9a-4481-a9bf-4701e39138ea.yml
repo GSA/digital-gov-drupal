@@ -45,9 +45,6 @@ default:
     -
       value: '<p>A ‘quick-start’ guide for embedding accessibility and inclusive design practices into your team’s workflow</p>'
       format: single_inline_html
-  field_guide_nav_ref:
-    -
-      target_id: 75
   field_guide_nav_title:
     -
       value: 'GUIDE-all fields (Overriden)'

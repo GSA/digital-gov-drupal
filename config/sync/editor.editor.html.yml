@@ -16,12 +16,12 @@ settings:
       - code
       - link
       - heading
-      - blockQuote
       - bulletedList
       - numberedList
       - drupalMedia
       - sourceEditing
       - embeddedContent__default
+      - Emoji
       - style
   plugins:
     ckeditor5_heading:
@@ -49,6 +49,12 @@ settings:
         -
           label: 'USA button link (outlined)'
           element: '<a class="usa-button usa-button--outline">'
+        -
+          label: Checklist
+          element: '<ul class="dg-checklist">'
+        -
+          label: 'Checklist (no top border)'
+          element: '<ul class="dg-checklist dg-checklist--no-border">'
     linkit_extension:
       linkit_enabled: true
       linkit_profile: default

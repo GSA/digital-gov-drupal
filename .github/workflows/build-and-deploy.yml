@@ -7,21 +7,24 @@ on:
       - main
       - stage
       - feature/DIGITAL-*-deploydev
-      #- release/*
-      #- hotfix/*
+      - feature/DIGITAL-*-deploystaging
+      - release/*
+      - hotfix/*
 
 permissions:
   contents: read
   packages: write
+  pull-requests: write
 
 jobs:
+  validate:
+    uses: ./.github/workflows/validation-run.yml
+    secrets: inherit
   deploy-infra:
     uses: ./.github/workflows/terraform-deploy-infra.yml
+    needs: validate
     secrets: inherit
   deploy-app:
     uses: ./.github/workflows/cloudgov-deploy-app.yml
     needs: deploy-infra
-    secrets: inherit
-  validate:
-    uses: ./.github/workflows/validation-run.yml
     secrets: inherit

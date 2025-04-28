@@ -12,6 +12,8 @@ fi
 
 # Drupal must be installed to update it.
 if [ -n "$(drush status --fields=bootstrap)" ]; then
+  echo 'Updating Drupal'
+  drush state:set system.maintenance_mode 1 -y
   echo "Ensure site is up to date from code"
   drush deploy
   # Required if config splits is enabled.
@@ -19,6 +21,8 @@ if [ -n "$(drush status --fields=bootstrap)" ]; then
     drush cr
     drush cim -y
   fi
+  drush state:set system.maintenance_mode 0 -y
+  echo "Finished updating Drupal!"
 else
   echo "Drupal is not installed, cannot update. Installing instead"
   ./orch/deploy_install.sh

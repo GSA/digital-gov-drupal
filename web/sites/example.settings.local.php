@@ -17,6 +17,20 @@
  */
 
 /**
+ * Disable autologout from running.
+ */
+// $config['autologout.settings']['enabled'] = FALSE;
+// $config['dg_autologout.settings']['enabled'] = FALSE;
+
+/**
+ * Is this a non-production remote environment?
+ *
+ * Currently this just toggles the 'Preview site banner' on if true. Default
+ * is false.
+ */
+// $config['environment']['env_non_prod_remote'] = TRUE;
+
+/**
  * Assertions.
  *
  * The Drupal project primarily uses runtime assertions to enforce the

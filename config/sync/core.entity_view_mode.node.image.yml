@@ -1,0 +1,11 @@
+uuid: 2af3cfaf-fbdf-44a1-b2ee-7f59155ed396
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.image
+label: Image
+description: 'When multiple fields are required to show an image, for example, the author content type.'
+targetEntityType: node
+cache: true

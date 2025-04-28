@@ -1,0 +1,45 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 10a75c69-1036-40db-ab4a-02ccaa1e0cce
+  bundle: authors
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Bethany Letalien'
+  created:
+    -
+      value: 1737579209
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /authors/bethany-letalien
+      langcode: en
+      pathauto: 1
+  field_first_name:
+    -
+      value: Bethany
+  field_last_name:
+    -
+      value: Letalien
+  field_profile_source:
+    -
+      value: digit-light

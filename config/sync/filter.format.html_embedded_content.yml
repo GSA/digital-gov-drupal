@@ -1,0 +1,33 @@
+uuid: cba1c0ab-64c5-45cd-9cfa-ceb5d8fd89fa
+langcode: en
+status: true
+dependencies:
+  module:
+    - auto_heading_ids
+    - linkit
+name: 'HTML Embedded Content'
+format: html_embedded_content
+weight: 0
+filters:
+  filter_html:
+    id: filter_html
+    provider: filter
+    status: false
+    weight: -10
+    settings:
+      allowed_html: '<span class="highlight-text"> <div class="box"> <a class="usa-button usa-button--outline">'
+      filter_html_help: true
+      filter_html_nofollow: false
+  heading_id_filter:
+    id: heading_id_filter
+    provider: auto_heading_ids
+    status: true
+    weight: 10
+    settings: {  }
+  linkit:
+    id: linkit
+    provider: linkit
+    status: true
+    weight: 0
+    settings:
+      title: true

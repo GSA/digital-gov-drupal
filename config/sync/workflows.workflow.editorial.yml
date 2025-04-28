@@ -7,6 +7,7 @@ dependencies:
     - node.type.basic_page
     - node.type.community
     - node.type.event
+    - node.type.guide_landing
     - node.type.guides
     - node.type.landing_page
     - node.type.news
@@ -182,6 +183,7 @@ type_settings:
       - basic_page
       - community
       - event
+      - guide_landing
       - guides
       - landing_page
       - news

@@ -1,0 +1,5 @@
+name: 'Digital.gov Guide Navigation'
+type: module
+description: 'Guide navigation helper module'
+package: Custom
+core_version_requirement: ^10 || ^11

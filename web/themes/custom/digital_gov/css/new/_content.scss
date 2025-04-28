@@ -14,7 +14,7 @@
   // Select all the links with href that start with "http" and do not contain ".gov"
   // See https://css-tricks.com/attribute-selectors/
   a[href^="http"]:not([href*=".gov"])::after {
-    background: url("../uswds/img/external-link.svg") no-repeat 0 0;
+    background: url("../digitalgov/img/external-link.svg") no-repeat 0 0;
     background-size: 100%;
     content: "";
     display: inline-block;
@@ -58,13 +58,18 @@
     @include u-padding-y(2);
     @include u-padding-bottom("205");
     @include u-padding-right(4);
-    @include u-bg("base-lightest");
+    @include u-bg("white");
     @include u-border("1px", "solid", "base-lighter");
     @include u-color("indigo-warm-80");
     @include u-radius("md");
     @include u-font("mono", "2xs");
     white-space: pre-wrap;
     word-wrap: break-word; /* Internet Explorer 5.5+ */
+  }
+
+  pre > code {
+    @include u-border(0);
+    @include u-padding-left(0);
   }
 
   // Quotes
@@ -78,6 +83,11 @@
 
   table tbody {
     vertical-align: baseline;
+  }
+
+  // Remove max-width from a paragraph if the only child it has is a .usa-button. (DIGITAL-578)
+  p:has(> .usa-button:only-child) {
+    max-width: none;
   }
 }
 

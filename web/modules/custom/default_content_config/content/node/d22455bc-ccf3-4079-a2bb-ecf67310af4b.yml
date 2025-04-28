@@ -43,7 +43,7 @@ default:
       options: {  }
   field_short_post_type:
     -
-      value: service
+      value: news
   field_source:
     -
       entity: a6224150-45d6-40ba-aa33-6a3e61a6830c

@@ -10,10 +10,12 @@ weight: 7
 is_admin: null
 permissions:
   - 'administer users'
+  - 'assign author role'
   - 'assign content_admin role'
   - 'assign data_analyst role'
   - 'assign editor role'
   - 'assign guide_navigation_admin role'
   - 'assign identifier_admin role'
+  - 'assign job_board_manager role'
   - 'assign publisher role'
   - 'assign user_admin role'

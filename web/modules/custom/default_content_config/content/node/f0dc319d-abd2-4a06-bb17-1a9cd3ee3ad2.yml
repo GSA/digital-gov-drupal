@@ -34,9 +34,6 @@ default:
       alias: /guides/guide-all-required-fields
       langcode: en
       pathauto: 1
-  field_guide_nav_ref:
-    -
-      target_id: 75
   field_summary:
     -
       value: '<p>A ‘quick-start’ guide for embedding accessibility and inclusive design practices into your team’s workflow</p>'

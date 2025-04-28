@@ -190,6 +190,9 @@ locals {
             terraform.workspace
           ]
         }
+
+        ## Commented out, due to permission restirctions to create the pipeline user via Terraform.
+        ## Instead use the create_service_account.sh script.
         # pipeline-space-deployer = {
         #   ## Applications to bind to this service.
         #   applications = [ "tf-bastion" ]

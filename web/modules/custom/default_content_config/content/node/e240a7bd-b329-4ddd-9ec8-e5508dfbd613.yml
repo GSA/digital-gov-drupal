@@ -63,16 +63,16 @@ default:
       value: Digital.gov
   field_event_platform:
     -
-      value: 'nulla iaculis ligula fames proin in <b>erat</b>'
+      value: 'nulla iaculis ligula fames proin in erat'
   field_featured_image:
     -
       entity: 6bd8641f-84c6-4ddb-b8b2-9c076b017198
   field_host:
     -
-      value: 'nulla iaculis ligula fames proin in <b>erat</b>'
+      value: 'nulla iaculis ligula fames proin in erat'
   field_kicker:
     -
-      value: 'nulla iaculis ligula fames proin in <b>erat</b>'
+      value: 'nulla iaculis ligula fames proin in erat'
   field_page_weight:
     -
       value: 1
@@ -138,4 +138,4 @@ default:
               value: '20006'
   field_youtube_id:
     -
-      value: 'nulla iaculis ligula fames proin in <b>erat</b>'
+      value: 'nulla iaculis ligula fames proin in erat'

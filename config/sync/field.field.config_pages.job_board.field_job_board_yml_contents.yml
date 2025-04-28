@@ -1,0 +1,19 @@
+uuid: 23c12065-5cd3-4261-866e-c59038d58d29
+langcode: en
+status: true
+dependencies:
+  config:
+    - config_pages.type.job_board
+    - field.storage.config_pages.field_job_board_yml_contents
+id: config_pages.job_board.field_job_board_yml_contents
+field_name: field_job_board_yml_contents
+entity_type: config_pages
+bundle: job_board
+label: 'Job Board YML Contents'
+description: 'https://docs.google.com/spreadsheets/d/1VW1IxK0KPmH11DlQbxL5Hj2qc7Y3223PDpp_t5DhcG8/edit?gid=1857335212#gid=1857335212'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

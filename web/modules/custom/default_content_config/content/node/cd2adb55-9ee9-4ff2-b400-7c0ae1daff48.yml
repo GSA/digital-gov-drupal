@@ -5,7 +5,9 @@ _meta:
   bundle: event
   default_langcode: en
   depends:
-    e2e80683-d456-446a-acbd-a03ff409bf1d: node
+    77dce077-3aff-45b4-bb75-48852de1436c: node
+    0f81698f-5884-4e89-8add-aebb0f940f21: node
+    10a75c69-1036-40db-ab4a-02ccaa1e0cce: node
     ad7aa7a5-33cf-400e-93cf-11820e467111: node
     bfc21cc0-5de7-4b9f-8dcd-4b1da264ace5: node
 default:
@@ -45,7 +47,11 @@ default:
       summary: ''
   field_authors:
     -
-      entity: e2e80683-d456-446a-acbd-a03ff409bf1d
+      entity: 77dce077-3aff-45b4-bb75-48852de1436c
+    -
+      entity: 0f81698f-5884-4e89-8add-aebb0f940f21
+    -
+      entity: 10a75c69-1036-40db-ab4a-02ccaa1e0cce
   field_captions:
     -
       uri: 'https://www.captionedtext.com/client/event.aspx?EventID=4718078&CustomerID=321'
@@ -53,7 +59,7 @@ default:
       options: {  }
   field_deck:
     -
-      value: 'Learn what the plain language and accessibility communities share:   opportunities to help people get and understand information. Find out what you   can do to help.'
+      value: '<p>Learn what the plain language and accessibility communities share: opportunities to help people get and understand information. Find out what you can do to help.</p>'
       format: single_inline_html
   field_end_date:
     -
@@ -80,7 +86,7 @@ default:
       options: {  }
   field_summary:
     -
-      value: 'Come join us  as we focus on concerns and opportunities shared by the   Section 508 and plain language communities in Government!'
+      value: '<p>Come join us as we focus on concerns and opportunities shared by the Section 508 and plain language communities in Government!</p>'
       format: single_inline_html
   field_topics:
     -

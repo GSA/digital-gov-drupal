@@ -1,0 +1,16 @@
+uuid: bb09f825-c39f-45a0-8d22-384e721965c0
+langcode: en
+status: true
+dependencies:
+  module:
+    - config_pages
+    - node
+id: job_board_manager
+label: 'Job Board Manager'
+weight: 11
+is_admin: null
+permissions:
+  - 'access config_pages overview'
+  - 'access content overview'
+  - 'edit job_board config page entity'
+  - 'view job_board config page entity'

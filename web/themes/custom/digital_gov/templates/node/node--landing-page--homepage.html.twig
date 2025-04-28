@@ -63,9 +63,7 @@
  */
 #}
 
-<main
-  role="main" id="main-content">
-  {# <div class="grid-container-desktop margin-bottom-5"> #}
+<main role="main" id="main-content" aria-label="{{ 'Content'|t }}">
   <section class="usa-section" id="resources_featured">
     <div class="tablet-lg:grid-container tablet-lg:grid-container-desktop">
       <div class="grid-row tablet-lg:grid-gap-4">
@@ -87,28 +85,32 @@
         </div>
         <div class="grid-col-12 tablet-lg:grid-col-8">
           <div class="resources-content">
-            [Place holder for resources list]
-            {# NOT-MIGRATED
-            {{/* Get all of the resources */}}
-            {{- $resources := (where .Site.Pages.ByTitle "Section" "resources") -}}
-            {{- $guides := (where .Site.Pages.ByTitle "Section" "guides") -}}
+            {# Load featured resources data from a view. #}
+            {% set featured_resources = drupal_view_result('featured_resources', 'homepage') %}
 
-            {{/* Get only the pages that are greater than or equal to 3 */}}
-            {{- $resourcesfeatured := (where $resources ".Params.weight" "ge" 3 ) -}}
-            {{- $guidesfeatured := (where $guides ".Params.weight" "ge" 6 ) -}}
+            {# Process and generate resource_list data from the featured_resources. #}
+            {% set resource_list = [] %}
+            {% for resource in featured_resources %}
+              {% set item = resource._entity %}
+              {% set summary = item.field_summary.value|default(item.field_deck.value) %}
+              {% set resource_list = resource_list|merge([{
+                link: path('entity.node.canonical', {node: item.id()}),
+                title: item.label,
+                summary: summary ? summary|check_markup('single_inline_html'),
+              }]) %}
+            {% endfor %}
 
-            {{- $allFeatured := union $resourcesfeatured $guidesfeatured -}}
-
-            {{/* Sort all of the resources by weight */}}
-            {{- $resourcesfeatured := (sort $allFeatured "Weight" "desc" ) -}}
-
-            {{- partialCached "core/featured-collection.html" (dict "list" $resourcesfeatured "heading" "How to implement 21st Century IDEA") -}} #}
+            {# Render the featured resources component. #}
+            {{ include('@digital_gov/partials/featured-collection.html.twig', {
+              heading: 'How to implement 21st Century IDEA'|t,
+              list: resource_list,
+            }) }}
             <footer>
               <div class="grid-row tablet-lg:grid-gap-2">
                 <div class="grid-col-12">
                   <p class="dg-more-link">
-                    <a href="{{ 'topics/digital-service-delivery/' }}">
-                      <span>Deliver better digital services</span>
+                    <a href="/topics/digital-service-delivery">
+                      <span>{{ 'Deliver better digital services'|t }}</span>
                       <svg class="usa-icon dg-icon dg-icon--standard margin-bottom-05" aria-hidden="true" focusable="false">
                         <use xlink:href="/{{ active_theme_path() }}/static/uswds/img/sprite.svg#arrow_forward"></use>
                       </svg>
@@ -124,15 +126,57 @@
   </section>
 
   {# Digital.gov Communities of Practice #}
-  <section class="grid-container-desktop usa-section">
-    {{ drupal_view('featured_communities', 'default') }}
-  </section>
+  {% set featured_communities = drupal_view_result('featured_communities', 'default') %}
+  {% set communities_landing = drupal_view_result('landing_page', 'default', 'communities') %}
+  {% if communities_landing|length and featured_communities|length %}
+    {% set landing = communities_landing.0._entity %}
+    <section class="grid-container-desktop usa-section">
+      {{ include('@digital_gov/partials/featured-communities.html.twig', {
+        heading: landing.title.value,
+        deck: landing.field_deck.value ? landing.field_deck.value|check_markup('single_inline_html'),
+        communities: featured_communities,
+        display: 'usa_card_community_no_icon',
+      }) }}
+    </section>
+  {% endif %}
 
-  [Place holder for news list]
+  {# Digital.gov News & Events #}
+  {# Get news posts, recent events and future events. #}
+  {% set homepage_news_events = drupal_view_result('news_and_events', 'homepage_news_events') %}
+  {% set homepage_future_events = drupal_view_result('news_and_events', 'homepage_future_events') %}
 
-{# NOT-MIGRATED
-{{/* News */}}
-{{- partialCached "core/home/news_featured.html" . -}} #}
+  {# Create new combined arrays. #}
+  {% set news_and_events = [] %}
 
-  {# </div> #}
+  {# Add processed news posts to the combined array. #}
+  {% for post in homepage_news_events %}
+    {# Insert 1st future event at the 3rd position. #}
+    {% if loop.index == 3 and homepage_future_events.0 %}
+      {% set news_and_events = news_and_events|merge([
+        drupal_entity('node', homepage_future_events.0.nid, 'teaser'),
+      ]) %}
+    {% endif %}
+
+    {# Insert 2nd future event at the 9th position. #}
+    {% if loop.index == 8 and homepage_future_events.1 %}
+      {% set news_and_events = news_and_events|merge([
+        drupal_entity('node', homepage_future_events.1.nid, 'teaser'),
+      ]) %}
+    {% endif %}
+
+    {% if loop.index <= 10 - homepage_future_events|length %}
+      {% set news_and_events = news_and_events|merge([
+        drupal_entity('node', post.nid, 'teaser'),
+      ]) %}
+    {% endif %}
+  {% endfor %}
+
+  {{ include('@digital_gov/partials/home/news-featured.html.twig', {
+    heading: 'News and Events'|t,
+    deck: 'Innovative work, news, and ideas from people and teams in government'|t,
+    list: news_and_events,
+    link: '/join',
+    link_text: 'Write for us'|t,
+    aria_label: 'Featured news and events'|t,
+  }) }}
 </main>

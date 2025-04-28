@@ -23,7 +23,7 @@
   .usa-banner__button[aria-expanded="true"]::before {
     @include u-bg("primary-darker");
 
-    background-image: url(#{$theme-image-path}/close-white-alt.svg),
+    background-image: url(../digitalgov/img/close-white-alt.svg),
       linear-gradient(transparent, transparent);
     background-position: center;
     background-repeat: no-repeat;

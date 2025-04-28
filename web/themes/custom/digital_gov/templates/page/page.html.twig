@@ -55,29 +55,23 @@
 
   {{ page.help }}
 
-  {{ page.content }}
+  {% if node is not defined %}
+    {# This is not a node page #}
+    <main role="main" id="main-content">
+      <div class="grid-container-desktop margin-bottom-5">
+        <header>
+          <h1>{{ page['#title'] }}</h1>
+        </header>
+        {{ page.content }}
+      </div>
+    </main>
+  {% else %}
+    {# This is a node page #}
+    {{ page.content }}
+  {% endif %}
 
   {{ page.footer }}
 
 </div>
 
 <div id="clicks_iframe" class="display-none"></div>
-
-{# NOT-MIGRATED #}
-{# The glossary will NOT be included in this way, leaving it just to remember
-  to implement it.
-<!-- Set the glossary terms as a variable -->
-<script type="text/javascript">
-    {{- $terms := .Params.glossary -}}
-    {{- if (not .IsNode) -}}
-      {{- $terms = .Parent.Params.glossary -}}
-    {{- end -}}
-    {{- $glossaryPath := (printf "%s/%s" "glossary/" $terms | absURL) -}}
-  let glossaryPath = null;
-  {{- if and ($terms) (os.FileExists (printf "%s/%s" "themes/digital.gov/static/glossary/" $terms)) -}}
-  glossaryPath = "{{ $glossaryPath | absURL }}";
-  {{- end -}}
-  // Needed to pass relURL to JS
-  const glossaryIcon = "{{ "uswds/img/sprite.svg#expand_more" | relURL }}"
-</script>
-#}

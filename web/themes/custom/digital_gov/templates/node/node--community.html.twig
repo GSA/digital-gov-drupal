@@ -110,12 +110,10 @@
               </div>
             </section>
           {% endif %}
-          <div class="content">
-            {{ content.body|field_value }}
-          </div>
+          {{ content.body|field_value }}
 
-          {# TODO future comunity events not sure how this needs to be set up - ticket  DIGITAL-293 #}
-          [placeholder Upcoming events]
+          {# TODO future community events not sure how this needs to be set up - ticket  DIGITAL-293 #}
+          {# [placeholder Upcoming events] #}
           {# NOT-MIGRATED
             {{ partial '@digital_gov/partials/core/get-upcomingevents.html' }}
           #}

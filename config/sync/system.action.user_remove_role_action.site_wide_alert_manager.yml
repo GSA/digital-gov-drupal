@@ -1,0 +1,14 @@
+uuid: 6f629d94-ef8e-4c4b-ba7f-1cbfa6549f23
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.site_wide_alert_manager
+  module:
+    - user
+id: user_remove_role_action.site_wide_alert_manager
+label: 'Remove the Site Wide Alert Manager role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: site_wide_alert_manager

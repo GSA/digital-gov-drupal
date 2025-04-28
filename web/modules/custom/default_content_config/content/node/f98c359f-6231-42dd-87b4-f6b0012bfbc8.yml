@@ -34,6 +34,10 @@ default:
       alias: /communities
       langcode: en
       pathauto: 0
+  field_deck:
+    -
+      value: '<p>Collaborate and share resources with other communities across government who are focused on building better digital experience in government.</p>'
+      format: single_inline_html
   field_landing_page_type:
     -
       value: communities

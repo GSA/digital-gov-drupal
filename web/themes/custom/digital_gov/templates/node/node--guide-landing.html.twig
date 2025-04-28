@@ -5,7 +5,6 @@
       {{ drupal_image(hero_image.target_id, '', {alt: hero_image.alt, class: 'dg-img-flexible'}) }}
     {% endif %}
 
-    {# partial "core/img-flexible.html" (dict "Site" .Site "src" Params.image "small" "false") #}
     <div class="dg-landing__hero-text">
       <h1>{{ label }}</h1>
       <a href="#content-start" class="usa-button usa-button--big"
@@ -19,33 +18,7 @@
     </div>
     <h2 class="dg-landing__body-featured-resources">Featured Resources</h2>
 
-    [placeholder card view of selected pages]
     {{ content.field_guides }}
-
-    {# NOT-MIGRATED
-    <ul class="usa-card-group" id="content-start">
-      {{ range .Pages }}
-      <li class="usa-card tablet:grid-col-4">
-        {{ $image := .Params.image }}
-        {{ $layout := "no-image" }}
-        {% if $image %}
-        {{ $layout = "has-image" }}
-        {% endif %}
-        {{ $cardData := (dict
-        "header" .Title
-        "body" .Params.summary
-        "link" (.Permalink | absURL)
-        "link_title" (print "Explore " (.Title | markdownify | lower))
-        "layout" $layout
-        "site" .Site
-        "image" $image
-        )
-        }}
-        {{ partial "core/usa-card.html" (dict "card_data" $cardData) }}
-      </li>
-      {% endif %}
-    </ul>
-    #}
 
     {% if (content.field_bottom_content) %}
       {{ content.field_bottom_content }}

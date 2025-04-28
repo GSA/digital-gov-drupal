@@ -1,0 +1,24 @@
+#Use the w800 image style for screens up to 800 pixels wide.
+#Use the w1200 image style for screens up to 1200 pixels wide.
+#Use the w1200 image style for screens wider than 1200 pixels.
+
+digital_gov.small:
+  label: Small Sized Screens
+  mediaQuery: '(max-width: 799px)'
+  weight: 0
+  multipliers:
+    - 1x
+
+digital_gov.medium:
+  label: Medium Sized Screens
+  mediaQuery: '(min-width: 800px) and (max-width: 1199px)'
+  weight: 1
+  multipliers:
+    - 1x
+
+digital_gov.large:
+  label: Large Sized Screens
+  mediaQuery: '(min-width: 1200px)'
+  weight: 2
+  multipliers:
+    - 1x

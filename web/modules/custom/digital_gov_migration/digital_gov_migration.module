@@ -1,0 +1,164 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for Digital.gov Migration module.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\redirect\Entity\Redirect;
+
+/**
+ * Implements hook_entity_insert().
+ */
+function digital_gov_migration_entity_insert(EntityInterface $entity) {
+  // Check if the entity is a node.
+  if ($entity->getEntityTypeId() !== 'node') {
+    return;
+  }
+  if (!empty($entity->redirects)) {
+    // Create redirects on nodes as they are migrated. If the migration is
+    // rolled back, the redirects are removed automatically by Drupal.
+    // This is not needed once the migration is over.
+    $nid = $entity->id();
+    $node_url = '/node/' . $nid;
+
+    foreach ($entity->redirects as $redirect) {
+      if (empty($redirect['redirect_source']['path'])) {
+        throw new \Exception('Cannot save redirect without a source/path ' . $node_url);
+      }
+      $redirect['redirect_source']['path'] = ltrim($redirect['redirect_source']['path'], '/');
+      // Create a redirect entity.
+      $redirect = Redirect::create([
+        'redirect_source' => $redirect['redirect_source'],
+        'redirect_redirect' => ['uri' => 'internal:' . $node_url],
+        'status_code' => $redirect['status_code'] ?? 301,
+      ]);
+
+      // Save the redirect.
+      try {
+        $redirect->save();
+      }
+      catch (\Exception $ex) {
+        trigger_error($ex->getMessage(), E_USER_WARNING);
+      }
+    }
+  }
+
+}
+
+/**
+ * Implements hook_entity_presave().
+ */
+function digital_gov_migration_entity_presave(EntityInterface $entity) {
+  // Check if the entity is a node.
+  if ($entity->getEntityTypeId() !== 'node') {
+    return;
+  }
+  // Venue only exists during the migration, this wouldn't effect updating
+  // existing items.
+  if (!empty($entity->venue)) {
+    $values = [
+      'type' => 'venue',
+      'field_venue_address' => $entity->venue['address'] ?? '',
+      'field_venue_city' => $entity->venue['city'] ?? '',
+      'field_venue_country' => $entity->venue['country'] ?? '',
+      'field_venue_map' => $entity->venue['map'] ?? '',
+      'field_venue_name' => $entity->venue['venue_name'] ?? '',
+      'field_venue_room' => $entity->venue['room'] ?? '',
+      'field_venue_state' => $entity->venue['state'] ?? '',
+      'field_venue_zip' => $entity->venue['zip'] ?? '',
+    ];
+    /** @var \Drupal\paragraphs\Entity\Paragraph $venue */
+    $venue = \Drupal::entityTypeManager()->getStorage('paragraph')->create($values);
+    $venue->save();
+    $entity->get('field_venue')->appendItem($venue);
+  }
+}
+
+/**
+ * Implements hook_entity_delete().
+ */
+function digital_gov_migration_entity_delete(EntityInterface $entity) {
+  // Clean up paragraphs that cannot be rolled back because they were not part
+  // of a migration.
+  $is_event_with_venue_data = $entity->getEntityTypeId() === 'node' && $entity->bundle() === 'event' && !$entity->get('field_venue')
+    ->isEmpty();
+  if (!$is_event_with_venue_data) {
+    return;
+  }
+  // Only cleanup venue paragraphs if doing a migration rollback.
+  $is_a_rollback = FALSE;
+  foreach (debug_backtrace() as $item) {
+    if (($item['function']) ?? '' === 'rollback') {
+      $is_a_rollback = TRUE;
+    }
+  }
+  if (!$is_a_rollback) {
+    return;
+  }
+  foreach ($entity->get('field_venue')->getValue() as $value) {
+    \Drupal::entityTypeManager()->getStorage('paragraph')->load($value['target_id'])->delete();
+  }
+}
+
+/**
+ * Takes a timestamp and returns it in UTC time.
+ *
+ * @param string $timestamp
+ *   A timestamp, in our case ISO 8601.
+ *
+ * @return string|null
+ *   The UTC time.
+ */
+function digital_gov_migration_convert_to_utc(string $timestamp): ?string {
+  if (empty($timestamp)) {
+    return NULL;
+  }
+
+  $date = new DateTime($timestamp);
+  $date->setTimezone(new DateTimeZone("UTC"));
+
+  return $date->format("Y-m-d\TH:i:s");
+}
+
+/**
+ * Takes JSON string value and returns bool equivalent.
+ *
+ * Converts "true", "yes", "y", and "1" to TRUE, all else is FALSE.
+ */
+function digital_gov_migration_convert_to_boolean(string $raw): bool {
+  $raw = strtolower(trim($raw));
+
+  return $raw === 'true' || $raw === 'yes' || $raw === 'y' || $raw === "1";
+}
+
+/**
+ * Cleans up internal links.
+ *
+ * Helper to turn links hard-coded to digital.gov domains into URLs with the
+ * local domain.
+ */
+function digital_gov_migration_make_url_local(string $url): string {
+  // CLI thinks local uses http:// but those don't load in browser.
+  $current = 'https://' . \Drupal::request()->getHttpHost() . '/';
+  $url = preg_replace('/^https?:\/\/digital.gov\//i', $current, $url);
+  return $url;
+}
+
+/**
+ * Callback to decode HTML entities during migration.
+ */
+function digital_gov_migration_html_entity_decode(?string $in): string {
+  if ($in) {
+    // Some stuff in authors particularly is doubly encode.
+    $in = str_replace(
+      ['&amp;#39;', '&amp;eacute;'],
+      ['&#39;', '&eacute;'],
+      $in
+    );
+
+    return html_entity_decode($in, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, 'UTF-8');
+  }
+  return '';
+}

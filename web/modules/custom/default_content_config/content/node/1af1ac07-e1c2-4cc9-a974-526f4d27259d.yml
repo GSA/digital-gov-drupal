@@ -43,7 +43,7 @@ default:
       summary: ''
   field_deck:
     -
-      value: 'Collaborate and share resources with other communities across government who are focused on building better digital experience in government.'
+      value: '<p>Collaborate and share resources with other communities across government who are focused on building better digital experience in government.</p>'
       format: single_inline_html
   field_dg_acronym:
     -
@@ -53,7 +53,7 @@ default:
       value: true
   field_dg_shortname:
     -
-      value: 'Plain Language'
+      value: 'Communities All Fields'
   field_members:
     -
       value: 2501
@@ -65,8 +65,8 @@ default:
       entity: c807a95f-ee73-4bd2-b616-0e56b5ff1ad1
   field_subscribe_email_subject:
     -
-      value: 'oin the Communicators Community'
+      value: 'Join the Communities All Fields'
   field_summary:
     -
-      value: 'Collaborate and share resources with others across government.'
+      value: '<p>Collaborate and share resources with others across government.</p>'
       format: single_inline_html

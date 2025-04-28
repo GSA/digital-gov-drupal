@@ -69,8 +69,8 @@ class ECShortcodesNote extends EmbeddedContentPluginBase implements EmbeddedCont
     $form['text'] = [
       '#type' => 'text_format',
       '#title' => $this->t('Note Text'),
-      '#format' => $this->configuration['text']['format'] ?? 'multiline_inline_html',
-      '#allowed_formats' => ['multiline_inline_html'],
+      '#format' => 'html_embedded_content',
+      '#allowed_formats' => ['html_embedded_content'],
       '#default_value' => $this->configuration['text']['value'] ?? '',
       '#required' => TRUE,
     ];

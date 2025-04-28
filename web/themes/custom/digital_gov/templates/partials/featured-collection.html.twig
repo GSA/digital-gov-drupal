@@ -1,0 +1,40 @@
+{#
+# Displays a list of featured resources
+
+EXPECTED VARIABLES:
+  - heading: boolean
+  - list: array (see nested variables)
+    - link: string url
+    - title: string or renderable markup
+    - summary: string or renderable markup
+#}
+
+{% if list|length %}
+  <div class="featured-collection">
+    {% if heading %}
+      <h2>{{ heading }}</h2>
+    {% endif %}
+    <ul>
+      {% for item in list %}
+        <li>
+          <div class="icon">
+            <img
+              src="/{{ active_theme_path() }}/static/digitalgov/img/digit-50.png"
+              alt=""
+              aria-hidden="true"
+              width="16"
+              height="16"
+            />
+          </div>
+          <div class="copy">
+            <p>
+              <a href="{{ item.link }}" title="{{ item.title }}">
+                <span>{{ item.title }}</span>
+              </a>{% if item.summary %}—{{ item.summary|trim|truncate(140, true, '&hellip;') }}{% endif %}
+            </p>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}

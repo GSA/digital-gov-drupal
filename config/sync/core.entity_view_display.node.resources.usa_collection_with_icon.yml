@@ -1,0 +1,37 @@
+uuid: 17fa86cb-bc56-4b07-9463-8d79b4afa10e
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.usa_collection_with_icon
+    - field.field.node.resources.body
+    - field.field.node.resources.field_deck
+    - field.field.node.resources.field_page_weight
+    - field.field.node.resources.field_slug
+    - field.field.node.resources.field_summary
+    - field.field.node.resources.field_topics
+    - node.type.resources
+  module:
+    - text
+    - user
+id: node.resources.usa_collection_with_icon
+targetEntityType: node
+bundle: resources
+mode: usa_collection_with_icon
+content:
+  field_summary:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  body: true
+  content_moderation_control: true
+  field_authors: true
+  field_deck: true
+  field_page_weight: true
+  field_slug: true
+  field_topics: true
+  links: true

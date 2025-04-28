@@ -1,0 +1,270 @@
+id: json_guide_navs__navigation
+label: 'Create Guide Nav navigation paragraphs'
+migration_tags:
+  - 'digitalgov-guidenav'
+source:
+  plugin: embedded_data
+  data_rows:
+    -
+      # a uuid is the parent guide nav slug:path for a page
+      uid: "accessibility-for-teams:/guides/accessibility-for-teams"
+      # link url is the UUI of a guide page in json_guides.
+      link_url: "/guides/accessibility-for-teams/"
+    -
+      # a uuid is the parent guide nav slug:path for a page
+      uid: "accessibility-for-teams:/guides/accessibility-for-teams/product-management"
+      link_url: "/guides/accessibility-for-teams/product-management/"
+    -
+      # a uuid is the parent guide nav slug:path for a page
+      uid: "accessibility-for-teams:/guides/accessibility-for-teams/content-design"
+      link_url: "/guides/accessibility-for-teams/content-design/"
+    -
+      # a uuid is the parent guide nav slug:path for a page
+      uid: "accessibility-for-teams:/guides/accessibility-for-teams/ux-design"
+      link_url: "/guides/accessibility-for-teams/ux-design/"
+    -
+      # a uuid is the parent guide nav slug:path for a page
+      uid: "accessibility-for-teams:/guides/accessibility-for-teams/visual-design"
+      link_url: "/guides/accessibility-for-teams/visual-design/"
+    -
+      # a uuid is the parent guide nav slug:path for a page
+      uid: "accessibility-for-teams:/guides/accessibility-for-teams/front-end-development"
+      link_url: "/guides/accessibility-for-teams/front-end-development/"
+    -
+      uid: "dap:/guides/dap/_index"
+      link_url: "/guides/dap/"
+    -
+      uid: "dap:/guides/dap/get-started-with-dap"
+      link_url: "/guides/dap/get-started-with-dap/"
+    -
+      uid: "dap:/guides/dap/make-data-informed-decisions"
+      link_url: "/guides/dap/make-data-informed-decisions/"
+    -
+      uid: "dap:/guides/dap/glossary-of-terms"
+      link_url: "/guides/dap/glossary-of-terms/"
+    -
+      uid: "dap:/guides/dap/gsa-dap-terms-of-service"
+      link_url: "/guides/dap/gsa-dap-terms-of-service/"
+    -
+      uid: "hcd-design-concepts:/guides/hcd/design-concepts/_index"
+      link_url: "/guides/hcd/design-concepts/"
+    -
+      uid: "hcd-design-concepts:/guides/hcd/design-concepts/design-phase-principles"
+      link_url: "/guides/hcd/design-concepts/design-phase-principles/"
+    -
+      uid: "hcd-design-concepts:/guides/hcd/design-concepts/designed-things"
+      link_url: "/guides/hcd/design-concepts/designed-things/"
+    -
+      uid: "hcd-design-concepts:/guides/hcd/design-concepts/communicating-ideas"
+      link_url: "/guides/hcd/design-concepts/communicating-ideas/"
+    -
+      uid: "hcd-design-concepts:/guides/hcd/design-concepts/design-and-implementation"
+      link_url: "/guides/hcd/design-concepts/design-and-implementation/"
+    -
+      uid: "hcd-design-concepts:/guides/hcd/design-concepts/up-next"
+      link_url: "/guides/hcd/design-concepts/up-next/"
+    -
+      uid: "hcd-design-operations:/guides/hcd/design-operations/_index"
+      link_url: "/guides/hcd/design-operations/"
+    -
+      uid: "hcd-design-operations:/guides/hcd/design-operations/thinking"
+      link_url: "/guides/hcd/design-operations/thinking/"
+    -
+      uid: "hcd-design-operations:/guides/hcd/design-operations/building"
+      link_url: "/guides/hcd/design-operations/building/"
+    -
+      uid: "hcd-design-operations:/guides/hcd/design-operations/making"
+      link_url: "/guides/hcd/design-operations/making/"
+    -
+      uid: "hcd-design-operations:/guides/hcd/design-operations/testing"
+      link_url: "/guides/hcd/design-operations/testing/"
+    -
+      uid: "hcd-design-operations:/guides/hcd/design-operations/up-next"
+      link_url: "/guides/hcd/design-operations/up-next/"
+    -
+      uid: "hcd-discovery-concepts:/guides/hcd/discovery-concepts/_index"
+      link_url: "/guides/hcd/discovery-concepts/"
+    -
+      uid: "hcd-discovery-concepts:/guides/hcd/discovery-concepts/plan"
+      link_url: "/guides/hcd/discovery-concepts/plan/"
+    -
+      uid: "hcd-discovery-concepts:/guides/hcd/discovery-concepts/recruit-participants"
+      link_url: "/guides/hcd/discovery-concepts/recruit-participants/"
+    -
+      uid: "hcd-discovery-concepts:/guides/hcd/discovery-concepts/plan-research"
+      link_url: "/guides/hcd/discovery-concepts/plan-research/"
+    -
+      uid: "hcd-discovery-concepts:/guides/hcd/discovery-concepts/synthesize"
+      link_url: "/guides/hcd/discovery-concepts/synthesize/"
+    -
+      uid: "hcd-discovery-concepts:/guides/hcd/discovery-concepts/find-opportunities"
+      link_url: "/guides/hcd/discovery-concepts/find-opportunities/"
+    -
+      uid: "hcd-discovery-concepts:/guides/hcd/discovery-concepts/present"
+      link_url: "/guides/hcd/discovery-concepts/present/"
+    -
+      uid: "hcd-discovery-concepts:/guides/hcd/discovery-concepts/up-next"
+      link_url: "/guides/hcd/discovery-concepts/up-next/"
+    -
+      uid: "hcd-discovery-operations:/guides/hcd/discovery-operations/_index"
+      link_url: "/guides/hcd/discovery-operations/"
+    -
+      uid: "hcd-discovery-operations:/guides/hcd/discovery-operations/framing"
+      link_url: "/guides/hcd/discovery-operations/framing/"
+    -
+      uid: "hcd-discovery-operations:/guides/hcd/discovery-operations/team-building"
+      link_url: "/guides/hcd/discovery-operations/team-building/"
+    -
+      uid: "hcd-discovery-operations:/guides/hcd/discovery-operations/overview-planning"
+      link_url: "/guides/hcd/discovery-operations/overview-planning/"
+    -
+      uid: "hcd-discovery-operations:/guides/hcd/discovery-operations/research-planning"
+      link_url: "/guides/hcd/discovery-operations/research-planning/"
+    -
+      uid: "hcd-discovery-operations:/guides/hcd/discovery-operations/interviews"
+      link_url: "/guides/hcd/discovery-operations/interviews/"
+    -
+      uid: "hcd-discovery-operations:/guides/hcd/discovery-operations/observation"
+      link_url: "/guides/hcd/discovery-operations/observation/"
+    -
+      uid: "hcd-discovery-operations:/guides/hcd/discovery-operations/synthesis"
+      link_url: "/guides/hcd/discovery-operations/synthesis/"
+    -
+      uid: "hcd-discovery-operations:/guides/hcd/discovery-operations/present"
+      link_url: "/guides/hcd/discovery-operations/present/"
+    -
+      uid: "hcd-introduction:/guides/hcd/introduction/_index"
+      link_url: "/guides/hcd/introduction/"
+    -
+      uid: "hcd-introduction:/guides/hcd/introduction/approach"
+      link_url: "/guides/hcd/introduction/approach/"
+    -
+      uid: "hcd-introduction:/guides/hcd/introduction/principles"
+      link_url: "/guides/hcd/introduction/principles/"
+    -
+      uid: "hcd-introduction:/guides/hcd/introduction/background"
+      link_url: "/guides/hcd/introduction/background/"
+    -
+      uid: "mobile-principles:/guides/mobile-principles/_index"
+      link_url: "/guides/mobile-principles/"
+    -
+      uid: "mobile-principles:/guides/mobile-principles/principles-javascript"
+      link_url: "/guides/mobile-principles/javascript/"
+    -
+      uid: "mobile-principles:/guides/mobile-principles/principles-viewport"
+      link_url: "/guides/mobile-principles/viewport/"
+    -
+      uid: "mobile-principles:/guides/mobile-principles/principles-tap-targets"
+      link_url: "/guides/mobile-principles/tap-targets/"
+    -
+      uid: "mobile-principles:/guides/mobile-principles/principles-plugins"
+      link_url: "/guides/mobile-principles/plugins/"
+    -
+      uid: "mobile-principles:/guides/mobile-principles/principles-cache"
+      link_url: "/guides/mobile-principles/cache/"
+    -
+      uid: "mobile-principles:/guides/mobile-principles/principles-optimize-minify-compression"
+      link_url: "/guides/mobile-principles/optimize-minify-compression/"
+    -
+      uid: "mobile-principles:/guides/mobile-principles/principles-configuration"
+      link_url: "/guides/mobile-principles/configuration/"
+    -
+      uid: "mobile-principles:/guides/mobile-principles/principles-accessibility"
+      link_url: "/guides/mobile-principles/accessibility/"
+    -
+      uid: "public-participation:/guides/public-participation/_index"
+      link_url: "/guides/public-participation/"
+    -
+      uid: "public-participation:/guides/public-participation/establish-goals"
+      link_url: "/guides/public-participation/establish-goals/"
+    -
+      uid: "public-participation:/guides/public-participation/understand"
+      link_url: "/guides/public-participation/understand/"
+    -
+      uid: "public-participation:/guides/public-participation/design-participation"
+      link_url: "/guides/public-participation/design-participation/"
+    -
+      uid: "public-participation:/guides/public-participation/facilitate-participation"
+      link_url: "/guides/public-participation/facilitate-participation/"
+    -
+      uid: "public-participation:/guides/public-participation/evaluate-report"
+      link_url: "/guides/public-participation/evaluate-report/"
+    -
+      uid: "rpa:/guides/rpa/_index"
+      link_url: "/guides/rpa/"
+    -
+      uid: "rpa:/guides/rpa/rpa-playbook"
+      link_url: "/guides/rpa/rpa-playbook/"
+    -
+      uid: "rpa:/guides/rpa/rpa-playbook-internal-controls"
+      link_url: "/guides/rpa/rpa-playbook-internal-controls/"
+    -
+      uid: "rpa:/guides/rpa/rpa-use-case-inventory"
+      link_url: "/guides/rpa/rpa-use-case-inventory/"
+    -
+      uid: "rpa:/guides/rpa/state-of-federal-rpa"
+      link_url: "/guides/rpa/state-of-federal-rpa/"
+    -
+      uid: "site-scanning:/guides/site-scanning/_index"
+      link_url: "/guides/site-scanning/"
+    -
+      uid: "site-scanning:/guides/site-scanning/data"
+      link_url: "/guides/site-scanning/data/"
+    -
+      uid: "site-scanning:/guides/site-scanning/understand-the-data"
+      link_url: "/guides/site-scanning/understand-the-data/"
+    -
+      uid: "site-scanning:/guides/site-scanning/technical-details"
+      link_url: "/guides/site-scanning/technical-details/"
+    -
+      uid: "site-scanning:/guides/site-scanning/learn-more-about-the-program"
+      link_url: "/guides/site-scanning/learn-more-about-the-program/"
+    -
+      uid: "web-analytics-playbook:/guides/web-analytics-playbook/_index"
+      link_url: "/guides/web-analytics-playbook/"
+    -
+      uid: "web-analytics-playbook:/guides/web-analytics-playbook/create-a-foundation-for-your-strategy"
+      link_url: "/guides/web-analytics-playbook/create-a-foundation-for-your-strategy/"
+    -
+      uid: "web-analytics-playbook:/guides/web-analytics-playbook/commit-to-action"
+      link_url: "/guides/web-analytics-playbook/commit-to-action/"
+    -
+      uid: "web-analytics-playbook:/guides/web-analytics-playbook/implement-wisely"
+      link_url: "/guides/web-analytics-playbook/implement-wisely/"
+    -
+      uid: "web-analytics-playbook:/guides/web-analytics-playbook/configure-your-tools-settings-carefully"
+      link_url: "/guides/web-analytics-playbook/configure-your-tools-settings-carefully/"
+    -
+      uid: "web-analytics-playbook:/guides/web-analytics-playbook/know-what-youre-looking-for"
+      link_url: "/guides/web-analytics-playbook/know-what-youre-looking-for/"
+    -
+      uid: "web-analytics-playbook:/guides/web-analytics-playbook/democratize-the-data"
+      link_url: "/guides/web-analytics-playbook/democratize-the-data/"
+    -
+      uid: "web-analytics-playbook:/guides/web-analytics-playbook/invest-in-training-and-support"
+      link_url: "/guides/web-analytics-playbook/invest-in-training-and-support/"
+    -
+      uid: "web-analytics-playbook:/guides/web-analytics-playbook/do-it-continuously"
+      link_url: "/guides/web-analytics-playbook/do-it-continuously/"
+
+  ids:
+    uid:
+      type: string
+
+process:
+  field_title: uid
+  field_guide_link:
+    plugin: migration_lookup
+    source: link_url
+    source_ids: src_unique_id
+    migration: json_guides
+    no_stub: true
+
+destination:
+  # It's a paragraph entity
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: guide_pages
+
+migration_dependencies:
+  required:
+    - json_guides

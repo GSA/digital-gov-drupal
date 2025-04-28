@@ -1,0 +1,49 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: e8c684ae-bff8-4e8f-8388-6005a617fc20
+  bundle: basic_page
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: '404 Error ... Page Not Found'
+  created:
+    -
+      value: 1737574151
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /404
+      langcode: en
+      pathauto: 0
+  body:
+    -
+      value: '<p><strong>The page you''re looking for cannot be found.</strong> Here are a few things that you can try:</p><ul><li>Go back to the <a href="/">homepage</a>.</li><li><a href="http://find.digitalgov.gov/search?affiliate=digitalgov">Search</a> for the page.</li><li>View our <a href="/node/21" data-entity-type="node" data-entity-uuid="986de625-5015-47c0-9ccc-273f985b69b8" data-entity-substitution="canonical">latest news</a>.</li><li>Explore topics in our <a href="/node/14" data-entity-type="node" data-entity-uuid="fefddcf3-e162-4622-9176-a3f4c2dadd8e" data-entity-substitution="canonical">guides and resources</a>.</li><li>Send us an email and <a href="mailto:digitalgov@gsa.gov">let us know this page is missing</a>.</li></ul>'
+      format: html
+      summary: ''
+  field_deck:
+    -
+      value: "<p>I'm sorry, but the page you're looking for does not exist.</p>"
+      format: single_inline_html
+  field_summary:
+    -
+      value: "<p>We're sorry, but the page you're seeking does not exist. Please verify that you've entered the correct URL in your browser's address bar.</p>"
+      format: single_inline_html
