@@ -1,0 +1,53 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 28ccfbf3-bf84-4882-a5f7-0e0f968f8296
+  bundle: short_post
+  default_langcode: en
+  depends:
+    95077128-6d33-4445-a48a-4ad8ebb7d9b3: node
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Cloud Smart: Federal Cloud Computing Strategy'
+  created:
+    -
+      value: 1739482815
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_external_url:
+    -
+      uri: 'https://cloud.cio.gov/strategy/'
+      title: ''
+      options: {  }
+  field_short_post_type:
+    -
+      value: resource
+  field_summary:
+    -
+      value: '<p>Founded on three key pillars of successful cloud adoption—security, procurement, and workforce—the Cloud Smart strategy includes 11 action items from the Chief Information Officers (CIO) Council.</p>'
+      format: single_inline_html
+  field_topics:
+    -
+      entity: 95077128-6d33-4445-a48a-4ad8ebb7d9b3

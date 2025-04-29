@@ -5,7 +5,6 @@ keys:
 repos:
   - deb http://apt.newrelic.com/debian/ newrelic non-free
 packages:
-  #- awscli
   - bsdmainutils
-  - mysql-client
-  #- newrelic-php5
+  - mysql-client-core-8.0
+  - newrelic-php5

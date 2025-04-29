@@ -75,11 +75,12 @@
         deck: content.field_deck|field_value,
       }, with_context: false) }}
 
-      {{ include('@digital_gov/partials/authors-list.html.twig', {
-        inline: true,
-        authors: content.field_authors,
-      }, with_context: false) }}
-
+      {% if content.field_authors|field_value %}
+        {{ include('@digital_gov/partials/authors-list.html.twig', {
+          inline: true,
+          authors: content.field_authors|field_value,
+        }, with_context: false) }}
+      {% endif %}
       <div class="meta">
         <div class="date">
             <span title="{{ label|field_value }}"
@@ -101,10 +102,12 @@
         </div>
 
         <div class="dg-sidebar grid-col-12 tablet-lg:grid-col-3">
-          {{ include('@digital_gov/partials/authors-list.html.twig', {
-            inline: false,
-            authors: content.field_authors,
-          }, with_context: false) }}
+          {% if content.field_authors|field_value %}
+            {{ include('@digital_gov/partials/authors-list.html.twig', {
+              inline: false,
+              authors: content.field_authors|field_value,
+            }, with_context: false) }}
+          {% endif %}
 
           <div class="meta">
             <div class="date">
@@ -112,10 +115,7 @@
             </div>
           </div>
 
-          [placeholder Get Related]
-          {# NOT-MIGRATED
-          {{ include('@digital_gov/partials/get-related.html.twig') }}
-          #}
+          {{ include('@digital_gov/partials/primary-communities.html.twig') }}
 
           {{ content.field_topics }}
 

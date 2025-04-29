@@ -1,0 +1,121 @@
+id: json_authors
+label: 'Import authors from Digital.gov Hugo'
+migration_tags:
+  - 'digitalgov'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json_authors
+  urls:
+    - https://federalist-466b7d92-5da1-4208-974f-d61fd4348571.sites.pages.cloud.gov/preview/gsa/digitalgov.gov/nl-json-endpoints/authors/v1/json/
+    # First value from wsl.exe hostname -I
+    #- http://172.20.60.7:1313/authors/v1/json/
+  # This is the path to where the data are in the JSON.
+  item_selector: items
+  # Under 'fields', we list the data items to be imported. The first level keys
+  # are the source field names we want to populate (the names to be used as
+  # sources in the process configuration below). For each field we're importing,
+  # we provide a label (optional - this is for display in migration tools) and
+  # an xpath for retrieving that value. It's important to note that this xpath
+  # is relative to the elements retrieved by item_selector.
+  fields:
+    - name: src_unique_id
+      label: 'Unique ID'
+      selector: uid
+    - name: title
+      label: 'Title'
+      selector: field_display_name
+    - name: field_first_name
+      label: 'First Name'
+      selector: field_first_name
+    - name: field_last_name
+      label: 'Last Name'
+      selector: field_last_name
+    - name: created
+      label: 'Created Time'
+      selector: date_modified
+    - name: alias
+      label: 'URL Alias'
+      selector: url
+    - name: field_github
+      label: 'GitHub Profile ID'
+      selector: field_github
+    - name: field_profile_source
+      label: 'Profile Source'
+      selector: field_profile_source
+    - name: field_slug
+      label: 'Slug'
+      selector: slug
+    - name: field_agency_full_name
+      label: 'Full Agency Name'
+      selector: field_agency_full_name
+    - name: redirects
+      label: 'Redirects'
+      selector: redirects
+  ids:
+    src_unique_id:
+      type: string
+  constants:
+    ALIAS_SEARCH: '/preview/gsa/digitalgov.gov/nl-json-endpoints'
+    ALIAS_REPLACE: ''
+process:
+  skip_empty_required_fields:
+    plugin: skip_on_condition
+    condition:
+      plugin: empty
+    source: title
+    method: row
+    message: 'Missing field_display_name which sets title field'
+  title:
+    - plugin: callback
+      callable: digital_gov_migration_html_entity_decode
+      source: title
+  field_first_name:
+    - plugin: callback
+      callable: digital_gov_migration_html_entity_decode
+      source: field_first_name
+  field_last_name:
+    - plugin: callback
+      callable: digital_gov_migration_html_entity_decode
+      source: field_last_name
+  field_github: field_github
+  field_profile_source: field_profile_source
+  field_slug: field_slug
+  field_agency_full_name:
+    - plugin: callback
+      callable: digital_gov_migration_html_entity_decode
+      source: field_agency_full_name
+  created:
+    plugin: callback
+    callable: strtotime
+    source: created
+  changed:
+    plugin: callback
+    callable: strtotime
+    source: created
+  # Setting the moderation state to published will automatically set status=1.
+  moderation_state:
+    plugin: default_value
+    default_value: published
+  path/alias:
+    plugin: callback
+    callable: str_replace
+    # The federalist build puts a relative path that is too much.
+    source: [constants/ALIAS_SEARCH, constants/ALIAS_REPLACE, alias]
+    unpack_source: true
+  # Must disable auto-creating path auto in order to set alias explicitly.
+  path/pathauto:
+    plugin: default_value
+    default_value: false
+  # See digital_gov_migration_entity_insert().
+  redirects:
+    plugin: sub_process
+    source: redirects
+    process:
+      redirect_source/path: from
+      status_code:
+        plugin: default_value
+        default_value: 301
+destination:
+  plugin: entity:node
+  default_bundle: authors

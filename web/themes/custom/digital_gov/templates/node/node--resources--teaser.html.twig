@@ -1,0 +1,16 @@
+{#
+/**
+ * @file
+ * Theme implementation to display a Resources node as a teaser.
+ */
+#}
+{# Caching the data in content object #}
+{% set savedCache = content|render %}
+
+{{ include('@digital_gov/partials/card-stream.html.twig', {
+    url: url,
+    label: node.title.value,
+    authors: content.field_authors|field_value,
+    summary: content.field_summary|field_value,
+    date: created,
+}) }}

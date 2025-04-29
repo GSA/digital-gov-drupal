@@ -7,6 +7,7 @@ dependencies:
     - node.type.basic_page
     - node.type.community
     - node.type.event
+    - node.type.guide_landing
     - node.type.guide_navigation
     - node.type.guides
     - node.type.landing_page
@@ -26,24 +27,31 @@ dependencies:
     - node
     - override_node_options
     - paragraphs_type_permissions
+    - path
     - scheduler
+    - sitewide_alert
 id: content_admin
 label: 'Content Admin'
 weight: 5
 is_admin: null
 permissions:
+  - 'access config_pages overview'
   - 'access content overview'
   - 'access files overview'
   - 'access media overview'
+  - 'add sitewide alert entities'
+  - 'administer config_pages types'
   - 'administer footer menu items'
   - 'administer footer-about menu items'
   - 'administer footer-grow menu items'
   - 'administer main menu items'
+  - 'administer sitewide alert entities'
   - 'bypass paragraphs type content access'
   - 'create authors content'
   - 'create basic_page content'
   - 'create community content'
   - 'create event content'
+  - 'create guide_landing content'
   - 'create guide_navigation content'
   - 'create guides content'
   - 'create landing_page content'
@@ -53,12 +61,15 @@ permissions:
   - 'create short_post content'
   - 'create source content'
   - 'create topics content'
+  - 'create url aliases'
   - 'delete any guide_navigation content'
   - 'delete any media'
+  - 'delete sitewide alert entities'
   - 'edit any authors content'
   - 'edit any basic_page content'
   - 'edit any community content'
   - 'edit any event content'
+  - 'edit any guide_landing content'
   - 'edit any guide_navigation content'
   - 'edit any guides content'
   - 'edit any landing_page content'
@@ -67,7 +78,10 @@ permissions:
   - 'edit any short_post content'
   - 'edit any source content'
   - 'edit any topics content'
+  - 'edit config_pages entity'
   - 'edit identifier config page entity'
+  - 'edit job_board config page entity'
+  - 'edit sitewide alert entities'
   - 'override all authored by option'
   - 'override all authored on option'
   - 'override guide_navigation published option'
@@ -94,4 +108,9 @@ permissions:
   - 'view all media revisions'
   - 'view all revisions'
   - 'view any unpublished content'
+  - 'view config_pages entity'
+  - 'view identifier config page entity'
+  - 'view job_board config page entity'
+  - 'view published sitewide alert entities'
   - 'view scheduled content'
+  - 'view unpublished sitewide alert entities'

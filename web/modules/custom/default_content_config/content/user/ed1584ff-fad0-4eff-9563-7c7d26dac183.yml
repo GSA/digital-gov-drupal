@@ -1,0 +1,52 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: ed1584ff-fad0-4eff-9563-7c7d26dac183
+  default_langcode: en
+default:
+  preferred_langcode:
+    -
+      value: en
+  preferred_admin_langcode:
+    -
+      value: en
+  name:
+    -
+      value: will.sullivan@gsa.gov
+  pass:
+    -
+      value: $2y$10$CzwDgvdezznqqC39gxM1lOIQM4La/dfdQavZt0b72dsCGt0B/P9/y
+      existing: ''
+      pre_hashed: true
+  mail:
+    -
+      value: will.sullivan@gsa.gov
+  timezone:
+    -
+      value: America/New_York
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1740431564
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  init:
+    -
+      value: will.sullivan@gsa.gov
+  roles:
+    -
+      target_id: admin
+  role_change:
+    -
+      target_id: __role_delegation_empty_field_value__
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

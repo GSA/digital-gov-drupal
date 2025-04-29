@@ -6,7 +6,7 @@ _meta:
   default_langcode: en
   depends:
     44a761c7-41e3-4657-99bc-7248846cd073: node
-    b2f35ae8-423f-428b-865d-e420313e7a81: media
+    6b9a9ec8-50ea-47ba-8e58-ce2dee0edb8d: media
 default:
   revision_uid:
     -
@@ -52,15 +52,12 @@ default:
   field_guide_nav_ref:
     -
       entity: 44a761c7-41e3-4657-99bc-7248846cd073
-  field_guide_weight:
-    -
-      value: 5
   field_page_weight:
     -
       value: 0
   field_primary_image:
     -
-      entity: b2f35ae8-423f-428b-865d-e420313e7a81
+      entity: 6b9a9ec8-50ea-47ba-8e58-ce2dee0edb8d
   field_summary:
     -
       value: '<p>Everything you need to know to get started with our human-centered design series</p>'

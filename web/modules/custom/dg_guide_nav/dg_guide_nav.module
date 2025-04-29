@@ -1,0 +1,183 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for dg_guide_nav module.
+ */
+
+use Drupal\Core\Cache\Cache;
+use Drupal\Core\Link;
+use Drupal\Core\Url;
+use Drupal\node\Entity\Node;
+use Drupal\node\NodeInterface;
+use Drupal\paragraphs\Entity\Paragraph;
+
+/**
+ * Builds an array we can add to $variables with guide navigation info.
+ */
+function dg_guide_nav_get_links(Node $guideNav, string $current, Node $currentPage): array {
+  $cacheTags = array_merge(
+    $currentPage->getCacheTags(),
+    $guideNav->getCacheTags(),
+    [dg_guide_nav_cache_tag($guideNav)],
+  );
+
+  $cid = __FUNCTION__ . '//' . implode('/', $cacheTags);
+  if ($cache = \Drupal::cache()->get($cid)) {
+    $links = $cache->data;
+    return $links;
+  }
+
+  // Anonymous helper for getting node links.
+  $makeLink = function (Node $page, ?string $override = NULL): Link {
+    $label = $page->label();
+
+    // Allow caller to specify the title to use, unless it's been set in the CMS
+    // Mainly to label the starting page as the Overview page.
+    if ($node_nav_title = $page->get('field_guide_nav_title')->getString()) {
+      $label = $node_nav_title;
+    }
+    elseif ($override) {
+      $label = $override;
+    }
+
+    return $page->toLink($label);
+  };
+
+  // The guide_nav is an array that holds items with the following keys
+  // - 'link': A Link object the main link used the menu bar
+  // - 'subnav': an array of Link objects of links if the sidenav is shown.
+  $links['guide_nav'] = [];
+
+  if ($kicker_link = $guideNav->get('field_kicker_link')?->first()) {
+    $links['guide_kicker_title'] = $kicker_link->getValue()['title'];
+    $links['guide_kicker_url'] = Url::fromUri($kicker_link->getValue()['uri']);
+  }
+
+  if ($guideNav->field_guide_navigation) {
+    // Track the count separately in case the first item is not published.
+    $count = 0;
+    // Generate the two-levels of nav links for this guide.
+    foreach ($guideNav->field_guide_navigation as $ref) {
+      // This field points at a paragraph entity.
+      $para = Paragraph::load($ref->target_id);
+
+      if ($para->field_guide_link->target_id) {
+        $guidePage = $para->get('field_guide_link')->referencedEntities()[0];
+        if (!$guidePage || !$guidePage->isPublished()) {
+          continue;
+        }
+
+        if ($count === 0) {
+          $links['guide_overview_node'] = $guidePage;
+        }
+        // Add the link to the navigation.
+        $link = $makeLink($guidePage, $count === 0 ? 'Overview' : NULL);
+        $item['link'] = $link;
+
+        $count++;
+
+        if ($para->field_guide_subnav) {
+          $item['subnav'] = [];
+          $subNavNodes = $para->get('field_guide_subnav')->referencedEntities();
+          $subNavNodes = array_filter($subNavNodes, fn(Node $node) => $guideNav->isPublished());
+          if ($subNavNodes) {
+            $item['subnav'] = array_map($makeLink, $subNavNodes);
+            // If the current page is in the subnav, mark the parent as current.
+            $current_in_subnav = array_filter($item['subnav'], function (Link $subItem) use ($current) {
+              return $subItem->getUrl()->toString() === $current;
+            });
+            if ($current_in_subnav) {
+              // We haven't added our item to the guidenav, add 1 to the last
+              // index to account for this.
+              $links['guide_current_index'] = $links['guide_nav'] ? array_key_last($links['guide_nav']) + 1 : 0;
+
+              // We needed to add one more to the index because twig's loops
+              // start at 1 not 0.
+              $links['guide_menubar_current'] = $links['guide_current_index'] + 1;
+            }
+          }
+        }
+        $links['guide_nav'][] = $item;
+        if ($item['link']->getUrl()->toString() === $current) {
+          // Set which subnav to display.
+          $links['guide_current_index'] = array_key_last($links['guide_nav']);
+          // Mark which top-level page is open. Twig's loops start at 1.
+          $links['guide_menubar_current'] = array_key_last($links['guide_nav']) + 1;
+        }
+      }
+    }
+  }
+
+  // Here, figure out the next/previous links.
+  // We need a flat list of all the URLs in the guide nav keyed by URL.
+  $allTheUrls = [];
+
+  array_walk_recursive(
+    $links['guide_nav'],
+    function ($link) use (&$allTheUrls) {
+      $allTheUrls[$link->getUrl()->toString()] = $link;
+    }
+  );
+
+  // $keyMap tells us what numeric slot each URL is found in.
+  $keyMap = array_keys($allTheUrls);
+  if ($allTheUrls && FALSE !== ($currentKey = array_search($current, $keyMap))) {
+    if (isset($keyMap[$currentKey - 1])) {
+      $prevKey = $keyMap[$currentKey - 1];
+      $links['guide_prev'] = $allTheUrls[$prevKey];
+    }
+
+    if (isset($keyMap[$currentKey + 1])) {
+      $nextKey = $keyMap[$currentKey + 1];
+      $links['guide_next'] = $allTheUrls[$nextKey];
+    }
+  }
+
+  // Invalidate this data if either the page or the guide nav changes.
+  $cacheTags = array_merge(
+    [dg_guide_nav_cache_tag($guideNav)],
+    $currentPage->getCacheTags(),
+    $guideNav->getCacheTags()
+  );
+  \Drupal::cache()->set($cid, $links, tags: $cacheTags);
+  return $links;
+}
+
+/**
+ * Implements hook_node_presave().
+ */
+function dg_guide_nav_node_presave(NodeInterface $node) {
+  switch ($node->getType()) {
+    case 'guide_navigation':
+      if ($node->uuid()) {
+        dg_guide_nav_invalidate_cache($node);
+      }
+      break;
+
+    case 'guides':
+      $guideNav = $node->field_guide_nav_ref?->referencedEntities();
+      if ($guideNav) {
+        dg_guide_nav_invalidate_cache($guideNav[0]);
+      }
+      break;
+  }
+}
+
+/**
+ * Generates group tag for a guide nav.
+ */
+function dg_guide_nav_cache_tag(NodeInterface $guideNav): string {
+  return 'guide-nav-links:' . $guideNav->uuid();
+}
+
+/**
+ * Invalidate all guide navs for a guide nav node.
+ */
+function dg_guide_nav_invalidate_cache(NodeInterface $node): void {
+  if ($node->getType() === 'guide_navigation') {
+    $tag = dg_guide_nav_cache_tag($node);
+    // Invalidate cached data for all links part of this guide nav $node.
+    Cache::invalidateTags([$tag]);
+  }
+}

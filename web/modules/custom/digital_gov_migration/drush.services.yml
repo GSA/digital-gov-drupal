@@ -1,0 +1,11 @@
+services:
+  postimport.commands:
+    class: \Drupal\digital_gov_migration\Commands\PostImportCommands
+    arguments: [
+      "@entity_type.manager",
+      "@entity_field.manager",
+      "@convert_text.shortcode_to_equiv",
+      "@http_client_factory"
+    ]
+    tags:
+      - { name: drush.command }

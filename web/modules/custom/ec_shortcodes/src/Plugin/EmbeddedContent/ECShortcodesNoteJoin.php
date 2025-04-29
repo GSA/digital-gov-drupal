@@ -46,8 +46,8 @@ class ECShortcodesNoteJoin extends EmbeddedContentPluginBase implements Embedded
     $form['text'] = [
       '#type' => 'text_format',
       '#title' => $this->t('Note Text'),
-      '#format' => $this->configuration['text']['format'] ?? 'html',
-      '#allowed_formats' => ['html'],
+      '#format' => 'html_embedded_content',
+      '#allowed_formats' => ['html_embedded_content'],
       '#default_value' => $this->configuration['text']['value'] ?? '',
       '#required' => TRUE,
     ];

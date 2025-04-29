@@ -4,8 +4,6 @@ _meta:
   uuid: 4d47f6f7-7716-4a42-9f03-1b93484f39b9
   bundle: menu_link_content
   default_langcode: en
-  depends:
-    73380b43-dd80-4ac0-beee-9803a7548068: node
 default:
   enabled:
     -
@@ -18,7 +16,7 @@ default:
       value: footer-about
   link:
     -
-      target_uuid: 73380b43-dd80-4ac0-beee-9803a7548068
+      uri: 'https://digital.gov/about'
       title: ''
       options: {  }
   external:

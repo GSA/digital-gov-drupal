@@ -1,0 +1,20 @@
+uuid: b1f85ffc-700b-4fca-9398-ed9856e8af71
+langcode: en
+status: true
+dependencies:
+  module:
+    - sitewide_alert_block
+  theme:
+    - digital_gov
+id: digital_gov_sitewidealert
+theme: digital_gov
+region: header
+weight: -1
+provider: null
+plugin: sitewide_alert_block
+settings:
+  id: sitewide_alert_block
+  label: 'Sitewide Alert'
+  label_display: '0'
+  provider: sitewide_alert_block
+visibility: {  }

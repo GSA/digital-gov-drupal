@@ -1,0 +1,63 @@
+id: json_images
+label: 'Import images from Digital.gov Hugo'
+migration_tags:
+  - 'digitalgov'
+source:
+  constants:
+    DRUPAL_FILE_DIRECTORY: 'public://m-images/'
+
+  plugin: url
+  data_fetcher_plugin: file
+  data_parser_plugin: json
+
+  urls:
+    # The host may have to change, depending on your local. For example, in
+    # WSL2, I had ot replace this with my WSL2 instances IP since Drupal is
+    # running inside a Docker Lando container, so localhost is the container
+    # not WSL2, where Hugo is. This shouldn't matter if this is a remote host.
+    # Another host to try is host.docker.internal or find your local machine's
+    # IP address.
+    #- http://172.20.60.7:1313/images/index.json
+    #- http://localhost:1313/images/index.json
+    - https://federalist-466b7d92-5da1-4208-974f-d61fd4348571.sites.pages.cloud.gov/preview/gsa/digitalgov.gov/nl-json-endpoints/images/index.json
+
+
+  # XPath-like selector. The slash (/) at the beginning is optional.
+  # This is needed if the content is not at the root.
+  item_selector:
+  fields:
+    - name: src_image_id
+      label: 'Image ID'
+      selector: uid
+    - name: src_image_url
+      label: 'Image URL'
+      selector: source-url
+  ids:
+    src_image_id:
+      type: string
+process:
+  psf_destination_filename:
+    plugin: callback
+    callable: basename
+    source: src_image_url
+  psf_destination_full_path:
+    - plugin: concat
+      source:
+        - constants/DRUPAL_FILE_DIRECTORY
+        - '@psf_destination_filename'
+    - plugin: urlencode
+  psf_source_image_path:
+    plugin: urlencode
+    source: src_image_url
+  # This is the field that actually gets saved to the file entity, the rest
+  # are just pseudo fields for populating it.
+  uri:
+    # https://api.drupal.org/api/drupal/core%21modules%21migrate%21src%21Plugin%21migrate%21process%21FileCopy.php/class/FileCopy/10
+    plugin: file_copy
+    source:
+      - '@psf_source_image_path'
+      - '@psf_destination_full_path'
+    file_exists: 'use existing'
+    move: FALSE
+destination:
+  plugin: 'entity:file'

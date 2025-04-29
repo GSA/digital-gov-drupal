@@ -1,0 +1,52 @@
+uuid: d79a9ac5-a009-4c2e-9b27-60d60cf8609c
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.html_embedded_content
+  module:
+    - ckeditor5
+format: html_embedded_content
+editor: ckeditor5
+settings:
+  toolbar:
+    items:
+      - bold
+      - italic
+      - code
+      - link
+      - heading
+      - bulletedList
+      - numberedList
+      - sourceEditing
+      - style
+  plugins:
+    ckeditor5_heading:
+      enabled_headings:
+        - heading2
+        - heading3
+        - heading4
+        - heading5
+        - heading6
+    ckeditor5_list:
+      properties:
+        reversed: true
+        startIndex: true
+      multiBlock: true
+    ckeditor5_sourceEditing:
+      allowed_tags: {  }
+    ckeditor5_style:
+      styles:
+        -
+          label: 'Highlight Text'
+          element: '<span class="highlight-text">'
+        -
+          label: 'Box Border'
+          element: '<div class="box">'
+        -
+          label: 'USA button link (outlined)'
+          element: '<a class="usa-button usa-button--outline">'
+    linkit_extension:
+      linkit_enabled: false
+image_upload:
+  status: false

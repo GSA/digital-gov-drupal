@@ -1,16 +1,18 @@
+{% set count_prefix = accordion_title.value|striptags|slice(0, 10)|clean_class %}
+{% set count = count_prefix ~ '-' ~ ((count ?? 0) + random()) %}
 <div class="usa-accordion accordion">
   <h3 class="usa-accordion__heading">
-    <button class="usa-accordion__button" title="View {{ title }}" aria-expanded="false" aria-controls="accordion-{{ count }}">
+    <button class="usa-accordion__button" title="View {{ accordion_title.value|striptags }}" aria-expanded="false" aria-controls="accordion-{{ count }}">
       {% if icon %}
         <span class="icon">
           <svg class="usa-icon dg-icon dg-icon--standard margin-bottom-05" aria-hidden="true" focusable="false">
-            <use href="/{{ active_theme_path() }}/static/digitalgov/img/sprite.svg#{{ icon }}"></use>
+            <use href="/{{ active_theme_path() }}/static/uswds/img/sprite.svg#{{ icon }}"></use>
           </svg>
         </span>
       {% else %}
         <span class="icon">
           <svg class="usa-icon dg-icon dg-icon--standard margin-bottom-05" aria-hidden="true" focusable="false" role="img">
-            <use href="/{{ active_theme_path() }}/static/digitalgov/img/sprite.svg#unfold_more"></use>
+            <use href="/{{ active_theme_path() }}/static/uswds/img/sprite.svg#unfold_more"></use>
           </svg>
         </span>
       {% endif %}
@@ -18,6 +20,11 @@
         {% if kicker %}
           <strong class="kicker">{{ kicker }}</strong>
         {% endif %}
+        {% set title = {
+          '#type': 'processed_text',
+          '#text': accordion_title.value,
+          '#format': accordion_title.format,
+        } %}
         {{ title }}
         {% if pdf %}
           <em>{{ pdf }}</em>

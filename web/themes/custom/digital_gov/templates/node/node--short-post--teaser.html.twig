@@ -78,11 +78,11 @@
   {% endapply %}{% endset %}
   {% if drupal_field('field_logo', 'node', source.id)|field_value %}
     {% set source_logo_url %}{% apply spaceless %}
-      {{ source.field_logo|file_uri|image_style('thumbnail') }}
+      {{ source.field_logo|file_uri|image_style('logo_250_x_250_convert_to_webp') }}
     {% endapply %}{% endset %}
   {% endif %}
 {% endif %}
-<article class="card card-news--external" aria-labelledby="{{ unique_id }}">
+<article class="card card-news--external card-linked" aria-labelledby="{{ unique_id }}">
   <div class="card__content">
     <div class="card__summary">
       <h3 id="{{ unique_id }}">

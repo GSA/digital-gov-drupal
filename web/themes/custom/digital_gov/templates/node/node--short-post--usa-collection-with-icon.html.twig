@@ -1,0 +1,10 @@
+{#
+This view mode is meant to be used within a usa-collection list
+#}
+{% set link = content.field_external_url|field_value|first %}
+{{ include('@digital_gov/partials/usa-collection-item.html.twig', {
+  with_icon: true,
+  link_title: node.label,
+  summary: content.field_summary|field_value,
+  url: link['#url'].toString,
+}, with_context: false) }}

@@ -1,0 +1,78 @@
+uuid: 67326451-c765-4010-a14d-a0db882838eb
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.image
+    - field.field.node.authors.field_agency_full_name
+    - field.field.node.authors.field_first_name
+    - field.field.node.authors.field_github
+    - field.field.node.authors.field_last_name
+    - field.field.node.authors.field_profile_source
+    - field.field.node.authors.field_slug
+    - node.type.authors
+  module:
+    - options
+    - text
+    - user
+id: node.authors.image
+targetEntityType: node
+bundle: authors
+mode: image
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
+  field_agency_full_name:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 106
+    region: content
+  field_first_name:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 119
+    region: content
+  field_github:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 113
+    region: content
+  field_last_name:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_profile_source:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 120
+    region: content
+  field_slug:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 106
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden: {  }

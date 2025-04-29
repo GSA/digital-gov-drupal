@@ -4,9 +4,11 @@ status: true
 dependencies:
   module:
     - config_pages
+    - node
 id: identifier_admin
 label: 'Identifier Admin'
 weight: 9
 is_admin: null
 permissions:
+  - 'access content overview'
   - 'edit identifier config page entity'

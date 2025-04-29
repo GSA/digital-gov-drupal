@@ -60,6 +60,7 @@ class ECShortCodesFeaturedResourceExt extends EmbeddedContentPluginBase implemen
       '#title' => $this->t('Url'),
       '#default_value' => $this->configuration['url'],
       '#required' => TRUE,
+      '#description' => $this->t('Enter a URL for an external resource.'),
     ];
     $form['title'] = [
       '#type' => 'textfield',

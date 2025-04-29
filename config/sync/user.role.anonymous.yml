@@ -6,6 +6,7 @@ dependencies:
     - config_pages
     - media
     - paragraphs_type_permissions
+    - sitewide_alert
     - system
 _core:
   default_config_hash: j5zLMOdJBqC0bMvSdth5UebkprJB8g_2FXHqhfpJzow
@@ -20,3 +21,4 @@ permissions:
   - 'view paragraph content external_content'
   - 'view paragraph content featured_links'
   - 'view paragraph content internal_content'
+  - 'view published sitewide alert entities'

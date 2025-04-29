@@ -1,0 +1,21 @@
+uuid: 73eb184b-e66b-4002-bceb-2361a56dccbe
+langcode: en
+status: true
+dependencies: {  }
+name: logo_250_x_250_convert_to_webp
+label: 'DG Logo (scale and crop 250 x 250, convert to webp)'
+effects:
+  938659b3-0f94-4300-ab93-ad5d3c747ad9:
+    uuid: 938659b3-0f94-4300-ab93-ad5d3c747ad9
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 250
+      height: 250
+      anchor: center-center
+  9a207c2c-2711-4470-bfa2-183e71c4eed1:
+    uuid: 9a207c2c-2711-4470-bfa2-183e71c4eed1
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

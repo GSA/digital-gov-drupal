@@ -1,9 +1,5 @@
 name: Generate Static (dev)
 
-env:
-  BRANCH: develop
-  CF_SPACE: dev
-
 on:
   workflow_call:
     secrets:
@@ -17,8 +13,8 @@ on:
         required: true
       DATABASE_BACKUP_BASTION_NAME:
         required: true
-  #schedule:
-  #  - cron: "15 * * * *"
+  schedule:
+    - cron: "15 * * * *"
 
 permissions:
   contents: read
@@ -27,4 +23,6 @@ permissions:
 jobs:
   generate-static:
     uses: ./.github/workflows/generate-static.yml
+    with:
+      CF_SPACE: dev
     secrets: inherit

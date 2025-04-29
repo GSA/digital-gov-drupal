@@ -1,0 +1,14 @@
+uuid: e84694ef-4efe-4a33-bb28-bc433b06c1f7
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.menu_manager
+  module:
+    - user
+id: user_add_role_action.menu_manager
+label: 'Add the Menu Manager role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: menu_manager

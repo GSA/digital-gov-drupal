@@ -1,0 +1,52 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for Digital.gov Fields module.
+ */
+
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter() for node_form.
+ */
+function dg_fields_form_node_form_alter(array &$form, FormStateInterface $form_state, string $id): void {
+  if ($id === 'node_guides_edit_form') {
+    // Only allow vocabularies with a machine name ending in '_glossary'
+    // in glossary ref field.
+    $form['field_glossary']['widget']['#options'] = array_filter(
+      $form['field_glossary']['widget']['#options'],
+      function (string $value, string $key): bool {
+        return $key === '_none' || str_ends_with($key, '_glossary');
+      },
+      ARRAY_FILTER_USE_BOTH
+    );
+  }
+}
+
+/**
+ * Implements hook_entity_view_alter().
+ */
+function dg_fields_entity_view_alter(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display): void {
+  if ($display->getTargetBundle() === 'video' && ($build['#embed'] ?? FALSE)) {
+    // Media wants to proxy the URL to the video, we should use the direct URL
+    // so the player works when exported by Tome.
+    $videoURL = $entity->get('field_media_oembed_video')->first()->getValue()['value'];
+    // Youtube blocks iframe-ing unless the URL is to /embed/.
+    $videoURL = str_replace("youtube.com/watch?v=", "youtube.com/embed/", $videoURL);
+    $build["field_media_oembed_video"][0]["#attributes"]['src'] = $videoURL;
+
+    if (str_contains($videoURL, 'youtube.com/embed/')) {
+      // Customize the HTML for YouTube iframes.
+      unset(
+        $build["field_media_oembed_video"][0]["#attributes"]["height"],
+        $build["field_media_oembed_video"][0]["#attributes"]["width"]
+      );
+      $build["field_media_oembed_video"][0]["#attributes"]["style"] = "position: absolute; top: 0; left: 0; width: 100%; height: 100%;";
+      $build["field_media_oembed_video"][0]["#attributes"]["allowfullscreen"] = "";
+      $build["field_media_oembed_video"][0]["#attributes"]["frameborder"] = 0;
+    }
+  }
+}

@@ -47,15 +47,16 @@ class ECShortcodesRing extends EmbeddedContentPluginBase implements EmbeddedCont
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
     $form['heading'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Ring Component Heading'),
+      '#title' => $this->t('Title'),
       '#default_value' => $this->configuration['heading'],
       '#required' => TRUE,
     ];
     $form['text'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Ring Component Text'),
-      '#default_value' => $this->configuration['text'],
-      '#maxlenght' => 512,
+      '#type' => 'text_format',
+      '#title' => $this->t('Body'),
+      '#format' => 'html_embedded_content',
+      '#allowed_formats' => ['html_embedded_content'],
+      '#default_value' => $this->configuration['text']['value'] ?? '',
       '#required' => TRUE,
     ];
     return $form;

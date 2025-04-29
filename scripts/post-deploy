@@ -1,20 +1,6 @@
 #! /bin/bash
 
-echo  "Updating drupal ... "
-drush state:set system.maintenance_mode 1 -y
-drush cr
-#drush updatedb --no-cache-clear -y
-#drush cim -y
-# drush locale-check
-# drush locale-update
-
-echo "Uploading public files to S3 ..."
-drush s3fs-rc
-drush s3fs-cl -y --scheme=public --condition=newer
+echo  "Running post-deploy ... "
 
 cd /home/vcap/app/ || exit
 ./orch/deploy.sh
-
-drush cr
-drush state:set system.maintenance_mode 0 -y
-echo "Post deploy finished!"

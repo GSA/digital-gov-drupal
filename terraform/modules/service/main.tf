@@ -8,8 +8,8 @@ locals {
             tags = value.tags
             credentials = merge(
               [
-                for name in try(value.credentials, {}) : {
-                  name = try(var.secrets[name], null)
+                for name in value.credentials : {
+                  "${name}" = try(var.secrets[name], null)
                 }
               ]
             ...)
@@ -62,9 +62,7 @@ resource "cloudfoundry_service_instance" "this" {
 }
 
 resource "cloudfoundry_user_provided_service" "this" {
-  for_each = {
-    for key, value in local.credentials : key => value
-  }
+  for_each = local.credentials
 
   name              = format(var.env.name_pattern, each.key)
   space             = var.cloudfoundry.space.id

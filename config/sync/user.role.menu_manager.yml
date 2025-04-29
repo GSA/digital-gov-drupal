@@ -1,0 +1,15 @@
+uuid: 42bef0f2-c0f7-425e-abed-236efbfe75a5
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_admin_per_menu
+id: menu_manager
+label: 'Menu Manager'
+weight: 12
+is_admin: null
+permissions:
+  - 'administer footer menu items'
+  - 'administer footer-about menu items'
+  - 'administer footer-grow menu items'
+  - 'administer main menu items'

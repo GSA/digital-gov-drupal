@@ -11,7 +11,6 @@ echo "DRUPAL_UPDATE_OR_INSTALL: ${DRUPAL_UPDATE_OR_INSTALL}"
 set -x
 if [ "${DRUPAL_UPDATE_OR_INSTALL}" = 'update' ]; then
     ./orch/deploy_update.sh
-    echo 'updating'
 elif [ "${DRUPAL_UPDATE_OR_INSTALL}" = 'install' ]; then
     ./orch/deploy_install.sh
 else

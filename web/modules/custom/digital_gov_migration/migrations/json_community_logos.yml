@@ -1,0 +1,54 @@
+id: json_community_logos
+label: 'Import community logo images from Digital.gov Hugo'
+migration_tags:
+  - 'digitalgov'
+source:
+  constants:
+    SOURCE_URL: 'https://federalist-466b7d92-5da1-4208-974f-d61fd4348571.sites.pages.cloud.gov/preview/gsa/digitalgov.gov/nl-json-endpoints/img/'
+    DG_LOGO_DIR: 'public://dg-logo/'
+
+  plugin: url
+  data_fetcher_plugin: file
+  data_parser_plugin: json
+  urls:
+    - https://federalist-466b7d92-5da1-4208-974f-d61fd4348571.sites.pages.cloud.gov/preview/gsa/digitalgov.gov/nl-json-endpoints/communities/index.json
+
+  item_selector: items
+
+  fields:
+    - name: field_dg_logo
+      label: "Basename"
+      selector: field_dg_logo
+  ids:
+    field_dg_logo:
+      type: string
+
+process:
+  # This is the URL we want to fetch
+  psf_logo_url:
+    plugin: concat
+    unpack_source: true
+    source: [ constants/SOURCE_URL, field_dg_logo ]
+  psf_logo_local_path:
+    - plugin: concat
+      source: [ constants/DG_LOGO_DIR, field_dg_logo ]
+    - plugin: urlencode
+  psf_download:
+    plugin: download
+    source:
+      - '@psf_logo_url'
+      - '@psf_logo_local_path'
+    file_exists: 'use existing'
+  # This is the field that actually gets saved to the file entity, the rest
+  # are just pseudo fields for populating it.
+  uri:
+    # https://api.drupal.org/api/drupal/core%21modules%21migrate%21src%21Plugin%21migrate%21process%21FileCopy.php/class/FileCopy/10
+    plugin: file_copy
+    source:
+      - '@psf_logo_local_path'
+      - '@psf_logo_local_path'
+    file_exists: 'use existing'
+    move: FALSE
+
+destination:
+  plugin: 'entity:file'

@@ -875,10 +875,6 @@ $settings['migrate_node_migrate_type_classic'] = FALSE;
 # $settings['migrate_file_public_path'] = '';
 # $settings['migrate_file_private_path'] = '';
 
-// @TODO add logic for detecting if the current environment is a non-production
-// remote environment.
-$config['environment']['env_non_prod_remote'] = FALSE;
-
 /**
  * Load local development override configuration, if available.
  *
@@ -909,6 +905,17 @@ if (FALSE !== getenv('GSA_AUTH_KEY')) {
  */
 if (empty(getenv('VCAP_APPLICATION')) || getenv('environment') !== 'prod') {
   $config['google_tag.container.GTM-MZCKZPQ.675b35536672a7.15039879']['status'] = FALSE;
+}
+
+/**
+ * Is this a non-production remote environment?
+ *
+ * Currently this just toggles the 'Preview site banner' on if true. Default
+ * is false.
+ */
+$config['environment']['env_non_prod_remote'] = FALSE;
+if (!empty(getenv('VCAP_APPLICATION')) && getenv('environment') !== 'prod') {
+  $config['environment']['env_non_prod_remote'] = TRUE;
 }
 
 // Load cloud.gov settings into Drupal.

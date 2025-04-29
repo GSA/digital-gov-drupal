@@ -1,0 +1,5 @@
+services:
+  dg_tome.tome_subscriber:
+    class: '\Drupal\dg_tome\EventSubscriber\TomeEventSubscriber'
+    tags:
+      - { name: 'event_subscriber' }

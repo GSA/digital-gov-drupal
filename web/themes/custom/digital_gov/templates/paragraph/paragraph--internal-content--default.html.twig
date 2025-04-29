@@ -39,23 +39,16 @@
  */
 
 #}
-{% set node = content.field_content.0['#entity'] %}
-{% set link_title %}{% apply spaceless %}
-  {% if content.field_override_title|field_value %}
-    {{ content.field_override_title|field_value }}
-  {% else %}
-    {{ drupal_field('title', 'node', node.id)|field_value }}
-  {% endif %}{% endapply %}
-{% endset %}
-{% set link_summary %}{% apply spaceless %}
-  {% if content.field_override_summary|field_value %}
-    {{ content.field_override_summary|field_value }}
-  {% else %}
-    {{ drupal_field('field_summary', 'node', node.id)|field_value }}
-  {% endif %}{% endapply %}
-{% endset %}
-{{ include('@digital_gov/partials/featured-resource.html.twig', {
-  url: path('entity.node.canonical', {node: node.id}),
-  title: link_title,
-  summary: link_summary,
-}, with_context: false) }}
+{% if content.field_content|render %}
+  {% set node = content.field_content.0['#entity'] %}
+  {% set node_url = path('entity.node.canonical', {node: node.id}) %}
+  {% set node_summary = node.field_summary.value ? node.field_summary.value|check_markup('single_inline_html') %}
+  {% set link_title = content.field_override_title|field_value|default(node.getTitle()) %}
+  {% set link_summary = content.field_override_summary|field_value|default(node_summary) %}
+
+  {{ include('@digital_gov/partials/featured-resource.html.twig', {
+    url: node_url,
+    title: link_title,
+    summary: link_summary,
+  }, with_context: false) }}
+{% endif %}

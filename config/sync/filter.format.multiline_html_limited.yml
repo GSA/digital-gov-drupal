@@ -1,0 +1,32 @@
+uuid: e6a1ff5b-ffa5-41ba-8a27-915d068c44d6
+langcode: en
+status: true
+dependencies:
+  module:
+    - linkit
+name: 'Multiline HTML limited'
+format: multiline_html_limited
+weight: 0
+filters:
+  filter_html:
+    id: filter_html
+    provider: filter
+    status: true
+    weight: -10
+    settings:
+      allowed_html: '<br> <p> <strong> <em> <a href data-entity-type data-entity-uuid data-entity-substitution> <ul> <ol reversed start> <li>'
+      filter_html_help: true
+      filter_html_nofollow: false
+  filter_htmlcorrector:
+    id: filter_htmlcorrector
+    provider: filter
+    status: true
+    weight: 10
+    settings: {  }
+  linkit:
+    id: linkit
+    provider: linkit
+    status: true
+    weight: 0
+    settings:
+      title: true

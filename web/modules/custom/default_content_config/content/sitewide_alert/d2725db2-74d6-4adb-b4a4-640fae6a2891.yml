@@ -1,0 +1,49 @@
+_meta:
+  version: '1.0'
+  entity_type: sitewide_alert
+  uuid: d2725db2-74d6-4adb-b4a4-640fae6a2891
+  default_langcode: en
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  user_id:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Social Media Guidance'
+  style:
+    -
+      value: info
+  dismissible:
+    -
+      value: false
+  dismissible_ignore_before_time:
+    -
+      value: 1740124894
+  limit_to_pages_negate:
+    -
+      value: false
+  message:
+    -
+      value: '<ul><li><a href="https://digital.gov/california-wildfires">digital.gov/california-wildfires</a></li><li><a href="https://digital.gov/hurricane-helene">digital.gov/hurricane-helene</a></li></ul>'
+      format: multiline_html_limited
+  scheduled_alert:
+    -
+      value: false
+  created:
+    -
+      value: 1740068336
+  field_heading:
+    -
+      value: 'Guidance for U.S. government websites and social media'
+  field_show_icon:
+    -
+      value: true
+  field_slim:
+    -
+      value: false

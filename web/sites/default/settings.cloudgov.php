@@ -19,7 +19,9 @@ $settings['tome_static_directory'] = dirname(DRUPAL_ROOT) . '/html';
 $settings['config_sync_directory'] = dirname(DRUPAL_ROOT) . '/config/sync';
 $settings['file_private_path'] = dirname(DRUPAL_ROOT) . '/private';
 
-$settings['hash_salt'] = getenv("HASH_SALT");
+if (!empty(getenv("HASH_SALT"))) {
+  $settings['hash_salt'] = hash('sha256', getenv("HASH_SALT"));
+}
 
 $settings['tome_static_path_exclude'] = [
   '/saml', '/saml/acs', '/saml/login', '/saml/logout', '/saml/metadata', '/saml/sls',
@@ -27,8 +29,6 @@ $settings['tome_static_path_exclude'] = [
   '/es/saml', '/es/saml/acs', '/es/saml/login', '/es/saml/logout', '/es/saml/metadata', '/es/saml/sls',
   '/es/jsonapi', '/es/jsonapi/deleted-nodes',
 ];
-
-$is_cloudgov = FALSE;
 
 // Default all splits to be off, then re-enable for the correct environments.
 $config['config_split.config_split.develop']['status'] = FALSE;
@@ -46,28 +46,27 @@ if (!empty($cf_application_data['space_name']) &&
   switch ($application_environment) {
     case "dev":
       $config['config_split.config_split.develop']['status'] = TRUE;
-      $is_cloudgov = TRUE;
       $server_http_host = 'digital-gov-drupal-dev.app.cloud.gov';
       break;
 
     case "prod":
       $config['config_split.config_split.non_production']['status'] = FALSE;
       $config['config_split.config_split.production']['status'] = TRUE;
-      $is_cloudgov = TRUE;
       $server_http_host = 'digital-gov-drupal-prod.app.cloud.gov';
       break;
 
-    case "stage":
+    case "staging":
       $config['config_split.config_split.stage']['status'] = TRUE;
-      $is_cloudgov = TRUE;
-      $server_http_host = 'digital-gov-drupal-stage.app.cloud.gov';
+      $server_http_host = 'digital-gov-drupal-staging.app.cloud.gov';
       break;
 
     case "test":
       $config['config_split.config_split.test']['status'] = TRUE;
-      $is_cloudgov = TRUE;
       $server_http_host = 'digital-gov-drupal-test.app.cloud.gov';
       break;
+
+    default:
+      throw new \Exception(sprintf('Invalid environment variable "environment" with value  of "%" given. Valid values are: dev, prod, staging, test.', $application_environment));
   }
 }
 
@@ -95,8 +94,24 @@ foreach ($cf_service_data as $service_list) {
       if (!empty($service['credentials']['newrelic_key'])) {
         $settings['new_relic_rpm.api_key'] = $service['credentials']['newrelic_key'];
         $config['new_relic_rpm.settings']['api_key'] = $service['credentials']['newrelic_key'];
+      } elseif (!empty(getenv('NEWRELIC_KEY'))) {
+        $settings['new_relic_rpm.api_key'] = getenv('NEWRELIC_KEY');
+        $config['new_relic_rpm.settings']['api_key'] = getenv('NEWRELIC_KEY');
       }
-      $settings['cron_key'] = hash('sha256', $service['credentials']['cron_key']);
+
+      // Set the key required to make successful SSO calls with GSA Auth.
+      if (!empty($service['credentials']['gsa_auth_key'])) {
+         $config['openid_connect.client.gsa_auth']['settings']['client_secret'] = $service['credentials']['gsa_auth_key'];
+      }
+
+      if (!empty($service['credentials']['cron_key'])) {
+        $settings['cron_key'] = hash('sha256', $service['credentials']['cron_key']);
+      }
+
+      if (!empty($service['credentials']['hash_salt']) && empty($settings['hash_salt'])) {
+        $settings['hash_salt'] = hash('sha256', $service['credentials']['hash_salt']);
+      }
+
     }
     elseif (stristr($service['name'], 'storage')) {
       $settings['s3fs.access_key'] = $service['credentials']['access_key_id'];
@@ -152,7 +167,7 @@ $settings['trusted_host_patterns'][] = $applicaiton_fqdn_regex;
 
 //   case "stage":
 //     $config['config_split.config_split.non_production']['status'] = TRUE;
-//     $config['samlauth.authentication']['sp_entity_id'] = 'digital-gov-drupal-stage.app.cloud.gov';
+//     $config['samlauth.authentication']['sp_entity_id'] = 'digital-gov-drupal-staging.app.cloud.gov';
 //     $config['samlauth.authentication']['idp_single_sign_on_service'] = 'https://auth-preprod.gsa.gov';
 //     break;
 

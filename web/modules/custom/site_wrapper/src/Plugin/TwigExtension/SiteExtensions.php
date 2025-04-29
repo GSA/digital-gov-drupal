@@ -71,7 +71,7 @@ class SiteExtensions extends AbstractExtension {
    *   The URL as a string.
    */
   public function getLocalLogo(): string {
-    $path = '/' . $this->themeManager->getActiveTheme()->getPath() . '/static/digitalgov/img/logos/digit-50.png';
+    $path = '/' . $this->themeManager->getActiveTheme()->getPath() . '/static/digitalgov/img/digit-50.png';
     return Url::fromUserInput($path)->toString();
   }
 

@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.authors.body
     - field.field.node.authors.field_agency_full_name
     - field.field.node.authors.field_first_name
     - field.field.node.authors.field_github
@@ -16,7 +15,6 @@ dependencies:
     - content_moderation
     - field_group
     - path
-    - text
 third_party_settings:
   field_group:
     group_social_media:
@@ -45,16 +43,6 @@ targetEntityType: node
 bundle: authors
 mode: default
 content:
-  body:
-    type: text_textarea_with_summary
-    weight: 7
-    region: content
-    settings:
-      rows: 9
-      summary_rows: 3
-      placeholder: ''
-      show_summary: false
-    third_party_settings: {  }
   created:
     type: datetime_timestamp
     weight: 2

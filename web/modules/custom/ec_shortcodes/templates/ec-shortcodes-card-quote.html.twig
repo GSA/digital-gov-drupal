@@ -1,14 +1,34 @@
-{# NOT-MIGRATED
-  Text and cite need to support HTML.
+{# Quote: display a block of quoted text with optional citation
+
+  @param {bool} dark - optional value of "dark" to display a dark background color otherwise will display as gold
+  @param {string} text - required text for displaying a quote
+  @param {string} cite - optional string to display a citation
 #}
 
-<div class="quote-block">
-  <blockquote>
-    <span class="quote-block__quotation-mark">“</span>
-    {{ text }}
-    <span class="quote-block__quotation-mark">”</span>
-    {% if cite %}
-      <cite>— {{ cite }}</cite>
-    {% endif %}
-  </blockquote>
-</div>
+{% set classes = [
+  'quote-block',
+  dark ? 'quote-block--dark',
+] %}
+
+{% if text.value %}
+  <div{{ create_attribute().addClass(classes) }}>
+    <blockquote>
+      <span class="quote-block__quotation-mark">&ldquo;</span>
+      {% set text = {
+        '#type': 'processed_text',
+        '#text': text.value,
+        '#format': text.format,
+      } %}
+      {{ text }}
+      <span class="quote-block__quotation-mark">&rdquo;</span>
+      {% if cite.value %}
+        {% set cite = {
+          '#type': 'processed_text',
+          '#text': cite.value,
+          '#format': cite.format,
+        } %}
+        <cite>— {{ cite }}</cite>
+      {% endif %}
+    </blockquote>
+  </div>
+{% endif %}

@@ -5,6 +5,8 @@ _meta:
   bundle: event
   default_langcode: en
   depends:
+    b0b97af4-90e2-4144-81c5-c31022c81d9f: node
+    77dce077-3aff-45b4-bb75-48852de1436c: node
     ad7aa7a5-33cf-400e-93cf-11820e467111: node
     bfc21cc0-5de7-4b9f-8dcd-4b1da264ace5: node
 default:
@@ -39,9 +41,14 @@ default:
       pathauto: 0
   body:
     -
-      value: '<drupal-media data-entity-type="media" data-entity-uuid="ed5f0f58-fbd9-4749-8e47-9b7c375087e6">&nbsp;</drupal-media><p>At its core, plain language is about making documents accessible to readers. In this month’s meeting we will discuss how plain language intersects with 508 compliance requirements to make federal electronic documents and technology accessible to people with disabilities. We invite 508 program managers and plain language experts to join us for an informative discussion. Topics include:</p><ul><li>What do plain language experts need to know about 508 compliance?</li><li>How can plain language support 508 compliance (and vice versa)</li><li>Disabilities can be permanent, temporary, or situational, and even when they’re permanent, they can be new or longstanding. What are some of the ways in which we all experience disabilities that might increase our need for plain language?</li><li>What are some common disabilities we need to consider when writing documents in plain language?</li><li>What formatting techniques hinder access to electronic or print texts?</li><li>Are there times when plain language and accessibility might be at odds?</li></ul><h2>In This Talk</h2><ul><li><strong>Katina Stapleton</strong>, Co-Chair of PLAIN</li><li><strong>David Lipscomb</strong>, from the Center for Plain Language</li></ul><hr><h2>Related Links and Resources:</h2><ul><li><a href="https://www.section508.gov/training">Section 508 training</a></li><li><a href="https://accessibility.digital.gov/">Accessibility for Teams</a></li><li><a href="https://accessibility.18f.gov/">18F''s Guide to Accessibility</a></li><li>[Join the Accessibility Community]({{&lt; ref "/communities/it-accessibility-section-508.md" &gt;}})</li><li><a href="https://plainlanguage.gov/">Plain language training</a></li><li>[Join the Plain Community]({{&lt; ref "/communities/plain-language-community-of-practice.md" &gt;}})</li></ul><hr><p><em>This meeting is hosted by the </em><a href="https://plainlanguage.gov/"><em>Plain Language Action and Information Network</em></a><em> (PLAIN), a community of federal employees dedicated to the idea that citizens deserve clear communications from the government.</em></p>'
+      value: '<drupal-media data-entity-type="media" data-entity-uuid="ed5f0f58-fbd9-4749-8e47-9b7c375087e6" data-align="right">&nbsp;</drupal-media><p>At its core, plain language is about making documents accessible to readers. In this month’s meeting we will discuss how plain language intersects with 508 compliance requirements to make federal electronic documents and technology accessible to people with disabilities. We invite 508 program managers and plain language experts to join us for an informative discussion. Topics include:</p><ul><li>What do plain language experts need to know about 508 compliance?</li><li>How can plain language support 508 compliance (and vice versa)</li><li>Disabilities can be permanent, temporary, or situational, and even when they’re permanent, they can be new or longstanding. What are some of the ways in which we all experience disabilities that might increase our need for plain language?</li><li>What are some common disabilities we need to consider when writing documents in plain language?</li><li>What formatting techniques hinder access to electronic or print texts?</li><li>Are there times when plain language and accessibility might be at odds?</li></ul><h2>In This Talk</h2><ul><li><strong>Katina Stapleton</strong>, Co-Chair of PLAIN</li><li><strong>David Lipscomb</strong>, from the Center for Plain Language</li></ul><hr><h2>Related Links and Resources:</h2><ul><li><a href="https://www.section508.gov/training">Section 508 training</a></li><li><a href="https://accessibility.digital.gov/">Accessibility for Teams</a></li><li><a href="https://accessibility.18f.gov/">18F''s Guide to Accessibility</a></li><li>[Join the Accessibility Community]({{&lt; ref "/communities/it-accessibility-section-508.md" &gt;}})</li><li><a href="https://plainlanguage.gov/">Plain language training</a></li><li>[Join the Plain Community]({{&lt; ref "/communities/plain-language-community-of-practice.md" &gt;}})</li></ul><hr><p><em>This meeting is hosted by the </em><a href="https://plainlanguage.gov/"><em>Plain Language Action and Information Network</em></a><em> (PLAIN), a community of federal employees dedicated to the idea that citizens deserve clear communications from the government.</em></p>'
       format: html
       summary: ''
+  field_authors:
+    -
+      entity: b0b97af4-90e2-4144-81c5-c31022c81d9f
+    -
+      entity: 77dce077-3aff-45b4-bb75-48852de1436c
   field_captions:
     -
       uri: 'https://www.captionedtext.com/client/event.aspx?EventID=4380373&CustomerID=321'
@@ -72,7 +79,7 @@ default:
       options: {  }
   field_summary:
     -
-      value: 'We’ll discuss how plain language intersects with 508 compliance requirements to make federal electronic documents and information technology accessible to people with disabilities.'
+      value: '<p>We’ll discuss how plain language intersects with 508 compliance requirements to make federal electronic documents and information technology accessible to people with disabilities.</p>'
       format: single_inline_html
   field_topics:
     -

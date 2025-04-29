@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.resources.body
+    - field.field.node.resources.field_authors
     - field.field.node.resources.field_deck
     - field.field.node.resources.field_page_weight
     - field.field.node.resources.field_slug
@@ -23,19 +24,19 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 101
+    weight: 2
     region: content
   content_moderation_control:
     settings: {  }
     third_party_settings: {  }
-    weight: -20
+    weight: 0
     region: content
   field_deck:
     type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 108
+    weight: 6
     region: content
   field_page_weight:
     type: number_integer
@@ -44,7 +45,7 @@ content:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 102
+    weight: 3
     region: content
   field_slug:
     type: string
@@ -52,14 +53,14 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 106
+    weight: 5
     region: content
   field_summary:
     type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 104
+    weight: 4
     region: content
   field_topics:
     type: entity_reference_label
@@ -67,11 +68,12 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 125
+    weight: 7
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 1
     region: content
-hidden: {  }
+hidden:
+  field_authors: true

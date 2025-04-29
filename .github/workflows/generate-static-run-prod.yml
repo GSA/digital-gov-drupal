@@ -1,9 +1,5 @@
 name: Generate Static (prod)
 
-env:
-  BRANCH: main
-  CF_SPACE: prod
-
 on:
   workflow_call:
     secrets:
@@ -27,4 +23,6 @@ permissions:
 jobs:
   generate-static:
     uses: ./.github/workflows/generate-static.yml
+    with:
+      CF_SPACE: prod
     secrets: inherit

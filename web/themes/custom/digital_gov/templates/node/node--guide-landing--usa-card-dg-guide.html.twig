@@ -1,0 +1,9 @@
+{# Filtering summary to field_value avoid extra markup from its field template. #}
+{{ include('@digital_gov/partials/usa-card.html.twig', {
+  header: node.label,
+  body: content.field_summary|field_value,
+  link: url,
+  link_title: label|field_value,
+  kicker: 'Digital.gov Guide',
+  image: content.field_primary_image,
+}, with_context: false) }}

@@ -1,0 +1,18 @@
+uuid: 09c8151d-9d09-4956-b3a0-8e07e4448c36
+langcode: en
+status: true
+dependencies:
+  module:
+    - sitewide_alert
+id: sitewide_alert.field_show_icon
+field_name: field_show_icon
+entity_type: sitewide_alert
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

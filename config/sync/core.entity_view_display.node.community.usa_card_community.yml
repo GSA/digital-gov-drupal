@@ -1,0 +1,89 @@
+uuid: 5b3f5230-0e60-4686-8da2-6e6a0a0192d7
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.usa_card_community
+    - field.field.node.community.body
+    - field.field.node.community.field_deck
+    - field.field.node.community.field_dg_acronym
+    - field.field.node.community.field_dg_highlight
+    - field.field.node.community.field_dg_logo
+    - field.field.node.community.field_dg_shortname
+    - field.field.node.community.field_kicker
+    - field.field.node.community.field_members
+    - field.field.node.community.field_page_weight
+    - field.field.node.community.field_primary_image
+    - field.field.node.community.field_slug
+    - field.field.node.community.field_subscribe_email_subject
+    - field.field.node.community.field_summary
+    - field.field.node.community.field_topics
+    - node.type.community
+  module:
+    - options
+    - svg_image
+    - text
+    - user
+id: node.community.usa_card_community
+targetEntityType: node
+bundle: community
+mode: usa_card_community
+content:
+  field_dg_acronym:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_dg_logo:
+    type: image
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: eager
+      svg_attributes:
+        width: null
+        height: null
+      svg_render_as_image: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_dg_shortname:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_members:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ','
+      prefix_suffix: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_summary:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+hidden:
+  body: true
+  content_moderation_control: true
+  field_deck: true
+  field_dg_highlight: true
+  field_kicker: true
+  field_page_weight: true
+  field_primary_image: true
+  field_slug: true
+  field_subscribe_email_subject: true
+  field_topics: true
+  links: true

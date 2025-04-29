@@ -34,7 +34,7 @@ content:
       maxlength:
         maxlength_js: 255
         maxlength_js_label: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
-        maxlength_js_enforce: true
+        maxlength_js_enforce: false
 hidden:
   created: true
   status: true

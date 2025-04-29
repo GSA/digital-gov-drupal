@@ -1,0 +1,39 @@
+{# Digital.gov News Featured Component
+
+  @param {string} heading - section heading
+  @param {string} deck - deck under heading
+  @param {string} link - url string
+  @param {string} link_text - string for link text
+  @param {string} list - array of renderable items
+  @param {string} aria_label - list identifier for screen readers
+#}
+<section id="news_featured" class="stream">
+  <div class="paper">
+    <div class="grid-container grid-container-desktop">
+      <div class="grid-row">
+        <div class="grid-col-12">
+          <header class="page-head page-head-page">
+            <h2>{{ heading }}</h2>
+            {% if deck %}
+              <p>{{ deck }}</p>
+            {% endif %}
+
+            {% if link and link_text %}
+              <div class="join-buttons">
+                <a href="{{ link }}">{{ link_text }}</a>
+              </div>
+            {% endif %}
+          </header>
+        </div>
+      </div>
+
+      <section class="stream" aria-label="{{ aria_label }}">
+        {% for item in list %}
+          {{ item }}
+        {% endfor %}
+
+        {{ include('@digital_gov/partials/see-all-footer.html.twig') }}
+      </section>
+    </div>
+  </div>
+</section>
