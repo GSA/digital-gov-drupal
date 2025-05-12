@@ -53,8 +53,11 @@ locals {
           ## IP addresses allowed to connected to the CMS.
           ALLOWED_IPS_CMS = base64encode(
              jsonencode([
+              "allow 149.142.0.0/16;",
+              "allow 149.143.0.0/16;", 
+              "allow 149.144.0.0/16;",
               "allow 159.142.0.0/16;",
-              "location = /update.php { allow 159.142.0.0/16; proxy_pass ${local.cms_fqdn}; }",
+              "location = /update.php { allow 149.142.0.0/16; allow 149.143.0.0/16; allow 149.144.0.0/16; allow 159.142.0.0/16; proxy_pass ${local.cms_fqdn}; }",
             ])
           )
 
