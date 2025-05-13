@@ -8,9 +8,10 @@ terraform {
   required_version = "> 1.7"
 }
 
-terraform {
-  backend "pg" { }
-}
+# Temporarily disabled for local validation
+# {
+#   backend "pg" { }
+# }
 
 provider "cloudfoundry" {
   api_url   = local.env.api_url

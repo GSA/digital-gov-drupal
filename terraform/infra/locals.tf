@@ -564,14 +564,100 @@ locals {
   }
 
   ## Map of the 'all' environement and the current workspace settings.
-  env = merge(
-    try(
-      local.envs.all, {}
-    ),
-    try(
-      local.envs[terraform.workspace], {}
-    )
-  )
+  env = {
+    # Base environment settings
+    api_url = "https://api.fr.cloud.gov"
+    defaults = {
+      disk_quota = 2048
+      enable_ssh = true
+      health_check_timeout = 60
+      health_check_type = "port"
+      instances = 1
+      memory = 64
+      port = 8080
+      stack = "cflinuxfs4"
+      stopped = false
+      strategy = "none"
+      timeout = 300
+    }
+    external_domain = "app.cloud.gov"
+    internal_domain = "apps.internal"
+    name_pattern = "${local.project}-%s-${terraform.workspace}"
+    organization = "gsa-digitalgov-prototyping"
+    project = local.project
+    space = terraform.workspace
+    # Workspace-specific settings
+    apps = {
+      waf = {
+        allow_egress = true
+        buildpacks = [
+          "https://github.com/cloudfoundry/apt-buildpack",
+          "nginx_buildpack"
+        ]
+        command = "./start"
+        disk_quota = 1024
+        enable_ssh = true
+        environment = {
+          ALLOWED_IPS_CMS = base64encode(
+            jsonencode([
+              "allow 149.142.0.0/16;",
+              "allow 149.143.0.0/16;", 
+              "allow 149.144.0.0/16;",
+              "allow 159.142.0.0/16;",
+              "allow 192.168.50.0/24;"
+            ])
+          ),
+          cms_internal_endpoint = "${local.project}-drupal-${terraform.workspace}.apps.internal",
+          CRS_RULES = "coreruleset-4.7.0-minimal.tar.gz",
+          DENYED_IPS_STATIC = base64encode(jsonencode([])),
+          ENV = terraform.workspace,
+          LD_LIBRARY_PATH = "/home/vcap/deps/0/lib/",
+          MODSECURITY_UPDATE = "libmodsecurity3_3.0.9-1_amd64.deb"
+        }
+        health_check_timeout = 180
+        health_check_type = "port"
+        instances = 1
+        labels = {
+          environment = terraform.workspace
+        }
+        memory = 128
+        network_policies = {
+          drupal = 61443
+        }
+        port = 80
+        public_route = true
+        source = "${path.cwd}/${var.terraform_working_dir}/applications/nginx-waf"
+        templates = [
+          {
+            source      = "${path.cwd}/${var.terraform_working_dir}/applications/nginx-waf/nginx/snippets/proxy-to-storage.conf.tmpl"
+            destination = "${path.cwd}/${var.terraform_working_dir}/applications/nginx-waf/nginx/snippets/proxy-to-storage.conf"
+          },
+          {
+            source      = "${path.cwd}/${var.terraform_working_dir}/applications/nginx-waf/nginx/snippets/proxy-to-static.conf.tmpl"
+            destination = "${path.cwd}/${var.terraform_working_dir}/applications/nginx-waf/nginx/snippets/proxy-to-static.conf"
+          },
+          {
+            source      = "${path.cwd}/${var.terraform_working_dir}/applications/nginx-waf/nginx/snippets/proxy-to-app.conf.tmpl"
+            destination = "${path.cwd}/${var.terraform_working_dir}/applications/nginx-waf/nginx/snippets/proxy-to-app.conf"
+          }
+        ]
+      }
+    },
+    services = {
+      backup = {
+        service_type = "s3"
+        service_plan = "basic"
+      },
+      mysql = {
+        service_type = "aws-rds"
+        service_plan = "micro-mysql"
+      }
+    },
+    passwords = {
+      hash_salt = { length = 32 },
+      cron_key = { length = 32 }
+    }
+  }
 
   service_bindings = merge(
     flatten(
