@@ -132,7 +132,7 @@ variable "env" {
     external_domain = optional(string, "app.cloud.gov")
     internal_domain = optional(string, "apps.internal")
     name_pattern    = string
-    organization    = optional(string, "gsa-tts-usagov")
+    organization    = optional(string, "gsa-digitalgov-prototyping")
     passwords = optional(
       map(
         object(
