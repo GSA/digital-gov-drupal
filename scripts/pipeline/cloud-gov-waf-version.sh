@@ -48,7 +48,7 @@ export current_nginx_version=${current_nginx_version}
 export current_bp_version=${CURRENT_BP_VERSION}
 export new_bp_version=${NEW_BP_VERSION}
 
-if [ "${new_bp_version}" -ne "${current_bp_version}" ]; then
+if [ "${new_bp_version}" != "${current_bp_version}" ]; then
   echo "New version of buildpack found!"
   echo "update=true" | tee -a "${GITHUB_OUTPUT}"
   export update=true
