@@ -14,10 +14,11 @@ if [ -z "$(which pup)" ] ; then
   fi
 fi
 
+# TODO: determine why we need to do this here -- okay?
 cf target -s ${CF_SPACE}
 
 declare CURRENT_BP_VERSION
-CURRENT_BP_VERSION=$(cf app "${PROJECT}-waf-${CF_SPACE}" | grep nginx_buildpack | xargs | awk '{print $2}')
+CURRENT_BP_VERSION=$(cf app "${PROJECT}-waf-${CF_SPACE}" | grep nginx_buildpack | awk '{print $2}')
 
 declare NEW_BP_VERSION
 NEW_BP_VERSION=$(cf buildpacks | grep nginx | grep cflinuxfs4 | awk '{print $NF}' | grep -Eo '[0-9]\.[0-9]?(.[0-9]+)')
