@@ -14,7 +14,7 @@ if [ -z "$(which pup)" ] ; then
   fi
 fi
 
-cf target
+cf target -s ${CF_SPACE}
 
 declare CURRENT_BP_VERSION
 CURRENT_BP_VERSION=$(cf app "${PROJECT}-waf-${CF_SPACE}" | grep nginx_buildpack | xargs | awk '{print $2}')
