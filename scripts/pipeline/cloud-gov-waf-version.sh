@@ -15,7 +15,7 @@ if [ -z "$(which pup)" ] ; then
 fi
 
 declare CURRENT_BP_VERSION
-CURRENT_BP_VERSION=$(cf app "${PROJECT}-waf-${BRANCH}" | grep nginx_buildpack | xargs | awk '{print $2}')
+CURRENT_BP_VERSION=$(cf app "${PROJECT}-waf-${CF_SPACE}" | grep nginx_buildpack | xargs | awk '{print $2}')
 
 declare NEW_BP_VERSION
 NEW_BP_VERSION=$(cf buildpacks | grep nginx | grep cflinuxfs4 | awk '{print $NF}' | grep -Eo '[0-9]\.[0-9]?(.[0-9]+)')
@@ -27,10 +27,10 @@ curl -Ls "https://github.com/cloudfoundry/nginx-buildpack/releases/tag/v${CURREN
 declare current_nginx_version
 current_nginx_version=$(cat /tmp/current_bp_version | pup 'table json{}' | jq -r '.[].children[].children[] | select(.children[].text == "nginx") | select(.children[].text == "cflinuxfs4") | .children[].text' | tr '\n' ' ' | sed -E 's/cflinuxfs4 /cflinuxfs4\n/g' | sort -r | head -n 1 | awk '{print $2}')
 
-curl -Ls "https://github.com/cloudfoundry/nginx-buildpack/releases/tag/v${NEW_BP_VERSION}" > /tmp/new_nginx_version 
+curl -Ls "https://github.com/cloudfoundry/nginx-buildpack/releases/tag/v${NEW_BP_VERSION}" > /tmp/new_nginx_version
 declare default_nginx_binary_version
 default_nginx_binary_version=$(cat /tmp/new_nginx_version | pup 'table json{}' | jq -r '.[].children[].children[] | select(.children[].text == "nginx") | select(.children[].text | contains(".x")) | .children[].text' | grep -v nginx | sed 's/.\{1\}$//')
-  
+
 declare new_nginx_version
 new_nginx_version=$(cat /tmp/new_nginx_version | pup 'table json{}' | jq -r ".[].children[].children[] | select(.children[].text == \"nginx\") | select(.children[].text == \"cflinuxfs4\") | select(.children[].text | contains(\"${default_nginx_binary_version}\")) | .children[].text" | tr '\n' ' ' | sed -E 's/cflinuxfs4 /cflinuxfs4\n/g' | sort -r | head -n 1 | awk '{print $2}')
 
