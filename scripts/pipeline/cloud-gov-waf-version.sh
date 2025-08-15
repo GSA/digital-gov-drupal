@@ -31,6 +31,7 @@ curl -Ls "https://raw.githubusercontent.com/cloudfoundry/nginx-buildpack/refs/ta
 declare current_nginx_version
 current_nginx_version=$(yq  eval '.dependencies[] | select(.name == "nginx") | .version' current_manifest.yml | sort -r | head -n 1 )
 
+curl -Ls "https://raw.githubusercontent.com/cloudfoundry/nginx-buildpack/refs/tags/v${NEW_BP_VERSION}/manifest.yml" > new_manifest.yml
 declare new_nginx_version
 new_nginx_version=$(yq  eval '.dependencies[] | select(.name == "nginx") | .version' new_manifest.yml | sort -r | head -n 1 )
 
