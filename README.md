@@ -46,7 +46,7 @@ There is some custom functionality apart from what's in the base Lando installat
 * See a list of shortcuts (Drush, Composer, etc.): `./robo.sh common:shortcuts-help`
 * When switching to a new branch, always: `lando rebuild -y && lando si` to start off completely fresh.
 * Export content as configuration `./robo.sh drupal-project:export-content`.
-  See [Exporting Content as Configuration](docs/backend#exporting-content-as-configuration).
+  See [Exporting Content as Configuration](docs/backend.md#exporting-content-as-configuration).
 
 ## Compiling theme assets
 
