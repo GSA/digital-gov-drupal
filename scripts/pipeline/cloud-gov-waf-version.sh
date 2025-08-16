@@ -14,7 +14,8 @@ if [ -z "$(which pup)" ] ; then
   fi
 fi
 
-# TODO: determine why we need to do this here -- okay?
+# This is probably going to be called in a pipeline using the TF_BACKEND_SPACE
+startspace=$( cf target | grep space: | awk '{ print $2 }')
 cf target -s ${CF_SPACE}
 
 declare CURRENT_BP_VERSION
@@ -57,3 +58,5 @@ echo "new_nginx_version=${new_nginx_version}"
 echo "current_nginx_version=${current_nginx_version}"
 echo "current_bp_version=${CURRENT_BP_VERSION}"
 echo "new_bp_version=${NEW_BP_VERSION}"
+
+cf target -s ${startspace}
