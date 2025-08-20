@@ -72,7 +72,7 @@ If a bug is discovered on **STAGE** (after deploying "release candidate" code), 
 ### Deploying to PROD
 **Merge strategy:** `Create a merge commit` This strategy maintains the history and commit ids in all environment branches.
 
-Once the "release candidate" in the `release/x.x.0` or `hotfix/x.x.x` branch has been successfully tested in the **STAGE** environment, a "release" PR is created to merge this branch into the `prod` branch. Once the "release" is approved and merged, a Git release and tag can be created capturing the release (using **"Release Version Convention"** found in this doc) and this git tag can be deployed to the **PROD** environment. After all work in the release has been tested in **PROD**, the release is considered complete.
+Once the "release candidate" in the `release/x.x.0` or `hotfix/x.x.x` branch has been successfully tested in the **STAGE** environment, a "release" PR is created to merge this branch into the `main` branch. Once the "release" is approved and merged, a Git release and tag can be created capturing the release (using **"Release Version Convention"** found in this doc) and this git tag can be deployed to the **PROD** environment. After all work in the release has been tested in **PROD**, the release is considered complete.
 - Any bugs found on **PROD**, following deployment (whether related to the release or not), must be addressed with a separate release (with its own Release Number) -- for critical bugs, a Hotfix release would be initiated; less-critical bugs could either be handled in a Hotfix release or in a future release. In either case, the original release should not be modified or recreated to include a bug fix / hotfix.
 - Releases represent what has been deployed to the **PROD** environment, so there should be a corresponding release for every **PROD** deployment (even those involving a minor code fix).
 
@@ -124,4 +124,3 @@ Now you can go back through the same process you did the first time to create th
 ### Staging is approved and it's time to deploy and finalize the release
 
 You can now merge your release pull request into `main` which will deploy the release to production. The last step is to create a new PR from `main` with `develop` as the target. This will ensure that there are no commits on `main` that are not on `develop`. This includes the merge commit from the deployment.
-
