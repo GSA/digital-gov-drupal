@@ -117,7 +117,7 @@ locals {
               "allow 2605:4300:1711::/48;",
               "allow 2605:4300:2c11::/48;",
               "allow 2605:4300:2c12::/48;",
-              "location = /update.php { allow 149.142.0.0/16; allow 149.143.0.0/16; allow 149.144.0.0/16; allow 159.142.0.0/16; allow 192.168.50.0/24; ${join(" ", [for ip in jsondecode(base64decode(local.env.apps.waf.environment.ALLOWED_IPS_CMS)) : ip if !contains(["allow 149.142.0.0/16", "allow 149.143.0.0/16", "allow 149.144.0.0/16", "allow 159.142.0.0/16", "allow 192.168.50.0/24", "location = /update.php"], ip)])} proxy_pass ${local.cms_fqdn}; }",
+              "location = /update.php { allow 149.142.0.0/16; allow 149.143.0.0/16; allow 149.144.0.0/16; allow 159.142.0.0/16; allow 192.168.50.0/24; ${join(" ", [for ip in jsondecode(base64decode(local.env.apps.waf.environment.ALLOWED_IPS_CMS)) : ip if !contains(["allow 149.142.0.0/16", "allow 149.143.0.0/16", "allow 149.144.0.0/16", "allow 159.142.0.0/16", "allow 192.168.50.0/24", "location = /update.php"], ip)])} proxy_pass ${local.cms_fqdn}; }"
             ])
           )
 
@@ -279,7 +279,7 @@ locals {
       },
 
       ## MySQL RDS database.
-       "mysql" = {
+      "mysql" = {
 
         ## Applications to bind to this service.
         applications = ["cms"]
@@ -307,7 +307,7 @@ locals {
           "cron_key",
           "hash_salt",
           "gsa_auth_key",
-          "newrelic_key",
+          "newrelic_key"
         ]
 
         ## The type of service to be deployed.
