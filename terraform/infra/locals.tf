@@ -63,7 +63,7 @@ locals {
           )
 
 	  ## TODO: needs to be terraform.workspace-specific. 
-          ALLOW_OR_DENY_ALL = 'deny all;'
+          ALLOW_OR_DENY_ALL = "deny all;"
 
           cms_internal_endpoint = "${local.project}-drupal-${terraform.workspace}.apps.internal"
 
