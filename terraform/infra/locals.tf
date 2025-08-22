@@ -11,9 +11,10 @@ locals {
   ## The names of the project's production workspaces. This is used to adjust
   ## settings dynamically throughout this configuration file.
   production_workspaces = ["prod"]
+  
   ## Names of workspaces that should have IP restrictions. This might not
   ## be the inverse of production_workspaces, although you might expect that.
-  iprestricted_workspaces = ["staging"] ## TODO: add dev.
+  iprestricted_workspaces = ["dev", "staging"]
 
   tf_backend = {
     type = "pg"
