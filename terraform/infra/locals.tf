@@ -10,10 +10,10 @@ locals {
 
   ## The names of the project's production workspaces. This is used to adjust
   ## settings dynamically throughout this configuration file.
-  production_workspaces = ["main", "dev"]
-
-  cms_fqdn = "https://bf-cms-${terraform.workspace}.bxdev.net"
-  static_fqdn = "https://bf-static-${terraform.workspace}.bxdev.net"
+  production_workspaces = ["prod"]
+  ## Names of workspaces that should have IP restrictions. This might not
+  ## be the inverse of production_workspaces, although you might expect that.
+  iprestricted_workspaces = ["staging"] ## TODO: add dev.
 
   tf_backend = {
     type = "pg"
@@ -50,76 +50,33 @@ locals {
         ## Environmental variables. Avoid sensitive variables.
         environment = {
 
-          ## IP addresses allowed to connected to the CMS.
+          ## IP addresses allowed to connect to the CMS, when restricted.
           ALLOWED_IPS_CMS = base64encode(
              jsonencode([
-              "allow 149.142.0.0/16;",
-              "allow 149.143.0.0/16;", 
-              "allow 149.144.0.0/16;",
               "allow 159.142.0.0/16;",
-              "allow 192.168.50.0/24;",
-              # ZScaler edge addresses
-              "allow 159.142.0.128/27;",
-              "allow 159.142.71.0/28;",
-              "allow 136.226.4.0/23;",
-              "allow 136.226.6.0/23;",
-              "allow 136.226.8.0/23;",
-              "allow 136.226.10.0/23;",
-              "allow 136.226.12.0/23;",
-              "allow 136.226.14.0/23;",
-              "allow 136.226.16.0/23;",
-              "allow 136.226.18.0/23;",
-              "allow 136.226.20.0/23;",
-              "allow 136.226.22.0/24;",
-              "allow 165.225.3.0/24;",
-              "allow 165.225.46.0/24;",
-              "allow 165.225.48.0/24;",
-              # SiteImprove
-              "allow 13.58.165.213;",
-              "allow 18.116.191.222;",
-              "allow 18.116.197.208;",
-              "allow 18.189.206.159;",
-              "allow 18.190.68.80;",
-              "allow 18.216.137.252;",
-              "allow 18.223.191.8;",
-              "allow 3.13.121.241;",
-              "allow 3.133.38.181;",
-              "allow 3.135.49.180;",
-              "allow 3.136.111.218;",
-              "allow 3.138.54.100;",
-              "allow 18.219.35.44;",
-              "allow 18.157.140.51;",
-              "allow 18.159.218.224;",
-              "allow 18.196.205.2;",
-              "allow 18.198.120.55;",
-              "allow 3.124.26.114;",
-              "allow 3.125.99.135;",
-              "allow 3.64.159.177;",
-              "allow 3.66.247.32;",
-              "allow 3.68.122.244;",
-              "allow 52.57.167.198;",
-              "allow 35.158.180.204;",
-              "allow 18.192.147.131;",
-              "allow 52.58.146.230;",
-              "allow 185.229.145.22;",
-              "allow 3.129.126.175;",
-              # Salesforce
-              "allow 96.43.153.8;",
-              "allow 96.43.152.8;",
-              "allow 52.61.131.34;",
-              "allow 52.61.135.34;",
               "allow 2607:6540:2000:800::/64;",
               "allow 2607:6540:2700:800::/64;",
-              "allow 2605:4300:1511::/48;",
-              "allow 2605:4300:1512::/48;",
-              "allow 2605:4300:1611::/48;",
-              "allow 2605:4300:1612::/48;",
-              "allow 2605:4300:1711::/48;",
-              "allow 2605:4300:2c11::/48;",
-              "allow 2605:4300:2c12::/48;",
-              "location = /update.php { allow 149.142.0.0/16; allow 149.143.0.0/16; allow 149.144.0.0/16; allow 159.142.0.0/16; allow 192.168.50.0/24; ${join(" ", [for ip in jsondecode(base64decode(local.env.apps.waf.environment.ALLOWED_IPS_CMS)) : ip if !contains(["allow 149.142.0.0/16", "allow 149.143.0.0/16", "allow 149.144.0.0/16", "allow 159.142.0.0/16", "allow 192.168.50.0/24", "location = /update.php"], ip)])} proxy_pass ${local.cms_fqdn}; }",
+              "allow 2620:0:150:3447:5d77:841e:bc01:5bf4;",
+              "allow 2620:0:150:3447:8fca:87e5:da51:4b7b;",
+              "allow 2620:0:150:3447:daad:6c9f:fb78:b689;",
+              "allow 2620:0:150:3447:faf0:b47d:a67d:5bad;",
+              "allow 2620:0:150:3447:6df7:3fdc:64b4:1b83;",
+              "allow 2620:0:150:3447:1196:7f61:5aab:fd8f;",
+              "allow 2620:0:150:3447:2f92:e6a1:efaa:fb98;",
+              "allow 2620:0:150:3447:2772:3f17:a0eb:8566;",
+              "allow 2620:0:150:4029:896d:2ddc:8450:efe9;",
+              "allow 2620:0:150:4029:de4b:dd85:31cc:6f55;",
+              "allow 2620:0:150:4029:a5df:d6e0:fc6c:e16b;",
+              "allow 2620:0:150:4029:da15:7695:c137:7767;",
+              "allow 2620:0:150:4029:a5bc:cc3f:55f9:6458;",
+              "allow 2620:0:150:4029:b8c7:f0d0:941e:de07;",
+              "allow 2620:0:150:4029:c9cc:5ce:ec04:eb30;",
+              "allow 2620:0:150:4029:f30c:dc1f:6722:b47b;"
             ])
           )
+
+          # TODO: Change default to "deny all". Testing that we can set this here and simply override prod.
+          ALLOW_OR_DENY_ALL_CMS = contains(local.iprestricted_workspaces, terraform.workspace) ? "deny all;" : "allow all;"
 
           cms_internal_endpoint = "${local.project}-drupal-${terraform.workspace}.apps.internal"
 
@@ -177,7 +134,7 @@ locals {
 
         ## Templates take templated files and fill them in with sensitive data.
         ## The proxy-to-static.conf has the S3 bucket written to it during
-        ## the 'terraform apply' command, before it the files are zipped up and 
+        ## the 'terraform apply' command, before it the files are zipped up and
         ## uploaded to cloud.gov.
         templates = [
           {
@@ -279,7 +236,7 @@ locals {
       },
 
       ## MySQL RDS database.
-       "mysql" = {
+      "mysql" = {
 
         ## Applications to bind to this service.
         applications = ["cms"]
@@ -307,7 +264,7 @@ locals {
           "cron_key",
           "hash_salt",
           "gsa_auth_key",
-          "newrelic_key",
+          "newrelic_key"
         ]
 
         ## The type of service to be deployed.
@@ -470,13 +427,13 @@ locals {
 
     #################################
     ##
-    ##    ____             
+    ##    ____
     ##   |  _ \  _____   __
     ##   | | | |/ _ \ \ / /
-    ##   | |_| |  __/\ V / 
-    ##   |____/ \___| \_/                 
+    ##   | |_| |  __/\ V /
+    ##   |____/ \___| \_/
     ##
-    #################################              
+    #################################
 
     dev = merge(
       {
@@ -501,7 +458,7 @@ locals {
 
     #################################
     ##
-    ##  ____                _ 
+    ##  ____                _
     ## |  _ \ _ __ ___   __| |
     ## | |_) | '__/ _ \ / _` |
     ## |  __/| | | (_) | (_| |
@@ -533,15 +490,15 @@ locals {
 
     #################################
     ##
-    ##  __ _                   
-    ## / _\ |_ __ _  __ _  ___ 
+    ##  __ _
+    ## / _\ |_ __ _  __ _  ___
     ## \ \| __/ _` |/ _` |/ _ \
     ## _\ \ || (_| | (_| |  __/
     ## \__/\__\__,_|\__, |\___|
-    ##              |___/              
+    ##              |___/
     ##
-    #################################              
-  
+    #################################
+
     staging = merge(
       {
         ## Applications to deploy.
@@ -564,104 +521,18 @@ locals {
   }
 
   ## Map of the 'all' environement and the current workspace settings.
-  env = {
-    # Base environment settings
-    api_url = "https://api.fr.cloud.gov"
-    defaults = {
-      disk_quota = 2048
-      enable_ssh = true
-      health_check_timeout = 60
-      health_check_type = "port"
-      instances = 1
-      memory = 64
-      port = 8080
-      stack = "cflinuxfs4"
-      stopped = false
-      strategy = "none"
-      timeout = 300
-    }
-    external_domain = "app.cloud.gov"
-    internal_domain = "apps.internal"
-    name_pattern = "${local.project}-%s-${terraform.workspace}"
-    organization = "gsa-digitalgov-prototyping"
-    project = local.project
-    space = terraform.workspace
-    # Workspace-specific settings
-    apps = {
-      waf = {
-        allow_egress = true
-        buildpacks = [
-          "https://github.com/cloudfoundry/apt-buildpack",
-          "nginx_buildpack"
-        ]
-        command = "./start"
-        disk_quota = 1024
-        enable_ssh = true
-        environment = {
-          ALLOWED_IPS_CMS = base64encode(
-            jsonencode([
-              "allow 149.142.0.0/16;",
-              "allow 149.143.0.0/16;", 
-              "allow 149.144.0.0/16;",
-              "allow 159.142.0.0/16;",
-              "allow 192.168.50.0/24;"
-            ])
-          ),
-          cms_internal_endpoint = "${local.project}-drupal-${terraform.workspace}.apps.internal",
-          CRS_RULES = "coreruleset-4.7.0-minimal.tar.gz",
-          DENYED_IPS_STATIC = base64encode(jsonencode([])),
-          ENV = terraform.workspace,
-          LD_LIBRARY_PATH = "/home/vcap/deps/0/lib/",
-          MODSECURITY_UPDATE = "libmodsecurity3_3.0.9-1_amd64.deb"
-        }
-        health_check_timeout = 180
-        health_check_type = "port"
-        instances = 1
-        labels = {
-          environment = terraform.workspace
-        }
-        memory = 128
-        network_policies = {
-          drupal = 61443
-        }
-        port = 80
-        public_route = true
-        source = "${path.cwd}/${var.terraform_working_dir}/applications/nginx-waf"
-        templates = [
-          {
-            source      = "${path.cwd}/${var.terraform_working_dir}/applications/nginx-waf/nginx/snippets/proxy-to-storage.conf.tmpl"
-            destination = "${path.cwd}/${var.terraform_working_dir}/applications/nginx-waf/nginx/snippets/proxy-to-storage.conf"
-          },
-          {
-            source      = "${path.cwd}/${var.terraform_working_dir}/applications/nginx-waf/nginx/snippets/proxy-to-static.conf.tmpl"
-            destination = "${path.cwd}/${var.terraform_working_dir}/applications/nginx-waf/nginx/snippets/proxy-to-static.conf"
-          },
-          {
-            source      = "${path.cwd}/${var.terraform_working_dir}/applications/nginx-waf/nginx/snippets/proxy-to-app.conf.tmpl"
-            destination = "${path.cwd}/${var.terraform_working_dir}/applications/nginx-waf/nginx/snippets/proxy-to-app.conf"
-          }
-        ]
-      }
-    },
-    services = {
-      backup = {
-        service_type = "s3"
-        service_plan = "basic"
-      },
-      mysql = {
-        service_type = "aws-rds"
-        service_plan = "micro-mysql"
-      }
-    },
-    passwords = {
-      hash_salt = { length = 32 },
-      cron_key = { length = 32 }
-    }
-  }
+  env = merge(
+    try(
+      local.envs.all, {}
+    ),
+    try(
+      local.envs[terraform.workspace], {}
+    )
+  )
 
   service_bindings = merge(
     flatten(
-      [ 
+      [
         for key, value in try(local.env.services, {}) : {
           "${key}" = value
         }
