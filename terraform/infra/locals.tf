@@ -75,7 +75,6 @@ locals {
             ])
           )
 
-          # TODO: Change default to "deny all". Testing that we can set this here and simply override prod.
           ALLOW_OR_DENY_ALL_CMS = contains(local.iprestricted_workspaces, terraform.workspace) ? "deny all;" : "allow all;"
           ALLOWED_IPS_CMS = contains(local.iprestricted_workspaces, terraform.workspace) ? globals.environment.allowed_ips : ""
 
