@@ -59,7 +59,7 @@ if [ -n "${MODSECURITY_UPDATE}" ]; then
   modsecurity_version=$(echo "${MODSECURITY_UPDATE}" | cut -d '_' -f2 | cut -d '-' -f1)
   echo "Updating libmodsecurity..."
   #current_path=$(pwd)
-  
+
   dpkg-deb -R "${app_path}/packages/${MODSECURITY_UPDATE}" ${home}/deps/0/apt/
   ln -s "${home}/deps/0/apt/usr/lib/x86_64-linux-gnu/libmodsecurity.so.${modsecurity_version}" "libmodsecurity.so.${modsecurity_version}"
 fi
