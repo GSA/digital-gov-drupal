@@ -77,7 +77,7 @@ locals {
         environment = {
 
           ALLOW_OR_DENY_ALL_CMS = contains(local.iprestricted_workspaces, terraform.workspace) ? "deny all;" : "allow all;"
-          ALLOWED_IPS_CMS = contains(local.iprestricted_workspaces, terraform.workspace) ? locals.allowed_ips : ""
+          ALLOWED_IPS_CMS = contains(local.iprestricted_workspaces, terraform.workspace) ? local.allowed_ips : ""
 
           cms_internal_endpoint = "${local.project}-drupal-${terraform.workspace}.apps.internal"
 
