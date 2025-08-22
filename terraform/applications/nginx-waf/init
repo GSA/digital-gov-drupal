@@ -75,7 +75,13 @@ echo "Configuring WAF ACLs..."
 declare IPS_ALLOWED_CMS
 IPS_ALLOWED_CMS=$(echo "${ALLOWED_IPS_CMS}" | base64 -d | jq -rc '.[] | @sh' | tr -d \' | sed 's/^/      /')
 export IPS_ALLOWED_CMS
+declare DENY_ALL_CMS
+if [ -n "${RESTRICT_CMS}" ]; then
+    DENY_ALL_CMS="deny all;"
+fi
+export DENY_ALL_CMS
 PATH=${PATH}; envsubst < ${app_path}/nginx/snippets/ip-restrict-cms.conf.tmpl > ${app_path}/nginx/snippets/ip-restrict-cms.conf
+
 
 ## Insert the denied IP's into the WAF's configuration.
 declare IPS_DENYED_STATIC
