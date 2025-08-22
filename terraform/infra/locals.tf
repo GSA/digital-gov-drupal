@@ -51,7 +51,7 @@ locals {
         environment = {
 
           ## IP addresses allowed to connect to the CMS, when restricted.
-          ALLOWED_IPS_CMS = base64encode(
+          allowed_ips = base64encode(
              jsonencode([
               "allow 159.142.0.0/16;",
               "allow 2607:6540:2000:800::/64;",
@@ -77,6 +77,7 @@ locals {
 
           # TODO: Change default to "deny all". Testing that we can set this here and simply override prod.
           ALLOW_OR_DENY_ALL_CMS = contains(local.iprestricted_workspaces, terraform.workspace) ? "deny all;" : "allow all;"
+          ALLOWED_IPS_CMS = contains(local.iprestricted_workspaces, terraform.workspace) ? globals.environment.allowed_ips : ""
 
           cms_internal_endpoint = "${local.project}-drupal-${terraform.workspace}.apps.internal"
 
