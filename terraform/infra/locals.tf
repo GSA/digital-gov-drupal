@@ -11,7 +11,7 @@ locals {
   ## The names of the project's production workspaces. This is used to adjust
   ## settings dynamically throughout this configuration file.
   production_workspaces = ["prod"]
-  
+
   ## Names of workspaces that should have IP restrictions. This might not
   ## be the inverse of production_workspaces, although you might expect that.
   iprestricted_workspaces = ["dev", "staging"]
@@ -78,7 +78,7 @@ locals {
         environment = {
 
           ALLOW_OR_DENY_ALL_CMS = contains(local.iprestricted_workspaces, terraform.workspace) ? "deny all;" : "allow all;"
-          ALLOWED_IPS_CMS = contains(local.iprestricted_workspaces, terraform.workspace) ? local.allowed_ips : ""
+          ALLOWED_IPS_CMS = contains(local.iprestricted_workspaces, terraform.workspace) ? local.allowed_ips : base64encode(jsonencode([]))
 
           cms_internal_endpoint = "${local.project}-drupal-${terraform.workspace}.apps.internal"
 
