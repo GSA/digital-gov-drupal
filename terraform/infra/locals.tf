@@ -10,10 +10,11 @@ locals {
 
   ## The names of the project's production workspaces. This is used to adjust
   ## settings dynamically throughout this configuration file.
-  production_workspaces = ["main", "dev"]
+  production_workspaces = ["prod"]
 
-  cms_fqdn = "https://bf-cms-${terraform.workspace}.bxdev.net"
-  static_fqdn = "https://bf-static-${terraform.workspace}.bxdev.net"
+  ## Names of workspaces that should have IP restrictions. This might not
+  ## be the inverse of production_workspaces, although you might expect that.
+  iprestricted_workspaces = ["dev", "staging"]
 
   tf_backend = {
     type = "pg"
@@ -21,6 +22,32 @@ locals {
     name_pattern_secrets = "${local.project}-pg-secrets-bootstrap"
     space = "prod"
   }
+
+
+  ## IP addresses allowed to connect, when restricted.
+  allowed_ips = base64encode(
+     jsonencode([
+      "allow 159.142.0.0/16;",
+      "allow 2607:6540:2000:800::/64;",
+      "allow 2607:6540:2700:800::/64;",
+      "allow 2620:0:150:3447:5d77:841e:bc01:5bf4;",
+      "allow 2620:0:150:3447:8fca:87e5:da51:4b7b;",
+      "allow 2620:0:150:3447:daad:6c9f:fb78:b689;",
+      "allow 2620:0:150:3447:faf0:b47d:a67d:5bad;",
+      "allow 2620:0:150:3447:6df7:3fdc:64b4:1b83;",
+      "allow 2620:0:150:3447:1196:7f61:5aab:fd8f;",
+      "allow 2620:0:150:3447:2f92:e6a1:efaa:fb98;",
+      "allow 2620:0:150:3447:2772:3f17:a0eb:8566;",
+      "allow 2620:0:150:4029:896d:2ddc:8450:efe9;",
+      "allow 2620:0:150:4029:de4b:dd85:31cc:6f55;",
+      "allow 2620:0:150:4029:a5df:d6e0:fc6c:e16b;",
+      "allow 2620:0:150:4029:da15:7695:c137:7767;",
+      "allow 2620:0:150:4029:a5bc:cc3f:55f9:6458;",
+      "allow 2620:0:150:4029:b8c7:f0d0:941e:de07;",
+      "allow 2620:0:150:4029:c9cc:5ce:ec04:eb30;",
+      "allow 2620:0:150:4029:f30c:dc1f:6722:b47b;"
+    ])
+  )
 
   ## "Common" applications and services that are deployed to every space.
   globals = {
@@ -50,13 +77,8 @@ locals {
         ## Environmental variables. Avoid sensitive variables.
         environment = {
 
-          ## IP addresses allowed to connected to the CMS.
-          ALLOWED_IPS_CMS = base64encode(
-             jsonencode([
-              "allow 159.142.0.0/16;",
-              "location = /update.php { allow 159.142.0.0/16; proxy_pass ${local.cms_fqdn}; }",
-            ])
-          )
+          RESTRICT_CMS = contains(local.iprestricted_workspaces, terraform.workspace) ? "TRUE" : ""
+          ALLOWED_IPS_CMS = contains(local.iprestricted_workspaces, terraform.workspace) ? local.allowed_ips : base64encode(jsonencode([]))
 
           cms_internal_endpoint = "${local.project}-drupal-${terraform.workspace}.apps.internal"
 
@@ -114,7 +136,7 @@ locals {
 
         ## Templates take templated files and fill them in with sensitive data.
         ## The proxy-to-static.conf has the S3 bucket written to it during
-        ## the 'terraform apply' command, before it the files are zipped up and 
+        ## the 'terraform apply' command, before it the files are zipped up and
         ## uploaded to cloud.gov.
         templates = [
           {
@@ -216,7 +238,7 @@ locals {
       },
 
       ## MySQL RDS database.
-       "mysql" = {
+      "mysql" = {
 
         ## Applications to bind to this service.
         applications = ["cms"]
@@ -244,7 +266,7 @@ locals {
           "cron_key",
           "hash_salt",
           "gsa_auth_key",
-          "newrelic_key",
+          "newrelic_key"
         ]
 
         ## The type of service to be deployed.
@@ -407,13 +429,13 @@ locals {
 
     #################################
     ##
-    ##    ____             
+    ##    ____
     ##   |  _ \  _____   __
     ##   | | | |/ _ \ \ / /
-    ##   | |_| |  __/\ V / 
-    ##   |____/ \___| \_/                 
+    ##   | |_| |  __/\ V /
+    ##   |____/ \___| \_/
     ##
-    #################################              
+    #################################
 
     dev = merge(
       {
@@ -438,7 +460,7 @@ locals {
 
     #################################
     ##
-    ##  ____                _ 
+    ##  ____                _
     ## |  _ \ _ __ ___   __| |
     ## | |_) | '__/ _ \ / _` |
     ## |  __/| | | (_) | (_| |
@@ -470,15 +492,15 @@ locals {
 
     #################################
     ##
-    ##  __ _                   
-    ## / _\ |_ __ _  __ _  ___ 
+    ##  __ _
+    ## / _\ |_ __ _  __ _  ___
     ## \ \| __/ _` |/ _` |/ _ \
     ## _\ \ || (_| | (_| |  __/
     ## \__/\__\__,_|\__, |\___|
-    ##              |___/              
+    ##              |___/
     ##
-    #################################              
-  
+    #################################
+
     staging = merge(
       {
         ## Applications to deploy.
@@ -512,7 +534,7 @@ locals {
 
   service_bindings = merge(
     flatten(
-      [ 
+      [
         for key, value in try(local.env.services, {}) : {
           "${key}" = value
         }
