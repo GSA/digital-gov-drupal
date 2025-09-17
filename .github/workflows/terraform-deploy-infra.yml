@@ -65,6 +65,7 @@ jobs:
           ubuntu_version: "${{ vars.UBUNTU_VERSION }}"
           modsecurity_nginx_version: "${{ vars.MODSECURITY_NGINX_VERSION }}"
           TF_BASTION: "${{ secrets.TF_BASTION }}"
+          PROJECT: "${{ secrets.PROJECT }}"
         run: |
           source ./scripts/pipeline/cloud-gov-waf-version.sh
           source ./scripts/pipeline/terraform-build-waf-plugin.sh
