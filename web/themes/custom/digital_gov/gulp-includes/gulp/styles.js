@@ -88,7 +88,7 @@ function copyUswdsSetup() {
 }
 
 function copyUswdsFonts() {
-  return src(`${USWDS}/uswds/dist/fonts/**/**`).pipe(dest(`${FONTS_DEST}`));
+  return src(`${USWDS}/uswds/dist/fonts/**/**`, {encoding: false}).pipe(dest(`${FONTS_DEST}`));
 }
 
 function copyUswdsImages() {

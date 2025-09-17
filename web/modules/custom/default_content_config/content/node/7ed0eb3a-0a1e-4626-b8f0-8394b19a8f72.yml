@@ -1,0 +1,76 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 7ed0eb3a-0a1e-4626-b8f0-8394b19a8f72
+  bundle: guide_landing
+  default_langcode: en
+  depends:
+    62fdaf72-5449-4312-a82e-b87b9b406f36: node
+    baa67bf4-6fa9-40b4-bee3-a51ae80d6269: node
+    d54f480c-f28b-49c0-a1ef-7d0adf594af6: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Human-Centered Design Guide Series'
+  created:
+    -
+      value: 1736454603
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /guides/hcd
+      langcode: en
+      pathauto: 0
+  rh_action:
+    -
+      value: bundle_default
+  rh_redirect_response:
+    -
+      value: 301
+  rh_redirect_fallback_action:
+    -
+      value: bundle_default
+  body:
+    -
+      value: '<h1 id="welcome">Welcome!</h1><p>The Human-Centered Design (HCD) Guides are intended to enhance the understanding and practice of human-centered design throughout the federal government. In this guide series, we will explore the four phases of HCD work: <strong>discovery, design, delivery,</strong> and <strong>measurement</strong>.</p><p>You can think of the HCD Guides like a travel series through design. In the same way you can collect travel guides to Kyoto and Tokyo and Nagasaki instead of a single, lengthy all-Japan travel guide, our HCD Guide series provides two volumes for each phase of the HCD process: a concept guide, focusing on why the phase works the way it does, and an operations guide with checklists and frameworks to help with the how of the phase.</p><p><strong>Ready to get started? Check out the guides below!</strong></p>'
+      format: html
+      summary: ''
+  field_bottom_content:
+    -
+      value: '<article class="dg-ring" aria-labelledby="add-res"><h2 class="dg-ring__title" id="add-res">Additional Resources</h2><p>If you encounter unfamiliar words or concepts in these guides, you can find definitions and explanations in the <button class="dg-glossary__toggle">glossary</button></p><p>You may also wish to review these additional research methods:</p><ul><li><a href="https://methods.18f.gov/">18F Methods</a></li><li>NYC Civic Service Design Group <a href="https://www1.nyc.gov/assets/servicedesign/">Tools &amp; Tactics</a></li><li>UK Design Group <a href="https://www.designcouncil.org.uk/resources/search">Case Studies</a></li><li>The Book Apart Series, specifically <a href="https://abookapart.com/products/design-for-real-life">Design for Real Life</a> by Eric Meyer &amp; Sara Wachter-Boettcher</li></ul></article>'
+      format: html
+  field_glossary:
+    -
+      target_id: hcd_glossary
+  field_guides:
+    -
+      entity: 62fdaf72-5449-4312-a82e-b87b9b406f36
+    -
+      entity: baa67bf4-6fa9-40b4-bee3-a51ae80d6269
+  field_guide_weight:
+    -
+      value: 2
+  field_primary_image:
+    -
+      entity: d54f480c-f28b-49c0-a1ef-7d0adf594af6
+  field_summary:
+    -
+      value: '<p>A series of guides to help you understand and practice human-centered design.</p>'
+      format: single_inline_html

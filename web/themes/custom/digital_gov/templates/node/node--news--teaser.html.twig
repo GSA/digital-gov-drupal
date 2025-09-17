@@ -66,7 +66,6 @@
 {% set summary = content.field_summary|field_value %}
 {% set deck = content.field_deck|field_value %}
 {% set date = node.created.value|format_date('digital_gov_short_date') %}
-{% set authors = content.field_authors|field_value %}
 {% set image_url %}{% apply spaceless %}
   {% if content.field_primary_image|field_value %}
     {{ node.field_primary_image|file_uri|image_style('large') }}
@@ -91,21 +90,22 @@
       </div>
     {% endif %}
 
-    {% if authors %}
+    {% if content.field_authors|field_value %}
       {{ include('@digital_gov/partials/authors-list.html.twig', {
                   inline: true,
-                  authors: content.field_authors,
-                  }, with_context=false) }}
+                  authors: content.field_authors|field_value,
+                  }, with_context: false) }}
     {% endif %}
   </div>
-
-  <div class="card__media">
-    <div class="media-featured">
-      <a href="{{ url }}" title="{{ title }}">
-        <img src="{{ image_url }}" aria-hidden="true" alt=""/>
-      </a>
+  {% if image_url %}
+    <div class="card__media">
+      <div class="media-featured">
+        <a href="{{ url }}" title="{{ title }}">
+          <img src="{{ image_url }}" aria-hidden="true" alt=""/>
+        </a>
+      </div>
     </div>
-  </div>
+  {% endif %}
   <div class="card__meta">
     <div class="date">{{ date }}
     </div>

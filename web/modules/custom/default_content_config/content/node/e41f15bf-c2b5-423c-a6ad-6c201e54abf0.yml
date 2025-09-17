@@ -34,16 +34,12 @@ default:
       alias: /authors/bridget-roddy
       langcode: en
       pathauto: 1
-  field_email:
-    -
-      value: roddybl@state.gov
   field_first_name:
     -
       value: Bridget
   field_last_name:
     -
       value: Roddy
-  field_summary:
+  field_profile_source:
     -
-      value: 'The people who have contributed their stories and guidance over the years.'
-      format: single_inline_html
+      value: digit-light

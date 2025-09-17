@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   module:
+    - auto_heading_ids
     - linkit
 name: 'Multiline Inline HTML'
 format: multiline_inline_html
@@ -20,6 +21,12 @@ filters:
   filter_htmlcorrector:
     id: filter_htmlcorrector
     provider: filter
+    status: true
+    weight: 10
+    settings: {  }
+  heading_id_filter:
+    id: heading_id_filter
+    provider: auto_heading_ids
     status: true
     weight: 10
     settings: {  }

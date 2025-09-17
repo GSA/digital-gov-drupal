@@ -1,0 +1,59 @@
+uuid: 4743db8e-9096-4347-af4b-1d2b532671fc
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.featured_resource
+    - field.field.node.community.body
+    - field.field.node.community.field_deck
+    - field.field.node.community.field_dg_acronym
+    - field.field.node.community.field_dg_highlight
+    - field.field.node.community.field_dg_logo
+    - field.field.node.community.field_dg_shortname
+    - field.field.node.community.field_kicker
+    - field.field.node.community.field_members
+    - field.field.node.community.field_page_weight
+    - field.field.node.community.field_primary_image
+    - field.field.node.community.field_slug
+    - field.field.node.community.field_subscribe_email_subject
+    - field.field.node.community.field_summary
+    - field.field.node.community.field_topics
+    - node.type.community
+  module:
+    - text
+    - user
+id: node.community.featured_resource
+targetEntityType: node
+bundle: community
+mode: featured_resource
+content:
+  field_kicker:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_summary:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  body: true
+  content_moderation_control: true
+  field_deck: true
+  field_dg_acronym: true
+  field_dg_highlight: true
+  field_dg_logo: true
+  field_dg_shortname: true
+  field_members: true
+  field_page_weight: true
+  field_primary_image: true
+  field_slug: true
+  field_subscribe_email_subject: true
+  field_topics: true
+  links: true

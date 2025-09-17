@@ -1,0 +1,14 @@
+uuid: fb9ca221-1fa7-400e-8b1f-21628c632921
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.site_wide_alert_manager
+  module:
+    - user
+id: user_add_role_action.site_wide_alert_manager
+label: 'Add the Site Wide Alert Manager role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: site_wide_alert_manager

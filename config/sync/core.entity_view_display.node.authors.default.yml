@@ -3,48 +3,25 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.authors.body
-    - field.field.node.authors.field_agency_acronym
     - field.field.node.authors.field_agency_full_name
-    - field.field.node.authors.field_bio
-    - field.field.node.authors.field_bio_url
-    - field.field.node.authors.field_email
-    - field.field.node.authors.field_facebook
     - field.field.node.authors.field_first_name
     - field.field.node.authors.field_github
-    - field.field.node.authors.field_instagram
     - field.field.node.authors.field_last_name
-    - field.field.node.authors.field_linkedin
-    - field.field.node.authors.field_location
-    - field.field.node.authors.field_pronouns
+    - field.field.node.authors.field_profile_source
     - field.field.node.authors.field_slug
-    - field.field.node.authors.field_summary
-    - field.field.node.authors.field_twitter
-    - field.field.node.authors.field_youtube
     - node.type.authors
   module:
-    - link
-    - text
+    - options
     - user
 id: node.authors.default
 targetEntityType: node
 bundle: authors
 mode: default
 content:
-  body:
-    type: text_default
-    label: hidden
+  content_moderation_control:
     settings: {  }
     third_party_settings: {  }
-    weight: 101
-    region: content
-  field_agency_acronym:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 107
+    weight: -20
     region: content
   field_agency_full_name:
     type: string
@@ -54,44 +31,11 @@ content:
     third_party_settings: {  }
     weight: 106
     region: content
-  field_bio:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 110
-    region: content
-  field_bio_url:
-    type: link
-    label: above
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
-    third_party_settings: {  }
-    weight: 111
-    region: content
-  field_email:
-    type: basic_string
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 109
-    region: content
-  field_facebook:
+  field_first_name:
     type: string
     label: above
     settings:
       link_to_entity: false
-    third_party_settings: {  }
-    weight: 115
-    region: content
-  field_first_name:
-    type: text_default
-    label: above
-    settings: {  }
     third_party_settings: {  }
     weight: 119
     region: content
@@ -103,44 +47,20 @@ content:
     third_party_settings: {  }
     weight: 113
     region: content
-  field_instagram:
+  field_last_name:
     type: string
     label: above
     settings:
       link_to_entity: false
-    third_party_settings: {  }
-    weight: 116
-    region: content
-  field_last_name:
-    type: text_default
-    label: above
-    settings: {  }
     third_party_settings: {  }
     weight: 104
     region: content
-  field_linkedin:
-    type: string
+  field_profile_source:
+    type: list_default
     label: above
-    settings:
-      link_to_entity: false
+    settings: {  }
     third_party_settings: {  }
-    weight: 117
-    region: content
-  field_location:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 108
-    region: content
-  field_pronouns:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 105
+    weight: 120
     region: content
   field_slug:
     type: string
@@ -149,29 +69,6 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 106
-    region: content
-  field_summary:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 104
-    region: content
-  field_twitter:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 114
-    region: content
-  field_youtube:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 118
     region: content
   links:
     settings: {  }

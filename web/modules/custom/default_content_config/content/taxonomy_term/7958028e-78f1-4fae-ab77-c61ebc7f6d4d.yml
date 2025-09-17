@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 7958028e-78f1-4fae-ab77-c61ebc7f6d4d
+  bundle: hcd_glossary
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: Participants
+  description:
+    -
+      value: '<p>The people for and with whom design teams work, because they participate in the use of the products, services, and systems we design.</p>'
+      format: single_inline_html
+  weight:
+    -
+      value: 23
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

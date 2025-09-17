@@ -1,0 +1,13 @@
+name: Digital.gov Automated Logout
+type: module
+description: 'Adds automated timed logout.'
+core_version_requirement: ^9.2 || ^10 || ^11
+configure: dg_autologout.set_admin
+dependencies:
+  - js_cookie:js_cookie
+package: Custom
+
+# Information added by Drupal.org packaging script on 2024-11-22
+#version: '2.0.1'
+#project: 'dg_autologout'
+#datestamp: 1732235108

@@ -10,7 +10,7 @@ if [ -n "$XDEBUG_MODE" ]; then
   export XDEBUG_MODE=debug
 fi
 
-drush cr
+(drush cr) || :
 
 # If using Postgres, enable the pg_trgm extension which is required before
 # Drupal is installed.
@@ -48,15 +48,29 @@ if [ -n "$(ls $(drush php:eval "echo realpath(Drupal\Core\Site\Settings::get('co
   drush si -y --account-pass='admin' --existing-config ${PROFILE}
   # Required if config splits is enabled.
   if drush pm-list --type=module --status=enabled --no-core | grep 'config_split'; then
-    drush cr
+    echo 'Config Split is installed, need to import config again'
+    (drush cr) || :
+    (drush cr) || :
     drush cim -y
+  else
+    echo 'Config Split is not installed, no need to import config again'
   fi
 else
   echo "Installing a fresh Drupal site without configuration"
   drush si -y --account-pass='admin' $(drupal_profile)
 fi
 
+# Files added during installation, from saying default content, are not synced.
+if drush pm-list --type=module --status=enabled --no-core | grep 's3fs'; then
+  echo "Uploading public files to S3 ..."
+  drush s3fs-rc
+  drush s3fs-cl -y --scheme=public --condition=newer
+fi
+
 # Clear cache after installation
 drush cr
+
+# Set the homepage. Custom functionality for Digital.gov.
+drush set-hp -y
 
 ./orch/show_file.sh $0 end

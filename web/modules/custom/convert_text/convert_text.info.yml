@@ -3,3 +3,5 @@ type: module
 description: 'Converts text to and from various formats.'
 package: Custom
 core_version_requirement: ^10 || ^11
+dependencies:
+  - drupal:migrate

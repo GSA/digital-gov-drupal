@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: fcb29d60-a10c-4ff0-b476-0d930926c7d0
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: communities-plain-language.svg
+  uri:
+    -
+      value: 'public://dg-logo/communities-plain-language.svg'
+  filemime:
+    -
+      value: image/svg+xml
+  filesize:
+    -
+      value: 966
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1736985216

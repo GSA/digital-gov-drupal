@@ -1,17 +1,27 @@
-uuid: d6416ee3-f371-4995-8562-14e8493fb226
+uuid: 87bdb79f-814e-4bdf-9424-95766484d469
 langcode: en
 status: true
 dependencies:
   module:
-    - media
+    - file
+    - image
     - node
 id: node.field_dg_logo
 field_name: field_dg_logo
 entity_type: node
-type: entity_reference
+type: image
 settings:
-  target_type: media
-module: core
+  target_type: file
+  display_field: false
+  display_default: false
+  uri_scheme: public
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+module: image
 locked: false
 cardinality: 1
 translatable: true

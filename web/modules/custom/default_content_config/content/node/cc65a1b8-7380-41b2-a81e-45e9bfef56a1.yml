@@ -1,0 +1,56 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: cc65a1b8-7380-41b2-a81e-45e9bfef56a1
+  bundle: guides
+  default_langcode: en
+  depends:
+    33dfb1a8-84a2-4184-990b-b8e6e849e8ec: node
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Implement wisely'
+  created:
+    -
+      value: 1736269216
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /guides/web-analytics-playbook/implement-wisely
+      langcode: en
+      pathauto: 0
+  body:
+    -
+      value: '<p>In the early days of web analytics, almost all analytics tools had to be deployed via script tags in the site’s HTML. Today, we have many tag management options that allow non-developers to adjust and customize implementations.</p><p>Whether you deploy from HTML or use a tag manager, the key word is flexibility. Don’t get locked into not being able to adjust an event tag because you can’t do anything about the once-per-month release cycle.</p><p><strong>Checklist:</strong></p><ul><li>Study all the possible tools and their options and features</li><li>Choose one</li><li>Study this tool’s options and features</li><li>Decide the best, most flexible way to implement</li><li>If you decide to use a tag manager, consider access permissions and workflows</li><li>Map out communications in case you need an emergency adjustment</li></ul><p><strong>Key Questions:</strong></p><ul><li>Who should be able to change the implementation?</li><li>How can we ensure that alterations can be made on-the-fly, when needed?</li><li>If we use a tag manager, who or what roles should have container publishing permissions?</li><li>What’s the best way to learn how to use a tag management system?</li></ul>'
+      format: html
+      summary: ''
+  field_guide_nav_ref:
+    -
+      entity: 33dfb1a8-84a2-4184-990b-b8e6e849e8ec
+  field_guide_nav_title:
+    -
+      value: Implement
+  field_summary:
+    -
+      value: '<p>Ensuring that your implementation is flexible is key for web analytics.</p>'
+      format: single_inline_html
+  field_summary_box:
+    -
+      value: false

@@ -1,0 +1,12 @@
+services:
+  dg_autologout_event_subscriber:
+    class: Drupal\dg_autologout\EventSubscriber\AutologoutSubscriber
+    tags:
+      - {name: event_subscriber}
+    arguments: ['@dg_autologout.manager', '@current_user', '@config.factory','@theme.manager','@datetime.time', '@request_stack', '@language_manager']
+
+  dg_autologout.manager:
+    class: Drupal\dg_autologout\AutologoutManager
+    # tags:
+      # - {name: autologout_manager}
+    arguments: ['@module_handler', '@config.factory', '@messenger', '@current_user', '@logger.factory', '@session_manager', '@user.data', '@datetime.time', '@entity_type.manager', '@request_stack']

@@ -36,7 +36,7 @@ default:
       pathauto: 1
   field_summary:
     -
-      value: 'A ‘quick-start’ guide for embedding accessibility and inclusive design practices into your team’s workflow'
+      value: '<p>A ‘quick-start’ guide for embedding accessibility and inclusive design practices into your team’s workflow</p>'
       format: single_inline_html
   field_summary_box:
     -

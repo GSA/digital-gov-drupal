@@ -5,6 +5,7 @@ _meta:
   bundle: guides
   default_langcode: en
   depends:
+    33dfb1a8-84a2-4184-990b-b8e6e849e8ec: node
     cdc07606-1563-4772-9b45-11fa5d99c31a: media
 default:
   revision_uid:
@@ -38,13 +39,16 @@ default:
       pathauto: 1
   body:
     -
-      value: '<p>Federal websites vary greatly in content and purpose, but they all share a common objective: to deliver information or services to the public in an efficient, easy, and accessible way.</p><p>Web analytics tools play an integral role in pursuit of that goal. However, if the tool is implemented improperly or the data it collects are analyzed incorrectly, it can derail delivering information or services to the public.</p><p>Use these plays to help strategize how your team can most effectively use web analytics for your website and target audience.</p><p>1.&nbsp; [Create a foundation for your strategy]({{&lt; ref "create-a-foundation-for-your-strategy" &gt;}})</p><p>2.&nbsp; [Commit to action]({{&lt; ref "commit-to-action" &gt;}})</p><p>3.&nbsp; [Implement wisely]({{&lt; ref "implement-wisely" &gt;}})</p><p>4.&nbsp; [Configure your tool’s settings carefully]({{&lt; ref "configure-your-tools-settings-carefully" &gt;}})</p><p>5.&nbsp; [Know what you’re looking for]({{&lt; ref "know-what-youre-looking-for" &gt;}})</p><p>6.&nbsp; [Democratize the data]({{&lt; ref "democratize-the-data" &gt;}})</p><p>7.&nbsp; [Invest in training and support]({{&lt; ref "invest-in-training-and-support" &gt;}})</p><p>8.&nbsp; [Do it continuously]({{&lt; ref "do-it-continuously" &gt;}})</p>'
+      value: '<p>Federal websites vary greatly in content and purpose, but they all share a common objective: to deliver information or services to the public in an efficient, easy, and accessible way.</p><p>Web analytics tools play an integral role in pursuit of that goal. However, if the tool is implemented improperly or the data it collects are analyzed incorrectly, it can derail delivering information or services to the public.</p><p>Use these plays to help strategize how your team can most effectively use web analytics for your website and target audience.</p><p>1.&nbsp;<a href="/node/76" data-entity-type="node" data-entity-uuid="446d9608-f2b8-463a-88b1-d6956adf0057" data-entity-substitution="canonical">Create a foundation for your strategy</a></p><p>2.&nbsp; <a href="/node/77" data-entity-type="node" data-entity-uuid="4ac07eca-6b35-43b5-b9a4-b2df9ef82401" data-entity-substitution="canonical">Commit to action</a></p><p>3.&nbsp; <a href="/node/78" data-entity-type="node" data-entity-uuid="cc65a1b8-7380-41b2-a81e-45e9bfef56a1" data-entity-substitution="canonical">Implement wisely</a></p><p>4.&nbsp; [Configure your tool’s settings carefully]({{&lt; ref "configure-your-tools-settings-carefully" &gt;}})</p><p>5.&nbsp; [Know what you’re looking for]({{&lt; ref "know-what-youre-looking-for" &gt;}})</p><p>6.&nbsp; [Democratize the data]({{&lt; ref "democratize-the-data" &gt;}})</p><p>7.&nbsp; [Invest in training and support]({{&lt; ref "invest-in-training-and-support" &gt;}})</p><p>8.&nbsp; [Do it continuously]({{&lt; ref "do-it-continuously" &gt;}})</p>'
       format: html
       summary: ''
   field_deck:
     -
-      value: 'Use web analytics to reach your strategic website goals'
+      value: '<p>Use web analytics to reach your strategic website goals</p>'
       format: single_inline_html
+  field_guide_nav_ref:
+    -
+      entity: 33dfb1a8-84a2-4184-990b-b8e6e849e8ec
   field_guide_weight:
     -
       value: 1
@@ -56,7 +60,7 @@ default:
       entity: cdc07606-1563-4772-9b45-11fa5d99c31a
   field_summary:
     -
-      value: 'This guide provides actionable strategies for effectively using web analytics to improve federal websites and digital services.'
+      value: '<p>This guide provides actionable strategies for effectively using web analytics to improve federal websites and digital services.</p>'
       format: single_inline_html
   field_summary_box:
     -

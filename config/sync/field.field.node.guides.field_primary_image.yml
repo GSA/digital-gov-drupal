@@ -11,7 +11,7 @@ field_name: field_primary_image
 entity_type: node
 bundle: guides
 label: 'Primary Image'
-description: ''
+description: 'Used for the image to use in social media previews. Header image is determined by the selected guide navigation.'
 required: false
 translatable: false
 default_value: {  }

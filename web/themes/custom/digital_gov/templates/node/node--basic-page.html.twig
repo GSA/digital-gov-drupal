@@ -63,6 +63,9 @@
  */
 #}
 
+{# Caching the data in content object #}
+{% set savedCache = content|render %}
+
 <main role="main" id="main-content">
   <article class="grid-container-desktop">
     <header>
@@ -70,20 +73,23 @@
       {{ drupal_entity('block', 'digital_gov_breadcrumbs') }}
 
       {{ include('@digital_gov/partials/page-header.html.twig', {
-        title: node.title.value,
-        deck: node.field_deck.value,
-      }, with_context=false) }}
+        title: label|field_value,
+        deck: content.field_deck|field_value,
+      }, with_context: false) }}
     </header>
 
     <section class="usa-in-page-nav-container">
+      {# Avoid printing in-page navigation component on error pages. #}
+      {% if not error_page %}
       <aside
         class="usa-in-page-nav"
         data-title-heading-level="h3"
         data-root-margin="-350px 0px -350px 0px"
       ></aside>
+      {% endif %}
 
       <div class="content usa-prose">
-        {{ content }}
+        {{ content.body|field_value }}
       </div>
 
     </section>

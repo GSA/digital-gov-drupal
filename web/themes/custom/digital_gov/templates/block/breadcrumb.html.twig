@@ -32,7 +32,7 @@
   <ol class="usa-breadcrumb__list">
   {% for item in breadcrumb %}
     {% if item.url %}
-      <li class="usa-breadcrumb__list-item"><a href="{{ item.url }}">{{ item.text }}</a></li>
+      <li class="usa-breadcrumb__list-item"><a href="{{ item.url }}" class="usa-breadcrumb__link" aria-label="Back to {{ item.text }}"><span>{{ item.text }}</span></a></li>
     {% else %}
       <li class="usa-breadcrumb__list-item usa-current">{{ item.text }}</li>
     {% endif %}

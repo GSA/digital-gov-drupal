@@ -1,0 +1,92 @@
+dg_autologout.settings:
+  type: config_object
+  mapping:
+    enabled:
+      type: boolean
+      label: 'Enable autologout'
+    timeout:
+      type: integer
+      label: 'Timeout value'
+    max_timeout:
+      type: integer
+      label: 'Max timeout value'
+    padding:
+      type: integer
+      label: 'Seconds to give a user to respond'
+    logout_regardless_of_activity:
+      type: boolean
+      label: 'Logout user regardless of activity'
+    no_individual_logout_threshold:
+      type: boolean
+      label: 'Disable user-specific logout thresholds'
+    role_logout:
+      type: boolean
+      label: 'Enable role timeout'
+    role_logout_max:
+      type: boolean
+      label: 'Use highest role timeout value'
+    redirect_url:
+      type: string
+      label: 'Redirect url'
+    include_destination:
+      type: boolean
+      label: 'Include destination'
+    no_dialog:
+      type: boolean
+      label: 'Integer label'
+    message:
+      type: text
+      label: 'Message to display'
+    inactivity_message:
+      type: text
+      label: 'Message displayed after logging out'
+    inactivity_message_type:
+      type: string
+      label: 'Type of the message displayed'
+    modal_width:
+      type: integer
+      label: 'Modal width'
+    enforce_admin:
+      type: boolean
+      label: 'Enable admin logout'
+    jstimer_format:
+      type: string
+      label: 'JS timer format'
+    jstimer_js_load_option:
+      type: boolean
+      label: 'JS timer load'
+    use_alt_logout_method:
+      type: boolean
+      label: 'Use alternate logout methode'
+    use_watchdog:
+      type: boolean
+      label: 'Use watchdog'
+    dialog_title:
+      type: label
+      label: 'Title'
+    disable_buttons:
+      type: boolean
+      label: 'Disable buttons'
+    yes_button:
+      type: label
+      label: 'Yes button text'
+    no_button:
+      type: label
+      label: 'No button text'
+    whitelisted_ip_addresses:
+      type: string
+      label: 'Whitelisted IP addresses'
+
+dg_autologout.role.*:
+  type: config_object
+  label: 'Role Settings'
+  mapping:
+    enabled:
+      type: boolean
+      label: 'Enabled'
+    timeout:
+      type: integer
+      label: 'Timeout'
+    url:
+      type: string
+      label: 'redirect_url'

@@ -1,0 +1,14 @@
+diff --git a/src/Exporter.php b/src/Exporter.php
+--- a/src/Exporter.php
++++ b/src/Exporter.php	(date 1735582111782)
+@@ -142,6 +142,10 @@
+     // Serialize all entities and key them by entity TYPE and uuid.
+     $serialized_entities_per_type = [];
+     foreach ($entities as $entity) {
++      $exclude_entity_results = $this->moduleHandler->invokeAll('default_content_exclude_entity', [$entity]);
++      if (in_array(TRUE, $exclude_entity_results, TRUE)) {
++        continue;
++      }
+       $normalized = $this->contentEntityNormalizer->normalize($entity);
+       $encoded = Yaml::encode($normalized);
+       $serialized_entities_per_type[$entity->getEntityTypeId()][$entity->uuid()] = $encoded;

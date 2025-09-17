@@ -1,0 +1,24 @@
+uuid: 4133a3ed-74a7-4c14-8051-23c8e7e1005d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.guide_landing
+  module:
+    - text
+id: node.guide_landing.body
+field_name: body
+entity_type: node
+bundle: guide_landing
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+  allowed_formats: {  }
+field_type: text_with_summary

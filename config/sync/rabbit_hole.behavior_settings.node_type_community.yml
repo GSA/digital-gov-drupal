@@ -1,0 +1,14 @@
+uuid: a1e71885-5eac-4b2b-ac82-73e9d894d7a0
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.community
+id: node_type_community
+entity_type_id: node_type
+entity_id: community
+action: display_page
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

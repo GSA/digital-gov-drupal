@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: a895e450-3d95-44a1-a0bc-bf5b2e4692e4
+  bundle: hcd_glossary
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: Snapshots
+  description:
+    -
+      value: '<p>A representative sample of research. In design-oriented presentations, this refers to a collection of photographs, quotations, and synthesized research that is formatted to tell the story of the research endeavor.</p>'
+      format: single_inline_html
+  weight:
+    -
+      value: 30
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

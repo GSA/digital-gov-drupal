@@ -62,19 +62,16 @@
  * @ingroup themeable
  */
 #}
-
 <main role="main" id="main-content">
   <div class="grid-container-desktop">
     <div class="grid-row">
       <div class="grid-col-12">
         <header class="page-head page-head-job-board">
-          <h1>{{ node.title.value }}</h1>
-
+          <h1>{{ label|field_value }}</h1>
           {% if content.field_deck %}
             <h2 class="deck">{{ content.field_deck|field_value }}</h2>
           {% endif %}
-
-          <br />
+          <br/>
         </header>
       </div>
     </div>
@@ -82,63 +79,63 @@
 
   <section class="stream">
     <div class="grid-container-desktop">
-      [placeholder list job cards]
-      {# NOT-MIGRATED
-      {{ range .Site.Data.job_board }}
-      {{ if ge .close_date $now }}
-      {{ $anyActivePost = true }}
-      {{ $jobLink := .apply_link | safeURL }}
-      <article class="card card-job" aria-labelledby="{{ .title }}">
-        <div class="card-job__content-header">
-          <a href="{{ $jobLink }}" target="__blank"
-          ><h3 id="{{ .title }}">{{- .title | markdownify -}}</h3></a
+      {% for item in job_board %}
+        {% set aria_id = item.title|clean_unique_id %}
+        <article class="card card-job" aria-labelledby="{{ aria_id }}">
+          <div class="card-job__content-header">
+            <a href="{{ item.apply_link }}" target="__blank">
+              <h3
+                id="{{ aria_id }}">{{ item.title|check_markup('single_inline_html') }}</h3>
+            </a>
+          </div>
+          <div class="card-job__content-summary">
+            <div class="card-job__department">
+              {{ item.department|check_markup('single_inline_html') }}
+            </div>
+            <div class="card-job__location">
+              {{ item.location|check_markup('single_inline_html') }}
+            </div>
+            <p class="card-job__description">
+              {{ item.description|check_markup('single_inline_html') }}
+            </p>
+          </div>
+          <div
+            class="card-job__apply"
           >
-        </div>
-        <div class="card-job__content-summary">
-          <div class="card-job__department">
-            {{ .department | markdownify }}
+            <a class="usa-button" href="{{ item.apply_link }}" target="__blank" aria-label="Apply for {{ item.title|striptags|trim }}">
+              {{ 'Apply'|t }}
+            </a>
           </div>
-          <div class="card-job__location">
-            {{ .location | markdownify }}
+          <div class="card-job__meta-date">
+            Open {{ item.open_date }} to
+            {{ item.close_date }}
           </div>
-          <p class="card-job__description">
-            {{ .description | markdownify }}
-          </p>
-        </div>
-        <div
-          class="card-job__apply"
-          aria-labelledby="Apply for {{ .title }}"
-        >
-          <a class="usa-button" href="{{ $jobLink }}" target="__blank">
-            Apply
-          </a>
-        </div>
-        <div class="card-job__meta-date">
-          Open {{ .open_date | time.Format ":date_long" }} to
-          {{ .close_date | time.Format ":date_long" }}
-        </div>
-        <div class="card-job__meta-topics">
-          {{ range .cop_topics }}
-          {{ $topic := . }}
-          {{ $acronym := index $acronymToCop $topic }}
-          <div class="cop-topic--{{ $acronym }}">
-            {{- $topic -}}
+          <div class="card-job__meta-topics">
+            {# todo: this may not be best here? #}
+            {% set topic_acronym = {
+              FCN: 'Communicators',
+              ML: 'Multilingual',
+              PL: 'Plain Language',
+              SM: 'Social Media',
+              UX: 'User Experience',
+              WAO: 'Web Analytics',
+              WCM: 'Web Managers',
+              CC: 'Contact Center',
+            } %}
+            {% for topic in item['cop_topics'] %}
+              {% for key, value in topic_acronym %}
+                {% if topic == value %}
+                  <div class="cop-topic--{{ key }}">{{ topic }}</div>
+                {% endif %}
+              {% endfor %}
+            {% endfor %}
           </div>
-          {{ end }}
+        </article>
+      {% else %}
+        <div id="no_job_postings">
+          {{ 'There are no active job postings at the moment. Please check back another time.'|t }}
         </div>
-      </article>
-      {{ end }}
-      {{ end }}
-
-
-      {{ if not $anyActivePost }}
-      <div id="no_job_postings">
-        There are no active job postings at the moment. Please check back
-        another time.
-      </div>
-      {{ end }}
-      #}
+      {% endfor %}
     </div>
-    {#- partial "core/pagination.html" . -#}
   </section>
 </main>

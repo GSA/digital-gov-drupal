@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.node.collection_item
     - field.field.node.short_post.field_deck
     - field.field.node.short_post.field_external_url
+    - field.field.node.short_post.field_kicker
     - field.field.node.short_post.field_short_post_type
     - field.field.node.short_post.field_slug
     - field.field.node.short_post.field_source
@@ -43,6 +44,7 @@ content:
 hidden:
   content_moderation_control: true
   field_deck: true
+  field_kicker: true
   field_short_post_type: true
   field_slug: true
   field_source: true

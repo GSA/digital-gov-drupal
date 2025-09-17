@@ -1,0 +1,40 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 4753aee3-93f3-484e-ac1b-9bb9a65aae64
+  bundle: resources
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'How to build an analytics strategy'
+  created:
+    -
+      value: 1736812399
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /resources/how-build-analytics-strategy
+      langcode: en
+      pathauto: 1
+  field_summary:
+    -
+      value: '<p>The Digital Analytics Program (DAP) provides a start-to-finish approach for assessing, reporting, and taking action using Digital.gov in a case study.</p>'
+      format: single_inline_html

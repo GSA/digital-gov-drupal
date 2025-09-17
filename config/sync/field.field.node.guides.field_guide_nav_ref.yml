@@ -1,0 +1,29 @@
+uuid: c401a03f-21ab-4bdc-942a-ae789b8f255f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_guide_nav_ref
+    - node.type.guide_navigation
+    - node.type.guides
+id: node.guides.field_guide_nav_ref
+field_name: field_guide_nav_ref
+entity_type: node
+bundle: guides
+label: 'Guide Navigation'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      guide_navigation: guide_navigation
+    sort:
+      field: title
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.storage.node.field_featured_communities
     - node.type.community
+    - node.type.short_post
     - node.type.topics
 id: node.topics.field_featured_communities
 field_name: field_featured_communities
@@ -21,9 +22,10 @@ settings:
   handler_settings:
     target_bundles:
       community: community
+      short_post: short_post
     sort:
       field: _none
       direction: ASC
     auto_create: false
-    auto_create_bundle: ''
+    auto_create_bundle: community
 field_type: entity_reference

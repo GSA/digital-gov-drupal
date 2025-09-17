@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 55926904-af0e-4cd4-89eb-d73d0491ab01
+  bundle: hcd_glossary
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'Human-Centered Design (HCD)'
+  description:
+    -
+      value: '<p>Human-centered design is a design and management framework that develops solutions to problems by involving the human perspective in all steps of the problem-solving process. Human involvement typically takes place in observing the problem within context, brainstorming, conceptualizing, developing, and implementing the solution.</p>'
+      format: single_inline_html
+  weight:
+    -
+      value: 15
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

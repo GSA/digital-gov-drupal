@@ -1,0 +1,148 @@
+#!/bin/bash
+
+set -e
+
+home="/home/vcap"
+app_path="${home}/app"
+html_path="${app_path}/html"
+
+theme_name="digital_gov"
+
+source "${home}/.bashrc"
+
+mkdir -p "${html_path}"
+
+cloud_gov_fqdn="app.cloud.gov"
+export cloud_gov_fqdn
+
+PYTHONWARNINGS="ignore:Unverified HTTPS request"
+export PYTHONWARNINGS
+
+application_uri=$(echo "${VCAP_APPLICATION}" | jq -r '.application_uris[]')
+export application_uri
+
+hostname=$(echo "$application_uri" | cut -d'.' -f 1)
+export hostname
+
+AWS_ACCESS_KEY_ID=$(echo "${VCAP_SERVICES}" | jq -r '.s3[] | select(.name | strings | test("static")).credentials.access_key_id')
+export AWS_ACCESS_KEY_ID
+
+AWS_SECRET_ACCESS_KEY=$(echo "${VCAP_SERVICES}" | jq -r '.s3[] | select(.name | strings | test("static")).credentials.secret_access_key')
+export AWS_SECRET_ACCESS_KEY
+
+AWS_DEFAULT_REGION=$(echo "${VCAP_SERVICES}" | jq -r '.s3[] | select(.name | strings | test("static")).credentials.region')
+export AWS_DEFAULT_REGION
+
+bucket_name=$(echo "${VCAP_SERVICES}" | jq -r '.s3[] | select(.name | strings | test("static")).name')
+export bucket_name
+
+bucket=$(echo "${VCAP_SERVICES}" | jq -r '.s3[] | select(.name | strings | test("static")).credentials.bucket')
+export bucket
+
+bucket_endpoint=$(echo "${VCAP_SERVICES}" | jq -r '.s3[] | select(.name | strings | test("static")).credentials.endpoint')
+export bucket_endpoint
+
+# Temporarily print out commands as they run for debugging.
+set -x
+
+cd "${app_path}"
+echo "**************************************************"
+echo "Running 'drush cr' in '${environment}'..."
+echo "**************************************************"
+drush cr
+echo "'drush cr' task...completed!"
+echo ""
+
+echo "**************************************************"
+echo "Running 'drush cron' in '${environment}'..."
+echo "**************************************************"
+drush cron
+echo "'drush cron' task...completed!"
+echo ""
+
+echo "**************************************************"
+echo "Running 'drush tome:static' in '${environment}'..."
+echo "**************************************************"
+drush state:set xmlsitemap_base_url "${STATIC_URI}"
+drush xmlsitemap:regenerate
+drush tome:static --uri="${STATIC_URI}" --path-count=1 --retry-count=3 -y
+drush cr
+drush state:set xmlsitemap_base_url "${DRUSH_OPTIONS_URI}"
+drush xmlsitemap:regenerate
+echo "'drush tome:static' task...completed!"
+echo ""
+
+echo "**************************************************"
+echo "Performing find and replace tasks..."
+echo "**************************************************"
+echo "-- Replace s3-based file urls with relative urls"
+echo "**************************************************"
+
+## Fix for DIGITAL-651
+find "${html_path}" -type f -exec grep -l 'http[s]*://[^/]\+/s3/files' {} \; -exec sed -i "s#${DRUSH_OPTIONS_URI}/s3/files#${STATIC_URI}/s3/files#g" {} +
+find "${html_path}" -type f -exec grep -l 'http[s]*://[^/]\+/s3/files' {} \; -exec sed -i "s#https://${hostname}.${cloud_gov_fqdn}/s3/files#${STATIC_URI}/s3/files#g" {} +
+echo "**************************************************"
+echo "-- Replace absolute urls with relative urls in generated files"
+echo "**************************************************"
+find "${html_path}/sites/default/files" -type f -exec grep -v 'meta property="og:image"' -v 'meta name="twitter:image"' -exec grep -l "${STATIC_URI}/" {} \; -exec sed -i "s#${STATIC_URI}/#/#g" {} +
+echo "Performing find and replace tasks...completed!"
+echo ""
+echo "**************************************************"
+echo "Adding missing Core assets vendor directory..."
+echo "**************************************************"
+mkdir -p "${html_path}/core/assets"
+cp -rfp "${app_path}/web/core/assets/vendor" "${html_path}/core/assets/"
+echo "Missing Core assets files...completed!"
+echo ""
+
+echo "**************************************************"
+echo "Adding digital.gov custom theme assets..."
+echo "**************************************************"
+mkdir -p "${html_path}/themes/custom/${theme_name}"
+cp -rfp "${app_path}/web/themes/custom/${theme_name}/static" "${html_path}/themes/custom/${theme_name}/"
+echo "Adding digital.gov custom theme assets...completed!"
+echo ""
+
+echo "*******************************************************************"
+echo "Copying robots.txt to static site based on env: '${environment}'..."
+echo "*******************************************************************"
+# Set the robots.txt file content based on the environment
+case "$environment" in
+  "prod")    robots_content="${app_path}/robots--live.txt" ;;
+  "staging") robots_content="${app_path}/robots--test-searchgov.txt" ;; # Temp for Testing on Search.gov
+  *)         robots_content="${app_path}/web/robots.txt" ;;
+esac
+
+# Check if the source file exists and copy file
+if [[ ! -f "$robots_content" ]]; then
+  echo "Warning: Source robots.txt '$robots_content' for '${environment}' not found. Skipping copy."
+else
+  cp "$robots_content" "${html_path}/robots.txt"
+  echo "robots.txt set up for '${environment}' environment!"
+fi
+
+echo "**************************************************"
+echo "Deleting 'node' redirect files..."
+echo "**************************************************"
+find "${html_path}" -type d -name "node" -print0 | while IFS= read -r -d '' node_dir; do
+    # Find index.html files within each 'node' directory that are a redirect.
+    find "$node_dir" -type f -path "*/index.html" -exec grep -q "http-equiv=\"refresh\"" {} \; -delete -exec dirname {} \;
+done
+echo "Deleting 'node' redirect files...completed!"
+echo ""
+
+echo "**************************************************"
+echo "Removing empty directories..."
+echo "**************************************************"
+find "${html_path}" -type d -empty -delete
+echo "Removing empty directories...completed!"
+echo ""
+
+cd "${html_path}"
+echo "**************************************************"
+echo "Copying static files to '${bucket_name}'..."
+echo "**************************************************"
+aws s3 sync . "s3://${bucket}" --delete --no-verify-ssl 2>/dev/null
+aws s3 website "s3://${bucket}" --index-document index.html --error-document /404/index.html  --no-verify-ssl 2>/dev/null
+echo "Copy to '${bucket_name}'...completed!"
+echo ""

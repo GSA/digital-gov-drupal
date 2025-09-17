@@ -75,9 +75,9 @@
       {# @TODO kicker and deck fields can contain HTML tags but use the plain text filter... #}
       {{ include('@digital_gov/partials/page-header.html.twig', {
         title: node.title.value,
-        kicker: node.field_kicker.value,
-        deck: node.field_deck.value,
-      }, with_context=false) }}
+        kicker: content.field_kicker|field_value,
+        deck: content.field_deck|field_value,
+      }, with_context: false) }}
 
       <p class="datetime">
         <svg
@@ -116,14 +116,14 @@
         youtube_id: node.field_youtube_id.value,
         youtube_title: node.label,
         captions: node.field_captions.0.uri,
-      }, with_context=false) }}
+      }, with_context: false) }}
     {% endif %}
 
     {% if not is_future_event and node.field_youtube_id.value %}
       {{ include('@digital_gov/partials/events/stage-youtube.html.twig', {
         youtube_id: node.field_youtube_id.value,
         youtube_title: node.label,
-      }, with_context=false) }}
+      }, with_context: false) }}
     {% endif %}
 
     <section class="grid-row tablet-lg:grid-gap-4">
@@ -134,12 +134,12 @@
             youtube_id: node.field_youtube_id.value,
             youtube_title: node.label,
             captions: node.field_captions.0.uri,
-          }, with_context=false) }}
+          }, with_context: false) }}
         {% endif %}
 
         {# Main Content #}
         <div class="content usa-prose">
-          {{ content }}
+          {{ content.body|field_value }}
         </div>
 
         {# Touchpoints Form #}
@@ -148,12 +148,12 @@
 
       <div class="dg-sidebar grid-col-12 tablet:grid-col-3">
         {# Authors #}
-        {% if content.field_authors %}
+        {% if content.field_authors|field_value %}
           <h4>In this talk</h4>
           {{ include('@digital_gov/partials/authors-list.html.twig', {
             inline: false,
-            authors: content.field_authors,
-          }, with_context=false) }}
+            authors: content.field_authors|field_value,
+          }, with_context: false) }}
         {% endif %}
 
         {% if node.field_event_platform.value == 'youtube_live' and is_future_event and content.field_registration_url|field_value %}
@@ -166,8 +166,6 @@
         {# Display Primary Communities #}
         {{ include('@digital_gov/partials/primary-communities.html.twig') }}
 
-        {# partial "core/primary-communities.html" . #}
-
         {# Topics #}
         {{ content.field_topics }}
 
@@ -175,7 +173,7 @@
         {{ include('@digital_gov/partials/get-sharetools.html.twig', {
           share_path: url,
           mailto_subject: node.label,
-        }, with_context=false) }}
+        }, with_context: false) }}
 
       </div>
     </section>
@@ -185,7 +183,7 @@
 {% macro registration_link(content) %}
   <a
     aria-label="Register for {{ content.label }}"
-    class="btn btn-register"
+    class="dg-register__button btn"
     href="{{ content.field_registration_url|field_value }}"
     onclick="__gaTracker('send', 'event', 'outbound-article', '{{ content.field_registration_url|field_value }}', '{{ 'REGISTER NOW'|t }}');"
   >{{ 'Register'|t }}</a

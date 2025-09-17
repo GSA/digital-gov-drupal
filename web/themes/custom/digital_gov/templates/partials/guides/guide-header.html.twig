@@ -1,16 +1,18 @@
+{% set kicker = kicker_title ? kicker_title : 'Digital.gov Guide' %}
+
 <header class="dg-guide__header grid-container grid-container-desktop">
   <div class="dg-guide__header-title">
-    {% if landingURL %}
-    <a class="usa-link kicker" href="{{ landingURL }}">
-      {{ field.kicker.value ?: 'Digital.gov Guide' }}
+    {% if kicker_url %}
+    <a class="usa-link kicker" href="{{ kicker_url }}">
+      {{ kicker }}
     </a>
     {% else %}
-    <p class="kicker">{{ field.kicker.value ?: 'Digital.gov Guide' }}</p>
+    <p class="kicker">{{ kicker }}</p>
     {% endif %}
 
     <h1>{{ node.title.value }}</h1>
     <div class="deck">
-      {{ field.deck.value }}
+      {{ node.field_summary[0].value|check_markup('single_inline_html') }}
     </div>
     {% if node.field_glossary.value %}
     <button class="dg-glossary__toggle">
@@ -29,12 +31,9 @@
     {% endif %}
   </div>
 
-  {% if node.field_featured_image.value %}
+  {% if overview_image %}
   <div class="dg-guide__header-image">
-    {{ content.field_featured_image|field_value }}
-    {# NOT-MIGRATED
-     partial "core/img-flexible.html" (dict "Site" .Site "src" $uid "small" "false")
-    #}
+    {{ drupal_image(overview_image.target_id, '', {alt: overview_image.alt, class: 'dg-img-flexible'}) }}
   </div>
   {% endif %}
 

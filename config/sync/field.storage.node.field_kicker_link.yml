@@ -1,0 +1,19 @@
+uuid: 35d02eeb-4a70-47fe-9091-a6e34bafcc0b
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+    - node
+id: node.field_kicker_link
+field_name: field_kicker_link
+entity_type: node
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

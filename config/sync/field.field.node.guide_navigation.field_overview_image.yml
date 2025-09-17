@@ -1,0 +1,29 @@
+uuid: 00ee266f-d44e-402a-8765-f2b361281f43
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_overview_image
+    - media.type.image
+    - node.type.guide_navigation
+id: node.guide_navigation.field_overview_image
+field_name: field_overview_image
+entity_type: node
+bundle: guide_navigation
+label: 'Overview Image'
+description: 'Image to use in the header for all pages in this guide.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

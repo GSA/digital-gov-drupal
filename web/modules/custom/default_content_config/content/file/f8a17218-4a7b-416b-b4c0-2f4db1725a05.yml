@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: f8a17218-4a7b-416b-b4c0-2f4db1725a05
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: communities-web-analytics.svg
+  uri:
+    -
+      value: 'public://dg-logo/communities-web-analytics.svg'
+  filemime:
+    -
+      value: image/svg+xml
+  filesize:
+    -
+      value: 2308
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1736970304

@@ -13,3 +13,6 @@ regions:
   breadcrumb: 'Breadcrumb'
   content: 'Content'
   footer: 'Footer'
+
+ckeditor5-stylesheets:
+  - static/dist/ckeditor.min.css

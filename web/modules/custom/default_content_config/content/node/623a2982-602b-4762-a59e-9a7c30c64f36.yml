@@ -5,8 +5,9 @@ _meta:
   bundle: community
   default_langcode: en
   depends:
-    df325658-effa-4ff9-9e6b-abfbaf437ff9: media
+    3f447040-a671-4acf-85c1-c2301f9eb7b3: file
     f53fc4bd-54e8-49b3-b419-73525681c8a1: media
+    58b5051e-356e-4ace-be42-ca090259d6ab: node
 default:
   revision_uid:
     -
@@ -39,9 +40,13 @@ default:
       pathauto: 0
   body:
     -
-      value: '<p>p&gt;Government professionals from all levels come together in this community to create a better online experience for the public.</p><p>&nbsp;</p><p>Become a member to learn more about creating, managing, and contributing to government websites and digital services.</p><p>Digital.gov fosters this fundamental community by providing spaces for sharing ideas, challenges, lessons learned, and best practices for managing government websites and digital services. Remember, when participating in this community, you must follow <a href="https://digital.gov/communities/community-guidelines/">Digital.gov community guidelines</a>.</p><embedded-content data-plugin-config="{&quot;content_reference&quot;:&quot;57&quot;}" data-plugin-id="ec_shortcodes_featured_resource" data-button-id="default">&nbsp;</embedded-content>'
+      value: '<p>Government professionals from all levels come together in this community to create a better online experience for the public.</p><p>Become a member to learn more about creating, managing, and contributing to government websites and digital services.</p><p>Digital.gov fosters this fundamental community by providing spaces for sharing ideas, challenges, lessons learned, and best practices for managing government websites and digital services. Remember, when participating in this community, you must follow <a href="https://digital.gov/communities/community-guidelines/">Digital.gov community guidelines</a>.</p><embedded-content data-plugin-config="{&quot;content_reference&quot;:&quot;57&quot;}" data-plugin-id="ec_shortcodes_featured_resource" data-button-id="default">&nbsp;</embedded-content>'
       format: html
       summary: ''
+  field_deck:
+    -
+      value: '<p>Share and learn with web and digital services practitioners.</p>'
+      format: single_inline_html
   field_dg_acronym:
     -
       value: WCM
@@ -50,10 +55,17 @@ default:
       value: true
   field_dg_logo:
     -
-      entity: df325658-effa-4ff9-9e6b-abfbaf437ff9
+      entity: 3f447040-a671-4acf-85c1-c2301f9eb7b3
+      alt: ''
+      title: ''
+      width: 0
+      height: 0
   field_dg_shortname:
     -
       value: 'Web Managers'
+  field_kicker:
+    -
+      value: 'Communities of Practice'
   field_members:
     -
       value: 2225
@@ -68,5 +80,8 @@ default:
       value: 'Join the Web Managers Community'
   field_summary:
     -
-      value: 'Create a better online experience for the public alongside government web content managers.'
+      value: '<p>Create a better online experience for the public alongside government web content managers.</p>'
       format: single_inline_html
+  field_topics:
+    -
+      entity: 58b5051e-356e-4ace-be42-ca090259d6ab

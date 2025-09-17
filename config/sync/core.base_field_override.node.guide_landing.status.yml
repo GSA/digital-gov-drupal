@@ -1,0 +1,22 @@
+uuid: 4364e4a5-14f6-47b3-b2e1-ffda3628e995
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.guide_landing
+id: node.guide_landing.status
+field_name: status
+entity_type: node
+bundle: guide_landing
+label: Published
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

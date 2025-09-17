@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: d6432ffb-edda-4429-8f93-96a177358f47
+  bundle: hcd_glossary
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'Root cause'
+  description:
+    -
+      value: '<p>The fundamental reason for the occurrence of a problem.</p>'
+      format: single_inline_html
+  weight:
+    -
+      value: 27
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

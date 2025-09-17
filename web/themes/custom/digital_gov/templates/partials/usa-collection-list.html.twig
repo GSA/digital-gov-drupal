@@ -1,0 +1,12 @@
+{# Wrap a view in the container classes for USA collection component #}
+{% if rows %}
+  <div class="dg-collection">
+    <ul class="usa-collection">
+      {% for item in rows %}
+        <li class="usa-collection__item">
+          {{ item.content }}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}

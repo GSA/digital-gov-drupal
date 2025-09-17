@@ -7,8 +7,13 @@
 
 declare(strict_types=1);
 
+use Drupal\Component\Serialization\Yaml;
+use Drupal\Component\Utility\Html;
+use Drupal\convert_text\ConvertText;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Template\Attribute;
+use Drupal\Core\Url;
+use Drupal\node\NodeInterface;
 
 /**
  * @file
@@ -19,7 +24,74 @@ use Drupal\Core\Template\Attribute;
  * Implements hook_preprocess_HOOK() for html.html.twig.
  */
 function digital_gov_preprocess_html(array &$variables): void {
+  $is_front = \Drupal::service('path.matcher')->isFrontPage();
+  $variables['theme_path'] = \Drupal::theme()->getActiveTheme()->getPath();
+  $variables['theme_path_absolute'] = Url::fromUri('base://' . $variables['theme_path'], ['absolute' => TRUE])->toString();
 
+  // @todo Authors landing page? authors + term.
+  if ($is_front) {
+    $variables['attributes']['class'][] = 'home';
+    $variables['attributes']['class'][] = 'page';
+  }
+  elseif ($node = \Drupal::routeMatch()->getParameter('node')) {
+    $variables['attributes']['class'][] = dg_get_specific_body_class($node);
+    $variables['attributes']['class'][] = dg_get_broad_body_class($node);
+  }
+}
+
+/**
+ * Helper to lookup node type to body class.
+ *
+ * For cases where the Drupal content type doesn't match the Hugo content type.
+ */
+function dg_get_specific_body_class(NodeInterface $node): string {
+  if ($node->getType() === 'landing_page') {
+    // The landing page type value is the css class used by hugo.
+    return Html::getClass($node->get('field_landing_page_type')->getString());
+  }
+
+  return match ($node->getType()) {
+    'event' => 'events',
+    'community' => 'communities',
+    'guide_landing' => 'landings',
+    default => Html::getClass($node->getType()),
+  };
+}
+
+/**
+ * Helper to lookup node type to broad body class.
+ */
+function dg_get_broad_body_class(NodeInterface $node): string {
+
+  if ($node->getType() === 'guides') {
+
+    if (!$node->get('field_guide_nav_ref')->referencedEntities()) {
+      return '';
+    }
+    // Need to check if this is the Overview page.
+    if ($navNode = $node->get('field_guide_nav_ref')->referencedEntities()[0]) {
+      // This field points at a paragraph entity.
+      if ($ref = $navNode->get('field_guide_navigation')->referencedEntities()[0]) {
+        // Is the first node in the guide navigation this node?
+        if ($ref->get('field_guide_link')->referencedEntities()) {
+          $overview = $ref->get('field_guide_link')->referencedEntities()[0];
+          if ($overview->id() === $node->id()) {
+            return 'section';
+          }
+        }
+      }
+    }
+
+  }
+
+  return match ($node->getType()) {
+    'landing_page',
+    'guide_landing' => 'section',
+    'authors',
+    'topics' => 'term',
+    // All other nodes are pages.
+    default => 'page',
+  };
 }
 
 /**
@@ -37,17 +109,181 @@ function digital_gov_preprocess_node(array &$variables): void {
   $created = DrupalDateTime::createFromTimestamp($variables['node']->getCreatedTime());
   $variables['created'] = $created->format('M j, Y');
 
+  // Check if current node page is designated an error page
+  // And set a variable for templates.
+  $system_errors = [
+    404 => Drupal::config('system.site')->get('page.404'),
+    403 => Drupal::config('system.site')->get('page.403'),
+  ];
+  foreach ($system_errors as $system_error) {
+    if ($system_error == '/node/' . $variables['node']->id()) {
+      $variables['error_page'] = TRUE;
+    }
+  }
+
+  $site_config = \Drupal::config('system.site');
+  $variables['site_name'] = $site_config->get('name');
+
   switch ($variables['node']->bundle()) {
     case 'news':
-      $before_date = new DrupalDateTime('5 years ago');
-      $variables['show_archive_warning'] = $created->getPhpDateTime() <= $before_date->getPhpDateTime();
+      // $before_date = new DrupalDateTime('5 years ago');
+      // $variables['show_archive_warning'] = $created->getPhpDateTime() <=
+      // $before_date->getPhpDateTime();
+      // Disable this archive warning, see DIGITAL-336.
+      $variables['show_archive_warning'] = FALSE;
       break;
 
     case 'event':
       $variables['is_future_event'] = $variables['node']->getCreatedTime() > \Drupal::time()->getRequestTime();
       break;
 
+    case 'guides':
+      digital_gov_preprocess_node_guides($variables);
+      break;
+
+    case 'guide_landing':
+      digital_gov_preprocess_node_guide_landing($variables);
+      break;
+
+    case 'short_post':
+      digital_gov_preprocess_node_short_post($variables);
+      break;
+
+    case 'authors':
+      if ($variables['view_mode'] !== 'image') {
+        break;
+      }
+      $profile_source = $variables['node']->get('field_profile_source')->getString();
+      $github = $variables['node']->get('field_github')->getString();
+      if (empty($profile_source) && $github) {
+        $profile_source = 'github';
+      }
+
+      switch ($profile_source) {
+        case 'github':
+          // Author has selected GitHub and specified a GitHub user ID.
+          $variables['icon_path'] = sprintf('https://github.com/%s.png?size=50', $github);
+          $variables['icon_path_internal'] = FALSE;
+          break;
+
+        case 'digit-light':
+        case 'digit-dark':
+        case 'digit-pride':
+          $variables['icon_path'] = sprintf('static/digitalgov/img/%s.png', $profile_source);
+          $variables['icon_path_internal'] = TRUE;
+          break;
+
+        default:
+          // No source selected OR they picked GitHub without a GitHub ID
+          // choose between light and dark based on length of the slug.
+          $variables['icon_path'] = sprintf(
+            'static/digitalgov/img/digit-%s.png',
+            strlen($variables['node']->get('field_slug')->getString() ?: $variables['node']->label()) % 2 ? 'dark' : 'light'
+          );
+          $variables['icon_path_internal'] = TRUE;
+          break;
+      }
+      break;
   }
+
+  $request = \Drupal::service('request_stack')->getCurrentRequest();
+  $page_param = $request->query->get('page');
+
+  // Ensure it's a number and sanitize it.
+  $variables['page_param'] = (is_numeric($page_param)) ? Html::escape($page_param) : NULL;
+  $variables['is_first_page'] = $variables['page_param'] === '0' || $variables['page_param'] === NULL;
+}
+
+/**
+ * Preprocess function for guide nodes.
+ */
+function digital_gov_preprocess_node_guides(&$variables): void {
+  $guide = $variables['node'];
+  // Set defaults.
+  $variables['show_next_previous'] = FALSE;
+  $variables['show_in_page_nav'] = FALSE;
+  $variables['is_guide_overview'] = FALSE;
+  $variables['show_summary_box'] = $guide->get('field_summary_box')[0]?->get('value')->getCastedValue();
+
+  if ($guideRef = $guide->get('field_guide_nav_ref')) {
+    if ($guideRef->count() === 0) {
+      trigger_error("No guide nav ref set for this page.", E_USER_WARNING);
+      return;
+    }
+
+    $navNode = $guideRef->referencedEntities()[0];
+    $links = dg_guide_nav_get_links($navNode, $variables['url'], $guide);
+    $variables = array_merge($variables, $links);
+
+    if ($overview_image = $navNode->get('field_overview_image')->first()?->get('entity')->getTarget()->getValue()) {
+      $media = $overview_image->get('field_media_image')->first();
+      $variables['guide_overview_image'] = $media;
+
+      if ($credit = $overview_image->get('field_credit')->first()) {
+        $variables['guide_overview_credit'] = $credit->view();
+      }
+
+      if ($caption = $overview_image->get('field_caption')->first()) {
+        $variables['guide_overview_caption'] = $caption->view();
+      }
+    }
+    $variables['show_next_previous'] = $navNode->field_show_next_previous?->value === "1";
+    $variables['show_in_page_nav'] = $navNode->field_show_in_page_nav?->value === "1";
+    if ($links['guide_nav']) {
+      $variables['is_guide_overview'] = ($variables['url'] === $links['guide_nav'][0]['link']?->getUrl()->toString());
+    }
+  }
+}
+
+/**
+ * Preprocess function for guide landing nodes.
+ */
+function digital_gov_preprocess_node_guide_landing(&$variables): void {
+  if ($hero_image = $variables['node']->get('field_primary_image')->first()?->get('entity')->getTarget()->getValue()) {
+    $media = $hero_image->get('field_media_image')->first();
+    $variables['hero_image'] = $media;
+
+    if ($credit = $hero_image->get('field_credit')->first()) {
+      $variables['hero_credit'] = $credit->view();
+    }
+
+    if ($caption = $hero_image->get('field_caption')->first()) {
+      $variables['hero_caption'] = $caption->view();
+    }
+  }
+}
+
+/**
+ * Preprocess function for short post nodes.
+ */
+function digital_gov_preprocess_node_short_post(&$variables): void {
+  $short_post = $variables['node'];
+  $is_external = TRUE;
+  // Some external URLs are to ourselves.
+  if ($external_url = $short_post->get('field_external_url')->getValue()) {
+    $url = $external_url[0]['uri'];
+    $is_external = digital_gov_is_external_url($url);
+  }
+  $variables['is_external_short_post'] = $is_external;
+}
+
+/**
+ * Tests if a URL is to an external domain.
+ */
+function digital_gov_is_external_url(string $url): bool {
+  $host = parse_url($url, PHP_URL_HOST);
+  if (
+    // Readable domains.
+    ($host === 'digital.gov' || $host === 'cms.digital.gov')
+    // Cloud.dov environments.
+    || (str_starts_with($host, 'digital-gov') && str_ends_with($host, '.cloud.gov'))
+    // Local Dev.
+    || ($host === 'https://digitalgov.lndo.site')
+  ) {
+    return FALSE;
+  }
+
+  return TRUE;
 }
 
 /**
@@ -61,43 +297,6 @@ function digital_gov_theme(): array {
       ],
     ],
   ];
-}
-
-/**
- * Preprocessor for author_image theme function.
- */
-function digital_gov_preprocess_author_image(array &$vars): void {
-  $profile_source = $vars["author"]["#entity"]->field_profile_source->value ?? NULL;
-  $github = $vars["author"]["#entity"]->field_github->value ?? NULL;
-
-  $slug = $vars["author"]["#entity"]->field_slug->value;
-  switch (TRUE) {
-    case $profile_source === 'github' && $github:
-      // Author has selected GitHub and specified a GitHub user ID.
-      $vars['icon_path'] = sprintf('https://github.com/%s.png?size=50', $github);
-      break;
-
-    case $profile_source === 'digit-light':
-    case $profile_source === 'digit-dark':
-    case $profile_source === 'digit-pride':
-      $vars['icon_path'] = sprintf('img/%s.png', $profile_source);
-      break;
-
-    default:
-      if ($github) {
-        // Author did not select GitHub but use a GitHUB ID if they have one.
-        $vars['icon_path'] = sprintf('https://github.com/%s.png?size=50', $github);
-      }
-      else {
-        // No source selected OR they picked GitHub without a GitHub ID
-        // choose between light and dark based on length of the slug.
-        $vars['icon_path'] = sprintf(
-          'img/digit-%s.png',
-          strlen($slug ?? $vars['author']['#title']) % 2 ? 'dark' : 'light'
-        );
-      }
-      break;
-  }
 }
 
 /**
@@ -190,5 +389,85 @@ function digital_gov_theme_suggestions_node_alter(array &$suggestions, array $va
         $suggestions[] = 'node__landing_page__' . $landing_type . '__' . $variables["elements"]["#view_mode"];
       }
       break;
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_user_alter().
+ */
+function digital_gov_theme_suggestions_container_alter(array &$suggestions, array $variables) {
+  if (!isset($variables['element']['#name'])) {
+    return $suggestions;
+  }
+  // A list of view names in which to exclude the container markup.
+  $exclude_views = [
+    'communities_for_topic',
+    'guide_cards',
+    'resource_topics_list',
+    'resources_for_topic',
+  ];
+
+  if (in_array($variables['element']['#name'], $exclude_views)) {
+    $suggestions[] = 'container__no_wrapper';
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function digital_gov_preprocess_node__landing_page__job_board(&$variables, $hook) {
+  $filtered_array = [];
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $config_pages = $entity_type_manager->getStorage('config_pages')->load('job_board');
+  $yml_string = $config_pages->get('field_job_board_yml_contents')->getString();
+  try {
+    $yml_array = Yaml::decode($yml_string);
+  }
+  catch (\Exception $exception) {
+    $yml_array = [];
+    \Drupal::logger('job_board')->emergency('The valued stored for job board at /admin/content/job-board is not valid YAML. ' . $exception->getMessage());
+  }
+  if (!empty($yml_array)) {
+    foreach ($yml_array as $item) {
+      $close_date = date('Y-m-d', $item['close_date']);
+      $today = date('Y-m-d');
+      if ($close_date >= $today) {
+        $item['open_date'] = date('F j, Y', $item['open_date']);
+        $item['close_date'] = date('F j, Y', $item['close_date']);
+        // These fields may have markdown still.
+        $item['title'] = ConvertText::htmlText($item['title']);
+        $item['department'] = ConvertText::htmlText($item['department']);
+        $item['description'] = ConvertText::htmlText($item['description']);
+
+        $filtered_array[] = $item;
+      }
+    }
+  }
+  $variables['job_board'] = $filtered_array;
+}
+
+/**
+ * Implements hook_preprocess_pager().
+ */
+function digital_gov_preprocess_pager__past_events__block(&$variables) {
+  // Appends fragment to pager links on past events to maintain scroll position.
+  $anchor = '#events-past';
+
+  if (!empty($variables['items'])) {
+    // Iterate through all items in the pager.
+    foreach ($variables['items'] as $key => &$item) {
+      // Handle numbered pages separately from navigation items.
+      if ($key === 'pages') {
+        foreach ($item as &$page) {
+          if (isset($page['href'])) {
+            $page['href'] .= $anchor;
+          }
+        }
+      }
+      // Handle navigation items (first, previous, next, last).
+      elseif (isset($item['href'])) {
+        $item['href'] .= $anchor;
+      }
+    }
   }
 }

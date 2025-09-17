@@ -1,0 +1,5 @@
+_core:
+  default_config_hash: bMLk1BMYZdizZNW-Bn-_bY0fSNgbC7yjhZfQ4zpT0aA
+role_watchdog_monitor_roles: {  }
+role_watchdog_notify_email: ''
+role_watchdog_use_watchdog: true

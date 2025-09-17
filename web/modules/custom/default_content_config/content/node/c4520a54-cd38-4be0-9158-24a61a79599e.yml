@@ -5,6 +5,7 @@ _meta:
   bundle: guides
   default_langcode: en
   depends:
+    95943ed2-cda0-4f06-bfb4-f736417a59bf: node
     b2f35ae8-423f-428b-865d-e420313e7a81: media
     ad7aa7a5-33cf-400e-93cf-11820e467111: node
     80caaa35-a22b-43ae-a72c-9a714c333a06: node
@@ -40,25 +41,28 @@ default:
       pathauto: 0
   body:
     -
-      value: '<h2>What is DAP?</h2><p>The Digital Analytics Program (DAP) helps federal agencies understand how the public finds, accesses, and uses government services online.</p><p>The U.S. General Services Administration (GSA) provides DAP as a shared service, so all federal agencies can use DAP’s web analytics tools, training, and support at no cost.</p><p>DAP uses Google Analytics 360 to measure traffic and engagement across thousands of federal government websites and apps, reporting analytics under a single federal-wide shared account. Google Analytics 360 is the paid, enterprise version of Google Analytics 4 (GA4).</p><h2>Why use DAP?</h2><p>For millions, access to digital services isn’t a luxury — it’s critical. And the public’s experiences using government websites to find unemployment support, file taxes, apply for student loans, or get assistance with housing, childcare, or food can dramatically affect how they feel about the federal government.</p><p>All federal agencies can use DAP to better understand user behavior and improve their public-facing websites and digital services, which will make it easier for the public to access the information and services that they count on each and every day.</p><p>Additionally, <a href="https://digital.gov/resources/delivering-digital-first-public-experience/">M-23-22, Delivering a Digital-First Public Experience</a> requires all federal executive branch agencies to use DAP:</p><embedded-content data-plugin-config="{&quot;text&quot;:&quot;Agencies are required to participate in GSA\u2019s government-wide Digital Analytics Program (DAP). Participation in DAP does not pre&quot;,&quot;cite&quot;:&quot;M-23-22, Section III-A, Subsection 6&quot;}" data-plugin-id="ec_shortcodes_card_quote" data-button-id="default">&nbsp;</embedded-content><h2>Learn more about DAP</h2><ul><li><a href="https://digital.gov/guides/dap/get-started-with-dap/#content-start">Get started with DAP: Use DAP to better understand user behavior</a></li><li><a href="https://digital.gov/guides/dap/make-data-informed-decisions/#content-start">Make data-informed decisions: How to turn the DAP data into actionable insights</a></li><li><a href="https://digital.gov/guides/dap/glossary-of-terms/#content-start">Glossary of terms: Browse DAP terms</a></li><li><a href="https://digital.gov/guides/dap/migration-from-universal-analytics-to-google-analytics-4/#content-start">Migration: Learn about the migration from Universal Analytics to Google Analytics 4</a></li><li><a href="https://digital.gov/guides/dap/gsa-dap-terms-of-service/#content-start">Terms of service: GSA offers DAP subject to your acceptance of these terms</a></li></ul><p><strong>Do you have a question for the DAP team?</strong> Send an email to <a href="mailto:dap@gsa.gov">dap@gsa.gov</a>, and they’ll get back to you.</p>'
+      value: '<h2>What is DAP?</h2><p>The Digital Analytics Program (DAP) helps federal agencies understand how the public finds, accesses, and uses government services online.</p><p>The U.S. General Services Administration (GSA) provides DAP as a shared service, so all federal agencies can use DAP’s web analytics tools, training, and support at no cost.</p><p>DAP uses Google Analytics 360 to measure traffic and engagement across thousands of federal government websites and apps, reporting analytics under a single federal-wide shared account. Google Analytics 360 is the paid, enterprise version of Google Analytics 4 (GA4).</p><h2>Why use DAP?</h2><p>For millions, access to digital services isn’t a luxury — it’s critical. And the public’s experiences using government websites to find unemployment support, file taxes, apply for student loans, or get assistance with housing, childcare, or food can dramatically affect how they feel about the federal government.</p><p>All federal agencies can use DAP to better understand user behavior and improve their public-facing websites and digital services, which will make it easier for the public to access the information and services that they count on each and every day.</p><p>Additionally, <a href="https://digital.gov/resources/delivering-digital-first-public-experience/">M-23-22, Delivering a Digital-First Public Experience</a> requires all federal executive branch agencies to use DAP:</p><embedded-content data-plugin-config="{&quot;text&quot;:&quot;Agencies are required to participate in GSA\u2019s government-wide Digital Analytics Program (DAP). Participation in DAP does not pre&quot;,&quot;cite&quot;:&quot;M-23-22, Section III-A, Subsection 6&quot;}" data-plugin-id="ec_shortcodes_card_quote" data-button-id="default">&nbsp;</embedded-content><h2>Learn more about DAP</h2><ul><li><a href="https://digital.gov/guides/dap/get-started-with-dap/#content-start">Get started with DAP: Use DAP to better understand user behavior</a></li><li><a href="https://digital.gov/guides/dap/make-data-informed-decisions/#content-start">Make data-informed decisions: How to turn the DAP data into actionable insights</a></li><li><a href="https://digital.gov/guides/dap/glossary-of-terms/#content-start">Glossary of terms: Browse DAP terms</a></li><li><a href="https://digital.gov/guides/dap/migration-from-universal-analytics-to-google-analytics-4/#content-start">Migration: Learn about the migration from Universal Analytics to Google Analytics 4</a></li><li><a href="https://digital.gov/guides/dap/gsa-dap-terms-of-service/#content-start">Terms of service: GSA offers DAP subject to your acceptance of these terms</a></li></ul><div class="box"><strong>Do you have a question for the DAP team?</strong> Send an email to <a href="mailto:dap@gsa.gov">dap@gsa.gov</a>, and they’ll get back to you.</div>'
       format: html
       summary: ''
   field_deck:
     -
-      value: 'A free analytics tool for measuring digital services in the federal government'
+      value: '<p>A free analytics tool for measuring digital services in the federal government</p>'
       format: single_inline_html
+  field_guide_nav_ref:
+    -
+      entity: 95943ed2-cda0-4f06-bfb4-f736417a59bf
   field_guide_weight:
     -
       value: 5
   field_page_weight:
     -
-      value: 0
+      value: 9
   field_primary_image:
     -
       entity: b2f35ae8-423f-428b-865d-e420313e7a81
   field_summary:
     -
-      value: 'he Digital Analytics Program (DAP) offers advanced, easy web analytics for federal agencies.'
+      value: '<p>The Digital Analytics Program (DAP) offers advanced, easy web analytics for federal agencies.</p>'
       format: single_inline_html
   field_summary_box:
     -

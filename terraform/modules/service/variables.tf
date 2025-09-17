@@ -114,7 +114,7 @@ variable "env" {
     external_domain = optional(string, "app.cloud.gov")
     internal_domain = optional(string, "apps.internal")
     name_pattern    = string
-    organization    = optional(string, "gsa-tts-usagov")
+    organization    = optional(string, "gsa-digitalgov-prototyping")
     passwords = optional(
       map(
         object(
@@ -150,10 +150,12 @@ variable "env" {
         object(
           {
             applications = optional(list(string), [])
+            credentials  = optional(list(string), [])
             environement = optional(string, "dev")
             service_key  = optional(bool, true)
             service_plan = optional(string, "basic")
             service_type = optional(string, "s3")
+            spaces       = optional(list(string), [])
             tags         = optional(list(string), [])
           }
         )

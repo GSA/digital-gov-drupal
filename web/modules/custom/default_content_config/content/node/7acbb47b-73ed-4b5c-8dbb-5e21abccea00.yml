@@ -34,9 +34,6 @@ default:
       alias: /authors/lorena-molinairizarry
       langcode: en
       pathauto: 0
-  field_agency_acronym:
-    -
-      value: Census
   field_agency_full_name:
     -
       value: 'U.S. Census Bureau'
@@ -46,3 +43,6 @@ default:
   field_last_name:
     -
       value: Molina-Irizarry
+  field_profile_source:
+    -
+      value: digit-dark

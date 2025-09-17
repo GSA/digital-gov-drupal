@@ -4,6 +4,8 @@ _meta:
   uuid: 2f1a705d-d0eb-495c-b872-e7973fac5e7f
   bundle: short_post
   default_langcode: en
+  depends:
+    95077128-6d33-4445-a48a-4ad8ebb7d9b3: node
 default:
   revision_uid:
     -
@@ -34,11 +36,18 @@ default:
       alias: ''
       langcode: en
       pathauto: 1
+  field_deck:
+    -
+      value: '<p>We connect data center and cloud colleagues to share insights and knowledge.</p>'
+      format: single_inline_html
   field_external_url:
     -
       uri: 'https://www.cio.gov/about/members-and-leadership/cloud-infrastructure-cop/'
       title: ''
       options: {  }
+  field_kicker:
+    -
+      value: 'Join the Cloud and Infrastructure Community'
   field_short_post_type:
     -
       value: community
@@ -46,3 +55,6 @@ default:
     -
       value: '<p>A community for those who support their agency’s IT modernization efforts, and want to learn about application rationalization, data center optimization, and federal cloud computing.</p>'
       format: single_inline_html
+  field_topics:
+    -
+      entity: 95077128-6d33-4445-a48a-4ad8ebb7d9b3

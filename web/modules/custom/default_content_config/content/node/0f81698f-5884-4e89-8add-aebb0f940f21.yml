@@ -1,0 +1,45 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 0f81698f-5884-4e89-8add-aebb0f940f21
+  bundle: authors
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Alex Wilson'
+  created:
+    -
+      value: 1737579279
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /authors/alex-wilson
+      langcode: en
+      pathauto: 1
+  field_first_name:
+    -
+      value: Alex
+  field_last_name:
+    -
+      value: Wilson
+  field_profile_source:
+    -
+      value: digit-dark

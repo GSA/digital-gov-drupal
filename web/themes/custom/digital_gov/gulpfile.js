@@ -6,8 +6,8 @@ const styles = require("./gulp-includes/gulp/styles");
 
 function gulpWatch() {
   const THEME_DIR = "./";
-  watch(`${THEME_DIR}/scss/uswds/**/*.scss`, styles.buildSass);
-  watch(`${THEME_DIR}/scss/new/**/*.scss`, styles.buildSass);
+  watch(`${THEME_DIR}/css/uswds/**/*.scss`, styles.buildSass);
+  watch(`${THEME_DIR}/css/new/**/*.scss`, styles.buildSass);
   watch(`${THEME_DIR}/js/*.js`, scripts.compile);
 }
 

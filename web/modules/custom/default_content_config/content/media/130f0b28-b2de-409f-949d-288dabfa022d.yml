@@ -1,0 +1,33 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 130f0b28-b2de-409f-949d-288dabfa022d
+  bundle: image
+  default_langcode: en
+  depends:
+    59295270-6edd-4b06-9446-1fb7da61a217: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: digitalgov-logo-white.png
+  created:
+    -
+      value: 1737056791
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_media_image:
+    -
+      entity: 59295270-6edd-4b06-9446-1fb7da61a217
+      alt: 'Digital.gov logo'
+      title: ''
+      width: 600
+      height: 98

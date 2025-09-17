@@ -108,37 +108,35 @@ locals {
       secrets = {
         PGDATABASE = {
           encrypted = false
-          key = "db_name"
+          key = "terraform-backend-db_name"
         }
         PGHOST = {
           encrypted = false
-          key = "host"
+          key = "terraform-backend-host"
         }
         PGPASSWORD = {
           encrypted = false
-          key = "password"
+          key = "terraform-backend-password"
         }
         PGPORT = {
           encrypted = false
-          key = "port"
+          key = "terraform-backend-port"
         }
         PG_CONN_STR = {
           encrypted = false
-          key = "uri"
+          key = "terraform-backend-uri"
         }
         PGUSER = {
           encrypted = false
-          key = "pg_user"
+          key = "terraform-backend-username"
         }
         CF_USER = {
           encrypted = false
           key = "cf_user"
-          value = var.cloudgov_username
         }
         CF_PASSWORD = {
           encrypted = false
           key = "cf_password"
-          value = var.cloudgov_password
         }
         CF_ORG = {
           encrypted = false
@@ -192,8 +190,29 @@ locals {
             terraform.workspace
           ]
         }
+
+        ## Commented out, due to permission restirctions to create the pipeline user via Terraform.
+        ## Instead use the create_service_account.sh script.
+        # pipeline-space-deployer = {
+        #   ## Applications to bind to this service.
+        #   applications = [ "tf-bastion" ]
+          
+        #   ## Create a service account.
+        #   service_type = "cloud-gov-service-account"
+
+        #   ## The type of service to be deployed.
+        #   service_plan = "space-deployer"
+
+        #   spaces = ["dev", "staging", "prod"]
+
+        #   ## Tags to add to the service.
+        #   tags = [
+        #     terraform.workspace
+        #   ]
+        # }
       }
-      space = "prod"
+
+      space = local.production_space
 
       variables = {
         "UBUNTU_VERSION" = {
@@ -222,7 +241,7 @@ locals {
           ]
 
           ## Command to run when container starts.
-          command = "./start"
+          command = "/home/vcap/app/start"
 
           ## Ephemeral disk storage.
           disk_quota = 1024
@@ -233,10 +252,8 @@ locals {
           ## Environmental variables. Avoid sensitive variables.
           environment = {
             CF_ORG = var.cloudgov_organization
-            CF_PASSWORD = var.cloudgov_password
-            CF_SPACE = var.cloudgov_space
-            CF_USER = var.cloudgov_username
-            OPENTOFU_VERSION = "1.8.4"
+            OPENTOFU_VERSION = "1.8.7"
+            PERL5LIB = "/home/vcap/deps/0/apt/usr/share/perl5/"
           }
 
           ## Timeout for health checks, in seconds.
@@ -272,7 +289,7 @@ locals {
 
           space = local.production_space
 
-          stopped = true
+          #stopped = true
 
           ## Templates take templated files and fill them in with sensitive data.
           templates = []

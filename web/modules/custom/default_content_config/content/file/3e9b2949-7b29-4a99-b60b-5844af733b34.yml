@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 3e9b2949-7b29-4a99-b60b-5844af733b34
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: hcd-intro.png
+  uri:
+    -
+      value: 'public://2025-01/hcd-intro.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 33973
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1736461047

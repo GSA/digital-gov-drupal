@@ -73,11 +73,11 @@
     <h1
       class="{{ node.field_legislation.0 ? 'dg-topic__header-title--collection' : 'dg-topic__header-title' }}"
     >
-      {{ node.title.value }}
+      {{ label|field_value }}
     </h1>
 
     {# Deck #}
-    {% if content.field_deck %}
+    {% if content.field_deck|render %}
       <p class="dg-topic__deck margin-0">
         {{ content.field_deck|field_value }}
       </p>
@@ -93,172 +93,110 @@
             {{ content.field_summary }}
           </div>
           <div class="desktop:grid-col">
-            {% if node.field_legislation.list %}
+            {% if content.field_legislation|render %}
               {{ include('@digital_gov/partials/card-legislation.html.twig', {
                 title: node.field_legislation.0.title,
-                url: node.field_legislation.0.uri,
-              }, with_context=false) }}
+                url: node.field_legislation.0.url,
+              }, with_context: false) }}
             {% endif %}
           </div>
         </div>
       </div>
     {% endif %}
   {% endif %}
-
   {# Collection — Featured Resources and Communities #}
   {% if content.field_featured_resources|field_value or content.field_featured_communities|field_value %}
-    {# NOT-MIGRATED
-      {% if is_first_page %}
-    #}
-    <div class="dg-topic__featured grid-container-desktop">
-      {{ content.field_featured_resources|field_value }}
-
-      [placeholder featured communities]
-      {{ content.field_featured_communities|field_value }}
-
-      {# range .Params.featured_communities #}
-      {# $community_page := (dict "link" (printf "communities/%s" .)) #}
-      {# NOT-MIGRATED #}
-      {# partial "core/featured-resource.html" (dict "Site" $.Site "resource_data" $community_page) #}
-      {# end #}
-    </div>
-
+    {% if is_first_page %}
+      <div class="dg-topic__featured grid-container-desktop">
+        {{ content.field_featured_resources|field_value }}
+        {{ content.field_featured_communities|field_value }}
+      </div>
+    {% endif %}
   {% endif %}
 
   {# Collection Featured Links #}
   {% if content.field_featured_links|field_value %}
-    {{ content.field_featured_links|field_value }}
+    {% if is_first_page %}
+      {{ content.field_featured_links|field_value }}
+    {% endif %}
   {% else %}
     {# Only show these sections when on page 1, otherwise hide to show only More News and Events #}
     {% if is_first_page %}
       {# Default - Related resources, services, and communities #}
       <div class="grid-container-desktop usa-section">
-        {# NOT-MIGRATED #}
-        {# $resource_settings := ( dict "header_title" (print "Resources on " .Title) "header_size" 2 "variant" "media" "list_header" 3) #}
-        {# partial "partials/core/collection/collection.html" (dict "collection_data" $resources "settings" $resource_settings ) #}
+        {% if drupal_view_result('resources_for_topic', 'default', node.nid.value) is not empty %}
+          <div class="dg-collection">
+            <h2 class="dg-collection__header">Resources on {{ node.label }}</h2>
+            {{ drupal_view('resources_for_topic', 'default', node.nid.value) }}
+          </div>
+        {% endif %}
 
         {# NOT-MIGRATED #}
+        {# WILL NOT MIGRATE THIS, SERVICES DO NOT EXIST ANY MORE #}
         {# $services_settings := ( dict "header_title" "Tools and Services" "header_size" 2 "variant" "media" "list_header" 3) #}
         {# partial "partials/core/collection/collection.html" (dict "collection_data" $services "settings" $services_settings) #}
 
-        {# NOT-MIGRATED #}
-        {# $community_settings := ( dict "header_title" "Join a Community of Practice" "header_size" 2 "variant" "media" "list_header" 3) #}
-        {# partial "partials/core/collection/collection.html" (dict "collection_data" $communities "settings" $community_settings) #}
+        {% if drupal_view_result('communities_for_topic', 'default', node.nid.value) is not empty %}
+          <div class="dg-collection">
+            <h2 class="dg-collection__header">Join a Community of Practice</h2>
+            {{ drupal_view('communities_for_topic', 'default', node.nid.value) }}
+          </div>
+        {% endif %}
       </div>
     {% endif %}
   {% endif %}
 
-  {# Topic Collection will always have a legislation card, use this as flag to display first 5 events & news #}
-  {% if Params.legislation %}
-    {# Only show these sections when on page 1, otherwise hide to show only More News and Events #}
+  {# Featured Events & News #}
+  {% if (drupal_view_result('topic_events', 'block_1') is not empty) or (drupal_view_result('topic_news', 'block_1') is not empty) %}
     {% if is_first_page %}
       <section class="dg-stream usa-section">
-        <div class="grid-container-desktop">
-          {# Display first 5 events #}
-          {# $featured_events_stream := first 5 $events #}
-          {% if featured_events_stream %}
-            <h2>{{ node.title.value }} events</h2>
 
-            [placeholder featured events]
-            {# NOT-MIGRATED #}
-            {# range $featured_events_stream #}
-            {# .Render "card-event" #}
-            {# end #}
-          {% else %}
-            <h3>No Events to Display</h3>
-          {% endif %}
-        </div>
+        {# Featured Events #}
+        {# Display first 5 events #}
+        {% if drupal_view_result('topic_events', 'block_1') is not empty %}
+          <div class="grid-container-desktop">
+              <h2>{{ node.title.value }} events</h2>
+              {{ drupal_view('topic_events', 'block_1') }}
+          </div>
+        {% endif %}
 
-        <div class="grid-container-desktop">
-          {# Display first 5 news posts #}
-          {# NOT-MIGRATED #}
-          {# $featured_posts_stream := first 5 $posts.ByDate.Reverse #}
+        {# Featured News #}
+        {# Display first 5 news posts #}
+        {% if drupal_view_result('topic_news', 'block_1') is not empty %}
+          <div class="grid-container-desktop">
+              <h2>{{ node.title.value }} news</h2>
+              {{ drupal_view('topic_news', 'block_1') }}
+          </div>
+        {% endif %}
 
-          [placeholder featured posts]
-          {% if featured_posts_stream %}
-            <h2>{{ node.title.value }} news</h2>
-
-            {# range $featured_posts_stream #}
-            {# NOT-MIGRATED #}
-            {# .Render "card-news" #}
-          {% else %}
-            <h3>No News to Display</h3>
-          {% endif %}
-        </div>
       </section>
     {% endif %}
-  {% else %}
-    <section class="usa-section">
-      <div class="grid-container grid-container-desktop">
-        {# Display events and news in one stream with pagination for topic default #}
-        [placeholder featured events and news]
-        {% if stream_paginated %}
-          <h2>
-            News and Events on
-            {{ node.title.value }}
-          </h2>
-          <p>{{ stream_count }} posts</p>
-
-          {# NOT-MIGRATED
-          {{ range stream_paginated }}
-            {% if eq .Type "events" %}
-            {{ .Render "card-event" }}
-            {% endif %}
-
-            {% if eq .Type "news" %}
-            {{ .Render "card-news" }}
-            {% endif %}
-          #}
-          {# end #}
-        {% endif %}
-        {# NOT-MIGRATED #}
-        {# partial "core/pagination.html" . #}
-      </div>
-    </section>
   {% endif %}
 
+  {# Remaining Resources #}
   {% if node.field_legislation.0 %}
     {# Display remaining resources, events and news for topic collection #}
     {% if is_first_page %}
-      <section class="grid-container-desktop usa-section">
-        [placeholder remaining resources]
-        {# Only show these sections when on page 1, otherwise hide to show only More News and Events #}
-        {# $resource_settings := ( dict "header_title" (printf "Resources on %s" .Title) "header_size" 2 "variant" "media" "list_header" 3) #}
-        {# NOT-MIGRATED #}
-        {# partial "partials/core/collection/collection.html" (dict "collection_data" $resources "settings" $resource_settings ) #}
-
-        {# $services_settings := ( dict "header_title" "Tools and Services" "header_size" 2 "variant" "media" "list_header" 3) #}
-        {# NOT-MIGRATED #}
-        {# partial "partials/core/collection/collection.html" (dict "collection_data" $services "settings" $services_settings) #}
-      </section>
-    {% endif %}
-
-    [placeholder more news and events]
-    {% if stream_paginated %}
-      <div class="usa-section usa-section--light">
-        <div class="grid-container grid-container-desktop">
-          <h2 id="dg-stream-pagination-header">
-            More News and Events on
-            {{ node.title.value }}
-          </h2>
-          <p>{{ stream_count }} posts</p>
-
-          {# range $stream_paginated #}
-          {% if Type == 'events' %}
-            {# NOT-MIGRATED #}
-            {# .Render "card-event" #}
-          {% endif %}
-
-          {% if Type == 'news' %}
-            {# NOT-MIGRATED #}
-            {# .Render "card-news" #}
-          {% endif %}
-          {# end #}
-          {# NOT-MIGRATED #}
-          {# partial "core/pagination.html" . #}
-        </div>
-      </div>
+      {# Shows all resources tagged to this topic, may repeat resources shown under featured resource. #}
+      {% if drupal_view_result('resources_for_topic', 'default', node.nid.value) is not empty %}
+        <section class="grid-container-desktop usa-section">
+          <div class="dg-collection">
+            <h2 class="dg-collection__header">Resources on {{ node.label }}</h2>
+            {{ drupal_view('resources_for_topic', 'default', node.nid.value) }}
+          </div>
+        </section>
+      {% endif %}
     {% endif %}
   {% endif %}
-
+  {# More News and Events on #}
+  {% if drupal_view_result('topic_news_and_events', 'block_1') is not empty %}
+    <div class="usa-section usa-section--light">
+      <div class="grid-container grid-container-desktop">
+        <h2 id="dg-stream-pagination-header">
+          More News and Events on {{ node.title.value }}
+        </h2>
+        {{ drupal_view('topic_news_and_events', 'block_1') }}
+      </div>
+    </div>
+  {% endif %}
 </main>

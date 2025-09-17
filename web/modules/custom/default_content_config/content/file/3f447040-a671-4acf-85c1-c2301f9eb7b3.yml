@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 3f447040-a671-4acf-85c1-c2301f9eb7b3
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: communities-web-managers.svg
+  uri:
+    -
+      value: 'public://dg-logo/communities-web-managers.svg'
+  filemime:
+    -
+      value: image/svg+xml
+  filesize:
+    -
+      value: 4146
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1736985151

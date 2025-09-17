@@ -1,0 +1,23 @@
+uuid: 72145b81-bb7e-479e-a5b6-803c84f9146e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_guide_weight
+    - node.type.guide_landing
+id: node.guide_landing.field_guide_weight
+field_name: field_guide_weight
+entity_type: node
+bundle: guide_landing
+label: 'Guide Weight'
+description: 'Will make this guide show on the guides landing page and larger weights sink to the end of the results.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 1
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

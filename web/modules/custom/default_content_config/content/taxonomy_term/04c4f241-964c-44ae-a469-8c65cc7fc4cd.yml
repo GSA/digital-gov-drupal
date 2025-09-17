@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 04c4f241-964c-44ae-a469-8c65cc7fc4cd
+  bundle: hcd_glossary
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'Qualitative research'
+  description:
+    -
+      value: '<p>Primarily exploratory research used to gain an understanding of underlying reasons, opinions, and motivations. It provides insights into the problem or helps to develop ideas or hypotheses for potential quantitative research.</p>'
+      format: single_inline_html
+  weight:
+    -
+      value: 25
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

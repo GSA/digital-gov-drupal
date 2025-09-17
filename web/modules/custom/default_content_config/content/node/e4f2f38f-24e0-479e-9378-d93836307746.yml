@@ -1,0 +1,53 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: e4f2f38f-24e0-479e-9378-d93836307746
+  bundle: guides
+  default_langcode: en
+  depends:
+    1a8ba304-e37c-4bf4-b8e9-d1ba6f8e780b: node
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: Reframing
+  created:
+    -
+      value: 1736370482
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /guides/reframing
+      langcode: en
+      pathauto: 1
+  body:
+    -
+      value: '<h2 id="why-reframe-your-problem-">Why reframe your problem?</h2><p>At this point in your project, you’ve learned more about your problem or brief through desk research. This new knowledge typically answers some of your questions, and can let you know if your initial starting point was a little off. Reframing your problem means you can narrow in on a more specific problem frame than you started out with.</p><p>This is good news! Because field research requires resources, reframing your problem frame to a narrower focus can help preserve resources for high-return field research. Good desk research also prevents you and your team from going out into the field and performing exhausting original research, only to find that other people have already covered the ground you thought you discovered.</p><blockquote><p>Framing a design problem or brief is often seen as a preliminary, even pro-forma part of developing solutions. But how we define a problem largely defines its solution, and typically design problems and solutions co-evolve. This iterative framing and reframing of problems is as much a design opportunity as finding solutions."&nbsp;</p><p>-The Lab at OPM"</p></blockquote><p>In this way, effective problem framing helps to:</p><ul><li>Avoid wasting resources on solving the wrong problems</li><li>Expand the range of possible solutions to any given problem</li><li>Maximize creative leverage and innovative potential of HCD</li></ul><h3 id="who-what-why-goal">Who, what, why, goal</h3><p>Clearly articulating the project frame is key to a successful project. Whether your project originates from your own work, or from a project brief from your leadership, it is essential to be able to answer each of these before moving on to the next phase of development:</p><ul><li>Who is this project for?</li><li>What are you trying to understand?</li><li>Why is this a problem?</li><li>What is the goal of the project?</li></ul><p>Work with your team to incorporate their feedback as you answer these questions. Ensure that your answers are precise, coherent and in plain language. This process can help you precisely communicate your idea to others.</p><h3 id="problem-frame-statement">Problem frame statement</h3><p>How you articulate your problem will influence how you approach it, so it’s important to find the right words. Stating your problem in the best possible terms takes creativity and critical thinking.</p><p>Using the phrase “How might we…” is one of the best ways to start a problem frame statement:</p><ul><li>“How” is action-oriented</li><li>“Might” is full of open-ended potential</li><li>“We” is collaborative and inviting.</li></ul><article class="dg-ring" aria-labelledby="fd980506beb979584750fabb271b4cde"><h2 class="dg-ring__title" id="fd980506beb979584750fabb271b4cde">Try it out</h2><p>Referencing these directions, the work done in Desk Research, and the Who, What, Why, and Goal frameworks, try writing your own project frame statement.</p></article>'
+      format: html
+      summary: ''
+  field_guide_nav_ref:
+    -
+      entity: 1a8ba304-e37c-4bf4-b8e9-d1ba6f8e780b
+  field_summary:
+    -
+      value: '<p>As you learn more about the problem space, iteratively reframe it, to ensure you’re working within scope, and researching the right problem.</p>'
+      format: single_inline_html
+  field_summary_box:
+    -
+      value: false

@@ -1,0 +1,20 @@
+uuid: e96bf56f-19e6-4c58-aeaa-dd2348ac1f7c
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_glossary
+field_name: field_glossary
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_vocabulary
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 59295270-6edd-4b06-9446-1fb7da61a217
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: digitalgov-logo-white.png
+  uri:
+    -
+      value: 'public://2025-01/digitalgov-logo-white.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 19122
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1737056791

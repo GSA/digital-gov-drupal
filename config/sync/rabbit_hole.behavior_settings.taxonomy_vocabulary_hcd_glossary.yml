@@ -1,0 +1,14 @@
+uuid: a55f5974-b3f0-4cf4-9e1e-e6770804a6cf
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.hcd_glossary
+id: taxonomy_vocabulary_hcd_glossary
+entity_type_id: taxonomy_vocabulary
+entity_id: hcd_glossary
+action: page_not_found
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

@@ -1,0 +1,51 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 7fda0dec-902a-420d-868c-603e01637ef2
+  bundle: authors
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Julia Solórzano'
+  created:
+    -
+      value: 1737124172
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /authors/julia-solorzano
+      langcode: en
+      pathauto: 1
+  field_agency_full_name:
+    -
+      value: 'U.S. General Services Administration'
+  field_first_name:
+    -
+      value: Julia
+  field_github:
+    -
+      value: juliaelman
+  field_last_name:
+    -
+      value: Solórzano
+  field_slug:
+    -
+      value: julia-solorzano

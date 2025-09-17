@@ -1,11 +1,15 @@
 locals {
+  additional_variables = {
+    CF_USER     = data.cloudfoundry_service_key.pipeline.credentials.username
+    CF_PASSWORD = data.cloudfoundry_service_key.pipeline.credentials.password
+  }
   ## Merging of the various credentials and environmental variables.
   service_secrets = merge(
     flatten(
       [
         for service_key, service_value in try(local.env.services, {}) : [
           for key, value in try(module.services.results.service_key[service_key].credentials, {}) : {
-            "${key}" = value
+            "${service_key}-${nonsensitive(key)}" = nonsensitive(value)
           }
         ] if try(module.services.results.service_key[service_key].credentials, null) != null
       ]
@@ -74,6 +78,8 @@ module "applications" {
   #for_each = local.cloudfoundry.spaces
   source = "../modules/application"
 
+  #additional_service_bindings = { "pipeline" = data.cloudfoundry_service_instance.pipeline.id }
+  additional_environmental_variables = local.additional_variables
   cloudfoundry = local.cloudfoundry
   env = merge(local.envs.all, local.envs.bootstrap, local.envs[local.production_space])
   secrets = local.secrets
@@ -87,6 +93,6 @@ module "github" {
   github_organization = var.github_organization
   github_token = var.github_token
   repository = local.repository
-  secrets = local.secrets
+  secrets = merge(local.secrets, local.additional_variables)
   variables = local.variables
 }

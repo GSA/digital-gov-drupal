@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.short_post.field_deck
     - field.field.node.short_post.field_external_url
+    - field.field.node.short_post.field_kicker
     - field.field.node.short_post.field_short_post_type
     - field.field.node.short_post.field_slug
     - field.field.node.short_post.field_source
@@ -13,10 +14,11 @@ dependencies:
     - node.type.short_post
     - workflows.workflow.editorial
   module:
+    - autocomplete_deluxe
     - content_moderation
-    - inline_entity_form
     - link
     - maxlength
+    - path
     - text
 id: node.short_post.default
 targetEntityType: node
@@ -25,55 +27,11 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 8
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
   field_deck:
-    type: text_textarea
-    weight: 1
-    region: content
-    settings:
-      rows: 1
-      placeholder: ''
-    third_party_settings:
-      maxlength:
-        maxlength_js: 255
-        maxlength_js_label: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
-        maxlength_js_enforce: true
-  field_external_url:
-    type: link_default
-    weight: 4
-    region: content
-    settings:
-      placeholder_url: ''
-      placeholder_title: ''
-    third_party_settings: {  }
-  field_short_post_type:
-    type: options_select
-    weight: 5
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_source:
-    type: inline_entity_form_complex
-    weight: 3
-    region: content
-    settings:
-      form_mode: default
-      override_labels: false
-      label_singular: ''
-      label_plural: ''
-      allow_new: true
-      allow_existing: true
-      match_operator: CONTAINS
-      allow_duplicate: false
-      collapsible: false
-      collapsed: false
-      revision: false
-      removed_reference: optional
-    third_party_settings: {  }
-  field_summary:
     type: text_textarea
     weight: 2
     region: content
@@ -84,48 +42,97 @@ content:
       maxlength:
         maxlength_js: 255
         maxlength_js_label: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
-        maxlength_js_enforce: true
-  field_topics:
-    type: inline_entity_form_complex
-    weight: 6
+        maxlength_js_enforce: false
+  field_external_url:
+    type: link_default
+    weight: 5
     region: content
     settings:
-      form_mode: default
-      override_labels: false
-      label_singular: ''
-      label_plural: ''
-      allow_new: true
-      allow_existing: true
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_kicker:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_short_post_type:
+    type: options_select
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_source:
+    type: entity_reference_autocomplete
+    weight: 4
+    region: content
+    settings:
       match_operator: CONTAINS
-      allow_duplicate: false
-      collapsible: false
-      collapsed: false
-      revision: false
-      removed_reference: optional
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_summary:
+    type: text_textarea
+    weight: 3
+    region: content
+    settings:
+      rows: 1
+      placeholder: ''
+    third_party_settings:
+      maxlength:
+        maxlength_js: 255
+        maxlength_js_label: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
+        maxlength_js_enforce: false
+  field_topics:
+    type: autocomplete_deluxe
+    weight: 7
+    region: content
+    settings:
+      match_operator: CONTAINS
+      autocomplete_route_name: autocomplete_deluxe.autocomplete
+      size: 60
+      selection_handler: default
+      match_limit: 0
+      min_length: 0
+      delimiter: ''
+      not_found_message_allow: false
+      not_found_message: "The term '@term' will be added"
+      new_terms: false
+      no_empty_message: 'No terms could be found. Please type in order to add a new term.'
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 11
+    weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 15
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 9
+    weight: 10
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 12
+    weight: 13
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 10
+    weight: 11
     region: content
     settings:
       display_label: true
@@ -139,31 +146,22 @@ content:
       placeholder: ''
     third_party_settings: {  }
   uid:
-    type: inline_entity_form_complex
-    weight: 7
+    type: entity_reference_autocomplete
+    weight: 8
     region: content
     settings:
-      form_mode: default
-      override_labels: false
-      label_singular: ''
-      label_plural: ''
-      allow_new: true
-      allow_existing: true
       match_operator: CONTAINS
-      allow_duplicate: false
-      collapsible: true
-      collapsed: true
-      revision: false
-      removed_reference: optional
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   url_redirects:
-    weight: 13
+    weight: 14
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
   field_slug: true
-  path: true
   publish_on: true
   publish_state: true
   unpublish_on: true

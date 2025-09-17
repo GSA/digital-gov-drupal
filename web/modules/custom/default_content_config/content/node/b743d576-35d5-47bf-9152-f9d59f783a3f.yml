@@ -1,0 +1,53 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: b743d576-35d5-47bf-9152-f9d59f783a3f
+  bundle: guides
+  default_langcode: en
+  depends:
+    1a8ba304-e37c-4bf4-b8e9-d1ba6f8e780b: node
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Roles and responsibilities'
+  created:
+    -
+      value: 1736374102
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /guides/roles-and-responsibilities
+      langcode: en
+      pathauto: 1
+  body:
+    -
+      value: '<h2 id="project-lead">Project Lead</h2><p>Must be HCD-trained and have experience leading HCD projects. For large-scale projects with multiple research teams, this person should have management training as well. Responsibilities include:</p><ul><li>Liaise and communicate with leadership and stakeholders, and relay communications back to the team.</li><li>Lead interviews and/or observations.</li><li>Guide post-interview downloading sessions, daily and weekly synthesis work.</li><li>Lead team through exercises to find insights and opportunities, and communicate results to leadership.</li><li>Ensure that all benchmarking, research, interview notes and photographs, deliverables, and recommendations are organized in an approved location.</li></ul><p><strong>Notes</strong>: On a large project, there may be more than one lead due to specialty knowledge or geographic location. In these cases, the leads are responsible for organizing themselves into a functional unit that can communicate with each other fluidly, consistently communicate to the team and stakeholders, and flex around changes in the project.</p><h2 id="researcher">Researcher</h2><p>Must be HCD trained, or an HCD-trained team member must directly oversee their work. Responsibilities include:</p><ul><li>Select research strategies.</li><li>Lead interviews and/or observations.</li><li>Lead or actively participate in daily, and weekly synthesis sessions.</li></ul><p><strong>Notes</strong>: All core team members should act as researchers. On any project, researchers may wear multiple hats, including recruiting, logistics, conducting interviews, or note-taking.</p><p><strong>Note-taking includes:</strong></p><ul><li>Observing the area &amp; interview subject and documenting interesting things.</li><li>Transcribing notes into digital format.</li><li>Filing notes, photos, and other documentation in the project folder.</li></ul><h2 id="recruiter">Recruiter</h2><p>Responsibilities include:</p><ul><li>Manage and follow up with potential participants and sources of participants.</li><li>Present participant options to the team, noting possible times for research sessions.</li><li>Work with the Logistics Coordinator to book time for interviews, site visits, team travel, and time and sites for synthesis sessions.</li></ul><p><strong>Notes</strong>: This person needs to be outgoing in personality and meticulous in detail. They will need to be comfortable making cold calls and following up with people multiple times.</p><h2 id="logistics-coordinator">Logistics Coordinator</h2><p>Responsibilities include:</p><ul><li>Own the calendar, and gather and record all calendar updates as other team members report schedule changes to interviews, travel, etc.</li><li>Choose a hotel for the team to stay when traveling, including securing space for weekly synthesis sessions.</li><li>Identify transportation options for the team.</li><li>Plan for and coordinate the printing of consent forms and any other required documents for field work.</li><li>Purchase supplies and tools needed before travel.</li><li>Ensure that all team(s) have required supplies.</li></ul><h2 id="local-contact">Local Contact</h2><p>Can be a geographic local contact, a subject matter local contact, or the representative of a local group. Responsibilities include:</p><ul><li>Work with the recruiter to find the local people whose work or community position can best inform the research project frame.</li><li>Help the recruiter gather references.</li><li>Track down local leads when the recruiter cannot.</li><li>Scout and secure synthesis sites that make sense in terms of size of the team, necessary all-day privacy, and distance from team members’ residences or hotels.</li><li>Conduct pre-visit observation (recon) to evaluate interview location options and set time for on-site briefings.</li><li>Coordinate with unions and other required parties prior to site visit.</li><li>Communicate any needs from local power structures, such as local leadership, unions, or bureaucracies, to the Project Lead before the team assembles on site.</li></ul>'
+      format: html
+      summary: ''
+  field_guide_nav_ref:
+    -
+      entity: 1a8ba304-e37c-4bf4-b8e9-d1ba6f8e780b
+  field_summary:
+    -
+      value: '<p>These are general descriptions of each team members’ responsibilities. Treat these as guidelines, not absolutes.</p>'
+      format: single_inline_html
+  field_summary_box:
+    -
+      value: false

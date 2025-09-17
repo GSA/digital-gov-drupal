@@ -1,0 +1,40 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 6384ae72-4e83-468e-bcbd-b45ccd21c2a7
+  bundle: resources
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'An introduction to search'
+  created:
+    -
+      value: 1736812468
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /resources/introduction-search
+      langcode: en
+      pathauto: 1
+  field_summary:
+    -
+      value: '<p>Follow search engine optimization (SEO) best practices to help search engines discover your content.</p>'
+      format: single_inline_html

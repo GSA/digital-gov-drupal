@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: afa47317-4ae3-4244-8009-8c970730b9cc
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: hcd-discovery-operations.png
+  uri:
+    -
+      value: 'public://2025-01/hcd-discovery-operations.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 26024
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1736369803

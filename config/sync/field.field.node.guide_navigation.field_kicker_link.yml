@@ -1,0 +1,23 @@
+uuid: 39bc296d-7be6-43cb-b6f5-da5e7437b937
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kicker_link
+    - node.type.guide_navigation
+  module:
+    - link
+id: node.guide_navigation.field_kicker_link
+field_name: field_kicker_link
+entity_type: node
+bundle: guide_navigation
+label: 'Kicker Link'
+description: 'Links the kicker to this page instead of using the default.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 2
+  link_type: 1
+field_type: link

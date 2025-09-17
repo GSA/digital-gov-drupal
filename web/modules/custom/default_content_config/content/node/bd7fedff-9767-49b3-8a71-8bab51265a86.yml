@@ -5,6 +5,7 @@ _meta:
   bundle: community
   default_langcode: en
   depends:
+    f8a17218-4a7b-416b-b4c0-2f4db1725a05: file
     96a9987a-5ad5-4232-9265-69edbaeab690: media
 default:
   revision_uid:
@@ -38,25 +39,45 @@ default:
       pathauto: 0
   body:
     -
-      value: '<p>Government professionals from all levels come together in this community to make better decisions using web analytics and other optimization strategies.</p><p>Become a member to uncover best practices, tips, and tools for web analytics, search, and search engine optimization.</p><p>Digital.gov fosters this dynamic community by providing spaces to engage in collaborative discussion and share new technology and trends. Remember, when participating in this community, you must follow <a href="https://digital.gov/communities/community-guidelines/">Digital.gov community guidelines</a>.</p><embedded-content data-plugin-config="{&quot;content_reference&quot;:&quot;54&quot;}" data-plugin-id="ec_shortcodes_featured_resource" data-button-id="default">&nbsp;</embedded-content>'
+      value: '<p>Government professionals from all levels come together in this community to make better decisions using web analytics and other optimization strategies.</p><p>Become a member to uncover best practices, tips, and tools for web analytics, search, and search engine optimization.</p><p>Digital.gov fosters this dynamic community by providing spaces to engage in collaborative discussion and share new technology and trends. Remember, when participating in this community, you must follow <a href="https://digital.gov/communities/community-guidelines/">Digital.gov community guidelines</a>.</p><embedded-content data-plugin-config="{&quot;content_reference&quot;:&quot;51&quot;}" data-plugin-id="ec_shortcodes_featured_resource" data-button-id="default">&nbsp;</embedded-content>'
       format: html
       summary: ''
+  field_deck:
+    -
+      value: '<p>Share and learn with web analytics and optimization practitioners.</p>'
+      format: single_inline_html
   field_dg_acronym:
     -
       value: WAO
   field_dg_highlight:
     -
       value: true
+  field_dg_logo:
+    -
+      entity: f8a17218-4a7b-416b-b4c0-2f4db1725a05
+      alt: ''
+      title: ''
+      width: 0
+      height: 0
   field_dg_shortname:
     -
       value: 'Web Analytics'
+  field_kicker:
+    -
+      value: 'Communities of practice'
+  field_members:
+    -
+      value: 1294
   field_page_weight:
     -
       value: 1
   field_primary_image:
     -
       entity: 96a9987a-5ad5-4232-9265-69edbaeab690
+  field_subscribe_email_subject:
+    -
+      value: 'Join the Web Analytics Community'
   field_summary:
     -
-      value: 'Make better decisions using web analytics and other optimization strategies.'
+      value: '<p>Make better decisions using web analytics and other optimization strategies.</p>'
       format: single_inline_html

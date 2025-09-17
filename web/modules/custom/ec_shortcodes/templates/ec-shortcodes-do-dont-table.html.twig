@@ -1,51 +1,33 @@
 {% if rows %}
-  {% set table_rows %}{% apply spaceless %}
-    {% for row in rows %}
-      {% if row.do.value is not empty and row.dont.value is not empty %}
-        <tr>
-          <td data-label="Do">
-            {% set do = {
-              '#type': 'processed_text',
-              '#text': row.do.value,
-              '#format': row.do.format,
-            } %}
-            {{ do }}
-          </td>
-          <td data-label="Don't">
-            {% set dont = {
-              '#type': 'processed_text',
-              '#text': row.dont.value,
-              '#format': row.dont.format,
-            } %}
-            {{ dont }}
-          </td>
-        </tr>
-      {% endif %}
-    {% endfor %}
-  {% endapply %}{% endset %}
-{% endif %}
-
-{% if table_rows %}
   <table class="usa-table usa-table--borderless dg-do-dont-table usa-table--stacked">
     <caption>{{ caption }}</caption>
     <thead class="dg-do-dont-table__header">
-      <tr class="dg-do-dont-table__header-row" scope="row">
-        <th class="dg-do-dont-table__header dg-do-dont-table__header--do" scope="col">
-          <svg class="usa-icon dg-icon dg-icon--standard margin-bottom-05" aria-hidden="true" focusable="false">
-            <use href="{{ drupal_url(theme_path ~ '/static/digitalgov/img/sprite.svg#check_circle') }}"></use>
-          </svg>
-          {{ 'What you should do'|t }}
-        </th>
-        <th class="dg-do-dont-table__header dg-do-dont-table__header--dont" scope="col">
-          <svg class="usa-icon dg-icon dg-icon--standard margin-bottom-05" aria-hidden="true" focusable="false">
-            <use href="{{ drupal_url(theme_path ~ '/static/digitalgov/img/sprite.svg#cancel') }}"></use>
-          </svg>
-          {{ "What you shouldn't do"|t }}
-        </th>
-      </tr>
+    <tr class="dg-do-dont-table__header-row" scope="row">
+      <th class="dg-do-dont-table__header dg-do-dont-table__header--do" scope="col">
+        <svg class="usa-icon dg-icon dg-icon--standard margin-bottom-05" aria-hidden="true" focusable="false">
+          <use href="/{{ active_theme_path() }}/static/uswds/img/sprite.svg#check_circle"></use>
+        </svg>
+        {{ 'What you should do'|t }}
+      </th>
+      <th class="dg-do-dont-table__header dg-do-dont-table__header--dont" scope="col">
+        <svg class="usa-icon dg-icon dg-icon--standard margin-bottom-05" aria-hidden="true" focusable="false">
+          <use href="/{{ active_theme_path() }}/static/uswds/img/sprite.svg#cancel"></use>
+        </svg>
+        {{ "What you shouldn't do"|t }}
+      </th>
+    </tr>
     </thead>
     <tbody class="dg-do-dont-table__body">
-      {{ table_rows }}
+    {% for row in rows %}
+      <tr>
+        <td data-label="Do">
+          {{ row.do }}
+        </td>
+        <td data-label="Don't">
+          {{ row.dont }}
+        </td>
+      </tr>
+    {% endfor %}
     </tbody>
   </table>
 {% endif %}

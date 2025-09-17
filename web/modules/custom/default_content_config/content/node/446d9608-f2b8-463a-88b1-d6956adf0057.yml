@@ -1,0 +1,60 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 446d9608-f2b8-463a-88b1-d6956adf0057
+  bundle: guides
+  default_langcode: en
+  depends:
+    33dfb1a8-84a2-4184-990b-b8e6e849e8ec: node
+    cdc07606-1563-4772-9b45-11fa5d99c31a: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Create a foundation'
+  created:
+    -
+      value: 1736268583
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /guides/web-analytics-playbook/create-a-foundation-for-your-strategy
+      langcode: en
+      pathauto: 0
+  body:
+    -
+      value: '<p>Build a solid foundation for your team by defining your website mission, goals, and key performance indicators (KPIs). Then your team can focus on reporting that matters. Don’t rely on pageviews alone; shift your team’s analytics framework to discover rich and meaningful insights that make a difference.</p><p><strong>Checklist:</strong></p><ul><li>Meet with your stakeholders and website management team to discuss the site’s overarching purpose</li><li>Define your target audience(s)</li><li>Define online objectives for your target audience(s)</li><li>Determine which goals your analytics tool can measure</li><li>Create KPIs</li></ul><p><strong>Key Questions:</strong></p><ul><li>Who are our users?</li><li>What are the most important things for our users to achieve?</li><li>How does our site contribute to the organizational mission?</li><li>Which KPIs would denote success at-a-glance?</li><li>Can we capture those KPIs with our tool?</li><li>How can we capture other important metrics?</li><li>What can’t this tool tell us?<br>&nbsp;</li></ul>'
+      format: html
+      summary: ''
+  field_guide_nav_ref:
+    -
+      entity: 33dfb1a8-84a2-4184-990b-b8e6e849e8ec
+  field_guide_nav_title:
+    -
+      value: Build
+  field_primary_image:
+    -
+      entity: cdc07606-1563-4772-9b45-11fa5d99c31a
+  field_summary:
+    -
+      value: '<p>Before starting, be sure to define your mission, goals, and key performance indicators.</p>'
+      format: single_inline_html
+  field_summary_box:
+    -
+      value: false

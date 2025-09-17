@@ -2,15 +2,14 @@
 Displays a vertical list of primary CoP's on the sidebar on event pages.
   ======================================
 #}
-{# $mainCommunities := (where .Site.Pages "Section" "communities") #}
-{# $mainCommunities = (where $mainCommunities ".Params.dg_highlight" "eq" true) #}
-{# $featuredCommunity := (where $mainCommunities ".Params.weight" "eq" 2) #}
-{# $mainCommunities = union $featuredCommunity $mainCommunities #}
-{# $mainCommunities = first 8 ($mainCommunities.ByTitle) #}
 
-{# Check if there are main community pages to display #}
+{% if drupal_view_result('sidebar_communities', 'block_1') is not empty %}
+  <article class="dg-promos dg-related-communities">
+    <h3 class="dg-promos__heading">Join a Community</h3>
+      {{ drupal_view('sidebar_communities', 'block_1') }}
+  </article>
+{% endif %}
 
-{# NOT-MIGRATED #}
 {% if mainCommunities %}
   <article class="dg-promos dg-related-communities">
     <h3 class="dg-promos__heading">Join a Community</h3>

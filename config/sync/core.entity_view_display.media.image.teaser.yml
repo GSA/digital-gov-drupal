@@ -4,6 +4,8 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.media.teaser
+    - field.field.media.image.field_caption
+    - field.field.media.image.field_credit
     - field.field.media.image.field_media_image
     - image.style.large
     - media.type.image
@@ -27,6 +29,8 @@ content:
     region: content
 hidden:
   created: true
+  field_caption: true
+  field_credit: true
   name: true
   thumbnail: true
   uid: true

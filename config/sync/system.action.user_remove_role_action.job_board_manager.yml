@@ -1,0 +1,14 @@
+uuid: 8fbafff9-a755-4b82-8684-3c43c9a70128
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.job_board_manager
+  module:
+    - user
+id: user_remove_role_action.job_board_manager
+label: 'Remove the Job Board Manager role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: job_board_manager

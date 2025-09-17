@@ -1,0 +1,21 @@
+uuid: 4df7fe65-cb3d-4019-98f7-b53f9964d1e2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_profile_source
+    - node.type.authors
+  module:
+    - options
+id: node.authors.field_profile_source
+field_name: field_profile_source
+entity_type: node
+bundle: authors
+label: 'Profile Source'
+description: "Select an light or dark digital.gov branded avatar for your author profile if you don't have a github account setup."
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

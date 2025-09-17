@@ -49,3 +49,13 @@ data "cloudfoundry_service" "this" {
   name          = each.value.service_type
   space         = try(data.cloudfoundry_space.this.id, null)
 }
+
+data "cloudfoundry_service_instance" "pipeline" {
+    name_or_id = "pipeline"
+    space      = data.cloudfoundry_space.this.id
+}
+
+data "cloudfoundry_service_key" "pipeline" {
+  name = "pipeline-key"
+  service_instance = data.cloudfoundry_service_instance.pipeline.id
+}

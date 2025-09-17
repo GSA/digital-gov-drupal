@@ -36,7 +36,7 @@ default:
       pathauto: 0
   field_deck:
     -
-      value: "<p>Don't know where to start with a federal requirement? Aren't sure how to adopt a new technology with your team? Start here! We have resources for every level. Our collections are organized by popular topics, and they will help you meet the requirements of</p>"
+      value: "<p>Don't know where to start with a federal requirement? Aren't sure how to adopt a new technology with your team? Start here! We have resources for every level. Our collections are organized by popular topics, and they will help you meet the requirements of federal web legislation.</p>"
       format: single_inline_html
   field_landing_page_type:
     -

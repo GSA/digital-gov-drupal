@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 8d475edd-90c6-4911-8e51-2c5b439e83cc
+  bundle: hcd_glossary
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'Guided Tour'
+  description:
+    -
+      value: '<p>A research methodology during which a participant shows researcher(s) their physical space, collections, or other assets so that the researcher(s) understand the participant’s context and reality through the participant’s point of view.</p>'
+      format: single_inline_html
+  weight:
+    -
+      value: 13
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

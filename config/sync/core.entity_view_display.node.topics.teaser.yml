@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
-    - field.field.node.topics.body
     - field.field.node.topics.field_deck
     - field.field.node.topics.field_featured_communities
     - field.field.node.topics.field_featured_links
@@ -12,25 +11,17 @@ dependencies:
     - field.field.node.topics.field_legislation
     - field.field.node.topics.field_page_weight
     - field.field.node.topics.field_primary_image
+    - field.field.node.topics.field_resource_topics
     - field.field.node.topics.field_slug
     - field.field.node.topics.field_summary
     - node.type.topics
   module:
-    - text
     - user
 id: node.topics.teaser
 targetEntityType: node
 bundle: topics
 mode: teaser
 content:
-  body:
-    type: text_summary_or_trimmed
-    label: hidden
-    settings:
-      trim_length: 600
-    third_party_settings: {  }
-    weight: 101
-    region: content
   content_moderation_control:
     settings: {  }
     third_party_settings: {  }
@@ -49,5 +40,6 @@ hidden:
   field_legislation: true
   field_page_weight: true
   field_primary_image: true
+  field_resource_topics: true
   field_slug: true
   field_summary: true

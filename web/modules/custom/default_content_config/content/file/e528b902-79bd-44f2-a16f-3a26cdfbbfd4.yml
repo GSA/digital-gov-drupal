@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: e528b902-79bd-44f2-a16f-3a26cdfbbfd4
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: hcd-guide-landing-resized.jpg
+  uri:
+    -
+      value: 'public://2025-01/hcd-guide-landing-resized.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 77359
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1736458020

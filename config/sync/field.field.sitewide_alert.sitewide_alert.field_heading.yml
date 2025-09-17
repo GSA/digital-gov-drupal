@@ -1,0 +1,20 @@
+uuid: 240c5dfb-45ae-4fc1-8753-bfab9374d445
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.sitewide_alert.field_heading
+  module:
+    - sitewide_alert
+id: sitewide_alert.sitewide_alert.field_heading
+field_name: field_heading
+entity_type: sitewide_alert
+bundle: sitewide_alert
+label: Heading
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

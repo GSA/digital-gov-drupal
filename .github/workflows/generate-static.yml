@@ -1,0 +1,37 @@
+name: Generate Static Site
+
+on:
+  workflow_call:
+    inputs:
+      CF_SPACE:
+        required: true
+        type: string
+
+jobs:
+  generateStatic:
+    name: Generate Static Site
+    runs-on: ubuntu-latest
+    if: contains(vars.GENERATE_STATIC_SITE_ON_CRON_SPACES, inputs.CF_SPACE)
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install basic dependancies
+        run: ./scripts/pipeline/deb-basic-deps.sh
+      - name: Install Cloudfoundry CLI
+        run: ./scripts/pipeline/deb-cf-install.sh
+      - name: Cloud.gov login
+        env:
+          CF_USER: "${{ secrets.CF_USER }}"
+          CF_PASSWORD: "${{ secrets.CF_PASSWORD }}"
+          CF_ORG: "${{ secrets.CF_ORG }}"
+          PROJECT: "${{ secrets.PROJECT }}"
+          CF_SPACE: "${{ inputs.CF_SPACE }}"
+        run: |
+          source ./scripts/pipeline/cloud-gov-login.sh
+          echo "Targeting space: ${CF_SPACE}"
+          cf target -s "${CF_SPACE}" >/dev/null 2>&1
+      - name: Run Tome
+        env:
+          PROJECT: "${{ secrets.PROJECT }}"
+          CF_SPACE: "${{ inputs.CF_SPACE }}"
+        run: source ./scripts/pipeline/pipeline_wrapper.sh upkeep

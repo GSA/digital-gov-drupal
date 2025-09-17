@@ -1,0 +1,12 @@
+{#
+/**
+* @file
+* Theme override to display a node: Community as a featured resource.
+*/
+#}
+{{ include('@digital_gov/partials/featured-resource.html.twig', {
+  kicker: content.field_kicker|field_value,
+  title: label,
+  summary: content.field_summary|field_value,
+  url: content.field_external_url|field_value,
+}, with_context: false) }}

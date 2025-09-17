@@ -1,0 +1,14 @@
+uuid: b2c7c3fe-42c4-4049-865d-820948f883de
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: qUkgsWZRCa_sLIn5JsMzB3xnx5ekIsVeGGZr7T0s9MY
+id: default_bundle
+entity_type_id: null
+entity_id: null
+action: display_page
+allow_override: 1
+redirect: ''
+redirect_code: 0
+redirect_fallback_action: access_denied

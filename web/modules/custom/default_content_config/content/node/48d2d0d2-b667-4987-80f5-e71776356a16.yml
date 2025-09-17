@@ -1,0 +1,86 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 48d2d0d2-b667-4987-80f5-e71776356a16
+  bundle: news
+  default_langcode: en
+  depends:
+    10a75c69-1036-40db-ab4a-02ccaa1e0cce: node
+    31fb46ba-3d68-4c18-8819-cbbd8624d689: node
+    a562cb6c-d534-46b3-bf5d-4b21e0422e4b: media
+    d54f480c-f28b-49c0-a1ef-7d0adf594af6: media
+    26f2d370-453e-4fdb-8b51-3f6a932fd3e9: node
+    95077128-6d33-4445-a48a-4ad8ebb7d9b3: node
+    0a1a61c6-b4aa-4e54-bf83-8e397e28e6f2: node
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Cloud Incassum Ludus Nutus'
+  created:
+    -
+      value: 1740020826
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /2025/02/19/cloud-incassum-ludus-nutus
+      langcode: en
+      pathauto: 1
+  body:
+    -
+      value: '<p>Caecus neque roto saluto. Aptent dolor loquor occuro roto secundum te. Eu pagus refero verto. Augue erat ibidem nulla torqueo. Commodo cui jugis laoreet pala scisco. Ad dolore immitto jumentum nimis populus ratis refero saepius zelus. Abico et nutus saluto secundum volutpat. Abbas aptent duis euismod hendrerit nostrud obruo quibus turpis ymo.</p><p>Ludus nimis nisl praesent. Abdo aliquam iustum probo verto. Aliquam camur conventio duis ideo si ut zelus. Abdo commodo eros jugis.</p><p>Diam hendrerit ideo illum immitto si velit. At defui nibh uxor vereor. Autem decet eligo euismod jus sed suscipit tamen venio vulputate. Jugis letalis loquor lucidus natu persto roto tamen. Augue blandit consectetuer duis jus oppeto pertineo saepius validus. Eum ideo imputo metuo nutus olim patria. Diam duis eros iaceo magna nulla sagaciter utrum validus vicis.</p><p>Accumsan eum letalis os paratus persto. Bene et interdico luctus modo pecus sagaciter tum ut. Distineo ibidem ideo. Feugiat in meus usitas.</p><p>Appellatio imputo patria pecus quis te valde vereor. Damnum genitus ibidem jumentum oppeto refoveo. Aliquip letalis nutus populus. Macto melior nulla probo quia ratis sit turpis ymo. Paratus singularis sino verto. Autem dolus jumentum lobortis mos obruo persto.</p><p>Aliquip gilvus lenis olim vindico virtus volutpat zelus. At eum refero. Bene decet iaceo incassum praesent probo vindico. Antehabeo capto diam dolus praemitto saepius torqueo utinam. Eu interdico iriure singularis utrum. Dolus immitto neque plaga pneum tego vero wisi. Dolore facilisi scisco typicus utinam vereor. Brevitas eros quibus. Defui gemino gravis letalis nunc olim secundum vulpes.</p><p>Appellatio conventio immitto imputo magna melior quia saluto uxor ymo. Autem bene eu immitto mos nulla utinam uxor. Feugiat lenis melior meus quibus vindico. Abluo aliquam et euismod imputo molior nimis quia quibus similis.</p><p>Aliquam damnum diam ibidem. Cui gemino genitus huic ideo iriure ulciscor vulpes. Capto lobortis lucidus luptatum mauris vindico ymo. Abluo cogo consequat feugiat macto ratis ut volutpat. Blandit causa tamen. Ad causa damnum natu pertineo ratis.</p><p>Capto defui elit. Commoveo ea facilisis nostrud obruo. At causa cui incassum nibh qui quis ratis refero. Facilisis fere iusto jugis magna nobis quadrum quidem te validus. Brevitas distineo neque nulla paulatim pecus refero torqueo ut. Eum luptatum proprius scisco. Consequat decet dignissim usitas.</p><p>Accumsan hendrerit letalis validus volutpat zelus. At duis feugiat gemino obruo te vulputate. Acsi eros eum gravis natu oppeto quidne ratis refoveo. At bene iaceo probo saepius secundum singularis verto.</p><p>Abico ibidem minim nimis quia ulciscor. Nimis oppeto qui refoveo scisco. Abluo causa eros incassum iusto lobortis pecus ratis tamen vulputate. Augue cogo eros gilvus importunus loquor neo probo si tation.</p><p>Consequat ex huic iustum jus loquor probo similis volutpat. Abluo appellatio eu hos laoreet modo voco. Abigo aliquip conventio dolore haero iustum rusticus tamen vulpes ymo. Cogo eligo melior velit. Erat euismod fere paratus vel verto. Conventio exputo hos sino sudo.</p>'
+      format: html
+      summary: ''
+  field_authors:
+    -
+      entity: 10a75c69-1036-40db-ab4a-02ccaa1e0cce
+    -
+      entity: 31fb46ba-3d68-4c18-8819-cbbd8624d689
+    -
+      entity: 10a75c69-1036-40db-ab4a-02ccaa1e0cce
+  field_deck:
+    -
+      value: '<p>Capto damnum hendrerit ibidem macto roto tego utinam.&nbsp;</p>'
+      format: single_inline_html
+  field_featured_image:
+    -
+      entity: a562cb6c-d534-46b3-bf5d-4b21e0422e4b
+  field_kicker:
+    -
+      value: 'Caecus comis'
+  field_page_weight:
+    -
+      value: 661
+  field_primary_image:
+    -
+      entity: d54f480c-f28b-49c0-a1ef-7d0adf594af6
+  field_slug:
+    -
+      value: 'Commoveo erat genitus interdico'
+  field_summary:
+    -
+      value: '<p>Enim pagus suscipere tum. Abdo imputo ratis scisco suscipere utinam vero. Camur imputo mos pecus plaga qui roto. Abico diam iriure torqueo.&nbsp;</p>'
+      format: single_inline_html
+  field_topics:
+    -
+      entity: 26f2d370-453e-4fdb-8b51-3f6a932fd3e9
+    -
+      entity: 95077128-6d33-4445-a48a-4ad8ebb7d9b3
+    -
+      entity: 0a1a61c6-b4aa-4e54-bf83-8e397e28e6f2

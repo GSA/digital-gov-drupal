@@ -34,3 +34,6 @@ default:
       alias: /authors/authors-all-required-fields
       langcode: en
       pathauto: 1
+  field_profile_source:
+    -
+      value: digit-light

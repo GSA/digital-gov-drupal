@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: c5a53e01-ba3f-4645-9752-15c7f4ff0c4f
+  bundle: hcd_glossary
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: ROI
+  description:
+    -
+      value: '<p>Acronym for <em>Return on Investment</em>.</p>'
+      format: single_inline_html
+  weight:
+    -
+      value: 26
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

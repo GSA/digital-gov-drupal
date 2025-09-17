@@ -1,0 +1,14 @@
+uuid: 462f9b09-b3aa-4d91-89e9-3cf23a924156
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.news
+id: node_type_news
+entity_type_id: node_type
+entity_id: news
+action: display_page
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

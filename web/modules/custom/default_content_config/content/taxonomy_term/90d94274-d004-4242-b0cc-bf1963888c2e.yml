@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 90d94274-d004-4242-b0cc-bf1963888c2e
+  bundle: hcd_glossary
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'Fail early, fail fast, fail small'
+  description:
+    -
+      value: '<p>A design research principle expressing the ethos that, through quickly making and testing small solutions to big problems in quick succession, drawing lessons for what works or does not work from those tests, and revising the next solution accordingly, more effective and successful end solutions can be reached than if a single large solution was launched once and without testing.</p>'
+      format: single_inline_html
+  weight:
+    -
+      value: 11
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

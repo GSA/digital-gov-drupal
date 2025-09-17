@@ -1,0 +1,73 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 44a761c7-41e3-4657-99bc-7248846cd073
+  bundle: guide_navigation
+  default_langcode: en
+  depends:
+    62fdaf72-5449-4312-a82e-b87b9b406f36: node
+    7ed0eb3a-0a1e-4626-b8f0-8394b19a8f72: node
+    6b9a9ec8-50ea-47ba-8e58-ce2dee0edb8d: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'HCD Introduction Navigation'
+  created:
+    -
+      value: 1736461014
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_guide_navigation:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 53374c24-9ef6-4a91-bea9-1fae9ba2530d
+          bundle: guide_pages
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1736461023
+          behavior_settings:
+            -
+              value: {  }
+          field_guide_link:
+            -
+              entity: 62fdaf72-5449-4312-a82e-b87b9b406f36
+  field_kicker_link:
+    -
+      target_uuid: 7ed0eb3a-0a1e-4626-b8f0-8394b19a8f72
+      title: 'HCD Guide Series'
+      options: {  }
+  field_overview_image:
+    -
+      entity: 6b9a9ec8-50ea-47ba-8e58-ce2dee0edb8d
+  field_show_in_page_nav:
+    -
+      value: false
+  field_show_next_previous:
+    -
+      value: true

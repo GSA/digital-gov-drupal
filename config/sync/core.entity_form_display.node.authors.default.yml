@@ -3,33 +3,18 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.authors.body
-    - field.field.node.authors.field_agency_acronym
     - field.field.node.authors.field_agency_full_name
-    - field.field.node.authors.field_bio
-    - field.field.node.authors.field_bio_url
-    - field.field.node.authors.field_email
-    - field.field.node.authors.field_facebook
     - field.field.node.authors.field_first_name
     - field.field.node.authors.field_github
-    - field.field.node.authors.field_instagram
     - field.field.node.authors.field_last_name
-    - field.field.node.authors.field_linkedin
-    - field.field.node.authors.field_location
-    - field.field.node.authors.field_pronouns
+    - field.field.node.authors.field_profile_source
     - field.field.node.authors.field_slug
-    - field.field.node.authors.field_summary
-    - field.field.node.authors.field_twitter
-    - field.field.node.authors.field_youtube
     - node.type.authors
     - workflows.workflow.editorial
   module:
     - content_moderation
     - field_group
-    - link
-    - maxlength
     - path
-    - text
 third_party_settings:
   field_group:
     group_social_media:
@@ -58,69 +43,15 @@ targetEntityType: node
 bundle: authors
 mode: default
 content:
-  body:
-    type: text_textarea_with_summary
-    weight: 7
-    region: content
-    settings:
-      rows: 9
-      summary_rows: 3
-      placeholder: ''
-      show_summary: false
-    third_party_settings: {  }
   created:
     type: datetime_timestamp
     weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_agency_acronym:
-    type: string_textfield
-    weight: 14
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
   field_agency_full_name:
     type: string_textfield
     weight: 13
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_bio:
-    type: text_textarea
-    weight: 16
-    region: content
-    settings:
-      rows: 1
-      placeholder: ''
-    third_party_settings:
-      maxlength:
-        maxlength_js: 50
-        maxlength_js_label: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
-        maxlength_js_enforce: true
-  field_bio_url:
-    type: link_default
-    weight: 17
-    region: content
-    settings:
-      placeholder_url: ''
-      placeholder_title: ''
-    third_party_settings: {  }
-  field_email:
-    type: email_default
-    weight: 11
-    region: content
-    settings:
-      placeholder: ''
-      size: 60
-    third_party_settings: {  }
-  field_facebook:
-    type: string_textfield
-    weight: 24
     region: content
     settings:
       size: 60
@@ -142,14 +73,6 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_instagram:
-    type: string_textfield
-    weight: 25
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
   field_last_name:
     type: string_textfield
     weight: 9
@@ -158,61 +81,15 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_linkedin:
-    type: string_textfield
-    weight: 26
+  field_profile_source:
+    type: options_select
+    weight: 51
     region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_location:
-    type: string_textfield
-    weight: 15
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_pronouns:
-    type: string_textfield
-    weight: 10
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_slug:
     type: string_textfield
     weight: 18
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_summary:
-    type: text_textarea
-    weight: 12
-    region: content
-    settings:
-      rows: 1
-      placeholder: ''
-    third_party_settings:
-      maxlength:
-        maxlength_js: 255
-        maxlength_js_label: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
-        maxlength_js_enforce: true
-  field_twitter:
-    type: string_textfield
-    weight: 23
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_youtube:
-    type: string_textfield
-    weight: 27
     region: content
     settings:
       size: 60

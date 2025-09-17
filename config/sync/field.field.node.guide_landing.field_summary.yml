@@ -1,0 +1,24 @@
+uuid: d9e9cf02-41f4-46af-9172-741883241320
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_summary
+    - filter.format.single_inline_html
+    - node.type.guide_landing
+  module:
+    - text
+id: node.guide_landing.field_summary
+field_name: field_summary
+entity_type: node
+bundle: guide_landing
+label: Summary
+description: '1-sentence description that does not repeat the headline'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - single_inline_html
+field_type: text_long

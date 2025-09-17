@@ -1,22 +1,68 @@
 <section class="dg-guide__content grid-container-desktop">
-  <div>
-    [placeholder Guide Content Header]
-    {# NOT-MIGRATED
-    {{ partial "core/guides/guide-content-header.html" . }}
-    #}
-    <div class="dg-guide__content-body usa-prose">
-      {{ content }}
-    </div>
+  <div class="dg-guide__content-header" id="content-start">
+    {% if is_guide_overview %}
+      <h2 class="dg-guide__content-header-title">Overview</h2>
+    {% else %}
+      <h2 class="dg-guide__content-header-title">{{ label|field_value }}</h2>
+      {{ content.field_summary }}
+    {% endif %}
+
+    {% if show_summary_box %}
+      {{ include('@digital_gov/partials/usa-summary-box.html.twig', {
+        containerClass: 'dg-guide-summary',
+      }, with_context: false) }}
+    {% endif %}
   </div>
+
+  {{ content.body }}
 </section>
 
 <section class="dg-guide__footer grid-container-desktop">
-  [placeholder Guide Prev-Next]
-  {# NOT-MIGRATED
-  {{ partial "core/guides/guide-prev-next.html" . }}
-  #}
-  {# NOT-MIGRATED
-  {{ include("@digital_gov/partials/attribution.html.twig") }}
-  #}
+  {% if show_next_previous %}
+    <div class="dg-guide__prev-next grid-row">
+      {% if guide_prev %}
+        <a
+          class="dg-guide__prev-next-prev-item usa-button usa-button--outline"
+          href="{{ guide_prev.url }}#content-start"
+          title="{{ guide_prev.text }}"
+        >
+          <svg
+            class="usa-icon dg-icon dg-icon--standard"
+            aria-hidden="true"
+            focusable="false"
+            role="img"
+          >
+            <use xlink:href="/{{ active_theme_path() }}/static/uswds/img/sprite.svg#arrow_back"></use>
+          </svg>
+          <span>{{ guide_prev.text }}</span>
+        </a>
+      {% endif %}
+      {% if guide_next %}
+        <a
+          class="dg-guide__prev-next-next-item usa-button"
+          href="{{ guide_next.url }}#content-start"
+          title="{{ guide_next.text }}"
+        >
+          <span>{{ guide_next.text }}</span>
+          <svg
+            class="usa-icon dg-icon dg-icon--standard"
+            aria-hidden="true"
+            focusable="false"
+            role="img"
+          >
+            <use xlink:href="/{{ active_theme_path() }}/static/uswds/img/sprite.svg#arrow_forward"></use>
+          </svg>
+        </a>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {% if guide_overview_credit or guide_overview_caption %}
+  {{ include('@digital_gov/partials/attribution.html.twig', {
+       credit: guide_overview_credit,
+       caption: guide_overview_caption,
+     }, with_context: false) }}
+  {% endif %}
+
   {{ include('@digital_gov/partials/touchpoints-form.html.twig') }}
 </section>

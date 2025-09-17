@@ -59,7 +59,7 @@ if [ -n "${MODSECURITY_UPDATE}" ]; then
   modsecurity_version=$(echo "${MODSECURITY_UPDATE}" | cut -d '_' -f2 | cut -d '-' -f1)
   echo "Updating libmodsecurity..."
   #current_path=$(pwd)
-  
+
   dpkg-deb -R "${app_path}/packages/${MODSECURITY_UPDATE}" ${home}/deps/0/apt/
   ln -s "${home}/deps/0/apt/usr/lib/x86_64-linux-gnu/libmodsecurity.so.${modsecurity_version}" "libmodsecurity.so.${modsecurity_version}"
 fi
@@ -75,7 +75,13 @@ echo "Configuring WAF ACLs..."
 declare IPS_ALLOWED_CMS
 IPS_ALLOWED_CMS=$(echo "${ALLOWED_IPS_CMS}" | base64 -d | jq -rc '.[] | @sh' | tr -d \' | sed 's/^/      /')
 export IPS_ALLOWED_CMS
+declare DENY_ALL_CMS
+if [ -n "${RESTRICT_CMS}" ]; then
+    DENY_ALL_CMS="deny all;"
+fi
+export DENY_ALL_CMS
 PATH=${PATH}; envsubst < ${app_path}/nginx/snippets/ip-restrict-cms.conf.tmpl > ${app_path}/nginx/snippets/ip-restrict-cms.conf
+
 
 ## Insert the denied IP's into the WAF's configuration.
 declare IPS_DENYED_STATIC

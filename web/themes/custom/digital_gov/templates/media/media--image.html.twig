@@ -1,0 +1,21 @@
+{#
+/**
+ * @file
+ * Theme override to display a media item: image.
+ */
+#}
+
+{# Caching the data in content object #}
+{% set savedCache = content|render %}
+{# This depends on the align filter to follow the media embed filter in text format settings. #}
+{% set data_align = attributes['data-align']|render %}
+
+{% set classes = [
+  'image',
+  data_align ? 'image-' ~ data_align,
+] %}
+
+<div{{ attributes.addClass(classes) }}>
+  {{ content.thumbnail|field_value }}
+  {{ content.field_media_image|field_value }}
+</div>

@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.resources.body
+    - field.field.node.resources.field_authors
     - field.field.node.resources.field_deck
     - field.field.node.resources.field_page_weight
     - field.field.node.resources.field_slug
@@ -19,22 +20,27 @@ targetEntityType: node
 bundle: resources
 mode: teaser
 content:
-  body:
-    type: text_summary_or_trimmed
-    label: hidden
+  field_authors:
+    type: entity_reference_entity_view
+    label: above
     settings:
-      trim_length: 600
+      view_mode: teaser
+      link: false
     third_party_settings: {  }
-    weight: 101
+    weight: 0
     region: content
-  links:
+  field_summary:
+    type: text_default
+    label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 1
     region: content
 hidden:
+  body: true
+  content_moderation_control: true
   field_deck: true
   field_page_weight: true
   field_slug: true
-  field_summary: true
   field_topics: true
+  links: true

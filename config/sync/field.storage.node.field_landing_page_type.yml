@@ -29,6 +29,9 @@ settings:
     -
       value: resources
       label: Resources
+    -
+      value: homepage
+      label: Homepage
   allowed_values_function: ''
 module: options
 locked: false

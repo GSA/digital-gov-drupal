@@ -24,6 +24,9 @@ default:
       alias: ''
       langcode: en
       pathauto: 0
+  field_credit:
+    -
+      value: 'drogatnev/iStock via Getty Images'
   field_media_image:
     -
       entity: 8fa4c601-fddf-498f-a653-135ed1d8afa3

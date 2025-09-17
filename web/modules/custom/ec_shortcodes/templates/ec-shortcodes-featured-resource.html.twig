@@ -3,7 +3,8 @@
 {% set title = drupal_field('title', 'node', content_reference)|field_value %}
 
 {{ include('@digital_gov/partials/featured-resource.html.twig', {
+  kicker: kicker|check_markup('single_inline_html') ?: '',
   title: title ?: '',
   url: url,
   summary: summary ?: '',
-}, with_context=false) }}
+}, with_context: false) }}

@@ -1,0 +1,53 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: c9faf441-8dd2-47a5-bf96-eeb8571f0dc8
+  bundle: guides
+  default_langcode: en
+  depends:
+    1a8ba304-e37c-4bf4-b8e9-d1ba6f8e780b: node
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Team building'
+  created:
+    -
+      value: 1736373941
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /guides/team-building
+      langcode: en
+      pathauto: 1
+  body:
+    -
+      value: '<h2 id="take-time-and-care-to-build-your-team">Take time and care to build your team</h2><p>First, spend more time than you might think necessary in getting to know who is on the team (if it is a new team) and on crafting and assigning roles and responsibilities. How well a team works together will have a notable effect on the success of the project. See below for detailed guidance on the skills you might need on your team.</p><p>Roles might overlap, and that’s fine. For example, both a recruiter and a researcher need to be comfortable speaking with strangers, but under different circumstances: a recruiter needs to understand the nuance of a cold call, how to explain the project quickly, and “sell” the project. But a researcher needs to be able to slow down a conversation, use silence, and talk about the project without explicitly framing it and directing their interview subject.</p><p>It’s also important to know that each role will have its time to be at the forefront of the project, and then that role will need to recede as the next phase comes to the fore. The Research Lead does not micromanage the Recruiter, just as the Logistics Coordinator does not interrupt the Project Lead during a presentation to leadership or stakeholders.</p><h2 id="team-checklist">Team checklist</h2><p>Use this checklist as you build your team to ensure you’re set up for success:</p><div style="margin-left:20px;"><input type="checkbox"> Read through the team role descriptions&nbsp;<br><input type="checkbox"> Identify potential researchers, recruiters, logistics coordinator, and local contacts&nbsp;<br><input type="checkbox"> Invite each identified person to join the team&nbsp;<br><input type="checkbox"> Get confirmation from each person on their commitment to join the team.&nbsp;<br><input type="checkbox"> Share the team map with all teammates to ensure that everyone understands their role, and the roles of the others.</div>'
+      format: html
+      summary: ''
+  field_guide_nav_ref:
+    -
+      entity: 1a8ba304-e37c-4bf4-b8e9-d1ba6f8e780b
+  field_summary:
+    -
+      value: '<p>Building the right team is critical to the success of your project.</p>'
+      format: single_inline_html
+  field_summary_box:
+    -
+      value: false

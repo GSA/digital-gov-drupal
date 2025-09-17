@@ -34,24 +34,9 @@ default:
       alias: /authors/dan-williams
       langcode: en
       pathauto: 1
-  field_agency_acronym:
-    -
-      value: GSA
   field_agency_full_name:
     -
       value: 'U.S. General Services Administration'
-  field_bio:
-    -
-      value: 'Dan Williams is the program lead for the U.S. Web Design System (USWDS).'
-      format: single_inline_html
-  field_bio_url:
-    -
-      uri: 'https://designsystem.digital.gov/'
-      title: ''
-      options: {  }
-  field_email:
-    -
-      value: daniel.williams@gsa.gov
   field_first_name:
     -
       value: Dan
@@ -61,10 +46,6 @@ default:
   field_last_name:
     -
       value: Williams
-  field_location:
+  field_profile_source:
     -
-      value: 'Portland, OR'
-  field_summary:
-    -
-      value: 'The people who have contributed their stories and guidance over the years.'
-      format: single_inline_html
+      value: digit-light

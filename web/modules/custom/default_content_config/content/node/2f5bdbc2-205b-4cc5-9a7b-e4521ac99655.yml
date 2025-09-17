@@ -1,0 +1,40 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 2f5bdbc2-205b-4cc5-9a7b-e4521ac99655
+  bundle: resources
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'An introduction to analytics'
+  created:
+    -
+      value: 1736812333
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /resources/introduction-analytics
+      langcode: en
+      pathauto: 1
+  field_summary:
+    -
+      value: '<p>Learn how to set performance goals, and identify specific KPIs and targets to measure and meet them, using web analytics.</p>'
+      format: single_inline_html

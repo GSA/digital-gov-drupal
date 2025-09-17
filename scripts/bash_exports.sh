@@ -35,12 +35,38 @@ export DB_PORT
 
 ENV=$(echo "${VCAP_APPLICATION}" | jq -r '.space_name' | rev | cut -d- -f1 | rev)
 export ENV
- 
-S3_BUCKET=$(echo "${VCAP_SERVICES}" | jq -r '.["s3"][]? | select(.name == "storage") | .credentials.bucket')
-export S3_BUCKET
 
-S3_ENDPOINT=$(echo "${VCAP_SERVICES}" | jq -r '.["s3"][]? | select(.name == "storage") | .credentials.fips_endpoint')
-export S3_ENDPOINT
+S3_STORAGE_BUCKET=$(echo "${VCAP_SERVICES}" | jq -r '."s3"[] | select( .name | contains("storage")) | .credentials.bucket')
+export S3_STORAGE_BUCKET
+
+S3_STORAGE_ENDPOINT=$(echo "${VCAP_SERVICES}" | jq -r '."s3"[] | select( .name | contains("storage")) | .credentials.fips_endpoint')
+export S3_STORAGE_ENDPOINT
+
+S3_STORAGE_ACCESS_KEY_ID=$(echo "${VCAP_SERVICES}" | jq -r '."s3"[] | select( .name | contains("storage")) | .credentials.access_key_id')
+export S3_STORAGE_ACCESS_KEY_ID
+
+S3_STORAGE_SECRET_ACCESS_KEY=$(echo "${VCAP_SERVICES}" | jq -r '."s3"[] | select( .name | contains("storage")) | .credentials.secret_access_key')
+export S3_STORAGE_SECRET_ACCESS_KEY
+
+S3_STORAGE_REGION=$(echo "${VCAP_SERVICES}" | jq -r '."s3"[] | select( .name | contains("storage")) | .credentials.region')
+export S3_STORAGE_REGION
+
+
+S3_STATIC_BUCKET=$(echo "${VCAP_SERVICES}" | jq -r '."s3"[] | select( .name | contains("static")) | .credentials.bucket')
+export S3_STATIC_BUCKET
+
+S3_STATIC_ENDPOINT=$(echo "${VCAP_SERVICES}" | jq -r '."s3"[] | select( .name | contains("static")) | .credentials.fips_endpoint')
+export S3_STATIC_ENDPOINT
+
+S3_STATIC_ACCESS_KEY_ID=$(echo "${VCAP_SERVICES}" | jq -r '."s3"[] | select( .name | contains("static")) | .credentials.access_key_id')
+export S3_STATIC_ACCESS_KEY_ID
+
+S3_STATIC_SECRET_ACCESS_KEY=$(echo "${VCAP_SERVICES}" | jq -r '."s3"[] | select( .name | contains("static")) | .credentials.secret_access_key')
+export S3_STATIC_SECRET_ACCESS_KEY
+
+S3_STATIC_REGION=$(echo "${VCAP_SERVICES}" | jq -r '."s3"[] | select( .name | contains("static")) | .credentials.region')
+export S3_STATIC_REGION
+
 
 SPACE=$(echo "${VCAP_APPLICATION}" | jq -r '.["space_name"]')
 export SPACE
@@ -51,31 +77,14 @@ export WWW_HOST
 CMS_HOST=${CMS_HOST:-$(echo "${VCAP_APPLICATION}" | jq -r '.["application_uris"][]' | grep cms | tr '\n' ' ')}
 export CMS_HOST
 
-if [ -z "$WWW_HOST" ]; then
-  WWW_HOST="*.app.cloud.gov"
-  export WWW_HOST
-elif [ -z "$CMS_HOST" ]; then
-  CMS_HOST=$(echo "${VCAP_APPLICATION}" | jq -r '.["application_uris"][]' | head -n 1)
-  export CMS_HOST
-fi
-
 S3_ROOT_WEB=${S3_ROOT_WEB:-/web}
 export S3_ROOT_WEB
 
 S3_ROOT_CMS=${S3_ROOT_CMS:-/cms/public}
 export S3_ROOT_CMS
 
-S3_HOST=${S3_HOST:-$S3_BUCKET.$S3_ENDPOINT}
-export S3_HOST
+S3_STORAGE_HOST=${S3_STORAGE_HOST:-$S3_STORAGE_BUCKET.$S3_STORAGE_ENDPOINT}
+export S3_STORAGE_HOST
 
-S3_PROXY_WEB=${S3_PROXY_WEB:-$S3_HOST$S3_ROOT_WEB}
-export S3_PROXY_WEB
-
-S3_PROXY_CMS=${S3_PROXY_CMS:-$S3_HOST$S3_ROOT_CMS}
-export S3_PROXY_CMS
-
-S3_PROXY_PATH_CMS=${S3_PROXY_PATH_CMS:-/s3/files}
-export S3_PROXY_PATH_CMS
-
-DNS_SERVER=${DNS_SERVER:-$(grep -i '^nameserver' /etc/resolv.conf|head -n1|cut -d ' ' -f2)}
-export DNS_SERVER
+S3_STATIC_HOST=${S3_STATIC_HOST:-$S3_STATIC_BUCKET.$S3_STATIC_ENDPOINT}
+export S3_STATIC_HOST

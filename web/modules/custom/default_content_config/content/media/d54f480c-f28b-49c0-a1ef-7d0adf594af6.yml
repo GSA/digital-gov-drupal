@@ -1,0 +1,36 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: d54f480c-f28b-49c0-a1ef-7d0adf594af6
+  bundle: image
+  default_langcode: en
+  depends:
+    e528b902-79bd-44f2-a16f-3a26cdfbbfd4: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: hcd-guide-landing-resized.jpg
+  created:
+    -
+      value: 1736458020
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_credit:
+    -
+      value: 'natrot/iStock via Getty Images'
+  field_media_image:
+    -
+      entity: e528b902-79bd-44f2-a16f-3a26cdfbbfd4
+      alt: 'Abstract background of colorful pastel colors'
+      title: ''
+      width: 1200
+      height: 605

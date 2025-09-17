@@ -6,9 +6,9 @@ name: Digital.gov
 mail: no-reply@digital.gov
 slogan: 'Guidance on building better digital services in government'
 page:
-  403: ''
-  404: ''
-  front: /user/login
+  403: /404
+  404: /404
+  front: DO-NOT-CHANGE-SET-BY-DRUSH-SET-HP
 admin_compact_mode: false
 weight_select_max: 100
 default_langcode: en

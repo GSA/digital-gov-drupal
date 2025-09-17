@@ -34,60 +34,18 @@ default:
       alias: /authors/authors-all-fields
       langcode: en
       pathauto: 1
-  body:
-    -
-      value: '<p>Lorem ipsum odor amet, consectetuer adipiscing elit. Dapibus facilisis tellus eleifend cras lectus diam efficitur. Porttitor aenean habitasse magna inceptos commodo litora. Magna fermentum sit phasellus taciti neque venenatis feugiat proin! Himenaeos nam leo hendrerit netus litora luctus porttitor? Congue <strong>habitasse</strong> faucibus habitasse nascetur sit. Dolor hac sagittis ligula vulputate; elit quisque mi tempor. Posuere penatibus vehicula orci suspendisse tortor netus nostra leo laoreet.</p><p>Cursus etiam metus sagittis ultricies, aliquet eget. Nostra euismod feugiat fames suspendisse hendrerit dapibus phasellus felis. Tempor tellus lacus convallis varius hac turpis. Pulvinar augue fusce accumsan suscipit molestie interdum augue porta. Consectetur maximus pulvinar ex curae nostra tellus nisi eu. Convallis mattis ex ullamcorper nisl neque mi torquent. Eros inceptos dis pretium lectus sem mus a. Faucibus proin luctus ultrices; vestibulum tincidunt rutrum.</p><p>Pretium lacus habitasse consequat volutpat facilisis cras fringilla parturient nisi. Mauris morbi praesent velit; nostra odio lacinia. Eros consectetur ornare quisque tellus cubilia consequat. Amet massa felis fringilla mauris malesuada finibus rutrum. Eleifend hendrerit egestas nulla; vel neque sapien. Orci nascetur sollicitudin lacus dictumst semper et pellentesque. Bibendum ultrices malesuada cursus habitasse nunc; condimentum non nisi. Ipsum habitasse arcu ultricies facilisis curae laoreet. Cras senectus tempus ultrices id ante proin, suscipit ante.</p><p><em>Condimentum rutrum ante non conubia urna. Adipiscing et tempor pharetra erat nullam torquent vitae dictumst taciti. Nulla curabitur velit leo feugiat habitasse potenti felis? Est volutpat rutrum montes finibus ipsum aptent. Praesent metus sagittis ex mollis porttitor viverra ridiculus potenti. Eros donec nullam dis sociosqu venenatis primis? Convallis leo aliquam fames fermentum interdum. Ligula semper varius massa sociosqu risus urna?</em></p><p>Ac vitae tortor metus viverra netus ornare cursus tempor parturient. Volutpat per eget nisi mus non. Sociosqu potenti eleifend iaculis tellus euismod, per mollis penatibus. Dis nulla iaculis ligula fames proin in erat. Penatibus urna diam commodo feugiat ornare viverra. Purus massa justo ultrices nam, parturient platea tincidunt. Volutpat lorem sociosqu class, eleifend nullam cursus praesent praesent vitae. Congue litora ridiculus fames diam, eget efficitur. Mus pretium dapibus hac vivamus; vitae feugiat fringilla.</p>'
-      format: html
-      summary: ''
-  field_agency_acronym:
-    -
-      value: 'HGL <b>erat</b>'
   field_agency_full_name:
     -
       value: 'roin in erat. Penatibus urna di <b>erat</b>'
-  field_bio:
-    -
-      value: 's proin in erat. Penatibus urna diam mes proin in <b>erat</b> commodo feugiat ornare viverra. Purus massa justo ultrices nam, parturient platea tincidunt. Volutpat lorem sociosqu class,'
-      format: single_inline_html
-  field_bio_url:
-    -
-      uri: 'http://www.lorem.com'
-      title: ''
-      options: {  }
-  field_email:
-    -
-      value: praesent@alk.gov
-  field_facebook:
-    -
-      value: 's proin in erat. Penatibus urna diam mes proin in <b>erat</b> commodo feugiat ornare viverra. Purus massa justo ultrices nam, parturient platea tincidunt. Volutpat lorem sociosqu class,'
   field_first_name:
     -
       value: 'penatibus fames proin in <b>erat</b>'
   field_github:
     -
-      value: 's proin in erat. Penatibus urna diam mes proin in <b>erat</b> commodo feugiat ornare viverra. Purus massa justo ultrices nam, parturient platea tincidunt. Volutpat lorem sociosqu class,'
-  field_instagram:
-    -
-      value: 's proin in erat. Penatibus urna diam mes proin in <b>erat</b> commodo feugiat ornare viverra. Purus massa justo ultrices nam, parturient platea tincidunt. Volutpat lorem sociosqu class,'
+      value: nick-mon1
   field_last_name:
     -
       value: 'efficitur mes proin in <b>erat</b>'
-  field_linkedin:
+  field_profile_source:
     -
-      value: 's proin in erat. Penatibus urna diam mes proin in <b>erat</b> commodo feugiat ornare viverra. Purus massa justo ultrices nam, parturient platea tincidunt. Volutpat lorem sociosqu class,'
-  field_location:
-    -
-      value: 'sociosqu risus urna? <b>erat</b>'
-  field_pronouns:
-    -
-      value: 'Adipiscing <b>erat</b>'
-  field_summary:
-    -
-      value: 'is nulla iaculis ligula fames proin in erat. Penatibus urna mes proin in <b>erat</b> diam commodo feugiat ornare viverra. Purus massa justo ultrices nam, parturient platea tincidunt. Volutpat lorem'
-      format: single_inline_html
-  field_twitter:
-    -
-      value: 's proin in erat. Penatibus urna diam mes proin in <b>erat</b> commodo feugiat ornare viverra. Purus massa justo ultrices nam, parturient platea tincidunt. Volutpat lorem sociosqu class,'
-  field_youtube:
-    -
-      value: 's proin in erat. Penatibus urna diam mes proin in <b>erat</b> commodo feugiat ornare viverra. Purus massa justo ultrices nam, parturient platea tincidunt. Volutpat lorem sociosqu class,'
+      value: digit-light

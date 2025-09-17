@@ -1,0 +1,53 @@
+uuid: 2c38e56a-c9cf-4af5-8729-bc1cce9b846a
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.usa_card_dg_guide
+    - field.field.node.guide_landing.body
+    - field.field.node.guide_landing.field_bottom_content
+    - field.field.node.guide_landing.field_glossary
+    - field.field.node.guide_landing.field_guide_weight
+    - field.field.node.guide_landing.field_guides
+    - field.field.node.guide_landing.field_primary_image
+    - field.field.node.guide_landing.field_summary
+    - image.style.large
+    - node.type.guide_landing
+  module:
+    - media
+    - text
+    - user
+id: node.guide_landing.usa_card_dg_guide
+targetEntityType: node
+bundle: guide_landing
+mode: usa_card_dg_guide
+content:
+  field_primary_image:
+    type: media_thumbnail
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: large
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_summary:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  body: true
+  field_bottom_content: true
+  field_glossary: true
+  field_guide_weight: true
+  field_guides: true

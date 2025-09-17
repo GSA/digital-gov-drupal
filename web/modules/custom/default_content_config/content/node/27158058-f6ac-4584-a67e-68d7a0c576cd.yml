@@ -4,6 +4,9 @@ _meta:
   uuid: 27158058-f6ac-4584-a67e-68d7a0c576cd
   bundle: short_post
   default_langcode: en
+  depends:
+    4533b7eb-0c1c-4ef0-97ee-1bee41e44b82: node
+    7ff882f9-4001-4ab5-8738-987f1ef3c18b: node
 default:
   revision_uid:
     -
@@ -46,3 +49,8 @@ default:
     -
       value: '<p>We work across government develop best practices for designing, implementing, and evaluating crowdsourcing and citizen science initiatives.</p>'
       format: single_inline_html
+  field_topics:
+    -
+      entity: 4533b7eb-0c1c-4ef0-97ee-1bee41e44b82
+    -
+      entity: 7ff882f9-4001-4ab5-8738-987f1ef3c18b

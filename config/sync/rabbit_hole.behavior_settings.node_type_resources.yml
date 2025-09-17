@@ -1,0 +1,14 @@
+uuid: c7118c17-44c4-41a8-a518-76e2698a93b5
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.resources
+id: node_type_resources
+entity_type_id: node_type
+entity_id: resources
+action: display_page
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

@@ -1,0 +1,67 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 95943ed2-cda0-4f06-bfb4-f736417a59bf
+  bundle: guide_navigation
+  default_langcode: en
+  depends:
+    c4520a54-cd38-4be0-9158-24a61a79599e: node
+    b2f35ae8-423f-428b-865d-e420313e7a81: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'DAP Navigation'
+  created:
+    -
+      value: 1736283450
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_guide_navigation:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 3023c643-bed1-4eaf-9e4d-116bd944d96f
+          bundle: guide_pages
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1736460574
+          behavior_settings:
+            -
+              value: {  }
+          field_guide_link:
+            -
+              entity: c4520a54-cd38-4be0-9158-24a61a79599e
+  field_overview_image:
+    -
+      entity: b2f35ae8-423f-428b-865d-e420313e7a81
+  field_show_in_page_nav:
+    -
+      value: false
+  field_show_next_previous:
+    -
+      value: true

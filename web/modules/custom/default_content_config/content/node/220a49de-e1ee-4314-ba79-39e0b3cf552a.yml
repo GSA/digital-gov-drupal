@@ -34,20 +34,12 @@ default:
       alias: /authors/erika-brown
       langcode: en
       pathauto: 1
-  field_bio:
-    -
-      value: 'Erika is a Marketing and Communication Coordinator for Peace Corps Response, a short-term, high-impact Peace Corps program.'
-      format: single_inline_html
-  field_email:
-    -
-      value: ebrown2@peacecorps.gov
   field_first_name:
     -
       value: Erika
   field_last_name:
     -
       value: Brown
-  field_summary:
+  field_profile_source:
     -
-      value: 'The people who have contributed their stories and guidance over the years.'
-      format: single_inline_html
+      value: digit-light

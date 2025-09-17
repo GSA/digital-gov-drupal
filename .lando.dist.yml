@@ -7,7 +7,7 @@ config:
   # Off by default, enabled with lando xdebug-on.
   xdebug: false
   config:
-    #database: config/my-custom.cnf
+    database: lando-config/my.cnf
     # Can be seen at /usr/local/etc/php/conf.d/zzz-lando-my-custom.ini.
     php: lando-config/php.ini
     #server: config/server.conf
@@ -36,14 +36,11 @@ services:
         #XDEBUG_CONFIG: 'log_level=0'
 
 tooling:
-  # @todo: Convert this to a robo command and make configurable.
   export-content:
     service: appserver
+    description: Export content as configuration.
     cmd:
-      - 'rm -r web/modules/custom/bixal_default_content/content'
-      - 'drush default-content:export-references node --folder=modules/custom/bixal_default_content/content'
-      - 'drush default-content:export-references menu_link_content --folder=modules/custom/bixal_default_content/content'
-      - 'drush default-content:export-references media --folder=modules/custom/bixal_default_content/content'
+      - './robo.sh drupal-project:export-content'
   patch:
     service: appserver
     description: Apply composer patches or regenerate lock hash.

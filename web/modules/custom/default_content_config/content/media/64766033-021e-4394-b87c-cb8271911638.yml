@@ -15,7 +15,7 @@ default:
       target_id: 1
   name:
     -
-      value: plain-accessibility-slides-march-2021.pdf
+      value: 'View the slides from this presentation (PDF, 4.4 MB, 39 pages).'
   created:
     -
       value: 1732202973
@@ -27,5 +27,5 @@ default:
   field_media_file:
     -
       entity: 03a519b3-86d3-4a48-9bc0-7461816ea273
-      display: false
+      display: true
       description: ''

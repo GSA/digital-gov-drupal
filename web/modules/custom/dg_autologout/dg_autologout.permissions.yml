@@ -1,0 +1,4 @@
+change own logout threshold:
+  title: 'Change own logout threshold'
+administer dg_autologout:
+  title: 'Administer Autologout'

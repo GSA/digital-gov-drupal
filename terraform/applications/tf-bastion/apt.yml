@@ -1,6 +1,12 @@
 ---
+keys:
+  - https://www.postgresql.org/media/keys/ACCC4CF8.asc
+repos:
+  - name: deb https://apt.postgresql.org/pub/repos/apt jammy-pgdg main
+    priority: 999
 packages:
   - curl
   - gettext
   - git
+  - postgresql-client-16
   - wget

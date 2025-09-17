@@ -1,0 +1,128 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 1a8ba304-e37c-4bf4-b8e9-d1ba6f8e780b
+  bundle: guide_navigation
+  default_langcode: en
+  depends:
+    baa67bf4-6fa9-40b4-bee3-a51ae80d6269: node
+    46f8c803-fe12-458d-beee-d5e0818c5373: node
+    66ee7eb5-f84e-40f3-8db9-98e034dc0b31: node
+    e4f2f38f-24e0-479e-9378-d93836307746: node
+    c9faf441-8dd2-47a5-bf96-eeb8571f0dc8: node
+    b743d576-35d5-47bf-9152-f9d59f783a3f: node
+    7ed0eb3a-0a1e-4626-b8f0-8394b19a8f72: node
+    86452891-0ee7-49db-9753-b677f2522ee1: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Discovery Ops Navigation'
+  created:
+    -
+      value: 1736369848
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_guide_navigation:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: b80b6823-8a3a-44a6-996c-1b019aa97d1c
+          bundle: guide_pages
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1736439271
+          behavior_settings:
+            -
+              value: {  }
+          field_guide_link:
+            -
+              entity: baa67bf4-6fa9-40b4-bee3-a51ae80d6269
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: e2a3dca5-b06d-423b-82e9-d206896b4866
+          bundle: guide_pages
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1736369915
+          behavior_settings:
+            -
+              value: {  }
+          field_guide_link:
+            -
+              entity: 46f8c803-fe12-458d-beee-d5e0818c5373
+          field_guide_subnav:
+            -
+              entity: 66ee7eb5-f84e-40f3-8db9-98e034dc0b31
+            -
+              entity: e4f2f38f-24e0-479e-9378-d93836307746
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: a5baff65-8777-446e-ac90-89913662000d
+          bundle: guide_pages
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1736374021
+          behavior_settings:
+            -
+              value: {  }
+          field_guide_link:
+            -
+              entity: c9faf441-8dd2-47a5-bf96-eeb8571f0dc8
+          field_guide_subnav:
+            -
+              entity: b743d576-35d5-47bf-9152-f9d59f783a3f
+  field_kicker_link:
+    -
+      target_uuid: 7ed0eb3a-0a1e-4626-b8f0-8394b19a8f72
+      title: 'HCD Guide Series'
+      options: {  }
+  field_overview_image:
+    -
+      entity: 86452891-0ee7-49db-9753-b677f2522ee1
+  field_show_in_page_nav:
+    -
+      value: true
+  field_show_next_previous:
+    -
+      value: true

@@ -62,6 +62,8 @@
  * @ingroup themeable
  */
 #}
+{# Caching the data in content object #}
+{% set savedCache = content|render %}
 
 <main role="main" id="main-content">
   <article class="grid-container-desktop">
@@ -71,14 +73,14 @@
 
       {{ include('@digital_gov/partials/page-header.html.twig', {
         title: node.title.value,
-        deck: node.field_deck.value,
-      }, with_context=false) }}
+        deck: content.field_deck|field_value,
+      }, with_context: false) }}
     </header>
 
     <section class="usa-in-page-nav-container">
       <div>
         <div class="content usa-prose">
-          {{ content }}
+          {{ content.body|field_value }}
         </div>
 
         {# Touchpoints Form #}
@@ -92,12 +94,11 @@
         aria-label="Related content"
         data-heading-elements="h2"
       >
-        <div class="dg-related-items" data-related-items>
-          [placeholder Get Related]
-          {# NOT-MIGRATED
-          {{ include('@digital_gov/partials/get-related.html.twig') }}
-          #}
-        </div>
+
+      <div class="dg-related-items" data-related-items>
+        {{ include('@digital_gov/partials/primary-communities.html.twig') }}
+      </div>
+
       </aside>
     </section>
   </article>

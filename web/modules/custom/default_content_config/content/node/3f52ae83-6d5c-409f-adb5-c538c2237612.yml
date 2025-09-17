@@ -1,0 +1,67 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 3f52ae83-6d5c-409f-adb5-c538c2237612
+  bundle: guide_navigation
+  default_langcode: en
+  depends:
+    b9c370f3-b204-4818-800d-660e366ebfea: node
+    d5b7c563-4023-4c09-b3b9-27c5d009ec37: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Site Scanning Program Navigation'
+  created:
+    -
+      value: 1736284291
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_guide_navigation:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 2b13f590-df2e-4057-9bf7-73463fc72fe3
+          bundle: guide_pages
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1736284314
+          behavior_settings:
+            -
+              value: {  }
+          field_guide_link:
+            -
+              entity: b9c370f3-b204-4818-800d-660e366ebfea
+  field_overview_image:
+    -
+      entity: d5b7c563-4023-4c09-b3b9-27c5d009ec37
+  field_show_in_page_nav:
+    -
+      value: false
+  field_show_next_previous:
+    -
+      value: true

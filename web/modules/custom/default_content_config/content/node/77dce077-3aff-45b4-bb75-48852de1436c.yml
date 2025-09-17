@@ -1,0 +1,45 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 77dce077-3aff-45b4-bb75-48852de1436c
+  bundle: authors
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Katherine Spivey'
+  created:
+    -
+      value: 1737576525
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /authors/katherine-spivey
+      langcode: en
+      pathauto: 1
+  field_first_name:
+    -
+      value: Catherine
+  field_github:
+    -
+      value: kpspivey
+  field_last_name:
+    -
+      value: Spivey

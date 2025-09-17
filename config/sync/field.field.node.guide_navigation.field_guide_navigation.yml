@@ -1,0 +1,43 @@
+uuid: 7fd2919b-bfcc-4056-9891-ae4163e33c7f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_guide_navigation
+    - node.type.guide_navigation
+    - paragraphs.paragraphs_type.guide_pages
+  module:
+    - entity_reference_revisions
+id: node.guide_navigation.field_guide_navigation
+field_name: field_guide_navigation
+entity_type: node
+bundle: guide_navigation
+label: Navigation
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      guide_pages: guide_pages
+    negate: 0
+    target_bundles_drag_drop:
+      external_content:
+        weight: 6
+        enabled: false
+      featured_links:
+        weight: 7
+        enabled: false
+      guide_pages:
+        weight: 8
+        enabled: true
+      internal_content:
+        weight: 9
+        enabled: false
+      venue:
+        weight: 10
+        enabled: false
+field_type: entity_reference_revisions

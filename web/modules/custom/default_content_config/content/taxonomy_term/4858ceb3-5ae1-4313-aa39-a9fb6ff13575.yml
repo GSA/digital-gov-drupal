@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 4858ceb3-5ae1-4313-aa39-a9fb6ff13575
+  bundle: hcd_glossary
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: Shadowing
+  description:
+    -
+      value: '<p>A research methodology during which the researcher follows the participant through the participant’s activities. These activities show the researcher the participant’s physical context, as well as their interactions within that context.</p>'
+      format: single_inline_html
+  weight:
+    -
+      value: 29
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

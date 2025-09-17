@@ -63,30 +63,27 @@
  */
 #}
 <main role="main" id="main-content">
-  <article class="grid-container-desktop"
-    {# TODO where does short_url come from? #}
-    {% if short_url %} data-short_url="{{ short_url }}" {% endif %}
-  >
+  {{ include('@digital_gov/partials/blog-date-warning.html.twig') }}
+  <article class="grid-container-desktop">
 
     {{ drupal_entity('block', 'digital_gov_breadcrumbs') }}
 
     <header>
-      {{ include('@digital_gov/partials/blog-date-warning.html.twig') }}
-
       {{ include('@digital_gov/partials/page-header.html.twig', {
-        title: node.title.value,
-        kicker: node.field_kicker.value,
-        deck: node.field_deck.value,
-      }, with_context=false) }}
+        title: label|field_value,
+        kicker: content.field_kicker|field_value,
+        deck: content.field_deck|field_value,
+      }, with_context: false) }}
 
-      {{ include('@digital_gov/partials/authors-list.html.twig', {
-        inline: true,
-        authors: content.field_authors,
-      }, with_context=false) }}
-
+      {% if content.field_authors|field_value %}
+        {{ include('@digital_gov/partials/authors-list.html.twig', {
+          inline: true,
+          authors: content.field_authors|field_value,
+        }, with_context: false) }}
+      {% endif %}
       <div class="meta">
         <div class="date">
-            <span title="{{ node.title.value }}"
+            <span title="{{ label|field_value }}"
             >{{ created }}</span
             >
         </div>
@@ -97,7 +94,7 @@
       <div class="grid-row tablet-lg:grid-gap-6">
         <div class="grid-col-12 tablet-lg:grid-col-9 tablet-lg:order-last">
           <div class="content usa-prose">
-            {{ content.body }}
+            {{ content.body|field_value }}
           </div>
 
           {# /* Touchpoints Form #}
@@ -105,24 +102,28 @@
         </div>
 
         <div class="dg-sidebar grid-col-12 tablet-lg:grid-col-3">
-          {{ include('@digital_gov/partials/authors-list.html.twig', {
-            inline: false,
-            authors: content.field_authors,
-          }, with_context=false) }}
+          {% if content.field_authors|field_value %}
+            {{ include('@digital_gov/partials/authors-list.html.twig', {
+              inline: false,
+              authors: content.field_authors|field_value,
+            }, with_context: false) }}
+          {% endif %}
 
           <div class="meta">
             <div class="date">
-              <span title="{{ label }}">{{ created }}</span>
+              <span title="{{ label|field_value }}">{{ created }}</span>
             </div>
           </div>
+
+          {{ include('@digital_gov/partials/primary-communities.html.twig') }}
 
           {{ content.field_topics }}
 
           {# Share Tools #}
           {{ include('@digital_gov/partials/get-sharetools.html.twig', {
             share_path: url,
-            mailto_subject: node.label,
-          }, with_context=false) }}
+            mailto_subject: label|field_value|render,
+          }, with_context: false) }}
 
         </div>
       </div>

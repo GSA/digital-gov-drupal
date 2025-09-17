@@ -1,0 +1,29 @@
+uuid: 707d0d34-88d4-424a-b72d-e031775e598a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_guides
+    - node.type.guide_landing
+    - node.type.guides
+id: node.guide_landing.field_guides
+field_name: field_guides
+entity_type: node
+bundle: guide_landing
+label: Guides
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      guides: guides
+    sort:
+      field: title
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

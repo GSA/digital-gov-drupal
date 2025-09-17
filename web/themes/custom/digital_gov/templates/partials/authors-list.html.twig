@@ -7,24 +7,8 @@
 
 #}
 <div class="authors-list {{ inline ? 'authors-list--inline' : '' }}">
-  {% for author in authors|children %}
-    <div class="author usa-media-block">
-      {{ render_var({'#theme': 'author_image', '#author': author}) }}
-      <div class="usa-media-block__body">
-        <a class="author__name"
-           href="{{ drupal_url('node/' ~ author['#entity'].nid.value) }}"
-           title="Posts by {{ author['#title'] }}"
-           rel="author"
-           aria-label="Read more articles by {{ author['#title'] }}"
-        >{{ author }}</a
-        >
-      </div>
-      {% if not inline and author['#entity'].field_agency_acronym.value %}
-        <p class="author__details-agency">
-          {{ author['#entity'].field_agency_acronym.value }}
-        </p>
-      {% endif %}
-    </div>
+  {% for author in authors %}
+    {% set display_mode = inline ? 'teaser_inline' : 'teaser' %}
+    {{ drupal_entity('node', author['#node'].id(), display_mode) }}
   {% endfor %}
-
 </div>

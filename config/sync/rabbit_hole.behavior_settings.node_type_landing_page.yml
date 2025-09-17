@@ -1,0 +1,14 @@
+uuid: 7627df5f-7cb3-4111-9248-8b8971b86633
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.landing_page
+id: node_type_landing_page
+entity_type_id: node_type
+entity_id: landing_page
+action: display_page
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

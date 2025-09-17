@@ -1,0 +1,87 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 8c830449-084e-494a-a094-0bb6cc2f6095
+  bundle: event
+  default_langcode: en
+  depends:
+    c40b2d86-1b3b-476a-b333-ebce3c31daa4: user
+    061eb5bf-80a8-4555-80b2-fc5b3228f7b3: node
+    38cd1f1f-47ba-4e50-bc50-9cc1d8916638: node
+    8c66bd6c-e163-46cd-b915-2575b5686eec: media
+    47d1784c-68a3-4a3b-a341-3e4f8d092253: media
+    4533b7eb-0c1c-4ef0-97ee-1bee41e44b82: node
+    95077128-6d33-4445-a48a-4ad8ebb7d9b3: node
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      entity: c40b2d86-1b3b-476a-b333-ebce3c31daa4
+  title:
+    -
+      value: 'Abico Quibus Cloud Ymo'
+  created:
+    -
+      value: 1740044406
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /event/2025/02/20/abico-quibus-cloud-ymo
+      langcode: en
+      pathauto: 1
+  body:
+    -
+      value: '<p>Augue brevitas vereor. Accumsan dolore exerci in lobortis probo quadrum sagaciter valde. Acsi aliquam dolor facilisis praemitto quadrum qui sagaciter similis uxor.</p><p>Dignissim imputo jumentum. Caecus diam lucidus praesent quia tamen verto. Adipiscing enim gravis illum. Pala paratus turpis. Abigo augue fere iriure iusto natu. Abico eros eu immitto nibh persto tamen. Eu ex gemino lenis lobortis mos voco.</p><p>Humo nostrud nunc os populus suscipere tamen vulpes. Hos importunus iriure lobortis modo pecus probo saepius te. Comis cui ea iustum nimis olim roto torqueo. Acsi damnum illum saluto. Haero tum utrum. Ad aliquip camur genitus imputo oppeto pertineo praesent sagaciter verto. Hendrerit lucidus luctus secundum virtus. Exerci ludus sagaciter ullamcorper.</p><p>Abluo conventio incassum iriure secundum suscipit virtus. Enim ideo importunus ludus volutpat. Diam dolore modo ullamcorper usitas. Appellatio esse gemino ludus si. Appellatio capto dignissim eros iriure modo nimis persto saepius. Pagus probo torqueo. Acsi ad esca luctus mauris rusticus si.</p><p>Abdo adipiscing conventio hendrerit ratis scisco tincidunt. Immitto imputo luptatum. Comis decet immitto meus rusticus. Exerci fere praesent zelus. Abico augue diam in letalis natu obruo refoveo ymo.</p><p>Imputo tation vel vindico. Causa et gravis sed wisi. Defui interdico jus magna paulatim populus quidem similis tation. Acsi patria quidem vindico. Cui feugiat gemino immitto nibh paratus quadrum similis te virtus. Ea humo nulla vulputate. Damnum ludus premo sed.</p><p>Autem cui jumentum pertineo quadrum quibus suscipere tego ulciscor. Abbas usitas vulputate. Iriure natu paulatim singularis. Aliquam aliquip autem dignissim elit esse gravis quia secundum vicis. Acsi ex odio oppeto patria populus torqueo velit vulpes.</p><p>Autem caecus distineo elit neque nibh proprius quadrum. Ea iaceo nibh. Abdo abigo ad aliquip brevitas cui duis feugiat macto paratus. Ideo metuo pala vindico vulpes. Abbas at gilvus nostrud occuro pecus ratis si similis vulpes. Aliquip cogo importunus molior obruo praesent singularis sit tamen ulciscor. Aliquam blandit jus plaga proprius quidne ut wisi.</p><p>Dignissim gravis haero ideo in si. Jumentum praemitto vereor. Abigo commoveo ex letalis odio quibus. Bene esca facilisi iusto mauris probo turpis vel vulputate. Amet eros virtus. Damnum dolus esse ille illum meus persto premo uxor. Abico at ea hendrerit letalis luptatum plaga quibus usitas utinam.</p><p>Adipiscing exerci iriure nimis quidem verto voco. Antehabeo autem incassum interdico letalis sed. Illum os quidne sit torqueo. Appellatio nutus pala quidem sit tum. Aliquip augue brevitas olim tamen torqueo validus vero. Commoveo quae secundum tation tum. Aptent eros loquor quia quidne ullamcorper ymo. Esse natu tincidunt typicus. Eligo pneum refoveo. At commoveo humo inhibeo iustum nimis patria te.</p><p>Acsi comis nisl ratis. Antehabeo consectetuer valde. Aptent eros luctus pneum suscipit tation tego valetudo. Eu magna mauris quidem tation. Dolus lucidus ut. Eu ex importunus. Enim hos vulpes. Abbas abigo consectetuer dignissim facilisi in.</p><p>Abluo duis fere iaceo scisco usitas veniam. Adipiscing autem blandit causa dignissim illum refero sagaciter tincidunt. Ad diam duis ideo laoreet neque validus. Erat esca exputo imputo neque sagaciter utinam. Abigo aptent eum exputo tamen ullamcorper vero virtus.</p><p>&nbsp;</p>'
+      format: html
+      summary: ''
+  field_authors:
+    -
+      entity: 061eb5bf-80a8-4555-80b2-fc5b3228f7b3
+    -
+      entity: 38cd1f1f-47ba-4e50-bc50-9cc1d8916638
+  field_end_date:
+    -
+      value: '2024-07-07T04:16:15'
+  field_event_organizer:
+    -
+      value: 'Causa diam'
+  field_event_platform:
+    -
+      value: 'Aliquip ludus'
+  field_featured_image:
+    -
+      entity: 8c66bd6c-e163-46cd-b915-2575b5686eec
+  field_host:
+    -
+      value: 'Amet Dolor '
+  field_page_weight:
+    -
+      value: 977
+  field_primary_image:
+    -
+      entity: 47d1784c-68a3-4a3b-a341-3e4f8d092253
+  field_slug:
+    -
+      value: 'Jumentum mos vindico voco. Exputo huic meus oppeto. Aliquip hendrerit praesent usitas utrum veniam vindico. Defui dolus duis humo os utrum vindico. Appellatio autem lucidus persto similis suscipit zelus.'
+  field_summary:
+    -
+      value: '<p>Consectetuer consequat facilisis. Eros facilisi feugiat ille iusto minim plaga quibus refoveo suscipit. Cogo decet eros mauris occuro persto pertineo secundum.&nbsp;</p>'
+      format: single_inline_html
+  field_topics:
+    -
+      entity: 4533b7eb-0c1c-4ef0-97ee-1bee41e44b82
+    -
+      entity: 95077128-6d33-4445-a48a-4ad8ebb7d9b3

@@ -1,0 +1,24 @@
+uuid: ef8d5731-1a6d-45e1-851b-3af0ff11e473
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_caption
+    - filter.format.single_inline_html
+    - media.type.image
+  module:
+    - text
+id: media.image.field_caption
+field_name: field_caption
+entity_type: media
+bundle: image
+label: Caption
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - single_inline_html
+field_type: text

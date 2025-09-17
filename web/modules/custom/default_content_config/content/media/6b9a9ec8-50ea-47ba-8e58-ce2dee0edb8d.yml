@@ -1,0 +1,33 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 6b9a9ec8-50ea-47ba-8e58-ce2dee0edb8d
+  bundle: image
+  default_langcode: en
+  depends:
+    3e9b2949-7b29-4a99-b60b-5844af733b34: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: hcd-intro.png
+  created:
+    -
+      value: 1736461047
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_media_image:
+    -
+      entity: 3e9b2949-7b29-4a99-b60b-5844af733b34
+      alt: 'A creative design-development team is working on a project together'
+      title: ''
+      width: 1200
+      height: 630

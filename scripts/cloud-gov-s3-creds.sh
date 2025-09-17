@@ -11,6 +11,10 @@ if [ -z "${bucket_name}" ]; then
   return
 fi
 
+if [ -n "$(cf orgs | grep FAILED)" ]; then
+  return
+fi
+
 echo "Deleting old credentials..."
 {
   service_key="${bucket_name}-${user}-key"
@@ -29,25 +33,29 @@ echo "Creating key..."
   aws_bucket_name=$(echo "${s3_credentials}" | jq -r '.credentials.bucket')
   aws_bucket_region=$(echo "${s3_credentials}" | jq -r '.credentials.region')
   aws_secret_key=$(echo "${s3_credentials}" | jq -r '.credentials.secret_access_key')
+
+  declare AWS_ACCESS_KEY_ID
   export AWS_ACCESS_KEY_ID=${aws_access_key}
+
+  declare AWS_BUCKET
   export AWS_BUCKET=${aws_bucket_name}
+
+  declare AWS_DEFAULT_REGION
   export AWS_DEFAULT_REGION=${aws_bucket_region}
+
+  declare AWS_SECRET_ACCESS_KEY
   export AWS_SECRET_ACCESS_KEY=${aws_secret_key}
 
   cat >~/current_creds.sh << EOT
-export AWS_ACCESS_KEY_ID=${aws_access_key}
-export AWS_BUCKET=${aws_bucket_name}
-export AWS_DEFAULT_REGION=${aws_bucket_region}
-export AWS_SECRET_ACCESS_KEY=${aws_secret_key}
+export AWS_ACCESS_KEY_ID="${aws_access_key}"
+export AWS_BUCKET="${aws_bucket_name}"
+export AWS_DEFAULT_REGION="${aws_bucket_region}"
+export AWS_SECRET_ACCESS_KEY="${aws_secret_key}"
 EOT
 chmod +x ~/current_creds.sh
 } >/dev/null 2>&1
 
-declare eror >/dev/null 2>&1
-
-[ -z "${AWS_ACCESS_KEY_ID}" ] && eror=true
-
-if [ -n "${eror}" ]; then
+if [ -z "${AWS_ACCESS_KEY_ID}" ]; then
   echo -e "Error setting AWS credentials."
   echo -e "Please ensure you're logged in to Cloud.gov."
   echo -e "You can check by running: cf target -s <space_name>"

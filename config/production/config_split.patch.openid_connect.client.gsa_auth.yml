@@ -6,5 +6,5 @@ removing:
 adding:
   settings:
     client_id: 0oadl2z7pcKOtN3zz4h7
-    iss_allowed_domains: "cms.digital.gov"
+    iss_allowed_domains: "cms.digital.gov\r\ndigital-gov-drupal-prod.app.cloud.gov"
     okta_domain: auth.gsa.gov

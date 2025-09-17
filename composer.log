@@ -53,3 +53,39 @@ b4d1a71ae39798e387fe895acb3c924c|Oscar Merida|feature/DIGITAL-140-security-kit|T
 142970354860260a21a9a93d4c5b2fe0|christian medders|feature/DIGITAL-150-limit-menu-access|Thu Dec 19 12:39:17 EST 2024|./composer.sh require drupal/menu_admin_per_menu:^1.6
 bd7840ebd67d69715dbd07eef9ceb742|cathybaptista|feature/DIGITAL-114-implement-identifier-block|Thu Dec 19 12:41:31 EST 2024|./composer.sh require drupal/config_pages
 72cca00bd0b4403e0db152c489a8e0a1|Matt Poole|feature/DIGITAL-114-implement-identifier-block|Thu Dec 19 15:32:32 EST 2024|./composer.sh require drupal/link_class
+b9a62f1676c64c163727b0feef5db80f|christian medders|feature/DIGITAL-40-gtm|Fri Dec 20 15:46:24 EST 2024|./composer.sh require drupal/google_tag:^2.0
+0e651880d7500538af3077d6462f9562|Matt Poole|feature/DIGITAL-158-log-stdout|Fri Jan  3 15:16:26 EST 2025|./composer.sh require drupal/log_stdout:^1.5
+cfff5655249d219415af160348b125c3|christian medders|feature/DIGITAL-143-topics-field-update|Mon Jan  6 09:55:32 EST 2025|./composer.sh require drupal/autocomplete_deluxe:^2.1
+652fb1da8ec252a44bd251452e4d5782|Oscar Merida|feature/DIGITAL-141-rabbit-hole-config|Mon Jan  6 10:29:35 EST 2025|./composer.sh require drupal/rabbit_hole
+24a55f780e267a896fddfcfa70ca8d55|christian medders|feature/DIGITAL-46-config-ignore|Mon Jan  6 14:17:36 EST 2025|./composer.sh require drupal/config_ignore:^3.3
+39cf95da3c743d865cba327138ef9da2|Matt Poole|feature/DIGITAL-307-update-deps|Fri Jan 10 12:35:14 EST 2025|./composer.sh update
+d9b88c3355f947a0ad6b677dfb2bd984|Matt Poole|feature/DIGITAL-307-update-deps|Fri Jan 10 15:17:43 EST 2025|./composer.sh require drupal/scheduler_content_moderation_integration:^3.0
+f5f559ecad3217a6dfc5db9f3157e5ca|Ray Estrada|feature/DIGITAL-283-security-modules|Mon Jan 13 12:13:10 EST 2025|./composer.sh require drupal/role_watchdog
+cd50d2b2b036edaa3a002881cf1b50ce|Ray Estrada|feature/DIGITAL-283-security-modules|Mon Jan 13 12:15:05 EST 2025|./composer.sh require drupal/upgrade_status
+406c28be9e70355b9cfbbe1df58bb7ef|Ray Estrada|feature/DIGITAL-283-security-modules|Mon Jan 13 12:16:28 EST 2025|./composer.sh require drupal/database_ssl_check
+699e8eda61efbe69e1f9a75fe81a3bf4|Oscar Merida|feature/DIGITAL-299-auto-headings|Tue Jan 14 14:23:14 EST 2025|./composer.sh require drupal/auto_heading_ids:^2.0@beta
+c4f5d0dc96584bd1dc808fd112b6e516|Ray Estrada|feature/DIGITAL-252-community-review|Thu Jan 16 10:51:08 EST 2025|./composer.sh require drupal/svg_image
+ce36fc2d9e87105d1ab7eda27ea9d434|Oscar Merida|develop|Mon Feb  3 14:30:03 EST 2025|./composer.sh require drupal/ckeditor_emoji
+b2b17cbb32ac57e73928af9f52acb537|Oscar Merida|feature/DIGITAL-96-ckeditor-emoji|Mon Feb  3 15:14:17 EST 2025|./composer.sh require elvanto/litemoji
+c73ec25d5b68a3e0e1bdfc83c24312ba|Matt Poole|feature/DIGITAL-396-update-deps-8-0|Wed Feb  5 15:32:16 EST 2025|./composer.sh update
+d0ca998c567e8cc218ee57bb5c9b6679|cathybaptista|feature/DIGITAL-119-configure-images|Thu Feb  6 11:06:05 EST 2025|./composer.sh require drupal/media_library_edit
+6b5963bf3c6740285c129be6d6273aed|cathybaptista|feature/DIGITAL-119-configure-images|Thu Feb  6 11:06:14 EST 2025|./composer.sh require drupal/edit_media_modal
+caeb4cc7f30e1f80c7425f9c3fcf8a98|Oscar Merida|feature/DIGITAL-89-linkit|Wed Feb  5 16:40:40 EST 2025|./composer.sh require drupal/linkit:^7.0
+c063010712247ba9dfd709c97fccb648|Oscar Merida|feature/DIGITAL-89-linkit|Thu Feb  6 16:27:25 EST 2025|./composer.sh require drupal/linkit:^7.0
+baf396b85c3bcb4a0f123cfa702e1088|Matt Poole|feature/DIGITAL-99-robo-standards|Mon Feb 10 14:12:29 EST 2025|./composer.sh update mattsqd/robovalidate
+a80a7c65cb0d9d62c454119c82bdf82e|Matt Poole|feature/DIGITAL-402-dep-update|Thu Feb 13 16:31:15 EST 2025|./composer.sh update
+543ba2f44c5ed46843de6cd6bc75f5fb|Matt Poole|feature/DIGITAL-378-first-migration|Tue Feb 18 16:27:54 EST 2025|./composer.sh require drupal/migrate_plus
+95f916020ef4ef3b476e92c4e7d7b998|Matt Poole|feature/DIGITAL-378-first-migration|Tue Feb 18 16:28:02 EST 2025|./composer.sh require drupal/migrate_conditions
+e85fe7addd55a02c6c3cd5ad9de215eb|afemath|feature/DIGITAL-377-sitewide-alerts|Fri Feb 21 15:35:03 EST 2025|./composer.sh require drupal/sitewide_alert
+1ba6c265cc7f91fb185e3563577e8e50|Ray Estrada|feature/DIGITAL-359-implement-new-relic-deploydev|Wed Feb 26 09:31:54 EST 2025|./composer.sh require drupal/new_relic_rpm
+fedf9be65fccaed95cf850edf1e86380|cathybaptista|feature/DIGITAL-311-install-path-redirect|Wed Feb 26 12:12:21 EST 2025|./composer.sh require drupal/path_redirect_import
+eecf22bebff444a178dfc909ef6628e7|afemath|feature/DIGITAL-457-update-dependencies|Wed Feb 26 17:26:56 EST 2025|./composer.sh update
+adf1e162003468d7feadf689a8a80fe1|afemath|feature/DIGITAL-447-replace-inline-entity|Tue Mar  4 10:36:59 EST 2025|./composer.sh remove drupal/inline_entity_form
+32903a55dfeb57c7aa878aa64240601c|afemath|feature/DIGITAL-473-robots-txt|Mon Mar 10 11:10:30 EDT 2025|./composer.sh require drupal/robotstxt
+3527f642148b384d457a4be0095d8f3d|afemath|feature/DIGITAL-473-robots-txt|Tue Mar 11 09:19:19 EDT 2025|./composer.sh update --lock
+c08a776105e00c8be6508332d25ddb74|Matt Poole|feature/DIGITAL-530-update-deps|Thu Mar 13 09:31:40 EDT 2025|./composer.sh update
+bfd189922e27b07bd4ea0a012d982743|Matt Poole|feature/DIGITAL-550-update-default-content|Mon Mar 17 15:31:01 EDT 2025|./composer.sh update mattsqd/robovalidate
+c39221e88c29f56dbc7956d8bd0db127|afemath|feature/DIGITAL-538-robots-split|Tue Mar 18 13:43:24 EDT 2025|./composer.sh remove drupal/robotstxt
+a2b0da67bd87badc7dc8c7b6c0099e40|Nick Lyons|feature/DIGITAL-489-enhance-linkit-media-module|Thu Mar 20 10:59:26 EDT 2025|./composer.sh require drupal/linkit_media_library:^2.0
+bb8b00709d78535b1d943ff4ea05aba7|Oscar Merida|feature/DIGITAL-502-drupal-update|Thu Apr  3 17:15:04 EDT 2025|./composer.sh update drupal/core-* --with-all-dependencies
+188ff6a36918e9768a1c6972737dea10|Oscar Merida|feature/DIGITAL-502-drupal-update|Thu Apr  3 17:15:39 EDT 2025|./composer.sh update drupal/autocomplete_deluxe --with-all-dependencies

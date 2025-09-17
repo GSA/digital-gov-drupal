@@ -5,7 +5,7 @@ _meta:
   bundle: news
   default_langcode: en
   depends:
-    220a49de-e1ee-4314-ba79-39e0b3cf552a: node
+    7fda0dec-902a-420d-868c-603e01637ef2: node
     d370c4f9-7405-493e-9438-6b2be1a93cbc: media
     95077128-6d33-4445-a48a-4ad8ebb7d9b3: node
     58b5051e-356e-4ace-be42-ca090259d6ab: node
@@ -24,7 +24,7 @@ default:
       value: "Security is Everyone's Responsibility: Delivering Secure, Usable Login for Government"
   created:
     -
-      value: 1729711007
+      value: 1614716207
   promote:
     -
       value: false
@@ -46,10 +46,10 @@ default:
       summary: ''
   field_authors:
     -
-      entity: 220a49de-e1ee-4314-ba79-39e0b3cf552a
+      entity: 7fda0dec-902a-420d-868c-603e01637ef2
   field_deck:
     -
-      value: 'How login.gov incorporated human centered design and continuous discovery into their product development process to improve the user experience.'
+      value: '<p>How login.gov incorporated human centered design and continuous discovery into their product development process to improve the user experience.</p>'
       format: single_inline_html
   field_kicker:
     -
@@ -62,7 +62,7 @@ default:
       entity: d370c4f9-7405-493e-9438-6b2be1a93cbc
   field_summary:
     -
-      value: 'How login.gov incorporated human centered design and continuous discovery into their product development process to improve the user experience.'
+      value: '<p>How login.gov incorporated human centered design and continuous discovery into their product development process to improve the user experience.</p>'
       format: single_inline_html
   field_topics:
     -

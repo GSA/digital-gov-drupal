@@ -1,4 +1,4 @@
-## Example
+## Basic Example
 
 ```terraform
 module "applications" {
@@ -33,7 +33,7 @@ A variable that contains a `map(map(string))` of the services deployed in the en
 
 See the [service module](../service/readme.MD) for more information.
 
-## Usage
+## Basic Terraform Configuration Example
 
 Here is an example of how to define an application in `locals.tf`.
 
@@ -83,3 +83,9 @@ locals {
 - Buildpacks
     - Valid built-in Cloud.gov buildpacks can be found by running `cf buildpacks` from the CLI.
     - External buildpacks, such as the `apt-buildpack` by referencing the URL to the buildpack repository: [https://github.com/cloudfoundry/apt-buildpack](https://github.com/cloudfoundry/apt-buildpack).
+
+## Runbook
+
+For a deeper breakdown of this module, you can read the full runbook for this module. A runbook is a collection of documented procedures, guidelines, and best practices used by teams, typically in IT operations and system administration, to handle routine processes and incidents efficiently. Runbooks provide step-by-step instructions and checklists to troubleshoot problems, maintain systems, and manage various tasks.
+
+[Runbook](RUNBOOK.md)

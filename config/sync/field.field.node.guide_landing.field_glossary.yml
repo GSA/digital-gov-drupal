@@ -1,0 +1,23 @@
+uuid: cb92dfc9-dfbb-425f-8cad-4488ddcdbb0f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_glossary
+    - node.type.guide_landing
+id: node.guide_landing.field_glossary
+field_name: field_glossary
+entity_type: node
+bundle: guide_landing
+label: Glossary
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_vocabulary'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+field_type: entity_reference

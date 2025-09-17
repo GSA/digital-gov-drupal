@@ -4,6 +4,8 @@ _meta:
   uuid: 8f5405bb-957a-4842-b1fb-6276ef95a165
   bundle: resources
   default_langcode: en
+  depends:
+    bfc21cc0-5de7-4b9f-8dcd-4b1da264ace5: node
 default:
   revision_uid:
     -
@@ -41,5 +43,8 @@ default:
       summary: ''
   field_summary:
     -
-      value: 'Help your readers complete their tasks with these Plain Language writing tips.'
+      value: '<p>Help your readers complete their tasks with these Plain Language writing tips.</p>'
       format: single_inline_html
+  field_topics:
+    -
+      entity: bfc21cc0-5de7-4b9f-8dcd-4b1da264ace5

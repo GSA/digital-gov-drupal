@@ -1,0 +1,39 @@
+<main role="main" id="main-content">
+  <header class="dg-landing__hero">
+
+    {% if hero_image %}
+      {{ drupal_image(hero_image.target_id, '', {alt: hero_image.alt, class: 'dg-img-flexible'}) }}
+    {% endif %}
+
+    <div class="dg-landing__hero-text">
+      <h1>{{ label }}</h1>
+      <a href="#content-start" class="usa-button usa-button--big"
+      >Get Started</a
+      >
+    </div>
+  </header>
+  <article class="dg-landing__body grid-container grid-container-desktop">
+    <div>
+      {{ content|without('field_guides', 'field_bottom_content') }}
+    </div>
+    <h2 class="dg-landing__body-featured-resources">Featured Resources</h2>
+
+    {{ content.field_guides }}
+
+    {% if (content.field_bottom_content) %}
+      {{ content.field_bottom_content }}
+    {% endif %}
+
+    {% if hero_credit or hero_caption %}
+      {{ include('@digital_gov/partials/attribution.html.twig', {
+        credit: hero_credit,
+        caption: hero_caption,
+      }, with_context: false) }}
+    {% endif %}
+
+  </article>
+
+  {% if node.field_glossary.target_id %}
+    {{ drupal_view('glossary_sidebar', 'accordion', node.field_glossary.target_id) }}
+  {% endif %}
+</main>

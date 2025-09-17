@@ -1,0 +1,64 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: baa67bf4-6fa9-40b4-bee3-a51ae80d6269
+  bundle: guides
+  default_langcode: en
+  depends:
+    1a8ba304-e37c-4bf4-b8e9-d1ba6f8e780b: node
+    86452891-0ee7-49db-9753-b677f2522ee1: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Discover operations guide'
+  created:
+    -
+      value: 1736369533
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /guides/discover-operations-guide
+      langcode: en
+      pathauto: 1
+  body:
+    -
+      value: '<h2>What is human-centered design?</h2><p>Human-centered design (HCD) is a qualitative research method that helps groups solve problems and seek solutions that prioritize customer needs over a system’s needs.</p><p>HCD involves four phases of sequential work: discovery, design, delivery, and measurement. This guide explains the “how-to” behind a successful discovery cycle. It provides step-by-step instruction on the concepts outlined in the [HCD Discovery Concepts Guide]({{&lt; ref "/guides/hcd/discovery-concepts/_index.md" &gt;}}), including how to:</p><ul><li>Understand the practical scale of your project</li><li>Identify the teammates and roles required</li><li>Prepare for and conduct research</li><li>Keep good records of your data</li><li>Synthesize findings as a team, and</li><li>Communicate your findings.</li></ul><p>You can review this [introduction to human-centered design (HCD)]({{&lt; ref "/guides/hcd/introduction/_index.md" &gt;}}) to learn more about HCD principles and practices, and review the basics of the HCD approach. If you’re already familiar with HCD, let’s proceed.</p><h2>What is discovery?</h2><p>When designers say “discovery”, they’re talking about research. This research can take many forms, but it always includes both primary research with the people who are involved in the team’s subject matter, as well as secondary or desk research, which involves reading white papers and articles on the subject.</p><p>Think of HCD discovery as a cycle, instead of a linear process.&nbsp;</p><h2>Operational timeline</h2><p>The HCD process requires many operational steps, some of which overlap in time. This means that you and your team cannot work individually without coordination or looking to the next step, nor can you try to accomplish one step before starting another, because one of two things frequently happens after a research phase is completed:</p><p>1. The team finds both new research and design opportunities to follow.<br>2. The team finds that the problem that they were investigating was slightly off-target, so they need to adjust the research frame to restart discovery.</p><p>Note the concepts, or the “why?” behind the discovery cycle, are explained in the [HCD Discovery Concepts Guide]({{&lt; ref "/guides/hcd/discovery-concepts/_index.md" &gt;}}). We’ll link there as needed throughout this guide, to provide additional context to inform the “why” behind the instructions that follow.</p><h2>Discovery process overview</h2><p>We’ll explain how to complete each step in greater detail below, but first begin by framing your project to identify what you will study. Engage your leadership and recruit your team. Gain approval for staffing, travel, and other expenses.</p><p>Work through the logistics; keep both a detailed and a bird’s-eye view on the overall project schedule, as well as your team members’ schedules. This can be challenging in the rush of gathering and tracking research, but it’s crucial to keep focused and organized as you recruit participants and conduct research.</p><p>Immediately after research wraps up, synthesis begins. Synthesis can be one of the most mentally challenging and tiring parts of the project, but this is where you will see your research come together in patterns. Keep your momentum going by scheduling the synthesis sessions as closely as possible after the end of the research phase.</p><p>Finally, present your discoveries to your stakeholders. This is a crucial piece of the project. If you do not communicate well, then your research, and all your work, could be for naught. Prepare, practice, and follow up on your presentations. <strong>Your work deserves it.</strong><br>&nbsp;</p>'
+      format: html
+      summary: ''
+  field_deck:
+    -
+      value: '<p>Step-by-step guidance on how to conduct discovery research</p>'
+      format: single_inline_html
+  field_glossary:
+    -
+      target_id: hcd_glossary
+  field_guide_nav_ref:
+    -
+      entity: 1a8ba304-e37c-4bf4-b8e9-d1ba6f8e780b
+  field_primary_image:
+    -
+      entity: 86452891-0ee7-49db-9753-b677f2522ee1
+  field_summary:
+    -
+      value: '<p>Step-by-step guidance on how to conduct discovery research</p>'
+      format: single_inline_html
+  field_summary_box:
+    -
+      value: false

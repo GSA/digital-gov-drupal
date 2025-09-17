@@ -17,7 +17,7 @@
    * and filter out h2's we do not want to show with the :not selector
    */
   const pageHeaders = document.querySelectorAll(
-    "h2:not(.usa-summary-box__heading, .dg-guide__content-header-title, .dg-glossary__header)"
+    "h2:not(.usa-summary-box__heading, .dg-guide__content-header-title, .dg-glossary__header, .visually-hidden)"
   );
 
   /**

@@ -3,7 +3,7 @@
     <div class="intro">
       <div class="icon">
         <svg class="usa-icon dg-icon dg-icon--standard margin-bottom-05" aria-hidden="true" focusable="false">
-          <use href="{{ drupal_url(theme_path ~ '/static/digitalgov/img/sprite.svg#comment') }}"></use>
+          <use href="/{{ active_theme_path() }}/static/uswds/img/sprite.svg#comment"></use>
         </svg>
       </div>
       {% set intro = {
@@ -22,7 +22,10 @@
         '#text': prompt.value,
         '#format': prompt.format,
       } %}
+<blockquote>
       {{ prompt }}
+</blockquote>
+
     </div>
   {% endif %}
 

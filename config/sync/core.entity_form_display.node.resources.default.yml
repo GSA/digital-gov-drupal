@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.resources.body
+    - field.field.node.resources.field_authors
     - field.field.node.resources.field_deck
     - field.field.node.resources.field_page_weight
     - field.field.node.resources.field_slug
@@ -12,8 +13,8 @@ dependencies:
     - node.type.resources
     - workflows.workflow.editorial
   module:
+    - autocomplete_deluxe
     - content_moderation
-    - inline_entity_form
     - maxlength
     - path
     - text
@@ -38,6 +39,23 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_authors:
+    type: autocomplete_deluxe
+    weight: 20
+    region: content
+    settings:
+      match_operator: CONTAINS
+      autocomplete_route_name: autocomplete_deluxe.autocomplete
+      size: 60
+      selection_handler: default
+      match_limit: 10
+      min_length: 0
+      delimiter: ''
+      not_found_message_allow: false
+      not_found_message: "The term '@term' will be added"
+      new_terms: false
+      no_empty_message: 'No terms could be found. Please type in order to add a new term.'
+    third_party_settings: {  }
   field_deck:
     type: text_textarea
     weight: 1
@@ -49,7 +67,7 @@ content:
       maxlength:
         maxlength_js: 255
         maxlength_js_label: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
-        maxlength_js_enforce: true
+        maxlength_js_enforce: false
   field_page_weight:
     type: number
     weight: 8
@@ -68,24 +86,23 @@ content:
       maxlength:
         maxlength_js: 255
         maxlength_js_label: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
-        maxlength_js_enforce: true
+        maxlength_js_enforce: false
   field_topics:
-    type: inline_entity_form_complex
+    type: autocomplete_deluxe
     weight: 4
     region: content
     settings:
-      form_mode: default
-      override_labels: false
-      label_singular: ''
-      label_plural: ''
-      allow_new: true
-      allow_existing: true
       match_operator: CONTAINS
-      allow_duplicate: false
-      collapsible: true
-      collapsed: true
-      revision: false
-      removed_reference: optional
+      autocomplete_route_name: autocomplete_deluxe.autocomplete
+      size: 60
+      selection_handler: default
+      match_limit: 0
+      min_length: 0
+      delimiter: ''
+      not_found_message_allow: false
+      not_found_message: "The term '@term' will be added"
+      new_terms: false
+      no_empty_message: 'No terms could be found. Please type in order to add a new term.'
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
@@ -115,22 +132,14 @@ content:
       placeholder: ''
     third_party_settings: {  }
   uid:
-    type: inline_entity_form_complex
+    type: entity_reference_autocomplete
     weight: 5
     region: content
     settings:
-      form_mode: default
-      override_labels: false
-      label_singular: ''
-      label_plural: ''
-      allow_new: true
-      allow_existing: true
       match_operator: CONTAINS
-      allow_duplicate: false
-      collapsible: true
-      collapsed: true
-      revision: false
-      removed_reference: optional
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   url_redirects:
     weight: 50

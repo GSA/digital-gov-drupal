@@ -34,6 +34,10 @@ default:
       alias: /job-board
       langcode: en
       pathauto: 0
+  field_deck:
+    -
+      value: '<p>Discover community- and technology-related job openings in the federal government.</p>'
+      format: single_inline_html
   field_landing_page_type:
     -
       value: job_board

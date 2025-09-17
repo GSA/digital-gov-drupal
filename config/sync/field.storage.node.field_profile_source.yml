@@ -1,0 +1,27 @@
+uuid: 2ca98c18-dcfb-46c5-b1bb-4af442c61983
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_profile_source
+field_name: field_profile_source
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: digit-light
+      label: 'Digital Light'
+    -
+      value: digit-dark
+      label: 'Digital Dark'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

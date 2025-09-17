@@ -1,0 +1,6 @@
+dg_autologout.set_admin:
+  title: 'Digital.gov Automated logout settings'
+  parent: user.admin_index
+  description: 'Configure default automated logout settings.'
+  weight: -10
+  route_name: dg_autologout.set_admin

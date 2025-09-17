@@ -1,0 +1,82 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: ab4e67a7-ca69-4176-b9d3-aec961d7608a
+  bundle: news
+  default_langcode: en
+  depends:
+    cb568d39-2141-4ac9-b6f2-b99bc4373fe1: user
+    e2e80683-d456-446a-acbd-a03ff409bf1d: node
+    d54f480c-f28b-49c0-a1ef-7d0adf594af6: media
+    d370c4f9-7405-493e-9438-6b2be1a93cbc: media
+    0a1a61c6-b4aa-4e54-bf83-8e397e28e6f2: node
+    26f2d370-453e-4fdb-8b51-3f6a932fd3e9: node
+    95077128-6d33-4445-a48a-4ad8ebb7d9b3: node
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      entity: cb568d39-2141-4ac9-b6f2-b99bc4373fe1
+  title:
+    -
+      value: 'Commoveo Obruo Cloud Singularis'
+  created:
+    -
+      value: 1740206734
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /2025/02/22/commoveo-obruo-cloud-singularis
+      langcode: en
+      pathauto: 1
+  body:
+    -
+      value: '<p>Appellatio camur capto hendrerit lobortis os premo typicus. Acsi dolore haero mos quadrum sudo suscipere suscipit veniam. Pneum venio volutpat vulpes. Amet appellatio gravis nimis occuro ut. Acsi aliquam genitus imputo iusto lobortis neque quis tum uxor. At damnum gemino gilvus pala premo quibus utinam vero volutpat. Comis paulatim uxor. Brevitas genitus vel. Ad imputo minim ulciscor.&nbsp;</p><p>Commodo enim exerci haero laoreet minim roto usitas. Abico accumsan commoveo diam erat eum lucidus pecus qui saluto. Consectetuer dignissim eros genitus gilvus patria quis usitas. Eum jumentum lucidus mauris. Dolore eum luptatum paulatim sit. Exputo feugiat humo turpis. Damnum defui macto.&nbsp;</p><p>Amet brevitas caecus cui et euismod humo minim quibus. Caecus commodo distineo eros lobortis melior nutus tamen vindico. Diam elit inhibeo lobortis nostrud quae qui refero sudo. Camur humo jumentum jus lenis macto virtus. Commoveo hendrerit iustum sed suscipere typicus. Defui gilvus inhibeo iusto pala roto torqueo vicis virtus volutpat. Adipiscing euismod jugis melior pagus qui secundum si vindico. Capto esca lucidus minim oppeto tum voco. Iaceo illum imputo iusto mauris natu. Bene hos luctus mauris qui tamen veniam vindico.&nbsp;</p>'
+      format: html
+      summary: "Appellatio camur capto hendrerit lobortis os premo typicus. Acsi dolore haero mos quadrum sudo suscipere suscipit veniam. Pneum venio volutpat vulpes. Amet appellatio gravis nimis occuro ut. Acsi aliquam genitus imputo iusto lobortis neque quis tum uxor.\r\n\r\nAt damnum gemino gilvus pala premo quibus utinam vero volutpat. Comis paulatim uxor. Brevitas genitus vel. Ad imputo minim ulciscor. Commodo enim exerci haero laoreet minim roto usitas. Abico accumsan commoveo diam erat eum lucidus pecus qui saluto.\r\n\r\nConsectetuer dignissim eros genitus gilvus patria quis usitas. Eum jumentum lucidus mauris. Dolore eum luptatum paulatim sit. Exputo feugiat humo turpis. Damnum defui macto. Amet brevitas caecus cui et euismod humo minim quibus.\r\n\r\nCaecus commodo distineo eros lobortis melior nutus tamen vindico. Diam elit inhibeo lobortis nostrud quae qui refero sudo. Camur humo jumentum jus lenis macto virtus. Commoveo hendrerit iustum sed suscipere typicus.\r\n\r\nDefui gilvus inhibeo iusto pala roto torqueo vicis virtus volutpat. Adipiscing euismod jugis melior pagus qui secundum si vindico. Capto esca lucidus minim oppeto tum voco. Iaceo illum imputo iusto mauris natu. Bene hos luctus mauris qui tamen veniam vindico. Bene comis gravis lucidus nimis nutus quadrum tation valetudo. Abico fere hendrerit illum magna meus nostrud nutus rusticus torqueo.\r\n\r\nBrevitas causa consequat exputo illum in olim validus. Accumsan caecus gravis ibidem populus sit torqueo ulciscor vulputate. Abico caecus dolus elit gilvus inhibeo saepius.\r\n\r\nDolore laoreet lobortis. Facilisis imputo macto melior modo nostrud quae. Augue decet enim gravis nunc oppeto pneum. Cogo elit esca exerci iusto refoveo sino tum. Camur exerci mos nibh refero tego. Et importunus probo. Caecus consequat feugiat os scisco tation. Abdo damnum erat esca eu interdico nutus qui quis vereor. Proprius quibus virtus.\r\n\r\nCommoveo iaceo nobis obruo tego voco. Valde veniam vindico. Aptent commodo dolor gravis letalis proprius usitas vulpes. Camur jumentum molior premo quidne roto.\r\n\r\nAbigo autem dolor minim pagus qui. Antehabeo quia suscipere. Gilvus oppeto suscipit veniam. Abigo consectetuer cui si usitas. Feugiat mauris suscipere. Augue autem hos melior nisl pneum saluto virtus vulputate. Huic nimis paulatim. At ille jumentum macto magna nulla virtus. Appellatio distineo suscipit typicus verto vulputate. Laoreet nutus proprius roto vel vulpes. Metuo natu nobis refero tego virtus.\r\n\r\nBrevitas consectetuer duis ideo. Facilisi gravis humo iustum loquor melior os. Accumsan adipiscing capto euismod fere incassum plaga ratis refero tum. Amet cui feugiat in melior torqueo utrum validus.\r\n\r\nDolore erat letalis neque pala. Commoveo conventio dolus eligo iriure lenis paulatim quidem sit. Abbas camur lenis metuo pala quidne quis saepius vero. Olim ut voco ymo. Defui pecus vel. Ad camur gilvus lenis letalis premo. Dignissim elit hendrerit nisl quis roto saluto uxor velit veniam. Cogo cui damnum eu ex praemitto quadrum qui usitas voco.\r\n\r\nBene genitus melior premo quae quidem saluto torqueo vulputate. Caecus damnum importunus populus. Abigo dignissim hendrerit illum iriure letalis occuro vero. Euismod ideo ludus nostrud praesent saepius si velit. Decet interdico oppeto utinam vel. Macto quadrum quae. Haero iusto luptatum. Et inhibeo mos neo olim refoveo si veniam.\r\n\r\n"
+  field_authors:
+    -
+      entity: e2e80683-d456-446a-acbd-a03ff409bf1d
+  field_deck:
+    -
+      value: '<p>Accumsan brevitas causa eros nimis populus valde vero. Accumsan bene causa distineo neque nulla tincidunt. Amet conventio letalis nisl nulla paratus pneum secundum sit. Caecus mos patria quidne quis tation velit. Jus laoreet nimis similis velit. Eros eu e</p>'
+      format: single_inline_html
+  field_featured_image:
+    -
+      entity: d54f480c-f28b-49c0-a1ef-7d0adf594af6
+  field_kicker:
+    -
+      value: 'Aptent feugiat haero melior quae vero. Amet decet letalis nobis refoveo tation. Abluo conventio et genitus roto typicus. Autem dolor eu lenis molior sino ymo. Commodo erat molior mos saluto. Nostrud vindico volutpat.'
+  field_page_weight:
+    -
+      value: 346
+  field_primary_image:
+    -
+      entity: d370c4f9-7405-493e-9438-6b2be1a93cbc
+  field_slug:
+    -
+      value: 'Abbas elit huic nibh olim patria qui saepius secundum validus. Abbas abdo accumsan consectetuer dolus esse paratus patria quibus.'
+  field_summary:
+    -
+      value: '<p>Abico amet erat gemino interdico mauris premo sino. Aptent bene brevitas causa cui damnum eligo mauris nostrud wisi. Pagus paratus vulpes. Acsi capto et importunus lenis nobis oppeto paratus sino. Bene iaceo nisl premo vindico. Diam euismod ibidem importu</p>'
+      format: single_inline_html
+  field_topics:
+    -
+      entity: 0a1a61c6-b4aa-4e54-bf83-8e397e28e6f2
+    -
+      entity: 26f2d370-453e-4fdb-8b51-3f6a932fd3e9
+    -
+      entity: 95077128-6d33-4445-a48a-4ad8ebb7d9b3

@@ -7,6 +7,7 @@ dependencies:
     - node.type.basic_page
     - node.type.community
     - node.type.event
+    - node.type.guide_landing
     - node.type.guides
     - node.type.landing_page
     - node.type.news
@@ -23,6 +24,7 @@ dependencies:
     - node
     - override_node_options
     - paragraphs_type_permissions
+    - path
 id: author
 label: Author
 weight: 3
@@ -36,6 +38,7 @@ permissions:
   - 'create basic_page content'
   - 'create community content'
   - 'create event content'
+  - 'create guide_landing content'
   - 'create guides content'
   - 'create landing_page content'
   - 'create media'
@@ -44,10 +47,12 @@ permissions:
   - 'create short_post content'
   - 'create source content'
   - 'create topics content'
+  - 'create url aliases'
   - 'edit own authors content'
   - 'edit own basic_page content'
   - 'edit own community content'
   - 'edit own event content'
+  - 'edit own guide_landing content'
   - 'edit own guides content'
   - 'edit own landing_page content'
   - 'edit own news content'

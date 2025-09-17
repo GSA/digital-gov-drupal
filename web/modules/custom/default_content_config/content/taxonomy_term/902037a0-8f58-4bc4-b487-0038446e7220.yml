@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 902037a0-8f58-4bc4-b487-0038446e7220
+  bundle: hcd_glossary
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: Touchpoints
+  description:
+    -
+      value: '<p>Any point of contact between a customer and a service or service provider. This could be the design of a receipt, the comfort of a waiting room, or the usability of a web page.</p>'
+      format: single_inline_html
+  weight:
+    -
+      value: 34
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

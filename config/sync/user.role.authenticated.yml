@@ -4,6 +4,8 @@ status: true
 dependencies:
   config:
     - filter.format.html
+    - filter.format.html_embedded_content
+    - filter.format.multiline_html_limited
     - filter.format.multiline_inline_html
     - filter.format.single_inline_html
   module:
@@ -12,6 +14,8 @@ dependencies:
     - content_moderation
     - filter
     - media
+    - paragraphs_type_permissions
+    - sitewide_alert
     - system
     - toolbar
     - userprotect
@@ -27,10 +31,16 @@ permissions:
   - 'access toolbar'
   - 'use admin toolbar search'
   - 'use text format html'
+  - 'use text format html_embedded_content'
+  - 'use text format multiline_html_limited'
   - 'use text format multiline_inline_html'
   - 'use text format single_inline_html'
   - userprotect.account.edit
   - 'view identifier config page entity'
   - 'view latest version'
   - 'view media'
+  - 'view paragraph content external_content'
+  - 'view paragraph content featured_links'
+  - 'view paragraph content internal_content'
+  - 'view published sitewide alert entities'
   - 'view the administration theme'

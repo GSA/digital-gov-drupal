@@ -24,6 +24,7 @@ for dir in $directories; do
 
       echo -e "${yellow}Gulp Build${NC}"
       gulp
+      npm run ckeditor
     )
 done
 

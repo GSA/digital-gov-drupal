@@ -5,7 +5,9 @@ _meta:
   bundle: topics
   default_langcode: en
   depends:
+    2f1a705d-d0eb-495c-b872-e7973fac5e7f: node
     623a2982-602b-4762-a59e-9a7c30c64f36: node
+    888d7b2e-4872-4c90-a3e9-554cae9ce376: taxonomy_term
 default:
   revision_uid:
     -
@@ -38,30 +40,13 @@ default:
       pathauto: 0
   field_deck:
     -
-      value: 'Digital infrastructure means hardware and software. It Includes physical and virtual “cloud” storage spaces.'
+      value: '<p>Digital infrastructure means hardware and software. It Includes physical and virtual “cloud” storage spaces.</p>'
       format: single_inline_html
   field_featured_communities:
     -
-      entity: 623a2982-602b-4762-a59e-9a7c30c64f36
-  field_featured_links:
+      entity: 2f1a705d-d0eb-495c-b872-e7973fac5e7f
     -
-      entity:
-        _meta:
-          version: '1.0'
-          entity_type: paragraph
-          uuid: b3cc1ee0-0bd2-42f9-8581-1f8713953303
-          bundle: featured_links
-          default_langcode: en
-        default:
-          status:
-            -
-              value: true
-          created:
-            -
-              value: 1729707255
-          behavior_settings:
-            -
-              value: {  }
+      entity: 623a2982-602b-4762-a59e-9a7c30c64f36
   field_featured_resources:
     -
       entity:
@@ -98,7 +83,10 @@ default:
   field_page_weight:
     -
       value: 2
+  field_resource_topics:
+    -
+      entity: 888d7b2e-4872-4c90-a3e9-554cae9ce376
   field_summary:
     -
-      value: 'Digital infrastructure includes hardware and software components that build the foundation of information technology systems. When you save a file online instead of on your own computer, you’re saving it virtually in “the cloud.” The cloud is a network of'
+      value: '<p>Digital infrastructure includes hardware and software components that build the foundation of information technology systems. When you save a file online instead of on your own computer, you’re saving it virtually in “the cloud.” The cloud is a network of</p>'
       format: single_inline_html

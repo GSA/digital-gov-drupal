@@ -1,3 +1,9 @@
+variable "additional_environmental_variables" {
+  description = "Additional environmental variables for the application Useful for dynamic information, like Terraform generated variables."
+  type = map(string)
+  default = {}
+}
+
 variable "cloudfoundry" {
   description = "Cloudfoundry settings."
   type = object(
@@ -126,7 +132,7 @@ variable "env" {
     external_domain = optional(string, "app.cloud.gov")
     internal_domain = optional(string, "apps.internal")
     name_pattern    = string
-    organization    = optional(string, "gsa-tts-usagov")
+    organization    = optional(string, "gsa-digitalgov-prototyping")
     passwords = optional(
       map(
         object(

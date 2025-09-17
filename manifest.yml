@@ -1,23 +1,25 @@
 ---
 default_config: &defaults
   buildpacks:
-    - https://github.com/cloudfoundry/apt-buildpack
+    #- https://github.com/cloudfoundry/apt-buildpack
+    - https://github.com/cloudfoundry/apt-buildpack.git#v0.3.5
     - php_buildpack
   disk_quota: 4G
   env:
     COMPOSER_DEV: ${COMPOSER_DEV}
     environment: ${CF_SPACE}
-    GSA_AUTH_KEY: ${GSA_AUTH_KEY}
-    HASH_SALT: ${HASH_SALT}
     LD_LIBRARY_PATH: /home/vcap/app/php/lib/
     PHP_INI_SCAN_DIR: /home/vcap/app/php/etc/:/home/vcap/app/php/etc/php.ini.d/
     waf_external_endpoint: ${PROJECT}-${WAF_NAME}-${CF_SPACE}.app.cloud.gov
+    STATIC_URI: ${STATIC_URI}
+    DRUSH_OPTIONS_URI: ${DRUSH_OPTIONS_URI}
   timeout: 180
   routes:
     - route: ${PROJECT}-drupal-${CF_SPACE}.apps.internal
       protocol: http2
   services:
     - ${PROJECT}-mysql-${CF_SPACE}
+    - ${PROJECT}-secrets-${CF_SPACE}
     - ${PROJECT}-static-${CF_SPACE}
     - ${PROJECT}-storage-${CF_SPACE}
 

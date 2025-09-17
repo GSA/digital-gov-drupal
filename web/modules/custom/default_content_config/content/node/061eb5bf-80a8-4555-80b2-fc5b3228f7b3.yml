@@ -34,9 +34,6 @@ default:
       alias: /authors/drew-zachary
       langcode: en
       pathauto: 1
-  field_agency_acronym:
-    -
-      value: USCB
   field_agency_full_name:
     -
       value: 'U.S. Census Bureau'
@@ -46,3 +43,6 @@ default:
   field_last_name:
     -
       value: Zachary
+  field_profile_source:
+    -
+      value: digit-light

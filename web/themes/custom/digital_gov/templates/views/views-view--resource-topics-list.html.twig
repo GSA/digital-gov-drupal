@@ -1,0 +1,10 @@
+{#
+Wrapper around the lists grouped by resource topic to make sure
+Views doesn't add any extra containers around the lists.
+#}
+<h2 class="margin-top-0">Browse by topic</h2>
+<div class="dg-resource-topics-grid">
+  {% for list in rows %}
+    {{ list }}
+  {% endfor %}
+</div>

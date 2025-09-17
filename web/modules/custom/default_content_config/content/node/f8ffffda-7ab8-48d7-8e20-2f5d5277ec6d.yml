@@ -5,7 +5,9 @@ _meta:
   bundle: community
   default_langcode: en
   depends:
+    fcb29d60-a10c-4ff0-b476-0d930926c7d0: file
     e164ea7f-8591-4282-a920-b11c94402fbb: media
+    bfc21cc0-5de7-4b9f-8dcd-4b1da264ace5: node
 default:
   revision_uid:
     -
@@ -38,12 +40,12 @@ default:
       pathauto: 0
   body:
     -
-      value: '<p>Government professionals from all levels come together in this community to promote the use of plain language to provide better services to the public.</p><p>Become a member to collaborate with colleagues who are dedicated to the idea that the public deserves clear communications from government.</p><p>Digital.gov fosters this engaging community by providing spaces designed to empower members on their communication and plain language journeys. Remember, when participating in this community, you must follow <a href="https://digital.gov/communities/community-guidelines/">Digital.gov community guidelines</a>.</p><embedded-content data-plugin-config="{&quot;content_reference&quot;:&quot;63&quot;}" data-plugin-id="ec_shortcodes_featured_resource" data-button-id="default">&nbsp;</embedded-content>'
+      value: '<p>Government professionals from all levels come together in this community to promote the use of plain language to provide better services to the public.</p><p>Become a member to collaborate with colleagues who are dedicated to the idea that the public deserves clear communications from government.</p><p>Digital.gov fosters this engaging community by providing spaces designed to empower members on their communication and plain language journeys. Remember, when participating in this community, you must follow <a href="https://digital.gov/communities/community-guidelines/">Digital.gov community guidelines</a>.</p><embedded-content data-plugin-config="{&quot;content_reference&quot;:&quot;62&quot;}" data-plugin-id="ec_shortcodes_featured_resource" data-button-id="default">&nbsp;</embedded-content>'
       format: html
       summary: ''
   field_deck:
     -
-      value: 'Share and learn with plain language practitioners.'
+      value: '<p>Share and learn with plain language practitioners.</p>'
       format: single_inline_html
   field_dg_acronym:
     -
@@ -51,6 +53,13 @@ default:
   field_dg_highlight:
     -
       value: true
+  field_dg_logo:
+    -
+      entity: fcb29d60-a10c-4ff0-b476-0d930926c7d0
+      alt: ''
+      title: ''
+      width: 0
+      height: 0
   field_dg_shortname:
     -
       value: 'Plain Language'
@@ -60,7 +69,13 @@ default:
   field_primary_image:
     -
       entity: e164ea7f-8591-4282-a920-b11c94402fbb
+  field_subscribe_email_subject:
+    -
+      value: 'Join the Plain Language Community'
   field_summary:
     -
-      value: 'Promote the use of plain language to provide better service to the public.'
+      value: '<p>Promote the use of plain language to provide better service to the public.</p>'
       format: single_inline_html
+  field_topics:
+    -
+      entity: bfc21cc0-5de7-4b9f-8dcd-4b1da264ace5

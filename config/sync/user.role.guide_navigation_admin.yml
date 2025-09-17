@@ -1,0 +1,21 @@
+uuid: 89d3d12f-f60d-439a-8a5a-e57d6df00fce
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.guide_navigation
+  module:
+    - node
+    - override_node_options
+    - paragraphs_type_permissions
+id: guide_navigation_admin
+label: 'Guide Navigation Admin'
+weight: 10
+is_admin: null
+permissions:
+  - 'access content overview'
+  - 'bypass paragraphs type content access'
+  - 'create guide_navigation content'
+  - 'delete any guide_navigation content'
+  - 'edit any guide_navigation content'
+  - 'override guide_navigation published option'

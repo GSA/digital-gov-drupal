@@ -4,8 +4,6 @@ _meta:
   uuid: 3c8c1a7b-5b5b-4196-b435-1fa57ff0230b
   bundle: resources
   default_langcode: en
-  depends:
-    ad7aa7a5-33cf-400e-93cf-11820e467111: node
 default:
   revision_uid:
     -
@@ -49,6 +47,3 @@ default:
     -
       value: 'An overview of how to design and deliver accessible digital products and services in the federal government'
       format: single_inline_html
-  field_topics:
-    -
-      entity: ad7aa7a5-33cf-400e-93cf-11820e467111

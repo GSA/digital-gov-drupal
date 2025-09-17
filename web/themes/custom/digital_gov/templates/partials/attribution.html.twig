@@ -1,0 +1,4 @@
+{% set attribution = credit ?: caption|render|striptags %}
+{% if attribution %}
+  <p class="dg-attribution">Header image credit: {{ attribution }}</p>
+{% endif %}

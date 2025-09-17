@@ -1,0 +1,168 @@
+uuid: 31864a7f-f8df-4e04-bd14-f8b75be8f6fe
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.guide_navigation.field_guide_navigation
+    - field.field.node.guide_navigation.field_kicker_link
+    - field.field.node.guide_navigation.field_overview_image
+    - field.field.node.guide_navigation.field_show_in_page_nav
+    - field.field.node.guide_navigation.field_show_next_previous
+    - node.type.guide_navigation
+  module:
+    - content_moderation
+    - field_group
+    - link
+    - media_library
+    - media_library_edit
+    - paragraphs
+third_party_settings:
+  field_group:
+    group_settings:
+      children:
+        - field_show_next_previous
+        - field_show_in_page_nav
+      label: Settings
+      region: content
+      parent_name: ''
+      weight: 4
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        description: ''
+        required_fields: true
+    group_overview_details:
+      children: {  }
+      label: 'NOTE: Overview Page'
+      region: content
+      parent_name: ''
+      weight: 2
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: true
+        id: ''
+        label_as_html: false
+        open: true
+        description: 'The first Navigation item will be used as the "Overview" page for the guide.'
+        required_fields: false
+    group_overview_settings:
+      children:
+        - field_overview_image
+        - field_kicker_link
+      label: 'Overview Settings'
+      region: content
+      parent_name: ''
+      weight: 1
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        description: "These elements are used in this guide's header."
+        required_fields: true
+id: node.guide_navigation.default
+targetEntityType: node
+bundle: guide_navigation
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_guide_navigation:
+    type: paragraphs
+    weight: 3
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+      features:
+        collapse_edit_all: collapse_edit_all
+        duplicate: duplicate
+    third_party_settings: {  }
+  field_kicker_link:
+    type: link_default
+    weight: 9
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_overview_image:
+    type: media_library_widget
+    weight: 8
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings:
+      media_library_edit:
+        show_edit: '1'
+        edit_form_mode: default
+  field_show_in_page_nav:
+    type: boolean_checkbox
+    weight: 4
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_show_next_previous:
+    type: boolean_checkbox
+    weight: 2
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 8
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 5
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  path: true
+  promote: true
+  publish_on: true
+  publish_state: true
+  sticky: true
+  unpublish_on: true
+  unpublish_state: true
+  url_redirects: true

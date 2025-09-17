@@ -1,0 +1,14 @@
+uuid: a8446a2f-080b-4615-8d45-3efc07bf7b45
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.guide_navigation_admin
+  module:
+    - user
+id: user_remove_role_action.guide_navigation_admin
+label: 'Remove the Guide Navigation Admin role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: guide_navigation_admin

@@ -1,0 +1,25 @@
+uuid: db848e3c-3b5b-453a-88c5-b8f00c9836fd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_guide_link
+    - paragraphs.paragraphs_type.guide_pages
+id: paragraph.guide_pages.field_guide_link
+field_name: field_guide_link
+entity_type: paragraph
+bundle: guide_pages
+label: 'Guide Link'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: guide_pages_ref
+      display_name: entity_reference_1
+      arguments: {  }
+field_type: entity_reference

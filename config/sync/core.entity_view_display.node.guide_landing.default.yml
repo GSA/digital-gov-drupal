@@ -1,0 +1,54 @@
+uuid: 274838c1-a2ff-4814-a099-eebbb3124f5e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.guide_landing.body
+    - field.field.node.guide_landing.field_bottom_content
+    - field.field.node.guide_landing.field_glossary
+    - field.field.node.guide_landing.field_guide_weight
+    - field.field.node.guide_landing.field_guides
+    - field.field.node.guide_landing.field_primary_image
+    - field.field.node.guide_landing.field_summary
+    - node.type.guide_landing
+  module:
+    - text
+    - user
+id: node.guide_landing.default
+targetEntityType: node
+bundle: guide_landing
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_bottom_content:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_guides:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: usa_card_explore
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_glossary: true
+  field_guide_weight: true
+  field_primary_image: true
+  field_summary: true

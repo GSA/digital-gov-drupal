@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: e6dab35a-0746-48af-8afe-6a8d697d1269
+  bundle: hcd_glossary
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: Stakeholders
+  description:
+    -
+      value: '<p>Persons, groups or organizations that have a direct or indirect stake in an organization because it can affect or be affected by the organization’s actions, objectives and policies</p>'
+      format: single_inline_html
+  weight:
+    -
+      value: 31
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

@@ -1,0 +1,20 @@
+uuid: a86f0ea4-6847-4b5f-a1c7-fa9473c7e156
+langcode: en
+status: true
+dependencies:
+  config:
+    - config_pages.type.job_board
+    - field.field.config_pages.job_board.field_job_board_yml_contents
+id: config_pages.job_board.default
+targetEntityType: config_pages
+bundle: job_board
+mode: default
+content:
+  field_job_board_yml_contents:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

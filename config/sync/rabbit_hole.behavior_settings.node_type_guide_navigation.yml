@@ -1,0 +1,14 @@
+uuid: a007a973-c123-413a-af5a-e68673cacaae
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.guide_navigation
+id: node_type_guide_navigation
+entity_type_id: node_type
+entity_id: guide_navigation
+action: page_not_found
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

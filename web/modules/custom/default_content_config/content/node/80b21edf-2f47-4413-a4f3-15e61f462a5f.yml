@@ -1,0 +1,46 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 80b21edf-2f47-4413-a4f3-15e61f462a5f
+  bundle: community
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Join the User Experience'
+  created:
+    -
+      value: 1736812141
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /communities/join-user-experience
+      langcode: en
+      pathauto: 1
+  field_dg_highlight:
+    -
+      value: false
+  field_kicker:
+    -
+      value: 'Communities of practice'
+  field_summary:
+    -
+      value: '<p>Create better user-centered products for the public.</p>'
+      format: single_inline_html

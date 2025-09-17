@@ -1,0 +1,60 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 4ac07eca-6b35-43b5-b9a4-b2df9ef82401
+  bundle: guides
+  default_langcode: en
+  depends:
+    33dfb1a8-84a2-4184-990b-b8e6e849e8ec: node
+    cdc07606-1563-4772-9b45-11fa5d99c31a: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Commit to action'
+  created:
+    -
+      value: 1736269013
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /guides/web-analytics-playbook/commit-to-action
+      langcode: en
+      pathauto: 0
+  body:
+    -
+      value: '<p>Once you have your strategy, set forth processes to improve your website based on what you find. Many organizations generate reports, but fail to act on the data. Web analytics tools have a reputation for use in advertising or maximizing sales, but most government sites aren’t e-commerce driven. Therefore, use the insights you draw from your analytics tool to structure content, reduce repetition, prioritize work, streamline outreach, improve user experience (UX), etc. Your team may need to coordinate with developer, design, content, and social media teams.</p><p><strong>Checklist:</strong></p><ul><li>Talk with senior leadership about basing action plans on data</li><li>Test and measure improvements (<a href="/node/43" data-entity-type="node" data-entity-uuid="91b1798f-4dec-49d6-bfee-38ed0a4f5e49" data-entity-substitution="canonical">A/B testing</a>)</li><li>Practice storytelling to translate data for leadership (visualization tools)</li></ul><p><strong>Key Questions:</strong></p><ul><li>What do these data tell me about our users?</li><li>What can we do to improve the experience for our target audience(s)?</li><li>What other tools can we use to help us?</li><li>How do we know if our efforts are worthwhile?</li><li>What new internal communication channels can we use to assist us?</li></ul>'
+      format: html
+      summary: ''
+  field_guide_nav_ref:
+    -
+      entity: 33dfb1a8-84a2-4184-990b-b8e6e849e8ec
+  field_guide_nav_title:
+    -
+      value: Commit
+  field_primary_image:
+    -
+      entity: cdc07606-1563-4772-9b45-11fa5d99c31a
+  field_summary:
+    -
+      value: '<p>Create actionable plans based on data to ensure success.</p>'
+      format: single_inline_html
+  field_summary_box:
+    -
+      value: false

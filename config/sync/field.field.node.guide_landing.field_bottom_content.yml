@@ -1,0 +1,24 @@
+uuid: b6c7ca7b-1a23-4bf4-b250-294b0758c25c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_bottom_content
+    - filter.format.html
+    - node.type.guide_landing
+  module:
+    - text
+id: node.guide_landing.field_bottom_content
+field_name: field_bottom_content
+entity_type: node
+bundle: guide_landing
+label: 'Bottom Content'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - html
+field_type: text_long

@@ -1,0 +1,144 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 8e4763ba-d37d-44fd-bdb7-46cf12f20bc3
+  bundle: event
+  default_langcode: en
+  depends:
+    0f81698f-5884-4e89-8add-aebb0f940f21: node
+    7acbb47b-73ed-4b5c-8dbb-5e21abccea00: node
+    69f23355-206e-4da4-9205-45a463bf02e0: media
+    cdc07606-1563-4772-9b45-11fa5d99c31a: media
+    bfc21cc0-5de7-4b9f-8dcd-4b1da264ace5: node
+    95077128-6d33-4445-a48a-4ad8ebb7d9b3: node
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Capto Iriure Cloud'
+  created:
+    -
+      value: 1739940122
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /event/2025/02/18/capto-iriure-cloud
+      langcode: en
+      pathauto: 1
+  body:
+    -
+      value: '<p>Et ex hendrerit ibidem incassum nunc quadrum vulpes. Dignissim huic letalis. Ad olim sino vindico. Abigo occuro quidem saluto suscipere turpis typicus velit vicis voco.</p><p>Causa consectetuer eu exputo saepius scisco singularis ut. Damnum rusticus utrum. Acsi ad defui et ibidem in lucidus minim sudo tincidunt. Abbas iaceo ibidem qui sudo. Eligo hendrerit olim rusticus secundum sino uxor vindico. Dolor luptatum praesent quae rusticus tego. Gravis lobortis tation. Dolore enim molior nulla nunc persto vulputate.</p><p>Cogo decet facilisis roto saluto si sudo. Hendrerit interdico molior. At blandit causa hendrerit importunus in incassum nibh quae. Bene dolor et iaceo lucidus nimis pala paratus turpis. Mos sudo valetudo. Blandit eu sagaciter sit. Defui eum immitto jus persto praesent validus. Accumsan cui defui eligo esse meus occuro ulciscor vicis.</p><p>Adipiscing commoveo defui ea validus veniam wisi. Huic molior ratis. Caecus causa eu huic iriure mos ullamcorper ut vulpes. Abbas accumsan appellatio macto. Aliquam diam ea importunus nunc. Aliquam iriure loquor. Abluo appellatio caecus defui modo nisl occuro sed turpis.</p><p>Consectetuer eu facilisis illum nunc quidem. Ex olim ulciscor utinam verto ymo. Dignissim exerci gemino lucidus modo neo utrum validus. Aliquam brevitas humo imputo molior suscipere ullamcorper. Ex ideo obruo populus premo turpis valetudo velit venio. Capto iustum oppeto praesent. Commoveo exputo feugiat metuo qui saepius. Facilisi nulla olim patria sit. Brevitas lenis lucidus macto ratis secundum tincidunt vicis. Brevitas commoveo hendrerit ludus nostrud ratis saepius similis.</p><p>Abdo at duis esse humo immitto luctus mauris utinam vereor. Causa commodo populus quidem scisco. Laoreet minim nunc nutus te torqueo vindico. Fere jumentum nobis. Abbas consequat fere feugiat interdico jus nunc quibus ut. Dolor ea huic jumentum nulla quadrum turpis vereor. Hendrerit qui saepius. Pneum probo proprius wisi. Capto cogo elit eum laoreet. Appellatio cogo damnum dolus luctus magna metuo molior scisco.</p><p>Abdo esse exputo odio quidne ulciscor. Ad camur distineo jus ludus pala persto qui secundum. Iustum meus paulatim sit valetudo. Ad jus oppeto quidne secundum utinam volutpat. Haero iriure mauris obruo sagaciter singularis tamen vicis zelus.</p><p>Appellatio mauris nostrud paratus validus. Amet antehabeo duis illum paratus. Feugiat nunc similis tation. Brevitas causa patria. Acsi ea gilvus laoreet nimis utinam vereor. Antehabeo aptent feugiat imputo. Distineo refero vereor. Abdo iaceo refoveo. Aliquip dignissim euismod gemino importunus qui quidne saluto si similis. Diam erat iustum lucidus suscipit utinam veniam vindico vulputate.</p><p>Abdo importunus ratis ullamcorper. Ad causa ea qui rusticus vulputate. Aliquam dolor saepius saluto. Dignissim gilvus nostrud nulla patria sudo vulpes. Dolus facilisi os persto plaga typicus ut vulpes. Dolor esca et melior. Facilisis lobortis velit volutpat. Decet elit gravis macto. Abdo dolore hos pecus valetudo zelus. Autem interdico jugis obruo quis tamen vel. Abbas abigo aliquam occuro praemitto ut.</p><p>Comis diam enim luptatum metuo modo roto tincidunt ut. Aliquam huic ille iusto metuo mos vulpes. Abbas acsi commoveo gemino neque ratis refoveo typicus.</p><p>Capto iaceo mos quidem saepius tation. Abdo decet jumentum pertineo suscipere tum turpis ullamcorper vel. At praemitto utrum. Cui imputo interdico nobis sagaciter. Elit exputo imputo olim qui scisco tum vero. Comis ille lobortis praemitto tego volutpat. Capto causa facilisis oppeto pneum quidem.</p><p>Accumsan capto probo quia quibus usitas. Appellatio blandit hos ludus luptatum macto natu nutus persto. Capto exerci hendrerit iusto nibh nisl os paratus virtus. Conventio dolor hendrerit qui velit. Commoveo melior meus persto proprius qui valetudo vel velit venio. Immitto luctus sagaciter verto.</p>'
+      format: html
+      summary: ''
+  field_authors:
+    -
+      entity: 0f81698f-5884-4e89-8add-aebb0f940f21
+    -
+      entity: 7acbb47b-73ed-4b5c-8dbb-5e21abccea00
+  field_captions:
+    -
+      uri: 'https://www.swuprit.info'
+      title: ''
+      options: {  }
+  field_end_date:
+    -
+      value: '2024-03-12T13:19:22'
+  field_event_organizer:
+    -
+      value: 'Aliquam euismod'
+  field_event_platform:
+    -
+      value: 'Damnum immitto'
+  field_featured_image:
+    -
+      entity: 69f23355-206e-4da4-9205-45a463bf02e0
+  field_host:
+    -
+      value: 'Augue camur cogo'
+  field_kicker:
+    -
+      value: Damnum
+  field_page_weight:
+    -
+      value: 283
+  field_primary_image:
+    -
+      entity: cdc07606-1563-4772-9b45-11fa5d99c31a
+  field_registration_url:
+    -
+      uri: 'https://www.gucrulanospes.info'
+      title: ''
+      options: {  }
+  field_slug:
+    -
+      value: 'Gravis nobis nunc premo quibus. Autem distineo eum gilvus laoreet modo paulatim quidne singularis volutpat.'
+  field_summary:
+    -
+      value: '<p>Brevitas meus nimis praemitto usitas verto vicis. Dolus facilisis humo olim. Aptent consequat exputo fere populus quia saepius ulciscor. Acsi conventio gravis imputo in loquor nutus probo.&nbsp;</p>'
+      format: single_inline_html
+  field_topics:
+    -
+      entity: bfc21cc0-5de7-4b9f-8dcd-4b1da264ace5
+    -
+      entity: 95077128-6d33-4445-a48a-4ad8ebb7d9b3
+  field_venue:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: bfd5ae5b-9f09-46ac-85f4-d13e5ae1d582
+          bundle: venue
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1740495489
+          behavior_settings:
+            -
+              value: {  }
+          field_venue_address:
+            -
+              value: 'Commoveo dolore haero lenis modo quadrum sudo. Exputo humo paulatim usitas.'
+          field_venue_city:
+            -
+              value: 'Capto consectetuer ulciscor. Eros iusto neo neque similis sit typicus. Abluo enim immitto nostrud obruo paratus persto refoveo tego vicis.'
+          field_venue_country:
+            -
+              value: 'Diam hendrerit'
+          field_venue_map:
+            -
+              uri: 'https://www.cabribr.edu'
+              title: ''
+              options: {  }
+          field_venue_name:
+            -
+              value: 'Imputo iustum odio typicus'
+          field_venue_room:
+            -
+              value: 'Abigo huic melior pertineo'
+          field_venue_state:
+            -
+              value: 'Capto comis elit'
+          field_venue_zip:
+            -
+              value: 'Ad defui eum'

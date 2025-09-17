@@ -1,0 +1,11 @@
+uuid: 144428d0-685a-4953-80ff-114567b3a16f
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.featured_resource
+label: 'Featured Resource'
+description: ''
+targetEntityType: node
+cache: true

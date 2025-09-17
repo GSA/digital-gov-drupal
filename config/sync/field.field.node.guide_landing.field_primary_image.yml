@@ -1,0 +1,29 @@
+uuid: 130fc166-c8d2-400c-b339-1087fdf881ad
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_primary_image
+    - media.type.image
+    - node.type.guide_landing
+id: node.guide_landing.field_primary_image
+field_name: field_primary_image
+entity_type: node
+bundle: guide_landing
+label: 'Primary Image'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

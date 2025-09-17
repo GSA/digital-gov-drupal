@@ -1,0 +1,14 @@
+uuid: bcf45318-c79f-4561-adbb-cc15355e26d8
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.topics
+id: node_type_topics
+entity_type_id: node_type
+entity_id: topics
+action: display_page
+allow_override: 0
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

@@ -1,0 +1,133 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 33dfb1a8-84a2-4184-990b-b8e6e849e8ec
+  bundle: guide_navigation
+  default_langcode: en
+  depends:
+    91b1798f-4dec-49d6-bfee-38ed0a4f5e49: node
+    446d9608-f2b8-463a-88b1-d6956adf0057: node
+    4ac07eca-6b35-43b5-b9a4-b2df9ef82401: node
+    cc65a1b8-7380-41b2-a81e-45e9bfef56a1: node
+    cdc07606-1563-4772-9b45-11fa5d99c31a: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Web Analytics Guide Navigation'
+  created:
+    -
+      value: 1736265416
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  field_guide_navigation:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: a6d2f29c-3772-43ae-ba96-e6146c565721
+          bundle: guide_pages
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1736460786
+          behavior_settings:
+            -
+              value: {  }
+          field_guide_link:
+            -
+              entity: 91b1798f-4dec-49d6-bfee-38ed0a4f5e49
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: d37033be-1e3f-4bdf-bced-aebd7caec74f
+          bundle: guide_pages
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1736265459
+          behavior_settings:
+            -
+              value: {  }
+          field_guide_link:
+            -
+              entity: 446d9608-f2b8-463a-88b1-d6956adf0057
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: c6d61cbf-529b-4d8c-a86b-3e320c669be7
+          bundle: guide_pages
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1736268898
+          behavior_settings:
+            -
+              value: {  }
+          field_guide_link:
+            -
+              entity: 4ac07eca-6b35-43b5-b9a4-b2df9ef82401
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 24f6de3e-fd1d-4b91-9c41-b0d0704cf4aa
+          bundle: guide_pages
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1736269307
+          behavior_settings:
+            -
+              value: {  }
+          field_guide_link:
+            -
+              entity: cc65a1b8-7380-41b2-a81e-45e9bfef56a1
+  field_overview_image:
+    -
+      entity: cdc07606-1563-4772-9b45-11fa5d99c31a
+  field_show_in_page_nav:
+    -
+      value: false
+  field_show_next_previous:
+    -
+      value: true

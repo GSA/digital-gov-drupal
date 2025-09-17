@@ -63,21 +63,24 @@
  */
 #}
 
-{# where does community list come from? #}
-{% set community_list = true %}
+{# Caching the data in content object #}
+{% set savedCache = content|render %}
+
+{% set community_acronym = content.field_dg_acronym|field_value %}
+{% set subscribe_email_subject = content.field_subscribe_email_subject|field_value %}
+{% set dg_logo = content.field_dg_logo|field_value %}
+{% set community_list = subscribe_email_subject|render and community_acronym|render and dg_logo|render %}
+
 <main role="main" id="main-content">
   <article class="grid-container-desktop">
-
     {{ drupal_entity('block', 'digital_gov_breadcrumbs') }}
-
     <header>
       {{ include('@digital_gov/partials/page-header.html.twig', {
-        title: node.title.value,
-        deck: node.field_deck.value,
-        append_title_text: 'Community',
-      }, with_context=false) }}
+        title: label|field_value,
+        deck: content.field_deck|field_value,
+        append_title_text: 'Community'|t,
+      }, with_context: false) }}
     </header>
-
     <section class="usa-in-page-nav-container">
       <aside
         class="usa-in-page-nav"
@@ -85,58 +88,37 @@
         data-root-margin="-350px 0px -350px 0px"
       ></aside>
       <div>
-        {# Summary controls if the community content is shown
-         but is not displayed on full page #}
-        {% if node.field_summary.value %}
-          {% set community_acronym = node.field_dg_acronym.value %}
-          {% set subscribe_email_subject = node.field_subscribe_email_subject.value %}
-          <div class="content usa-prose">
-            {% if community_list %}
-              <section
-                class="join-community-form join-community-form--{{ community_acronym }}"
-              >
-                <div class="join-community-form__header">
-                  {{ content.field_dg_logo|field_value }}
-                  <h3>Connect with us</h3>
-                </div>
-                <div class="join-community-form__body">
-                  <p>
-                    Federal, state, territorial, tribal, and local government
-                    employees and contractors are eligible to join.
-                  </p>
-                  <p>
-                    Select "{{ subscribe_email_subject }}," then a form will ask
+        <div class="content usa-prose">
+          {% if community_list %}
+            <section class="join-community-form join-community-form--{{ community_acronym }}">
+              <div class="join-community-form__header">
+                {{ dg_logo }}
+                <h3>{{ 'Connect with us'|t }}</h3>
+              </div>
+              <div class="join-community-form__body">
+                <p>
+                  {{ 'Employees and contractors of federal, state, local, tribal, and territorial governments are eligible to join our communities.'|t }}
+                </p>
+                <p>
+                  {{ "Select \"#{subscribe_email_subject|render},\" then a form will ask
                     for your name and email address. The form should take most
-                    people a minute or less to complete.
-                  </p>
-                  {# Get the form link #}
-                  <a
-                    class="usa-button"
-                    href="https://feedback.gsa.gov/jfe/form/SV_3dwvggn0tq8HIzk"
-                  >
-                    {{ subscribe_email_subject }}
-                  </a>
-                </div>
-              </section>
-            {% endif %}
-            <div class="content">
-              {{ content|without('field_dg_logo') }}
-            </div>
+                    people a minute or less to complete."|t }}
+                </p>
+                <a class="usa-button" href="https://feedback.gsa.gov/jfe/form/SV_3dwvggn0tq8HIzk">
+                  {{ subscribe_email_subject }}
+                </a>
+              </div>
+            </section>
+          {% endif %}
+          {{ content.body|field_value }}
 
-            {# @TODO Community Events #}
-            [placeholder Upcoming events]
-            {# NOT-MIGRATED
-          {{ partial '@digital_gov/partials/core/get-upcomingevents.html' }}
-            #}
-            <div class="community_conduct">
-              <h2 id="community-conduct">Community Conduct</h2>
-              {{ include(('@digital_gov/partials/community-pagefooter.html.twig')) }}
-            </div>
-          </div>
-        {% endif %}
+          {# TODO future community events not sure how this needs to be set up - ticket  DIGITAL-293 #}
+          {# [placeholder Upcoming events] #}
+          {# NOT-MIGRATED
+            {{ partial '@digital_gov/partials/core/get-upcomingevents.html' }}
+          #}
+        </div>
       </div>
-
     </section>
-
   </article>
 </main>

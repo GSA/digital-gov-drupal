@@ -9,15 +9,18 @@ dependencies:
     - field.field.node.community.field_dg_highlight
     - field.field.node.community.field_dg_logo
     - field.field.node.community.field_dg_shortname
+    - field.field.node.community.field_kicker
     - field.field.node.community.field_members
     - field.field.node.community.field_page_weight
     - field.field.node.community.field_primary_image
     - field.field.node.community.field_slug
     - field.field.node.community.field_subscribe_email_subject
     - field.field.node.community.field_summary
+    - field.field.node.community.field_topics
     - node.type.community
   module:
     - options
+    - svg_image
     - text
     - user
 id: node.community.default
@@ -30,75 +33,49 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 101
+    weight: 2
+    region: content
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
     region: content
   field_deck:
     type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 108
+    weight: 5
     region: content
   field_dg_acronym:
     type: list_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 120
-    region: content
-  field_dg_highlight:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 121
+    weight: 6
     region: content
   field_dg_logo:
-    type: entity_reference_entity_view
+    type: image
     label: above
     settings:
-      view_mode: default
-      link: false
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: eager
+      svg_attributes:
+        width: null
+        height: null
+      svg_render_as_image: true
     third_party_settings: {  }
-    weight: 112
+    weight: 8
     region: content
-  field_dg_shortname:
+  field_kicker:
     type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 118
-    region: content
-  field_members:
-    type: number_integer
-    label: above
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    weight: 119
-    region: content
-  field_page_weight:
-    type: number_integer
-    label: above
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    weight: 102
-    region: content
-  field_primary_image:
-    type: entity_reference_entity_view
-    label: above
-    settings:
-      view_mode: default
-      link: false
-    third_party_settings: {  }
-    weight: 114
+    weight: 11
     region: content
   field_slug:
     type: string
@@ -106,7 +83,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 106
+    weight: 3
     region: content
   field_subscribe_email_subject:
     type: string
@@ -114,18 +91,25 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 117
+    weight: 7
     region: content
-  field_summary:
-    type: text_default
+  field_topics:
+    type: entity_reference_label
     label: above
-    settings: {  }
+    settings:
+      link: true
     third_party_settings: {  }
-    weight: 104
+    weight: 17
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 1
     region: content
-hidden: {  }
+hidden:
+  field_dg_highlight: true
+  field_dg_shortname: true
+  field_members: true
+  field_page_weight: true
+  field_primary_image: true
+  field_summary: true

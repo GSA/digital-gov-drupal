@@ -1,31 +1,60 @@
-uuid: d2ed1476-0f0b-4449-af79-875e98e6a23c
+uuid: 5fa19904-04a9-4513-8bb5-10867585ae57
 langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.image.field_caption
+    - field.field.media.image.field_credit
     - field.field.media.image.field_media_image
-    - image.style.large
     - media.type.image
+    - responsive_image.styles.digital_gov_responsive_images
   module:
-    - image
+    - responsive_image
+    - user
 id: media.image.default
 targetEntityType: media
 bundle: image
 mode: default
 content:
-  field_media_image:
-    type: image
+  created:
+    type: timestamp
     label: hidden
     settings:
+      date_format: medium
+      custom_date_format: ''
+      timezone: ''
+      tooltip:
+        date_format: long
+        custom_date_format: ''
+      time_diff:
+        enabled: false
+        future_format: '@interval hence'
+        past_format: '@interval ago'
+        granularity: 2
+        refresh: 60
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_media_image:
+    type: responsive_image
+    label: above
+    settings:
+      responsive_image_style: digital_gov_responsive_images
       image_link: ''
-      image_style: large
       image_loading:
         attribute: lazy
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  uid:
+    type: author
+    label: hidden
+    settings: {  }
     third_party_settings: {  }
     weight: 0
     region: content
 hidden:
-  created: true
+  field_caption: true
+  field_credit: true
   name: true
   thumbnail: true
-  uid: true

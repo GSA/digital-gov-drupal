@@ -1,0 +1,24 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 888d7b2e-4872-4c90-a3e9-554cae9ce376
+  bundle: resource_topics
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: Technology
+  weight:
+    -
+      value: 4
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

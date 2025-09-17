@@ -1,0 +1,14 @@
+uuid: 7632ffa8-086c-44c1-bf9f-c350e2059f78
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.guide_navigation_admin
+  module:
+    - user
+id: user_add_role_action.guide_navigation_admin
+label: 'Add the Guide Navigation Admin role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: guide_navigation_admin

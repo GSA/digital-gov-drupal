@@ -32,9 +32,66 @@ class RoboFile extends Tasks
     }
 
     /**
+     * Generate a static site from Drupal with Tome.
+     *
+     * @command drupal-project:static
+     *
+     * @aliases static
+     *
+     * @param bool $incremental
+     *   (Default false) If only content changes have happened, you can set this to 1 to make
+     *   this command faster.
+     * @param bool $start_server
+     *   (Default true) Start an HTTP server with node.
+     *
+     * @return \Robo\ResultData
+     */
+    public function static(
+        InputInterface $input,
+        OutputInterface $output,
+        bool $incremental = FALSE,
+        bool $start_server = TRUE,
+    ): ResultData
+    {
+        $io = new SymfonyStyle($input, $output);
+        if (!$incremental && is_dir("html")) {
+            $io->info('Removing pre-existing static site.');
+            $this->_cleanDir("html");
+        } else {
+            $io->info('Doing an incremental update');
+        }
+
+        $cms_url = $this->taskExec('./drush.sh state:get xmlsitemap_base_url')->printOutput(false)->run()->getOutputData() ?: getenv('DRUSH_OPTIONS_URI') ?: 'http://digitalgov.lndo.site';
+        $static_url = getenv('STATIC_URI') ?: 'http://127.0.0.1:8080';
+        $theme_name = "digital_gov";
+        $theme_path = "themes/custom/{$theme_name}";
+        $this->_exec('./drush.sh state:set xmlsitemap_base_url ' . $static_url);
+        $this->_exec('./drush.sh xmlsitemap:regenerate');
+        $this->_exec('./drush.sh tome:static --path-count=1 --retry-count=3 -y --uri=' . $static_url);
+        if (is_dir("web/$theme_path/static")) {
+            $io->info('Copy static assets to static site -> $theme_path/static');
+            $this->_copyDir("web/$theme_path/static", "html/$theme_path/static");
+        }
+        if (is_file("web/robots.txt")) {
+            $io->info('Copy Robots.txt to static site');
+            $this->_copy("web/robots.txt", "html/robots.txt");
+        }
+        $this->_exec('./drush.sh state:set xmlsitemap_base_url ' . $cms_url);
+        $this->_exec('./drush.sh xmlsitemap:regenerate');
+        if ($start_server) {
+            $this->_exec('npm install && npx http-server html');
+        }
+
+        return new ResultData();
+    }
+
+
+    /**
      * Export default content.
      *
      * @command drupal-project:export-content
+     *
+     * @aliases export-content
      *
      * @return \Robo\ResultData
      *
@@ -52,6 +109,8 @@ class RoboFile extends Tasks
                 'redirect',
                 'user',
                 'config_pages',
+                'taxonomy_term',
+                'sitewide_alert'
             ],
         ]
     ): ResultData
@@ -73,5 +132,211 @@ class RoboFile extends Tasks
         return new ResultData();
     }
 
+    /**
+     * Shared functionality to help create and re-tag a release.
+     *
+     * @param string $hotfix_or_release
+     *    Either 'hotfix' or 'release'.
+     * @param string $semantic_version
+     *    A semantic version number in the form x.y.z. Release must end in 0.
+     *
+     * @return array
+     *    An indexed array of [$tag_description, $new_branch_name, $source_branch].
+     *
+     * @throws \Exception
+     */
 
+    protected function getVariablesForRelease(string $hotfix_or_release, string $semantic_version): array
+    {
+        if (!in_array($hotfix_or_release, ['hotfix', 'release'])) {
+            throw new InvalidArgumentException("hotfix_or_release must be either 'hotfix' or 'release', '$hotfix_or_release' given.");
+        }
+
+        // @see https://regex101.com/r/Ly7O1x/3/.
+        if ($hotfix_or_release === 'hotfix') {
+            if (!preg_match('/^(?P<major>0|[1-9]\d*)\.(?P<minor>0|[1-9]\d*)\.(?P<patch>[1-9]\d*)$/', $semantic_version)) {
+                throw new InvalidArgumentException("semantic_version must be in the form x.y.z, where z is greater than 0, '$semantic_version' given.");
+            }
+        } else if (!preg_match('/^(?P<major>0|[1-9]\d*)\.(?P<minor>0|[1-9]\d*)\.(?P<patch>0)$/', $semantic_version)) {
+            throw new InvalidArgumentException("semantic_version must be in the form x.y.z, where z is 0, '$semantic_version' given.");
+        }
+        $this->_exec('git status');
+        if (`git status --porcelain`) {
+            throw new \Exception('Your "git status" must be clean of any changes or untracked files before continuing. Please see the output of "git status" above.');
+        }
+        if ($hotfix_or_release === 'hotfix') {
+            $source_branch = 'main';
+            $tag_description = "Hotfix version $semantic_version";
+        } else {
+            $source_branch = 'develop';
+            $tag_description = "Release version $semantic_version";
+        }
+
+        $new_branch_name = "$hotfix_or_release/$semantic_version";
+
+        return [$tag_description, $new_branch_name, $source_branch];
+    }
+
+    /**
+     * Create a release.
+     *
+     * @command drupal-project:create-release
+     *
+     * @aliases create-release
+     *
+     * @param string $hotfix_or_release
+     *   Either 'hotfix' or 'release'.
+     * @param string $semantic_version
+     *   A semantic version number in the form x.y.z. Release must end in 0.
+     *
+     * @return \Robo\ResultData
+     *
+     * @throws \Exception
+     */
+    public function createRelease(
+        InputInterface $input,
+        OutputInterface $output,
+        string $hotfix_or_release,
+        string $semantic_version,
+    ): ResultData
+    {
+        [$tag_description, $new_branch_name, $source_branch] = $this->getVariablesForRelease($hotfix_or_release, $semantic_version);
+
+        `git fetch`;
+        // Checkout the branch that the release will be created from.
+        $this->taskGitStack()
+            ->stopOnFail()
+            ->checkout($source_branch)
+            ->run();
+
+        // If you trying to test this function, you will need to temp change
+        // $source_branch to whatever branch you are working in, otherwise,
+        // your changes will get wiped out.
+        // You will also want to comment the following line out, since it will
+        // also wipe out your changes.
+        `git reset --hard origin/$source_branch`;
+
+        // Create the new release branch.
+        `git checkout -b $new_branch_name`;
+
+        // Create a new release tag and push the release branch and tag.
+        $this->taskGitStack()
+            ->stopOnFail()
+            ->push('origin', $new_branch_name)
+            ->tag("v$semantic_version", $tag_description)
+            ->push('origin', "v$semantic_version")
+            ->run();
+
+        return new ResultData();
+    }
+
+    /**
+     * Re-creates the tag for a release after updates have been pushed.
+     *
+     * The release branch will already be up to date because a feature branch
+     * should have been pushed to it, but the initial tag will be out of date
+     * now. This checks out the current version of the release, deletes the tag
+     * then pushes back up the tag.
+     *
+     * @command drupal-project:re-tag-release
+     *
+     * @aliases re-tag
+     *
+     * @param string $hotfix_or_release
+     *   Either 'hotfix' or 'release'.
+     * @param string $semantic_version
+     *   A semantic version number in the form x.y.z. Release must end in 0.
+     *
+     * @return \Robo\ResultData
+     *
+     * @throws \Exception
+     */
+    public function reTagRelease(
+        InputInterface $input,
+        OutputInterface $output,
+        string $hotfix_or_release,
+        string $semantic_version,
+    ): ResultData
+    {
+        [$tag_description, $new_branch_name] = $this->getVariablesForRelease($hotfix_or_release, $semantic_version);
+
+        `git fetch`;
+        // Check back out the release branch that has been updated by a feature
+        // request and is ahead of the source branch.
+        $this->taskGitStack()
+            ->stopOnFail()
+            ->checkout($new_branch_name)
+            ->run();
+
+        // Ensure that the release is at the latest.
+        `git reset --hard origin/$new_branch_name`;
+
+        // Delete the old tag locally and remotely.
+        `git tag --delete v$semantic_version`;
+        `git push origin --delete v$semantic_version`;
+
+        // Create a new tag of the same named based on the updated release
+        // branch.
+        $this->taskGitStack()
+            ->stopOnFail()
+            ->tag("v$semantic_version", $tag_description)
+            ->push('origin', "v$semantic_version")
+            ->run();
+
+        return new ResultData();
+    }
+
+    /**
+     * Run PHPStan validation.
+     *
+     * @command validate:phpstan
+     */
+    public function validatePhpstan(): ResultData
+    {
+        if (!$this->taskExec('vendor/bin/phpstan')
+            ->option('memory-limit', '-1', '=')
+            ->run()->wasSuccessful()) {
+            $this->printError('PHPStan errors found');
+            return new ResultData(ResultData::EXITCODE_ERROR);
+        }
+        $this->sayWithWrapper('SUCCESS: No PHPStan errors found.');
+        return new ResultData();
+    }
+
+    /**
+     * Run Twig validation.
+     *
+     * @command validate:twig
+     */
+    public function validateTwig(): ResultData
+    {
+        if (!$this->taskExec('vendor/bin/twig-cs-fixer')
+            ->arg('lint')
+            ->run()->wasSuccessful()) {
+            $this->printError('Twig errors found. Use vendor/bin/twig-cs-fixer lint --fix to automatically fix.');
+            return new ResultData(ResultData::EXITCODE_ERROR);
+        }
+        $this->sayWithWrapper('SUCCESS: No PHPStan errors found.');
+        return new ResultData();
+    }
+
+    /**
+     * Say a message but with a '---' wrapper around it.
+     */
+    protected function sayWithWrapper($message)
+    {
+        $this->say('');
+        $this->say(str_repeat('-', strlen($message)));
+        $this->say($message);
+        $this->say(str_repeat('-', strlen($message)));
+        $this->say('');
+    }
+
+    /**
+     * Print an error message.
+     */
+    protected function printError($message)
+    {
+        $this->yell($message, 40, 'red');
+    }
 }

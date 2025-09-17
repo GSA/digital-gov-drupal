@@ -1,0 +1,59 @@
+uuid: be5022e3-944d-4b14-8730-008223078059
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.featured_resource
+    - field.field.node.short_post.field_deck
+    - field.field.node.short_post.field_external_url
+    - field.field.node.short_post.field_kicker
+    - field.field.node.short_post.field_short_post_type
+    - field.field.node.short_post.field_slug
+    - field.field.node.short_post.field_source
+    - field.field.node.short_post.field_summary
+    - field.field.node.short_post.field_topics
+    - node.type.short_post
+  module:
+    - link
+    - text
+    - user
+id: node.short_post.featured_resource
+targetEntityType: node
+bundle: short_post
+mode: featured_resource
+content:
+  field_external_url:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: true
+      url_plain: true
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_kicker:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_summary:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  content_moderation_control: true
+  field_deck: true
+  field_short_post_type: true
+  field_slug: true
+  field_source: true
+  field_topics: true
+  links: true

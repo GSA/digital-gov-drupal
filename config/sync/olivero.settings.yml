@@ -8,6 +8,7 @@ features:
   favicon: true
   node_user_picture: false
 logo:
+  path: ''
   use_default: false
 third_party_settings:
   shortcut:

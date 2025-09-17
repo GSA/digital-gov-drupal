@@ -1,0 +1,36 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 86452891-0ee7-49db-9753-b677f2522ee1
+  bundle: image
+  default_langcode: en
+  depends:
+    afa47317-4ae3-4244-8009-8c970730b9cc: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: hcd-discovery-operations.png
+  created:
+    -
+      value: 1736369803
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
+  field_credit:
+    -
+      value: 'Miray Celebi Kaba/DigitalVision Vectors via Getty Images'
+  field_media_image:
+    -
+      entity: afa47317-4ae3-4244-8009-8c970730b9cc
+      alt: 'Illustration of a man taking a survey and a woman providing a testimonial'
+      title: ''
+      width: 1200
+      height: 630

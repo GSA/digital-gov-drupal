@@ -1,0 +1,30 @@
+{#
+/**
+ * @file
+ * Theme override to display a media item.
+ *
+ * Available variables:
+ * - name: Name of the media.
+ * - content: Media content.
+ *
+ * @see template_preprocess_media()
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+    'media',
+    'media--type-' ~ media.bundle()|clean_class,
+    not media.isPublished() ? 'media--unpublished',
+    view_mode ? 'media--view-mode-' ~ view_mode|clean_class,
+  ]
+%}
+{% set document_path = media.field_media_file.entity.uri.value|file_url %}
+{% set document_filemime = media.field_media_file.entity.filemime.value %}
+
+<div{{ attributes.addClass(classes) }}>
+  {% if content %}
+    <a href="{{ document_path }}" class="usa-link" type="{{ document_filemime }}" >{{ name }}</a>
+  {% endif %}
+</div>

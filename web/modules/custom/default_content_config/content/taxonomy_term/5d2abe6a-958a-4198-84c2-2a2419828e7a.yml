@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 5d2abe6a-958a-4198-84c2-2a2419828e7a
+  bundle: hcd_glossary
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: Clustering
+  description:
+    -
+      value: '<p>A research analysis method characterized by grouping of words or phrases with a single or set of commonalities. In design research, this is often enacted physically by the assembly of words or phrases written on single pieces of paper into a proximate group.</p>'
+      format: single_inline_html
+  weight:
+    -
+      value: 4
+  parent:
+    -
+      target_id: 0
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

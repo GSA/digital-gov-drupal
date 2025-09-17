@@ -1,0 +1,52 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: fd18104a-d557-4851-a7cb-dd573d347c35
+  default_langcode: en
+default:
+  preferred_langcode:
+    -
+      value: en
+  preferred_admin_langcode:
+    -
+      value: en
+  name:
+    -
+      value: guidenavadmin@example.com
+  pass:
+    -
+      value: $2y$10$cYsRV4MUpmsENfB2LNP.9e2nyrP5ncYFr0z12N09Dh20H.iAV8pzS
+      existing: ''
+      pre_hashed: true
+  mail:
+    -
+      value: guidenavadmin@example.com
+  timezone:
+    -
+      value: America/New_York
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1735751268
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  init:
+    -
+      value: guidenavadmin@example.com
+  roles:
+    -
+      target_id: guide_navigation_admin
+  role_change:
+    -
+      target_id: __role_delegation_empty_field_value__
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

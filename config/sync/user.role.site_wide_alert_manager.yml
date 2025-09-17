@@ -1,0 +1,19 @@
+uuid: 34c4f587-4cdf-4e9a-b79c-25af12ecb23c
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - sitewide_alert
+id: site_wide_alert_manager
+label: 'Site Wide Alert Manager'
+weight: 12
+is_admin: null
+permissions:
+  - 'access content overview'
+  - 'add sitewide alert entities'
+  - 'administer sitewide alert entities'
+  - 'delete sitewide alert entities'
+  - 'edit sitewide alert entities'
+  - 'view published sitewide alert entities'
+  - 'view unpublished sitewide alert entities'

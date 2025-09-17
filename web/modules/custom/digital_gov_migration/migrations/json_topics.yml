@@ -1,0 +1,197 @@
+id: json_topics
+label: 'Import Topics from Digital.gov Hugo'
+migration_tags:
+  - 'digitalgov'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json_topics
+  urls:
+    - https://federalist-466b7d92-5da1-4208-974f-d61fd4348571.sites.pages.cloud.gov/preview/gsa/digitalgov.gov/nl-json-endpoints/topics/index.json
+  # This is the path to where the data are in the JSON.
+  item_selector: items
+  fields:
+    - name: src_unique_id
+      label: 'Unique ID'
+      selector: uid
+    - name: title
+      label: 'Title'
+      selector: field_title
+    - name: field_deck
+      label: 'Deck'
+      selector: field_deck
+    - name: field_summary
+      label: 'Summary'
+      selector: field_summary
+    - name: changed
+      label: 'Modified Time'
+      selector: date_modified
+    - name: field_page_weight
+      label: 'Weight'
+      selector: field_page_weight
+    - name: field_legislation
+      label: 'Legislation URL'
+      selector: field_legislation
+    - name: legislation_title
+      label: 'Legislation title'
+      selector: legislation_title
+    - name: legislation_link
+      label: 'Legislation link'
+      selector: legislation_link
+    - name: field_featured_communities
+      label: 'Featured Communities'
+      selector: field_featured_communities
+    - name: field_featured_resources
+      label: 'Featured Resources'
+      selector: field_featured_resources
+    - name: field_featured_links
+      label: 'Featured Resources'
+      selector: field_featured_links
+    - name: field_slug
+      label: 'Slug'
+      selector: slug
+    - name: resource_topic
+      label: "Resource Topic"
+      selector: resource_topic
+    - name: alias
+      label: 'URL Alias'
+      selector: url
+    - name: redirects
+      label: 'Redirects'
+      selector: redirects
+  ids:
+    src_unique_id:
+      type: string
+  constants:
+    ALIAS_SEARCH: '/preview/gsa/digitalgov.gov/nl-json-endpoints'
+    ALIAS_REPLACE: ''
+    FORMAT_EMBEDDED: 'html_embedded_content'
+    FORMAT_MULTI: 'multiline_inline_html'
+    FORMAT_SINGLE: 'single_inline_html'
+    FORMAT_PLAIN: 'plain_text'
+    UID: 'uid'
+process:
+  skip_empty_required_fields:
+    plugin: skip_on_condition
+    condition:
+      plugin: empty
+    source: title
+    method: row
+    message: 'Missing field_title which sets title field'
+  title: title
+  field_deck/value:
+    - plugin: callback
+      callable: digital_gov_migration_html_entity_decode
+      source: field_deck
+  field_deck/format: constants/FORMAT_SINGLE
+  field_summary/value:
+    - plugin: callback
+      callable: digital_gov_migration_html_entity_decode
+      source: field_summary
+  field_summary/format: constants/FORMAT_SINGLE
+  changed:
+    plugin: callback
+    callable: strtotime
+    source: created
+  field_page_weight: field_page_weight
+  field_legislation/uri:
+   - plugin: callback
+     callable: digital_gov_migration_make_url_local
+     source: field_legislation
+  field_legislation/title:
+    - plugin: callback
+      callable: digital_gov_migration_html_entity_decode
+      source: legislation_title
+  field_slug: field_slug
+  field_featured_communities:
+    plugin: migration_lookup
+    # source is where we are getting values to lookup
+    source: field_featured_communities
+    # the migration to look ids up in
+    migration: json_communities
+    # the migration to make any stub entities
+    stub_id: json_communities
+    no_stub: true
+
+  field_featured_resources:
+  - plugin: skip_on_condition
+    condition: empty
+    source: field_featured_resources
+    method: process
+  - plugin: sub_process
+    source: field_featured_resources
+    include_source: true
+    source_key: root
+    process:
+      target_id:
+        - plugin: migration_lookup
+          migration: json_topics__resource_paragraphs
+          source: resource_uid
+        - plugin: extract
+          index: [0]
+      target_revision_id:
+        - plugin: migration_lookup
+          migration: json_topics__resource_paragraphs
+          source: resource_uid
+        - plugin: extract
+          index: [1]
+
+  field_featured_links/target_id:
+      - plugin: skip_on_condition
+        condition: empty
+        source: field_featured_links
+        method: process
+      - plugin: migration_lookup
+        migration: json_topics__featured_links
+        source: field_featured_links
+      - plugin: extract
+        index: [0]
+  field_featured_links/target_revision_id:
+      - plugin: skip_on_condition
+        condition: empty
+        source: field_featured_links
+        method: process
+      - plugin: migration_lookup
+        migration: json_topics__featured_links
+        source: field_featured_links
+      - plugin: extract
+        index: [1]
+  field_resource_topics:
+    - plugin: entity_lookup
+      entity_type: taxonomy_term
+      value_key: name
+      source: resource_topic
+      bundle_key: vid
+      bundle: resource_topics
+  # Setting the moderation state to published will automatically set status=1.
+  moderation_state:
+    plugin: default_value
+    default_value: published
+  path/alias:
+    plugin: callback
+    callable: str_replace
+    # The federalist build puts a relative path that is too much.
+    source: [constants/ALIAS_SEARCH, constants/ALIAS_REPLACE, alias]
+    unpack_source: true
+  # Must disable auto-creating path auto in order to set alias explicitly.
+  path/pathauto:
+    plugin: default_value
+    default_value: false
+  # See digital_gov_migration_entity_insert().
+  redirects:
+    plugin: sub_process
+    source: redirects
+    process:
+      redirect_source/path: from
+      status_code:
+        plugin: default_value
+        default_value: 301
+
+destination:
+  plugin: entity:node
+  default_bundle: topics
+
+migration_dependencies:
+  required:
+    - json_topics__resource_paragraphs
+    - json_topics__featured_links
