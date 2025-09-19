@@ -1,5 +1,8 @@
 name: Deploy App
 
+permissions:
+  contents: read
+
 on:
   workflow_call:
 
