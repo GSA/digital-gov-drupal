@@ -1,5 +1,9 @@
 name: Validation
 
+permissions:
+  contents: read
+  pull-requests: read
+
 on:
   # Commit message validation requires a target branch which is only available in a PR.
   pull_request:
