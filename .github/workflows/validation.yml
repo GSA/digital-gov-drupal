@@ -2,7 +2,7 @@ name: Validation
 
 on:
   # Commit message validation requires a target branch which is only available in a PR.
-  # pull_request:
+  pull_request:
   push:
     branches:
       - 'feature/**'
