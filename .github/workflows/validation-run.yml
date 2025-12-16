@@ -56,3 +56,16 @@ jobs:
                     if [ "$status1" -ne 0 ]; then
                       exit 1
                     fi
+
+            -   name: Validate pull requests
+                if: github.event_name == 'pull_request'
+                run: |
+                    # Initialize status variables to 0
+                    status1=0
+
+                    ROBO_VALIDATE_TARGET_BRANCH="${{ github.base_ref }}" ROBO_VALIDATE_CURRENT_BRANCH="${{ github.head_ref }}" vendor/bin/robo validate:all
+
+                    # Exit with a non-zero status if the command failed
+                    if [ "$status1" -ne 0 ]; then
+                      exit 1
+                    fi
