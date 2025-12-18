@@ -2,6 +2,12 @@ name: digitalgov
 config:
   via: 'nginx:1.25'
 services:
+  appserver:
+    build_as_root:
+      - sed 's|mozilla\/AddTrust_External_Root.crt|#mozilla\/AddTrust_External_Root.crt|g' -i /etc/ca-certificates.conf
+      - cp /app/zscaler_cert.pem /usr/local/share/ca-certificates/zscaler_cert.crt
+      - chmod 644 /usr/local/share/ca-certificates/zscaler_cert.crt
+      - update-ca-certificates
   cache:
     type: 'memcached:1.5.12'
   node:

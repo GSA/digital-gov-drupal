@@ -997,10 +997,14 @@ class LandoCommands extends CommonCommands
         // This allows the project to be copied from any descendant and use
         // the original directory + suffix.
         $this->ensureOriginalInstallDirectorySet();
-        $this->_exec('./robo.sh lando:setup-urls')->stopOnFail();
-        $this->_exec('lando destroy -y')->stopOnFail();
-        $this->_exec('lando start')->stopOnFail();
-        $this->_exec('lando si')->stopOnFail();
+        $io->info('About to run: ./robo.sh lando:setup-urls');
+        $this->_exec('./robo.sh lando:setup-urls');
+        $io->info('About to run: lando destroy -y --debug');
+        $this->_exec('lando destroy -y --debug');
+        $io->info('About to run: lando start --debug');
+        $this->_exec('lando start --debug');
+        $io->info('About to run: lando si --debug');
+        $this->_exec('lando si --debug');
         $io->success('Your environment has been started and Drupal site installed! Please use the one time login link to login.');
         if ($io->confirm('Would you like to add any personal services (like PhpMyadmin, Mailhog, etc)? You can run this at any time using "./robo.sh lando:set-personal-services"', false)) {
             $this->_exec('./robo.sh lando:set-personal-services');
