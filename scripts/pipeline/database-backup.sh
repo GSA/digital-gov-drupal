@@ -19,6 +19,11 @@ wait_for_tunnel() {
 
 date
 
+# Enable SSH if in prod
+if [[ ${CF_SPACE} = "prod" ]]; then
+  echo "Enabling ssh"
+  cf enable-ssh "${PROJECT}-drupal-${CF_SPACE}"
+fi
 ## Create a tunnel through the application to pull the database.
 echo "Creating tunnel to database..."
 cf connect-to-service --no-client "${PROJECT}-${DATABASE_BACKUP_BASTION_NAME}-${CF_SPACE}" "${PROJECT}-mysql-${CF_SPACE}" > backup.txt &
@@ -26,6 +31,12 @@ cf connect-to-service --no-client "${PROJECT}-${DATABASE_BACKUP_BASTION_NAME}-${
 wait_for_tunnel
 
 date
+
+## Disable SSH if in prod -- the existing ssh connection will persist.
+if [[ ${CF_SPACE} = "prod" ]]; then
+  echo "Connection established; disabling ssh"
+  cf disable-ssh "${PROJECT}-drupal-${CF_SPACE}"
+fi
 
 ## Create variables and credential file for MySQL login.
 echo "Backing up '${CF_SPACE}' database..."
@@ -106,10 +117,6 @@ echo "Cleaning up old connections..."
   kill_pids "connect-to-service"
 }
 
-## Disable ssh.
-#echo "Disabling ssh..."
-#cf disable-ssh "${PROJECT}-drupal-${CF_SPACE}"
-
 rm -rf backup.txt ~/.mysql
 
 echo "Compressing '${CF_SPACE}' database..."
@@ -120,26 +127,26 @@ echo "Compressing '${CF_SPACE}' database..."
 
 echo "Setting S3 credentials..."
 {
-  s3_credentials=$(cf ssh "${PROJECT}-database-backup-bastion-${CF_SPACE}" -c "env | sort | grep VCAP_SERVICES | sed 's/VCAP_SERVICES=//' | jq -r '.s3[] | select(.name == \"${PROJECT}-backup-${CF_SPACE}\")'")
-  export s3_credentials
-  
-  AWS_ACCESS_KEY_ID=$(echo "${s3_credentials}" | jq -r '.credentials.access_key_id')
-  export AWS_ACCESS_KEY_ID
+  SERVICE_INSTANCE_NAME="${PROJECT}-backup-${CF_SPACE}"
+  KEY_NAME="tmp-key-${SERVICE_INSTANCE_NAME}"
+  cf create-service-key $SERVICE_INSTANCE_NAME $KEY_NAME
 
-  bucket=$(echo "${s3_credentials}" | jq -r '.credentials.bucket')
-  export bucket
+  S3_CREDENTIALS=$(cf service-key "${SERVICE_INSTANCE_NAME}" "${KEY_NAME}" | tail -n +2)
 
-  AWS_DEFAULT_REGION=$(echo "${s3_credentials}" | jq -r '.credentials.region')
-  export AWS_DEFAULT_REGION
+  export AWS_ACCESS_KEY_ID=$(echo "${S3_CREDENTIALS}" | jq -r '.credentials.access_key_id')
+  export AWS_SECRET_ACCESS_KEY=$(echo "${S3_CREDENTIALS}" | jq -r '.credentials.secret_access_key')
+  export BUCKET_NAME=$(echo "${S3_CREDENTIALS}" | jq -r '.credentials.bucket')
+  export AWS_DEFAULT_REGION=$(echo "${S3_CREDENTIALS}" | jq -r '.credentials.region')
 
-  AWS_SECRET_ACCESS_KEY=$(echo "${s3_credentials}" | jq -r '.credentials.secret_access_key')
-  export AWS_SECRET_ACCESS_KEY
 } >/dev/null 2>&1
 
 echo "Saving to backup bucket..."
 {
-  aws s3 cp "${TIMESTAMP}.sql.gz" "s3://${bucket}/$(date +%Y)/$(date +%m)/$(date +%d)/" --no-verify-ssl 2>/dev/null
-  aws s3 cp "${TIMESTAMP}.sql.gz" "s3://${bucket}/latest.sql.gz" --no-verify-ssl 2>/dev/null
+  aws s3 cp "${TIMESTAMP}.sql.gz" "s3://${BUCKET_NAME}/$(date +%Y)/$(date +%m)/$(date +%d)/" --no-verify-ssl 2>/dev/null
+  aws s3 cp "${TIMESTAMP}.sql.gz" "s3://${BUCKET_NAME}/latest.sql.gz" --no-verify-ssl 2>/dev/null
 } >/dev/null 2>&1
+
+echo "Deleting s3 credentials (service key)"
+cf delete-service-key $SERVICE_INSTANCE_NAME $KEY_NAME -f
 
 date
