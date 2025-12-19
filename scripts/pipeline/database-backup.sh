@@ -19,10 +19,12 @@ wait_for_tunnel() {
 
 date
 
-# Enable SSH if in prod
+## Enable SSH if in prod.
 if [[ ${CF_SPACE} = "prod" ]]; then
   echo "Enabling ssh"
-  cf enable-ssh "${PROJECT}-drupal-${CF_SPACE}"
+  cf allow-space-ssh "${CF_SPACE}"
+  cf enable-ssh "${PROJECT}-${DATABASE_BACKUP_BASTION_NAME}-${CF_SPACE}"
+  cf restart "${PROJECT}-${DATABASE_BACKUP_BASTION_NAME}-${CF_SPACE}"
 fi
 ## Create a tunnel through the application to pull the database.
 echo "Creating tunnel to database..."
@@ -35,7 +37,8 @@ date
 ## Disable SSH if in prod -- the existing ssh connection will persist.
 if [[ ${CF_SPACE} = "prod" ]]; then
   echo "Connection established; disabling ssh"
-  cf disable-ssh "${PROJECT}-drupal-${CF_SPACE}"
+  cf disallow-space-ssh "${CF_SPACE}"
+  cf disable-ssh "${PROJECT}-${DATABASE_BACKUP_BASTION_NAME}-${CF_SPACE}"
 fi
 
 ## Create variables and credential file for MySQL login.
