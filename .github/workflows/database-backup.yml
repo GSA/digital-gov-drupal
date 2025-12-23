@@ -17,7 +17,7 @@ on:
       DATABASE_BACKUP_BASTION_NAME:
         required: true
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 6 * * *"
 
 jobs:
   startBastion:
@@ -29,46 +29,13 @@ jobs:
         uses: actions/checkout@v4
       - name: Set env
         run: |
-          #BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)
           BRANCH=main
-          COMPOSER_DEV=1
-          GSA_AUTH_KEY=${{ secrets.GSA_AUTH_DEVELOPMENT_KEY }}
-          case ${BRANCH} in
-            develop)
-              CF_SPACE="dev"
-              DRUPAL_MEMORY=${{ vars.DEVELOP_CMS_MEMORY }}
-              DRUPAL_INSTANCES=${{ vars.DEVELOP_INSTANCES }}
-              ;;
-            main)
-              CF_SPACE="prod"
-              COMPOSER_DEV=0
-              DRUPAL_MEMORY=${{ vars.MAIN_CMS_MEMORY }}
-              DRUPAL_INSTANCES=${{ vars.MAIN_INSTANCES }}
-              GSA_AUTH_KEY=${{ secrets.GSA_AUTH_PRODUCTION_KEY }}
-              ;;
-            stage)
-              CF_SPACE="staging"
-              COMPOSER_DEV=0
-              DRUPAL_MEMORY=${{ vars.STAGE_CMS_MEMORY }}
-              DRUPAL_INSTANCES=${{ vars.STAGE_INSTANCES }}
-              ;;
-          esac
+          CF_SPACE="prod"
 
-          echo "APP_NAME=drupal" | tee -a $GITHUB_ENV
           echo "BRANCH=${BRANCH}" | tee -a $GITHUB_ENV
-          echo "BUILDPACK_PORT=${{ vars.BUILDPACK_PORT }}" | tee -a $GITHUB_ENV
           echo "CF_SPACE=${CF_SPACE}" | tee -a $GITHUB_ENV
-          echo "COMPOSER_DEV=${COMPOSER_DEV}" | tee -a $GITHUB_ENV
-          echo "DRUPAL_INSTANCES=${DRUPAL_INSTANCES}" | tee -a $GITHUB_ENV
-          echo "DRUPAL_MEMORY=${DRUPAL_MEMORY}" | tee -a $GITHUB_ENV
-          echo "GSA_AUTH_KEY=${GSA_AUTH_KEY}" | tee -a $GITHUB_ENV
-          echo "HASH_SALT=${{ secrets.HASH_SALT }}" | tee -a $GITHUB_ENV
-          echo "WAF_NAME=waf"| tee -a $GITHUB_ENV
 
-          if [ "${COMPOSER_DEV}" = "1" ]; then
-            sed -i 's/--no-dev //' .bp-config/options.json || exit 0
-          fi
-      - name: Install basic dependancies
+      - name: Install basic dependencies
         run: ./scripts/pipeline/deb-basic-deps.sh
       - name: Install Cloudfoundry CLI
         run: ./scripts/pipeline/deb-cf-install.sh
@@ -97,46 +64,13 @@ jobs:
         uses: actions/checkout@v4
       - name: Set env
         run: |
-          #BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)
           BRANCH=main
-          COMPOSER_DEV=1
-          GSA_AUTH_KEY=${{ secrets.GSA_AUTH_DEVELOPMENT_KEY }}
-          case ${BRANCH} in
-            develop)
-              CF_SPACE="dev"
-              DRUPAL_MEMORY=${{ vars.DEVELOP_CMS_MEMORY }}
-              DRUPAL_INSTANCES=${{ vars.DEVELOP_INSTANCES }}
-              ;;
-            main)
-              CF_SPACE="prod"
-              COMPOSER_DEV=0
-              DRUPAL_MEMORY=${{ vars.MAIN_CMS_MEMORY }}
-              DRUPAL_INSTANCES=${{ vars.MAIN_INSTANCES }}
-              GSA_AUTH_KEY=${{ secrets.GSA_AUTH_PRODUCTION_KEY }}
-              ;;
-            stage)
-              CF_SPACE="staging"
-              COMPOSER_DEV=0
-              DRUPAL_MEMORY=${{ vars.STAGE_CMS_MEMORY }}
-              DRUPAL_INSTANCES=${{ vars.STAGE_INSTANCES }}
-              ;;
-          esac
+          CF_SPACE="prod"
 
-          echo "APP_NAME=drupal" | tee -a $GITHUB_ENV
           echo "BRANCH=${BRANCH}" | tee -a $GITHUB_ENV
-          echo "BUILDPACK_PORT=${{ vars.BUILDPACK_PORT }}" | tee -a $GITHUB_ENV
           echo "CF_SPACE=${CF_SPACE}" | tee -a $GITHUB_ENV
-          echo "COMPOSER_DEV=${COMPOSER_DEV}" | tee -a $GITHUB_ENV
-          echo "DRUPAL_INSTANCES=${DRUPAL_INSTANCES}" | tee -a $GITHUB_ENV
-          echo "DRUPAL_MEMORY=${DRUPAL_MEMORY}" | tee -a $GITHUB_ENV
-          echo "GSA_AUTH_KEY=${GSA_AUTH_KEY}" | tee -a $GITHUB_ENV
-          echo "HASH_SALT=${{ secrets.HASH_SALT }}" | tee -a $GITHUB_ENV
-          echo "WAF_NAME=waf"| tee -a $GITHUB_ENV
 
-          if [ "${COMPOSER_DEV}" = "1" ]; then
-            sed -i 's/--no-dev //' .bp-config/options.json || exit 0
-          fi
-      - name: Install basic dependancies
+      - name: Install basic dependencies
         run: ./scripts/pipeline/deb-basic-deps.sh
       - name: Install AWSCLI
         run: ./scripts/pipeline/deb-awscli.sh
@@ -174,46 +108,13 @@ jobs:
         uses: actions/checkout@v4
       - name: Set env
         run: |
-          #BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)
           BRANCH=main
-          COMPOSER_DEV=1
-          GSA_AUTH_KEY=${{ secrets.GSA_AUTH_DEVELOPMENT_KEY }}
-          case ${BRANCH} in
-            develop)
-              CF_SPACE="dev"
-              DRUPAL_MEMORY=${{ vars.DEVELOP_CMS_MEMORY }}
-              DRUPAL_INSTANCES=${{ vars.DEVELOP_INSTANCES }}
-              ;;
-            main)
-              CF_SPACE="prod"
-              COMPOSER_DEV=0
-              DRUPAL_MEMORY=${{ vars.MAIN_CMS_MEMORY }}
-              DRUPAL_INSTANCES=${{ vars.MAIN_INSTANCES }}
-              GSA_AUTH_KEY=${{ secrets.GSA_AUTH_PRODUCTION_KEY }}
-              ;;
-            stage)
-              CF_SPACE="staging"
-              COMPOSER_DEV=0
-              DRUPAL_MEMORY=${{ vars.STAGE_CMS_MEMORY }}
-              DRUPAL_INSTANCES=${{ vars.STAGE_INSTANCES }}
-              ;;
-          esac
+          CF_SPACE="prod"
 
-          echo "APP_NAME=drupal" | tee -a $GITHUB_ENV
           echo "BRANCH=${BRANCH}" | tee -a $GITHUB_ENV
-          echo "BUILDPACK_PORT=${{ vars.BUILDPACK_PORT }}" | tee -a $GITHUB_ENV
           echo "CF_SPACE=${CF_SPACE}" | tee -a $GITHUB_ENV
-          echo "COMPOSER_DEV=${COMPOSER_DEV}" | tee -a $GITHUB_ENV
-          echo "DRUPAL_INSTANCES=${DRUPAL_INSTANCES}" | tee -a $GITHUB_ENV
-          echo "DRUPAL_MEMORY=${DRUPAL_MEMORY}" | tee -a $GITHUB_ENV
-          echo "GSA_AUTH_KEY=${GSA_AUTH_KEY}" | tee -a $GITHUB_ENV
-          echo "HASH_SALT=${{ secrets.HASH_SALT }}" | tee -a $GITHUB_ENV
-          echo "WAF_NAME=waf"| tee -a $GITHUB_ENV
 
-          if [ "${COMPOSER_DEV}" = "1" ]; then
-            sed -i 's/--no-dev //' .bp-config/options.json || exit 0
-          fi
-      - name: Install basic dependancies
+      - name: Install basic dependencies
         run: ./scripts/pipeline/deb-basic-deps.sh
       - name: Install Cloudfoundry CLI
         run: ./scripts/pipeline/deb-cf-install.sh
