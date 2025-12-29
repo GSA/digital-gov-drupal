@@ -1,5 +1,8 @@
 name: Database Restore
 
+permissions:
+  contents: read
+
 on:
   workflow_dispatch:
     inputs:
