@@ -20,8 +20,6 @@ services:
           - digitalgov.docker.local
     volumes:
       - .:/app:delegated
-    # env_file:
-    #   - ./env.local
     environment:
       COMPOSER_MEMORY_LIMIT: -1
       CF_INSTANCE_INDEX: '1'
@@ -33,10 +31,7 @@ services:
   database:
     container_name: digital-gov-database
     image: mariadb:11
-    ports:
-      - 3306:3306
     volumes:
-#     - .:/app:delegated
       - database_data:/var/lib/mysql
     environment:
       MARIADB_ROOT_PASSWORD: "letmein"
