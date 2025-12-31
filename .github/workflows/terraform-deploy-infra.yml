@@ -49,6 +49,7 @@ jobs:
       - name: Start Bastion
         env:
           TF_BASTION: "${{ secrets.TF_BASTION }}"
+          TF_BACKEND_SPACE: "${{ secrets.TF_BACKEND_SPACE }}"
         run: |
           cf allow-space-ssh "${TF_BACKEND_SPACE}" >/dev/null 2>&1
           cf enable-ssh "${TF_BASTION}" >/dev/null 2>&1
@@ -142,6 +143,7 @@ jobs:
       - name: Stop Bastion
         env:
           TF_BASTION: "${{ secrets.TF_BASTION }}"
+          TF_BACKEND_SPACE: "${{ secrets.TF_BACKEND_SPACE }}"
         run: |
           cf stop "${TF_BASTION}"  >/dev/null 2>&1
           cf disallow-space-ssh "${TF_BACKEND_SPACE}" >/dev/null 2>&1
