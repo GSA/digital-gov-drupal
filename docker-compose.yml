@@ -1,0 +1,75 @@
+services:
+  # cms:
+  #   container_name: appserver
+  #   image: devwithlando/php:8.3-fpm-5
+  #   build:
+  #     context: ./
+  #     # args:
+  #     #   - BUID
+  #     #   - BGID
+  #     #   - HOST_ARCH
+  #     #   - BUILD_ENV
+  #   ports:
+  #     - 80:80
+  #     - 443:443
+  #   networks:
+  #     gsa-digital-gov:
+  #       aliases:
+  #         - appserver.apps.internal
+  #         - appserver.docker.local
+  #         - digitalgov.docker.local
+  #   volumes:
+  #     - .:/app:delegated
+  #   # env_file:
+  #   #   - ./env.local
+  #   environment:
+  #     COMPOSER_MEMORY_LIMIT: -1
+  #     CF_INSTANCE_INDEX: '1'
+  #     FIX_FILE_PERMS:
+  #     LANDO_INFO: "{\"appserver_nginx\":{\"service\":\"appserver_nginx\",\"urls\":[\"http://digitalgov.docker.local/\",\"https://digitalgov.docker.local/\"],\"type\":\"drupal-nginx\",\"healthy\":\"unknown\",\"managed\":true,\"webroot\":\"web\",\"config\":{\"vhosts\":\"/home/amykfarrell@ent.ds.gsa.gov/.lando/config/drupal10/default.conf.tpl\",\"php\":\"lando-config/php.ini\"},\"version\":\"1.25\",\"meUser\":\"www-data\",\"hasCerts\":true,\"api\":3,\"hostnames\":[\"appserver_nginx.digitalgov.internal\"]},\"appserver\":{\"service\":\"appserver\",\"urls\":[],\"type\":\"drupal-php\",\"healthy\":\"unknown\",\"via\":\"nginx:1.25\",\"served_by\":\"appserver_nginx\",\"webroot\":\"web\",\"config\":{\"php\":\"lando-config/php.ini\",\"vhosts\":\"/home/amykfarrell@ent.ds.gsa.gov/.lando/config/drupal10/default.conf.tpl\"},\"version\":\"8.3\",\"meUser\":\"www-data\",\"hasCerts\":true,\"api\":3,\"hostnames\":[\"appserver.digitalgov.internal\"],\"hostname\":[]},\"database\":{\"service\":\"digital-gov-database\",\"urls\":[],\"type\":\"drupal-mariadb\",\"healthy\":\"unknown\",\"internal_connection\":{\"host\":\"digital-gov-database\",\"port\":\"3306\"},\"external_connection\":{\"host\":\"127.0.0.1\",\"port\":true},\"healthcheck\":\"mysql --host=digital-gov-database --user=drupal10 --database=drupal10 --password=drupal10 --silent --execute \\\"SHOW TABLES;\\\"\",\"creds\":{\"database\":\"drupal10\",\"password\":\"drupal10\",\"user\":\"drupal10\"},\"config\":{\"database\":\"lando-config/my.cnf\"},\"version\":\"10.6\",\"meUser\":\"www-data\",\"hasCerts\":false,\"api\":3,\"hostnames\":[\"digital-gov-database.digitalgov.internal\"],\"hostname\":[]},\"cache\":{\"service\":\"cache\",\"urls\":[],\"type\":\"memcached\",\"healthy\":\"unknown\",\"internal_connection\":{\"host\":\"cache\",\"port\":\"11211\"},\"external_connection\":{\"host\":\"127.0.0.1\",\"port\":\"not forwarded\"},\"config\":{},\"version\":\"1.5.12\",\"meUser\":\"www-data\",\"hasCerts\":false,\"api\":3,\"hostnames\":[\"cache.digitalgov.internal\"],\"hostname\":[]},\"node\":{\"service\":\"node\",\"urls\":[],\"type\":\"node\",\"healthy\":\"unknown\",\"config\":{},\"version\":\"20\",\"meUser\":\"node\",\"hasCerts\":false,\"api\":3,\"hostnames\":[\"node.digitalgov.internal\"],\"hostname\":[]}}"
+  #   depends_on:
+  #     - database
+
+  database:
+    container_name: digital-gov-database
+    image: mariadb:11
+    ports:
+      - 3306:3306
+    volumes:
+#     - .:/app:delegated
+      - database_data:/var/lib/mysql:delegated
+    environment:
+      MYSQL_ROOT_USER: drupal10
+      MYSQL_ROOT_PASSWORD: drupal10
+      MYSQL_DATABASE: drupal10
+      MARIADB_ROOT_USER: drupal10
+      MARIADB_ROOT_PASSWORD: drupal10
+      MARIADB_DATABASE: drupal10
+      
+    cap_add:
+      - SYS_NICE
+    networks:
+      - gsa-digital-gov
+
+  # node:
+  #   container_name: node
+  #   build:
+  #     context: ./
+  #     dockerfile: .docker/Dockerfile-cms
+  #     target: theme-builder
+  #     args:
+  #       - BUID
+  #       - BGID
+  #   command: npm run watch --prefix /var/www/web/themes/custom/usagov
+  #   volumes:
+  #     - .:/var/www:delegated
+  #   env_file:
+  #     - ./env.local
+  #   networks:
+  #     - gsa-digital-gov
+
+volumes:
+  database_data:
+
+networks:
+  gsa-digital-gov:
