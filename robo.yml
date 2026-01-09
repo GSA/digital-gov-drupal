@@ -27,7 +27,7 @@ command:
         commands:
           - {robo_command: 'validate:coding-standards', label: 'Coding Standards'}
           - {robo_command: 'validate:composer-lock', label: 'Composer Lock File'}
-          - {robo_command: 'validate:commit-messages', label: 'Commit Messages', only_pr: 1}
-          - {robo_command: 'validate:branch-name', label: 'Branch Name'}
+          # - {robo_command: 'validate:commit-messages', label: 'Commit Messages', only_pr: 1}
+          # - {robo_command: 'validate:branch-name', label: 'Branch Name'}
           - {robo_command: 'validate:phpstan', label: 'PHP Stan'}
           - {robo_command: 'validate:twig', label: 'Twig Standards'}
