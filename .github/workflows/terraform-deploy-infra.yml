@@ -49,7 +49,10 @@ jobs:
       - name: Start Bastion
         env:
           TF_BASTION: "${{ secrets.TF_BASTION }}"
+          TF_BACKEND_SPACE: "${{ secrets.TF_BACKEND_SPACE }}"
         run: |
+          cf allow-space-ssh "${TF_BACKEND_SPACE}" >/dev/null 2>&1
+          cf enable-ssh "${TF_BASTION}" >/dev/null 2>&1
           cf start "${TF_BASTION}" >/dev/null 2>&1
           ./scripts/pipeline/cloud-gov-wait-for-app-start.sh "${TF_BASTION}"
       - name: Cloud.gov bastion git checkout
@@ -140,4 +143,8 @@ jobs:
       - name: Stop Bastion
         env:
           TF_BASTION: "${{ secrets.TF_BASTION }}"
-        run: cf stop "${TF_BASTION}"  >/dev/null 2>&1
+          TF_BACKEND_SPACE: "${{ secrets.TF_BACKEND_SPACE }}"
+        run: |
+          cf stop "${TF_BASTION}"  >/dev/null 2>&1
+          cf disallow-space-ssh "${TF_BACKEND_SPACE}" >/dev/null 2>&1
+          cf disable-ssh "${TF_BASTION}" >/dev/null 2>&1

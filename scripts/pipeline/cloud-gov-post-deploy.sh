@@ -10,6 +10,7 @@ done
 
 # Enable SSH if in prod
 if [[ ${CF_SPACE} = "prod" ]]; then
+  cf allow-space-ssh "${CF_SPACE}"
   cf enable-ssh "${PROJECT}-drupal-${CF_SPACE}"
   cf restart --strategy rolling "${PROJECT}-drupal-${CF_SPACE}"
 
@@ -40,5 +41,6 @@ cf ssh "${PROJECT}-drupal-${CF_SPACE}" --command "PATH=/home/vcap/deps/1/bin:/ho
 
 ## Clean up.
 if [[ ${CF_SPACE} = "prod" ]]; then
+  cf disallow-space-ssh "${CF_SPACE}"
   cf disable-ssh "${PROJECT}-drupal-${CF_SPACE}"
 fi
