@@ -1,7 +1,7 @@
 services:
   cms:
     container_name: appserver
-    image: devwithlando/php:8.3-fpm-5
+    image: php:8.3-fpm
     build:
       context: ./
       # args:
