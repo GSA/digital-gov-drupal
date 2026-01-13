@@ -1,5 +1,8 @@
 name: Generate Static Site
 
+permissions:
+  contents: read
+
 on:
   workflow_call:
     inputs:

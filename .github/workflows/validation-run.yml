@@ -1,5 +1,9 @@
 name: Run validation with RoboValidate
 
+permissions:
+  contents: read
+  pull-requests: read
+
 on:
     workflow_call:
 
@@ -63,7 +67,7 @@ jobs:
                     # Initialize status variables to 0
                     status1=0
 
-                    ROBO_VALIDATE_TARGET_BRANCH="${{ github.base_ref }}" ROBO_VALIDATE_CURRENT_BRANCH="${{ github.head_ref }}" vendor/bin/robo validate:all only_pr
+                    ROBO_VALIDATE_BRANCH_NAME=${{ steps.extract_branch.outputs.branch }} ROBO_VALIDATE_TARGET_BRANCH="${{ github.base_ref }}" ROBO_VALIDATE_CURRENT_BRANCH="${{ github.head_ref }}" vendor/bin/robo validate:all
 
                     # Exit with a non-zero status if the command failed
                     if [ "$status1" -ne 0 ]; then
