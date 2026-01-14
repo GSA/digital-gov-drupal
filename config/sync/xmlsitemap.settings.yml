@@ -1,7 +1,7 @@
 _core:
   default_config_hash: 58nI4vVTGv677fB42ySkQN9iTenfZvvW-xJlXODHdV4
 minimum_lifetime: 0
-xsl: 1
+xsl: 0
 prefetch_aliases: 1
 chunk_size: auto
 batch_limit: 100
