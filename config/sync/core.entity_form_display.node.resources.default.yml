@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.resources.field_authors
     - field.field.node.resources.field_deck
     - field.field.node.resources.field_page_weight
+    - field.field.node.resources.field_primary_image
     - field.field.node.resources.field_slug
     - field.field.node.resources.field_summary
     - field.field.node.resources.field_topics
@@ -16,6 +17,8 @@ dependencies:
     - autocomplete_deluxe
     - content_moderation
     - maxlength
+    - media_library
+    - media_library_edit
     - path
     - text
 id: node.resources.default
@@ -75,6 +78,16 @@ content:
     settings:
       placeholder: ''
     third_party_settings: {  }
+  field_primary_image:
+    type: media_library_widget
+    weight: 9
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings:
+      media_library_edit:
+        show_edit: '1'
+        edit_form_mode: default
   field_summary:
     type: text_textarea
     weight: 2
