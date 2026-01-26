@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.resources.field_authors
     - field.field.node.resources.field_deck
     - field.field.node.resources.field_page_weight
+    - field.field.node.resources.field_primary_image
     - field.field.node.resources.field_slug
     - field.field.node.resources.field_summary
     - field.field.node.resources.field_topics
@@ -77,3 +78,4 @@ content:
     region: content
 hidden:
   field_authors: true
+  field_primary_image: true

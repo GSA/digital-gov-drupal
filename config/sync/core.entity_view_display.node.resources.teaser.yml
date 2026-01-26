@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.resources.field_authors
     - field.field.node.resources.field_deck
     - field.field.node.resources.field_page_weight
+    - field.field.node.resources.field_primary_image
     - field.field.node.resources.field_slug
     - field.field.node.resources.field_summary
     - field.field.node.resources.field_topics
@@ -41,6 +42,7 @@ hidden:
   content_moderation_control: true
   field_deck: true
   field_page_weight: true
+  field_primary_image: true
   field_slug: true
   field_topics: true
   links: true

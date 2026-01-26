@@ -12,7 +12,7 @@ entity_type: node
 bundle: short_post
 label: Source
 description: 'Provides the logo for this short post from the source content type.'
-required: true
+required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
