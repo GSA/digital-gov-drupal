@@ -20,7 +20,7 @@ tags:
   og_type: '[dg:og_type]'
   og_url: '[current-page:url]'
   robots: 'index, follow'
-  title: '[current-page:title] – [site:name]'
+  title: '[current-page:title] | [site:name]'
   twitter_cards_creator: '@Digital_Gov'
   twitter_cards_description: '[dg:meta_description]'
   twitter_cards_image: '[dg:meta_image]'
