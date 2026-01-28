@@ -173,21 +173,14 @@ content:
       placeholder: ''
     third_party_settings: {  }
   uid:
-    type: autocomplete_deluxe
+    type: entity_reference_autocomplete
     weight: 5
     region: content
     settings:
       match_operator: CONTAINS
-      autocomplete_route_name: autocomplete_deluxe.autocomplete
-      size: 60
-      selection_handler: default
       match_limit: 10
-      min_length: 0
-      delimiter: ''
-      not_found_message_allow: false
-      not_found_message: "The term '@term' will be added"
-      new_terms: false
-      no_empty_message: 'No terms could be found. Please type in order to add a new term.'
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   url_redirects:
     weight: 50
