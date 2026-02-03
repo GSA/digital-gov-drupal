@@ -28,12 +28,7 @@ jobs:
     needs: validate
     secrets: inherit
   deploy-app:
-    steps:
-      - name: installNodeVersion
-        uses: actions/setup-node@v6
-        with:
-          node-version: '>=22.2.0'
-      - name: deploy
-        uses: ./.github/workflows/cloudgov-deploy-app.yml
-    needs: [deploy-infra, install-node-version]
+    uses: ./.github/workflows/cloudgov-deploy-app.yml
     secrets: inherit
+    needs: deploy-infra
+
