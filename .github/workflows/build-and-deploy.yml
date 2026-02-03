@@ -27,15 +27,13 @@ jobs:
     uses: ./.github/workflows/terraform-deploy-infra.yml
     needs: validate
     secrets: inherit
-  install-node-version:
-    uses: 
   deploy-app:
     steps:
       - name: installNodeVersion
         uses: actions/setup-node@v6
         with:
           node-version: '>=22.2.0'
-      -name: deploy
+      - name: deploy
         uses: ./.github/workflows/cloudgov-deploy-app.yml
     needs: [deploy-infra, install-node-version]
     secrets: inherit
