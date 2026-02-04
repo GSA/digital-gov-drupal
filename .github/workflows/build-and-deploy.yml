@@ -29,6 +29,5 @@ jobs:
     secrets: inherit
   deploy-app:
     uses: ./.github/workflows/cloudgov-deploy-app.yml
-    secrets: inherit
     needs: deploy-infra
-
+    secrets: inherit
