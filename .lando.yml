@@ -5,7 +5,7 @@ services:
   cache:
     type: 'memcached:1.5.12'
   node:
-    type: 'node:20'
+    type: 'node:24'
     build:
       - ./orch/build_node.sh
     scanner: false
