@@ -74,9 +74,7 @@ jobs:
           source ./scripts/pipeline/cloud-gov-login.sh
           cf target -s "${CF_SPACE}" >/dev/null 2>&1
       - name: Build theme
-        run: |
-          node -v || true
-          ./orch/build_node.sh
+        run: ./orch/build_node.sh
       - name: Deploy App
         env:
           PROJECT: "${{ secrets.PROJECT }}"
