@@ -54,11 +54,14 @@ jobs:
           if [ "${COMPOSER_DEV}" = "1" ]; then
             sed -i 's/--no-dev //' .bp-config/options.json || exit 0
           fi
-
       - name: Set repo name
         run: echo "REPO_NAME=${{ github.event.repository.name }}" >> $GITHUB_ENV
-      - name: Install basic dependancies
+      - name: Install basic dependencies
         run: ./scripts/pipeline/deb-basic-deps.sh
+      - name: Install node version 24
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
       - name: Install Cloudfoundry CLI
         run: ./scripts/pipeline/deb-cf-install.sh
       - name: Cloud.gov login
