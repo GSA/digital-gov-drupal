@@ -3,7 +3,8 @@ default_config: &defaults
   buildpacks:
     #- https://github.com/cloudfoundry/apt-buildpack
     - https://github.com/cloudfoundry/apt-buildpack.git#v0.3.5
-    - php_buildpack#v4.6.28
+    #- php_buildpack
+    - https://github.com/cloudfoundry/php-buildpack.git#v4.6.28
   disk_quota: 4G
   env:
     COMPOSER_DEV: ${COMPOSER_DEV}
