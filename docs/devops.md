@@ -306,7 +306,7 @@ This directory has configuration settings for PHP.
 
 This configuration includes additional bootstrapping options for the `php-buildpack`.
 
-  - `PHP_VERSION`: This field uses a special variable (i.e. `{PHP_##_LATEST}`). For valid variable names, [check this file](https://github.com/cloudfoundry/php-buildpack/blob/master/defaults/options.json).
+  - `PHP_VERSION`: Currently set to a specific patch version. Used to use a special variable (i.e. `{PHP_##_LATEST}`), and it's unclear why that started failing (on 2026-02-06). Valid variable names _were_ in [this file](https://github.com/cloudfoundry/php-buildpack/blob/master/defaults/options.json), but there's evidence that they continued to work even after removal. Perhaps they will work again one day.
   - `ADDITIONAL_PREPROCESS_CMDS`: This array of strings are the paths to scripts to be ran before the system is deployed, during the staging process. Currently, this runs [bootstrap.sh](#bootstrapsh).
 
 
@@ -393,4 +393,3 @@ Certain variables are environmentally dependent, like the application's memory.
 Launched by a `triggered pipeline` in CircleCI, this scripts gathers all S3 bucket resources, along with a database back and packages them into a single archive.
 
 [[top]](#devops-documentation)
-
