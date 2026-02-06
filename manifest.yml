@@ -6,7 +6,8 @@ default_config: &defaults
     # - php_buildpack
     # 2026-02-06: pinned due to problems with php_buildpack 5.0.1.
     # see DIGITAL-704
-    - https://github.com/cloudfoundry/php-buildpack.git#v4.6.28
+    # - https://github.com/cloudfoundry/php-buildpack.git#v4.6.28
+    - https://github.com/cloudfoundry/php-buildpack.git#remove-rewrite-binary-clean
   disk_quota: 4G
   env:
     COMPOSER_DEV: ${COMPOSER_DEV}
