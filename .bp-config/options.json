@@ -4,7 +4,7 @@
   ],
   "COMPOSER_VENDOR_DIR": "vendor",
   "WEBDIR": "web",
-  "PHP_VERSION": "8.3.21",
+  "PHP_VERSION": "PHP_83_LATEST",
   "ADDITIONAL_PREPROCESS_CMDS": [
     "source $HOME/scripts/bootstrap.sh"
   ]
