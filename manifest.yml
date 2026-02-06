@@ -13,6 +13,7 @@ default_config: &defaults
     waf_external_endpoint: ${PROJECT}-${WAF_NAME}-${CF_SPACE}.app.cloud.gov
     STATIC_URI: ${STATIC_URI}
     DRUSH_OPTIONS_URI: ${DRUSH_OPTIONS_URI}
+    BP_DEBUG: true
   timeout: 180
   routes:
     - route: ${PROJECT}-drupal-${CF_SPACE}.apps.internal
