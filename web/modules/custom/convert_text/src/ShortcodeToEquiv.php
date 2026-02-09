@@ -13,7 +13,7 @@ use Drupal\path_alias\AliasManagerInterface;
 use Psr\Log\LoggerInterface;
 
 /**
- * Provides methods to convert Hugo shortcodes to their Drupal equivalent..
+ * Provides methods to convert Hugo shortcodes to their Drupal equivalent.
  */
 class ShortcodeToEquiv {
 
