@@ -11,6 +11,10 @@ services:
     scanner: false
     globals:
       gulp-cli: latest
+  appserver_nginx:
+    build_as_root:
+      # See https://github.com/lando/drupal/issues/124
+      - sed 's|daemon|www-data|g' -i /opt/bitnami/scripts/nginx-env.sh
 tooling:
   be:
     service: appserver
