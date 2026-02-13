@@ -4,7 +4,7 @@ default_config: &defaults
     #- https://github.com/cloudfoundry/apt-buildpack
     - https://github.com/cloudfoundry/apt-buildpack.git#v0.3.5
     #- php_buildpack
-    - https://github.com/cloudfoundry/php-buildpack.git#0185dd5
+    - https://github.com/cloudfoundry/php-buildpack.git#remove-rewrite-binary-clean
   disk_quota: 4G
   env:
     COMPOSER_DEV: ${COMPOSER_DEV}
