@@ -122,3 +122,8 @@ dbaa65c93039dfa1fab69ae27454dbc1|arpage|feature/DIGITAL-709-drupal-10.6-module-u
 24efd7e25e4044f6d86db2d9608a2936|arpage|feature/DIGITAL-709-drupal-10.6-module-updates|Wed Feb 11 13:02:41 EST 2026|./composer.sh require drupal/tome:^1.14
 13e21f0d5440aba5012f9d1b424c7472|arpage|feature/DIGITAL-709-drupal-10.6-module-updates|Wed Feb 11 13:02:46 EST 2026|./composer.sh require drupal/twig_tweak:^3.4
 62aae4e3c1c063bd76f9c57b4ad98366|arpage|feature/DIGITAL-709-drupal-10.6-module-updates|Wed Feb 11 13:02:51 EST 2026|./composer.sh require drupal/views_bulk_operations:^4.4
+c569b4005d5551dc834267ebbf3e90b9|arpage|feature/DIGITAL-709-drupal-10.6-problematic-module-updates|Fri Feb 13 11:47:25 EST 2026|./composer.sh require drupal/devel:^5.5 --dev
+5ba4bad00c35b0b8bc18a5b686ae3fa5|arpage|feature/DIGITAL-709-drupal-10.6-problematic-module-updates|Fri Feb 13 11:48:12 EST 2026|./composer.sh require drupal/role_watchdog:^2.1
+7cb14bb5cb2fa032d7803f2b06f9bb35|arpage|feature/DIGITAL-709-drupal-10.6-problematic-module-updates|Fri Feb 13 11:50:02 EST 2026|./composer.sh require drupal/upgrade_status:^4.3
+2b19879a70bc23c10881f72c71b8ba41|arpage|feature/DIGITAL-709-drupal-10.6-problematic-module-updates|Fri Feb 13 11:52:24 EST 2026|./composer.sh require drupal/xmlsitemap:^2.0
+44ccc5d5dbb11c5ef76be6dcd497361c|arpage|feature/DIGITAL-709-drupal-10.6-problematic-module-updates|Fri Feb 13 11:54:19 EST 2026|./composer.sh require drupal/require_revision_log_message:^2.0

@@ -85,7 +85,7 @@
         "drupal/uswds_templates": "^3.0@dev",
         "drupal/vbo_workflow_transition": "1.0.x-dev@dev",
         "drupal/views_bulk_operations": "^4.4",
-        "drupal/xmlsitemap": "^1.5",
+        "drupal/xmlsitemap": "^2.0",
         "drush/drush": "^13",
         "elvanto/litemoji": "^5.1",
         "league/commonmark": "^2.5",
@@ -190,7 +190,7 @@
     "require-dev": {
         "consolidation/robo": "^5",
         "drupal/core-dev": "^10.2",
-        "drupal/devel": "^5.2",
+        "drupal/devel": "^5.5",
         "vincentlanglet/twig-cs-fixer": "^3.3"
     }
 }
