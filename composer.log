@@ -95,3 +95,7 @@ fb229fcfb48c2f52c006789e3bdd41a7|arpage|feature/DIGITAL-693-drupal-update-s3fs-p
 6f35406dc20c0dffcfb8923852e41844|arpage|feature/DIGITAL-693-drupal-update-s3fs-plus-standard|Thu Feb  5 10:54:15 EST 2026|./composer.sh update mattsqd/drupal-env
 a3e42c350e75a551e605b90831598e7a|arpage|feature/DIGITAL-693-drupal-update-s3fs-plus-standard|Thu Feb  5 10:54:25 EST 2026|./composer.sh update mattsqd/drupal-env-lando
 b966059caba1273dc00f8a4528a6b01a|arpage|feature/DIGITAL-693-drupal-update-s3fs-plus-standard|Thu Feb  5 10:55:21 EST 2026|./composer.sh require --dev consolidation/robo:^5 --with-all-dependencies
+693a914469a4fdbb287f22e7d0632bce|arpage|feature/DIGITAL-715-modules-affecting-patches|Wed Feb 18 11:25:48 EST 2026|./composer.sh require drupal/default_content:^2.0@beta
+70abc4dea170b9bf096435a6f27113ea|arpage|feature/DIGITAL-715-modules-affecting-patches|Wed Feb 18 11:26:08 EST 2026|./composer.sh require drupal/js_cookie:^1.0 --with-all-dependencies
+77dad83d77d7384512274aa435055a45|arpage|feature/DIGITAL-715-modules-affecting-patches|Wed Feb 18 11:26:50 EST 2026|./composer.sh require drupal/sitewide_alert:^3.0 --with-all-dependencies
+5afe1e476655921a00fc1c1930c66616|arpage|feature/DIGITAL-715-modules-affecting-patches|Wed Feb 18 11:27:15 EST 2026|./composer.sh require drupal/svg_image:^3.2 --with-all-dependencies
