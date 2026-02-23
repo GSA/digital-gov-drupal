@@ -1089,6 +1089,7 @@ display:
           plugin_id: list_field
           operator: or
           value:
+            resource: resource
             news: news
           group: 1
           exposed: false
