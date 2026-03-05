@@ -8,8 +8,8 @@ The WAF (Nginx) server is an ingress proxy, routing traffic to various internal 
     - `Dockerfile`: Builds the Nginx `modsecurity` plugin.
     - `Makefile`: Builds a new version of the Caddy binary, then copies the resulting binary to the `modules` directory above this one (`../modules`).
 - `modsecurity`: modsecurity configuration, utilizing OWASP CRS.
-    - https://github.com/SpiderLabs/ModSecurity
-    - https://github.com/SpiderLabs/ModSecurity-nginx
+    - https://github.com/owasp-modsecurity/ModSecurity
+    - https://github.com/owasp-modsecurity/ModSecurity-nginx
     - https://github.com/coreruleset/coreruleset/
 - `modules`: Contains the compiled Nginx modsecurity binary.
 - `nginx`: Contains Nginx configuration files.
