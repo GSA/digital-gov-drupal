@@ -7,7 +7,7 @@ This runbook is for the `terraform-build-waf-plugin.sh` script, which involves b
 
 ##### Variable Checks
 The script begins with checks to ensure the presence of several environment variables, namely:
-- `${new_nginx_version}`
+- `${nginx_version}`
 - `${modsecurity_nginx_version}`
 - `${ubuntu_version}`
 

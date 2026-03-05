@@ -43,7 +43,7 @@ RUN  apt-get update && \
 ARG modsecurity_path=/usr/local/src/modsecurity_nginx
 RUN mkdir -p ${modsecurity_path}
 WORKDIR ${modsecurity_path}
-RUN wget https://github.com/SpiderLabs/ModSecurity-nginx/archive/refs/tags/v${modsecurity_nginx_version}.tar.gz
+RUN wget https://github.com/owasp-modsecurity/ModSecurity-nginx/archive/refs/tags/v${modsecurity_nginx_version}.tar.gz
 RUN tar -xf v${modsecurity_nginx_version}.tar.gz && \
     rm -f v${modsecurity_nginx_version}.tar.gz
 
