@@ -114,6 +114,8 @@ jobs:
           TF_BASTION: "${{ secrets.TF_BASTION }}"
         id: apply
         run: |
+          source ./scripts/pipeline/cloud-gov-waf-version.sh
+          envsubst <  terraform/applications/nginx-waf/buildpack.yml.tmpl > terraform/applications/nginx-waf/buildpack.yml
           ./scripts/pipeline/cloud-gov-remote-command.sh "${TF_BASTION}" "TF_WORKSPACE=${CF_SPACE} tofu -chdir=${REPO_NAME}/terraform/infra apply -auto-approve" 1
   stopBastion:
     name: Stop Bastion
