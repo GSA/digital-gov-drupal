@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[ -z "${new_nginx_version}" ] && echo "NGINX version not set!" && exit 1
+[ -z "${nginx_version}" ] && echo "NGINX version not set!" && exit 1
 [ -z "${modsecurity_nginx_version}" ] && echo "Modsecurity version not set!" && exit 1
 [ -z "${ubuntu_version}" ] && echo "Ubuntu version not set!" && exit 1
 
