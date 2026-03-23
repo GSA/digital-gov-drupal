@@ -18,12 +18,12 @@ The `Dockerfile` initializes a Docker image that is based on the Ubuntu `jammy` 
    ARG ubuntu_version="jammy"
    ```
    These environment variables are important because they allow the builder to specify the exact versions of the components that will be built.
-   
+
       - `modsecurity_nginx_version` is determined by the version of the [OWASP ModSecurity NGINX repo](https://github.com/owasp-modsecurity/ModSecurity-nginx).
       - `nginx_version` is deterimined by the version shipped in version of NGINX buildpack that is in use.  This can be determined by using the `cf buildpacks` command to see what version Cloud.gov is using.  That buildpack version can then be referenced at the [NGINX Buildpack GitHub repository](https://github.com/cloudfoundry/nginx-buildpack/releases) to see what version of NGINX is shipped in that version of the buildpack.
       - `ubuntu_version` is determined by what version of `cflinuxfs` is in use.  As of this documents creation, it is `cflinuxfs4`, based on Ubuntu Jammy.
-    
-  The ModSecurity plugin needs to be build for the specific version of NGINX running.
+
+  The ModSecurity plugin needs to be built for the specific version of NGINX running.
 
 2. **Apt Source List Modification**
    ```
@@ -65,7 +65,7 @@ In addition to the `Dockerfile`, a `Makefile` provides a build pipeline to compi
 
 1. **Building the Docker Image**
    ```
-   docker build --platform linux/amd64 --tag nginx-modsecurity --build-arg=modsecurity_nginx_version=${modsecurity_nginx_version} --build-arg=nginx_version=${new_nginx_version} --build-arg=ubuntu_version=${ubuntu_version} .
+   docker build --platform linux/amd64 --tag nginx-modsecurity --build-arg=modsecurity_nginx_version=${modsecurity_nginx_version} --build-arg=nginx_version=${nginx_version} --build-arg=ubuntu_version=${ubuntu_version} .
    ```
    The Makefile references the arguments for the builds and constructs the Docker image.
 
@@ -92,4 +92,4 @@ In addition to the `Dockerfile`, a `Makefile` provides a build pipeline to compi
 
 - **Incorrect Version Compilation**: You might receive warnings about mismatching versions if the environment variables passed to the Docker build (`modsecurity_nginx_version`, `nginx_version`, and `ubuntu_version`) do not match the expected versions inside the Dockerfile statements.
 
-- **Module Compilation Failure**: If there are issues with the dynamic module compilation step (`make` command), review the configuration and build paths to ensure that there are no typos or missing paths declared within the `Dockerfile`. 
+- **Module Compilation Failure**: If there are issues with the dynamic module compilation step (`make` command), review the configuration and build paths to ensure that there are no typos or missing paths declared within the `Dockerfile`.

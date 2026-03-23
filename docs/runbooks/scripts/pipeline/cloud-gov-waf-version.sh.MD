@@ -1,5 +1,11 @@
 ### Runbook for `cloud-gov-waf-version.sh`
 
+#### DEPRECATED!
+
+The script described here has been replaced. We no longer try to determine the `new_nginx_version` dynamically. In the absence of a stable API for buildpack details, this turned out to be too unreliable for the deployment pipeline.
+
+However, something like this might make sense as part of a build-and-commit pipeline to generate a modsecurity bundle for later deployment.
+
 #### Overview
 
 The script `cloud-gov-waf-version.sh` is a bash script designed to check for new versions of an nginx buildpack and update the environment variables accordingly. It also initializes the necessary libraries and checks if there are new versions available. The script runs a series of commands to determine the current and new versions of the nginx buildpack, extracts the relevant nginx version from the GitHub releases page, and makes decisions based on whether an update is necessary.
@@ -66,7 +72,7 @@ current_nginx_version=$(cat /tmp/current_bp_version | pup 'table json{}' | jq -r
 and for the new version:
 
 ```bash
-curl -Ls "https://github.com/cloudfoundry/nginx-buildpack/releases/tag/v${NEW_BP_VERSION}" > /tmp/new_nginx_version 
+curl -Ls "https://github.com/cloudfoundry/nginx-buildpack/releases/tag/v${NEW_BP_VERSION}" > /tmp/new_nginx_version
 declare default_nginx_binary_version
 default_nginx_binary_version=$(cat /tmp/new_nginx_version | pup 'table json{}' | jq -r '.[].children[].children[] | select(.children[].text == "nginx") | select(.children[].text | contains(".x")) | .children[].text' | grep -v nginx | sed 's/.\{1\}$//')
 

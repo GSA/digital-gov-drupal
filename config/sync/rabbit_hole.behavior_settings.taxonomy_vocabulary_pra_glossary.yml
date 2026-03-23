@@ -1,0 +1,14 @@
+uuid: dfe0b212-a6c5-4666-99ac-e6a54a3a26c9
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.pra_glossary
+id: taxonomy_vocabulary_pra_glossary
+entity_type_id: taxonomy_vocabulary
+entity_id: pra_glossary
+action: display_page
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied
