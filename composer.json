@@ -40,6 +40,7 @@
         "drupal/field_group": "^4.0",
         "drupal/field_permissions": "^1.5",
         "drupal/google_tag": "^2.0",
+        "drupal/js_cookie": "^1.0",
         "drupal/link_class": "^2.1",
         "drupal/linkit": "^7.0",
         "drupal/linkit_media_library": "^2.0",

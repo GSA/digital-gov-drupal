@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4ef132727a7f1fd237f87cb54f746ec1",
+    "content-hash": "551b361cf0d6fbb8dc45e06d478e012f",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1548,27 +1548,26 @@
         },
         {
             "name": "drupal/autologout",
-            "version": "2.0.1",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/autologout.git",
-                "reference": "2.0.1"
+                "reference": "2.0.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/autologout-2.0.1.zip",
-                "reference": "2.0.1",
-                "shasum": "61407ffa8b857b1e5d22d03ededac94b5119bd60"
+                "url": "https://ftp.drupal.org/files/projects/autologout-2.0.2.zip",
+                "reference": "2.0.2",
+                "shasum": "5e9bb2b37368cdb5e5d09f27ac4018466aaac2d6"
             },
             "require": {
-                "drupal/core": "^9.2 || ^10 || ^11",
-                "drupal/js_cookie": "^1.0"
+                "drupal/core": "^9.2 || ^10 || ^11"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.0.1",
-                    "datestamp": "1732235105",
+                    "version": "2.0.2",
+                    "datestamp": "1773996386",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -1623,10 +1622,6 @@
                 {
                     "name": "prabeen.giri",
                     "homepage": "https://www.drupal.org/user/913078"
-                },
-                {
-                    "name": "scott_earnest",
-                    "homepage": "https://www.drupal.org/user/416158"
                 },
                 {
                     "name": "str8",
@@ -3074,17 +3069,17 @@
         },
         {
             "name": "drupal/js_cookie",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/js_cookie.git",
-                "reference": "1.0.1"
+                "reference": "1.0.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/js_cookie-1.0.1.zip",
-                "reference": "1.0.1",
-                "shasum": "e010b3de64a0d57eef9c1773c4dd7e3d9bd9118c"
+                "url": "https://ftp.drupal.org/files/projects/js_cookie-1.0.2.zip",
+                "reference": "1.0.2",
+                "shasum": "effcbee68083efc866aca2a1bfa3fc6e14fe0c2f"
             },
             "require": {
                 "drupal/core": "^9 || ^10 || ^11"
@@ -3092,8 +3087,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "1.0.1",
-                    "datestamp": "1693951097",
+                    "version": "1.0.2",
+                    "datestamp": "1762168962",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3106,8 +3101,20 @@
             ],
             "authors": [
                 {
-                    "name": "Dave Reid",
+                    "name": "anybody",
+                    "homepage": "https://www.drupal.org/user/291091"
+                },
+                {
+                    "name": "dave reid",
                     "homepage": "https://www.drupal.org/user/53892"
+                },
+                {
+                    "name": "grevil",
+                    "homepage": "https://www.drupal.org/user/3668491"
+                },
+                {
+                    "name": "jan kellermann",
+                    "homepage": "https://www.drupal.org/user/371731"
                 }
             ],
             "description": "Provides the js-cookie library as a dependency.",
@@ -18068,5 +18075,5 @@
     "prefer-lowest": false,
     "platform": {},
     "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.9.0"
 }
