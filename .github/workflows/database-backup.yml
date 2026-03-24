@@ -26,7 +26,7 @@ jobs:
     if: github.ref_protected == true
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6.0.2
       - name: Set env
         run: |
           BRANCH=main
@@ -61,7 +61,7 @@ jobs:
     if: github.ref_protected == true
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6.0.2
       - name: Set env
         run: |
           BRANCH=main
@@ -105,7 +105,7 @@ jobs:
     if: github.ref_protected == true && ${{ always() }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6.0.2
       - name: Set env
         run: |
           BRANCH=main
