@@ -12,7 +12,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             -   name: Checkout code
-                uses: actions/checkout@v4
+                uses: actions/checkout@v4.2.2
 
             -   name: Extract branch name
                 shell: bash
@@ -32,7 +32,7 @@ jobs:
                 run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
             -   name: Cache Composer dependencies
-                uses: actions/cache@v4
+                uses: actions/cache@v4.2.2
                 with:
                     path: ${{ steps.composer-cache.outputs.dir }}
                     key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
