@@ -17,7 +17,7 @@ jobs:
     if: contains(vars.GENERATE_STATIC_SITE_ON_CRON_SPACES, inputs.CF_SPACE)
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6.0.2
       - name: Install basic dependancies
         run: ./scripts/pipeline/deb-basic-deps.sh
       - name: Install Cloudfoundry CLI
