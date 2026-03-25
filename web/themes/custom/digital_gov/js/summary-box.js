@@ -13,11 +13,14 @@
 
   const guideSummaryList = guideSummary.querySelector(".usa-list");
   /**
-   * Return a list of h2's to display in the summary box
-   * and filter out h2's we do not want to show with the :not selector
+   * Return a list of h2's to display in the summary box. We want h2s:
+   *  - from the body of the page only (div.dg-guide__content_body)
+   *  - not the summary box heading (.usa-summary-box__heading)
+   *  - not a few other things (note .visually-hidden is not reliable)
+   * We will also skip h2s without IDs in the createSummaryBox loop.
    */
   const pageHeaders = document.querySelectorAll(
-    "h2:not(.usa-summary-box__heading, .dg-guide__content-header-title, .dg-glossary__header, .visually-hidden)"
+    "div.dg-guide__content-body > h2:not(.usa-summary-box__heading, .dg-guide__content-header-title, .dg-glossary__header, .visually-hidden)"
   );
 
   /**
@@ -26,16 +29,18 @@
   function createSummaryBox() {
     const summaryBoxFragment = document.createDocumentFragment();
     pageHeaders.forEach((link) => {
-      const summaryListItem = document.createElement("li");
+      if (link.id) { // skip, not a link.
+          const summaryListItem = document.createElement("li");
 
-      const summaryLink = Object.assign(document.createElement("a"), {
-        class: "usa-summary-box__link",
-        href: `#${link.id}`,
-        innerHTML: `${link.innerText}`,
-      });
+          const summaryLink = Object.assign(document.createElement("a"), {
+              class: "usa-summary-box__link",
+              href: `#${link.id}`,
+              innerHTML: `${link.innerText}`,
+          });
 
-      summaryListItem.appendChild(summaryLink);
-      summaryBoxFragment.appendChild(summaryListItem);
+          summaryListItem.appendChild(summaryLink);
+          summaryBoxFragment.appendChild(summaryListItem);
+      }
     });
 
     guideSummaryList.appendChild(summaryBoxFragment);
