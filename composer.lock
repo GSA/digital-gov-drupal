@@ -2699,17 +2699,17 @@
         },
         {
             "name": "drupal/embedded_content",
-            "version": "2.0.3",
+            "version": "2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/embedded_content.git",
-                "reference": "2.0.3"
+                "reference": "2.0.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/embedded_content-2.0.3.zip",
-                "reference": "2.0.3",
-                "shasum": "629c979ff598feaa51b0ae32dbc4d95cff714182"
+                "url": "https://ftp.drupal.org/files/projects/embedded_content-2.0.4.zip",
+                "reference": "2.0.4",
+                "shasum": "14f401f0e74773abaa02a041ce282ff7f71f9eef"
             },
             "require": {
                 "drupal/core": "^9 || ^10 || ^11",
@@ -2720,8 +2720,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.0.3",
-                    "datestamp": "1737579248",
+                    "version": "2.0.4",
+                    "datestamp": "1770987506",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
