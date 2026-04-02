@@ -131,3 +131,4 @@ c569b4005d5551dc834267ebbf3e90b9|arpage|feature/DIGITAL-709-drupal-10.6-problema
 7cb14bb5cb2fa032d7803f2b06f9bb35|arpage|feature/DIGITAL-709-drupal-10.6-problematic-module-updates|Fri Feb 13 11:50:02 EST 2026|./composer.sh require drupal/upgrade_status:^4.3
 2b19879a70bc23c10881f72c71b8ba41|arpage|feature/DIGITAL-709-drupal-10.6-problematic-module-updates|Fri Feb 13 11:52:24 EST 2026|./composer.sh require drupal/xmlsitemap:^2.0
 44ccc5d5dbb11c5ef76be6dcd497361c|arpage|feature/DIGITAL-709-drupal-10.6-problematic-module-updates|Fri Feb 13 11:54:19 EST 2026|./composer.sh require drupal/require_revision_log_message:^2.0
+c617cece40ebf7cf8b8008cc8e0b541b|Amy Farrell|develop|Tue Mar 31 03:21:29 PM PDT 2026|./composer.sh update drupal/embedded_content
