@@ -173,6 +173,7 @@
         {{ include('@digital_gov/partials/get-sharetools.html.twig', {
           share_path: url,
           mailto_subject: node.label,
+          title: node.title.value,
         }, with_context: false) }}
 
       </div>

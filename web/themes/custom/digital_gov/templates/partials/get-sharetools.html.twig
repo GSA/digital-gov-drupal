@@ -1,6 +1,9 @@
 {# Share tools #}
 
-<!-- Test syntax -->
+{#
+  Note that per RFC 3986, it is unnecessary to percent-encode URLs that are query parameter values.
+  https://datatracker.ietf.org/doc/html/rfc3986#section-3.4
+#}
 <section class="share-tools">
   <div class="grid-row">
     <div class="grid-col-4">
@@ -9,7 +12,7 @@
         aria-label="Share on Twitter"
         target="_blank"
         rel="noreferrer"
-        href="http://twitter.com/share?url=https://digital.gov{{ share_path }}&amp;text={{ title }}"
+        href="https://x.com/intent/post?url=https://digital.gov{{ share_path }}&text={{ title|url_encode }}"
       >
         <svg
           class="usa-icon dg-icon dg-icon--large margin-bottom-05"
