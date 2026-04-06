@@ -8,4 +8,4 @@ global:
     base:
       static/dist/styles.min.css: { minified: true }
   dependencies:
-    - core/drupal/misc/drupal.js
+    - core/drupal
