@@ -9,3 +9,4 @@ global:
       static/dist/styles.min.css: { minified: true }
   dependencies:
     - core/drupal
+    - core/once
