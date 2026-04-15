@@ -123,6 +123,7 @@
           {{ include('@digital_gov/partials/get-sharetools.html.twig', {
             share_path: url,
             mailto_subject: label|field_value|render,
+            title: node.title.value,
           }, with_context: false) }}
 
         </div>
