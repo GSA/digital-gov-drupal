@@ -132,3 +132,6 @@ c569b4005d5551dc834267ebbf3e90b9|arpage|feature/DIGITAL-709-drupal-10.6-problema
 2b19879a70bc23c10881f72c71b8ba41|arpage|feature/DIGITAL-709-drupal-10.6-problematic-module-updates|Fri Feb 13 11:52:24 EST 2026|./composer.sh require drupal/xmlsitemap:^2.0
 44ccc5d5dbb11c5ef76be6dcd497361c|arpage|feature/DIGITAL-709-drupal-10.6-problematic-module-updates|Fri Feb 13 11:54:19 EST 2026|./composer.sh require drupal/require_revision_log_message:^2.0
 c617cece40ebf7cf8b8008cc8e0b541b|Amy Farrell|develop|Tue Mar 31 03:21:29 PM PDT 2026|./composer.sh update drupal/embedded_content
+57b0d8ee39e92cfc57f927d703ac6e4a|arpage|feature/DIGITAL-746-core-cve-updates|Thu Apr 16 22:21:56 EDT 2026|./composer.sh require drupal/core-recommended:10.6.7 --with-all-dependencies --ignore-platform-reqs
+7ef08c1d32e941a7f03d6bd56ce61b0b|arpage|feature/DIGITAL-746-core-cve-updates|Thu Apr 16 22:22:14 EDT 2026|./composer.sh require drupal/core-composer-scaffold:^10.6.7 --with-all-dependencies --ignore-platform-reqs
+7fa06ffcd3b962cfed9f507d677c044a|arpage|feature/DIGITAL-746-core-cve-updates|Thu Apr 16 22:22:29 EDT 2026|./composer.sh require drupal/core-project-message:^10.6.7 --with-all-dependencies --ignore-platform-reqs
