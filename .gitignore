@@ -9,6 +9,7 @@ html
 #### End Digital.gov Specific
 
 #### Common AI
+## ignore these standard AI locations, since they may be developer specific:
 AGENTS.md
 CLAUDE.md
 .claude
@@ -17,6 +18,8 @@ CLAUDE.md
 .codex/*
 .cline
 .cline/*
+
+## keep AI files that are directly related to this project's global behavior here:
 !.ai/*
 #### End Common AI
 
