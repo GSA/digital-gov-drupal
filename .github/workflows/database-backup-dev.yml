@@ -16,8 +16,6 @@ on:
         required: true
       DATABASE_BACKUP_BASTION_NAME:
         required: true
-  schedule:
-    - cron: "30 6 * * *"
 
 jobs:
   startBastion:
