@@ -135,3 +135,4 @@ c617cece40ebf7cf8b8008cc8e0b541b|Amy Farrell|develop|Tue Mar 31 03:21:29 PM PDT 
 57b0d8ee39e92cfc57f927d703ac6e4a|arpage|feature/DIGITAL-746-core-cve-updates|Thu Apr 16 22:21:56 EDT 2026|./composer.sh require drupal/core-recommended:10.6.7 --with-all-dependencies --ignore-platform-reqs
 7ef08c1d32e941a7f03d6bd56ce61b0b|arpage|feature/DIGITAL-746-core-cve-updates|Thu Apr 16 22:22:14 EDT 2026|./composer.sh require drupal/core-composer-scaffold:^10.6.7 --with-all-dependencies --ignore-platform-reqs
 7fa06ffcd3b962cfed9f507d677c044a|arpage|feature/DIGITAL-746-core-cve-updates|Thu Apr 16 22:22:29 EDT 2026|./composer.sh require drupal/core-project-message:^10.6.7 --with-all-dependencies --ignore-platform-reqs
+51923de405565635c17823b314ab5827|Amy Farrell|develop|Mon Apr 20 06:03:03 PM PDT 2026|./composer.sh update composer/composer
