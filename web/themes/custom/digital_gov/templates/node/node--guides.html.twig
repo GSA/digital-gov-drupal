@@ -78,14 +78,20 @@
     {{ include('@digital_gov/partials/guides/guide-menu-bar.html.twig') }}
 
     {% if show_in_page_nav %}
-    <div class="dg-guide__container grid-container grid-container-desktop">
-      <aside class="dg-guide__nav">
-        {{ include('@digital_gov/partials/guides/guide-sidenav.html.twig') }}
-      </aside>
-      <div class="dg-guide__content">
+    <section class="usa-in-page-nav-container grid-container grid-container-desktop">
+      <div class="dg-guide__in-page-content">
         {{ include('@digital_gov/partials/guides/guide-content.html.twig') }}
       </div>
-    </div>
+      <aside
+        class="usa-in-page-nav"
+        data-title-text="On this page"
+        data-title-heading-level="h2"
+        data-main-content-selector=".dg-guide__content"
+        data-heading-elements="h2 h3"
+        data-root-margin="-100px 0px -55% 0px"
+        data-scroll-offset="100"
+      ></aside>
+    </section>
     {% else %}
       {{ include('@digital_gov/partials/guides/guide-content.html.twig') }}
     {% endif %}
