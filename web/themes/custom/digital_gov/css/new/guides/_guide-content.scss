@@ -1,16 +1,34 @@
 @use "uswds-core" as *;
 
-.dg-guide__container {
-  display: flex;
+// Content column next to USWDS in-page nav (flex sibling; rail uses default order on the right).
+.dg-guide__in-page-content {
+  flex: 1 1 0;
+  min-width: 0;
+}
 
-  .dg-guide__menu-bar-links {
-    // padding-left: calc(50vw - 36rem);
+// Stack content above the nav on small screens; USWDS default is row-only from the tablet breakpoint.
+.dg-guide .usa-in-page-nav-container {
+  flex-direction: column;
+
+  @include at-media("tablet") {
+    flex-direction: row;
+  }
+}
+
+.dg-guide .usa-in-page-nav {
+  display: block;
+  margin-left: 0;
+  max-width: none;
+  width: 100%;
+
+  @include at-media("tablet") {
+    margin-left: units(5);
+    max-width: units("card-lg");
+    width: auto;
   }
 }
 
 .dg-guide__content {
-  flex-shrink: 1;
-
   &-body {
     margin-bottom: units(5);
     overflow: hidden;
