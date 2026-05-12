@@ -1,0 +1,20 @@
+uuid: 72690f6d-02c0-495e-9264-3824055557d4
+langcode: en
+status: true
+dependencies:
+  theme:
+    - digital_gov
+id: digital_gov_local_admin_tasks
+theme: digital_gov
+region: content
+weight: 0
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Local admin tasks'
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: true
+visibility: {  }
