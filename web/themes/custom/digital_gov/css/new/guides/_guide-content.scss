@@ -21,9 +21,6 @@
   max-width: none;
   width: 100%;
 
-  // maintains space between menu bar and nav when page is scrolled down:
-  top: 4rem;
-
 
   @include at-media("tablet") {
     margin-left: units(5);
