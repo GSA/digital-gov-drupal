@@ -139,3 +139,6 @@ c617cece40ebf7cf8b8008cc8e0b541b|Amy Farrell|develop|Tue Mar 31 03:21:29 PM PDT 
 34e655407ebe6f460dec09988b581da8|arpage|feature/DIGITAL-765-core-security-update|Wed May 20 02:19:49 PM EDT 2026|./composer.sh require drupal/core-recommended:10.6.9 --update-with-all-dependencies --ignore-platform-reqs
 35e2d72bd6d0285db16915a1c7ae6086|arpage|feature/DIGITAL-765-core-security-update|Wed May 20 02:19:59 PM EDT 2026|./composer.sh require drupal/core-composer-scaffold:10.6.9 --update-with-all-dependencies --ignore-platform-reqs
 7bac0ad7f16c545b650ba0d09746feab|arpage|feature/DIGITAL-765-core-security-update|Wed May 20 02:20:22 PM EDT 2026|./composer.sh require drupal/core-project-message:10.6.9 --update-with-all-dependencies --ignore-platform-reqs
+69c88ae6da8892b067d86611de24585c|arpage|drupal-10.6.10-update|Thu May 28 04:39:44 PM EDT 2026|./composer.sh require drupal/core-recommended:10.6.10 --update-with-all-dependencies --ignore-platform-reqs
+864a9b35792dd69eaedae0de5cb6dfde|arpage|drupal-10.6.10-update|Thu May 28 04:40:05 PM EDT 2026|./composer.sh require drupal/core-composer-scaffold:10.6.10 --update-with-all-dependencies --ignore-platform-reqs
+5609102bc6ac53c14e2052243986688f|arpage|drupal-10.6.10-update|Thu May 28 04:40:33 PM EDT 2026|./composer.sh require drupal/core-project-message:10.6.10 --update-with-all-dependencies --ignore-platform-reqs
