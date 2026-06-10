@@ -58,8 +58,7 @@ fi
 help(){
   echo "Usage: $0 [options]" >&2
   echo
-  echo "   -b           The name of the S3 bucket with the backup."
-  echo "   -e           Environment of backup to download."
+  echo "   -c           The name of the CF service containing the S3 bucket with the backup."
   echo "   -s           Name of the space the backup bucket is in."
   echo "   -d           Date to retrieve backup from. Acceptable values
                 are 'latest' or in 'YYYY-MM-DD' format and no
@@ -69,45 +68,34 @@ help(){
 RED='\033[0;31m'
 NC='\033[0m'
 
-while getopts 'b:e:s:d:' flag; do
+while getopts 'c:e:s:d:' flag; do
   case ${flag} in
-    b) backup_bucket=${OPTARG} ;;
-    e) env=${OPTARG} ;;
+    c) cf_s3_service=${OPTARG} ;;
     s) space=${OPTARG} ;;
     d) retrieve_date=${OPTARG} ;;
     *) help && exit 1 ;;
   esac
 done
 
-[[ -z "${backup_bucket}" ]] && help && echo -e "\n${RED}Error: Missing -b flag.${NC}" && exit 1
-[[ -z "${env}" ]] && help && echo -e "\n${RED}Error: Missing -e flag.${NC}" && exit 1
+[[ -z "${cf_s3_service}" ]] && help && echo -e "\n${RED}Error: Missing -b flag.${NC}" && exit 1
 [[ -z "${space}" ]] && help && echo -e "\n${RED}Error: Missing -s flag.${NC}" && exit 1
 [[ -z "${retrieve_date}" ]] && help && echo -e "\n${RED}Error: Missing -d flag.${NC}" && exit 1
 
-echo "Getting backup bucket credentials..."
+echo "Getting backup bucket credentials for $cf_s3_service in $space ..."
 {
   cf target -s "${space}"
+  script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+  . "${script_dir}/cloud-gov-s3-creds.sh" ${cf_s3_service}
+  export bucket="${AWS_BUCKET}"
+} &>/dev/null
+[ $? -ne 0 ] && echo -e "\n${RED}Error: Failed to get backup bucket credentials.${NC}" && exit 1
 
-  export service="${backup_bucket}"
-  export service_key="${service}-key"
-  cf delete-service-key "${service}" "${service_key}" -f
-  cf create-service-key "${service}" "${service_key}"
-  sleep 2
-  export s3_credentials=$(cf service-key "${service}" "${service_key}" | tail -n +2)
-
-  export AWS_ACCESS_KEY_ID=$(echo "${s3_credentials}" | jq -r '.credentials.access_key_id')
-  export bucket=$(echo "${s3_credentials}" | jq -r '.credentials.bucket')
-  export AWS_DEFAULT_REGION=$(echo "${s3_credentials}" | jq -r '.credentials.region')
-  export AWS_SECRET_ACCESS_KEY=$(echo "${s3_credentials}" | jq -r '.credentials.secret_access_key')
-
-} >/dev/null 2>&1
-
-echo "Downloading backup..."
+echo "Downloading backup from $bucket..."
 {
-
-  aws s3 cp s3://${bucket}/${env}/${retrieve_date}.tar.gz . --no-verify-ssl 2>/dev/null
-  cf delete-service-key "${service}" "${service_key}" -f
-
-} >/dev/null 2>&1
+  aws s3 cp s3://${bucket}/${retrieve_date}.sql.gz . --no-verify-ssl
+  script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+  . "${script_dir}/cloud-gov-s3-creds.sh" -d
+} &>/dev/null
+[ $? -ne 0 ] && echo -e "\n${RED}Error: Failed to download backup from S3 bucket.${NC}" && exit 1
 
 echo "File saved: ${retrieve_date}.tar.gz"
