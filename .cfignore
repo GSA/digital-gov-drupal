@@ -5,6 +5,7 @@ docs/**
 lando-config/**
 node_modules
 terraform/**
+utility/**
 web/themes/custom/digital_gov/*.js
 web/themes/custom/digital_gov/*.json
 web/themes/custom/digital_gov/css/**
