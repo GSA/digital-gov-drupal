@@ -40,8 +40,7 @@
 
 #}
 
-{# I don't know why Drupal is giving us entries for content the user can't see here --akf, 2026-06-18 #}
-{% if content.field_content.0 %}
+{% if content.field_content|render %}
   {% set node = content.field_content.0['#entity'] %}
   {% set link_title %}{% apply spaceless %}
     {% if content.field_override_title|field_value %}
