@@ -142,3 +142,6 @@ c617cece40ebf7cf8b8008cc8e0b541b|Amy Farrell|develop|Tue Mar 31 03:21:29 PM PDT 
 69c88ae6da8892b067d86611de24585c|arpage|drupal-10.6.10-update|Thu May 28 04:39:44 PM EDT 2026|./composer.sh require drupal/core-recommended:10.6.10 --update-with-all-dependencies --ignore-platform-reqs
 864a9b35792dd69eaedae0de5cb6dfde|arpage|drupal-10.6.10-update|Thu May 28 04:40:05 PM EDT 2026|./composer.sh require drupal/core-composer-scaffold:10.6.10 --update-with-all-dependencies --ignore-platform-reqs
 5609102bc6ac53c14e2052243986688f|arpage|drupal-10.6.10-update|Thu May 28 04:40:33 PM EDT 2026|./composer.sh require drupal/core-project-message:10.6.10 --update-with-all-dependencies --ignore-platform-reqs
+adc4e0d2f9a48ebb29e9e4f44b1157e2|arpage|features/DIGITAL-788-drupal-core-update|Mon Jun 22 11:35:34 EDT 2026|./composer.sh require drupal/core-recommended:10.6.11 --update-with-all-dependencies --ignore-platform-reqs
+df82b8830d6ba37406e5253b08d0f980|arpage|features/DIGITAL-788-drupal-core-update|Mon Jun 22 11:36:43 EDT 2026|./composer.sh require drupal/core-composer-scaffold:10.6.11 --update-with-all-dependencies --ignore-platform-reqs
+837b12446d4a84fe38db17529463fb9c|arpage|features/DIGITAL-788-drupal-core-update|Mon Jun 22 11:37:38 EDT 2026|./composer.sh require drupal/core-project-message:10.6.11 --update-with-all-dependencies --ignore-platform-reqs
