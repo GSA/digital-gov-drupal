@@ -1,0 +1,56 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: f629dd66-d164-4dbf-827b-0b4e1c011322
+  default_langcode: en
+default:
+  preferred_langcode:
+    -
+      value: en
+  preferred_admin_langcode:
+    -
+      value: en
+  name:
+    -
+      value: meghan.omeara@gsa.gov
+  pass:
+    -
+      value: $2y$10$qy8Z2uGOHTd2CV.hifCX8.LXLJWV0FR3bgbFDsPwHQucbR/My4NVu
+      existing: ''
+      pre_hashed: true
+  mail:
+    -
+      value: meghan.omeara@gsa.gov
+  timezone:
+    -
+      value: America/New_York
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1782167793
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  init:
+    -
+      value: meghan.omeara@gsa.gov
+  roles:
+    -
+      target_id: author
+    -
+      target_id: editor
+    -
+      target_id: content_admin
+  role_change:
+    -
+      target_id: __role_delegation_empty_field_value__
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

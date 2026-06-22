@@ -1,0 +1,74 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: d0f2b422-d817-4fc7-ad24-9e77c7cf90bd
+  default_langcode: en
+default:
+  preferred_langcode:
+    -
+      value: en
+  preferred_admin_langcode:
+    -
+      value: en
+  name:
+    -
+      value: amy.farrell@gsa.gov
+  pass:
+    -
+      value: $2y$10$Pv7xiVlb/g/vXfBK4AxPt.ttaN02sKbTu9Ubz/b2ofPBOF7VBiMDy
+      existing: ''
+      pre_hashed: true
+  mail:
+    -
+      value: amy.farrell@gsa.gov
+  timezone:
+    -
+      value: America/Los_Angeles
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1782167747
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  init:
+    -
+      value: amy.farrell@gsa.gov
+  roles:
+    -
+      target_id: publisher
+    -
+      target_id: author
+    -
+      target_id: editor
+    -
+      target_id: content_admin
+    -
+      target_id: data_analyst
+    -
+      target_id: user_admin
+    -
+      target_id: admin
+    -
+      target_id: identifier_admin
+    -
+      target_id: guide_navigation_admin
+    -
+      target_id: job_board_manager
+    -
+      target_id: menu_manager
+    -
+      target_id: site_wide_alert_manager
+  role_change:
+    -
+      target_id: __role_delegation_empty_field_value__
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

@@ -1,0 +1,54 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: e60c6547-2899-4581-b56d-11370aa78941
+  default_langcode: en
+default:
+  preferred_langcode:
+    -
+      value: en
+  preferred_admin_langcode:
+    -
+      value: en
+  name:
+    -
+      value: claire.loxsom-desorbo@gsa.gov
+  pass:
+    -
+      value: $2y$10$TfCPOdwAraYDHJnclGnfRuU8BvNie5d04SKpButXx3f1hxwcmFNEq
+      existing: ''
+      pre_hashed: true
+  mail:
+    -
+      value: claire.loxsom-desorbo@gsa.gov
+  timezone:
+    -
+      value: America/New_York
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1782167881
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  init:
+    -
+      value: claire.loxsom-desorbo@gsa.gov
+  roles:
+    -
+      target_id: user_admin
+    -
+      target_id: admin
+  role_change:
+    -
+      target_id: __role_delegation_empty_field_value__
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

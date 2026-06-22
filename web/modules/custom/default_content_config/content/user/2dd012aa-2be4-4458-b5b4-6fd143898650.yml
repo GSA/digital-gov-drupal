@@ -1,0 +1,56 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: 2dd012aa-2be4-4458-b5b4-6fd143898650
+  default_langcode: en
+default:
+  preferred_langcode:
+    -
+      value: en
+  preferred_admin_langcode:
+    -
+      value: en
+  name:
+    -
+      value: marietta.jelks@gsa.gov
+  pass:
+    -
+      value: $2y$10$TJsk28uxKvwLE0lzWM4XO..ZnkZmdydjcSLpwP19RLVlrY4UiNIS.
+      existing: ''
+      pre_hashed: true
+  mail:
+    -
+      value: marietta.jelks@gsa.gov
+  timezone:
+    -
+      value: America/New_York
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1782167631
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  init:
+    -
+      value: marietta.jelks@gsa.gov
+  roles:
+    -
+      target_id: author
+    -
+      target_id: editor
+    -
+      target_id: content_admin
+  role_change:
+    -
+      target_id: __role_delegation_empty_field_value__
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0
