@@ -28,6 +28,9 @@
     },
     "drupal/sitewide_alert": {
       "DIGITAL-478: Update Alerts display in Tome Static Build": "patches/sitewide_alert_cache_tome.patch"
+    },
+    "drupal/autologout": {
+      "Autologout multiple tab behavior fixes (3395581-48) plus multi-tab timeout-doubling fix and console countdown": "./patches/autologout-multitab-timeout-fix.patch"
     }
   }
 }
