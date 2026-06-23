@@ -14,7 +14,7 @@ The `Dockerfile` initializes a Docker image that is based on the Ubuntu `jammy` 
 1. **ARG Values Declaration**
    ```
    ARG modsecurity_nginx_version="1.0.3"
-   ARG nginx_version="1.25.4"
+   ARG nginx_version="1.30.3"
    ARG ubuntu_version="jammy"
    ```
    These environment variables are important because they allow the builder to specify the exact versions of the components that will be built.
