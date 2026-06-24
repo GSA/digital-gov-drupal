@@ -11,10 +11,8 @@
 # include updating it in our regular review process.
 
 # NB: Mainline nginx versions are denoted by an even number in the second part of the version number.
-NGINX_VERSION=1.28.1
+NGINX_VERSION=1.28.3
 
 
 export nginx_version=${NGINX_VERSION}
 echo "nginx_version=${NGINX_VERSION}"
-
-
