@@ -78,12 +78,12 @@ download_backup_files() {
   fi
 
   local backup_service="${project}-backup-${space}"
-  local cf_space="${project}-${space}"
 
   echo "Getting backup bucket credentials..."
-  {
-    cf target -s "${cf_space}"
-  } >/dev/null 2>&1
+  if ! cf target -s "${space}" >/dev/null 2>&1; then
+    echo -e "${RED}Error: could not target space '${space}'. Are you logged in (cf login) with access to it?${NC}"
+    exit 1
+  fi
   read -r AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY bucket AWS_DEFAULT_REGION < <(get_s3_credentials "${backup_service}")
   export AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_DEFAULT_REGION
 
@@ -95,11 +95,14 @@ download_backup_files() {
     ## Dated backups are stored under <type>/YYYY/MM/DD/<timestamp>.tar.gz.
     local date_prefix="${files_type}/${retrieve_date//-//}/"
     echo "Looking for a backup under '${date_prefix}'..."
+    ## When the prefix matches nothing, Contents is absent and the JMESPath
+    ## query errors; `|| true` keeps that from aborting under `set -e` so the
+    ## empty check below produces a clean error message.
     s3_key=$(aws s3api list-objects-v2 \
       --bucket "${bucket}" \
       --prefix "${date_prefix}" \
       --query 'sort_by(Contents, &LastModified)[-1].Key' \
-      --output text --no-verify-ssl 2>/dev/null)
+      --output text --no-verify-ssl 2>/dev/null || true)
 
     if [[ -z "${s3_key}" || "${s3_key}" == "None" ]]; then
       delete_s3_credentials "${backup_service}"
