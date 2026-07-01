@@ -168,9 +168,10 @@ download_backup_files() {
 
   delete_s3_credentials "${backup_service}"
 
-  echo "File saved: ${local_archive}"
-
-  if [[ -n "${extract}" ]]; then
+  if [[ -z "${extract}" ]]; then
+    ## Download-only: keep the archive and report where it is.
+    echo "File saved: ${local_archive}"
+  else
     [[ -z "${output_dir}" ]] && output_dir="${default_dir}"
 
     echo "Extracting into '${output_dir}'..."
@@ -201,6 +202,10 @@ download_backup_files() {
     else
       tar -xzf "${local_archive}" -C "${output_dir}"
     fi
+
+    ## The archive was only a means to extract; remove it so multi-GB downloads
+    ## don't linger in the working directory.
+    rm -f "${local_archive}"
     echo "Extraction complete."
   fi
 }

@@ -22,6 +22,66 @@ Simply edit or add new content, then run `./robo.sh export-content`
 
 To test the static site generation locally please run `./robo.sh static`.
 
+### Refreshing your local from Cloud.gov
+
+Several scripts in `./scripts` pull backups from Cloud.gov into your local
+environment. They operate on the space you currently have targeted, so log in
+and select one first:
+
+```
+cf login -a api.fr.cloud.gov --sso
+cf target -s dev
+```
+
+The project name and space are derived automatically (from
+`terraform/infra/locals.tf` and `cf target` respectively) — to work against a
+different space, switch to it with `cf target -s <space>`.
+
+#### One-step refresh (recommended)
+
+```
+./scripts/refresh-local.sh
+```
+
+This performs the sequence needed for an image-ready local site:
+
+1. Downloads the latest database backup and imports it (`lando db-import`).
+   MySQL 8 collations in the dump are rewritten to MariaDB-compatible ones so the
+   import succeeds locally.
+2. Downloads the public files and extracts them into `web/sites/default/files`.
+3. Uninstalls the **s3fs** module locally (`drush pmu s3fs`) and rebuilds caches
+   (`lando drush cr`).
+4. Opens a one-time login link (`lando drush uli`).
+
+Step 3 is important: an upstream database has cloud-only state such as s3fs
+enabled, which makes Drupal look for public files in S3 rather than on disk — so
+images (including image-style derivatives under `styles/`) won't render. This is
+the usual cause of missing images after loading a production database. The
+uninstall is deliberately targeted; the script does **not** run a full
+`drush cim`, which can fail on unrelated config-vs-data conflicts when your
+branch's configuration differs from the loaded database. If you want your local
+configuration fully re-applied, run `lando drush cim` yourself afterwards.
+
+Options:
+
+- `--no-db` — skip the database import (files/config only).
+- `--no-files` — skip the ~2GB public files download.
+- `-d YYYY-MM-DD` — load a specific day's backup instead of the latest.
+
+#### Downloading individual pieces
+
+If you only need the raw backups (for inspection or non-local use), the
+underlying tools can be run on their own:
+
+- `./scripts/download_files.sh` — public (uploaded) files. Add `-x` to extract
+  into `web/sites/default/files`; omit it to keep just the `.tar.gz`. The
+  `cms/public/` bucket prefix is stripped on extraction so files land where a
+  local Drupal expects them.
+- `./scripts/download_static.sh` — the generated static site. Add `-x` to
+  extract; omit it to keep the archive.
+
+Both accept `-d latest|YYYY-MM-DD` and `-h` for help.
+
 ### Auto Logout
 
 The autologout module will log you out after 30 minutes of inactivity or after 12 hours regardless of activity. This can get annoying when developing locally and having multiple tabs open.
