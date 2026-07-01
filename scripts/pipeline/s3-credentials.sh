@@ -17,6 +17,28 @@ s3_temp_key_name() {
   echo "tmp-key-$1-${S3_TMP_KEY_SUFFIX}"
 }
 
+## Registry of service instances this process has created temp keys for, so an
+## EXIT trap can remove them even if the caller is interrupted (Ctrl-C) or aborts
+## under `set -e`. Without this, failed/cancelled runs leak service keys, which
+## accumulate against the bucket's key quota and eventually cause new keys to
+## fail authorization (AccessDenied on GetObject).
+S3_CLEANUP_SERVICES=()
+
+## Remove every temp key created during this invocation. Safe to call repeatedly.
+s3_cleanup_temp_keys() {
+  local svc
+  for svc in "${S3_CLEANUP_SERVICES[@]:-}"; do
+    [[ -n "${svc}" ]] && delete_s3_credentials "${svc}"
+  done
+}
+
+## Register a service for automatic temp-key cleanup on process exit. Call this
+## (from the caller's shell, not a subshell) before/around get_s3_credentials.
+s3_autoclean_on_exit() {
+  S3_CLEANUP_SERVICES+=("$1")
+  trap 's3_cleanup_temp_keys' EXIT INT TERM
+}
+
 ## Create a temporary service key for an S3 service and echo its credentials as
 ## space separated values: <access_key> <secret_key> <bucket> <region>
 get_s3_credentials() {
