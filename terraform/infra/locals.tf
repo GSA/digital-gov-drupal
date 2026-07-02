@@ -109,7 +109,7 @@ locals {
         health_check_type = "port"
 
         ## Number of instances of application to deploy.
-        instances = 1
+        instances = contains(local.production_workspaces, terraform.workspace) ? 2 : 1
 
         ## Labels to add to the application.
         labels = {
@@ -117,7 +117,7 @@ locals {
         }
 
         ## Maximum amount of memory the application can use.
-        memory = 128
+        memory = 172
 
         ## Addional network policies to add to the application.
         ## Format: name of the application and the port it is listening on.
