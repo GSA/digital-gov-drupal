@@ -112,9 +112,11 @@ cf target -s dev
 | `./scripts/download_files.sh` | Download public (uploaded) files; `-x` extracts into `web/sites/default/files` |
 | `./scripts/download_static.sh` | Download the generated static site; `-x` extracts it locally |
 
-Each script takes `-h` for full options. `refresh-local.sh` supports `--no-db`
-and `--no-files` to run only part of the refresh, and `-d YYYY-MM-DD` to load a
-specific day's backup instead of the latest. See the
+Each script takes `-h` for full options. `refresh-local.sh` reuses local data
+by default (a populated local DB, a cached SQL dump, or existing public files)
+and only downloads what's missing; pass `--force-db` or `--force-files` to pull
+fresh copies, and `-d YYYY-MM-DD` to load a specific day's backup instead of the
+latest. See the
 [backend documentation](docs/backend.md#refreshing-your-local-from-cloudgov) for details.
 
 ## Additional developer documentation

@@ -46,11 +46,15 @@ get_s3_credentials() {
   local key_name
   key_name="$(s3_temp_key_name "${service_instance_name}")"
 
-  cf delete-service-key "${service_instance_name}" "${key_name}" -f >/dev/null 2>&1
-  cf create-service-key "${service_instance_name}" "${key_name}" >/dev/null 2>&1
+  ## `|| true` on the cf calls: callers run this inside a process substitution
+  ## which inherits `set -e`, so an unguarded cf failure (e.g. expired auth
+  ## token) would kill the subshell silently. Let the failure flow through to
+  ## empty/null credentials, which callers can check and report clearly.
+  cf delete-service-key "${service_instance_name}" "${key_name}" -f >/dev/null 2>&1 || true
+  cf create-service-key "${service_instance_name}" "${key_name}" >/dev/null 2>&1 || true
 
   local s3_credentials
-  s3_credentials=$(cf service-key "${service_instance_name}" "${key_name}" | tail -n +2)
+  s3_credentials=$(cf service-key "${service_instance_name}" "${key_name}" 2>/dev/null | tail -n +2 || true)
 
   local access_key secret_key bucket region
   access_key=$(echo "${s3_credentials}" | jq -r '.credentials.access_key_id')

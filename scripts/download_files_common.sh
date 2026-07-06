@@ -126,7 +126,16 @@ download_backup_files() {
   ## Ensure the temp service key is removed even if the run is interrupted or
   ## aborts, so keys don't leak and exhaust the bucket's key quota.
   s3_autoclean_on_exit "${backup_service}"
-  read -r AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY bucket AWS_DEFAULT_REGION < <(get_s3_credentials "${backup_service}")
+  ## `|| true` so a failed credential fetch reaches the explicit check below
+  ## instead of dying silently under `set -e` with no error message.
+  read -r AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY bucket AWS_DEFAULT_REGION \
+    < <(get_s3_credentials "${backup_service}") || true
+  if [[ -z "${AWS_ACCESS_KEY_ID:-}" || "${AWS_ACCESS_KEY_ID}" == "null" ]]; then
+    echo -e "${RED}Error: could not get S3 credentials for '${backup_service}'.${NC}"
+    echo "Check that the service exists in this space and your cf session is valid"
+    echo "(an expired session can be renewed with: cf login -a api.fr.cloud.gov --sso)."
+    exit 1
+  fi
   export AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_DEFAULT_REGION
 
   ## Resolve the object key to download.

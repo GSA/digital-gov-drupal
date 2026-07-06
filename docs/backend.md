@@ -45,13 +45,24 @@ different space, switch to it with `cf target -s <space>`.
 
 This performs the sequence needed for an image-ready local site:
 
-1. Downloads the latest database backup and imports it (`lando db-import`).
-   MySQL 8 collations in the dump are rewritten to MariaDB-compatible ones so the
-   import succeeds locally.
-2. Downloads the public files and extracts them into `web/sites/default/files`.
+1. Loads the database. By default it is **non-destructive and reuses what you
+   already have**: if the local Lando database already has content it is left
+   untouched; otherwise a previously downloaded dump
+   (`digitalgov.sql.gz`) is reused if present; otherwise the latest backup
+   is downloaded and imported (`lando db-import`). MySQL 8 collations in the dump
+   are rewritten to MariaDB-compatible ones so the import succeeds locally. In
+   each case the script tells you which source it used.
+2. Loads the public files: if `web/sites/default/files` already has content it
+   is reused; otherwise the backup is downloaded and extracted there.
 3. Uninstalls the **s3fs** module locally (`drush pmu s3fs`) and rebuilds caches
-   (`lando drush cr`).
+   (`lando drush cr`). The s3fs step only runs when the database was actually
+   (re)loaded this run.
 4. Opens a one-time login link (`lando drush uli`).
+
+Because it reuses local data, rerunning the script is cheap and safe. If you
+later decide you want fresh upstream data, rerun with the matching `--force-*`
+flag — forcing just the database re-downloads only the small SQL dump and leaves
+your ~2GB of files in place.
 
 Step 3 is important: an upstream database has cloud-only state such as s3fs
 enabled, which makes Drupal look for public files in S3 rather than on disk — so
@@ -64,8 +75,10 @@ configuration fully re-applied, run `lando drush cim` yourself afterwards.
 
 Options:
 
-- `--no-db` — skip the database import (files/config only).
-- `--no-files` — skip the ~2GB public files download.
+- `--force-db` — always download a fresh database backup and re-import,
+  replacing the current local database.
+- `--force-files` — always download and extract fresh public files (~2GB), even
+  if local files already exist.
 - `-d YYYY-MM-DD` — load a specific day's backup instead of the latest.
 
 #### Downloading individual pieces
