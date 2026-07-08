@@ -8,6 +8,7 @@
     @include u-margin-bottom("205");
     @include u-bg("gray-warm-10");
     @include u-line-height("sans", 1);
+    @include u-radius("lg");
 
     &:first-child {
       border: none;
@@ -17,6 +18,7 @@
       @include u-padding-x(2);
       @include u-padding-y(1);
       @include u-bg("gray-warm-20");
+      @include u-radius-top("lg");
 
       p {
         @include u-line-height("sans", 3);
