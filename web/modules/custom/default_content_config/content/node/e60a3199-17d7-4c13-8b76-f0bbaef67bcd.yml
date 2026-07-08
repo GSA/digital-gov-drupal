@@ -39,10 +39,6 @@ default:
       uri: 'https://www.youtube.com/@DigitalGov'
       title: 'Video library'
       options: {  }
-    -
-      uri: 'internal:/events/#events-past'
-      title: 'Past events'
-      options: {  }
   field_deck:
     -
       value: '<p><strong>Digital.gov</strong> provides free webinars that highlight the innovations, case studies, tools, and resources people in government need most.</p>'
