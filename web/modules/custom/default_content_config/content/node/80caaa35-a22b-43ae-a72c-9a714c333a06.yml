@@ -191,7 +191,7 @@ default:
                       format: single_inline_html
           field_title:
             -
-              value: 'Analytics: Essential knowledge'
+              value: 'Analytics: essential knowledge'
   field_featured_resources:
     -
       entity:
