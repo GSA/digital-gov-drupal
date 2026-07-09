@@ -30,7 +30,7 @@
 .dg-promos__link {
   @include u-border("1px", "gray-cool-10", "solid");
   @include u-line-height("sans", 2);
-  @include u-radius("md");
+  @include u-radius("lg");
   @include u-text("semibold");
   color: color("indigo-80");
   display: flex;
