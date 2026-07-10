@@ -36,12 +36,6 @@ function digital_gov_preprocess_html(array &$variables): void {
   elseif ($node = \Drupal::routeMatch()->getParameter('node')) {
     $variables['attributes']['class'][] = dg_get_specific_body_class($node);
     $variables['attributes']['class'][] = dg_get_broad_body_class($node);
-
-    if ($node->getType() === 'community') {
-      $variables['head_title']['title'] = t('@title Community', [
-        '@title' => $node->label(),
-      ]);
-    }
   }
 }
 

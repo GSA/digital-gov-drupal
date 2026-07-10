@@ -21,15 +21,6 @@ function dg_breadcrumb_system_breadcrumb_alter(Breadcrumb &$breadcrumb, RouteMat
     return;
   }
   switch ($current_node->getType()) {
-    case 'community':
-      $links = $breadcrumb->getLinks();
-      if (!empty($links)) {
-        $links[array_key_last($links)]->setText(t('@title Community', [
-          '@title' => $current_node->label(),
-        ]));
-      }
-      break;
-
     case 'news':
       $eq = \Drupal::entityQuery('node');
       $eq->condition('type', 'landing_page');
