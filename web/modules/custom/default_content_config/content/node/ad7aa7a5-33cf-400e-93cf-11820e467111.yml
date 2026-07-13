@@ -228,7 +228,7 @@ default:
                       format: single_inline_html
           field_title:
             -
-              value: 'Accessibility: Essential knowledge'
+              value: 'Accessibility: essential knowledge'
   field_featured_resources:
     -
       entity:
