@@ -76,25 +76,37 @@
 
       {% if content.field_buttons %}
         <div class="join-buttons">
-          {{ content.field_buttons|field_value }}
+          {# The "Past events" anchor button is hidden while the Past Events
+             heading is disabled. Remove the filter to restore it. #}
+          {% for key, item in node.field_buttons %}
+            {% if '#events-past' not in item.uri %}
+              {{ content.field_buttons[key] }}
+            {% endif %}
+          {% endfor %}
         </div>
       {% endif %}
     </div>
   </header>
 
+  {# Upcoming Events section hidden per DIGITAL ticket - no events planned
+     for the near future. Restore this section if events resume.
   <section class="upcoming-events article-list">
     <div class="grid-container grid-container-desktop">
       <h2>Upcoming Events</h2>
       {{ drupal_view('events', 'block_1') }}
     </div>
   </section>
+  #}
 
   <section id="events-past">
+    {# Past Events heading hidden while the Upcoming Events section is
+       disabled. Restore the heading if events resume.
     <header>
       <div class="grid-container grid-container-desktop">
         <h2>Past Events</h2>
       </div>
     </header>
+    #}
     <div class="article-list">
       <div class="grid-container grid-container-desktop">
           {{ drupal_view('past_events', 'block_1') }}
