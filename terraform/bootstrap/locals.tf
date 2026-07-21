@@ -87,7 +87,6 @@ locals {
       ## If one is defined below in a workspace's settings, it will supersed this one.
       passwords = {
         # test = {length = 32}
-        hash_salt = {length = 32}
       }
 
       ## A copy of the project name, so it gets added to this setting object.

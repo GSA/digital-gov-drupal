@@ -263,8 +263,6 @@ locals {
 
         ## Credentials that should be added to the json blob.
         credentials = [
-          "cron_key",
-          "hash_salt",
           "gsa_auth_key",
           "newrelic_key"
         ]
@@ -412,12 +410,6 @@ locals {
       ## Passwords that are generated for workspaces. By default, it's an empty map.
       ## If one is defined below in a workspace's settings, it will supersed this one.
       passwords = {
-          hash_salt = {
-            length = 32
-          }
-          cron_key = {
-            length = 32
-          }
         }
 
       ## A copy of the project name, so it gets added to this setting object.
@@ -448,12 +440,6 @@ locals {
         ## Passwords that need to be generated for this environment.
         ## These will actually use the sha256 result from the random module.
         passwords = {
-          hash_salt = {
-            length = 32
-          }
-          cron_key = {
-            length = 32
-          }
         }
       }
     )
@@ -480,12 +466,6 @@ locals {
         ## Passwords that need to be generated for this environment.
         ## These will actually use the sha256 result from the random module.
          passwords = {
-          hash_salt = {
-            length = 32
-          }
-          cron_key = {
-            length = 32
-          }
         }
       }
     )
@@ -511,12 +491,6 @@ locals {
         ## Passwords that need to be generated for this environment.
         ## These will actually use the sha256 result from the random module.
         passwords = {
-          hash_salt = {
-            length = 32
-          }
-          cron_key = {
-            length = 32
-          }
         }
       }
     )
