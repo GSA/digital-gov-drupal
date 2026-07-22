@@ -3,12 +3,19 @@
 ## Get current username with no special characters.
 user=$(whoami | tr -dc '[:alnum:]\n\r' | tr '[:upper:]' '[:lower:]')
 
-if [ -z "${bucket_name}" ]; then
-  echo -e "Error: No bucket name is set!\n"
-  echo -e "Export the bucket name, found with 'cf services | grep s3', then run the script again."
-  echo -e "This is the name of the bucket in cloud.gov, not the AWS bucket name.\n"
-  echo -e "Example usage:\n\texport bucket_name=project-bucket-name-environment\n\t$0\n"
-  return
+## Find the CF s3 service name. Look on the command line, then in the environment.
+cf_service=$1
+if [ -z "${cf_service}" ]; then
+  cf_service="${cf_s3_service}"
+  if [ -z "${cf_service}" ]; then
+    echo -e "Error: No CF s3 service name is set!\n"
+    echo -e "Export the CF s3 service name, found with 'cf services | grep s3', then run the script again."
+    echo -e "This is the name of the bucket in cloud.gov, not the AWS CF s3 service name.\n"
+    echo -e "Example usage:\n\texport cf_service=project-bucket-name-environment\n\t$0\n"
+    return
+  fi
+else
+  shift
 fi
 
 if [ -n "$(cf orgs | grep FAILED)" ]; then
@@ -17,18 +24,18 @@ fi
 
 echo "Deleting old credentials..."
 {
-  service_key="${bucket_name}-${user}-key"
+  service_key="${cf_service}-${user}-key"
 
   ## Delete any old keys.
-  cf delete-service-key "${bucket_name}" "${service_key}" -f
+  cf delete-service-key "${cf_service}" "${service_key}" -f
 } >/dev/null 2>&1
 
 [ "${1}" = "-d" ] && echo "AWS bucket key deleted." && return
 
 echo "Creating key..."
 {
-  cf create-service-key "${bucket_name}" "${service_key}"
-  s3_credentials=$(cf service-key "${bucket_name}" "${service_key}" | tail -n +2)
+  cf create-service-key "${cf_service}" "${service_key}"
+  s3_credentials=$(cf service-key "${cf_service}" "${service_key}" | tail -n +2)
   aws_access_key=$(echo "${s3_credentials}" | jq -r '.credentials.access_key_id')
   aws_bucket_name=$(echo "${s3_credentials}" | jq -r '.credentials.bucket')
   aws_bucket_region=$(echo "${s3_credentials}" | jq -r '.credentials.region')
