@@ -1,7 +1,7 @@
 _meta:
   version: '1.0'
   entity_type: user
-  uuid: 3d6e8774-b4d5-4b6f-ba01-79686f0fabee
+  uuid: 24f8ecbd-0de6-40f0-a7a8-097ba457986f
   default_langcode: en
 default:
   preferred_langcode:
@@ -12,24 +12,24 @@ default:
       value: en
   name:
     -
-      value: anna.femath@gsa.gov
+      value: david.stenger@gsa.gov
   pass:
     -
-      value: $2y$10$GttwdZ4Hn5CTxZorjCJmeOQUzXQeFhJO7vE5I7XLudyfX5CKdCii2
+      value: $2y$10$MQFcClIBP3zDyrtOwF/oXO//2jlQx0xVFzcfaj5ceQBu3CxNP/X/m
       existing: ''
       pre_hashed: true
   mail:
     -
-      value: anna.femath@gsa.gov
+      value: david.stenger@gsa.gov
   timezone:
     -
       value: America/New_York
   status:
     -
-      value: false
+      value: true
   created:
     -
-      value: 1740431548
+      value: 1782167600
   access:
     -
       value: 0
@@ -38,10 +38,14 @@ default:
       value: 0
   init:
     -
-      value: anna.femath@gsa.gov
+      value: david.stenger@gsa.gov
   roles:
     -
-      target_id: admin
+      target_id: author
+    -
+      target_id: editor
+    -
+      target_id: content_admin
   role_change:
     -
       target_id: __role_delegation_empty_field_value__

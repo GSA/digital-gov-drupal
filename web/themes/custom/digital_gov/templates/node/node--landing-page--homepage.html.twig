@@ -171,12 +171,14 @@
     {% endif %}
   {% endfor %}
 
-  {{ include('@digital_gov/partials/home/news-featured.html.twig', {
+    {# DIGITAL-771: remove News and Events section
+    { include('@digital_gov/partials/home/news-featured.html.twig', {
     heading: 'News and Events'|t,
     deck: 'Innovative work, news, and ideas from people and teams in government'|t,
     list: news_and_events,
     link: '/join',
     link_text: 'Write for us'|t,
     aria_label: 'Featured news and events'|t,
-  }) }}
+    }) }
+    #}
 </main>

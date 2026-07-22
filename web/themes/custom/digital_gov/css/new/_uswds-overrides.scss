@@ -12,6 +12,7 @@
   &__nav {
     padding-left: 0;
     padding-top: units("05");
+    margin-top: units(4);
   }
 
   &__heading {
@@ -20,6 +21,32 @@
 
   &__item--sub-item {
     @include u-display("none");
+  }
+}
+
+.usa-in-page-nav__list a:not(.usa-button):hover {
+  background: color("gray-cool-5");
+  text-decoration: none;
+}
+
+.usa-in-page-nav__list a:not(.usa-button):hover::after {
+  content: "";
+  background: color("blue-warm-50v");
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0; 
+  width: 0.25rem;
+  z-index: 100;
+}
+
+.usa-in-page-nav__list a:not(.usa-button).usa-current {
+  z-index: 10;
+  position: relative; 
+  &::after {
+    background: color("blue-warm-50v");
+    bottom: 0; 
   }
 }
 
@@ -67,3 +94,10 @@
   }
 }
 /* stylelint-enable */
+
+// Override grid container padding for side nav on guide pages
+.dg-guide .usa-in-page-nav-container .dg-guide__in-page-content > .dg-guide__content.grid-container-desktop,
+.dg-guide .usa-in-page-nav-container .dg-guide__in-page-content > .dg-guide__footer.grid-container-desktop {
+  @include u-padding-left(0);
+  @include u-padding-right(0);
+}

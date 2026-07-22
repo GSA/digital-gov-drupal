@@ -78,7 +78,6 @@
       {{ include('@digital_gov/partials/page-header.html.twig', {
         title: label|field_value,
         deck: content.field_deck|field_value,
-        append_title_text: 'Community'|t,
       }, with_context: false) }}
     </header>
     <section class="usa-in-page-nav-container">
@@ -86,6 +85,7 @@
         class="usa-in-page-nav"
         data-title-heading-level="h3"
         data-root-margin="-350px 0px -350px 0px"
+        data-heading-elements="h2"
       ></aside>
       <div>
         <div class="content usa-prose">
