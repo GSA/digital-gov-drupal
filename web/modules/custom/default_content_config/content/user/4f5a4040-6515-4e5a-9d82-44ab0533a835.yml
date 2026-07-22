@@ -1,7 +1,7 @@
 _meta:
   version: '1.0'
   entity_type: user
-  uuid: 3d6e8774-b4d5-4b6f-ba01-79686f0fabee
+  uuid: 4f5a4040-6515-4e5a-9d82-44ab0533a835
   default_langcode: en
 default:
   preferred_langcode:
@@ -12,24 +12,24 @@ default:
       value: en
   name:
     -
-      value: anna.femath@gsa.gov
+      value: maria.marrero@gsa.gov
   pass:
     -
-      value: $2y$10$GttwdZ4Hn5CTxZorjCJmeOQUzXQeFhJO7vE5I7XLudyfX5CKdCii2
+      value: $2y$10$kzVN9iG.g0mcBDanFVUpj.JXn5eHCGjQCiFOZ9WtYAyz5eezj/UEO
       existing: ''
       pre_hashed: true
   mail:
     -
-      value: anna.femath@gsa.gov
+      value: maria.marrero@gsa.gov
   timezone:
     -
       value: America/New_York
   status:
     -
-      value: false
+      value: true
   created:
     -
-      value: 1740431548
+      value: 1782167710
   access:
     -
       value: 0
@@ -38,10 +38,14 @@ default:
       value: 0
   init:
     -
-      value: anna.femath@gsa.gov
+      value: maria.marrero@gsa.gov
   roles:
     -
-      target_id: admin
+      target_id: author
+    -
+      target_id: editor
+    -
+      target_id: content_admin
   role_change:
     -
       target_id: __role_delegation_empty_field_value__
