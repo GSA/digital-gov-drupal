@@ -2,9 +2,11 @@
 
 use Drupal\Core\Installer\InstallerKernel;
 
+$redis_interface = class_exists('Predis\Client') ? 'Predis' : (extension_loaded('redis') ? 'PhpRedis' : NULL);
+
 if ((
   !InstallerKernel::installationAttempted() &&
-  extension_loaded('redis') &&
+  $redis_interface &&
   class_exists('Drupal\redis\ClientFactory')
 )) {
   function _settings_redis(array &$settings, string $host, string $port): void {
@@ -12,7 +14,7 @@ if ((
     $settings['redis.connection']['port'] = $port;
   }
 
-  $settings['redis.connection']['interface'] = 'PhpRedis'; // Can be "Predis".
+  $settings['redis.connection']['interface'] = $redis_interface;
   # Use for all bins otherwise specified.
   $settings['cache']['default'] = 'cache.backend.redis';
 

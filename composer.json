@@ -67,6 +67,7 @@
         "drupal/pathauto": "^1.14",
         "drupal/rabbit_hole": "^1.1",
         "drupal/redirect": "^1.12",
+        "drupal/redis": "^1.11",
         "drupal/remove_username": "^1.5",
         "drupal/require_revision_log_message": "^2.0",
         "drupal/role_delegation": "^1.6",
@@ -92,7 +93,8 @@
         "league/commonmark": "^2.5",
         "mattsqd/drupal-env": "dev-main",
         "mattsqd/drupal-env-lando": "dev-main",
-        "mattsqd/robovalidate": "@alpha"
+        "mattsqd/robovalidate": "@alpha",
+        "predis/predis": "^2.4"
     },
     "conflict": {
         "drupal/drupal": "*"

@@ -22,6 +22,7 @@ default_config: &defaults
       protocol: http2
   services:
     - ${PROJECT}-mysql-${CF_SPACE}
+    # CACHE_SERVICE_BINDING
     - ${PROJECT}-secrets-${CF_SPACE}
     - ${PROJECT}-static-${CF_SPACE}
     - ${PROJECT}-storage-${CF_SPACE}

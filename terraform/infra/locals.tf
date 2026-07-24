@@ -216,6 +216,33 @@ locals {
     ## Services to deploy in this environment.
     services = {
 
+      ## Shared Drupal cache. Valkey is Redis-protocol compatible and encrypted
+      ## in transit by the Cloud.gov broker.
+      "cache" = {
+
+        ## The Drupal application is deployed by manifest.yml.
+        applications = []
+
+        ## The application only needs the binding credentials.
+        service_key = false
+
+        ## Matches the USAGov cache cluster size used for static generation.
+        service_plan = "redis-3node-large"
+
+        ## Create the current Cloud.gov-supported Valkey engine explicitly.
+        service_type = "aws-elasticache-redis"
+        json_params = jsonencode({
+          engine        = "valkey"
+          engineVersion = "8.2"
+        })
+
+        ## settings.cloudgov.php detects this tag rather than a fixed name.
+        tags = [
+          terraform.workspace,
+          "cache-service"
+        ]
+      }
+
       ## S3 storage for backups.
       "backup" = {
 
