@@ -78,13 +78,14 @@
       {% if content.field_authors|field_value %}
         {{ include('@digital_gov/partials/authors-list.html.twig', {
           inline: true,
+          show_agency: true,
           authors: content.field_authors|field_value,
         }, with_context: false) }}
       {% endif %}
       <div class="meta">
         <div class="date">
             <span title="{{ label|field_value }}"
-            >{{ created }}</span
+            >Published on: {{ created }}</span
             >
         </div>
       </div>
@@ -92,7 +93,7 @@
 
     <section>
       <div class="grid-row tablet-lg:grid-gap-6">
-        <div class="grid-col-12 tablet-lg:grid-col-9 tablet-lg:order-last">
+        <div class="grid-col-12 tablet-lg:grid-col-9">
           <div class="content usa-prose">
             {{ content.body|field_value }}
           </div>
@@ -102,19 +103,6 @@
         </div>
 
         <div class="dg-sidebar grid-col-12 tablet-lg:grid-col-3">
-          {% if content.field_authors|field_value %}
-            {{ include('@digital_gov/partials/authors-list.html.twig', {
-              inline: false,
-              authors: content.field_authors|field_value,
-            }, with_context: false) }}
-          {% endif %}
-
-          <div class="meta">
-            <div class="date">
-              <span title="{{ label|field_value }}">{{ created }}</span>
-            </div>
-          </div>
-
           {{ include('@digital_gov/partials/primary-communities.html.twig') }}
 
           {{ content.field_topics }}

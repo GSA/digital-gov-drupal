@@ -4,11 +4,14 @@
   EXPECTED VARIABLES:
     - inline: boolean
     - authors: render array of author nodes
+    - show_agency: boolean (optional) — when there is a single author, render
+      their agency name below their name (used in the blog post byline)
 
 #}
-<div class="authors-list {{ inline ? 'authors-list--inline' : '' }}">
+{% set with_agency = show_agency|default(false) and authors|length == 1 %}
+<div class="authors-list {{ inline ? 'authors-list--inline' : '' }} {{ with_agency ? 'authors-list--with-agency' : '' }}">
   {% for author in authors %}
-    {% set display_mode = inline ? 'teaser_inline' : 'teaser' %}
+    {% set display_mode = inline and not with_agency ? 'teaser_inline' : 'teaser' %}
     {{ drupal_entity('node', author['#node'].id(), display_mode) }}
   {% endfor %}
 </div>
