@@ -9,7 +9,6 @@ default_config: &defaults
     - https://github.com/cloudfoundry/php-buildpack.git#v4.6.28
   disk_quota: 4G
   env:
-    BP_DEBUG: false
     COMPOSER_DEV: ${COMPOSER_DEV}
     environment: ${CF_SPACE}
     LD_LIBRARY_PATH: /home/vcap/app/php/lib/
