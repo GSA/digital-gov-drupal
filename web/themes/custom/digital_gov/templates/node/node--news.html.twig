@@ -78,13 +78,14 @@
       {% if content.field_authors|field_value %}
         {{ include('@digital_gov/partials/authors-list.html.twig', {
           inline: true,
+          show_agency: true,
           authors: content.field_authors|field_value,
         }, with_context: false) }}
       {% endif %}
       <div class="meta">
         <div class="date">
             <span title="{{ label|field_value }}"
-            >{{ created }}</span
+            >Published on: {{ created }}</span
             >
         </div>
       </div>
