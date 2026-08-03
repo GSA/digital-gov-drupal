@@ -165,7 +165,7 @@ default:
                       format: single_inline_html
           field_title:
             -
-              value: 'Plain language: Essential knowledge'
+              value: 'Plain language: essential knowledge'
   field_featured_resources:
     -
       entity:

@@ -16,5 +16,3 @@ NGINX_VERSION=1.30.3
 
 export nginx_version=${NGINX_VERSION}
 echo "nginx_version=${NGINX_VERSION}"
-
-

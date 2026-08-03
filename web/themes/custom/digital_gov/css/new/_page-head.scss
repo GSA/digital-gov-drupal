@@ -2,11 +2,9 @@
 
 .page-head {
   @include u-padding-y(5);
-  @include u-text("center");
 
   h1,
   h2 {
-    @include u-text("center");
     @include u-text("heavy");
     margin-bottom: units(1);
   }

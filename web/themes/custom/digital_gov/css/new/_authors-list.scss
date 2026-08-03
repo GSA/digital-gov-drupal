@@ -1,5 +1,4 @@
 // Styles for the list of authors generally found on blog posts and event pages
-// NOTE: The authors-list is included twice on the page. Once for desktop, the other for mobile.
 @use "uswds-core" as *;
 
 // authors landing override
@@ -55,7 +54,7 @@
     align-items: center;
     border: none;
     display: flex;
-    margin-bottom: units("05");
+    margin-bottom: units("205");
     margin-left: 0;
     margin-right: units("105");
     margin-top: units("05");
@@ -73,7 +72,14 @@
 
   .author__photo-img {
     border: 1px color("indigo-30") solid;
-    margin-right: units("05");
+    margin-right: units(1);
     @include u-circle(3);
+  }
+}
+
+// Single-author byline showing the author's agency (blog post header)
+.authors-list--inline.authors-list--with-agency {
+  .author__photo-img {
+    @include u-circle(5);
   }
 }

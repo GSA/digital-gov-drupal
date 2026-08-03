@@ -50,11 +50,13 @@ jobs:
 
             -   name: Validate a change to any branch
                 if: github.event_name == 'push'
+                env:
+                    BRANCH_NAME: ${{ steps.extract_branch.outputs.branch }}
                 run: |
                     # Initialize status variables to 0
                     status1=0
 
-                    ROBO_VALIDATE_BRANCH_NAME=${{ steps.extract_branch.outputs.branch }} vendor/bin/robo validate:all non_pr
+                    ROBO_VALIDATE_BRANCH_NAME="$BRANCH_NAME" vendor/bin/robo validate:all non_pr
 
                     # Exit with a non-zero status if the command failed
                     if [ "$status1" -ne 0 ]; then
@@ -63,11 +65,15 @@ jobs:
 
             -   name: Validate pull requests
                 if: github.event_name == 'pull_request'
+                env:
+                    BRANCH_NAME: ${{ steps.extract_branch.outputs.branch }}
+                    TARGET_BRANCH: ${{ github.base_ref }}
+                    CURRENT_BRANCH: ${{ github.head_ref }}
                 run: |
                     # Initialize status variables to 0
                     status1=0
 
-                    ROBO_VALIDATE_BRANCH_NAME=${{ steps.extract_branch.outputs.branch }} ROBO_VALIDATE_TARGET_BRANCH="${{ github.base_ref }}" ROBO_VALIDATE_CURRENT_BRANCH="${{ github.head_ref }}" vendor/bin/robo validate:all
+                    ROBO_VALIDATE_BRANCH_NAME="$BRANCH_NAME" ROBO_VALIDATE_TARGET_BRANCH="$TARGET_BRANCH" ROBO_VALIDATE_CURRENT_BRANCH="$CURRENT_BRANCH" vendor/bin/robo validate:all
 
                     # Exit with a non-zero status if the command failed
                     if [ "$status1" -ne 0 ]; then

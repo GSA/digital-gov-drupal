@@ -20,6 +20,10 @@ $communities-of-practice-colors: (
   }
 }
 
+.join-community-form--CC {
+  border-width: 0.15rem;
+}
+
 .join-community-form {
   color: color("gray-90");
   font-weight: font-weight("light");
@@ -28,7 +32,7 @@ $communities-of-practice-colors: (
   padding-left: units(3);
   padding-right: units(3);
   padding-top: units(2.5);
-  @include u-radius("sm");
+  border-radius: 0.5rem;
 
   &__header {
     align-items: center;

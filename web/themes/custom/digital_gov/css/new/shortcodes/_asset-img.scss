@@ -4,7 +4,7 @@
   @include u-margin-y(2);
   @include u-padding(2);
   @include u-bg("gray-5");
-  @include u-radius("sm");
+  @include u-radius("lg");
 
   p {
     @include u-display("flex");

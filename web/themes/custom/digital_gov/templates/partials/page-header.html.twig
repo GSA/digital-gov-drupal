@@ -5,7 +5,6 @@ You can pass any of these params:
 - title - the required page title
 - deck - an optional summary text displayed below the title
 - kicker - an optional short introduction text displayed above the title
-- append_title_text - optional text that is appended to the title text field
 #}
 
 <div class="dg-page-header">
@@ -17,9 +16,6 @@ You can pass any of these params:
   {% if title %}
   <h1>
     {{ title }}
-    {% if append_title_text %}
-      {{ append_title_text }}
-    {% endif %}
   </h1>
   {% endif %}
   {% if deck %}
