@@ -167,14 +167,46 @@ import_db_archive() {
   echo "==> Importing database into local Lando..."
   ## Decompress to a working copy but keep the .gz so it stays available as a
   ## cache for future reruns.
-  gunzip -c "${db_archive}" > "${db_sql}"
+  ##
   ## Cloud.gov runs MySQL 8, which emits the utf8mb4_0900_* collations and the
   ## mysql_native_password plugin; local Lando runs MariaDB, which rejects them.
-  ## Rewrite those to MariaDB-compatible equivalents before importing.
-  sed -i '' \
-    -e 's/utf8mb4_0900_ai_ci/utf8mb4_general_ci/g' \
-    -e 's/COLLATE=utf8mb4_0900_ai_ci//g' \
-    "${db_sql}"
+  ## Rewrite those to MariaDB-compatible equivalents on the way out. Streaming
+  ## through sed instead of editing in place keeps this portable: `-i` takes a
+  ## mandatory backup-suffix argument on BSD/macOS sed but an optional one on
+  ## GNU sed, so no single `-i` invocation works on both. It also saves a second
+  ## full pass over a multi-GB dump.
+  ##
+  ## pipefail so a truncated or corrupt cached .gz aborts here rather than
+  ## importing a partial dump -- sed would otherwise exit 0 and mask it.
+  if ! ( set -o pipefail
+         gunzip -c "${db_archive}" \
+           | sed -e 's/utf8mb4_0900_ai_ci/utf8mb4_general_ci/g' \
+                 -e 's/COLLATE=utf8mb4_0900_ai_ci//g' \
+           > "${db_sql}" ); then
+    echo -e "${RED}Error: failed to read '${db_archive}'.${NC}"
+    echo "The archive looks corrupt; re-run with --force-db to download a fresh copy."
+    rm -f "${db_sql}"
+    exit 1
+  fi
+
+  ## A dump can be a perfectly valid .gz and still be incomplete: the backup job
+  ## (scripts/pipeline/database-backup.sh) runs without `set -e` and sends
+  ## mysqldump's stderr to /dev/null, so a connection dropped mid-dump is
+  ## silently gzipped and uploaded as a short file. gunzip accepts that happily,
+  ## which is why the pipefail check above cannot catch it. mysqldump's last
+  ## line is a completion trailer, so require it before importing -- otherwise
+  ## the import "succeeds" and leaves a half-populated site that looks real.
+  ## NB: this depends on the backup keeping mysqldump's comments (it does not
+  ## pass --skip-comments); revisit here if that ever changes.
+  if ! tail -5 "${db_sql}" | grep -q '^-- Dump completed'; then
+    echo -e "${RED}Error: '${db_archive}' is incomplete -- no mysqldump completion marker.${NC}"
+    echo "Importing it would leave a partially-populated local site. Either:"
+    echo "  ./scripts/refresh-local.sh --force-db              # fetch a fresh backup"
+    echo "  ./scripts/refresh-local.sh --force-db -d <date>    # or an earlier one"
+    rm -f "${db_sql}"
+    exit 1
+  fi
+
   ## lando db-import resolves the path inside the container (relative to the
   ## project root mounted at /app), so pass a project-relative filename.
   ( cd "${REPO_ROOT}" && lando db-import "$(basename "${db_sql}")" )
