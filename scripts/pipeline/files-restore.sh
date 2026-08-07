@@ -72,12 +72,29 @@ date
 echo "Getting '${FILES_BACKUP_TYPE}' bucket credentials..."
 read -r TARGET_ACCESS_KEY TARGET_SECRET_KEY TARGET_BUCKET TARGET_REGION < <(get_s3_credentials "${TARGET_SERVICE}")
 
+## Match the exclusion in files-backup.sh. New archives no longer contain
+## cms/public/php (Drupal's regenerable PhpBackend cache -- see the comment
+## there), but every archive taken before that change still does, so restoring
+## one would push ~560MB of dead cache files back into the live bucket.
+##
+## The interaction with --delete is worth knowing: the AWS CLI applies filters
+## to the destination listing as well, so excluded keys are not pruned -- the
+## bucket's current php cache should be left as-is rather than deleted. That
+## specific behaviour is documented but was not verified here (no S3 endpoint
+## available), and it is safe either way: if the cache were pruned, Drupal
+## regenerates it on demand.
+RESTORE_EXCLUDES=()
+if [[ "${FILES_BACKUP_TYPE}" == "storage" ]]; then
+  RESTORE_EXCLUDES=(--exclude "cms/public/php/*")
+fi
+
 echo "Restoring '${FILES_BACKUP_TYPE}' files to bucket..."
 {
   AWS_ACCESS_KEY_ID="${TARGET_ACCESS_KEY}" \
   AWS_SECRET_ACCESS_KEY="${TARGET_SECRET_KEY}" \
   AWS_DEFAULT_REGION="${TARGET_REGION}" \
-    aws s3 sync "${WORK_DIR}" "s3://${TARGET_BUCKET}" --delete --no-verify-ssl 2>/dev/null
+    aws s3 sync "${WORK_DIR}" "s3://${TARGET_BUCKET}" "${RESTORE_EXCLUDES[@]}" \
+      --delete --no-verify-ssl 2>/dev/null
 } >/dev/null 2>&1
 
 echo "Cleaning up..."

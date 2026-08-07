@@ -40,6 +40,24 @@ BACKUP_SERVICE="${PROJECT}-backup-${CF_SPACE}"
 echo "Getting '${FILES_BACKUP_TYPE}' bucket credentials..."
 read -r SRC_ACCESS_KEY SRC_SECRET_KEY SRC_BUCKET SRC_REGION < <(get_s3_credentials "${SOURCE_SERVICE}")
 
+## Drupal writes a regenerable PHP cache into the public files bucket, and it
+## does not belong in a backup. settings.cloudgov.php points the 'data' cache
+## bin at cache.backend.php; PhpBackend prefixes the bin to "cache_data" and
+## PhpStorageFactory defaults its storage to <public files>/php, which the s3fs
+## public takeover places in this bucket at cms/public/php. (twig storage is
+## already redirected off S3 in settings.cloudgov.php; this bin never was.)
+##
+## It is currently ~560MB across 73k+ files -- roughly a fifth of the archive --
+## with entries dating back to 2025, because nothing prunes it. Note the
+## cms/public/ prefix is required: a bare "php/*" pattern matches no keys.
+##
+## Only the Drupal files bucket has this; "static" is a Tome build, so its sync
+## is left unfiltered.
+SYNC_EXCLUDES=()
+if [[ "${FILES_BACKUP_TYPE}" == "storage" ]]; then
+  SYNC_EXCLUDES=(--exclude "cms/public/php/*")
+fi
+
 echo "Downloading '${FILES_BACKUP_TYPE}' files from bucket..."
 {
   rm -rf "${WORK_DIR}"
@@ -48,7 +66,7 @@ echo "Downloading '${FILES_BACKUP_TYPE}' files from bucket..."
   AWS_ACCESS_KEY_ID="${SRC_ACCESS_KEY}" \
   AWS_SECRET_ACCESS_KEY="${SRC_SECRET_KEY}" \
   AWS_DEFAULT_REGION="${SRC_REGION}" \
-    aws s3 sync "s3://${SRC_BUCKET}" "${WORK_DIR}" --no-verify-ssl 2>/dev/null
+    aws s3 sync "s3://${SRC_BUCKET}" "${WORK_DIR}" "${SYNC_EXCLUDES[@]}" --no-verify-ssl 2>/dev/null
 } >/dev/null 2>&1
 
 ## The source credentials are no longer needed.
