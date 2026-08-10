@@ -1,0 +1,40 @@
+<?php
+
+/**
+ * @file
+ * Install and update functions for the site_wrapper module.
+ */
+
+/**
+ * Point the identifier's "Performance reports" link at the new GSA location.
+ */
+function site_wrapper_update_10001(&$sandbox) {
+  $old_uri = 'https://www.gsa.gov/reference/reports/budget-performance';
+  $new_uri = 'https://www.gsa.gov/about-us/newsroom/budget-and-performance';
+
+  $storage = \Drupal::entityTypeManager()->getStorage('config_pages');
+  $ids = \Drupal::entityQuery('config_pages')
+    ->accessCheck(FALSE)
+    ->condition('type', 'identifier')
+    ->execute();
+
+  $updated = 0;
+  foreach ($storage->loadMultiple($ids) as $config_page) {
+    $links = $config_page->get('field_links')->getValue();
+    $changed = FALSE;
+    foreach ($links as $delta => $link) {
+      // Only rewrite the known stale URI, so a link that has already been
+      // corrected by hand is left alone.
+      if (($link['uri'] ?? '') === $old_uri) {
+        $links[$delta]['uri'] = $new_uri;
+        $changed = TRUE;
+      }
+    }
+    if ($changed) {
+      $config_page->set('field_links', $links)->save();
+      $updated++;
+    }
+  }
+
+  return t('Updated the "Performance reports" link on @count identifier config page(s).', ['@count' => $updated]);
+}
