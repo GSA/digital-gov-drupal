@@ -63,8 +63,11 @@
  */
 #}
 <main role="main" id="main-content">
-  <section class="grid-container-desktop">
-    <header class="page-head padding-bottom-0">
+  {# A <div> rather than a <section> on purpose: the "section > header" rule in
+     _article.scss enlarges the h1 and adds spacing that the other landing pages
+     (e.g. /guides) don't get. Keeping this a <div> matches their h1 styling. #}
+  <div class="grid-container-desktop">
+    <header class="page-head">
       <h1>{{ node.title.value }}</h1>
 
       {% if content.field_deck %}
@@ -77,5 +80,5 @@
     <div class="dg-resource-topics margin-bottom-8">
       {{ drupal_view('resource_topics_list', 'by_resource_topic') }}
     </div>
-  </section>
+  </div>
 </main>
