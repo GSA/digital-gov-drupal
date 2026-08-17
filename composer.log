@@ -149,3 +149,4 @@ df82b8830d6ba37406e5253b08d0f980|arpage|features/DIGITAL-788-drupal-core-update|
 32b6224154b767304fa46f2cd2666b0f|arpage|feature/DIGITAL-808-core-security-updates|Tue Jul 28 06:15:40 EDT 2026|./composer.sh require drupal/core-recommended:10.6.14 --with-all-dependencies --ignore-platform-reqs
 873537afcfa938db74a386e1ec06198a|arpage|feature/DIGITAL-808-core-security-updates|Tue Jul 28 06:15:53 EDT 2026|./composer.sh require drupal/core-composer-scaffold:10.6.14 --with-all-dependencies --ignore-platform-reqs
 cf5dc8061ee27663fc8968237f723ec2|arpage|feature/DIGITAL-808-core-security-updates|Tue Jul 28 06:16:49 EDT 2026|./composer.sh require drupal/core-project-message:^10.6.14 --with-all-dependencies --ignore-platform-reqs
+a7c38babfff5507cc136c63b1dcd2d05|Amy Farrell|feature/DIGITAL-825-bump-php-codesniffer|Mon Aug 17 02:02:39 PM PDT 2026|./composer.sh upgrade squizlabs/php_codesniffer
