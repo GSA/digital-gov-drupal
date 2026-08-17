@@ -146,6 +146,15 @@ a.btn-sm {
   }
 }
 
+.page-head-events .join-buttons {
+  @include u-text("left");
+  @include u-flex("justify-start");
+
+  a {
+    @include u-margin-left(0);
+  }
+}
+
 .actions {
   @include u-margin-bottom(3);
   @include u-display("flex");
