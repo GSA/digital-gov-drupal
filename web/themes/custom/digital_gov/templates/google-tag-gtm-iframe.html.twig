@@ -1,0 +1,18 @@
+{#
+/**
+ * @file
+ * Overrides google_tag's GTM noscript fallback to add a sandbox attribute.
+ *
+ * The upstream template emits this iframe with no sandbox, which security
+ * scans flag as an insecure external frame. The frame renders only when
+ * scripting is disabled, and it needs nothing beyond issuing the request to
+ * Google Tag Manager, so the most restrictive sandbox value is safe: it
+ * blocks script execution and same-origin access without preventing the
+ * request that the no-script tracking fallback depends on.
+ *
+ * Available variables:
+ * - url: The Google Tag Manager iframe URL.
+ */
+#}
+<noscript><iframe sandbox src="{{ url|raw }}"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
