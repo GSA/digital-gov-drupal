@@ -2,7 +2,10 @@
 
 use Drupal\Core\Installer\InstallerKernel;
 
-$redis_interface = class_exists('Predis\Client') ? 'Predis' : (extension_loaded('redis') ? 'PhpRedis' : NULL);
+// PhpRedis must win over Predis: the redis module's Predis client cannot do
+// TLS, which Cloud.gov ElastiCache requires. PhpRedis supports it through a
+// tls:// host prefix.
+$redis_interface = extension_loaded('redis') ? 'PhpRedis' : (class_exists('Predis\Client') ? 'Predis' : NULL);
 
 if ((
   !InstallerKernel::installationAttempted() &&

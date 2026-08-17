@@ -153,9 +153,11 @@ foreach ($cf_service_data as $service_list) {
       if ($redis_host && $redis_port && $redis_password) {
         require_once 'settings.redis.php';
         if (function_exists('_settings_redis')) {
-          _settings_redis($settings, $redis_host, $redis_port);
+          // Cloud.gov ElastiCache requires in-transit TLS. The redis module
+          // has no scheme/ssl settings; PhpRedis negotiates TLS only when the
+          // host carries a tls:// prefix.
+          _settings_redis($settings, 'tls://' . $redis_host, (string) $redis_port);
           $settings['redis.connection']['password'] = $redis_password;
-          $settings['redis.connection']['scheme'] = 'tls';
           $settings['redis.connection']['persistent'] = TRUE;
         }
       }

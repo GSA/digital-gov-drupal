@@ -93,8 +93,7 @@
         "league/commonmark": "^2.5",
         "mattsqd/drupal-env": "dev-main",
         "mattsqd/drupal-env-lando": "dev-main",
-        "mattsqd/robovalidate": "@alpha",
-        "predis/predis": "^2.4"
+        "mattsqd/robovalidate": "@alpha"
     },
     "conflict": {
         "drupal/drupal": "*"

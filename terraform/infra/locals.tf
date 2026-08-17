@@ -230,10 +230,15 @@ locals {
         service_plan = "redis-3node-large"
 
         ## Create the current Cloud.gov-supported Valkey engine explicitly.
+        ## The deployed broker reads snake_case engine_version and silently
+        ## falls back to its Redis 7.1 plan default on any other key; the
+        ## camelCase key from the Cloud.gov docs is sent too in case the
+        ## broker ever changes to match its docs.
         service_type = "aws-elasticache-redis"
         json_params = jsonencode({
-          engine        = "valkey"
-          engineVersion = "8.2"
+          engine         = "valkey"
+          engine_version = "8.2"
+          engineVersion  = "8.2"
         })
 
         ## settings.cloudgov.php detects this tag rather than a fixed name.
