@@ -48,8 +48,10 @@
   &__text {
     color: color("black");
 
-    @include at-media("tablet") {
-      max-width: 70%;
+    // Text fills the box; the box itself is already width-capped by its
+    // container, so the global paragraph measure is dropped here. (DIGITAL-806)
+    p {
+      max-width: none;
     }
 
     &-title {
