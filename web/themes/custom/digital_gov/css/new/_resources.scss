@@ -12,6 +12,15 @@
 }
 
 .dg-resource-topics-list {
+  // The topic headings are h2 so the page reads h1 > h2 with no skipped
+  // levels, but they keep the smaller "lg" type scale and 1em rhythm they
+  // had as h3 headings.
+  &__header {
+    @include u-font("sans", "lg");
+    margin-bottom: 1em;
+    margin-top: 1em;
+  }
+
   &__list-item {
     padding-bottom: units(1);
   }
