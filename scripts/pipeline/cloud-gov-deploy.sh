@@ -17,6 +17,14 @@ export CMS_URI="${!CMS_URI_VAR_NAME}"
 STATIC_FQDN=$(echo "${STATIC_URI}" | sed -E 's/^\s*.*:\/\///g')
 CMS_FQDN=$(echo "${CMS_URI}" | sed -E 's/^\s*.*:\/\///g')
 
+## Bind the cache service only when it exists and its last operation
+## succeeded; otherwise the placeholder stays a comment so the app still
+## deploys without a cache service (Drupal falls back to the database cache).
+if cf service "${PROJECT}-cache-${CF_SPACE}" 2>/dev/null | grep -qi "succeeded"; then
+  sed "s|# CACHE_SERVICE_BINDING|- \${PROJECT}-cache-\${CF_SPACE}|" manifest.tmp > manifest.bind.tmp
+  mv manifest.bind.tmp manifest.tmp
+fi
+
 envsubst < manifest.tmp > manifest.yml
 cat manifest.tmp
 cat manifest.yml
