@@ -1,9 +1,14 @@
 @use "uswds-core" as *;
+@use "page-title" as *;
 
 .page-head {
   @include u-padding-y(5);
 
-  h1,
+  h1 {
+    @include page-title-type;
+    margin-bottom: units(1);
+  }
+
   h2 {
     @include u-text("heavy");
     margin-bottom: units(1);

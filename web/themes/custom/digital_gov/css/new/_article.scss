@@ -1,4 +1,5 @@
 @use "uswds-core" as *;
+@use "page-title" as *;
 
 // Article
 
@@ -21,16 +22,9 @@ article > header {
 
   // Page Titles
   h1 {
+    @include page-title-type;
     @include u-margin(0);
     @include u-margin-bottom("2px");
-    @include u-text("heavy");
-    @include u-line-height("sans", 2);
-    @include u-font("sans", "xl");
-
-    @include at-media("tablet") {
-      @include u-font("sans", "2xl");
-      @include u-line-height("sans", 2);
-    }
   }
 
   // Deck
