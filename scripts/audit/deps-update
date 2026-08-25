@@ -64,6 +64,17 @@
 #   * When composer.lock changes, an entry is appended to composer.log in the
 #     same format composer.sh uses, so the project's lock-change log stays
 #     complete. Commit composer.log together with the composer changes.
+#   * Composer runs with COMPOSER_DISCARD_CHANGES=1: dev-ref packages (e.g.
+#     drupal/maillog) are git checkouts made dirty by the project's composer
+#     patches, and composer refuses to update them otherwise. The discarded
+#     changes are patch artifacts; composer-patches re-applies patches after
+#     each update.
+#   * Dev-ref packages you did NOT approve are excluded from the bulk patch
+#     pass (--patch-only cannot restrain a git ref, so a full-lock pass would
+#     move them against your answer).
+#   * This project's composer-patches config SKIPS patches that no longer
+#     apply (the package lands unpatched, without an error). Any patch skip
+#     seen during the run is reported on the needs-attention list.
 #   * Never commits or pushes. Review with `git diff`.
 #   * Runs composer and npm directly on the host (no Lando/Docker needed);
 #     Composer >= 2.7 is required on the host (for --patch-only). The repo's
@@ -135,7 +146,12 @@ LAST_OUT=""   # set to a file holding the last failed command's output
 
 classify_failure() {
   if grep -q "affected by security advisories" "$LAST_OUT"; then echo advisory
-  elif grep -qi "Could not apply patch\|Cannot apply patch\|patch.*failed to apply" "$LAST_OUT"; then echo patch
+  elif grep -q "has uncommitted changes" "$LAST_OUT"; then echo dirtysource
+  elif grep -q "Failed to open stream" "$LAST_OUT"; then echo brokenvendor
+  # composer-patches on this project SKIPS patches that fail (it logs
+  # "Could not apply patch! Skipping." and continues), so those lines are
+  # non-fatal noise — only patch failures NOT marked Skipping are the cause.
+  elif grep -vi "Skipping" "$LAST_OUT" | grep -qi "Could not apply patch\|Cannot apply patch\|patch.*failed to apply"; then echo patch
   elif grep -q "could not be resolved to an installable set" "$LAST_OUT"; then echo conflict
   elif grep -q "ERESOLVE" "$LAST_OUT"; then echo eresolve
   elif grep -qi "Could not resolve host\|getaddrinfo\|Connection refused\|Connection timed out\|network is unreachable\|ETIMEDOUT\|ENOTFOUND\|EAI_AGAIN" "$LAST_OUT"; then echo network
@@ -365,6 +381,7 @@ COMPOSER_TARGETED=()       # packages for a targeted `composer update pkg -W`
 COMPOSER_AUTO=0            # count of constraint-allowed patch updates
 : >"$PLAN/skipped.txt"     # declined / not offered at this level
 : >"$PLAN/attention.txt"   # held back or skipped due to failures — needs action
+: >"$PLAN/patch-skips.txt" # composer patches that no longer apply (skipped by composer-patches)
 
 note_attention() { echo "$*" >>"$PLAN/attention.txt"; }
 
@@ -530,11 +547,27 @@ fi
 
 # Mutable execution lists (failure handlers may drop entries from these)
 awk -F'\t' '$1=="auto"{print $2}' "$PLAN/composer.tsv" >"$PLAN/composer-auto.list"
+jq -r '((.require // {}) + (."require-dev" // {})) | keys[]' composer.json \
+  | grep -vE '^(php$|ext-|lib-|composer-plugin-api|composer-runtime-api)' \
+  >"$PLAN/composer-direct.list"
 : >"$PLAN/composer-targeted.list"
 if [ "${#COMPOSER_TARGETED[@]}" -gt 0 ]; then
   printf '%s\n' ${COMPOSER_TARGETED[@]+"${COMPOSER_TARGETED[@]}"} >"$PLAN/composer-targeted.list"
 fi
 : >"$PLAN/composer-holdback.list"
+
+# Dev-ref packages (e.g. drupal/maillog dev-1.x) escape --patch-only
+# discipline: a full-lock patch pass would move them to the newest commit
+# even when the interview answer was No. Hold back any dev-ref package that
+# was not explicitly approved so the patch pass cannot touch it.
+if [ "$DO_COMPOSER" = 1 ]; then
+  while IFS="$(printf '\t')" read -r kind name cur target j constraint; do
+    [ -n "$name" ] || continue
+    case "$cur" in dev-*) ;; *) continue ;; esac
+    grep -qx "$name" "$PLAN/composer-targeted.list" 2>/dev/null && continue
+    echo "$name" >>"$PLAN/composer-holdback.list"
+  done <"$PLAN/composer.tsv"
+fi
 
 # ---------------------------------------------------------------------------
 # Final confirmation
@@ -546,7 +579,13 @@ if [ "$DO_COMPOSER" = 1 ]; then
   echo "Composer:" >&2
   [ "${#COMPOSER_REQUIRE_ARGS[@]}" -gt 0 ] && echo "  * constraint edits: ${COMPOSER_REQUIRE_ARGS[*]}" >&2
   [ "${#COMPOSER_PIN_PKGS[@]}" -gt 0 ] && echo "  * pin updates (targeted; transitive deps may move as the pinned release requires): ${COMPOSER_PIN_PKGS[*]}" >&2
-  [ "$COMPOSER_AUTO" -gt 0 ] && echo "  * patch-level pass over the whole lock file (composer update --patch-only)" >&2
+  if [ "$COMPOSER_AUTO" -gt 0 ]; then
+    if [ -s "$PLAN/composer-holdback.list" ]; then
+      echo "  * patch-level pass over the lock file (composer update --patch-only), excluding: $(tr '\n' ' ' <"$PLAN/composer-holdback.list")" >&2
+    else
+      echo "  * patch-level pass over the whole lock file (composer update --patch-only)" >&2
+    fi
+  fi
   [ "${#COMPOSER_TARGETED[@]}" -gt 0 ] && echo "  * targeted update: ${COMPOSER_TARGETED[*]}" >&2
   if [ "$COMPOSER_AUTO" -eq 0 ] && [ "${#COMPOSER_REQUIRE_ARGS[@]}" -eq 0 ] && [ "${#COMPOSER_TARGETED[@]}" -eq 0 ]; then
     echo "  * nothing to do" >&2
@@ -593,8 +632,14 @@ fi
 # Execution helpers: runners, rollback, failure handlers
 # ---------------------------------------------------------------------------
 
+# COMPOSER_DISCARD_CHANGES=1: dev-ref packages (e.g. drupal/maillog) are
+# source-installed git checkouts, and the project's composer patches make them
+# dirty. Without this, composer refuses to update them ("Source directory ...
+# has uncommitted changes") and ABORTS every other in-flight operation.
+# Discarding is safe here: the only expected local changes are patch
+# artifacts, and composer-patches re-applies patches after the update.
 composer_run() {
-  composer "$@"
+  COMPOSER_DISCARD_CHANGES=1 composer "$@"
 }
 run_in() {
   local dir="$1"; shift
@@ -663,8 +708,15 @@ do_rollback() {
   done
   if [ "$COMPOSER_VENDOR_TOUCHED" = 1 ]; then
     info "restoring vendor/ to match the rolled-back lock file..."
-    runcap composer_run install --no-interaction --ignore-platform-reqs \
-      || info "WARNING: composer install failed — run 'composer install --ignore-platform-reqs' manually"
+    # An aborted update can leave vendor/ so broken that composer itself
+    # cannot start (a plugin's files half-deleted). vendor/ is fully
+    # generated, so wipe it and reinstall as the fallback.
+    if ! runcap composer_run install --no-interaction --ignore-platform-reqs; then
+      info "composer install failed — wiping vendor/ and reinstalling from the lock file..."
+      rm -rf vendor
+      runcap composer_run install --no-interaction --ignore-platform-reqs \
+        || info "WARNING: composer install failed — run 'composer install --ignore-platform-reqs' manually"
+    fi
   fi
   if [ -n "$BUILT_DIRS$(cat "$PLAN"/ops--* 2>/dev/null)" ]; then
     info "note: node_modules in updated npm dirs may be out of sync until the next npm install"
@@ -815,6 +867,71 @@ handle_network() {
   case "$CHOICE" in 1) return 0 ;; 2) abort_run ;; esac
 }
 
+# Reconstruct the wrapped "Source directory ... has uncommitted changes" path
+# (symfony console hard-wraps error text, splitting the path across lines).
+dirty_dir() {
+  sed -n '/Source directory/,/has uncommitted changes/p' "$LAST_OUT" \
+    | sed 's/^ *//; s/ *$//' | tr -d '\n' \
+    | sed 's/.*Source directory //; s/ *has *uncommitted *changes.*//'
+}
+
+handle_dirtysource() {
+  local dir
+  dir="$(dirty_dir)"
+  echo >&2
+  echo "  PROBLEM: composer refused to update a source-installed (git checkout) package" >&2
+  echo "  because its directory has local modifications:" >&2
+  echo "    ${dir:-(could not extract the directory — see the output above)}" >&2
+  echo "  This usually comes from a composer patch applied to a source checkout. The" >&2
+  echo "  updater normally avoids this with COMPOSER_DISCARD_CHANGES=1 — reaching this" >&2
+  echo "  prompt means that did not cover this case." >&2
+  if [ -n "$dir" ] && [ -d "$dir" ]; then
+    choose "How do you want to proceed?" \
+      "Discard the local changes in that checkout and retry (composer re-applies patches after updating)" \
+      "Abort"
+    case "$CHOICE" in
+      1) git -C "$dir" checkout -- . 2>/dev/null || true
+         git -C "$dir" clean -fd >/dev/null 2>&1 || true
+         return 0 ;;
+      2) abort_run ;;
+    esac
+  else
+    choose "How do you want to proceed?" \
+      "Retry (after fixing manually in another terminal)" \
+      "Abort"
+    case "$CHOICE" in 1) return 0 ;; 2) abort_run ;; esac
+  fi
+}
+
+handle_brokenvendor() {
+  echo >&2
+  echo "  PROBLEM: composer could not start because vendor/ is in a broken state" >&2
+  echo "  (usually a plugin's files were half-removed by an aborted operation)." >&2
+  echo "  vendor/ is fully generated, so it is safe to wipe and reinstall." >&2
+  choose "How do you want to proceed?" \
+    "Wipe vendor/ and reinstall from the lock file, then retry" \
+    "Abort"
+  case "$CHOICE" in
+    1) rm -rf vendor
+       runcap composer_run install --no-interaction --ignore-platform-reqs \
+         || info "warning: reinstall reported errors — retrying the step anyway"
+       return 0 ;;
+    2) abort_run ;;
+  esac
+}
+
+# composer-patches on this project leaves composer-exit-on-patch-failure
+# unset, so a patch that no longer applies is SKIPPED and the package lands
+# UNPATCHED without failing the command. Scan the last command's output and
+# collect those for the needs-attention list.
+scan_patch_skips() {
+  awk '/Applying patches for/ {pkg=$NF}
+       /Could not apply patch! Skipping/ {
+         msg=$0; sub(/^.*The error was: */, "", msg); sub(/\r$/, "", msg)
+         print "composer: " (pkg != "" ? pkg : "a package") " installed UNPATCHED — " msg " (re-roll the patch or remove it from composer.patches.json)"
+       }' "$LAST_OUT" >>"$PLAN/patch-skips.txt" 2>/dev/null || true
+}
+
 handle_unknown() {
   local label="$1"
   echo >&2
@@ -883,13 +1000,27 @@ handle_npm_failure() {
 
 # Build the CARGS array for the bulk patch pass. Returns 1 if everything is
 # held back (nothing to do). $1 = extra flag ("--dry-run" or "").
+#
+# With no holdbacks this is a plain full-lock `composer update --patch-only`.
+# With holdbacks, it names every DIRECT dependency except the held-back ones,
+# plus --with-all-dependencies — that keeps the full-lock transitive patch
+# coverage (e.g. symfony/* under drupal/core-recommended) while the held-back
+# packages stay untouched. A held-back TRANSITIVE package is frozen with a
+# temporary `--with pkg:current-version` constraint instead.
 CARGS=()
 build_bulk_cmd() {
+  local p v
   CARGS=(update)
   if [ -s "$PLAN/composer-holdback.list" ]; then
-    grep -vx -F -f "$PLAN/composer-holdback.list" "$PLAN/composer-auto.list" >"$TMP/bulk.list" || true
+    grep -vx -F -f "$PLAN/composer-holdback.list" "$PLAN/composer-direct.list" >"$TMP/bulk.list" || true
     [ -s "$TMP/bulk.list" ] || return 1
     while read -r p; do [ -n "$p" ] && CARGS+=("$p"); done <"$TMP/bulk.list"
+    while read -r p; do
+      [ -n "$p" ] || continue
+      grep -qx "$p" "$PLAN/composer-direct.list" && continue
+      v="$(jq -r --arg p "$p" '[(.packages // [])[], (.["packages-dev"] // [])[] | select(.name==$p) | .version] | first // empty' composer.lock 2>/dev/null)"
+      [ -n "$v" ] && CARGS+=(--with "$p:$v")
+    done <"$PLAN/composer-holdback.list"
     CARGS+=(--patch-only --with-all-dependencies)
   else
     CARGS+=(--patch-only)
@@ -927,18 +1058,29 @@ composer_step() {
           --with-all-dependencies --no-interaction --ignore-platform-reqs \
           ${dry:+"$dry"} || rc=$? ;;
     esac
-    [ "$rc" = 0 ] && return 0
+    if [ "$rc" = 0 ]; then
+      [ "$DRY_RUN" = 1 ] || scan_patch_skips
+      return 0
+    fi
     [ "$DRY_RUN" = 1 ] && return 0
     hrc=0
     case "$(classify_failure)" in
-      advisory) handle_advisory || hrc=$? ;;
-      patch)    handle_patch "$step" || hrc=$?
-                # patch failures happen after the lock is written — restore it
-                # to this step's starting point before retrying
-                [ "$hrc" = 0 ] && [ -f "$TMP/step.lock.before" ] && cp "$TMP/step.lock.before" composer.lock ;;
-      conflict) handle_conflict "$step" || hrc=$? ;;
-      network)  handle_network || hrc=$? ;;
-      *)        handle_unknown "$label" || hrc=$? ;;
+      advisory)    handle_advisory || hrc=$? ;;
+      brokenvendor)
+                   # reinstall from this step's starting lock, then retry
+                   [ -f "$TMP/step.lock.before" ] && cp "$TMP/step.lock.before" composer.lock
+                   handle_brokenvendor || hrc=$? ;;
+      dirtysource) handle_dirtysource || hrc=$?
+                   # like patch failures, this happens after the lock is
+                   # written — restore it before retrying
+                   [ "$hrc" = 0 ] && [ -f "$TMP/step.lock.before" ] && cp "$TMP/step.lock.before" composer.lock ;;
+      patch)       handle_patch "$step" || hrc=$?
+                   # patch failures happen after the lock is written — restore it
+                   # to this step's starting point before retrying
+                   [ "$hrc" = 0 ] && [ -f "$TMP/step.lock.before" ] && cp "$TMP/step.lock.before" composer.lock ;;
+      conflict)    handle_conflict "$step" || hrc=$? ;;
+      network)     handle_network || hrc=$? ;;
+      *)           handle_unknown "$label" || hrc=$? ;;
     esac
     [ "$hrc" = 2 ] && return 0
   done
@@ -1226,6 +1368,12 @@ fi
 # Keep the project's lock-change log complete (same convention as composer.sh).
 if [ "$DO_COMPOSER" = 1 ]; then
   log_composer_change
+fi
+
+# Patches skipped by composer-patches leave packages installed UNPATCHED —
+# promote them (deduplicated) onto the needs-attention list.
+if [ -s "$PLAN/patch-skips.txt" ]; then
+  sort -u "$PLAN/patch-skips.txt" >>"$PLAN/attention.txt"
 fi
 
 echo
