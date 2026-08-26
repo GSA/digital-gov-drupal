@@ -77,6 +77,16 @@ else
     || die "composer is required on the host PATH (brew install composer)"
   [ "$DO_NPM" = 0 ] || command -v npm >/dev/null 2>&1 \
     || die "npm is required on the host PATH"
+  # An aborted composer run can leave vendor/ so broken that composer itself
+  # cannot start (a plugin's files half-deleted) — detect that up front and
+  # name the remedy instead of dying on a raw composer error mid-collection.
+  if [ "$DO_COMPOSER" = 1 ]; then
+    if ! PRECHECK_ERR="$(composer show --name-only --direct 2>&1 >/dev/null)"; then
+      if printf '%s' "$PRECHECK_ERR" | grep -q "Failed to open stream"; then
+        die "vendor/ appears broken (composer plugins cannot load). Fix with: rm -rf vendor && composer install --ignore-platform-reqs"
+      fi
+    fi
+  fi
   RAW="$(mktemp -d)"
 fi
 
