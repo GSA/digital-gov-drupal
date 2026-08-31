@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f709f9fd79b31e985aed6bacee01bf08",
+    "content-hash": "fb536dc7223fa943c9e768e7e343e8d9",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -5995,24 +5995,27 @@
         },
         {
             "name": "drupal/vbo_workflow_transition",
-            "version": "dev-1.0.x",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/vbo_workflow_transition.git",
-                "reference": "74018a93de0cbd936415da58d0cef5c4a355e6cd"
+                "reference": "1.0.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/vbo_workflow_transition-1.0.0.zip",
+                "reference": "1.0.0",
+                "shasum": "0e611544d63440561fae1a545b3d6a768aca0ae0"
             },
             "require": {
-                "drupal/core": "^10.2 || ^11 || ^12",
+                "drupal/core": "^10 || ^11",
                 "drupal/views_bulk_operations": "*"
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.0.x": "1.0.x-dev"
-                },
                 "drupal": {
-                    "version": "1.0.0+6-dev",
-                    "datestamp": "1786559115",
+                    "version": "1.0.0",
+                    "datestamp": "1741900430",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -18070,7 +18073,6 @@
         "drupal/multivalue_form_element": 10,
         "drupal/openid_connect": 15,
         "drupal/uswds_templates": 20,
-        "drupal/vbo_workflow_transition": 20,
         "mattsqd/drupal-env": 20,
         "mattsqd/drupal-env-lando": 20,
         "mattsqd/robovalidate": 15
@@ -18079,5 +18081,5 @@
     "prefer-lowest": false,
     "platform": {},
     "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.9.0"
 }
