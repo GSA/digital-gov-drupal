@@ -29,7 +29,7 @@ content:
       media_types: {  }
     third_party_settings:
       media_library_edit:
-        show_edit: '1'
+        show_edit: true
         edit_form_mode: default
   moderation_state:
     type: moderation_state_default
