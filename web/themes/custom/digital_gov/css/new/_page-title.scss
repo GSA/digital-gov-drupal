@@ -1,0 +1,19 @@
+@use "uswds-core" as *;
+
+// Shared type treatment for page titles (h1).
+//
+// Every page title should read at the same size and weight regardless of the
+// markup it sits in. Before this existed the size depended on structure: an
+// h1 inside "main > header", "section > header" or "article > header" picked
+// up a 2xl override from _article.scss, while landing pages such as /guides
+// and /news fell through to the browser default. That produced two different
+// title sizes across the site.
+//
+// Spacing deliberately stays with each component. The contexts are not
+// equivalent -- some titles sit directly under a kicker, others under the
+// padding of .page-head -- so margins are set where that context is known.
+@mixin page-title-type {
+  @include u-font("sans", 12);
+  @include u-text("heavy");
+  @include u-line-height("sans", 2);
+}
