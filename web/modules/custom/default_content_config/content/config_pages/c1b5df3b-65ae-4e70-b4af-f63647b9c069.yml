@@ -40,7 +40,7 @@ default:
       title: 'Office of the Inspector General'
       options: {  }
     -
-      uri: 'https://www.gsa.gov/reference/reports/budget-performance'
+      uri: 'https://www.gsa.gov/about-us/newsroom/budget-and-performance'
       title: 'Performance reports'
       options: {  }
     -
