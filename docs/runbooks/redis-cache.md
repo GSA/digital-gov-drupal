@@ -4,11 +4,17 @@ The Drupal application uses Valkey only when a bound Cloud.gov service has the
 `cache-service` tag. Without that binding, it uses the configured default cache
 backend. Local Lando development continues to use Memcached.
 
-Cloud.gov ElastiCache requires TLS for every connection. The Drupal redis
-module supports TLS only through the PhpRedis extension (enabled in
-`.bp-config/php/php.ini.d/extensions.ini`) with a `tls://` host prefix, which
-`settings.cloudgov.php` applies. The Predis library cannot be used against
-Cloud.gov ElastiCache.
+Cloud.gov ElastiCache requires TLS for every connection. This project connects
+with the PhpRedis extension (enabled in
+`.bp-config/php/php.ini.d/extensions.ini`), which negotiates TLS from the
+`tls://` host prefix that `settings.cloudgov.php` applies. PhpRedis needs no
+patch for that.
+
+Predis can also reach Cloud.gov ElastiCache, but only with the patch from
+[#3004561](https://www.drupal.org/project/redis/issues/3004561); the redis
+module's stock Predis client drops the scheme. USAGov carries that patch and
+found Predis to be the faster of the two, so a PhpRedis/Predis comparison here
+is worth a follow-up ticket.
 
 ## Deploy
 
@@ -41,8 +47,9 @@ The normal build-and-deploy workflow applies infrastructure before deploying
 Drupal. `cloud-gov-deploy.sh` replaces the `# CACHE_SERVICE_BINDING`
 placeholder in `manifest.yml` only when the cache service exists and its last
 operation succeeded, so the application deploys with or without the service.
-ElastiCache provisioning can take a significant amount of time; the binding
-happens on the first deploy after provisioning completes.
+The infrastructure step waits for ElastiCache provisioning to finish before the
+Drupal deploy starts, so the binding lands on that same deploy rather than
+needing a second run. A first-time provision took about three minutes.
 
 ## Verify
 
@@ -58,7 +65,17 @@ cf service "${PROJECT}-cache-${CF_SPACE}"
 The output should show the last operation succeeded and list
 `${PROJECT}-drupal-${CF_SPACE}` under bound apps.
 
-Confirm Drupal is actually using the cache service:
+### From the CMS
+
+The `redis` module is installed, so an admin user can check the connection from
+the CMS at `/admin/reports/redis` (also linked as "Redis" under Reports). The
+page reports the module's configuration and cache activity, and reports
+`Not connected.` when no cache service is bound. Use this in spaces where SSH
+is disabled, such as production.
+
+### Over SSH
+
+Where SSH is available, confirm the cache backend Drupal actually resolved:
 
 ```sh
 ./scripts/pipeline/cloud-gov-remote-command.sh "${PROJECT}-drupal-${CF_SPACE}" \
@@ -68,6 +85,19 @@ Confirm Drupal is actually using the cache service:
 This prints `Drupal\redis\Cache\PhpRedis` when the cache service is in use and
 `Drupal\Core\Cache\DatabaseBackend` when Drupal has fallen back to the
 database.
+
+If the script fails with `permission denied`, the SSH proxy rejected the
+connection, usually because SSH is off at the space or the app level. Check
+both:
+
+```sh
+cf space-ssh-allowed "${CF_SPACE}"
+cf ssh-enabled "${PROJECT}-drupal-${CF_SPACE}"
+```
+
+Turning either on (`cf allow-space-ssh`, `cf enable-ssh`) requires a restart of
+the app before the proxy accepts connections. Where SSH is off deliberately,
+use the CMS report above rather than enabling it.
 
 ## Measure static generation
 
