@@ -1,0 +1,12 @@
+--- a/config/schema/openid_connect.schema.yml
++++ b/config/schema/openid_connect.schema.yml
+@@ -74,6 +74,9 @@
+       sequence:
+         type: string
+         label: 'Prompt option'
++    use_pkce:
++      type: boolean
++      label: 'Use PKCE (Proof Key for Code Exchange)'
+ 
+ openid_connect.client.plugin.facebook:
+   type: mapping
