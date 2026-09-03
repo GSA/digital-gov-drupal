@@ -214,10 +214,28 @@ if [ -n "$RAW_IN" ]; then
   [ -d "$RAW_IN" ] || die "--raw-in dir not found: $RAW_IN"
   RAW="$RAW_IN"
   info "using existing audit data from $RAW_IN (make sure it is fresh)"
+  # A dir collected with deps-check --composer-only/--npm-only only covers half
+  # the work. Say so here rather than failing later inside jq.
+  if [ "$DO_COMPOSER" = 1 ]; then
+    [ -f "$RAW/composer-outdated.json" ] && [ -f "$RAW/composer-pins.json" ] \
+      || die "$RAW_IN holds no composer data (collected with --npm-only?) — recollect it, or add --npm-only"
+  fi
+  if [ "$DO_NPM" = 1 ]; then
+    for t in "${NPM_TARGETS[@]}"; do
+      IFS='|' read -r slug _ _ <<<"$t"
+      [ -f "$RAW/npm-outdated--$slug.json" ] \
+        || die "$RAW_IN holds no npm data for $slug (collected with --composer-only?) — recollect it, or add --composer-only"
+    done
+  fi
 else
   RAW="$TMP/raw"; mkdir -p "$RAW"
   info "collecting current dependency state (scripts/audit/deps-check)..."
-  "$SCRIPT_DIR/deps-check" --raw-out "$RAW" >"$TMP/audit-report.md"
+  # Pass our scope on: without this, --composer-only/--npm-only would still pay
+  # for (and could still fail on) the half of the collection we are skipping.
+  CHECK_ARGS=(--raw-out "$RAW")
+  [ "$DO_NPM" = 1 ]      || CHECK_ARGS+=(--composer-only)
+  [ "$DO_COMPOSER" = 1 ] || CHECK_ARGS+=(--npm-only)
+  "$SCRIPT_DIR/deps-check" "${CHECK_ARGS[@]}" >"$TMP/audit-report.md"
 fi
 
 # ---------------------------------------------------------------------------
@@ -304,19 +322,33 @@ if has("__error__") then empty else
 end
 EOF
 
-jq -r "$(cat "$TMP/lib.jq" "$TMP/plan-composer.jq")" \
-  --slurpfile cj composer.json \
-  --slurpfile pins "$RAW/composer-pins.json" \
-  "$RAW/composer-outdated.json" | sort -t"$(printf '\t')" -k1,1 -k2,2 >"$PLAN/composer.tsv" \
-  || die "failed to build composer plan"
-
+# Build a plan only for the halves we are working on: the raw data for a
+# skipped half may legitimately be absent (--composer-only/--npm-only, or a
+# --raw-in dir collected with one of those flags). A skipped half is left with
+# an empty plan so downstream readers need no scope guards of their own.
+: >"$PLAN/composer.tsv"
 for t in "${NPM_TARGETS[@]}"; do
-  IFS='|' read -r slug label dir <<<"$t"
-  jq -r "$(cat "$TMP/lib.jq" "$TMP/plan-npm.jq")" \
-    --slurpfile pj "$dir/package.json" \
-    "$RAW/npm-outdated--$slug.json" | sort -t"$(printf '\t')" -k1,1 -k2,2 >"$PLAN/$slug.tsv" \
-    || die "failed to build npm plan for $label"
+  IFS='|' read -r slug _ _ <<<"$t"
+  : >"$PLAN/$slug.tsv"
 done
+
+if [ "$DO_COMPOSER" = 1 ]; then
+  jq -r "$(cat "$TMP/lib.jq" "$TMP/plan-composer.jq")" \
+    --slurpfile cj composer.json \
+    --slurpfile pins "$RAW/composer-pins.json" \
+    "$RAW/composer-outdated.json" | sort -t"$(printf '\t')" -k1,1 -k2,2 >"$PLAN/composer.tsv" \
+    || die "failed to build composer plan"
+fi
+
+if [ "$DO_NPM" = 1 ]; then
+  for t in "${NPM_TARGETS[@]}"; do
+    IFS='|' read -r slug label dir <<<"$t"
+    jq -r "$(cat "$TMP/lib.jq" "$TMP/plan-npm.jq")" \
+      --slurpfile pj "$dir/package.json" \
+      "$RAW/npm-outdated--$slug.json" | sort -t"$(printf '\t')" -k1,1 -k2,2 >"$PLAN/$slug.tsv" \
+      || die "failed to build npm plan for $label"
+  done
+fi
 
 # ---------------------------------------------------------------------------
 # Phase 1: interview
@@ -743,6 +775,36 @@ abort_run() {
 }
 
 # ---- extractors ----
+# Advisory detail for the packages composer named, read out of the audit data
+# deps-check already collected. Composer's own message lists every candidate
+# version it declined to load and points at packagist for details, which is
+# doubly misleading for Drupal contrib: the affected range is usually much
+# narrower than that list, and the advisories live on drupal.org. Printing the
+# advisory's own affectedVersions and canonical link keeps the operator honest.
+adv_details() {
+  local pkgs="$1"
+  [ -n "$pkgs" ] || return 0
+  [ -s "$RAW/composer-audit.json" ] || return 0
+  printf '%s\n' $pkgs | jq -R . | jq -s -r \
+    --slurpfile audit "$RAW/composer-audit.json" '
+    def advlist:
+      if type == "array" then .
+      elif type == "object" then
+        (if (has("advisoryId") or has("packageName") or has("title"))
+         then [.] else [.[]?] end)
+      else [] end;
+    . as $want
+    | (($audit[0].advisories // {}) | if type == "object" then . else {} end) as $adv
+    | [ $want[]
+        | . as $p
+        | ($adv[$p] | advlist[])
+        | "    \($p) — \(.advisoryId // .cve // "advisory"): affects \(.affectedVersions // "?")"
+          + "\n      \(.link // "(no link)")" ]
+    | if length == 0
+      then "    (no matching advisory in the audit data — open each ID above to see\n     which releases it actually affects)"
+      else join("\n") end' || true
+}
+
 adv_packages()      { grep -oE "found [A-Za-z0-9_./-]+\[" "$LAST_OUT" | sed 's/^found //; s/\[$//' | sort -u | tr '\n' ' '; }
 adv_ids()           { grep -oE '"(SA|PKSA|CVE|GHSA)-[^"]*"' "$LAST_OUT" | tr -d '"' | sort -u | tr '\n' ' '; }
 patch_package()     { grep "Applying patches for" "$LAST_OUT" | tail -1 | awk '{print $NF}'; }
@@ -759,8 +821,18 @@ handle_advisory() {
   echo "  security advisories, which makes the update unresolvable." >&2
   echo "    Packages:   ${pkgs:-unknown}" >&2
   echo "    Advisories: ${ids:-unknown}" >&2
-  echo "  The real fix is usually a major-version update of those packages (see the" >&2
-  echo "  audit report); the options below unblock this run in the meantime." >&2
+  echo >&2
+  echo "  Two things composer's own message gets wrong for Drupal contrib:" >&2
+  echo "    * The versions it lists as \"not loaded\" are the candidates it rejected," >&2
+  echo "      NOT the advisory's affected set — the affected range is usually much" >&2
+  echo "      narrower, and a release outside it is often already available." >&2
+  echo "    * It sends you to packagist.org, which does not carry SA-CONTRIB" >&2
+  echo "      advisories. They are published on drupal.org." >&2
+  echo "  What the advisories actually say:" >&2
+  adv_details "$pkgs" >&2
+  echo "  The durable fix is moving to a release outside that range — if one is" >&2
+  echo "  within the constraint, the update itself resolves this. The options below" >&2
+  echo "  only unblock this run; neither fixes anything." >&2
   choose "How do you want to proceed?" \
     "Disable resolve-time blocking project-wide (composer.json config change; advisories stay visible in reports) and retry" \
     "Ignore only these advisories (composer.json audit.ignore; HIDES them from reports — not recommended) and retry" \
@@ -1439,6 +1511,15 @@ def sevof($t):
 def actionable:
   (ascii_downcase) as $d
   | (["critical", "high", "highly critical", "moderately critical"] | index($d)) != null;
+# See the note on advlist in deps-check: composer can emit a package's
+# advisories as an index-keyed object, and reading that wrapper as one
+# advisory drops every real advisory out of the remediation output.
+def advlist:
+  if type == "array" then .
+  elif type == "object" then
+    (if (has("advisoryId") or has("packageName") or has("title"))
+     then [.] else [.[]?] end)
+  else [] end;
 (($plan // "") | split("\n") | map(select(. != "") | split("\t")) | map(select(length >= 6))
  | map({key: .[1], value: {kind: .[0], cur: .[2], target: .[3], jump: .[4], constraint: .[5]}})
  | from_entries) as $rows
@@ -1447,7 +1528,7 @@ def actionable:
 | ((.advisories // {}) | if type == "object" then . else {} end)
 | to_entries[]
 | .key as $p
-| (.value | if type == "array" then .[] else . end)
+| (.value | advlist[])
 | (.title // "advisory") as $title
 | ((.severity // "") | sevof($title)) as $sev
 | select($sev | actionable)
@@ -1503,28 +1584,28 @@ def actionable:
 | (.fixAvailable) as $fix
 | ([.effects[]?] | join(", ")) as $eff
 | if $fix == true then
-    "ACTION (no ticket needed): \($p) — \($sev) in \($label)\n"
+    "ACTION (no ticket needed): \($p) — \($sev) in \($scope)\n"
     + "  An in-range fix exists; the default scripts/audit/deps-update run applies it\n"
     + "  via npm audit fix. Seeing this after a full run usually means the fix\n"
     + "  landed only partially — run `npm audit fix` in \($dir) directly.\n"
     + "  Advisory: \($link)\n"
   elif ($fix | type) == "object" and (($fix.isSemVerMajor // false) | not) then
-    "ACTION (no ticket needed): \($p) — \($sev) in \($label)\n"
+    "ACTION (no ticket needed): \($p) — \($sev) in \($scope)\n"
     + "  Fixed by updating \($fix.name) to \($fix.version) (non-major).\n"
-    + "  Run: scripts/audit/deps-update --minor  and approve \($fix.name) for \($label).\n"
+    + "  Run: scripts/audit/deps-update --minor  and approve \($fix.name) for \($scope).\n"
     + "  Advisory: \($link)\n"
   else
     "--- TICKET ---------------------------------------------------------\n"
     + "Title: \($title)\n"
     + "Description:\n"
-    + "  \($p) (severity: \($sev)) in \($label) (\($dir)).\n"
+    + "  \($p) (severity: \($sev)) in \($scope) (\($dir)).\n"
     + (if $eff != "" then "  Pulled in via: \($eff).\n" else "" end)
     + "  Advisory: \($link)\n"
     + "  Suggested remediation:\n"
     + (if ($fix | type) == "object" then
         "    - The fix requires \($fix.name)@\($fix.version) (a MAJOR update).\n"
         + "    - Run `scripts/audit/deps-update --major` and approve \($fix.name), then test\n"
-        + "      \($label); or schedule this as its own task.\n"
+        + "      \($scope); or schedule this as its own task.\n"
       else
         "    - No complete fix is available yet (npm reports fixAvailable: false).\n"
         + "    - Monitor upstream; `npm ls \($p)` in \($dir) shows the dependency path.\n"
@@ -1552,8 +1633,10 @@ if [ "$DO_NPM" = 1 ]; then
     info "re-auditing $label..."
     npm_run "$dir" audit --json >"$TMP/post-na-$slug.json" 2>/dev/null || true
     jq -e . "$TMP/post-na-$slug.json" >/dev/null 2>&1 || echo '{}' >"$TMP/post-na-$slug.json"
+    # $scope, not $label: "label" is a reserved word in jq 1.6, where the
+    # variable $label is a compile error (jq 1.7+ accepts it).
     jq -r "$(cat "$TMP/tickets-npm.jq")" \
-          --arg label "$label" --arg dir "$dir" \
+          --arg scope "$label" --arg dir "$dir" \
           "$TMP/post-na-$slug.json" >>"$TMP/remediation.txt" 2>/dev/null || true
   done
 fi
@@ -1575,6 +1658,7 @@ echo "Nothing has been committed. Suggested next steps:"
 STEP=0
 step() { STEP=$((STEP+1)); printf '  %d. %s\n' "$STEP" "$1"; }
 step "Review:            git diff composer.json && git diff --stat"
+step "Reinstall:         ./composer.sh install   (or: lando composer install) — re-applies every patch from a clean install; a patch that no longer applies to an updated package shows up here, and the update run itself can miss it"
 step "Update database:   ./drush.sh updb -y && ./drush.sh cr   (or: lando drush updb -y)"
 step "Sanity checks:     ./robo.sh validate:phpstan   /   ./robo.sh validate:twig"
 step "Test locally:      reload your lando site and spot-check pages/styles (the theme build was already verified by this run)."
