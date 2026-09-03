@@ -10,6 +10,7 @@ roles:
   peer_reviewer: peer_reviewer
 author: false
 site_mail: true
+user_fields: {  }
 emails: ''
 subject: 'New draft content ready for peer review'
 body:
