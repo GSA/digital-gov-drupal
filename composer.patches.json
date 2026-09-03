@@ -19,7 +19,8 @@
       "/project/migrate_plus/issues/2849525: add a process plugin to truncate strings": "https://www.drupal.org/files/issues/2849525-2.migrate_plus.add-a-process-plugin-to-truncate-strings.patch"
     },
     "drupal/openid_connect": {
-      "/project/openid_connect/issues/3266205#comment-15642526": "patches/openid_connect-support_pkce-3266205-37.patch"
+      "/project/openid_connect/issues/3266205#comment-16669343: PKCE support. Replaces the #37 patch, which no longer applies to 3.0.0-alpha8": "patches/openid_connect-pkce-optional-3266205-58.patch",
+      "DIGITAL-833: config schema for the use_pkce key added by the PKCE patch (missing upstream)": "patches/openid_connect-pkce-config-schema.patch"
     },
     "drupal/redis": {
       "Avoid the AWS-disabled Redis CONFIG command": "patches/redis-no-config-command.patch"
