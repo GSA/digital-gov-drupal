@@ -152,3 +152,4 @@ cf5dc8061ee27663fc8968237f723ec2|arpage|feature/DIGITAL-808-core-security-update
 a7c38babfff5507cc136c63b1dcd2d05|Amy Farrell|feature/DIGITAL-825-bump-php-codesniffer|Mon Aug 17 02:02:39 PM PDT 2026|./composer.sh upgrade squizlabs/php_codesniffer
 eec786516f1cb59b97f1b5865a725c87|Jacob Yeager|feature/DIGITAL-836-depenancy-update-scripts|Wed Aug 26 12:34:06 EDT 2026|./scripts/audit/deps-update
 6c7b92b80941dd2b1246246ddf5af039|Amy Farrell|feature/DIGITAL-833-OM-8-26-26-deploydev|Mon Aug 31 03:26:48 PM PDT 2026|./composer.sh require drupal/vbo_workflow_transition:1.0.0
+a5ea401d9cc3df16e299a8b021a31a0f|Amy Farrell|feature/DIGITAL-752-add-redis-cache-deploydev|Thu Sep  3 12:05:32 PM PDT 2026|./composer.sh update --lock
