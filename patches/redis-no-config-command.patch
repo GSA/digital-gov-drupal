@@ -1,0 +1,21 @@
+diff --git a/src/Controller/ReportController.php b/src/Controller/ReportController.php
+index a7bd778..6ed89ac 100644
+--- a/src/Controller/ReportController.php
++++ b/src/Controller/ReportController.php
+@@ -394,14 +394,7 @@ class ReportController extends ControllerBase {
+     $normalized_info['used_memory'] = $info['used_memory'] ?? $info['Memory']['used_memory'];
+     $normalized_info['used_memory_human'] = $info['used_memory_human'] ?? $info['Memory']['used_memory_human'];
+ 
+-    if (empty($info['maxmemory_policy'])) {
+-      $memory_config = $this->redis->config('get', 'maxmemory*');
+-      $normalized_info['maxmemory_policy'] = $memory_config['maxmemory-policy'];
+-      $normalized_info['maxmemory'] = $memory_config['maxmemory'];
+-    }
+-    else {
+-      $normalized_info['maxmemory_policy'] = $info['maxmemory_policy'];
+-      $normalized_info['maxmemory'] = $info['maxmemory'];
+-    }
++    $normalized_info['maxmemory_policy'] = $info['maxmemory_policy'] ?? $info['Memory']['maxmemory_policy'] ?? NULL;
++    $normalized_info['maxmemory'] = $info['maxmemory'] ?? $info['Memory']['maxmemory'] ?? NULL;
+ 
+     $normalized_info['uptime_in_seconds'] = $info['uptime_in_seconds'] ?? $info['Server']['uptime_in_seconds'] ?? NULL;

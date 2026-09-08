@@ -54,7 +54,7 @@ resource "cloudfoundry_service_instance" "this" {
 
   name                            = format(var.env.name_pattern, each.key)
   json_params                     = try(each.value.json_params, null)
-  replace_on_params_change        = try(each.value.replace_on_service_plan_change, false)
+  replace_on_params_change        = try(each.value.replace_on_params_change, false)
   replace_on_service_plan_change  = try(each.value.replace_on_service_plan_change, false)
   space                           = var.cloudfoundry.space.id
   service_plan                    = var.cloudfoundry.services[each.key].service_plans[each.value.service_plan]

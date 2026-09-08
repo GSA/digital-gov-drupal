@@ -84,6 +84,7 @@ module:
   path_redirect_import: 0
   rabbit_hole: 0
   redirect: 0
+  redis: 0
   remove_username: 0
   require_revision_log_message: 0
   responsive_image: 0
