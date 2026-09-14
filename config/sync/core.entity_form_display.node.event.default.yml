@@ -122,7 +122,7 @@ content:
       media_types: {  }
     third_party_settings:
       media_library_edit:
-        show_edit: '1'
+        show_edit: true
         edit_form_mode: default
   field_host:
     type: string_textfield
@@ -155,7 +155,7 @@ content:
       media_types: {  }
     third_party_settings:
       media_library_edit:
-        show_edit: '1'
+        show_edit: true
         edit_form_mode: default
   field_registration_url:
     type: link_default

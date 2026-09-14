@@ -150,3 +150,10 @@ df82b8830d6ba37406e5253b08d0f980|arpage|features/DIGITAL-788-drupal-core-update|
 873537afcfa938db74a386e1ec06198a|arpage|feature/DIGITAL-808-core-security-updates|Tue Jul 28 06:15:53 EDT 2026|./composer.sh require drupal/core-composer-scaffold:10.6.14 --with-all-dependencies --ignore-platform-reqs
 cf5dc8061ee27663fc8968237f723ec2|arpage|feature/DIGITAL-808-core-security-updates|Tue Jul 28 06:16:49 EDT 2026|./composer.sh require drupal/core-project-message:^10.6.14 --with-all-dependencies --ignore-platform-reqs
 a7c38babfff5507cc136c63b1dcd2d05|Amy Farrell|feature/DIGITAL-825-bump-php-codesniffer|Mon Aug 17 02:02:39 PM PDT 2026|./composer.sh upgrade squizlabs/php_codesniffer
+eec786516f1cb59b97f1b5865a725c87|Jacob Yeager|feature/DIGITAL-836-depenancy-update-scripts|Wed Aug 26 12:34:06 EDT 2026|./scripts/audit/deps-update
+6c7b92b80941dd2b1246246ddf5af039|Amy Farrell|feature/DIGITAL-833-OM-8-26-26-deploydev|Mon Aug 31 03:26:48 PM PDT 2026|./composer.sh require drupal/vbo_workflow_transition:1.0.0
+51651f79e795b173471cd95ff6958fc3|Amy Farrell|feature/DIGITAL-836-depenancy-update-scripts|Wed Sep  2 04:23:53 PM PDT 2026|./scripts/audit/deps-update
+cb3a9aadf5d696dff56783fc0faa69e2|Amy Farrell|feature/DIGITAL-836-depenancy-update-scripts|Wed Sep  2 04:55:06 PM PDT 2026|./composer.sh update drupal/paragraphs
+cd38b0c774a9fff6f5f998b8a96c58b8|Amy Farrell|feature/DIGITAL-836-depenancy-update-scripts|Wed Sep  2 04:55:28 PM PDT 2026|./composer.sh update league/commonmark
+aecd901276bd6a50b802e7eba0ca6767|Amy Farrell|feature/DIGITAL-836-depenancy-update-scripts|Wed Sep  2 04:58:53 PM PDT 2026|./composer.sh update mtdowling/jmespath.php --with-all-dependencies
+7808c9d1350c6de6cfb72a4601e73e15|Jacob Yeager|feature/DIGITAL-752-add-redis-cache|Thu Sep  3 17:21:10 EDT 2026|./composer.sh update --lock

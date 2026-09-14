@@ -1,0 +1,215 @@
+diff --git a/src/OpenIDConnectSession.php b/src/OpenIDConnectSession.php
+index fd67621..ae3379b 100644
+--- a/src/OpenIDConnectSession.php
++++ b/src/OpenIDConnectSession.php
+@@ -243,4 +243,22 @@ class OpenIDConnectSession implements OpenIDConnectSessionInterface {
+     $this->session->set('openid_connect_state', $token);
+   }
+ 
++  /**
++   * {@inheritdoc}
++   */
++  public function retrievePkceVerifier(bool $clear = TRUE): ?string {
++    $ret = $this->session->get('openid_connect_pkce_verifier');
++    if ($clear) {
++      $this->session->remove('openid_connect_pkce_verifier');
++    }
++    return $ret;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function savePkceVerifier(string $verifier): void {
++    $this->session->set('openid_connect_pkce_verifier', $verifier);
++  }
++
+ }
+diff --git a/src/OpenIDConnectSessionInterface.php b/src/OpenIDConnectSessionInterface.php
+index 8692c0e..a89378f 100644
+--- a/src/OpenIDConnectSessionInterface.php
++++ b/src/OpenIDConnectSessionInterface.php
+@@ -158,4 +158,23 @@ interface OpenIDConnectSessionInterface extends ContainerInjectionInterface {
+    */
+   public function saveStateToken(string $token);
+ 
++  /**
++   * Get the PKCE code verifier from the session.
++   *
++   * @param bool $clear
++   *   The value is cleared from the session, unless this is set to FALSE.
++   *
++   * @return string|null
++   *   The PKCE code verifier.
++   */
++  public function retrievePkceVerifier(bool $clear = TRUE): ?string;
++
++  /**
++   * Save the PKCE code verifier in the session.
++   *
++   * @param string $verifier
++   *   The PKCE code verifier.
++   */
++  public function savePkceVerifier(string $verifier): void;
++
+ }
+diff --git a/src/Plugin/OpenIDConnectClientBase.php b/src/Plugin/OpenIDConnectClientBase.php
+index d91f358..21afdd5 100644
+--- a/src/Plugin/OpenIDConnectClientBase.php
++++ b/src/Plugin/OpenIDConnectClientBase.php
+@@ -17,6 +17,7 @@ use Drupal\Core\Routing\TrustedRedirectResponse;
+ use Drupal\Core\StringTranslation\StringTranslationTrait;
+ use Drupal\Core\Url;
+ use Drupal\openid_connect\OpenIDConnectAutoDiscover;
++use Drupal\openid_connect\OpenIDConnectSessionInterface;
+ use Drupal\openid_connect\OpenIDConnectStateTokenInterface;
+ use GuzzleHttp\ClientInterface;
+ use GuzzleHttp\Exception\RequestException;
+@@ -87,6 +88,13 @@ abstract class OpenIDConnectClientBase extends PluginBase implements OpenIDConne
+    */
+   protected $autoDiscover;
+ 
++  /**
++   * The OpenID Connect session service.
++   *
++   * @var \Drupal\openid_connect\OpenIDConnectSessionInterface
++   */
++  protected $session;
++
+   /**
+    * The parent entity identifier.
+    *
+@@ -119,8 +127,10 @@ abstract class OpenIDConnectClientBase extends PluginBase implements OpenIDConne
+    *   The OpenID state token service.
+    * @param \Drupal\openid_connect\OpenIDConnectAutoDiscover $auto_discover
+    *   The OpenID well-known discovery service.
++   * @param \Drupal\openid_connect\OpenIDConnectSessionInterface $session
++   *   The OpenID Connect session service.
+    */
+-  public function __construct(array $configuration, string $plugin_id, $plugin_definition, RequestStack $request_stack, ClientInterface $http_client, LoggerChannelFactoryInterface $logger_factory, TimeInterface $datetime_time, KillSwitch $page_cache_kill_switch, LanguageManagerInterface $language_manager, OpenIDConnectStateTokenInterface $state_token, OpenIDConnectAutoDiscover $auto_discover) {
++  public function __construct(array $configuration, string $plugin_id, $plugin_definition, RequestStack $request_stack, ClientInterface $http_client, LoggerChannelFactoryInterface $logger_factory, TimeInterface $datetime_time, KillSwitch $page_cache_kill_switch, LanguageManagerInterface $language_manager, OpenIDConnectStateTokenInterface $state_token, OpenIDConnectAutoDiscover $auto_discover, OpenIDConnectSessionInterface $session) {
+     parent::__construct($configuration, $plugin_id, $plugin_definition);
+ 
+     $this->requestStack = $request_stack;
+@@ -131,6 +141,7 @@ abstract class OpenIDConnectClientBase extends PluginBase implements OpenIDConne
+     $this->languageManager = $language_manager;
+     $this->stateToken = $state_token;
+     $this->autoDiscover = $auto_discover;
++    $this->session = $session;
+     $this->parentEntityId = '';
+     $this->setConfiguration($configuration);
+   }
+@@ -150,7 +161,8 @@ abstract class OpenIDConnectClientBase extends PluginBase implements OpenIDConne
+       $container->get('page_cache_kill_switch'),
+       $container->get('language_manager'),
+       $container->get('openid_connect.state_token'),
+-      $container->get('openid_connect.autodiscover')
++      $container->get('openid_connect.autodiscover'),
++      $container->get('openid_connect.session')
+     );
+   }
+ 
+@@ -200,6 +212,7 @@ abstract class OpenIDConnectClientBase extends PluginBase implements OpenIDConne
+       'client_secret' => '',
+       'iss_allowed_domains' => '',
+       'prompt' => ['login'],
++      'use_pkce' => FALSE,
+     ];
+   }
+ 
+@@ -258,6 +271,12 @@ abstract class OpenIDConnectClientBase extends PluginBase implements OpenIDConne
+       '#default_value' => $this->configuration['prompt'] ?? [],
+       '#description' => $this->t('<strong><em>Please note:</em> This option has security implications.</strong><br />While valid, not selecting a prompt could lead to security issues and is discouraged in most use cases.'),
+     ];
++    $form['use_pkce'] = [
++      '#title' => $this->t('Use PKCE'),
++      '#type' => 'checkbox',
++      '#default_value' => $this->configuration['use_pkce'] ?? FALSE,
++      '#description' => $this->t('Enable Proof Key for Code Exchange (PKCE, RFC 7636). Recommended for public clients and providers that support it. When enabled, a code_challenge is added to the authorization request and the code_verifier is sent during token exchange.'),
++    ];
+     return $form;
+   }
+ 
+@@ -291,7 +310,7 @@ abstract class OpenIDConnectClientBase extends PluginBase implements OpenIDConne
+     if (is_array($prompt)) {
+       $this->setConfiguration(['prompt' => array_values(array_filter($prompt))]);
+     }
+-
++    $this->setConfiguration(['use_pkce' => (bool) $form_state->getValue('use_pkce')]);
+   }
+ 
+   /**
+@@ -349,9 +368,41 @@ abstract class OpenIDConnectClientBase extends PluginBase implements OpenIDConne
+     ) {
+       $return['query']['prompt'] = implode(' ', $this->configuration['prompt']);
+     }
++
++    // Add PKCE parameters if enabled.
++    if (!empty($this->configuration['use_pkce'])) {
++      $verifier = $this->generatePkceVerifier();
++      $this->session->savePkceVerifier($verifier);
++      $return['query']['code_challenge'] = $this->generatePkceChallenge($verifier);
++      $return['query']['code_challenge_method'] = 'S256';
++    }
++
+     return $return;
+   }
+ 
++  /**
++   * Generates a cryptographically random PKCE code verifier.
++   *
++   * @return string
++   *   A base64url-encoded random string of 32 bytes (43 chars).
++   */
++  protected function generatePkceVerifier(): string {
++    return rtrim(strtr(base64_encode(random_bytes(32)), '+/', '-_'), '=');
++  }
++
++  /**
++   * Generates the PKCE code challenge from a verifier using S256 method.
++   *
++   * @param string $verifier
++   *   The PKCE code verifier.
++   *
++   * @return string
++   *   The base64url-encoded SHA-256 hash of the verifier.
++   */
++  protected function generatePkceChallenge(string $verifier): string {
++    return rtrim(strtr(base64_encode(hash('sha256', $verifier, TRUE)), '+/', '-_'), '=');
++  }
++
+   /**
+    * Helper function for request options.
+    *
+@@ -364,14 +415,24 @@ abstract class OpenIDConnectClientBase extends PluginBase implements OpenIDConne
+    *   Array with request options.
+    */
+   protected function getRequestOptions(string $authorization_code, string $redirect_uri): array {
++    $form_params = [
++      'code' => $authorization_code,
++      'client_id' => $this->configuration['client_id'],
++      'client_secret' => $this->configuration['client_secret'],
++      'redirect_uri' => $redirect_uri,
++      'grant_type' => 'authorization_code',
++    ];
++
++    // Add PKCE code_verifier if PKCE is enabled and a verifier is stored.
++    if (!empty($this->configuration['use_pkce'])) {
++      $verifier = $this->session->retrievePkceVerifier();
++      if ($verifier !== NULL) {
++        $form_params['code_verifier'] = $verifier;
++      }
++    }
++
+     return [
+-      'form_params' => [
+-        'code' => $authorization_code,
+-        'client_id' => $this->configuration['client_id'],
+-        'client_secret' => $this->configuration['client_secret'],
+-        'redirect_uri' => $redirect_uri,
+-        'grant_type' => 'authorization_code',
+-      ],
++      'form_params' => $form_params,
+       'headers' => [
+         'Accept' => 'application/json',
+       ],

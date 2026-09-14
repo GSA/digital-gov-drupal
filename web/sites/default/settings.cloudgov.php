@@ -142,6 +142,26 @@ foreach ($cf_service_data as $service_list) {
       $settings['s3fs.use_s3_for_public'] = TRUE;
       $settings['s3fs.use_s3_for_private'] = TRUE;
     }
+    elseif (
+      !empty($service['tags']) &&
+      in_array('cache-service', $service['tags'], TRUE)
+    ) {
+      $redis_host = $service['credentials']['hostname'] ?? $service['credentials']['host'] ?? NULL;
+      $redis_port = $service['credentials']['port'] ?? NULL;
+      $redis_password = $service['credentials']['password'] ?? NULL;
+
+      if ($redis_host && $redis_port && $redis_password) {
+        require_once 'settings.redis.php';
+        if (function_exists('_settings_redis')) {
+          // Cloud.gov ElastiCache requires in-transit TLS. The redis module
+          // has no scheme/ssl settings; PhpRedis negotiates TLS only when the
+          // host carries a tls:// prefix.
+          _settings_redis($settings, 'tls://' . $redis_host, (string) $redis_port);
+          $settings['redis.connection']['password'] = $redis_password;
+          $settings['redis.connection']['persistent'] = TRUE;
+        }
+      }
+    }
   }
 }
 

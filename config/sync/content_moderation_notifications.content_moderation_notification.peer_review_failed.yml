@@ -9,6 +9,7 @@ transitions:
 roles: {  }
 author: true
 site_mail: false
+user_fields: {  }
 emails: ''
 subject: 'Content failed peer review, content changes required'
 body:
