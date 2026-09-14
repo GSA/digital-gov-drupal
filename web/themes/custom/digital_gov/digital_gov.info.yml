@@ -4,6 +4,7 @@ base theme: stark
 description: A 1-1 migration of the Hugo site.
 package: Custom
 core_version_requirement: ^10
+logo: logo.png
 libraries:
   - digital_gov/global
 regions:
