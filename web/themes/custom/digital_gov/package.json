@@ -34,7 +34,7 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1016.0",
     "@prantlf/jsonlint": "^17.0.1",
-    "@uswds/uswds": "^3.7.1",
+    "@uswds/uswds": "~3.8.1",
     "autoprefixer": "^10.4.16",
     "concurrently": "^9.1.2",
     "del": "^6.1.1",
@@ -83,7 +83,7 @@
   },
   "overrides": {
     "gulp-responsive": {
-      "sharp": "0.32.6"
+      "sharp": "^0.35.0"
     },
     "glob-parent": "6.0.2",
     "eslint": {
