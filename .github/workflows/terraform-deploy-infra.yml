@@ -115,6 +115,52 @@ jobs:
         id: apply
         run: |
           ./scripts/pipeline/cloud-gov-remote-command.sh "${TF_BASTION}" "TF_WORKSPACE=${CF_SPACE} tofu -chdir=${REPO_NAME}/terraform/infra apply -auto-approve" 1
+
+      ## The egress proxy is a separate root configuration. It runs on the official
+      ## cloudfoundry/cloudfoundry provider, which cannot share a root module with the
+      ## community provider used by terraform/infra, and it keeps its own state in the
+      ## terraform_remote_state_egress schema of the same backend.
+      ##
+      ## Runs after infra so that later work can reference applications infra creates.
+      ## Whether a proxy is actually deployed is controlled by enabled_workspaces in
+      ## terraform/egress/locals.tf -- an environment that is not listed is a no-op.
+      - name: Configure Terraform (Egress)
+        env:
+          CF_USER: "${{ secrets.CF_USER }}"
+          CF_PASSWORD: "${{ secrets.CF_PASSWORD }}"
+          CF_ORG: "${{ secrets.CF_ORG }}"
+          TF_BASTION: "${{ secrets.TF_BASTION }}"
+        run: |
+          CWD=$(pwd)
+          cd terraform/egress
+          envsubst < terraform.tfvars.tmpl > terraform.tfvars
+          ${CWD}/scripts/pipeline/cloud-gov-scp-file.sh "${TF_BASTION}" "terraform.tfvars" "${REPO_NAME}/terraform/egress/"
+          cd "${CWD}"
+      - name: Terraform Init (Egress)
+        env:
+          TF_BASTION: "${{ secrets.TF_BASTION }}"
+        id: init_egress
+        run: |
+          ./scripts/pipeline/cloud-gov-remote-command.sh "${TF_BASTION}" "tofu -chdir=${REPO_NAME}/terraform/egress init" 1
+          ./scripts/pipeline/cloud-gov-remote-command.sh "${TF_BASTION}" "tofu -chdir=${REPO_NAME}/terraform/egress workspace new ${CF_SPACE} || exit 0" 1
+      - name: Terraform Validate (Egress)
+        env:
+          TF_BASTION: "${{ secrets.TF_BASTION }}"
+        id: validate_egress
+        run: |
+          ./scripts/pipeline/cloud-gov-remote-command.sh ${TF_BASTION} "TF_WORKSPACE=${CF_SPACE} tofu -chdir=${REPO_NAME}/terraform/egress validate -no-color" 1
+      - name: Terraform Plan (Egress)
+        env:
+          TF_BASTION: "${{ secrets.TF_BASTION }}"
+        id: plan_egress
+        run: |
+          ./scripts/pipeline/cloud-gov-remote-command.sh "${TF_BASTION}" "TF_WORKSPACE=${CF_SPACE} tofu -chdir=${REPO_NAME}/terraform/egress plan -no-color" 1
+      - name: Terraform Apply (Egress)
+        env:
+          TF_BASTION: "${{ secrets.TF_BASTION }}"
+        id: apply_egress
+        run: |
+          ./scripts/pipeline/cloud-gov-remote-command.sh "${TF_BASTION}" "TF_WORKSPACE=${CF_SPACE} tofu -chdir=${REPO_NAME}/terraform/egress apply -auto-approve" 1
   stopBastion:
     name: Stop Bastion
     runs-on: ubuntu-latest
