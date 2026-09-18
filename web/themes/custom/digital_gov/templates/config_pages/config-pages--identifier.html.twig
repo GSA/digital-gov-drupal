@@ -24,7 +24,7 @@
     <div class="usa-identifier__container">
       {% if content.field_logo_icon|field_value %}
         <div class="usa-identifier__logos">
-          <a href="{{ content.field_parent_link[0]['#url'] }}" class="usa-identifier__logo">
+          <div class="usa-identifier__logo">
             {{ drupal_image(
               config_pages.field_logo_icon|file_uri,
               '',
@@ -36,7 +36,7 @@
                 alt: content.field_acronym|field_value|render ~ ' logo',
               },
             ) }}
-          </a>
+          </div>
         </div>
       {% endif %}
       {% if content.field_site_name|field_value or content.field_parent_link|field_value %}
