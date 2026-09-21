@@ -66,13 +66,23 @@
 <main role="main" id="main-content">
   <div class="grid-container-desktop margin-bottom-5">
     <header class="page-head">
-      <h1>{{ node.title.value }}</h1>
+      <h1>Explore how-to guides</h1>
       {% if content.field_deck %}
-        <h2 class="deck">{{ content.field_deck|field_value }}</h2>
+        <div class="deck">{{ content.field_deck|field_value }}</div>
       {% endif %}
     </header>
 
-    {{ drupal_view('guide_cards', 'block_1') }}
+    {% set series_cards = drupal_view_result('guide_cards', 'block_series') %}
+    {% if series_cards %}
+      <h2>Guide series</h2>
+      {{ drupal_view('guide_cards', 'block_series') }}
+    {% endif %}
+
+    {% set topic_cards = drupal_view_result('guide_cards', 'block_topics') %}
+    {% if topic_cards %}
+      <h2>Topic guides</h2>
+      {{ drupal_view('guide_cards', 'block_topics') }}
+    {% endif %}
 
   </div>
 </main>
