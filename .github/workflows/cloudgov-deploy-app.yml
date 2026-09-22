@@ -98,3 +98,13 @@ jobs:
           PROJECT: "${{ secrets.PROJECT }}"
         if: contains(vars.GENERATE_STATIC_SITE_ON_DEPLOY_SPACES, env.CF_SPACE)
         run: source ./scripts/pipeline/pipeline_wrapper.sh upkeep
+
+      ## Runs last, and only removes public egress from a space whose application is
+      ## already bound to its proxy credentials -- so an environment that has not been
+      ## rolled out to keeps its public egress automatically. Idempotent, so it also
+      ## re-applies the posture if the security group is ever re-bound by hand.
+      - name: Enforce Egress Security Groups
+        env:
+          CF_ORG: "${{ secrets.CF_ORG }}"
+          PROJECT: "${{ secrets.PROJECT }}"
+        run: ./scripts/pipeline/cloud-gov-egress-asg.sh
