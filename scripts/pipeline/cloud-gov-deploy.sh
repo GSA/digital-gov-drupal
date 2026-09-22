@@ -25,6 +25,14 @@ if cf service "${PROJECT}-cache-${CF_SPACE}" 2>/dev/null | grep -qi "succeeded";
   mv manifest.bind.tmp manifest.tmp
 fi
 
+## Bind the egress proxy credentials only when the service exists. The proxy is
+## rolled out one environment at a time, so a space without one still deploys -- the
+## application simply has no proxy and its New Relic daemon connects directly.
+if cf service "${PROJECT}-egress-cms-${CF_SPACE}" >/dev/null 2>&1; then
+  sed "s|# EGRESS_SERVICE_BINDING|- \${PROJECT}-egress-cms-\${CF_SPACE}|" manifest.tmp > manifest.bind.tmp
+  mv manifest.bind.tmp manifest.tmp
+fi
+
 envsubst < manifest.tmp > manifest.yml
 cat manifest.tmp
 cat manifest.yml

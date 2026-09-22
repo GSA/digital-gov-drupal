@@ -36,3 +36,49 @@ module "egress_proxy" {
     }
   }
 }
+
+## Each client's credentials, delivered as a user-provided service in the application's
+## own space. One service per client, so a client only ever sees its own credentials.
+##
+## Terraform creates the service; manifest.yml binds it. That split matches every other
+## service this application uses (mysql, secrets, static, storage) -- see the
+## EGRESS_SERVICE_BINDING placeholder in manifest.yml.
+##
+## The payload uses `proxy_uri` rather than the module's own json_credentials output,
+## whose shape changes from flat to nested once a second client exists. A fixed key
+## means adding the log shipper later cannot silently break the CMS.
+resource "cloudfoundry_service_instance" "egress_credentials" {
+  for_each = local.active_clients
+
+  name  = format(local.name_pattern, "egress-${each.key}")
+  space = data.cloudfoundry_space.app[0].id
+  type  = "user-provided"
+
+  ## Applications locate this by tag, not by name.
+  tags = [local.credential_tag, terraform.workspace]
+
+  credentials = jsonencode({
+    proxy_uri  = module.egress_proxy[0].https_proxy[each.key]
+    domain     = module.egress_proxy[0].domain
+    https_port = module.egress_proxy[0].https_port
+  })
+}
+
+## Container-to-container access from each client to the proxy. Without this the
+## credentials are useless -- the client cannot reach the proxy's port at all.
+##
+## Port 61443 implicitly terminates TLS at the platform, which is why the credential
+## URI uses https://.
+resource "cloudfoundry_network_policy" "egress" {
+  for_each = local.active_clients
+
+  ## One resource per client rather than one resource holding every policy: removing a
+  ## client then removes exactly its own policy, and the schema requires a non-empty
+  ## list, which a shared resource would violate in a workspace with no clients.
+  policies = [{
+    source_app      = data.cloudfoundry_app.client[each.key].id
+    destination_app = module.egress_proxy[0].app_id
+    port            = local.mtls_port
+    protocol        = "tcp"
+  }]
+}

@@ -44,7 +44,12 @@ locals {
 
     ## The Drupal CMS. Needs the proxy only for the New Relic PHP daemon; its S3
     ## traffic goes direct.
+    ##
+    ## `app` is the Cloud Foundry application name, which the network policy and the
+    ## credential service are attached to. It is looked up, not managed -- this
+    ## application is deployed from manifest.yml, not Terraform.
     cms = {
+      app       = format(local.name_pattern, "drupal")
       allowlist = []
     }
 
@@ -66,4 +71,16 @@ locals {
 
   ## Is the proxy deployed in this workspace?
   enabled = contains(local.enabled_workspaces, terraform.workspace)
+
+  ## Clients, but only when the feature is on -- keeps every for_each below empty in a
+  ## workspace that is not being rolled out to.
+  active_clients = local.enabled ? local.clients : {}
+
+  ## Tag on each credential service. Applications find their proxy by this tag rather
+  ## than by a fixed service name, matching how settings.cloudgov.php locates the
+  ## cache service.
+  credential_tag = "egress-proxy"
+
+  ## The mTLS port. Cloud Foundry terminates TLS here and forwards to the app's $PORT.
+  mtls_port = "61443"
 }

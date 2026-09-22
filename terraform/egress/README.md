@@ -39,6 +39,17 @@ cf bind-security-group public_networks_egress "$CF_ORG" --space shared-egress --
 cf bind-security-group public_networks_egress "$CF_ORG" --space shared-egress --lifecycle staging
 ```
 
+The pipeline's service account must also be given a role on the new space. `cf create-space`
+grants SpaceDeveloper only to the user who runs it, and
+`../bootstrap/create_service_account.sh` grants roles by looping over the spaces that
+existed **when it was run** — so a space created later is invisible to the pipeline, and
+`tofu plan` fails when the `cloudfoundry_space` data source cannot find it:
+
+```bash
+username=$(cf service-key pipeline pipeline-key | tail -n +3 | jq -r '.credentials.username')
+cf set-space-role "$username" "$CF_ORG" shared-egress SpaceDeveloper
+```
+
 ## Rolling out an environment
 
 `locals.tf` holds `enabled_workspaces`. Applying with a workspace that is not listed is a
