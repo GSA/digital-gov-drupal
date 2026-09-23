@@ -99,11 +99,21 @@ jobs:
         if: contains(vars.GENERATE_STATIC_SITE_ON_DEPLOY_SPACES, env.CF_SPACE)
         run: source ./scripts/pipeline/pipeline_wrapper.sh upkeep
 
-      ## Runs last, and only removes public egress from a space whose application is
-      ## already bound to its proxy credentials -- so an environment that has not been
-      ## rolled out to keeps its public egress automatically. Idempotent, so it also
-      ## re-applies the posture if the security group is ever re-bound by hand.
+      ## Removing public egress from a space is opt-in per environment, via the
+      ## EGRESS_LOCKDOWN_SPACES repository variable -- the same pattern as
+      ## GENERATE_STATIC_SITE_ON_DEPLOY_SPACES above. An unset variable is an empty
+      ## string, and contains('', 'dev') is false, so merging this code changes nothing
+      ## anywhere until someone deliberately opts an environment in.
+      ##
+      ## Only enable a space once the proxy-aware code is on the branch that deploys to
+      ## it. A space can end up locked down while running code that predates the proxy
+      ## wiring, which leaves the application with no egress at all -- see egress-plan.md
+      ## section 1.12.
+      ##
+      ## Runs last, and is idempotent, so it also re-applies the posture if the security
+      ## group is ever re-bound by hand.
       - name: Enforce Egress Security Groups
+        if: contains(vars.EGRESS_LOCKDOWN_SPACES, env.CF_SPACE)
         env:
           CF_ORG: "${{ secrets.CF_ORG }}"
           PROJECT: "${{ secrets.PROJECT }}"
