@@ -28,7 +28,13 @@ locals {
   ## through the proxy -- doing so would break `aws s3 sync` in scripts/upkeep.
   ## See egress-plan.md section 1.1.
   base_allowlist = [
-    "*.newrelic.com"
+    "*.newrelic.com",
+
+    ## scripts/bootstrap.sh downloads the AWS CLI on every container start -- it runs at
+    ## pre-start, not staging. This is a CloudFront host, so it is NOT covered by the AWS
+    ## S3 Gateway ranges in trusted_local_networks_egress. Without it there is no `aws`
+    ## binary and the static site build dies with exit 127.
+    "awscli.amazonaws.com"
   ]
 
   ## Hosts no client may reach, whatever their allowlist says.

@@ -106,10 +106,25 @@ done
 
 source ${home}/.bashrc
 
+## This runs on EVERY container start, not at staging, so it needs egress every time
+## an application instance or task starts. awscli.amazonaws.com is a CloudFront host --
+## it is not covered by the AWS S3 Gateway ranges in trusted_local_networks_egress -- so
+## once the space loses public egress this must go through the proxy.
+##
+## Without it there is no `aws` binary, and scripts/upkeep dies with exit 127 partway
+## through the static site build.
 echo "Installing awscli..."
+awscli_curl=(curl -sS --fail)
+if [ -n "${proxy_uri}" ]; then
+  awscli_curl+=(--proxy "${proxy_uri}")
+fi
 {
-  curl -S "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/awscliv2.zip"
-  unzip -qq /tmp/awscliv2.zip -d /tmp/
+  "${awscli_curl[@]}" "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/awscliv2.zip" &&
+  unzip -qq /tmp/awscliv2.zip -d /tmp/ &&
   /tmp/aws/install --bin-dir ${home}/deps/0/bin --install-dir ${home}/deps/0/usr/local/aws-cli
-  rm -rf /tmp/awscliv2.zip /tmp/aws
-} >/dev/null 2>&1
+} || echo "ERROR: awscli install failed -- anything using 'aws' will fail with exit 127"
+rm -rf /tmp/awscliv2.zip /tmp/aws
+
+if [ ! -x "${home}/deps/0/bin/aws" ]; then
+  echo "ERROR: ${home}/deps/0/bin/aws is missing after install"
+fi

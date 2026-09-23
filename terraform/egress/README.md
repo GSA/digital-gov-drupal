@@ -79,9 +79,34 @@ direct rather than being routed through the proxy.
 
 ## Rotating credentials
 
+These are the HTTP Basic auth credentials Caddy's `forward_proxy` checks.
+
+**Policy: rotate only on suspected compromise.** GSA recommends annual rotation, but these
+credentials are low value and no schedule is kept. Rotation is an exception, not routine.
+
+### The blunt way — causes a brief outage
+
 Change `credential_version` in `locals.tf`. This is the only thing that rotates
-credentials — an allowlist or code change cannot do it accidentally. Every client
-application must be restarted afterwards to pick up the new value.
+credentials; an allowlist or code change cannot do it accidentally.
+
+It rotates **every** client at once. `VCAP_SERVICES` is injected at container start, so a
+running application keeps its old credentials until it restarts — and until it does, its
+proxied traffic gets 407. Each client application must be restarted afterwards.
+
+### The zero-downtime way — preferred
+
+Because each entry in `clients` gets its own credentials *and* its own ACL, and the
+generated Caddyfile contains one `forward_proxy` block per client, two sets of credentials
+can be valid at the same time:
+
+1. Add a second client alongside the first with the same allowlist, e.g. `cms_next`.
+2. Apply. Both credential sets are now accepted.
+3. Repoint the application at the new credential service and restart it.
+4. Remove the original client entry.
+5. Apply. The old credentials stop working.
+
+No window exists where the application holds credentials the proxy will not accept. Leave
+`credential_version` alone when doing this — it is the all-at-once lever, not this one.
 
 ## Testing
 
