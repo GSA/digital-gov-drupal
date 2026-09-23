@@ -62,6 +62,9 @@ locals {
     ## `app` is the Cloud Foundry application name, which the network policy and the
     ## credential service are attached to. It is looked up, not managed -- this
     ## application is deployed from manifest.yml, not Terraform.
+    ## bind_service is not set here: the CMS is deployed from manifest.yml, which binds
+    ## the credential service through its EGRESS_SERVICE_BINDING placeholder. Clients
+    ## deployed by Terraform set bind_service = true instead -- see main.tf.
     cms = {
       app       = format(local.name_pattern, "drupal")
       allowlist = []

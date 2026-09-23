@@ -128,21 +128,89 @@ itself off because a variable was cleared.
 
 ## Adding an application to the proxy
 
-Add an entry to `clients` in `locals.tf`. Each client gets its own credentials and its own
-ACL, so no client can use another's grants. The application does **not** need to be
-Terraform-managed — `digital-gov-drupal` is deployed from `manifest.yml`.
+Three parts: declare the client, bind its credentials, and tell the application to use
+them. All three are required — a client with no binding gets credentials nothing reads,
+and a binding with no consumer configuration is inert.
+
+### 1. Declare the client
+
+In `locals.tf`, add an entry to `clients`. `app` is the Cloud Foundry application name,
+used to look the application up for the network policy and to place the credential service
+in the right space.
 
 ```hcl
 clients = {
   cms = {
-    allowlist = []                         # base_allowlist is added automatically
+    app       = format(local.name_pattern, "drupal")
+    allowlist = []                          # base_allowlist is added automatically
+  }
+
+  waf = {
+    app       = format(local.name_pattern, "waf")
+    allowlist = ["example.gov"]             # anything beyond the shared base list
   }
 }
 ```
 
-Then give the application its proxy configuration. Note that setting `http_proxy` globally
-is deliberately avoided: each consumer opts in individually, so that S3 traffic keeps going
-direct rather than being routed through the proxy.
+This creates, for each client: its own credentials, a `digital-gov-egress-<client>-<space>`
+user-provided service in the application's space, and a network policy to the proxy on
+61443. Credentials and ACLs are per client, so one client cannot use another's grants.
+
+### 2. Bind the credential service
+
+How depends on how the application is deployed.
+
+**Deployed from `manifest.yml`** (the CMS): follow the existing
+`# EGRESS_SERVICE_BINDING` placeholder. `scripts/pipeline/cloud-gov-deploy.sh` replaces it
+only when the service exists, so environments without a proxy still deploy. Add a second
+placeholder and matching conditional for a second such application.
+
+**Deployed by Terraform** (the WAF, the bastions, a future log shipper): their bindings
+live in `terraform/infra`, which cannot reference a service created here — separate
+configurations, separate state. Set `bind_service = true` on the client and this
+configuration makes the binding itself:
+
+```hcl
+logshipper = {
+  app          = format(local.name_pattern, "logshipper")
+  allowlist    = []
+  bind_service = true
+}
+```
+
+**Use exactly one path per client.** Setting `bind_service` on an application that is also
+bound through `manifest.yml` would give one binding two owners.
+
+### 3. Tell the application to use the proxy
+
+Read `proxy_uri` from the bound service and configure the specific consumer that needs it.
+`scripts/bootstrap.sh` has the pattern:
+
+```bash
+proxy_uri=$(echo "${VCAP_SERVICES}" | jq -r '[."user-provided"[]? | select(any(.tags[]?; . == "egress-proxy")) | .credentials.proxy_uri] | first // empty')
+```
+
+Located by tag rather than service name, so it survives renaming.
+
+**Do not export `http_proxy`/`https_proxy` globally.** Each consumer opts in individually,
+so that S3 traffic keeps going direct — the AWS S3 Gateway ranges are already permitted by
+`trusted_local_networks_egress`, and routing `aws s3 sync` through the proxy would break
+the static site build. Set `no_proxy=apps.internal` if you do set them for a specific
+process, so container-to-container traffic is unaffected.
+
+### A caution about the WAF specifically
+
+The WAF is used above as a worked example, but it is **not** a good proxy candidate today,
+and is deliberately excluded. Its outbound traffic is `proxy_pass` to S3 and to Drupal over
+`apps.internal`, both already permitted without the proxy — and nginx cannot use an HTTP
+`CONNECT` proxy for `proxy_pass` at all, so pointing it at one would not work.
+
+It would only become a client if it gained something that speaks to the internet and
+honours a proxy setting, such as a New Relic agent. The same is true of
+`database-backup-bastion`, which only reaches S3 and RDS.
+
+The application that genuinely needs this next is `tf-bastion` — it downloads OpenTofu from
+GitHub on every start. That is tracked separately.
 
 ## Rotating credentials
 

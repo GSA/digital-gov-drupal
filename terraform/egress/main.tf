@@ -64,6 +64,34 @@ resource "cloudfoundry_service_instance" "egress_credentials" {
   })
 }
 
+## Bind the credentials for clients Terraform is asked to bind.
+##
+## Two binding paths exist because applications reach this space two ways:
+##
+##   - deployed from manifest.yml (the CMS) -- bound by the EGRESS_SERVICE_BINDING
+##     placeholder there, matching how mysql, secrets, static and storage are bound.
+##     Leave bind_service unset for these.
+##
+##   - deployed by Terraform (the WAF, the bastions, a future log shipper) -- their
+##     bindings live in terraform/infra, which cannot reference a service created here
+##     because it is a separate configuration with separate state. Set bind_service = true
+##     and the binding is made from this configuration instead, which has both the
+##     application and the service to hand.
+##
+## Setting bind_service on an application that is also bound by manifest.yml would create
+## two owners of one binding. Use exactly one path per client.
+resource "cloudfoundry_service_credential_binding" "egress" {
+  for_each = {
+    for client_name, client in local.active_clients : client_name => client
+    if try(client.bind_service, false)
+  }
+
+  type             = "app"
+  name             = "egress-${each.key}"
+  app              = data.cloudfoundry_app.client[each.key].id
+  service_instance = cloudfoundry_service_instance.egress_credentials[each.key].id
+}
+
 ## Container-to-container access from each client to the proxy. Without this the
 ## credentials are useless -- the client cannot reach the proxy's port at all.
 ##
