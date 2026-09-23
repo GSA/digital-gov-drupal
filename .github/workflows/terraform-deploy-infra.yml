@@ -130,6 +130,10 @@ jobs:
           CF_PASSWORD: "${{ secrets.CF_PASSWORD }}"
           CF_ORG: "${{ secrets.CF_ORG }}"
           TF_BASTION: "${{ secrets.TF_BASTION }}"
+          ## Which environments the egress proxy is enabled for. Unset means none, and
+          ## every egress step below becomes a no-op. The same variable gates the
+          ## security-group lockdown in cloudgov-deploy-app.yml.
+          EGRESS_SPACES: "${{ vars.EGRESS_SPACES }}"
         run: |
           CWD=$(pwd)
           cd terraform/egress

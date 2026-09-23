@@ -58,7 +58,20 @@ for lifecycle in running staging; do
   fi
 done
 
-## 2. Only lock down an application space once its application is actually using the
+## 2. The proxy serving this space must actually be running. EGRESS_SPACES expresses
+## intent; this confirms reality. Without it, a variable edit alone could strip a space's
+## egress before its proxy had been built.
+proxy_app="${PROJECT}-proxy-${CF_SPACE}"
+egress_space_guid=$(cf curl "/v3/spaces?names=${EGRESS_SPACE}&organization_guids=$(cf curl "/v3/organizations?names=${CF_ORG}" 2>/dev/null | jq -r '.resources[0].guid // empty')" 2>/dev/null | jq -r '.resources[0].guid // empty')
+proxy_state=$(cf curl "/v3/apps?names=${proxy_app}&space_guids=${egress_space_guid}" 2>/dev/null | jq -r '.resources[0].state // empty')
+
+if [ "${proxy_state}" != "STARTED" ]; then
+  echo "  ${CF_SPACE}/running: ${proxy_app} is '${proxy_state:-absent}', not STARTED;"
+  echo "                       leaving ${GROUP} in place"
+  exit 0
+fi
+
+## 3. Only lock down an application space once its application is actually using the
 ## proxy. Removing public egress from a space whose app has no proxy credentials would
 ## cut off its outbound traffic with nothing to replace it.
 ## Looked up through the API rather than `cf app --guid`, which depends on whichever
@@ -85,7 +98,7 @@ case " ${bound_services} " in
     ;;
 esac
 
-## 3. The application is proxied, so the space no longer needs public egress.
+## 4. The application is proxied, so the space no longer needs public egress.
 if is_bound "${CF_SPACE}" running; then
   echo "  ${CF_SPACE}/running: removing ${GROUP} (${CLIENT_APP} is proxied)"
   cf unbind-security-group "${GROUP}" "${CF_ORG}" "${CF_SPACE}" --lifecycle running || exit 1

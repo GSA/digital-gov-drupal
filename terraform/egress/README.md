@@ -52,12 +52,79 @@ cf set-space-role "$username" "$CF_ORG" shared-egress SpaceDeveloper
 
 ## Rolling out an environment
 
-`locals.tf` holds `enabled_workspaces`. Applying with a workspace that is not listed is a
-safe no-op, so environments are switched on one at a time:
+One repository variable, **`EGRESS_SPACES`**, controls the whole feature. It is a
+space-separated list of environments:
 
-```hcl
-enabled_workspaces = ["dev"]              # then ["dev", "staging"], then all three
 ```
+EGRESS_SPACES = "dev"                 # then "dev staging", then "dev staging prod"
+```
+
+Unset means the feature is off everywhere — Terraform deploys no proxy and the lockdown
+step is skipped — so the code can be merged and deployed with no effect anywhere.
+
+Adding a space does two things on the next deploy to it:
+
+1. `terraform/egress` builds `digital-gov-proxy-<space>`, the per-client credential
+   services and the network policies.
+2. `scripts/pipeline/cloud-gov-egress-asg.sh` removes `public_networks_egress` from that
+   space's **running** lifecycle.
+
+They happen in that order within one deploy: `deploy-infra` builds the proxy, and the
+lockdown runs last in `deploy-app`.
+
+### Why one variable and not two
+
+Building a proxy and removing public egress are two phases, but they are not independent:
+"locked down without a proxy" is not a state anyone wants, and two lists that must be kept
+in sync would make it reachable by a single mistaken edit.
+
+Safety is derived instead of duplicated. Before unbinding anything the script requires:
+
+- the proxy application for that space exists and is `STARTED`
+- the client application is bound to its egress credential service
+
+The variable expresses intent; those checks confirm reality. It cannot be put into an
+invalid state by editing the variable alone.
+
+### Verifying
+
+Check from inside a **freshly created** container — `cf run-task` is reliable, `cf ssh` has
+proved flaky:
+
+```bash
+cf run-task <app> --command '...' -m 1G -k 2G --wait
+```
+
+**Security group changes take minutes to propagate.** A container started immediately
+after a change may still have public egress and give a false pass. Confirm that a direct
+request to a non-allowlisted host is refused before trusting the result.
+
+### Temporarily restoring egress, with the variable left set
+
+For testing, or to unblock something quickly, public egress can be restored without
+touching `EGRESS_SPACES`:
+
+```bash
+cf bind-security-group public_networks_egress "$CF_ORG" --space <space> --lifecycle running
+```
+
+This holds until the **next deploy to that space**, which will remove it again. Only
+`cloudgov-deploy-app.yml` runs the lockdown — the `generate-static` cron workflows do not
+— so scheduled jobs will not undo it.
+
+Note again that security group changes take minutes to propagate, in both directions.
+
+### Backing a space out, durably
+
+Remove it from `EGRESS_SPACES`, then re-bind by hand:
+
+```bash
+cf bind-security-group public_networks_egress "$CF_ORG" --space <space> --lifecycle running
+```
+
+Removing the space stops enforcement and stops the proxy being managed; it does not
+re-open egress on its own. That is deliberate — a security control should not switch
+itself off because a variable was cleared.
 
 ## Adding an application to the proxy
 

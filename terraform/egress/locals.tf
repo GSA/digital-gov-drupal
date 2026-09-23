@@ -8,10 +8,18 @@ locals {
   ## Workspaces that the production instance count applies to.
   production_workspaces = ["prod"]
 
-  ## Workspaces the proxy is deployed for. This is the switch that turns the feature
-  ## on for an environment -- add "staging" and "prod" as the rollout proceeds.
-  ## Applying with a workspace that is not listed is a safe no-op.
-  enabled_workspaces = ["dev"]
+  ## Environments the proxy is deployed for, from the EGRESS_SPACES repository variable
+  ## rather than hardcoded here -- switching an environment on should not require a pull
+  ## request. Applying in a workspace that is not listed is a safe no-op.
+  ##
+  ## One variable, not two: the security-group lockdown reads the same one, so a space
+  ## can never be locked down without a proxy to replace its egress.
+  ##
+  ## The filter drops empty strings so that an unset variable yields [] rather than [""].
+  enabled_workspaces = [
+    for workspace in split(" ", trimspace(var.egress_spaces)) : workspace
+    if workspace != ""
+  ]
 
   ## The space holding the public_networks_egress security group, where the proxy
   ## applications run. Shared by every environment and created once, outside this
