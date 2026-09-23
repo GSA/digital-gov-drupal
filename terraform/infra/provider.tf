@@ -6,7 +6,7 @@ terraform {
     ## "cloudfoundry". That work lives in ../egress instead.
     cloudfoundry = {
       source  = "cloudfoundry-community/cloudfoundry"
-      version = "~> 0.5"
+      version = "~> 0.51.0"
     }
   }
   required_version = "> 1.7"
