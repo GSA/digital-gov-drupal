@@ -12,7 +12,7 @@ use Drupal\embedded_content\EmbeddedContentPluginBase;
  *
  * @EmbeddedContent(
  *   id = "ec_usaalert",
- *   label = @Translation("USWDS: alert"),
+ *   label = @Translation("Alert"),
  *   description = @Translation("Renders a inline alert."),
  * )
  */

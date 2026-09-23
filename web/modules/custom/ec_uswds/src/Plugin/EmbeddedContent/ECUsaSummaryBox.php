@@ -12,7 +12,7 @@ use Drupal\embedded_content\EmbeddedContentPluginBase;
  *
  * @EmbeddedContent(
  *   id = "ec_usasummarybox",
- *   label = @Translation("USWDS: summary box"),
+ *   label = @Translation("Summary Box"),
  *   description = @Translation("Highlights key information from the page."),
  * )
  */
