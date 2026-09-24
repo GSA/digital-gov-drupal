@@ -66,8 +66,23 @@ locals {
     ## the credential service through its EGRESS_SERVICE_BINDING placeholder. Clients
     ## deployed by Terraform set bind_service = true instead -- see main.tf.
     cms = {
-      app       = format(local.name_pattern, "drupal")
-      allowlist = []
+      app = format(local.name_pattern, "drupal")
+
+      ## Drupal's own server-side HTTP, enabled by http_client_config in
+      ## settings.cloudgov.php. These are client-specific rather than base entries --
+      ## no other client needs them.
+      allowlist = [
+        ## GSA Auth (openid_connect). Non-production and production respectively.
+        ## Without these the code-for-token exchange fails and SSO login breaks.
+        "auth-preprod.gsa.gov",
+        "secureauth.gsa.gov",
+
+        ## Media oEmbed: the provider list, then YouTube, which is the only provider
+        ## enabled in media.type.video.
+        "oembed.com",
+        "www.youtube.com",
+        "i.ytimg.com",
+      ]
     }
 
     ## Deliberately NOT clients, recorded so the reasoning is not relitigated:

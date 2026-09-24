@@ -9,7 +9,7 @@ terraform {
     ## does not disambiguate them. See egress-plan.md section 1.11.
     cloudfoundry = {
       source  = "cloudfoundry/cloudfoundry"
-      version = ">= 1.6.0"
+      version = "~> 1.18.0"
     }
   }
 

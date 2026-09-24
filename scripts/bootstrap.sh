@@ -1,17 +1,6 @@
 #!/bin/bash
 set -uo pipefail
 
-## Egress proxy.
-##
-## http_proxy/https_proxy are deliberately NOT exported. Each consumer opts in
-## individually instead, so that S3 traffic keeps going direct -- the AWS S3 Gateway
-## ranges are already permitted by trusted_local_networks_egress, and routing
-## `aws s3 sync` through the proxy would break the static site build in scripts/upkeep.
-##
-## Located by tag rather than service name, matching how settings.cloudgov.php finds
-## the cache service. Empty when no proxy is bound, which is the normal state in an
-## environment the proxy has not been rolled out to yet.
-proxy_uri=$(echo "${VCAP_SERVICES}" | jq -r '[."user-provided"[]? | select(any(.tags[]?; . == "egress-proxy")) | .credentials.proxy_uri] | first // empty')
 
 export home="/home/vcap"
 export app_path="${home}/app"
@@ -26,6 +15,18 @@ if [ -z "${VCAP_SERVICES:-}" ]; then
     echo "VCAP_SERVICES must a be set in the environment: aborting bootstrap";
     exit 1;
 fi
+
+## Egress proxy.
+##
+## http_proxy/https_proxy are deliberately NOT exported. Each consumer opts in
+## individually instead, so that S3 traffic keeps going direct -- the AWS S3 Gateway
+## ranges are already permitted by trusted_local_networks_egress, and routing
+## `aws s3 sync` through the proxy would break the static site build in scripts/upkeep.
+##
+## Located by tag rather than service name, matching how settings.cloudgov.php finds
+## the cache service. Empty when no proxy is bound, which is the normal state in an
+## environment the proxy has not been rolled out to yet.
+proxy_uri=$(echo "${VCAP_SERVICES}" | jq -r '[."user-provided"[]? | select(any(.tags[]?; . == "egress-proxy")) | .credentials.proxy_uri] | first // empty')
 
 export deps_path="${home}/deps/0"
 export apt_path="${deps_path}/apt"
@@ -68,13 +69,12 @@ if [ -n "${proxy_uri}" ]; then
     "newrelic.daemon.ssl_ca_bundle = \"/etc/ssl/certs/ca-certificates.crt\"" \
     "newrelic.daemon.ssl_ca_path = \"/etc/ssl/certs/\"" ; do
     key="${setting%% *}"
-    if grep -qE "^;?[[:space:]]*${key}[[:space:]]*=" "${php_ini_d_path}/newrelic.ini"; then
-      ## -E for portability: the "\?" optional-marker in a basic regex is a GNU
-      ## extension, which silently fails to match elsewhere.
-      sed -i -E "s|^;?[[:space:]]*${key}[[:space:]]*=.*|${setting}|" "${php_ini_d_path}/newrelic.ini"
-    else
-      echo "${setting}" >> "${php_ini_d_path}/newrelic.ini"
-    fi
+    ## Drop any existing definition, then append. Avoids putting the value on the
+    ## right-hand side of a sed expression, where a & \ or | in a generated credential
+    ## would be interpreted rather than written literally.
+    ## -E for portability: "\?" in a basic regex is a GNU extension.
+    sed -i -E "/^;?[[:space:]]*${key}[[:space:]]*=/d" "${php_ini_d_path}/newrelic.ini"
+    printf '%s\n' "${setting}" >> "${php_ini_d_path}/newrelic.ini"
   done
 else
   echo "No egress proxy bound; the New Relic daemon will connect directly."

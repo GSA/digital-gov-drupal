@@ -1,5 +1,6 @@
-## Consumed by the next step, which binds these credentials to the client applications
-## as user-provided services. Sensitive: these are live proxy credentials.
+## Informational. The credential services and network policies are created in main.tf;
+## these outputs exist for debugging and for any future configuration that needs to
+## reference the proxy. Sensitive: proxy_credentials holds live credentials.
 
 output "proxy_app_id" {
   description = "GUID of the egress proxy application, for network policies."

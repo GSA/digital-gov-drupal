@@ -125,6 +125,7 @@ jobs:
       ## Whether a proxy is actually deployed is controlled by enabled_workspaces in
       ## terraform/egress/locals.tf -- an environment that is not listed is a no-op.
       - name: Configure Terraform (Egress)
+        if: contains(vars.EGRESS_SPACES, env.CF_SPACE)
         env:
           CF_USER: "${{ secrets.CF_USER }}"
           CF_PASSWORD: "${{ secrets.CF_PASSWORD }}"
@@ -141,6 +142,7 @@ jobs:
           ${CWD}/scripts/pipeline/cloud-gov-scp-file.sh "${TF_BASTION}" "terraform.tfvars" "${REPO_NAME}/terraform/egress/"
           cd "${CWD}"
       - name: Terraform Init (Egress)
+        if: contains(vars.EGRESS_SPACES, env.CF_SPACE)
         env:
           TF_BASTION: "${{ secrets.TF_BASTION }}"
         id: init_egress
@@ -148,18 +150,21 @@ jobs:
           ./scripts/pipeline/cloud-gov-remote-command.sh "${TF_BASTION}" "tofu -chdir=${REPO_NAME}/terraform/egress init" 1
           ./scripts/pipeline/cloud-gov-remote-command.sh "${TF_BASTION}" "tofu -chdir=${REPO_NAME}/terraform/egress workspace new ${CF_SPACE} || exit 0" 1
       - name: Terraform Validate (Egress)
+        if: contains(vars.EGRESS_SPACES, env.CF_SPACE)
         env:
           TF_BASTION: "${{ secrets.TF_BASTION }}"
         id: validate_egress
         run: |
           ./scripts/pipeline/cloud-gov-remote-command.sh ${TF_BASTION} "TF_WORKSPACE=${CF_SPACE} tofu -chdir=${REPO_NAME}/terraform/egress validate -no-color" 1
       - name: Terraform Plan (Egress)
+        if: contains(vars.EGRESS_SPACES, env.CF_SPACE)
         env:
           TF_BASTION: "${{ secrets.TF_BASTION }}"
         id: plan_egress
         run: |
           ./scripts/pipeline/cloud-gov-remote-command.sh "${TF_BASTION}" "TF_WORKSPACE=${CF_SPACE} tofu -chdir=${REPO_NAME}/terraform/egress plan -no-color" 1
       - name: Terraform Apply (Egress)
+        if: contains(vars.EGRESS_SPACES, env.CF_SPACE)
         env:
           TF_BASTION: "${{ secrets.TF_BASTION }}"
         id: apply_egress

@@ -29,7 +29,7 @@ module "egress_proxy" {
 
   ## Per-client ACLs: the shared base lists plus anything specific to that client.
   client_configuration = {
-    for client_name, client in local.clients : client_name => {
+    for client_name, client in local.active_clients : client_name => {
       allowlist = concat(local.base_allowlist, try(client.allowlist, []))
       denylist  = concat(local.base_denylist, try(client.denylist, []))
       ports     = try(client.ports, [443])

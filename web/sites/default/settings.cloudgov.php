@@ -90,6 +90,33 @@ foreach ($cf_service_data as $service_list) {
         $databases['default']['default']['pdo'][PDO::MYSQL_ATTR_SSL_CA] = $rds_cert_path;
       }
     }
+    // Route Drupal's own server-side HTTP through the egress proxy.
+    //
+    // Without this every Guzzle call fails once the space loses
+    // public_networks_egress. The visible casualty is OpenID Connect: the browser
+    // redirect to GSA Auth still works, but the code-for-token exchange is
+    // server-to-server, so logins stop completing.
+    //
+    // Found by tag rather than service name, matching scripts/bootstrap.sh.
+    //
+    // 'no' keeps traffic that must NOT be proxied going direct:
+    //   - apps.internal, so container-to-container routing is untouched
+    //   - S3, whose gateway ranges trusted_local_networks_egress already permits.
+    //     Proxying it would break `aws s3 sync` in scripts/upkeep and s3fs. Guzzle
+    //     matches these as suffixes, so bucket-prefixed hostnames are covered.
+    elseif (!empty($service['tags']) && in_array('egress-proxy', $service['tags'], TRUE)) {
+      if (!empty($service['credentials']['proxy_uri'])) {
+        $settings['http_client_config']['proxy']['http'] = $service['credentials']['proxy_uri'];
+        $settings['http_client_config']['proxy']['https'] = $service['credentials']['proxy_uri'];
+        $settings['http_client_config']['proxy']['no'] = [
+          'localhost',
+          '127.0.0.1',
+          'apps.internal',
+          's3-fips.us-gov-west-1.amazonaws.com',
+          's3.us-gov-west-1.amazonaws.com',
+        ];
+      }
+    }
     elseif (stristr($service['name'], 'secrets')) {
       if (!empty($service['credentials']['newrelic_key'])) {
         $settings['new_relic_rpm.api_key'] = $service['credentials']['newrelic_key'];
