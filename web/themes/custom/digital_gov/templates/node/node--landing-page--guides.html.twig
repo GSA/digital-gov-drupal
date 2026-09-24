@@ -66,7 +66,7 @@
 <main role="main" id="main-content">
   <div class="grid-container-desktop margin-bottom-5">
     <header class="page-head">
-      <h1>Explore how-to guides</h1>
+      <h1>{{ node.title.value }}</h1>
       {% if content.field_deck %}
         <div class="deck">{{ content.field_deck|field_value }}</div>
       {% endif %}
