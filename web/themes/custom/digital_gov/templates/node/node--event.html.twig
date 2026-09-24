@@ -149,7 +149,7 @@
       <div class="dg-sidebar grid-col-12 tablet:grid-col-3">
         {# Authors #}
         {% if content.field_authors|field_value %}
-          <h4>In this talk</h4>
+          <h3>In this talk</h3>
           {{ include('@digital_gov/partials/authors-list.html.twig', {
             inline: false,
             authors: content.field_authors|field_value,
