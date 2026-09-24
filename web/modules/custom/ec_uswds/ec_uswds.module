@@ -5,6 +5,8 @@
  * The module file with theming functions.
  */
 
+use Drupal\Component\Utility\Html;
+
 /**
  * Implements hook_theme().
  */
@@ -18,5 +20,77 @@ function ec_uswds_theme($existing, $type, $theme, $path) {
       ],
       'template' => 'embedded-content/ec-uswds--usaalert',
     ],
+    'ec_usasummarybox' => [
+      'variables' => [
+        'heading' => NULL,
+        'heading_id' => NULL,
+        'text' => NULL,
+      ],
+      'template' => 'embedded-content/ec-uswds--usasummarybox',
+    ],
   ];
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for ec_usasummarybox.
+ */
+function template_preprocess_ec_usasummarybox(array &$variables): void {
+  $heading = $variables['heading'] ?: t('Key information');
+  $variables['heading'] = $heading;
+  $variables['heading_id'] = Html::getUniqueId('summary-box-' . $heading);
+  if (!empty($variables['text']['value']) && is_string($variables['text']['value'])) {
+    $variables['text']['value'] = _ec_uswds_apply_summary_box_markup(
+      _ec_uswds_trim_empty_html($variables['text']['value'])
+    );
+  }
+}
+
+/**
+ * Add USWDS list and link classes to summary box body HTML.
+ */
+function _ec_uswds_apply_summary_box_markup(string $html): string {
+  if (trim($html) === '') {
+    return $html;
+  }
+
+  $document = Html::load($html);
+  $xpath = new \DOMXPath($document);
+  foreach ($xpath->query('//ul | //ol') as $list) {
+    if ($list instanceof \DOMElement) {
+      _ec_uswds_add_class($list, 'usa-list');
+    }
+  }
+  foreach ($xpath->query('//a') as $link) {
+    if ($link instanceof \DOMElement) {
+      _ec_uswds_add_class($link, 'usa-summary-box__link');
+    }
+  }
+  return Html::serialize($document);
+}
+
+/**
+ * Add a class to a DOM element if it is not already present.
+ */
+function _ec_uswds_add_class(\DOMElement $element, string $class): void {
+  $classes = preg_split('/\s+/', trim($element->getAttribute('class'))) ?: [];
+  $classes = array_values(array_filter($classes, static fn($item) => $item !== ''));
+  if (!in_array($class, $classes, TRUE)) {
+    $classes[] = $class;
+    $element->setAttribute('class', implode(' ', $classes));
+  }
+}
+
+/**
+ * Strip trailing empty paragraphs and breaks left by CKEditor.
+ */
+function _ec_uswds_trim_empty_html(string $html): string {
+  $empty = '(?:<p\b[^>]*>((?:\s|&nbsp;|&#160;|<br\b[^>]*>)*)<\/p>|<br\b[^>]*>)';
+  $previous = '';
+  $html = trim($html);
+  while ($html !== $previous) {
+    $previous = $html;
+    $html = preg_replace('/(?:' . $empty . ')+$/iu', '', $html) ?? $html;
+    $html = trim($html);
+  }
+  return $html;
 }

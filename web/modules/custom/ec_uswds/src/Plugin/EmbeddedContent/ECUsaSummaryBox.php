@@ -8,15 +8,15 @@ use Drupal\embedded_content\EmbeddedContentInterface;
 use Drupal\embedded_content\EmbeddedContentPluginBase;
 
 /**
- * Plugin iframes.
+ * Renders a USWDS summary box as embedded content.
  *
  * @EmbeddedContent(
- *   id = "ec_usaalert",
- *   label = @Translation("Alert"),
- *   description = @Translation("Renders a inline alert."),
+ *   id = "ec_usasummarybox",
+ *   label = @Translation("Summary Box"),
+ *   description = @Translation("Highlights key information from the page."),
  * )
  */
-class ECUsaAlert extends EmbeddedContentPluginBase implements EmbeddedContentInterface {
+class ECUsaSummaryBox extends EmbeddedContentPluginBase implements EmbeddedContentInterface {
 
   use StringTranslationTrait;
 
@@ -25,8 +25,7 @@ class ECUsaAlert extends EmbeddedContentPluginBase implements EmbeddedContentInt
    */
   public function defaultConfiguration() {
     return [
-      'heading' => NULL,
-      'type' => NULL,
+      'heading' => 'Key information',
       'text' => NULL,
     ];
   }
@@ -36,9 +35,8 @@ class ECUsaAlert extends EmbeddedContentPluginBase implements EmbeddedContentInt
    */
   public function build(): array {
     return [
-      '#theme' => 'ec_usaalert',
+      '#theme' => 'ec_usasummarybox',
       '#heading' => $this->configuration['heading'],
-      '#type' => $this->configuration['type'],
       '#text' => $this->configuration['text'],
     ];
   }
@@ -49,24 +47,16 @@ class ECUsaAlert extends EmbeddedContentPluginBase implements EmbeddedContentInt
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
     $form['heading'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Alert Heading'),
-      '#default_value' => $this->configuration['heading'],
-    ];
-    $form['type'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Alert type'),
-      '#options' => [
-        'info' => $this->t('Info'),
-        'warning' => $this->t('Warning'),
-      ],
-      '#default_value' => $this->configuration['type'],
+      '#title' => $this->t('Summary box heading'),
+      '#default_value' => $this->configuration['heading'] ?? $this->t('Key information'),
       '#required' => TRUE,
     ];
     $form['text'] = [
       '#type' => 'text_format',
-      '#title' => $this->t('Alert text'),
-      '#format' => $this->configuration['text']['format'] ?? 'html',
-      '#allowed_formats' => ['html'],
+      '#title' => $this->t('Summary box content'),
+      '#description' => $this->t('Use a short list of 3 to 5 key details. Do not use this as a table of contents.'),
+      '#format' => $this->configuration['text']['format'] ?? 'html_embedded_content',
+      '#allowed_formats' => ['html_embedded_content'],
       '#default_value' => $this->configuration['text']['value'] ?? '',
       '#required' => TRUE,
     ];
@@ -74,7 +64,7 @@ class ECUsaAlert extends EmbeddedContentPluginBase implements EmbeddedContentInt
   }
 
   /**
-   * {@inheritDoc}
+   * {@inheritdoc}
    */
   public function isInline(): bool {
     return FALSE;

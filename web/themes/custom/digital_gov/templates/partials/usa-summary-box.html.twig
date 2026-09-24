@@ -1,14 +1,32 @@
+{#
+  USWDS Summary box - https://designsystem.digital.gov/components/summary-box/
+
+  Highlights key information. Do not use as a table of contents.
+
+  @param {string} heading - Heading text. Defaults to "Key information".
+  @param {int} [header_level] - Heading level. Defaults to 3.
+  @param {string} [heading_id] - ID used by aria-labelledby. Defaults to
+    summary-box-{heading}. A text filter restores this id if the heading id
+    filter rewrites it.
+  @param {string} text - Rendered body content.
+  @param {string} [containerClass] - Optional extra classes on the region.
+#}
+
+{% set heading = heading ?: 'Key information' %}
+{% set header_level = header_level ?: 3 %}
+{% set heading_id = heading_id ?: ('summary-box-' ~ heading)|clean_id %}
+
 <div
-  class="usa-summary-box {{ containerClass }}"
+  class="usa-summary-box{{ containerClass ? ' ' ~ containerClass }}"
   role="region"
-  aria-labelledby="summary-box-key-information"
+  aria-labelledby="{{ heading_id }}"
 >
   <div class="usa-summary-box__body">
-    <h2 class="usa-summary-box__heading" id="summary-box-key-information">
-      On this page
-    </h2>
+    <h{{ header_level }} class="usa-summary-box__heading" id="{{ heading_id }}">
+      {{ heading }}
+    </h{{ header_level }}>
     <div class="usa-summary-box__text">
-      <ul class="usa-list"></ul>
+      {{ text }}
     </div>
   </div>
 </div>
