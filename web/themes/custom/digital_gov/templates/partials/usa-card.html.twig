@@ -13,6 +13,7 @@
   @param {string} [kicker] - Optional kicker text to be displayed above the title
   @param {object} [site] - The Hugo site object for context
   @param {bool} [outline] - Boolean to determine if the usa-button--outline class should be applied
+  @param {int} [header_level] - Heading level for the card title. Defaults to 2.
 #}
 
 {% set header = header ?: '' %}
@@ -25,6 +26,7 @@
 {% set kicker = kicker ?: '' %}
 {% set members = members ?: '' %}
 {% set outline = outline ?: FALSE %}
+{% set header_level = header_level ?: 2 %}
 
 <div class="usa-card__container">
   {% if header %}
@@ -32,7 +34,7 @@
       {% if kicker %}
         <span class="usa-card__kicker margin-bottom-2">{{ kicker }}</span>
       {% endif %}
-      <h2 class="usa-card__heading">{{ header }}</h2>
+      <h{{ header_level }} class="usa-card__heading">{{ header }}</h{{ header_level }}>
     </div>
   {% endif %}
 
