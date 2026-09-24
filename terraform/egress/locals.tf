@@ -56,8 +56,10 @@ locals {
   ## deployed from manifest.yml. See egress-plan.md D10.
   clients = {
 
-    ## The Drupal CMS. Needs the proxy only for the New Relic PHP daemon; its S3
-    ## traffic goes direct.
+    ## The Drupal CMS. Uses the proxy for the New Relic PHP daemon and, via
+    ## http_client_config in settings.cloudgov.php, for Drupal's own server-side HTTP
+    ## (GSA Auth and media oEmbed). Its S3 traffic goes direct -- see the `no` list
+    ## in that file.
     ##
     ## `app` is the Cloud Foundry application name, which the network policy and the
     ## credential service are attached to. It is looked up, not managed -- this
@@ -72,10 +74,18 @@ locals {
       ## settings.cloudgov.php. These are client-specific rather than base entries --
       ## no other client needs them.
       allowlist = [
-        ## GSA Auth (openid_connect). Non-production and production respectively.
-        ## Without these the code-for-token exchange fails and SSO login breaks.
+        ## GSA Auth (openid_connect). The OIDC plugin builds its authorize, token and
+        ## userinfo endpoints directly from `okta_domain`, so the host listed here must
+        ## match that config exactly -- see OpenIDConnectOktaClient::getEndpoints().
+        ##
+        ##   dev / staging  config/sync/openid_connect.client.gsa_auth.yml
+        ##   production     config/production/config_split.patch...gsa_auth.yml
+        ##
+        ## Without the right host the code-for-token exchange is refused by the proxy
+        ## and SSO login breaks. secureauth.gsa.gov is deliberately absent: it is the
+        ## SAML-era IdP and appears nowhere in the OIDC configuration.
         "auth-preprod.gsa.gov",
-        "secureauth.gsa.gov",
+        "auth.gsa.gov",
 
         ## Media oEmbed: the provider list, then YouTube, which is the only provider
         ## enabled in media.type.video.

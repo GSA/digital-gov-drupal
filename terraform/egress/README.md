@@ -198,6 +198,34 @@ so that S3 traffic keeps going direct — the AWS S3 Gateway ranges are already 
 the static site build. Set `no_proxy=apps.internal` if you do set them for a specific
 process, so container-to-container traffic is unaffected.
 
+The CMS has two separate consumers, which is the pattern to copy:
+
+| consumer | where | what it covers |
+|---|---|---|
+| New Relic PHP daemon | `scripts/bootstrap.sh` writes `newrelic.daemon.proxy` into `newrelic.ini` | the daemon ignores `http_proxy`; this ini key is the only thing it reads |
+| Drupal's HTTP client | `$settings['http_client_config']['proxy']` in `settings.cloudgov.php` | every server-side Guzzle call — OpenID Connect, media oEmbed |
+
+The Drupal one carries a `no` list, and it is load-bearing:
+
+```php
+$settings['http_client_config']['proxy']['no'] = [
+  'localhost', '127.0.0.1',
+  'apps.internal',                             // container-to-container
+  's3-fips.us-gov-west-1.amazonaws.com',       // Guzzle suffix-matches, so
+  's3.us-gov-west-1.amazonaws.com',            // <bucket>.s3-fips... is covered
+];
+```
+
+S3 is in that list on purpose. Without it, `aws s3 sync` and s3fs would be routed through
+the proxy, refused by the ACL, and the static site build would fail — trading one outage
+for another.
+
+**A host allowlisted here must match what the application actually requests.** The OIDC
+plugin builds its endpoints from `okta_domain`, which differs between environments
+(`auth-preprod.gsa.gov` for dev and staging, `auth.gsa.gov` in the production config
+split), so both are listed. Caddy's ACL matches the CONNECT host, so a redirect elsewhere
+would not help.
+
 ### A caution about the WAF specifically
 
 The WAF is used above as a worked example, but it is **not** a good proxy candidate today,

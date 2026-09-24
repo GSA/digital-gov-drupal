@@ -69,11 +69,28 @@ is_bound() {
 
 echo "Egress security groups for '${CF_SPACE}' ..."
 
-## 1. The proxy serving this space must actually be running. EGRESS_SPACES expresses
+## 1. Keep the proxy's own space able to reach the internet.
+##
+## Runs last and never fails the deploy. This is a prerequisite that should already be
+## satisfied by the documented space setup; if it is not, the right outcome is a loud
+## warning, not a red deploy for an application that pushed successfully.
+for lifecycle in running staging; do
+  if is_bound "${EGRESS_SPACE}" "${lifecycle}"; then
+    echo "  ${EGRESS_SPACE}/${lifecycle}: ${GROUP} already bound"
+  elif cf bind-security-group "${GROUP}" "${CF_ORG}" --space "${EGRESS_SPACE}" --lifecycle "${lifecycle}" >/dev/null 2>&1; then
+    echo "  ${EGRESS_SPACE}/${lifecycle}: bound ${GROUP}"
+  else
+    echo "  WARNING: ${EGRESS_SPACE}/${lifecycle}: could not bind ${GROUP}."
+    echo "           The proxy may be unable to reach the internet. See"
+    echo "           terraform/egress/README.md prerequisites."
+  fi
+done
+
+## 2. The proxy serving this space must actually be running. EGRESS_SPACES expresses
 ## intent; this confirms reality. Without it, a variable edit alone could strip a space's
 ## egress before its proxy had been built.
 proxy_app="${PROJECT}-proxy-${CF_SPACE}"
-egress_space_guid=$(cf curl "/v3/spaces?names=${EGRESS_SPACE}&organization_guids=$(cf curl "/v3/organizations?names=${CF_ORG}" 2>/dev/null | jq -r '.resources[0].guid // empty')" 2>/dev/null | jq -r '.resources[0].guid // empty')
+egress_space_guid=$(space_guid "${EGRESS_SPACE}")
 proxy_state=$(cf curl "/v3/apps?names=${proxy_app}&space_guids=${egress_space_guid}" 2>/dev/null | jq -r '.resources[0].state // empty')
 
 if [ "${proxy_state}" != "STARTED" ]; then
@@ -82,14 +99,13 @@ if [ "${proxy_state}" != "STARTED" ]; then
   exit 0
 fi
 
-## 2. Only lock down an application space once its application is actually using the
+## 3. Only lock down an application space once its application is actually using the
 ## proxy. Removing public egress from a space whose app has no proxy credentials would
 ## cut off its outbound traffic with nothing to replace it.
 ## Looked up through the API rather than `cf app --guid`, which depends on whichever
 ## space happens to be targeted and fails silently when it is the wrong one.
-org_guid=$(cf curl "/v3/organizations?names=${CF_ORG}" 2>/dev/null | jq -r '.resources[0].guid // empty')
-space_guid=$(cf curl "/v3/spaces?names=${CF_SPACE}&organization_guids=${org_guid}" 2>/dev/null | jq -r '.resources[0].guid // empty')
-app_guid=$(cf curl "/v3/apps?names=${CLIENT_APP}&space_guids=${space_guid}" 2>/dev/null | jq -r '.resources[0].guid // empty')
+app_space_guid=$(space_guid "${CF_SPACE}")
+app_guid=$(cf curl "/v3/apps?names=${CLIENT_APP}&space_guids=${app_space_guid}" 2>/dev/null | jq -r '.resources[0].guid // empty')
 
 if [ -z "${app_guid}" ]; then
   echo "  ${CF_SPACE}/running: ${CLIENT_APP} not found; leaving ${GROUP} in place"
@@ -108,7 +124,7 @@ if [ -z "${bound_egress}" ]; then
 fi
 echo "  ${CF_SPACE}/running: ${CLIENT_APP} is proxied via ${bound_egress}"
 
-## 3. The application is proxied, so the space no longer needs public egress.
+## 4. The application is proxied, so the space no longer needs public egress.
 if is_bound "${CF_SPACE}" running; then
   echo "  ${CF_SPACE}/running: removing ${GROUP} (${CLIENT_APP} is proxied)"
   cf unbind-security-group "${GROUP}" "${CF_ORG}" "${CF_SPACE}" --lifecycle running || exit 1
@@ -116,22 +132,5 @@ if is_bound "${CF_SPACE}" running; then
 else
   echo "  ${CF_SPACE}/running: ${GROUP} already absent"
 fi
-
-## 4. Keep the proxy's own space able to reach the internet.
-##
-## Runs last and never fails the deploy. This is a prerequisite that should already be
-## satisfied by the documented space setup; if it is not, the right outcome is a loud
-## warning, not a red deploy for an application that pushed successfully.
-for lifecycle in running staging; do
-  if is_bound "${EGRESS_SPACE}" "${lifecycle}"; then
-    echo "  ${EGRESS_SPACE}/${lifecycle}: ${GROUP} already bound"
-  elif cf bind-security-group "${GROUP}" "${CF_ORG}" --space "${EGRESS_SPACE}" --lifecycle "${lifecycle}" >/dev/null 2>&1; then
-    echo "  ${EGRESS_SPACE}/${lifecycle}: bound ${GROUP}"
-  else
-    echo "  WARNING: ${EGRESS_SPACE}/${lifecycle}: could not bind ${GROUP}."
-    echo "           The proxy may be unable to reach the internet. See"
-    echo "           terraform/egress/README.md prerequisites."
-  fi
-done
 
 echo "Egress security groups for '${CF_SPACE}' ... done"
