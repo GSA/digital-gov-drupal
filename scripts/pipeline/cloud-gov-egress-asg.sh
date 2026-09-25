@@ -71,7 +71,9 @@ echo "Egress security groups for '${CF_SPACE}' ..."
 
 ## 1. Keep the proxy's own space able to reach the internet.
 ##
-## Runs last and never fails the deploy. This is a prerequisite that should already be
+## Runs first, and never fails the deploy. It is independent of the application space,
+## so running it unconditionally means the drift correction still happens on the paths
+## where the checks below bail out early. This is a prerequisite that should already be
 ## satisfied by the documented space setup; if it is not, the right outcome is a loud
 ## warning, not a red deploy for an application that pushed successfully.
 for lifecycle in running staging; do
@@ -91,6 +93,10 @@ done
 ## egress before its proxy had been built.
 proxy_app="${PROJECT}-proxy-${CF_SPACE}"
 egress_space_guid=$(space_guid "${EGRESS_SPACE}")
+if [ -z "${egress_space_guid}" ]; then
+  echo "  ${CF_SPACE}/running: cannot resolve space '${EGRESS_SPACE}'; leaving ${GROUP} in place"
+  exit 0
+fi
 proxy_state=$(cf curl "/v3/apps?names=${proxy_app}&space_guids=${egress_space_guid}" 2>/dev/null | jq -r '.resources[0].state // empty')
 
 if [ "${proxy_state}" != "STARTED" ]; then
@@ -105,6 +111,10 @@ fi
 ## Looked up through the API rather than `cf app --guid`, which depends on whichever
 ## space happens to be targeted and fails silently when it is the wrong one.
 app_space_guid=$(space_guid "${CF_SPACE}")
+if [ -z "${app_space_guid}" ]; then
+  echo "  ${CF_SPACE}/running: cannot resolve space '${CF_SPACE}'; leaving ${GROUP} in place"
+  exit 0
+fi
 app_guid=$(cf curl "/v3/apps?names=${CLIENT_APP}&space_guids=${app_space_guid}" 2>/dev/null | jq -r '.resources[0].guid // empty')
 
 if [ -z "${app_guid}" ]; then

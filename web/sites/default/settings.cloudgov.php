@@ -98,23 +98,43 @@ foreach ($cf_service_data as $service_list) {
     // server-to-server, so logins stop completing.
     //
     // Found by tag rather than service name, matching scripts/bootstrap.sh.
-    //
-    // 'no' keeps traffic that must NOT be proxied going direct:
-    //   - apps.internal, so container-to-container routing is untouched
-    //   - S3, whose gateway ranges trusted_local_networks_egress already permits.
-    //     Proxying it would break `aws s3 sync` in scripts/upkeep and s3fs. Guzzle
-    //     matches these as suffixes, so bucket-prefixed hostnames are covered.
     elseif (!empty($service['tags']) && in_array('egress-proxy', $service['tags'], TRUE)) {
       if (!empty($service['credentials']['proxy_uri'])) {
         $settings['http_client_config']['proxy']['http'] = $service['credentials']['proxy_uri'];
         $settings['http_client_config']['proxy']['https'] = $service['credentials']['proxy_uri'];
-        $settings['http_client_config']['proxy']['no'] = [
+
+        // Hosts that must NOT go through the proxy. Guzzle matches these as suffixes,
+        // so a bucket-prefixed S3 hostname is covered by its endpoint.
+        $http_proxy_bypass = [
           'localhost',
           '127.0.0.1',
+
+          // Container-to-container routing.
           'apps.internal',
-          's3-fips.us-gov-west-1.amazonaws.com',
-          's3.us-gov-west-1.amazonaws.com',
+
+          // The site's own public hostnames. convert_text fetches
+          // \Drupal::request()->getSchemeAndHttpHost() to resolve unrouted paths
+          // (ConvertText.php:295, reachable from /admin/convert-text as well as from
+          // migrations). The proxy is never the route from the app back to itself.
+          $server_http_host ?? NULL,
+          $_SERVER['SERVER_NAME'] ?? NULL,
         ];
+
+        // S3 endpoints, read from VCAP_SERVICES so they cannot drift from what is
+        // actually bound. Defensive rather than required: `aws s3 sync` is a separate
+        // process reading http_proxy from the environment, which is deliberately not
+        // exported, and s3fs (enabled via the non_local config split) uses the AWS
+        // SDK's own Guzzle client, which does not read this setting either. This
+        // covers any \Drupal::httpClient() call that targets S3 directly.
+        foreach (($cf_service_data['s3'] ?? []) as $s3_service) {
+          foreach (['fips_endpoint', 'endpoint'] as $s3_endpoint_key) {
+            if (!empty($s3_service['credentials'][$s3_endpoint_key])) {
+              $http_proxy_bypass[] = $s3_service['credentials'][$s3_endpoint_key];
+            }
+          }
+        }
+
+        $settings['http_client_config']['proxy']['no'] = array_values(array_unique(array_filter($http_proxy_bypass)));
       }
     }
     elseif (stristr($service['name'], 'secrets')) {

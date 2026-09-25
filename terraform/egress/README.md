@@ -195,8 +195,9 @@ Located by tag rather than service name, so it survives renaming.
 **Do not export `http_proxy`/`https_proxy` globally.** Each consumer opts in individually,
 so that S3 traffic keeps going direct — the AWS S3 Gateway ranges are already permitted by
 `trusted_local_networks_egress`, and routing `aws s3 sync` through the proxy would break
-the static site build. Set `no_proxy=apps.internal` if you do set them for a specific
-process, so container-to-container traffic is unaffected.
+the static site build. If you do set them for a specific process, `no_proxy`
+must cover `apps.internal`, the site's own hostnames **and** the S3 endpoints — see the
+table below for why S3 matters there even though it does not here.
 
 The CMS has two separate consumers, which is the pattern to copy:
 
@@ -216,9 +217,50 @@ $settings['http_client_config']['proxy']['no'] = [
 ];
 ```
 
-S3 is in that list on purpose. Without it, `aws s3 sync` and s3fs would be routed through
-the proxy, refused by the ACL, and the static site build would fail — trading one outage
-for another.
+The entries fall into three kinds, and the reasons differ:
+
+- **`apps.internal`** — container-to-container routing must not go through a proxy.
+- **The site's own hostnames** — `convert_text` fetches
+  `\Drupal::request()->getSchemeAndHttpHost()` to resolve unrouted paths, from
+  `/admin/convert-text` as well as from migrations. The proxy is never the route from the
+  application back to itself.
+- **S3** — *defensive, not load-bearing.* Neither of the two things that actually talk to
+  S3 reads this setting:
+  - `aws s3 sync` is a separate process. It reads `http_proxy` from the environment,
+    which is deliberately not exported, so `http_client_config` is invisible to it.
+  - `s3fs` **is** enabled — via the `non_local` config split, not `core.extension.yml` —
+    but it uses the AWS SDK, which builds its own Guzzle client and never reads
+    `Settings::get('http_client_config')`.
+
+  These entries cover a `\Drupal::httpClient()` call that targets S3 directly. They are
+  derived from the bound credential rather than hardcoded, so they cannot drift from the
+  endpoint actually in use.
+
+**The stronger reason for per-consumer opt-in.** Guzzle's `configureDefaults()` reads
+`HTTPS_PROXY` from the environment in *any* SAPI — only `HTTP_PROXY` is CLI-gated. So
+exporting `HTTPS_PROXY` anywhere in the container would silently route the AWS SDK,
+including anything using it for S3, through the proxy, and only the `NO_PROXY` environment
+variable — not this PHP setting — would prevent it. If you ever do export proxy variables
+for a specific process, `NO_PROXY` must list the S3 endpoints as well as `apps.internal`.
+
+### Expected 403s
+
+Two enabled modules reach hosts that are deliberately not allowlisted, and will log proxy
+403s. These are not faults:
+
+| module | host | effect |
+|---|---|---|
+| `update` | `updates.drupal.org` | Available Updates page reports an error |
+| `upgrade_status` | `drupal.org` | project data unavailable, admin-only |
+
+**When checking which modules are enabled, read the config splits as well as
+`core.extension.yml`.** `config/sync/config_split.config_split.non_local.yml` enables
+`s3fs` and `new_relic_rpm` in every cloud.gov environment, and neither appears in
+`core.extension.yml`. Two separate reviews of this work both concluded s3fs was disabled
+by reading only the latter.
+
+Both degrade to an error message rather than breaking the site. Allowlisting either is a
+one-line change if the noise is not wanted.
 
 **A host allowlisted here must match what the application actually requests.** The OIDC
 plugin builds its endpoints from `okta_domain`, which differs between environments
