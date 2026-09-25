@@ -38,8 +38,12 @@
     {% endif %}
     {% for item in items %}
       <li{{ item.attributes }}>
-        {# OVERRIDE: This menu was overrided just to set the usa-nav__link class #}
-        {{ link(item.title, item.url, create_attribute({class: ['usa-nav__link']})) }}
+        {# OVERRIDE: Add USWDS nav classes. usa-current matches the hover underline on the current top-level page. #}
+        {% set link_classes = ['usa-nav__link'] %}
+        {% if menu_level == 0 and item.in_active_trail %}
+          {% set link_classes = link_classes|merge(['usa-current']) %}
+        {% endif %}
+        {{ link(item.title, item.url, create_attribute({class: link_classes})) }}
         {% if item.below %}
           {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
         {% endif %}
