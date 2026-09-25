@@ -160,3 +160,7 @@ aecd901276bd6a50b802e7eba0ca6767|Amy Farrell|feature/DIGITAL-836-depenancy-updat
 a31c65fab0aa1955973386449861566c|Amy Farrell|feature/DIGITAL-857-dependency-updates|Thu Sep 17 04:26:22 PM PDT 2026|./composer.sh require drupal/core-recommended:10.6.17 drupal/core-composer-scaffold:10.6.17 drupal/core-project-message:10.6.17 --update-with-all-dependencies
 ee49dba3ea4e568fe2b09b3ba3d6b960|Amy Farrell|feature/DIGITAL-857-dependency-updates|Thu Sep 17 04:43:45 PM PDT 2026|./scripts/audit/deps-update --composer-only
 be4be046da5e145df1a2433d8811490f|Amy Farrell|feature/DIGITAL-857-dependency-updates|Thu Sep 17 05:18:06 PM PDT 2026|./scripts/audit/deps-update --minor --composer-only
+44aa89189821cc5e7a3d32e58906151c|arpage|develop|Fri Sep 25 16:09:00 EDT 2026|./composer.sh require drupal/core-recommended:10.6.17 --with-all-dependencies --ignore-platform-reqs
+c3cc0aabf210091cd6546e68345c9d9c|arpage|develop|Fri Sep 25 16:09:09 EDT 2026|./composer.sh require drupal/core-composer-scaffold:^10.6.17 --with-all-dependencies --ignore-platform-reqs
+31c3610d3a29f70090a8e1067c9719fe|arpage|develop|Fri Sep 25 16:09:17 EDT 2026|./composer.sh require drupal/core-project-message:^10.6.17 --with-all-dependencies --ignore-platform-reqs
+9aa7b3dc5a1c01ef9e3b290740c980d1|arpage|develop|Fri Sep 25 16:21:00 EDT 2026|./composer.sh require twig/twig:~3.29.0
