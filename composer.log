@@ -157,3 +157,6 @@ cb3a9aadf5d696dff56783fc0faa69e2|Amy Farrell|feature/DIGITAL-836-depenancy-updat
 cd38b0c774a9fff6f5f998b8a96c58b8|Amy Farrell|feature/DIGITAL-836-depenancy-update-scripts|Wed Sep  2 04:55:28 PM PDT 2026|./composer.sh update league/commonmark
 aecd901276bd6a50b802e7eba0ca6767|Amy Farrell|feature/DIGITAL-836-depenancy-update-scripts|Wed Sep  2 04:58:53 PM PDT 2026|./composer.sh update mtdowling/jmespath.php --with-all-dependencies
 7808c9d1350c6de6cfb72a4601e73e15|Jacob Yeager|feature/DIGITAL-752-add-redis-cache|Thu Sep  3 17:21:10 EDT 2026|./composer.sh update --lock
+0ca4afed8259f2f5b7f3d0d12b8280a1|arpage|drupal-core-10.6.17|Thu Sep 24 12:01:38 EDT 2026|./composer.sh require drupal/core-recommended:10.6.17 --with-all-dependencies --ignore-platform-reqs
+fa125031f0e095a18935e0cca3f42294|arpage|drupal-core-10.6.17|Thu Sep 24 12:01:48 EDT 2026|./composer.sh require drupal/core-composer-scaffold:^10.6.17 --with-all-dependencies --ignore-platform-reqs
+a94fba05d00412bd6b028916d15c8106|arpage|drupal-core-10.6.17|Thu Sep 24 12:02:10 EDT 2026|./composer.sh require drupal/core-project-message:^10.6.7 --with-all-dependencies --ignore-platform-reqs
