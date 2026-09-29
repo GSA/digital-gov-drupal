@@ -101,7 +101,7 @@ filters:
     status: true
     weight: -50
     settings:
-      title: true
+      title: false
   media_embed:
     id: media_embed
     provider: media

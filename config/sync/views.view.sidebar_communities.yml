@@ -152,7 +152,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: 'Join the {{ field_dg_shortname }}'
+            text: '{{ field_dg_shortname }}'
             make_link: true
             path: '{{ view_node }}?promo'
             absolute: false

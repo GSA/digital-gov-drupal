@@ -41,29 +41,22 @@
     }
   }
 
-  .email {
+  .email,
+  .print {
     @include u-padding-y(1);
-    @include u-bg("indigo-5");
-    @include u-text("indigo-warm-60");
+    @include u-text("indigo-warm-80v");
+    @include u-bg("indigo-warm-10v");
 
     &:hover {
-      @include u-bg("indigo-20");
+      @include u-bg("indigo-warm-20v");
     }
+  }
 
+  .email {
     i {
       font-size: 1rem;
       position: relative;
       top: 1px;
-    }
-  }
-
-  .print {
-    @include u-padding-y(1);
-    @include u-bg("indigo-5");
-    @include u-text("indigo-warm-60");
-
-    &:hover {
-      @include u-bg("indigo-20");
     }
   }
 }
