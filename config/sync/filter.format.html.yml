@@ -5,6 +5,7 @@ dependencies:
   module:
     - auto_heading_ids
     - dg_fields
+    - ec_uswds
     - editor
     - embedded_content
     - linkit
@@ -24,6 +25,12 @@ filters:
     provider: embedded_content
     status: true
     weight: -49
+    settings: {  }
+  ec_uswds_summary_box_labelledby:
+    id: ec_uswds_summary_box_labelledby
+    provider: ec_uswds
+    status: true
+    weight: -45
     settings: {  }
   filter_align:
     id: filter_align

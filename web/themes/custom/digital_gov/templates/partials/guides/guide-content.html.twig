@@ -6,12 +6,6 @@
       <h2 class="dg-guide__content-header-title">{{ label|field_value }}</h2>
       {{ content.field_summary }}
     {% endif %}
-
-    {% if show_summary_box %}
-      {{ include('@digital_gov/partials/usa-summary-box.html.twig', {
-        containerClass: 'dg-guide-summary',
-      }, with_context: false) }}
-    {% endif %}
   </div>
 
   {{ content.body }}
