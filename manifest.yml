@@ -23,6 +23,8 @@ default_config: &defaults
     - ${PROJECT}-mysql-${CF_SPACE}
     # Do not delete CACHE_SERVICE_BINDING line; deploy pipeline will update it
     # CACHE_SERVICE_BINDING
+    # Do not delete EGRESS_SERVICE_BINDING line; deploy pipeline will update it
+    # EGRESS_SERVICE_BINDING
     - ${PROJECT}-secrets-${CF_SPACE}
     - ${PROJECT}-static-${CF_SPACE}
     - ${PROJECT}-storage-${CF_SPACE}
