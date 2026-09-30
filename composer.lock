@@ -5423,17 +5423,17 @@
         },
         {
             "name": "drupal/sitewide_alert",
-            "version": "3.0.1",
+            "version": "3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/sitewide_alert.git",
-                "reference": "3.0.1"
+                "reference": "3.1.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/sitewide_alert-3.0.1.zip",
-                "reference": "3.0.1",
-                "shasum": "258e8dcbd40346e25c77af5c9e6b55ad9ef6414a"
+                "url": "https://ftp.drupal.org/files/projects/sitewide_alert-3.1.2.zip",
+                "reference": "3.1.2",
+                "shasum": "6c4402c79d0bccb8617ae357fd0731d9e1d20417"
             },
             "require": {
                 "drupal/core": "^10.3 || ^11"
@@ -5446,8 +5446,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "3.0.1",
-                    "datestamp": "1752106651",
+                    "version": "3.1.2",
+                    "datestamp": "1778700015",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
