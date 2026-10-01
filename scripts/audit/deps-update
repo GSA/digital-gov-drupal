@@ -97,9 +97,11 @@ NPM_TARGETS=(
   "repo-root|Repo root|."
 )
 
-# Only these two core packages are pinned exact; drupal/core-project-message
-# uses a caret range and follows along via the normal patch pass.
-CORE_PINNED="drupal/core-recommended drupal/core-composer-scaffold"
+# Drupal core packages. Whichever of these composer.json pins EXACT move
+# together as one grouped decision; any on a caret range follow the normal
+# passes. The grouping is read from the plan rather than hard-coded, so it
+# keeps up when a core update changes a constraint (DIGITAL-857 moved
+# core-project-message from a caret range to an exact pin).
 CORE_ALL="drupal/core-recommended drupal/core-composer-scaffold drupal/core-project-message"
 
 # Paths this run may modify (dirty-check warning + final git-status display).
@@ -182,7 +184,9 @@ LAST_OUT="$TMP/last-cmd.out"
 if [ "$DRY_RUN" = 0 ]; then
   if [ "$DO_COMPOSER" = 1 ]; then
     command -v composer >/dev/null 2>&1 || die "composer is required on the host PATH (brew install composer)"
-    COMPOSER_VER="$(composer --version --no-ansi 2>/dev/null | grep -oE '[0-9]+\.[0-9]+(\.[0-9]+)?' | head -1 || true)"
+    # --no-plugins: a broken vendor/ must not masquerade as a version problem
+    # (the failure handlers below deal with it).
+    COMPOSER_VER="$(composer --no-plugins --version --no-ansi 2>/dev/null | grep -oE '[0-9]+\.[0-9]+(\.[0-9]+)?' | head -1 || true)"
     case "${COMPOSER_VER:-0}" in
       0|1.*|2.[0-6]|2.[0-6].*) die "Composer >= 2.7 is required on the host (for --patch-only); found ${COMPOSER_VER:-unknown}" ;;
     esac
@@ -435,24 +439,26 @@ if [ "$DO_COMPOSER" = 1 ]; then
     echo "  No constraint-allowed patch updates." >&2
   fi
 
-  # Drupal core pinned pair: one grouped decision. core-project-message uses a
-  # caret range, so its patch releases arrive via the automatic patch pass.
+  # Drupal core: every exact-pinned core package with a pin move available is
+  # one grouped decision (CORE_GROUP); caret-range core packages are not pin
+  # rows and go through the normal flow below.
   CORE_TARGET=""
   CORE_PIN=""
-  for pkg in $CORE_PINNED; do
+  CORE_GROUP=""
+  for pkg in $CORE_ALL; do
     line="$(awk -F'\t' -v p="$pkg" '$1=="pin" && $2==p' "$PLAN/composer.tsv" | head -1)"
     [ -n "$line" ] || continue
     t="$(printf '%s' "$line" | cut -f4)"
     c="$(printf '%s' "$line" | cut -f6)"
+    CORE_GROUP="${CORE_GROUP:+$CORE_GROUP }$pkg"
     if [ -z "$CORE_TARGET" ]; then CORE_TARGET="$t"; CORE_PIN="$c"; fi
     [ "$t" = "$CORE_TARGET" ] || CORE_TARGET="CONFLICT"
   done
   if [ -n "$CORE_TARGET" ] && [ "$CORE_TARGET" != "CONFLICT" ]; then
     echo >&2
     echo "  Drupal core is pinned to $CORE_PIN; patch release $CORE_TARGET is available." >&2
-    echo "  (drupal/core-project-message has a caret range and follows via the patch pass.)" >&2
-    if ask "Move the Drupal core pin to $CORE_TARGET (core-recommended + core-composer-scaffold)?"; then
-      for pkg in $CORE_PINNED; do
+    if ask "Move the Drupal core pin to $CORE_TARGET ($(printf '%s' "$CORE_GROUP" | sed 's#drupal/##g; s# # + #g'))?"; then
+      for pkg in $CORE_GROUP; do
         COMPOSER_REQUIRE_ARGS+=("$pkg:$CORE_TARGET")
         COMPOSER_PIN_PKGS+=("$pkg")
       done
@@ -461,6 +467,7 @@ if [ "$DO_COMPOSER" = 1 ]; then
     fi
   elif [ "$CORE_TARGET" = "CONFLICT" ]; then
     echo "  WARNING: core packages disagree on available patch versions — resolve manually." >&2
+    echo "composer: Drupal core pins not moved — $CORE_GROUP disagree on the available patch release; resolve manually" >>"$PLAN/skipped.txt"
   fi
 
   # Everything else that needs a decision.
@@ -468,7 +475,7 @@ if [ "$DO_COMPOSER" = 1 ]; then
   while IFS="$(printf '\t')" read -r kind name cur target j constraint <&3; do
     [ -n "$kind" ] || continue
     [ "$kind" = "auto" ] && continue
-    case " $CORE_ALL " in *" $name "*) continue ;; esac   # handled above (core moves as a set)
+    case " $CORE_GROUP " in *" $name "*) continue ;; esac   # handled above (core moves as a set)
     if offered "$kind" "$j" composer; then
       echo >&2
       case "$kind" in
@@ -581,7 +588,7 @@ fi
 awk -F'\t' '$1=="auto"{print $2}' "$PLAN/composer.tsv" >"$PLAN/composer-auto.list"
 jq -r '((.require // {}) + (."require-dev" // {})) | keys[]' composer.json \
   | grep -vE '^(php$|ext-|lib-|composer-plugin-api|composer-runtime-api)' \
-  >"$PLAN/composer-direct.list"
+  >"$PLAN/composer-direct.list" || true
 : >"$PLAN/composer-targeted.list"
 if [ "${#COMPOSER_TARGETED[@]}" -gt 0 ]; then
   printf '%s\n' ${COMPOSER_TARGETED[@]+"${COMPOSER_TARGETED[@]}"} >"$PLAN/composer-targeted.list"
