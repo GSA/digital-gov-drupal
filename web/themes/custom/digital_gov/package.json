@@ -58,7 +58,7 @@
     "webpack-stream": "^7.0.0"
   },
   "devDependencies": {
-    "@18f/identity-stylelint-config": "^2.0.0",
+    "@18f/identity-stylelint-config": "^6.0.0",
     "@types/mime-types": "^2.1.4",
     "@typescript-eslint/eslint-plugin": "^7.17.0",
     "@typescript-eslint/parser": "^7.17.0",
@@ -77,7 +77,7 @@
     "postcss": "^8.5.23",
     "prettier": "^2.8.8",
     "prettier-plugin-go-template": "^0.0.13",
-    "stylelint": "^15.11.0",
+    "stylelint": "^17.16.0",
     "stylelint-order": "^6.0.4",
     "vinyl-paths": "^3.0.1"
   },
