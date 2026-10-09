@@ -162,3 +162,5 @@ ee49dba3ea4e568fe2b09b3ba3d6b960|Amy Farrell|feature/DIGITAL-857-dependency-upda
 be4be046da5e145df1a2433d8811490f|Amy Farrell|feature/DIGITAL-857-dependency-updates|Thu Sep 17 05:18:06 PM PDT 2026|./scripts/audit/deps-update --minor --composer-only
 78243aac6c10b0733637d61cef1f44d4|Jacob Yeager|feature/DIGITAL-753-egress-proxy|Tue Sep 29 15:30:29 EDT 2026|./composer.sh update drupal/sitewide_alert
 595a218660c01883c63b132048b45091|Jacob Yeager|feature/DIGITAL-833-O&M-2026-10-deps-update|Mon Oct  5 14:36:03 EDT 2026|./scripts/audit/deps-update
+458fe7ba7ac57b9f609e57347413768e|Amy Farrell|develop|Thu Oct  8 04:53:37 PM PDT 2026|./composer.sh require drupal/config_pages:^2.22
+e151c73dc8306d1236eadd47690c5fe7|Amy Farrell|feature/DIGITAL-879-composer-updates|Thu Oct  8 05:06:08 PM PDT 2026|./composer.sh update
