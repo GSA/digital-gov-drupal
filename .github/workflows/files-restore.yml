@@ -1,0 +1,83 @@
+name: Files Restore
+
+permissions:
+  contents: read
+
+on:
+  workflow_dispatch:
+    inputs:
+      restore_storage:
+        description: "Restore Drupal uploaded files (storage bucket)."
+        type: boolean
+        required: false
+        default: true
+      restore_static:
+        description: "Restore the generated static site (static bucket)."
+        type: boolean
+        required: false
+        default: false
+      storage_file_override:
+        description: "Path on S3 backup bucket to a specific storage archive."
+        required: false
+      static_file_override:
+        description: "Path on S3 backup bucket to a specific static archive."
+        required: false
+jobs:
+  restore-files:
+    name: Restore Files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.2
+      - name: Set env.BRANCH
+        run: |
+          echo "BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)" | tee -a $GITHUB_ENV
+          case ${BRANCH} in
+            develop)
+              CF_SPACE="dev"
+              ;;
+            main)
+              CF_SPACE="prod"
+              ;;
+            stage)
+              CF_SPACE="staging"
+              ;;
+          esac
+          echo "CF_SPACE=${CF_SPACE}" | tee -a $GITHUB_ENV
+      - name: Install basic dependancies
+        run: ./scripts/pipeline/deb-basic-deps.sh
+      - name: Install AWSCLI
+        run: ./scripts/pipeline/deb-awscli.sh
+      - name: Install Cloudfoundry CLI
+        run: ./scripts/pipeline/deb-cf-install.sh
+      - name: Cloud.gov login
+        env:
+          CF_USER: "${{ secrets.CF_USER }}"
+          CF_PASSWORD: "${{ secrets.CF_PASSWORD }}"
+          CF_ORG: "${{ secrets.CF_ORG }}"
+          PROJECT: "${{ secrets.PROJECT }}"
+        run: source ./scripts/pipeline/cloud-gov-login.sh
+      - name: Restore storage files
+        if: ${{ github.event.inputs.restore_storage == 'true' }}
+        shell: bash
+        env:
+          CF_USER: "${{ secrets.CF_USER }}"
+          CF_PASSWORD: "${{ secrets.CF_PASSWORD }}"
+          CF_ORG: "${{ secrets.CF_ORG }}"
+          PROJECT: "${{ secrets.PROJECT }}"
+          FILES_BACKUP_TYPE: "storage"
+        run: |
+          export S3_FILE_PATH="${{ github.event.inputs.storage_file_override }}"
+          source ./scripts/pipeline/files-restore.sh
+      - name: Restore static files
+        if: ${{ github.event.inputs.restore_static == 'true' }}
+        shell: bash
+        env:
+          CF_USER: "${{ secrets.CF_USER }}"
+          CF_PASSWORD: "${{ secrets.CF_PASSWORD }}"
+          CF_ORG: "${{ secrets.CF_ORG }}"
+          PROJECT: "${{ secrets.PROJECT }}"
+          FILES_BACKUP_TYPE: "static"
+        run: |
+          export S3_FILE_PATH="${{ github.event.inputs.static_file_override }}"
+          source ./scripts/pipeline/files-restore.sh
