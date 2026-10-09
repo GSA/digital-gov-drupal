@@ -307,7 +307,7 @@ This directory has configuration settings for PHP.
 This configuration includes additional bootstrapping options for the `php-buildpack`.
 
   - `PHP_VERSION`: This field uses a special variable (i.e. `{PHP_##_LATEST}`). For valid variable names, [check this file](https://github.com/cloudfoundry/php-buildpack/blob/master/defaults/options.json).
-  - `ADDITIONAL_PREPROCESS_CMDS`: This array of strings are the paths to scripts to be ran before the system is deployed, during the staging process. Currently, this runs [bootstrap.sh](#bootstrapsh).
+  - `ADDITIONAL_PREPROCESS_CMDS`: This array of strings are the paths to scripts run at container start, before the start command. Currently, this runs [bootstrap.sh](#bootstrapsh). Note this is every container start -- application instances and one-off tasks alike -- not once at staging.
 
 
 ## Scripts
