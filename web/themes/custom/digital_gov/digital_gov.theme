@@ -203,7 +203,6 @@ function digital_gov_preprocess_node_guides(&$variables): void {
   $variables['show_next_previous'] = FALSE;
   $variables['show_in_page_nav'] = FALSE;
   $variables['is_guide_overview'] = FALSE;
-  $variables['show_summary_box'] = $guide->get('field_summary_box')[0]?->get('value')->getCastedValue();
 
   if ($guideRef = $guide->get('field_guide_nav_ref')) {
     if ($guideRef->count() === 0) {

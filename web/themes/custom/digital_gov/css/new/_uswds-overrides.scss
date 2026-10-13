@@ -70,9 +70,28 @@
   }
 }
 
-// adds vertical space between content and summary box
-.dg-guide-summary {
+.usa-summary-box {
   margin-bottom: units(2);
+}
+
+.usa-summary-box__text {
+  > :last-child {
+    margin-bottom: 0;
+  }
+
+  > br,
+  > p:empty,
+  > p:has(> br:only-child) {
+    display: none;
+  }
+}
+
+.usa-summary-box__text a {
+  @include set-link-from-bg(
+    $theme-summary-box-background-color,
+    $theme-summary-box-link-color,
+    $context: "Summary Box"
+  );
 }
 
 // Archived alerts

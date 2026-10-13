@@ -1,13 +1,13 @@
 diff --git a/js/init.js b/js/init.js
-index 799fba6..c1a94e1 100644
+index 43ef6e1..7da9cdd 100644
 --- a/js/init.js
 +++ b/js/init.js
-@@ -91,6 +91,7 @@
-         drupalSettings.path.baseUrl +
-         drupalSettings.path.pathPrefix
-       }sitewide_alert/load`,
-+      {cache: 'reload'}
-     )
+@@ -188,7 +188,7 @@
+     // (e.g. on sites using HTTP Basic Authentication).
+     url.username = '';
+     url.password = '';
+-    return fetch(url.toString())
++    return fetch(url.toString(), { cache: 'reload' })
        .then((res) => res.json())
        .then(
-
+         (result) => result.sitewideAlerts,
