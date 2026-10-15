@@ -64,22 +64,23 @@
 #}
 
 <main role="main" id="main-content">
-  <div class="grid-container grid-container-desktop">
-    <div class="grid-row">
-      <div class="grid-col-12">
-        <header class="page-head page-head-{{ Type }}">
-          {# Page Title #}
-          <h1>{{ label|field_value }}</h1>
+  <section class="grid-container grid-container-desktop">
+    <header class="page-head page-head-{{ Type }}">
+      <div class="grid-row">
+        <div class="grid-col-12">
 
-          {# Deck #}
-          {# todo: check to see if we need to take the summary field out since they are seem to be using deck for landing page #}
-          {% if content.field_deck|field_value %}
-            <h2 class="deck">{{ content.field_deck|field_value }}</h2>
-          {% endif %}
-        </header>
+            {# Page Title #}
+            <h1>{{ label|field_value }}</h1>
+
+            {# Deck #}
+            {# todo: check to see if we need to take the summary field out since they are seem to be using deck for landing page #}
+            {% if content.field_deck|field_value %}
+              <h2 class="deck">{{ content.field_deck|field_value }}</h2>
+            {% endif %}
+        </div>
       </div>
-    </div>
-  </div>
+    </header>
+  </section>
   <section class="stream">
     <div class="grid-container grid-container-desktop">
 

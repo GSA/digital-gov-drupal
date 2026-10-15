@@ -1,0 +1,11 @@
+{% set processed_text = {
+  '#type': 'processed_text',
+  '#text': text.value,
+  '#format': text.format,
+} %}
+{{ include('@digital_gov/partials/usa-summary-box.html.twig', {
+  heading: heading,
+  header_level: 3,
+  heading_id: heading_id,
+  text: processed_text,
+}, with_context: false) }}
