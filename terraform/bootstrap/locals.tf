@@ -252,7 +252,7 @@ locals {
           ## Environmental variables. Avoid sensitive variables.
           environment = {
             CF_ORG = var.cloudgov_organization
-            OPENTOFU_VERSION = "1.8.7"
+            OPENTOFU_VERSION = "1.12.6"
             PERL5LIB = "/home/vcap/deps/0/apt/usr/share/perl5/"
           }
 
