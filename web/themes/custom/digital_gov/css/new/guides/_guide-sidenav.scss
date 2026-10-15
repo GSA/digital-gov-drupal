@@ -1,0 +1,20 @@
+@use "uswds-core" as *;
+
+// Full width above the page content until the desktop breakpoint, then a
+// left-hand column. Source order keeps it above the content on small screens.
+.dg-guide__sidenav {
+  margin-top: units(4);
+
+  @include at-media("desktop") {
+    align-self: flex-start;
+    margin-top: units(5);
+    max-height: calc(100vh - #{units(4)});
+    overflow-y: auto;
+    position: sticky;
+    top: units(2);
+  }
+}
+
+.dg-guide__main {
+  min-width: 0;
+}

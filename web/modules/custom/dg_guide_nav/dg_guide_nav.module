@@ -22,7 +22,8 @@ function dg_guide_nav_get_links(Node $guideNav, string $current, Node $currentPa
     [dg_guide_nav_cache_tag($guideNav)],
   );
 
-  $cid = __FUNCTION__ . '//' . implode('/', $cacheTags);
+  // Version the cache id so a deploy does not reuse the old menu-bar payload.
+  $cid = __FUNCTION__ . ':sidenav//' . implode('/', $cacheTags);
   if ($cache = \Drupal::cache()->get($cid)) {
     $links = $cache->data;
     return $links;
@@ -44,9 +45,10 @@ function dg_guide_nav_get_links(Node $guideNav, string $current, Node $currentPa
     return $page->toLink($label);
   };
 
-  // The guide_nav is an array that holds items with the following keys
-  // - 'link': A Link object the main link used the menu bar
-  // - 'subnav': an array of Link objects of links if the sidenav is shown.
+  // Each guide_nav item has:
+  // - 'link': Link for a top-level guide page.
+  // - 'is_current': TRUE when that page is the one being viewed.
+  // - 'subnav': child pages, each with 'link' and 'is_current'.
   $links['guide_nav'] = [];
 
   if ($kicker_link = $guideNav->get('field_kicker_link')?->first()) {
@@ -57,80 +59,45 @@ function dg_guide_nav_get_links(Node $guideNav, string $current, Node $currentPa
   if ($guideNav->field_guide_navigation) {
     // Track the count separately in case the first item is not published.
     $count = 0;
-    // Generate the two-levels of nav links for this guide.
+    // Generate the two levels of nav links for this guide.
     foreach ($guideNav->field_guide_navigation as $ref) {
       // This field points at a paragraph entity.
       $para = Paragraph::load($ref->target_id);
-
-      if ($para->field_guide_link->target_id) {
-        $guidePage = $para->get('field_guide_link')->referencedEntities()[0];
-        if (!$guidePage || !$guidePage->isPublished()) {
-          continue;
-        }
-
-        if ($count === 0) {
-          $links['guide_overview_node'] = $guidePage;
-        }
-        // Add the link to the navigation.
-        $link = $makeLink($guidePage, $count === 0 ? 'Overview' : NULL);
-        $item['link'] = $link;
-
-        $count++;
-
-        if ($para->field_guide_subnav) {
-          $item['subnav'] = [];
-          $subNavNodes = $para->get('field_guide_subnav')->referencedEntities();
-          $subNavNodes = array_filter($subNavNodes, fn(Node $node) => $guideNav->isPublished());
-          if ($subNavNodes) {
-            $item['subnav'] = array_map($makeLink, $subNavNodes);
-            // If the current page is in the subnav, mark the parent as current.
-            $current_in_subnav = array_filter($item['subnav'], function (Link $subItem) use ($current) {
-              return $subItem->getUrl()->toString() === $current;
-            });
-            if ($current_in_subnav) {
-              // We haven't added our item to the guidenav, add 1 to the last
-              // index to account for this.
-              $links['guide_current_index'] = $links['guide_nav'] ? array_key_last($links['guide_nav']) + 1 : 0;
-
-              // We needed to add one more to the index because twig's loops
-              // start at 1 not 0.
-              $links['guide_menubar_current'] = $links['guide_current_index'] + 1;
-            }
-          }
-        }
-        $links['guide_nav'][] = $item;
-        if ($item['link']->getUrl()->toString() === $current) {
-          // Set which subnav to display.
-          $links['guide_current_index'] = array_key_last($links['guide_nav']);
-          // Mark which top-level page is open. Twig's loops start at 1.
-          $links['guide_menubar_current'] = array_key_last($links['guide_nav']) + 1;
-        }
+      if (!$para || $para->get('field_guide_link')->isEmpty()) {
+        continue;
       }
-    }
-  }
 
-  // Here, figure out the next/previous links.
-  // We need a flat list of all the URLs in the guide nav keyed by URL.
-  $allTheUrls = [];
+      $guidePage = $para->get('field_guide_link')->referencedEntities()[0] ?? NULL;
+      if (!$guidePage || !$guidePage->isPublished()) {
+        continue;
+      }
 
-  array_walk_recursive(
-    $links['guide_nav'],
-    function ($link) use (&$allTheUrls) {
-      $allTheUrls[$link->getUrl()->toString()] = $link;
-    }
-  );
+      if ($count === 0) {
+        $links['guide_overview_node'] = $guidePage;
+      }
 
-  // $keyMap tells us what numeric slot each URL is found in.
-  $keyMap = array_keys($allTheUrls);
-  if ($allTheUrls && FALSE !== ($currentKey = array_search($current, $keyMap))) {
-    if (isset($keyMap[$currentKey - 1])) {
-      $prevKey = $keyMap[$currentKey - 1];
-      $links['guide_prev'] = $allTheUrls[$prevKey];
-    }
+      $link = $makeLink($guidePage, $count === 0 ? 'Overview' : NULL);
+      $count++;
 
-    if (isset($keyMap[$currentKey + 1])) {
-      $nextKey = $keyMap[$currentKey + 1];
-      $links['guide_next'] = $allTheUrls[$nextKey];
+      $item = [
+        'link' => $link,
+        'is_current' => $link->getUrl()->toString() === $current,
+        'subnav' => [],
+      ];
+
+      $subNavNodes = array_filter(
+        $para->get('field_guide_subnav')->referencedEntities(),
+        fn(Node $node) => $node->isPublished(),
+      );
+      foreach ($subNavNodes as $subNavNode) {
+        $subLink = $makeLink($subNavNode);
+        $item['subnav'][] = [
+          'link' => $subLink,
+          'is_current' => $subLink->getUrl()->toString() === $current,
+        ];
+      }
+
+      $links['guide_nav'][] = $item;
     }
   }
 

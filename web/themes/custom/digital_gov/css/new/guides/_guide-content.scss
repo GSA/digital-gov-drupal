@@ -21,9 +21,6 @@
   max-width: none;
   width: 100%;
 
-  // maintains space between menu bar and nav when page is scrolled down:
-  top: 4rem;
-
   @include at-media("tablet") {
     margin-left: units(5);
     max-width: units("card-lg");
@@ -70,7 +67,7 @@
   }
 }
 
-// Needed to corrrect for header height when scrolling on guide pages
+// Keeps in-page anchor targets from sitting flush against the viewport edge.
 html {
-  scroll-padding-top: units(15);
+  scroll-padding-top: units(2);
 }
