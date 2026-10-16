@@ -40,9 +40,13 @@ die() {
   exit 1
 }
 
+## `|| true`: GitHub runs `shell: bash` steps with -eo pipefail, which this
+## sourced file inherits, and `grep -v` finding nothing (the tunnel is already
+## gone, as it is when the EXIT trap runs) would otherwise abort the trap and
+## fail a successful backup.
 kill_pids() {
   app=$1
-  ids=$(ps aux | grep "${app}" | grep -v grep | awk '{print $2}')
+  ids=$(ps aux | grep "${app}" | grep -v grep | awk '{print $2}') || true
   for id in ${ids}; do
     kill -9 "${id}" &
   done

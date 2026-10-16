@@ -15,6 +15,11 @@
 ## Optional environment variables:
 ##   S3_FILE_PATH           Path within the backup bucket to a specific archive.
 ##                          Defaults to "<type>/latest.tar.gz".
+##   BACKUP_SPACE           The space whose backup bucket holds the archive.
+##                          Defaults to CF_SPACE; set it to restore another
+##                          space's backup (e.g. prod into staging).
+##   PUBLIC_FILES_ONLY      If set, a "storage" restore only touches cms/public,
+##                          leaving the target's private files alone.
 
 set -e
 
@@ -42,24 +47,40 @@ BACKUP_FILE="${FILES_BACKUP_TYPE}/latest.tar.gz"
 ## Shared helpers: get_s3_credentials / delete_s3_credentials.
 source "$(dirname "${BASH_SOURCE[0]}")/s3-credentials.sh"
 
+BACKUP_SPACE="${BACKUP_SPACE:-${CF_SPACE}}"
+
 TARGET_SERVICE="${PROJECT}-${FILES_BACKUP_TYPE}-${CF_SPACE}"
-BACKUP_SERVICE="${PROJECT}-backup-${CF_SPACE}"
+BACKUP_SERVICE="${PROJECT}-backup-${BACKUP_SPACE}"
+
+## Service keys are created in the targeted space, so stay in the backup's
+## space while its key exists.
+cf target -s "${BACKUP_SPACE}" >/dev/null
 
 echo "Getting backup bucket credentials..."
 read -r BACKUP_ACCESS_KEY BACKUP_SECRET_KEY BACKUP_BUCKET BACKUP_REGION < <(get_s3_credentials "${BACKUP_SERVICE}")
 
 echo "Downloading '${BACKUP_FILE}' from backup bucket..."
+## A failed download is reported after the key is deleted: exiting here under
+## `set -e` would leak it.
+DOWNLOAD_FAILED=""
 {
   rm -rf "${WORK_DIR}" "${ARCHIVE_NAME}"
 
   AWS_ACCESS_KEY_ID="${BACKUP_ACCESS_KEY}" \
   AWS_SECRET_ACCESS_KEY="${BACKUP_SECRET_KEY}" \
   AWS_DEFAULT_REGION="${BACKUP_REGION}" \
-    aws s3 cp "s3://${BACKUP_BUCKET}/${BACKUP_FILE}" "${ARCHIVE_NAME}" --no-verify-ssl 2>/dev/null
+    aws s3 cp "s3://${BACKUP_BUCKET}/${BACKUP_FILE}" "${ARCHIVE_NAME}" --no-verify-ssl 2>/dev/null \
+    || DOWNLOAD_FAILED=1
 } >/dev/null 2>&1
 
 ## The backup credentials are no longer needed.
 delete_s3_credentials "${BACKUP_SERVICE}"
+cf target -s "${CF_SPACE}" >/dev/null
+
+if [[ -n "${DOWNLOAD_FAILED}" ]]; then
+  echo "Error: could not download '${BACKUP_FILE}' from ${BACKUP_SERVICE}."
+  exit 1
+fi
 
 echo "Extracting archive..."
 {
@@ -83,9 +104,16 @@ read -r TARGET_ACCESS_KEY TARGET_SECRET_KEY TARGET_BUCKET TARGET_REGION < <(get_
 ## specific behaviour is documented but was not verified here (no S3 endpoint
 ## available), and it is safe either way: if the cache were pruned, Drupal
 ## regenerates it on demand.
-RESTORE_EXCLUDES=()
+##
+## PUBLIC_FILES_ONLY narrows the sync to cms/public by the same mechanism: later
+## filters take precedence, so the php exclusion still applies inside it, and
+## --delete leaves everything outside it (the target's private files) alone.
+RESTORE_FILTERS=()
 if [[ "${FILES_BACKUP_TYPE}" == "storage" ]]; then
-  RESTORE_EXCLUDES=(--exclude "cms/public/php/*")
+  if [[ -n "${PUBLIC_FILES_ONLY}" ]]; then
+    RESTORE_FILTERS=(--exclude "*" --include "cms/public/*")
+  fi
+  RESTORE_FILTERS+=(--exclude "cms/public/php/*")
 fi
 
 echo "Restoring '${FILES_BACKUP_TYPE}' files to bucket..."
@@ -93,7 +121,7 @@ echo "Restoring '${FILES_BACKUP_TYPE}' files to bucket..."
   AWS_ACCESS_KEY_ID="${TARGET_ACCESS_KEY}" \
   AWS_SECRET_ACCESS_KEY="${TARGET_SECRET_KEY}" \
   AWS_DEFAULT_REGION="${TARGET_REGION}" \
-    aws s3 sync "${WORK_DIR}" "s3://${TARGET_BUCKET}" "${RESTORE_EXCLUDES[@]}" \
+    aws s3 sync "${WORK_DIR}" "s3://${TARGET_BUCKET}" "${RESTORE_FILTERS[@]}" \
       --delete --no-verify-ssl 2>/dev/null
 } >/dev/null 2>&1
 

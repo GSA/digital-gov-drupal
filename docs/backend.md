@@ -95,6 +95,15 @@ underlying tools can be run on their own:
 
 Both accept `-d latest|YYYY-MM-DD` and `-h` for help.
 
+### Refreshing dev and staging from production
+
+The **Sync From Prod** GitHub Actions workflow overwrites the `dev` or
+`staging` space with production's latest nightly database and public files,
+then runs `drush deploy` there and regenerates its static site. Run it manually
+from the Actions tab. See the
+[runbook](runbooks/github/sync-from-prod.yml.MD) for inputs, how to undo a
+sync, and what changes on the target.
+
 ### Auto Logout
 
 The autologout module will log you out after 30 minutes of inactivity or after 12 hours regardless of activity. This can get annoying when developing locally and having multiple tabs open.
