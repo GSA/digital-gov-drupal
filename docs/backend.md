@@ -95,14 +95,21 @@ underlying tools can be run on their own:
 
 Both accept `-d latest|YYYY-MM-DD` and `-h` for help.
 
-### Refreshing dev and staging from production
+### Copying data between spaces (downsync)
 
-The **Sync From Prod** GitHub Actions workflow overwrites the `dev` or
-`staging` space with production's latest nightly database and public files,
-then runs `drush deploy` there and regenerates its static site. Run it manually
-from the Actions tab. See the
-[runbook](runbooks/github/sync-from-prod.yml.MD) for inputs, how to undo a
-sync, and what changes on the target.
+Downsync overwrites one Cloud.gov space's database and public files with
+another's, usually to refresh `staging` or `dev` from `prod`. It then runs
+`drush deploy` on the target and regenerates its static site. Run it from the
+Actions tab (**Downsync**), or from your computer:
+
+```
+cf login -a api.fr.cloud.gov --sso
+./scripts/downsync.sh -s prod -t staging
+```
+
+Upward syncs and syncs into prod need a separate confirmation. See the
+[runbook](runbooks/github/downsync.yml.MD) for options, how to undo a sync, and
+what changes on the target.
 
 ### Auto Logout
 

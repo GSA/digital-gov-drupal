@@ -4,11 +4,15 @@
 ## bucket, both as a dated copy and as latest.sql.gz.
 ##
 ## This file is *sourced* (not executed) by .github/workflows/daily-backup.yml
-## and database-backup-dev.yml, so failures are raised with `die`, which exits
-## non-zero and fails the workflow step. It deliberately does NOT use
-## `set -eo pipefail`: `kill_pids` runs a grep pipeline that legitimately
-## matches nothing once the tunnel is gone, and pipefail would turn that into an
-## abort. Checks below are therefore explicit.
+## and database-backup-dev.yml, and run by scripts/downsync.sh, so failures are
+## raised with `die`, which exits non-zero and fails the workflow step. GitHub
+## runs those steps with `bash -eo pipefail`, which a sourced file inherits, so
+## everything here, the EXIT trap included, has to hold up under it. Checks
+## below are explicit rather than relying on it.
+##
+## It also runs on developers' computers (via downsync.sh), so it only touches
+## what it created: credentials go in a temporary directory, and only the
+## tunnel this script started is stopped.
 ##
 ## Most command output is routed to /dev/null on purpose: backup.txt holds the
 ## database credentials and `cf service-key` prints the S3 access keys, and all
@@ -40,16 +44,31 @@ die() {
   exit 1
 }
 
-## `|| true`: GitHub runs `shell: bash` steps with -eo pipefail, which this
-## sourced file inherits, and `grep -v` finding nothing (the tunnel is already
-## gone, as it is when the EXIT trap runs) would otherwise abort the trap and
-## fail a successful backup.
-kill_pids() {
-  app=$1
-  ids=$(ps aux | grep "${app}" | grep -v grep | awk '{print $2}') || true
-  for id in ${ids}; do
-    kill -9 "${id}" &
+## Stop a process and everything it started, children first. The tunnel is
+## `cf`, which runs the service-connect plugin, which may run its own ssh.
+kill_tree() {
+  local child
+  for child in $(pgrep -P "$1" 2>/dev/null || true); do
+    kill_tree "${child}"
   done
+  kill "$1" 2>/dev/null || true
+}
+
+## Stop the tunnel this script started, and no other.
+stop_tunnel() {
+  [[ -n "${TUNNEL_PID:-}" ]] || return 0
+  kill_tree "${TUNNEL_PID}"
+  TUNNEL_PID=""
+}
+
+## Prod's space keeps SSH off; turn it back off once the tunnel is up, or from
+## the cleanup trap if the script fails first.
+close_prod_ssh() {
+  [[ -n "${prod_ssh_open:-}" ]] || return 0
+  echo "Disabling ssh"
+  cf disallow-space-ssh "${CF_SPACE}" || true
+  cf disable-ssh "${PROJECT}-${DATABASE_BACKUP_BASTION_NAME}-${CF_SPACE}" || true
+  prod_ssh_open=""
 }
 
 ## Wait for the tunnel to finish connecting, but do not hang the job forever if
@@ -70,8 +89,10 @@ wait_for_tunnel() {
 ## access key or a readable password on the runner.
 cleanup() {
   local status=$?
-  kill_pids "connect-to-service"
-  rm -rf backup.txt ~/.mysql
+  close_prod_ssh
+  stop_tunnel
+  rm -f backup.txt
+  [[ -n "${MYSQL_DIR:-}" ]] && rm -rf "${MYSQL_DIR}"
   [[ -n "${DUMP_ERR:-}" ]] && rm -f "${DUMP_ERR}"
   if [[ -n "${SERVICE_INSTANCE_NAME:-}" && -n "${KEY_NAME:-}" ]]; then
     cf delete-service-key "${SERVICE_INSTANCE_NAME}" "${KEY_NAME}" -f >/dev/null 2>&1
@@ -88,12 +109,17 @@ done
 
 backup_file="backup_${CF_SPACE}.sql"
 DUMP_ERR="$(mktemp)"
+## mktemp -d creates it readable by this user only.
+MYSQL_DIR="$(mktemp -d)"
+mysqldump_cnf="${MYSQL_DIR}/mysqldump.cnf"
 
 date
 
-## Enable SSH if in prod.
+## Enable SSH if in prod. prod_ssh_open lets the cleanup trap disable it again
+## if the tunnel never comes up.
 if [[ ${CF_SPACE} = "prod" ]]; then
   echo "Enabling ssh"
+  prod_ssh_open=1
   cf allow-space-ssh "${CF_SPACE}"
   cf enable-ssh "${PROJECT}-${DATABASE_BACKUP_BASTION_NAME}-${CF_SPACE}"
   cf restart "${PROJECT}-${DATABASE_BACKUP_BASTION_NAME}-${CF_SPACE}"
@@ -104,17 +130,14 @@ fi
 ## wait_for_tunnel timeout above.
 echo "Creating tunnel to database..."
 cf connect-to-service --no-client "${PROJECT}-${DATABASE_BACKUP_BASTION_NAME}-${CF_SPACE}" "${PROJECT}-mysql-${CF_SPACE}" > backup.txt &
+TUNNEL_PID=$!
 
 wait_for_tunnel
 
 date
 
 ## Disable SSH if in prod -- the existing ssh connection will persist.
-if [[ ${CF_SPACE} = "prod" ]]; then
-  echo "Connection established; disabling ssh"
-  cf disallow-space-ssh "${CF_SPACE}"
-  cf disable-ssh "${PROJECT}-${DATABASE_BACKUP_BASTION_NAME}-${CF_SPACE}"
-fi
+close_prod_ssh
 
 ## Create variables and credential file for MySQL login.
 echo "Backing up '${CF_SPACE}' database..."
@@ -134,12 +157,10 @@ done
 SECRETS+=("${password}")
 
 {
-  mkdir -p ~/.mysql && chmod 0700 ~/.mysql
-
-  echo "[mysqldump]" > ~/.mysql/mysqldump.cnf
-  echo "user=${username}" >> ~/.mysql/mysqldump.cnf
-  echo "password=${password}" >> ~/.mysql/mysqldump.cnf
-  chmod 400 ~/.mysql/mysqldump.cnf
+  echo "[mysqldump]" > "${mysqldump_cnf}"
+  echo "user=${username}" >> "${mysqldump_cnf}"
+  echo "password=${password}" >> "${mysqldump_cnf}"
+  chmod 400 "${mysqldump_cnf}"
 
   ## Exclude tables without data
   declare -a excluded_tables=(
@@ -173,7 +194,7 @@ SECRETS+=("${password}")
 ## separate --ignore-table flags.
 echo "Dumping structure..."
 if ! mysqldump \
-      --defaults-extra-file=~/.mysql/mysqldump.cnf \
+      --defaults-extra-file="${mysqldump_cnf}" \
       --host="${host}" \
       --port="${port}" \
       --protocol=TCP \
@@ -185,7 +206,7 @@ fi
 
 echo "Dumping content..."
 if ! mysqldump \
-      --defaults-extra-file=~/.mysql/mysqldump.cnf \
+      --defaults-extra-file="${mysqldump_cnf}" \
       --host="${host}" \
       --port="${port}" \
       --protocol=TCP \
@@ -197,8 +218,11 @@ if ! mysqldump \
   die "mysqldump failed while dumping table content."
 fi
 
-## Patch out any MySQL 'SET' commands that require admin.
-sed -i 's/^SET /-- &/' "${backup_file}" || die "Failed to patch SET commands out of the dump."
+## Patch out any MySQL 'SET' commands that require admin. Not `sed -i`, which
+## takes different arguments on macOS.
+sed 's/^SET /-- &/' "${backup_file}" > "${backup_file}.tmp" \
+  && mv "${backup_file}.tmp" "${backup_file}" \
+  || die "Failed to patch SET commands out of the dump."
 
 ## A dump can be short even when mysqldump reports success -- e.g. a connection
 ## dropped mid-stream. mysqldump writes a completion trailer as its final line,
@@ -213,11 +237,8 @@ date
 
 ## Kill the backgrounded SSH tunnel.
 echo "Cleaning up old connections..."
-{
-  kill_pids "connect-to-service"
-}
-
-rm -rf backup.txt ~/.mysql
+stop_tunnel
+rm -rf backup.txt "${MYSQL_DIR}"
 
 echo "Compressing '${CF_SPACE}' database..."
 mv "${backup_file}" "${TIMESTAMP}.sql" || die "Could not stage the dump for compression."

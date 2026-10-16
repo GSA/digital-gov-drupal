@@ -37,22 +37,30 @@ echo "Getting backup bucket credentials..."
 
  }  &> /dev/null
 
+## The copy database-backup.sh refreshes on every run.
+DATABASE_FILE="latest.sql.gz"
+[ -n "${S3_FILE_PATH}" ] && DATABASE_FILE="${S3_FILE_PATH}"
+
 echo "Downloading backup..."
+## A failed download is reported after the key is deleted and the space put
+## back: exiting inside this muted block under `set -e` would do neither.
+DOWNLOAD_FAILED=""
  {
 
   rm -f "*.sql"
 
-  ## The copy database-backup.sh refreshes on every run.
-  DATABASE_FILE="latest.sql.gz"
-
-  [ -n "${S3_FILE_PATH}" ] && DATABASE_FILE="${S3_FILE_PATH}"
-
-  aws s3 cp "s3://${bucket}/${DATABASE_FILE}" database_restore.sql.gz  --no-verify-ssl # 2>/dev/null
+  aws s3 cp "s3://${bucket}/${DATABASE_FILE}" database_restore.sql.gz  --no-verify-ssl \
+    || DOWNLOAD_FAILED=1
 
   cf delete-service-key "${service}" "${service_key}" -f
 
   cf target -s "${CF_SPACE}"
 
  } &> /dev/null
+
+if [ -n "${DOWNLOAD_FAILED}" ]; then
+  echo "Error: could not download '${DATABASE_FILE}' from ${backup_bucket}."
+  exit 1
+fi
 
 echo "File downloaded: ${DATABASE_FILE} from ${BACKUP_SPACE}"

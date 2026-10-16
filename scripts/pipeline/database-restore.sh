@@ -4,7 +4,7 @@
 ## (as downloaded by s3-backup-download.sh), through that space's bastion.
 ##
 ## This file is *sourced* by .github/workflows/database-restore.yml and
-## sync-from-prod.yml. As in database-backup.sh, failures are raised with `die`,
+## downsync.yml. As in database-backup.sh, failures are raised with `die`,
 ## and output that could carry credentials or database content is kept out of
 ## the CI log.
 
@@ -19,13 +19,22 @@ die() {
   exit 1
 }
 
-## `|| true`: see kill_pids in database-backup.sh.
-kill_pids() {
-  app=$1
-  ids=$(ps aux | grep "${app}" | grep -v grep | awk '{print $2}') || true
-  for id in ${ids}; do
-    kill -9 "${id}" &
+## Stop a process and everything it started, children first. The tunnel is
+## `cf`, which runs the service-connect plugin, which may run its own ssh.
+kill_tree() {
+  local child
+  for child in $(pgrep -P "$1" 2>/dev/null || true); do
+    kill_tree "${child}"
   done
+  kill "$1" 2>/dev/null || true
+}
+
+## Stop the tunnel this script started, and no other: this also runs on
+## developers' computers, via scripts/downsync.sh.
+stop_tunnel() {
+  [[ -n "${TUNNEL_PID:-}" ]] || return 0
+  kill_tree "${TUNNEL_PID}"
+  TUNNEL_PID=""
 }
 
 ## Wait for the tunnel to finish connecting, but not forever.
@@ -53,10 +62,22 @@ report_mysql_errors() {
   sed -n 's/^\(ERROR [0-9]* ([0-9A-Z]*)\( at line [0-9]*\)\{0,1\}\).*/\1/p' "${MYSQL_ERR}" | head -10 >&3
 }
 
+## Prod's space keeps SSH off. It is opened only while the tunnel starts, as
+## in database-backup.sh, and closed here too in case a failure comes first.
+close_prod_ssh() {
+  [[ -n "${prod_ssh_open:-}" ]] || return 0
+  echo "Disabling ssh"
+  cf disallow-space-ssh "${CF_SPACE}" >/dev/null 2>&1 || true
+  cf disable-ssh "${bastion}" >/dev/null 2>&1 || true
+  prod_ssh_open=""
+}
+
 cleanup() {
   local status=$?
-  kill_pids "connect-to-service"
-  rm -rf restore.txt "${HOME}/.mysql" database_restore.sql
+  close_prod_ssh
+  stop_tunnel
+  rm -f restore.txt database_restore.sql
+  [[ -n "${MYSQL_DIR:-}" ]] && rm -rf "${MYSQL_DIR}"
   [[ -n "${MYSQL_ERR:-}" ]] && rm -f "${MYSQL_ERR}"
   exec 3>&-
   return ${status}
@@ -68,7 +89,10 @@ for required in PROJECT CF_SPACE DATABASE_BACKUP_BASTION_NAME; do
 done
 
 MYSQL_ERR="$(mktemp)"
-mysql_cnf="${HOME}/.mysql/mysql.cnf"
+## mktemp -d creates it readable by this user only.
+MYSQL_DIR="$(mktemp -d)"
+mysql_cnf="${MYSQL_DIR}/mysql.cnf"
+bastion="${PROJECT}-${DATABASE_BACKUP_BASTION_NAME}-${CF_SPACE}"
 
 date
 
@@ -82,11 +106,25 @@ if ! tail -5 database_restore.sql | grep -q '^-- Dump completed'; then
   die "Dump is incomplete (no mysqldump completion marker); refusing to restore it."
 fi
 
+## Unchecked, as in database-backup.sh: a tunnel that can't open shows up as
+## the wait_for_tunnel timeout.
+if [[ ${CF_SPACE} = "prod" ]]; then
+  echo "Enabling ssh"
+  prod_ssh_open=1
+  cf allow-space-ssh "${CF_SPACE}" || true
+  cf enable-ssh "${bastion}" || true
+  cf restart "${bastion}" || true
+fi
+
 ## Create a tunnel through the bastion to restore the database.
 echo "Creating tunnel to database..."
-cf connect-to-service --no-client "${PROJECT}-${DATABASE_BACKUP_BASTION_NAME}-${CF_SPACE}" "${PROJECT}-mysql-${CF_SPACE}" > restore.txt &
+cf connect-to-service --no-client "${bastion}" "${PROJECT}-mysql-${CF_SPACE}" > restore.txt &
+TUNNEL_PID=$!
 
 wait_for_tunnel
+
+## The established tunnel persists after SSH is disabled.
+close_prod_ssh
 
 date
 
@@ -101,8 +139,6 @@ for field in host port username password dbname; do
 done
 
 {
-  rm -rf "${HOME}/.mysql" && mkdir -m 0700 "${HOME}/.mysql"
-
   echo "[client]" > "${mysql_cnf}"
   echo "user=${username}" >> "${mysql_cnf}"
   echo "password=${password}" >> "${mysql_cnf}"
@@ -146,7 +182,7 @@ date
 
 ## Kill the backgrounded SSH tunnel.
 echo "Cleaning up old connections..."
-kill_pids "connect-to-service"
-rm -rf restore.txt "${HOME}/.mysql" database_restore.sql
+stop_tunnel
+rm -rf restore.txt "${MYSQL_DIR}" database_restore.sql
 
 echo "Restored '${CF_SPACE}' database."
