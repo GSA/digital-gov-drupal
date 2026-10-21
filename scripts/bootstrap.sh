@@ -40,6 +40,9 @@ newrelic_so=$(find ${home} -name "newrelic*${php_api_version}*.so")
 php_path="${home}/deps/1/php"
 php_ini_d_path="${php_path}/etc/php.ini.d"
 
+## v4 put the composer bin dir (drush) on PATH; v5 doesn't. Append so deps/1 php still wins.
+export PATH="${PATH}:${app_path}/php/bin"
+
 ## Create link to New Relic PHP module.
 ln -s "${newrelic_so}" "${php_path}/lib/newrelic.so"
 
