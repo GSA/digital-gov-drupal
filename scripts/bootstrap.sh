@@ -56,7 +56,7 @@ if [ ! -f ./container_start_timestamp ]; then
   echo "$(date +'%s')" > ./container_start_timestamp
 fi
 
-dirs=( "${HOME}/private" "${HOME}/web/sites/default/files" )
+dirs=( "${app_path}/private" "${app_path}/web/sites/default/files" )
 
 for dir in "${dirs[@]}"; do
   if [ ! -d "${dir}" ]; then
