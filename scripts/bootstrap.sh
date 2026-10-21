@@ -1,4 +1,10 @@
 #!/bin/bash
+
+## php-buildpack v5's start script re-sources profile.d after the CF launcher
+## already has, so only run once per process tree.
+[ -n "${BOOTSTRAP_COMPLETE:-}" ] && return 0
+export BOOTSTRAP_COMPLETE=1
+
 set -uo pipefail
 
 ## Export proxy servers.
