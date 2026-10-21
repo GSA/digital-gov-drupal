@@ -1,4 +1,10 @@
 #!/bin/bash
+
+## php-buildpack v5's start script re-sources profile.d after the CF launcher
+## already has, so only run once per process tree.
+[ -n "${BOOTSTRAP_COMPLETE:-}" ] && return 0
+export BOOTSTRAP_COMPLETE=1
+
 set -uo pipefail
 
 ## Export proxy servers.
@@ -30,16 +36,21 @@ application_name=$(echo "$VCAP_APPLICATION" | jq -r '.application_name')
 newrelic_key=$(echo "$VCAP_SERVICES" | jq -r '."user-provided"[] | select(.name | contains("secrets")) | .credentials | .newrelic_key')
 newrelic_ini=$(find ${home} -name "newrelic.ini*")
 newrelic_so=$(find ${home} -name "newrelic*${php_api_version}*.so")
-php_ini_d_path="${app_path}/php/etc/php.ini.d"
+## php-buildpack v5 runs PHP from deps/1/php; app/php is only its build-time composer copy.
+php_path="${home}/deps/1/php"
+php_ini_d_path="${php_path}/etc/php.ini.d"
+
+## v4 put the composer bin dir (drush) on PATH; v5 doesn't. Append so deps/1 php still wins.
+export PATH="${PATH}:${app_path}/php/bin"
 
 ## Create link to New Relic PHP module.
-ln -s "${newrelic_so}" "${app_path}/php/lib/newrelic.so"
+ln -s "${newrelic_so}" "${php_path}/lib/newrelic.so"
 
 ## Create link to New Relic PHP ini configuration file.
 ln -s "${newrelic_ini}" "${php_ini_d_path}/newrelic.ini"
 
 ## Edit New Relic PHP ini configuration file.
-sed -i "s|extension = \"newrelic.so\"|extension = \"${app_path}/php/lib/newrelic.so\"|" "${php_ini_d_path}/newrelic.ini"
+sed -i "s|extension = \"newrelic.so\"|extension = \"${php_path}/lib/newrelic.so\"|" "${php_ini_d_path}/newrelic.ini"
 sed -i "s/newrelic.appname = \"PHP Application\"/newrelic.appname = \"${application_name}\"/" "${php_ini_d_path}/newrelic.ini"
 sed -i 's/;newrelic.daemon.collector_host = ""/newrelic.daemon.collector_host="gov-collector.newrelic.com"/' "${php_ini_d_path}/newrelic.ini"
 sed -i "s|;newrelic.daemon.location = \"/usr/bin/newrelic-daemon\"|newrelic.daemon.location = \"${apt_bin_path}/newrelic-daemon\"|" "${php_ini_d_path}/newrelic.ini"
@@ -56,7 +67,7 @@ if [ ! -f ./container_start_timestamp ]; then
   echo "$(date +'%s')" > ./container_start_timestamp
 fi
 
-dirs=( "${HOME}/private" "${HOME}/web/sites/default/files" )
+dirs=( "${app_path}/private" "${app_path}/web/sites/default/files" )
 
 for dir in "${dirs[@]}"; do
   if [ ! -d "${dir}" ]; then
