@@ -8,6 +8,23 @@
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\dg_fields\Plugin\Filter\LinkNoopenerFilter;
+
+/**
+ * Implements hook_link_alter().
+ *
+ * Covers links built with the render API, such as core's "About text formats"
+ * link on edit forms. Links in body text get the same treatment from
+ * LinkNoopenerFilter.
+ */
+function dg_fields_link_alter(array &$variables): void {
+  $attributes = $variables['options']['attributes'] ?? [];
+  if (!isset($attributes['target']) || !LinkNoopenerFilter::opensNewTab((string) $attributes['target'])) {
+    return;
+  }
+  $rel = $attributes['rel'] ?? '';
+  $variables['options']['attributes']['rel'] = LinkNoopenerFilter::addNoopener(is_array($rel) ? implode(' ', $rel) : (string) $rel);
+}
 
 /**
  * Implements hook_form_BASE_FORM_ID_alter() for node_form.

@@ -14,6 +14,12 @@ name: HTML
 format: html
 weight: 0
 filters:
+  dg_fields_link_noopener:
+    id: dg_fields_link_noopener
+    provider: dg_fields
+    status: true
+    weight: -35
+    settings: {  }
   editor_file_reference:
     id: editor_file_reference
     provider: editor

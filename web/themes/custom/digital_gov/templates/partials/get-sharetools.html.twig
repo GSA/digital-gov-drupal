@@ -11,7 +11,7 @@
         class="twitter"
         aria-label="Share on Twitter"
         target="_blank"
-        rel="noreferrer"
+        rel="noopener noreferrer"
         href="https://x.com/intent/post?url=https://digital.gov{{ share_path }}&text={{ title|url_encode }}"
       >
         <svg
@@ -27,7 +27,7 @@
         class="facebook"
         aria-label="Share on Facebook"
         target="_blank"
-        rel="noreferrer"
+        rel="noopener noreferrer"
         href="https://www.facebook.com/sharer/sharer.php?u=https://digital.gov{{ share_path }}"
       >
         <svg
@@ -45,7 +45,7 @@
         class="linkedin"
         aria-label="Share on LinkedIn"
         target="_blank"
-        rel="noreferrer"
+        rel="noopener noreferrer"
         href="https://www.linkedin.com/sharing/share-offsite/?url=https://digital.gov{{ share_path }}"
       >
         <svg
@@ -63,6 +63,7 @@
     <div class="grid-col-6">
       <a
         target="_blank"
+        rel="noopener noreferrer"
         title="Email this page"
         class="email"
         href="mailto:?subject={{ mailto_subject|url_encode }}%20%7C%20Digital.gov&body=%20%20%0A-------%0A{{ title|url_encode }}%0Ahttps://digital.gov{{ share_path }}%3Fem%0A-------%0A%0A&#9829; Sign-up%20for%20the%20Digital.gov%20newsletter%3A%20https%3A%2F%2Fdigital.gov%2Fsubscribe%2F"
