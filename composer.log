@@ -165,3 +165,5 @@ be4be046da5e145df1a2433d8811490f|Amy Farrell|feature/DIGITAL-857-dependency-upda
 458fe7ba7ac57b9f609e57347413768e|Amy Farrell|develop|Thu Oct  8 04:53:37 PM PDT 2026|./composer.sh require drupal/config_pages:^2.22
 e151c73dc8306d1236eadd47690c5fe7|Amy Farrell|feature/DIGITAL-879-composer-updates|Thu Oct  8 05:06:08 PM PDT 2026|./composer.sh update
 90a4a69803e8f48e116cc57f009ddcc3|Amy Farrell|feature/DIGITAL-879-composer-updates|Wed Oct 14 10:04:19 AM PDT 2026|./composer.sh require drupal/core-recommended:10.6.19 drupal/core-composer-scaffold:10.6.19 drupal/core-project-message:10.6.19 --update-with-all-dependencies
+1b797ddbef959ef1c458e38b55c9d62e|Amy Farrell|feature/DIGITAL-897-composer-updates|Fri Oct 23 02:21:57 PM PDT 2026|./composer.sh require drupal/core-recommended:10.6.20 drupal/core-composer-scaffold:10.6.20 drupal/core-project-message:10.6.20 --update-with-all-dependencies
+
