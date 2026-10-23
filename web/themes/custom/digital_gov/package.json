@@ -91,6 +91,7 @@
     }
   },
   "allowScripts": {
-    "es5-ext": false
+    "es5-ext": false,
+    "@parcel/watcher@2.6.0": true
   }
 }
