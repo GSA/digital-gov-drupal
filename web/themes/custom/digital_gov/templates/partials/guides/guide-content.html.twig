@@ -1,4 +1,4 @@
-<section class="dg-guide__content grid-container-desktop">
+<section class="dg-guide__content">
   <div class="dg-guide__content-header" id="content-start">
     {% if is_guide_overview %}
       <h2 class="dg-guide__content-header-title">Overview</h2>
@@ -11,46 +11,7 @@
   {{ content.body }}
 </section>
 
-<section class="dg-guide__footer grid-container-desktop">
-  {% if show_next_previous %}
-    <div class="dg-guide__prev-next grid-row">
-      {% if guide_prev %}
-        <a
-          class="dg-guide__prev-next-prev-item usa-button usa-button--outline"
-          href="{{ guide_prev.url }}#content-start"
-          title="{{ guide_prev.text }}"
-        >
-          <svg
-            class="usa-icon dg-icon dg-icon--standard"
-            aria-hidden="true"
-            focusable="false"
-            role="img"
-          >
-            <use xlink:href="/{{ active_theme_path() }}/static/uswds/img/sprite.svg#arrow_back"></use>
-          </svg>
-          <span>{{ guide_prev.text }}</span>
-        </a>
-      {% endif %}
-      {% if guide_next %}
-        <a
-          class="dg-guide__prev-next-next-item usa-button"
-          href="{{ guide_next.url }}#content-start"
-          title="{{ guide_next.text }}"
-        >
-          <span>{{ guide_next.text }}</span>
-          <svg
-            class="usa-icon dg-icon dg-icon--standard"
-            aria-hidden="true"
-            focusable="false"
-            role="img"
-          >
-            <use xlink:href="/{{ active_theme_path() }}/static/uswds/img/sprite.svg#arrow_forward"></use>
-          </svg>
-        </a>
-      {% endif %}
-    </div>
-  {% endif %}
-
+<section class="dg-guide__footer">
   {% if guide_overview_credit or guide_overview_caption %}
   {{ include('@digital_gov/partials/attribution.html.twig', {
        credit: guide_overview_credit,

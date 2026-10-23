@@ -75,26 +75,43 @@
     }}
     {% endif %}
 
-    {{ include('@digital_gov/partials/guides/guide-menu-bar.html.twig') }}
+    <hr class="dg-guide__rule">
 
-    {% if show_in_page_nav %}
-    <section class="usa-in-page-nav-container grid-container grid-container-desktop">
-      <div class="dg-guide__in-page-content">
-        {{ include('@digital_gov/partials/guides/guide-content.html.twig') }}
+    {#
+      Side navigation is first in source order so it sits above the page
+      content on small screens. At the desktop breakpoint the grid places it
+      beside the content. "On this page" stays a separate rail.
+    #}
+    <div class="dg-guide__layout grid-container grid-container-desktop">
+      <div class="grid-row grid-gap">
+        {% if guide_nav %}
+          <div class="dg-guide__sidenav grid-col-12 desktop:grid-col-3">
+            {{ include('@digital_gov/partials/guides/guide-sidenav.html.twig') }}
+          </div>
+        {% endif %}
+
+        <div class="dg-guide__main grid-col-12 {{ guide_nav ? 'desktop:grid-col-9' : '' }}">
+          {% if show_in_page_nav %}
+            <section class="usa-in-page-nav-container">
+              <div class="dg-guide__in-page-content">
+                {{ include('@digital_gov/partials/guides/guide-content.html.twig') }}
+              </div>
+              <aside
+                class="usa-in-page-nav"
+                data-title-text="On this page"
+                data-title-heading-level="h2"
+                data-main-content-selector=".dg-guide__content"
+                data-heading-elements="h2"
+                data-root-margin="0px 0px -55% 0px"
+                data-scroll-offset="16"
+              ></aside>
+            </section>
+          {% else %}
+            {{ include('@digital_gov/partials/guides/guide-content.html.twig') }}
+          {% endif %}
+        </div>
       </div>
-      <aside
-        class="usa-in-page-nav"
-        data-title-text="On this page"
-        data-title-heading-level="h2"
-        data-main-content-selector=".dg-guide__content"
-        data-heading-elements="h2"
-        data-root-margin="-100px 0px -55% 0px"
-        data-scroll-offset="100"
-      ></aside>
-    </section>
-    {% else %}
-      {{ include('@digital_gov/partials/guides/guide-content.html.twig') }}
-    {% endif %}
+    </div>
 
     {% if node.field_glossary.target_id %}
       {{ drupal_view('glossary_sidebar', 'accordion', node.field_glossary.target_id) }}

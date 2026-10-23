@@ -200,7 +200,6 @@ function digital_gov_preprocess_node(array &$variables): void {
 function digital_gov_preprocess_node_guides(&$variables): void {
   $guide = $variables['node'];
   // Set defaults.
-  $variables['show_next_previous'] = FALSE;
   $variables['show_in_page_nav'] = FALSE;
   $variables['is_guide_overview'] = FALSE;
 
@@ -226,7 +225,6 @@ function digital_gov_preprocess_node_guides(&$variables): void {
         $variables['guide_overview_caption'] = $caption->view();
       }
     }
-    $variables['show_next_previous'] = $navNode->field_show_next_previous?->value === "1";
     $variables['show_in_page_nav'] = $navNode->field_show_in_page_nav?->value === "1";
     if ($links['guide_nav']) {
       $variables['is_guide_overview'] = ($variables['url'] === $links['guide_nav'][0]['link']?->getUrl()->toString());
