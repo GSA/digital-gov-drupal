@@ -90,6 +90,53 @@ foreach ($cf_service_data as $service_list) {
         $databases['default']['default']['pdo'][PDO::MYSQL_ATTR_SSL_CA] = $rds_cert_path;
       }
     }
+    // Route Drupal's own server-side HTTP through the egress proxy.
+    //
+    // Without this every Guzzle call fails once the space loses
+    // public_networks_egress. The visible casualty is OpenID Connect: the browser
+    // redirect to GSA Auth still works, but the code-for-token exchange is
+    // server-to-server, so logins stop completing.
+    //
+    // Found by tag rather than service name, matching scripts/bootstrap.sh.
+    elseif (!empty($service['tags']) && in_array('egress-proxy', $service['tags'], TRUE)) {
+      if (!empty($service['credentials']['proxy_uri'])) {
+        $settings['http_client_config']['proxy']['http'] = $service['credentials']['proxy_uri'];
+        $settings['http_client_config']['proxy']['https'] = $service['credentials']['proxy_uri'];
+
+        // Hosts that must NOT go through the proxy. Guzzle matches these as suffixes,
+        // so a bucket-prefixed S3 hostname is covered by its endpoint.
+        $http_proxy_bypass = [
+          'localhost',
+          '127.0.0.1',
+
+          // Container-to-container routing.
+          'apps.internal',
+
+          // The site's own public hostnames. convert_text fetches
+          // \Drupal::request()->getSchemeAndHttpHost() to resolve unrouted paths
+          // (ConvertText.php:295, reachable from /admin/convert-text as well as from
+          // migrations). The proxy is never the route from the app back to itself.
+          $server_http_host ?? NULL,
+          $_SERVER['SERVER_NAME'] ?? NULL,
+        ];
+
+        // S3 endpoints, read from VCAP_SERVICES so they cannot drift from what is
+        // actually bound. Defensive rather than required: `aws s3 sync` is a separate
+        // process reading http_proxy from the environment, which is deliberately not
+        // exported, and s3fs (enabled via the non_local config split) uses the AWS
+        // SDK's own Guzzle client, which does not read this setting either. This
+        // covers any \Drupal::httpClient() call that targets S3 directly.
+        foreach (($cf_service_data['s3'] ?? []) as $s3_service) {
+          foreach (['fips_endpoint', 'endpoint'] as $s3_endpoint_key) {
+            if (!empty($s3_service['credentials'][$s3_endpoint_key])) {
+              $http_proxy_bypass[] = $s3_service['credentials'][$s3_endpoint_key];
+            }
+          }
+        }
+
+        $settings['http_client_config']['proxy']['no'] = array_values(array_unique(array_filter($http_proxy_bypass)));
+      }
+    }
     elseif (stristr($service['name'], 'secrets')) {
       if (!empty($service['credentials']['newrelic_key'])) {
         $settings['new_relic_rpm.api_key'] = $service['credentials']['newrelic_key'];

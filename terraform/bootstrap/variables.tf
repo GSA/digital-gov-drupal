@@ -4,6 +4,18 @@ variable "cloudgov_organization" {
   sensitive   = true
 }
 
+variable "cloudgov_password" {
+  description = "The password for the cloud.gov account."
+  type        = string
+  sensitive   = true
+}
+
+variable "cloudgov_username" {
+  description = "The username for the cloudfoundry account."
+  type        = string
+  sensitive   = true
+}
+
 variable "cloudgov_production_space" {
   description = "The production space for the cloud.gov project."
   type        = string
@@ -12,8 +24,8 @@ variable "cloudgov_production_space" {
 
 variable "github_organization" {
   description = "The organization to use with GitHub."
-  type = string
-  default = "GSA"
+  type        = string
+  default     = "GSA"
 }
 variable "github_token" {
   description = "The token used authenticate with GitHub."
@@ -23,14 +35,14 @@ variable "github_token" {
 
 variable "gsa_auth_development_key" {
   description = "The GSA Auth key for development environments."
-  type = string
-  sensitive = true
+  type        = string
+  sensitive   = true
 }
 
 variable "gsa_auth_production_key" {
   description = "The GSA Auth key for production environments."
-  type = string
-  sensitive = true
+  type        = string
+  sensitive   = true
 }
 
 variable "mtls_port" {
