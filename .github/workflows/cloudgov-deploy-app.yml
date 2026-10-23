@@ -96,5 +96,6 @@ jobs:
       - name: Build Static Site
         env:
           PROJECT: "${{ secrets.PROJECT }}"
+          MAX_WAIT_MINUTES: 25
         if: contains(vars.GENERATE_STATIC_SITE_ON_DEPLOY_SPACES, env.CF_SPACE)
         run: source ./scripts/pipeline/pipeline_wrapper.sh upkeep
