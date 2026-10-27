@@ -14,6 +14,12 @@ name: HTML
 format: html
 weight: 0
 filters:
+  ec_uswds_summary_box_labelledby:
+    id: ec_uswds_summary_box_labelledby
+    provider: ec_uswds
+    status: true
+    weight: -45
+    settings: {  }
   editor_file_reference:
     id: editor_file_reference
     provider: editor
@@ -25,12 +31,6 @@ filters:
     provider: embedded_content
     status: true
     weight: -49
-    settings: {  }
-  ec_uswds_summary_box_labelledby:
-    id: ec_uswds_summary_box_labelledby
-    provider: ec_uswds
-    status: true
-    weight: -45
     settings: {  }
   filter_align:
     id: filter_align
