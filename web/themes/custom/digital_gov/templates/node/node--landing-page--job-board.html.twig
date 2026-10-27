@@ -83,7 +83,7 @@
         {% set aria_id = item.title|clean_unique_id %}
         <article class="card card-job" aria-labelledby="{{ aria_id }}">
           <div class="card-job__content-header">
-            <a href="{{ item.apply_link }}" target="__blank">
+            <a href="{{ item.apply_link }}" target="_blank" rel="noopener noreferrer">
               <h3
                 id="{{ aria_id }}">{{ item.title|check_markup('single_inline_html') }}</h3>
             </a>
@@ -102,7 +102,7 @@
           <div
             class="card-job__apply"
           >
-            <a class="usa-button" href="{{ item.apply_link }}" target="__blank" aria-label="Apply for {{ item.title|striptags|trim }}">
+            <a class="usa-button" href="{{ item.apply_link }}" target="_blank" rel="noopener noreferrer" aria-label="Apply for {{ item.title|striptags|trim }}">
               {{ 'Apply'|t }}
             </a>
           </div>

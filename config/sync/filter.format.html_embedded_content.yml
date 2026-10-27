@@ -4,11 +4,18 @@ status: true
 dependencies:
   module:
     - auto_heading_ids
+    - dg_fields
     - linkit
 name: 'HTML Embedded Content'
 format: html_embedded_content
 weight: 0
 filters:
+  dg_fields_link_noopener:
+    id: dg_fields_link_noopener
+    provider: dg_fields
+    status: true
+    weight: 20
+    settings: {  }
   filter_html:
     id: filter_html
     provider: filter
