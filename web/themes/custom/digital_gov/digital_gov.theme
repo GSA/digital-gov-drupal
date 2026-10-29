@@ -137,6 +137,10 @@ function digital_gov_preprocess_node(array &$variables): void {
       $variables['is_future_event'] = $variables['node']->getCreatedTime() > \Drupal::time()->getRequestTime();
       break;
 
+    case 'resources':
+      digital_gov_add_last_updated($variables);
+      break;
+
     case 'guides':
       digital_gov_preprocess_node_guides($variables);
       break;
@@ -192,6 +196,49 @@ function digital_gov_preprocess_node(array &$variables): void {
   // Ensure it's a number and sanitize it.
   $variables['page_param'] = (is_numeric($page_param)) ? Html::escape($page_param) : NULL;
   $variables['is_first_page'] = $variables['page_param'] === '0' || $variables['page_param'] === NULL;
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for field.html.twig.
+ */
+function digital_gov_preprocess_field(array &$variables): void {
+  $element = $variables['element'];
+  if (($element['#field_name'] ?? '') !== 'body' || ($element['#entity_type'] ?? '') !== 'node') {
+    return;
+  }
+
+  $node = $element['#object'] ?? NULL;
+  if (!$node instanceof NodeInterface || $node->bundle() !== 'guides') {
+    return;
+  }
+
+  // Guide body markup is printed from the field template, which does not
+  // inherit node preprocess variables.
+  digital_gov_add_last_updated($variables, $element['#view_mode'] ?? '');
+}
+
+/**
+ * Adds the automatic last-updated line for a full page.
+ *
+ * Resource pages read these variables from the node template. Guide pages
+ * read them from the body field template.
+ */
+function digital_gov_add_last_updated(array &$variables, ?string $view_mode = NULL): void {
+  $view_mode = $view_mode ?? ($variables['view_mode'] ?? '');
+  if (!in_array($view_mode, ['full', 'default'], TRUE)) {
+    return;
+  }
+
+  $node = $variables['node'] ?? $variables['element']['#object'] ?? NULL;
+  if (!$node instanceof NodeInterface) {
+    return;
+  }
+
+  // Use the site timezone so anonymous and authenticated visitors see one date.
+  $timezone = \Drupal::config('system.date')->get('timezone.default') ?: NULL;
+  $changed = DrupalDateTime::createFromTimestamp($node->getChangedTime(), $timezone);
+  $variables['last_updated'] = $changed->format('F j, Y');
+  $variables['last_updated_iso'] = $changed->format('Y-m-d');
 }
 
 /**
