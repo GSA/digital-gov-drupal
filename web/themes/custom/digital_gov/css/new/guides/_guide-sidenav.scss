@@ -31,3 +31,29 @@
 .dg-guide__main {
   min-width: 0;
 }
+
+// USWDS removes the current-page bar inside a sublist. Restore that bar and
+// use black text so an active child stays distinct from the blue parent link.
+.dg-guide__sidenav .usa-sidenav__sublist .usa-current {
+  color: color("black");
+  position: relative;
+
+  &::after {
+    background-color: color("primary");
+    border-radius: radius("pill");
+    bottom: units(0.5);
+    content: "";
+    display: block;
+    left: units(0.5);
+    position: absolute;
+    top: units(0.5);
+    width: units(0.5);
+  }
+
+  @include at-media("tablet") {
+    &::after {
+      background-color: color("blue-warm-60v");
+      left: 0;
+    }
+  }
+}
