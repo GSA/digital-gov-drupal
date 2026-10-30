@@ -4,19 +4,12 @@ declare(strict_types=1);
 
 namespace Drupal\convert_text;
 
-use Drupal\Component\Utility\Html;
-use Drupal\Core\Url;
-use Drupal\node\Entity\Node;
-use Drupal\taxonomy\Entity\Term;
-use GuzzleHttp\Exception\GuzzleException;
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\Autolink\AutolinkExtension;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\Extension\Table\TableExtension;
 use League\CommonMark\MarkdownConverter;
 use LitEmoji\LitEmoji;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
 
 /**
  * Provides methods to convert migrated text for fields.
@@ -140,34 +133,6 @@ class ConvertText {
   }
 
   /**
-   * Runs conversions that must happen after all content is migrated.
-   */
-  protected static function afterMigrate(string $source_text, string $field_type, string $baseURL = ''): string {
-    switch ($field_type) {
-      case 'plain_text':
-        // Doesn't do anything yet, stubbed here in case we need it later.
-        return $source_text;
-
-      case 'html':
-      case 'html_no_breaks':
-        $source_text = self::fixShortCodes($source_text, $baseURL);
-        $source_text = self::addLinkItMarkup($source_text, $baseURL);
-        // Doesn't like when new lines are in the source text. Autop filter?
-        $source_text = preg_replace('/\R/', "", $source_text);
-        // Or p-tags around embedded content.
-        $source_text = str_replace(
-          ['<p><embedded-content', '</embedded-content></p>'],
-          ['<embedded-content', '</embedded-content>'],
-          $source_text
-        );
-        return $source_text;
-
-      default:
-        throw new \Exception("Invalid \$field_type of $field_type given");
-    }
-  }
-
-  /**
    * Cleans up the markdown to prevent conversion bugs.
    */
   protected static function prepareMarkdown(string $source_text): string {
@@ -227,179 +192,6 @@ class ConvertText {
   }
 
   /**
-   * Update local link tags with LinkIt data attributes.
-   */
-  protected static function addLinkItMarkup(string $source_text, string $baseURL = ''): string {
-    // Consider these domains local.
-    $base_domains = [\Drupal::request()->getHost(), 'digital.gov', 'www.digital.gov'];
-
-    $dom = Html::load($source_text);
-
-    foreach ($dom->getElementsByTagName('a') as $link) {
-      $href = $link->getAttribute('href');
-      if (!$href || str_starts_with($href, 'mailto:') || str_starts_with($href, '#')) {
-        continue;
-      }
-
-      $anchor = '';
-      if (preg_match('/\#(.*)$/', $href, $matches)) {
-        $anchor = $matches[0];
-      }
-
-      // Prepend base URL to relative links.
-      // Starts with a letter or number but no protocol.
-      if ($baseURL
-        && !str_starts_with($href, '/')
-        && preg_match('/^(?![A-Za-z]+?:\/\/)([[:alnum:]]+)/', $href)
-      ) {
-        $href = $baseURL
-          . (!str_ends_with($baseURL, '/') ? '/' : '')
-          . $href;
-      }
-
-      // Add a trailing slash for links with just the domain w/o trailing slash.
-      if (preg_match('/^https?:\/\/(' . implode('|', $base_domains) . ')$/', $href, $matches)) {
-        $href = $matches[0] . '/';
-      }
-      // Now, strip the local domains from links that include them.
-      $href = preg_replace(
-        '/^https?:\/\/(' . implode('|', $base_domains) . ')/',
-        '',
-        $href, count: $replaced);
-      if ($replaced > 0) {
-        // HREF here includes any anchor.
-        $link->setAttribute('href', $href);
-      }
-
-      $host = parse_url($href, PHP_URL_HOST) ?? '';
-      if ($host === '') {
-        $alias = parse_url($href, PHP_URL_PATH);
-
-        $sysPath = \Drupal::service('path_alias.manager')->getPathByAlias($alias);
-
-        // If a link already has all the linkit attributes, leave it be.
-        if (
-          $link->hasAttribute('data-entity-type')
-          && $link->hasAttribute('data-entity-uuid')
-          && $link->hasAttribute('data-entity-substitution')
-        ) {
-          continue;
-        }
-
-        $url = Url::fromUserInput($sysPath);
-
-        if (!$url->isRouted()) {
-          // What do we have here?
-          $client = \Drupal::httpClient();
-
-          $host = \Drupal::request()->getSchemeAndHttpHost();
-          usleep(300000);
-          try {
-            $response = $client->get($host . $sysPath, [
-              // Don't throw exceptions on error codes.
-              'http_errors' => FALSE,
-              'allow_redirects' => [
-                'max' => 10,
-                'track_redirects' => TRUE,
-                'on_redirect' => function (RequestInterface $request, ResponseInterface $response, $uri) {
-                  echo "\n Redirecting: " . $request->getUri() . ' to ' . $uri . "\n";
-                  usleep(300000);
-                },
-              ],
-            ]);
-          }
-          catch (GuzzleException) {
-            trigger_error("Could not follow request " . $host, E_USER_WARNING);
-            continue;
-          }
-
-          if ($response->getStatusCode() > 400) {
-            continue;
-          }
-          if ($response->getStatusCode() === 200) {
-            if ($history = $response->getHeader('X-Guzzle-Redirect-History')) {
-              $finalURI = $history[array_key_last($history)];
-              $redirHost = parse_url($finalURI, PHP_URL_HOST);
-              if (!str_ends_with($host, $redirHost)) {
-                // We were redirected off site. Let's fix the link and move on.
-                $link->setAttribute('href', $finalURI . $anchor);
-                continue;
-              }
-              $redirPath = parse_url($finalURI, PHP_URL_PATH) ?? '/';
-              $url = Url::fromUserInput($redirPath);
-              if (!$url->isRouted()) {
-                // Redirected to an unrouted path, not much we can do here.
-                continue;
-              }
-              // Replace the alias in the href with the internal path.
-              $sysPath = \Drupal::request()->getBasePath() . '/' . $url->getInternalPath();
-            }
-          }
-          else {
-            // Leave 40x links alone.
-            continue;
-          }
-        }
-
-        switch ($url->getRouteName()) {
-          case 'entity.node.canonical':
-            $params = $url->getRouteParameters();
-            $node = Node::load($params['node']);
-            if (!$node) {
-              continue 2;
-            }
-            $entityType = 'node';
-            $uuid = $node->uuid();
-            break;
-
-          case 'entity.taxonomy_term.canonical':
-            $entityType = 'term';
-            $params = $url->getRouteParameters();
-            $term = Term::load($params['taxonomy_term']);
-            if (!$term) {
-              continue 2;
-            }
-            $uuid = $term->uuid();
-            break;
-
-          case '<front>':
-            // Ensure the link to the homepage doesn't have a domain name.
-            // Don't need to add any other attributes or anchor.
-            $link->setAttribute('href', $href);
-            continue 2;
-
-          default:
-            continue 2;
-        }
-
-        // Linkit saves the internal path and renders the alias.
-        $link->setAttribute('href', $sysPath . $anchor);
-        $link->setAttribute('data-entity-type', $entityType);
-        $link->setAttribute('data-entity-uuid', $uuid);
-        $link->setAttribute('data-entity-substitution', 'canonical');
-      }
-    }
-
-    return Html::serialize($dom);
-  }
-
-  /**
-   * Helper for calling the short code fixer service.
-   *
-   * @param string $source_text
-   *   The original source value.
-   * @param string $alias_of_item
-   *   The alias of the item being processed.
-   */
-  public static function fixShortCodes(string $source_text, string $alias_of_item = ''): string {
-    if (empty($alias_of_item)) {
-      $alias_of_item = md5($source_text);
-    }
-    return \Drupal::service('convert_text.shortcode_to_equiv')
-      ->convert($alias_of_item, $source_text);
-  }
-
-  /**
    * Gets text ready to be stored in plain text fields.
    *
    * @param string $source_text
@@ -410,13 +202,6 @@ class ConvertText {
    */
   public static function plainText(string $source_text): string {
     return self::convert($source_text, 'plain_text');
-  }
-
-  /**
-   * Runs post-migration cleanup for plain text fields.
-   */
-  public static function plainTextAfterMigrate(string $source_text, string $baseURL = ''): string {
-    return self::afterMigrate($source_text, 'plain_text', $baseURL);
   }
 
   /**
@@ -433,13 +218,6 @@ class ConvertText {
   }
 
   /**
-   * Runs post-migration cleanup for HTML fields.
-   */
-  public static function htmlTextAfterMigrate(string $source_text, string $baseURL = ''): string {
-    return self::afterMigrate($source_text, 'html', $baseURL);
-  }
-
-  /**
    * Gets text ready to be stored in html text fields without breaks.
    *
    * @var string $source_text
@@ -450,13 +228,6 @@ class ConvertText {
    */
   public static function htmlNoBreaksText(string $source_text): string {
     return self::convert($source_text, 'html_no_breaks');
-  }
-
-  /**
-   * Runs post-migration cleanup for HTML-no-breaks fields.
-   */
-  public static function htmlNoBreaksAfterMigrate(string $source_text, string $baseURL = ''): string {
-    return self::afterMigrate($source_text, 'html_no_breaks', $baseURL);
   }
 
 }
