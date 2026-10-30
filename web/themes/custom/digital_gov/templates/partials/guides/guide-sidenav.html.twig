@@ -21,6 +21,23 @@
 {% if guide_nav %}
   <nav aria-label="{{ 'In this guide'|t }}">
     <ul class="usa-sidenav">
+      {% if guide_kicker_url and guide_kicker_title %}
+        <li class="usa-sidenav__item">
+          <a class="dg-guide__sidenav-back" href="{{ guide_kicker_url }}">
+            <svg
+              class="usa-icon dg-icon dg-icon--small"
+              aria-hidden="true"
+              focusable="false"
+              role="img"
+            >
+              <use
+                xlink:href="{{ drupal_url('/' ~ active_theme_path() ~ '/static/uswds/img/sprite.svg#arrow_back') }}"
+              ></use>
+            </svg>
+            {{ guide_kicker_title }}
+          </a>
+        </li>
+      {% endif %}
       {% for item in guide_nav %}
         <li class="usa-sidenav__item">
           {{ _self.guide_link(item.link, item.is_current) }}

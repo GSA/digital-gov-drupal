@@ -32,10 +32,48 @@
   min-width: 0;
 }
 
-// USWDS removes the current-page bar inside a sublist. Restore that bar and
-// use black text so an active child stays distinct from the blue parent link.
-.dg-guide__sidenav .usa-sidenav__sublist .usa-current {
+// The back arrow sits in extra left padding so its label lines up with the
+// top-level items below. The gap between the arrow and the label is tighter
+// than a standard icon gap.
+$guide-sidenav-back-offset: 1rem + units(0.5);
+
+.dg-guide__sidenav .usa-sidenav:has(.dg-guide__sidenav-back) {
+  > .usa-sidenav__item > a:not(.dg-guide__sidenav-back) {
+    padding-left: units(2) + $guide-sidenav-back-offset;
+  }
+
+  .usa-sidenav__sublist > .usa-sidenav__item > a {
+    padding-left: units(4) + $guide-sidenav-back-offset;
+  }
+}
+
+.dg-guide__sidenav .usa-sidenav a.dg-guide__sidenav-back {
+  align-items: center;
+  column-gap: units(0.5);
+  display: flex;
+}
+
+// Inactive links stay the standard link blue. The current page is black.
+.dg-guide__sidenav .usa-sidenav a:not(.usa-button):not(.usa-current) {
+  &,
+  &:link,
+  &:visited,
+  &:hover {
+    color: color("blue-warm-60v");
+  }
+}
+
+.dg-guide__sidenav .usa-sidenav a.usa-current {
   color: color("black");
+}
+
+// Keep the parent section bold while one of its child pages is current.
+.dg-guide__sidenav .usa-sidenav__item:has(> .usa-sidenav__sublist .usa-current) > a {
+  font-weight: font-weight("bold");
+}
+
+// USWDS removes the current-page bar inside a sublist. Restore that bar.
+.dg-guide__sidenav .usa-sidenav__sublist .usa-current {
   position: relative;
 
   &::after {
