@@ -1,0 +1,57 @@
+{#
+/**
+ * @file
+ * USWDS side navigation for a guide.
+ *
+ * Shows the guide's top-level pages and their child pages so both levels of
+ * the guide information architecture are visible.
+ *
+ * Variables from dg_guide_nav_get_links():
+ * - guide_nav: list of items with link, is_current, and subnav.
+ */
+#}
+
+{% macro guide_link(link, is_current) %}
+  <a
+    href="{{ link.url }}#content-start"
+    {% if is_current %}class="usa-current" aria-current="page"{% endif %}
+  >{{ link.text }}</a>
+{% endmacro %}
+
+{% if guide_nav %}
+  <nav aria-label="{{ 'In this guide'|t }}">
+    <ul class="usa-sidenav">
+      {% if guide_kicker_url and guide_kicker_title %}
+        <li class="usa-sidenav__item">
+          <a class="dg-guide__sidenav-back" href="{{ guide_kicker_url }}">
+            <svg
+              class="usa-icon dg-icon dg-icon--small"
+              aria-hidden="true"
+              focusable="false"
+              role="img"
+            >
+              <use
+                xlink:href="{{ drupal_url('/' ~ active_theme_path() ~ '/static/uswds/img/sprite.svg#arrow_back') }}"
+              ></use>
+            </svg>
+            {{ guide_kicker_title }}
+          </a>
+        </li>
+      {% endif %}
+      {% for item in guide_nav %}
+        <li class="usa-sidenav__item">
+          {{ _self.guide_link(item.link, item.is_current) }}
+          {% if item.subnav is not empty %}
+            <ul class="usa-sidenav__sublist">
+              {% for subitem in item.subnav %}
+                <li class="usa-sidenav__item">
+                  {{ _self.guide_link(subitem.link, subitem.is_current) }}
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+{% endif %}
