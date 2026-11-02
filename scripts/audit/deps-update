@@ -58,6 +58,7 @@
 #                      instead of collecting fresh data (data must be fresh!).
 #   --classify FILE    Maintenance helper: print which failure class the given
 #                      command output would be classified as, then exit.
+#   DIR and FILE are relative to the directory you run the script from.
 #
 # Safety rails:
 #   * Rollback is snapshot-based: composer.json/composer.lock and every npm
@@ -95,6 +96,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
+CALLER_DIR="$PWD"   # path options are relative to where the script was run
 cd "$ROOT_DIR"
 # shellcheck source=lib/reviewed-advisories.sh
 . "$SCRIPT_DIR/lib/reviewed-advisories.sh"
@@ -130,6 +132,18 @@ ORIG_ARGS="$*"    # recorded in composer.log if composer.lock changes
 usage() { awk 'NR==1 {next} /^#/ {sub(/^# ?/, ""); print; next} {exit}' "${BASH_SOURCE[0]}"; }
 info()  { printf '»» %s\n' "$*" >&2; }
 die()   { printf 'ERROR: %s\n' "$*" >&2; exit 1; }
+# optval <option> <value> — the option's value; dies when it is missing.
+optval() {
+  case "${2:-}" in ""|--*) die "$1 needs a value (see --help)" ;; esac
+  printf '%s\n' "$2"
+}
+# optpath <option> <value> — a path option's value, resolved against the
+# directory the script was run from (the script itself runs from the repo root).
+optpath() {
+  local v
+  v="$(optval "$1" "${2:-}")" || exit 1
+  case "$v" in /*) printf '%s\n' "$v" ;; *) printf '%s\n' "$CALLER_DIR/$v" ;; esac
+}
 
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -139,8 +153,8 @@ while [ $# -gt 0 ]; do
     --preflight-only) PREFLIGHT_ONLY=1 ;;
     --composer-only)  DO_NPM=0 ;;
     --npm-only)       DO_COMPOSER=0 ;;
-    --raw-in)         RAW_IN="${2:-}"; shift ;;
-    --classify)       CLASSIFY_FILE="${2:-}"; shift ;;
+    --raw-in)         RAW_IN="$(optpath "$1" "${2:-}")"; shift ;;
+    --classify)       CLASSIFY_FILE="$(optpath "$1" "${2:-}")"; shift ;;
     -h|--help)        usage; exit 0 ;;
     *)                die "unknown option: $1 (see --help)" ;;
   esac

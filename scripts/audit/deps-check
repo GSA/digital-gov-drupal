@@ -31,12 +31,15 @@
 #   scripts/audit/deps-check --raw-out DIR    # also save raw tool output (JSON)
 #   scripts/audit/deps-check --raw-in DIR     # re-render a report from saved raw output
 #
+# DIR is relative to the directory you run the script from.
+#
 # Progress goes to stderr; the report itself is the only thing on stdout.
 
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
+CALLER_DIR="$PWD"   # path options are relative to where the script was run
 cd "$ROOT_DIR"
 # shellcheck source=lib/reviewed-advisories.sh
 . "$SCRIPT_DIR/lib/reviewed-advisories.sh"
@@ -58,13 +61,25 @@ usage() {
 
 info() { printf '»» %s\n' "$*" >&2; }
 die()  { printf 'ERROR: %s\n' "$*" >&2; exit 1; }
+# optval <option> <value> — the option's value; dies when it is missing.
+optval() {
+  case "${2:-}" in ""|--*) die "$1 needs a value (see --help)" ;; esac
+  printf '%s\n' "$2"
+}
+# optpath <option> <value> — a path option's value, resolved against the
+# directory the script was run from (the script itself runs from the repo root).
+optpath() {
+  local v
+  v="$(optval "$1" "${2:-}")" || exit 1
+  case "$v" in /*) printf '%s\n' "$v" ;; *) printf '%s\n' "$CALLER_DIR/$v" ;; esac
+}
 
 while [ $# -gt 0 ]; do
   case "$1" in
     --composer-only) DO_NPM=0 ;;
     --npm-only)      DO_COMPOSER=0 ;;
-    --raw-in)        RAW_IN="${2:-}"; shift ;;
-    --raw-out)       RAW_OUT="${2:-}"; shift ;;
+    --raw-in)        RAW_IN="$(optpath "$1" "${2:-}")"; shift ;;
+    --raw-out)       RAW_OUT="$(optpath "$1" "${2:-}")"; shift ;;
     -h|--help)       usage; exit 0 ;;
     *)               die "unknown option: $1 (see --help)" ;;
   esac

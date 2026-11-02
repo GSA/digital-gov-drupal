@@ -98,6 +98,10 @@ advisory back into the output.
 
 ## Notes
 
+- **Paths:** path options (`--raw-out`, `--raw-in`, `--classify`, `--findings`)
+  are relative to the directory you run the command from. For example,
+  `deps-check --raw-out .` run from the repo root saves the raw JSON there.
+  The scripts themselves always run from the repo root.
 - **Contexts:** the npm targets are `NPM_TARGETS` at the top of `deps-check`
   and `deps-update`. An entry whose context matches no target gets a warning
   and is listed as *unknown context*.

@@ -15,6 +15,7 @@
 #   scripts/audit/deps-flag -i                 # go through the unflagged items one by one
 #   scripts/audit/deps-flag --prune            # drop entries the last run no longer saw reported
 #   scripts/audit/deps-flag --findings FILE    # read another findings file
+#                                              (relative to where you run it)
 #
 #   --ticketed TICKET  a real issue, tracked in TICKET until the fix lands
 #   --ignore           a false positive in this context (needs --ticket and --reason)
@@ -27,11 +28,24 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
+CALLER_DIR="$PWD"   # path options are relative to where the script was run
 cd "$ROOT_DIR"
 
 usage() { awk 'NR==1 {next} /^#/ {sub(/^# ?/, ""); print; next} {exit}' "${BASH_SOURCE[0]}"; }
 info()  { printf '»» %s\n' "$*" >&2; }
 die()   { printf 'ERROR: %s\n' "$*" >&2; exit 1; }
+# optval <option> <value> — the option's value; dies when it is missing.
+optval() {
+  case "${2:-}" in ""|--*) die "$1 needs a value (see --help)" ;; esac
+  printf '%s\n' "$2"
+}
+# optpath <option> <value> — a path option's value, resolved against the
+# directory the script was run from (the script itself runs from the repo root).
+optpath() {
+  local v
+  v="$(optval "$1" "${2:-}")" || exit 1
+  case "$v" in /*) printf '%s\n' "$v" ;; *) printf '%s\n' "$CALLER_DIR/$v" ;; esac
+}
 
 # shellcheck source=lib/reviewed-advisories.sh
 . "$SCRIPT_DIR/lib/reviewed-advisories.sh"
@@ -49,15 +63,15 @@ FINDINGS="$RA_FINDINGS"
 while [ $# -gt 0 ]; do
   case "$1" in
     [0-9]*)          NUMS+=("$1") ;;
-    --ticketed)      STATUS="ticketed"; TICKET="${2:-}"; shift ;;
+    --ticketed)      STATUS="ticketed"; TICKET="$(optval "$1" "${2:-}")"; shift ;;
     --ignore)        STATUS="ignored" ;;
-    --ticket)        TICKET="${2:-}"; shift ;;
-    --reason)        REASON="${2:-}"; shift ;;
-    --review-by)     REVIEW_BY="${2:-}"; shift ;;
-    --show)          SHOW="${2:-}"; shift ;;
+    --ticket)        TICKET="$(optval "$1" "${2:-}")"; shift ;;
+    --reason)        REASON="$(optval "$1" "${2:-}")"; shift ;;
+    --review-by)     REVIEW_BY="$(optval "$1" "${2:-}")"; shift ;;
+    --show)          SHOW="$(optval "$1" "${2:-}")"; shift ;;
     -i|--interactive) INTERACTIVE=1 ;;
     --prune)         PRUNE=1 ;;
-    --findings)      FINDINGS="${2:-}"; shift ;;
+    --findings)      FINDINGS="$(optpath "$1" "${2:-}")"; shift ;;
     -h|--help)       usage; exit 0 ;;
     *)               die "unknown option: $1 (see --help)" ;;
   esac
