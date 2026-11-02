@@ -39,10 +39,12 @@
 #   * The final summary re-audits and, for each remaining high/critical
 #     vulnerability (Drupal scale: "Moderately critical" and up), prints either
 #     the command that fixes it (e.g. a --minor run) or ready-to-file ticket
-#     text with the advisory details and remediation steps. Advisories listed
-#     in scripts/audit/false-positives.json for that context are left out of
-#     both and listed with their ticket and reason instead (entry format: the
-#     header of scripts/audit/lib/false-positives.sh).
+#     text with the advisory details and remediation steps. Each item is
+#     numbered and also saved to scripts/audit/.last-findings.json (local,
+#     gitignored) so scripts/audit/deps-flag can record it as ticketed or
+#     ignored by number. Advisories already recorded in
+#     scripts/audit/reviewed-advisories.json are left out and listed with their
+#     status instead. See scripts/audit/README.md for the workflow.
 #
 # Other flags:
 #   --dry-run          Interview + plan, then PRINT the commands instead of
@@ -94,8 +96,8 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
 cd "$ROOT_DIR"
-# shellcheck source=lib/false-positives.sh
-. "$SCRIPT_DIR/lib/false-positives.sh"
+# shellcheck source=lib/reviewed-advisories.sh
+. "$SCRIPT_DIR/lib/reviewed-advisories.sh"
 
 NPM_TARGETS=(
   "drupal-theme|Drupal theme|web/themes/custom/digital_gov"
@@ -182,14 +184,14 @@ PLAN="$TMP/plan"; mkdir -p "$PLAN"
 LAST_OUT="$TMP/last-cmd.out"
 : >"$LAST_OUT"
 
-# Load the false-positive list now: an invalid file should stop the run before
-# anything changes, not drop the ticket output at the end.
-FP_CONTEXTS=(composer.lock)
+# Load the reviewed-advisory list now: an invalid file should stop the run
+# before anything changes, not drop the ticket output at the end.
+RA_CONTEXTS=(composer.lock)
 for t in "${NPM_TARGETS[@]}"; do
   IFS='|' read -r _ _ dir <<<"$t"
-  FP_CONTEXTS+=("$(fp_npm_context "$dir")")
+  RA_CONTEXTS+=("$(ra_npm_context "$dir")")
 done
-fp_load "$TMP/fp.json" "${FP_CONTEXTS[@]}"
+ra_load "$TMP/reviewed.json" "${RA_CONTEXTS[@]}"
 
 # ---------------------------------------------------------------------------
 # Preconditions
@@ -1523,6 +1525,9 @@ fi
 # Remaining high/critical vulnerabilities: instructions or ticket text
 # ---------------------------------------------------------------------------
 
+# Both programs emit one finding object per item: kind (action|ticket),
+# package, context, scope, severity, title, advisories[] (what deps-flag
+# records), and the text of the block (headline + body) printed below.
 cat >"$TMP/tickets-composer.jq" <<'EOF'
 def sevof($t):
   . as $s
@@ -1550,11 +1555,11 @@ def advlist:
 | to_entries[]
 | .key as $p
 | (.value | advlist[])
-| select(fp_active(composer_ids; "composer.lock"; $p) == null)
+| select(ra_active(composer_ids; "composer.lock"; $p) == null)
 | (.title // "advisory") as $title
 | ((.severity // "") | sevof($title)) as $sev
 | select($sev | actionable)
-| (.advisoryId // "?") as $aid
+| (.advisoryId // .cve // "?") as $aid
 | (.cve // "n/a") as $cve
 | (.link // "") as $link
 | (.affectedVersions // "?") as $aff
@@ -1562,33 +1567,36 @@ def advlist:
 | ($rows[$p] // null) as $r
 | if $r != null and ($r.kind == "pin" or (($r.kind == "ask" or $r.kind == "auto")
       and ($r.jump == "patch" or $r.jump == "minor"))) then
-    "ACTION (no ticket needed): \($p) — \($sev), \($cve) (\($aid))\n"
-    + "  An update within reach likely fixes this: \($r.cur) -> \($r.target) (\($r.jump)).\n"
-    + "  Run: scripts/audit/deps-update\(if $r.jump == "minor" then " --minor" else "" end)  and approve \($p).\n"
-    + "  Verify the fixed version in the advisory: \($link)\n"
+    { kind: "action",
+      headline: "\($p) — \($sev), \($cve) (\($aid))",
+      body: ("  An update within reach likely fixes this: \($r.cur) -> \($r.target) (\($r.jump)).\n"
+        + "  Run: scripts/audit/deps-update\(if $r.jump == "minor" then " --minor" else "" end)  and approve \($p).\n"
+        + "  Verify the fixed version in the advisory: \($link)\n") }
   else
-    "--- TICKET ---------------------------------------------------------\n"
-    + "Title: \($title)\n"
-    + "Description:\n"
-    + "  \($p) (installed \($cur)) is affected by \($cve) — severity: \($sev).\n"
-    + "  Advisory: \($aid) — \($link)\n"
-    + "  Context: composer.lock\n"
-    + "  Affected versions: \($aff)\n"
-    + "  Suggested remediation:\n"
-    + (if $r != null then
-        "    - A \($r.jump) update exists (\($r.cur) -> \($r.target)) but the constraint `\($r.constraint)` blocks it.\n"
-        + "    - Run `scripts/audit/deps-update --major` and approve \($p), then regression-test; or\n"
-        + "      schedule this as its own task using the advisory's fixed release.\n"
-      else
-        "    - \($p) is not a direct dependency (or has no published update). Run\n"
-        + "      `./composer.sh why \($p)` to find which package requires it.\n"
-        + "    - If the advisory's fixed release is within the parents' constraints\n"
-        + "      (compare \"Affected versions\" above), a targeted\n"
-        + "      `./composer.sh update \($p) --with-all-dependencies` takes it directly;\n"
-        + "      otherwise update the parent package(s) or monitor upstream.\n"
-      end)
-    + "--------------------------------------------------------------------\n"
+    { kind: "ticket",
+      body: ("Title: \($title)\n"
+        + "Description:\n"
+        + "  \($p) (installed \($cur)) is affected by \($cve) — severity: \($sev).\n"
+        + "  Advisory: \($aid) — \($link)\n"
+        + "  Context: composer.lock\n"
+        + "  Affected versions: \($aff)\n"
+        + "  Suggested remediation:\n"
+        + (if $r != null then
+            "    - A \($r.jump) update exists (\($r.cur) -> \($r.target)) but the constraint `\($r.constraint)` blocks it.\n"
+            + "    - Run `scripts/audit/deps-update --major` and approve \($p), then regression-test; or\n"
+            + "      schedule this as its own task using the advisory's fixed release.\n"
+          else
+            "    - \($p) is not a direct dependency (or has no published update). Run\n"
+            + "      `./composer.sh why \($p)` to find which package requires it.\n"
+            + "    - If the advisory's fixed release is within the parents' constraints\n"
+            + "      (compare \"Affected versions\" above), a targeted\n"
+            + "      `./composer.sh update \($p) --with-all-dependencies` takes it directly;\n"
+            + "      otherwise update the parent package(s) or monitor upstream.\n"
+          end)) }
   end
+| . + { package: $p, context: "composer.lock", scope: "Composer", severity: $sev,
+        title: $title, installed: $cur,
+        advisories: [{id: $aid, severity: $sev, title: $title, link: $link}] }
 EOF
 
 cat >"$TMP/tickets-npm.jq" <<'EOF'
@@ -1599,11 +1607,11 @@ def actionable:
 | to_entries[]
 | .value
 | .name as $p
-# This package's own advisories, worst first, less known false positives.
-# String entries in .via are other packages in the chain, which get their own
-# entry. Severity comes from what is left: npm's .severity also counts the
-# false positives and everything the package pulls in.
-| ([.via[]? | objects | select(fp_active(npm_ids; $ctx; $p) == null)]
+# This package's own advisories, worst first, less reviewed ones. String
+# entries in .via are other packages in the chain, which get their own entry.
+# Severity comes from what is left: npm's .severity also counts the reviewed
+# advisories and everything the package pulls in.
+| ([.via[]? | objects | select(ra_active(npm_ids; $ctx; $p) == null)]
    | unique_by(npm_id) | sort_by(((.severity // "") | worstfirst), npm_id)) as $advs
 | select(($advs | length) > 0)
 | ($advs[0].severity // "") as $sev
@@ -1613,54 +1621,60 @@ def actionable:
 | (.fixAvailable) as $fix
 | ([.effects[]?] | join(", ")) as $eff
 | if $fix == true then
-    "ACTION (no ticket needed): \($p) — \($sev) in \($scope)\n"
-    + "  An in-range fix exists; the default scripts/audit/deps-update run applies it\n"
-    + "  via npm audit fix. Seeing this after a full run usually means the fix\n"
-    + "  landed only partially — run `npm audit fix` in \($dir) directly.\n"
-    + "  Advisories:\n\($list)"
+    { kind: "action",
+      headline: "\($p) — \($sev) in \($scope)",
+      body: ("  An in-range fix exists; the default scripts/audit/deps-update run applies it\n"
+        + "  via npm audit fix. Seeing this after a full run usually means the fix\n"
+        + "  landed only partially — run `npm audit fix` in \($dir) directly.\n"
+        + "  Advisories:\n\($list)") }
   elif ($fix | type) == "object" and (($fix.isSemVerMajor // false) | not) then
-    "ACTION (no ticket needed): \($p) — \($sev) in \($scope)\n"
-    + "  Fixed by updating \($fix.name) to \($fix.version) (non-major).\n"
-    + "  Run: scripts/audit/deps-update --minor  and approve \($fix.name) for \($scope).\n"
-    + "  Advisories:\n\($list)"
+    { kind: "action",
+      headline: "\($p) — \($sev) in \($scope)",
+      body: ("  Fixed by updating \($fix.name) to \($fix.version) (non-major).\n"
+        + "  Run: scripts/audit/deps-update --minor  and approve \($fix.name) for \($scope).\n"
+        + "  Advisories:\n\($list)") }
   else
-    "--- TICKET ---------------------------------------------------------\n"
-    + "Title: \($title)\n"
-    + "Description:\n"
-    + "  \($p) (severity: \($sev)) in \($scope) (\($dir)).\n"
-    + (if $eff != "" then "  Pulled in via: \($eff).\n" else "" end)
-    + "  Context: \($ctx)\n"
-    + "  Advisories:\n\($list)"
-    + "  Suggested remediation:\n"
-    + (if ($fix | type) == "object" then
-        "    - The fix requires \($fix.name)@\($fix.version) (a MAJOR update).\n"
-        + "    - Run `scripts/audit/deps-update --major` and approve \($fix.name), then test\n"
-        + "      \($scope); or schedule this as its own task.\n"
-      else
-        "    - No complete fix is available yet (npm reports fixAvailable: false).\n"
-        + "    - Monitor upstream; `npm ls \($p)` in \($dir) shows the dependency path.\n"
-      end)
-    + "--------------------------------------------------------------------\n"
+    { kind: "ticket",
+      body: ("Title: \($title)\n"
+        + "Description:\n"
+        + "  \($p) (severity: \($sev)) in \($scope) (\($dir)).\n"
+        + (if $eff != "" then "  Pulled in via: \($eff).\n" else "" end)
+        + "  Context: \($ctx)\n"
+        + "  Advisories:\n\($list)"
+        + "  Suggested remediation:\n"
+        + (if ($fix | type) == "object" then
+            "    - The fix requires \($fix.name)@\($fix.version) (a MAJOR update).\n"
+            + "    - Run `scripts/audit/deps-update --major` and approve \($fix.name), then test\n"
+            + "      \($scope); or schedule this as its own task.\n"
+          else
+            "    - No complete fix is available yet (npm reports fixAvailable: false).\n"
+            + "    - Monitor upstream; `npm ls \($p)` in \($dir) shows the dependency path.\n"
+          end)) }
   end
+| . + { package: $p, context: $ctx, scope: $scope, severity: $sev, title: $title,
+        advisories: ($advs | map({id: npm_id, severity: (.severity // "?"),
+                                  title: (.title // "advisory"), link: (.url // "")})) }
 EOF
 
 echo
 echo "================  REMAINING HIGH/CRITICAL VULNERABILITIES  ================"
 echo '(includes Drupal severities "Moderately critical" and up; re-audited just now)'
-: >"$TMP/remediation.txt"
+: >"$TMP/findings.ndjson"
 POST="$TMP/post"; mkdir -p "$POST"
-FP_SPECS=()
+RA_SPECS=()
+RA_AUDITED=()
 if [ "$DO_COMPOSER" = 1 ]; then
   info "re-auditing composer..."
   composer_run audit --format=json --no-interaction >"$POST/composer-audit.json" 2>/dev/null || true
   jq -e . "$POST/composer-audit.json" >/dev/null 2>&1 || echo '{}' >"$POST/composer-audit.json"
-  jq -r "$FP_JQ_DEFS
+  jq -c "$RA_JQ_DEFS
 $(cat "$TMP/tickets-composer.jq")" \
         --rawfile plan "$PLAN/composer.tsv" \
         --slurpfile lock composer.lock \
-        --slurpfile fpl "$TMP/fp.json" --arg today "$FP_TODAY" \
-        "$POST/composer-audit.json" >>"$TMP/remediation.txt" 2>/dev/null || true
-  FP_SPECS+=("composer|composer.lock|$POST/composer-audit.json")
+        --slurpfile reviewed "$TMP/reviewed.json" --arg today "$RA_TODAY" \
+        "$POST/composer-audit.json" >>"$TMP/findings.ndjson" 2>/dev/null || true
+  RA_SPECS+=("composer|composer.lock|$POST/composer-audit.json")
+  RA_AUDITED+=(composer.lock)
 fi
 if [ "$DO_NPM" = 1 ]; then
   for t in "${NPM_TARGETS[@]}"; do
@@ -1670,36 +1684,64 @@ if [ "$DO_NPM" = 1 ]; then
     jq -e . "$POST/npm-audit--$slug.json" >/dev/null 2>&1 || echo '{}' >"$POST/npm-audit--$slug.json"
     # $scope, not $label: "label" is a reserved word in jq 1.6, where the
     # variable $label is a compile error (jq 1.7+ accepts it).
-    jq -r "$FP_JQ_DEFS
+    jq -c "$RA_JQ_DEFS
 $(cat "$TMP/tickets-npm.jq")" \
-          --arg scope "$label" --arg dir "$dir" --arg ctx "$(fp_npm_context "$dir")" \
-          --slurpfile fpl "$TMP/fp.json" --arg today "$FP_TODAY" \
-          "$POST/npm-audit--$slug.json" >>"$TMP/remediation.txt" 2>/dev/null || true
-    FP_SPECS+=("npm|$(fp_npm_context "$dir")|$POST/npm-audit--$slug.json")
+          --arg scope "$label" --arg dir "$dir" --arg ctx "$(ra_npm_context "$dir")" \
+          --slurpfile reviewed "$TMP/reviewed.json" --arg today "$RA_TODAY" \
+          "$POST/npm-audit--$slug.json" >>"$TMP/findings.ndjson" 2>/dev/null || true
+    RA_SPECS+=("npm|$(ra_npm_context "$dir")|$POST/npm-audit--$slug.json")
+    RA_AUDITED+=("$(ra_npm_context "$dir")")
   done
 fi
-TICKETS=0
-ACTIONS=0
-if [ -s "$TMP/remediation.txt" ]; then
+
+# Number the findings (deps-flag refers to them by number) and render each.
+jq -s '
+  to_entries | map(.key as $k | .value | . + {n: ($k + 1)})
+  | map(. + { text: (
+      if .kind == "action" then "ACTION #\(.n) (no ticket needed): \(.headline)\n\(.body)"
+      else ("--- TICKET #\(.n) " + "--------------------------------------------------------------------")[0:68]
+        + "\n" + .body
+        + "--------------------------------------------------------------------\n"
+      end ) } | del(.headline, .body))
+' "$TMP/findings.ndjson" >"$TMP/findings.json"
+TICKETS="$(jq '[.[] | select(.kind == "ticket")] | length' "$TMP/findings.json")"
+ACTIONS="$(jq '[.[] | select(.kind == "action")] | length' "$TMP/findings.json")"
+if [ "$((TICKETS + ACTIONS))" -gt 0 ]; then
   echo
-  cat "$TMP/remediation.txt"
-  TICKETS="$(grep -c '^--- TICKET' "$TMP/remediation.txt" || true)"
-  ACTIONS="$(grep -c '^ACTION (no ticket needed)' "$TMP/remediation.txt" || true)"
+  jq -r '.[].text' "$TMP/findings.json"
 else
   echo
   echo "None — no high/critical vulnerabilities remain in these dependencies."
   echo "(Lower-severity items may exist; see scripts/audit/deps-check.)"
 fi
-FP_STALE=0
-if [ "$(jq length "$TMP/fp.json")" != 0 ]; then
+
+RA_KNOWN="$(printf '%s\n' "${RA_CONTEXTS[@]}" | jq -R . | jq -sc .)"
+ra_states "$TMP/reviewed.json" "$RA_KNOWN" ${RA_SPECS[@]+"${RA_SPECS[@]}"} >"$TMP/ra-states.json"
+RA_STALE="$(jq '[.[] | select(.state == "not-reported" or .state == "overdue" or .state == "unknown-context")] | length' "$TMP/ra-states.json")"
+if [ "$(jq length "$TMP/ra-states.json")" != 0 ]; then
   echo
-  echo "Known false positives (scripts/audit/false-positives.json) — suppressed"
+  echo "Reviewed advisories (scripts/audit/reviewed-advisories.json) — suppressed"
   echo "entries are left out above:"
-  fp_status "$TMP/fp.json" "$(printf '%s\n' "${FP_CONTEXTS[@]}" | jq -R . | jq -sc .)" \
-    ${FP_SPECS[@]+"${FP_SPECS[@]}"} >"$TMP/fp-status.txt"
-  sed 's/^/  /' "$TMP/fp-status.txt"
-  FP_STALE="$(grep -cE '^- \[(no longer reported|REVIEW OVERDUE|unknown context)' "$TMP/fp-status.txt" || true)"
+  ra_render <"$TMP/ra-states.json" | sed 's/^/  /'
 fi
+
+# Save the findings for scripts/audit/deps-flag. Lock hashes let it warn when
+# the findings no longer describe the working tree.
+LOCKS="{}"
+for ctx in ${RA_AUDITED[@]+"${RA_AUDITED[@]}"}; do
+  LOCKS="$(jq -c --arg c "$ctx" --arg h "$(git hash-object -- "$ctx" 2>/dev/null || echo '?')" '. + {($c): $h}' <<<"$LOCKS")"
+done
+jq -n --arg generated "$(date '+%Y-%m-%d %H:%M %Z')" \
+      --arg branch "$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo '?')" \
+      --arg commit "$(git rev-parse --short HEAD 2>/dev/null || echo '?')" \
+      --argjson contexts "$RA_KNOWN" \
+      --argjson locks "$LOCKS" \
+      --slurpfile findings "$TMP/findings.json" \
+      --slurpfile reviewed "$TMP/ra-states.json" '
+  { generated: $generated, branch: $branch, commit: $commit,
+    contexts: $contexts, locks: $locks,
+    findings: $findings[0], reviewed: $reviewed[0] }
+' >"$TMP/last-findings.json" && mv -f "$TMP/last-findings.json" "$RA_FINDINGS"
 
 echo
 echo "Nothing has been committed. Suggested next steps:"
@@ -1712,11 +1754,11 @@ step "Sanity checks:     ./robo.sh validate:phpstan   /   ./robo.sh validate:twi
 step "Test locally:      reload your lando site and spot-check pages/styles (the theme build was already verified by this run)."
 step "Commit in logical chunks (composer.json/lock + composer.log vs each npm dir)."
 if [ "${ACTIONS:-0}" -gt 0 ]; then
-  step "Act on the $ACTIONS ACTION item(s) above — each names the command that fixes it (no ticket needed)."
+  step "Act on the $ACTIONS ACTION item(s) above — each names the command that fixes it. To defer one to a ticket instead: scripts/audit/deps-flag <#> --ticketed <TICKET>."
 fi
 if [ "${TICKETS:-0}" -gt 0 ]; then
-  step "File the $TICKETS ticket(s) above: copy each Title/Description block into a new ticket so the remaining vulnerabilities stay tracked. Check for an existing ticket first — these recur each run until the update lands. One that does not apply to this site belongs in scripts/audit/false-positives.json instead (its advisory ID and context are in the block), with the ticket that records the review."
+  step "File the $TICKETS ticket(s) above (copy each Title/Description block), then record them so they stop recurring: scripts/audit/deps-flag <#>... --ticketed <TICKET>. One that does not apply to this site: scripts/audit/deps-flag <#> --ignore --ticket <TICKET> --reason \"...\". Run scripts/audit/deps-flag alone to list the items again, or with -i to go through them one by one."
 fi
-if [ "${FP_STALE:-0}" -gt 0 ]; then
-  step "Tidy scripts/audit/false-positives.json: $FP_STALE entr$( [ "$FP_STALE" = 1 ] && echo y || echo ies ) above are no longer reported, overdue for review, or name an unknown context."
+if [ "${RA_STALE:-0}" -gt 0 ]; then
+  step "Tidy scripts/audit/reviewed-advisories.json — reviewed entries needing attention above: $RA_STALE (no longer reported, overdue for review, or an unknown context). scripts/audit/deps-flag --prune removes the no-longer-reported ones."
 fi
