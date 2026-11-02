@@ -8,6 +8,10 @@
 #   * abandoned Composer packages
 #   * exact-pinned packages that are holding back newer releases,
 #     including the latest patch release within the pinned minor
+#   * the status of each known false positive in
+#     scripts/audit/false-positives.json (format: scripts/audit/lib/
+#     false-positives.sh). Matching advisories stay in the tables, marked, and
+#     are counted separately in the summary.
 #
 # Covers:
 #   * Composer  — Drupal core, contrib modules, PHP libraries
@@ -35,6 +39,8 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
 cd "$ROOT_DIR"
+# shellcheck source=lib/false-positives.sh
+. "$SCRIPT_DIR/lib/false-positives.sh"
 
 # slug | human label | path relative to repo root
 NPM_TARGETS=(
@@ -70,6 +76,12 @@ done
 command -v jq >/dev/null 2>&1 || die "jq 1.6 or newer is required on the host (brew install jq)"
 
 JQDIR="$(mktemp -d)"
+FP_CONTEXTS=(composer.lock)
+for t in "${NPM_TARGETS[@]}"; do
+  IFS='|' read -r _ _ dir <<<"$t"
+  FP_CONTEXTS+=("$(fp_npm_context "$dir")")
+done
+fp_load "$JQDIR/fp.json" "${FP_CONTEXTS[@]}"
 if [ -n "$RAW_IN" ]; then
   [ -d "$RAW_IN" ] || die "--raw-in directory not found: $RAW_IN"
   RAW="$RAW_IN"
@@ -233,6 +245,13 @@ def advlist:
     (if (has("advisoryId") or has("packageName") or has("title"))
      then [.] else [.[]?] end)
   else [] end;
+# Summary cell from a list of "is a known false positive" flags, one per
+# advisory: the real count, plus the false positives counted apart.
+def fpcell:
+  ([.[] | select(. | not)] | length) as $n
+  | ([.[] | select(.)] | length) as $f
+  | "\($n)\(if $f > 0 then " (+\($f) FP)" else "" end)";
+def fpnote: if . == null then "" else " — *false positive: \(.ticket)*" end;
 EOF
 
   cat >"$JQDIR/composer-updates.jq" <<'EOF'
@@ -271,12 +290,13 @@ else
            cve: (.cve // "n/a"),
            title: (.title // "advisory"),
            aff: (.affectedVersions // "?"),
-           link: (.link // "") } ]) as $rows
+           link: (.link // ""),
+           fp: fp_active(composer_ids; "composer.lock"; $p) } ]) as $rows
   | ( if ($rows | length) == 0 then "No known security advisories."
       else
         ( [ "| Package | Severity | CVE | Affected versions | Advisory |",
             "|---|---|---|---|---|" ]
-          + ($rows | sort_by(.sev) | map("| \(.p) | \(.sev) | \(.cve) | `\(.aff)` | [\(.title)](\(.link)) |"))
+          + ($rows | sort_by(.sev) | map("| \(.p) | \(.sev) | \(.cve) | `\(.aff)` | [\(.title)](\(.link))\(.fp | fpnote) |"))
         ) | join("\n")
       end )
     + ( if ($ab | length) > 0 then
@@ -353,13 +373,29 @@ if has("__error__") then "> ⚠️ `npm audit` could not run: \(.__error__)"
 else
   (.metadata.vulnerabilities // {}) as $m
   | ($m.total // 0) as $tot
-  | if $tot == 0 then "No known vulnerabilities."
+  # Each advisory once, from the vulnerable package itself (string entries
+  # in .via are other packages in the chain).
+  | ([ (.vulnerabilities // {}) | .[] | .name as $p | .via[]? | objects
+       | { p: $p,
+           sev: (.severity // "?"),
+           id: npm_id,
+           title: (.title // "advisory"),
+           link: (.url // ""),
+           range: (.range // "?"),
+           fp: fp_active(npm_ids; $ctx; $p) } ]
+     | unique_by([.p, .id]) | sort_by((.sev | worstfirst), .p, .id)) as $rows
+  | if $tot == 0 and ($rows | length) == 0 then "No known vulnerabilities."
     else
-      "**\($tot) known vulnerabilities** — critical: \($m.critical // 0), high: \($m.high // 0), moderate: \($m.moderate // 0), low: \($m.low // 0), info: \($m.info // 0)."
+      "npm counts **\($tot) vulnerable packages** — critical: \($m.critical // 0), high: \($m.high // 0), moderate: \($m.moderate // 0), low: \($m.low // 0), info: \($m.info // 0) — from **\($rows | length) distinct advisories**."
       + ( [ (.vulnerabilities // {}) | to_entries[] | .value
             | select(.isDirect == true) | "\(.name) (\(.severity))" ]
           | if length > 0 then "\n\nDirect dependencies affected: " + join(", ") + "."
             else "\n\nNo *direct* dependencies affected (transitive only)." end )
+      + "\n\n"
+      + ( [ "| Package | Severity | Advisory | Vulnerable versions |",
+            "|---|---|---|---|" ]
+          + ($rows | map("| \(.p) | \(.sev) | [\(.id)](\(.link)): \(.title)\(.fp | fpnote) | `\(.range)` |"))
+        | join("\n") )
     end
 end
 EOF
@@ -371,8 +407,9 @@ EOF
                  ok: ((.["latest-status"] // "") == "semver-safe-update") })) as $c
 | (if ($audit[0] | has("__error__")) then "?"
    else ([ ($audit[0].advisories // {})
-           | if type == "object" then to_entries[] | (.value | advlist[])
-             else empty end ] | length)
+           | if type == "object" then to_entries[] | .key as $p | (.value | advlist[])
+               | fp_active(composer_ids; "composer.lock"; $p) != null
+             else empty end ] | fpcell)
    end) as $adv
 | "| Composer (Drupal) | \($adv) | \([$c[] | select(.jump == "patch")] | length) | \([$c[] | select(.jump == "minor")] | length) | \([$c[] | select(.jump == "major")] | length) | \([$c[] | select(.ok | not)] | length) |"
 EOF
@@ -387,7 +424,9 @@ else
           latest: (.latest // "?") })
     | map(. + { jump: jump(.base; .latest), ok: (.wanted != .base) }) ) as $c
   | (if ($audit[0] | has("__error__")) then "?"
-     else ($audit[0].metadata.vulnerabilities.total // 0) end) as $adv
+     else ([ ($audit[0].vulnerabilities // {}) | .[] | .name as $p | .via[]? | objects
+             | {k: [$p, npm_id], fp: (fp_active(npm_ids; $ctx; $p) != null)} ]
+           | unique_by(.k) | map(.fp) | fpcell) end) as $adv
   | "| npm — \($area) | \($adv) | \([$c[] | select(.jump == "patch")] | length) | \([$c[] | select(.jump == "minor")] | length) | \([$c[] | select(.jump == "major")] | length) | \([$c[] | select(.ok | not)] | length) |"
 end
 EOF
@@ -400,7 +439,9 @@ render() {
     echo "_Not collected._"
     return 0
   fi
-  jq -r "$(cat "$JQDIR/lib.jq" "$JQDIR/$prog")" "$@" "$input"
+  jq -r "$FP_JQ_DEFS
+$(cat "$JQDIR/lib.jq" "$JQDIR/$prog")" \
+    --slurpfile fpl "$JQDIR/fp.json" --arg today "$FP_TODAY" "$@" "$input"
 }
 
 # ---------------------------------------------------------------------------
@@ -455,7 +496,8 @@ SHA="$(git rev-parse --short HEAD 2>/dev/null || echo '?')"
   echo
   echo "## Summary"
   echo
-  echo 'One row per dependency area. *Security advisories* counts known vulnerabilities;'
+  echo 'One row per dependency area. *Security advisories* counts distinct advisories;'
+  echo 'known false positives (see the end of this report) are counted apart as `(+N FP)`.'
   echo '*Patch/Minor/Major* count available updates by jump size; *Blocked/pinned* counts'
   echo 'updates that a plain `composer update` / `npm update` would **not** take — each of'
   echo 'those needs a human decision.'
@@ -473,7 +515,7 @@ SHA="$(git rev-parse --short HEAD 2>/dev/null || echo '?')"
       # $area, not $label: "label" is a reserved word in jq 1.6, where the
       # variable $label is a compile error (jq 1.7+ accepts it).
       render summary-npm.jq "$RAW/npm-outdated--$slug.json" \
-        --arg area "$label" \
+        --arg area "$label" --arg ctx "$(fp_npm_context "$dir")" \
         --slurpfile audit "$RAW/npm-audit--$slug.json"
     done
   fi
@@ -523,9 +565,12 @@ SHA="$(git rev-parse --short HEAD 2>/dev/null || echo '?')"
       echo
       echo 'Known vulnerabilities among this package.json'"'"'s dependencies. "Direct" ones'
       echo 'are packages this project lists itself — fix by updating them; the rest are'
-      echo 'pulled in indirectly.'
+      echo 'pulled in indirectly. npm counts every package in a vulnerable chain, so its'
+      echo 'package count runs higher than the advisory count; the table lists each'
+      echo 'advisory once, on the package it is published against. npm'"'"'s counts and the'
+      echo 'direct-dependency list include known false positives.'
       echo
-      render npm-audit.jq "$RAW/npm-audit--$slug.json"
+      render npm-audit.jq "$RAW/npm-audit--$slug.json" --arg ctx "$(fp_npm_context "$dir")"
       echo
       echo "### Available updates"
       echo
@@ -538,6 +583,31 @@ SHA="$(git rev-parse --short HEAD 2>/dev/null || echo '?')"
       echo
     done
   fi
+
+  echo "## Known false positives"
+  echo
+  echo 'Advisories reviewed and found not to apply in one context, recorded in'
+  echo '`scripts/audit/false-positives.json` (entry format: the header of'
+  echo '`scripts/audit/lib/false-positives.sh`). *suppressed* entries are marked in'
+  echo 'the tables above, and `scripts/audit/deps-update` does not raise ACTION or'
+  echo 'TICKET items for them. An entry whose advisory is *no longer reported* can be'
+  echo 'removed; one past its `review_by` date is reported again until re-reviewed.'
+  echo
+  if [ "$(jq length "$JQDIR/fp.json")" = 0 ]; then
+    echo '_None recorded._'
+  else
+    FP_SPECS=()
+    [ "$DO_COMPOSER" = 1 ] && FP_SPECS+=("composer|composer.lock|$RAW/composer-audit.json")
+    if [ "$DO_NPM" = 1 ]; then
+      for t in "${NPM_TARGETS[@]}"; do
+        IFS='|' read -r slug label dir <<<"$t"
+        FP_SPECS+=("npm|$(fp_npm_context "$dir")|$RAW/npm-audit--$slug.json")
+      done
+    fi
+    fp_status "$JQDIR/fp.json" "$(printf '%s\n' "${FP_CONTEXTS[@]}" | jq -R . | jq -sc .)" \
+      ${FP_SPECS[@]+"${FP_SPECS[@]}"}
+  fi
+  echo
 
   echo "## Notes"
   echo

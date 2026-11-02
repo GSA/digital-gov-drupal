@@ -39,7 +39,10 @@
 #   * The final summary re-audits and, for each remaining high/critical
 #     vulnerability (Drupal scale: "Moderately critical" and up), prints either
 #     the command that fixes it (e.g. a --minor run) or ready-to-file ticket
-#     text with the advisory details and remediation steps.
+#     text with the advisory details and remediation steps. Advisories listed
+#     in scripts/audit/false-positives.json for that context are left out of
+#     both and listed with their ticket and reason instead (entry format: the
+#     header of scripts/audit/lib/false-positives.sh).
 #
 # Other flags:
 #   --dry-run          Interview + plan, then PRINT the commands instead of
@@ -91,6 +94,8 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
 cd "$ROOT_DIR"
+# shellcheck source=lib/false-positives.sh
+. "$SCRIPT_DIR/lib/false-positives.sh"
 
 NPM_TARGETS=(
   "drupal-theme|Drupal theme|web/themes/custom/digital_gov"
@@ -176,6 +181,15 @@ trap 'rm -rf "$TMP"' EXIT
 PLAN="$TMP/plan"; mkdir -p "$PLAN"
 LAST_OUT="$TMP/last-cmd.out"
 : >"$LAST_OUT"
+
+# Load the false-positive list now: an invalid file should stop the run before
+# anything changes, not drop the ticket output at the end.
+FP_CONTEXTS=(composer.lock)
+for t in "${NPM_TARGETS[@]}"; do
+  IFS='|' read -r _ _ dir <<<"$t"
+  FP_CONTEXTS+=("$(fp_npm_context "$dir")")
+done
+fp_load "$TMP/fp.json" "${FP_CONTEXTS[@]}"
 
 # ---------------------------------------------------------------------------
 # Preconditions
@@ -1536,9 +1550,11 @@ def advlist:
 | to_entries[]
 | .key as $p
 | (.value | advlist[])
+| select(fp_active(composer_ids; "composer.lock"; $p) == null)
 | (.title // "advisory") as $title
 | ((.severity // "") | sevof($title)) as $sev
 | select($sev | actionable)
+| (.advisoryId // "?") as $aid
 | (.cve // "n/a") as $cve
 | (.link // "") as $link
 | (.affectedVersions // "?") as $aff
@@ -1546,7 +1562,7 @@ def advlist:
 | ($rows[$p] // null) as $r
 | if $r != null and ($r.kind == "pin" or (($r.kind == "ask" or $r.kind == "auto")
       and ($r.jump == "patch" or $r.jump == "minor"))) then
-    "ACTION (no ticket needed): \($p) — \($sev), \($cve)\n"
+    "ACTION (no ticket needed): \($p) — \($sev), \($cve) (\($aid))\n"
     + "  An update within reach likely fixes this: \($r.cur) -> \($r.target) (\($r.jump)).\n"
     + "  Run: scripts/audit/deps-update\(if $r.jump == "minor" then " --minor" else "" end)  and approve \($p).\n"
     + "  Verify the fixed version in the advisory: \($link)\n"
@@ -1555,7 +1571,8 @@ def advlist:
     + "Title: \($title)\n"
     + "Description:\n"
     + "  \($p) (installed \($cur)) is affected by \($cve) — severity: \($sev).\n"
-    + "  Advisory: \($link)\n"
+    + "  Advisory: \($aid) — \($link)\n"
+    + "  Context: composer.lock\n"
     + "  Affected versions: \($aff)\n"
     + "  Suggested remediation:\n"
     + (if $r != null then
@@ -1581,13 +1598,18 @@ def actionable:
 (.vulnerabilities // {})
 | to_entries[]
 | .value
-| select((.severity // "") | actionable)
-| ([.via[]? | select(type == "object")]) as $advs
-| select(($advs | length) > 0)
 | .name as $p
+# This package's own advisories, worst first, less known false positives.
+# String entries in .via are other packages in the chain, which get their own
+# entry. Severity comes from what is left: npm's .severity also counts the
+# false positives and everything the package pulls in.
+| ([.via[]? | objects | select(fp_active(npm_ids; $ctx; $p) == null)]
+   | unique_by(npm_id) | sort_by(((.severity // "") | worstfirst), npm_id)) as $advs
+| select(($advs | length) > 0)
+| ($advs[0].severity // "") as $sev
+| select($sev | actionable)
 | ($advs[0].title // "vulnerability in \($p)") as $title
-| ($advs[0].url // "") as $link
-| (.severity) as $sev
+| ($advs | map("    \(npm_id) (\(.severity // "?")): \(.title // "advisory")\n      \(.url // "(no link)")\n") | join("")) as $list
 | (.fixAvailable) as $fix
 | ([.effects[]?] | join(", ")) as $eff
 | if $fix == true then
@@ -1595,19 +1617,20 @@ def actionable:
     + "  An in-range fix exists; the default scripts/audit/deps-update run applies it\n"
     + "  via npm audit fix. Seeing this after a full run usually means the fix\n"
     + "  landed only partially — run `npm audit fix` in \($dir) directly.\n"
-    + "  Advisory: \($link)\n"
+    + "  Advisories:\n\($list)"
   elif ($fix | type) == "object" and (($fix.isSemVerMajor // false) | not) then
     "ACTION (no ticket needed): \($p) — \($sev) in \($scope)\n"
     + "  Fixed by updating \($fix.name) to \($fix.version) (non-major).\n"
     + "  Run: scripts/audit/deps-update --minor  and approve \($fix.name) for \($scope).\n"
-    + "  Advisory: \($link)\n"
+    + "  Advisories:\n\($list)"
   else
     "--- TICKET ---------------------------------------------------------\n"
     + "Title: \($title)\n"
     + "Description:\n"
     + "  \($p) (severity: \($sev)) in \($scope) (\($dir)).\n"
     + (if $eff != "" then "  Pulled in via: \($eff).\n" else "" end)
-    + "  Advisory: \($link)\n"
+    + "  Context: \($ctx)\n"
+    + "  Advisories:\n\($list)"
     + "  Suggested remediation:\n"
     + (if ($fix | type) == "object" then
         "    - The fix requires \($fix.name)@\($fix.version) (a MAJOR update).\n"
@@ -1625,26 +1648,34 @@ echo
 echo "================  REMAINING HIGH/CRITICAL VULNERABILITIES  ================"
 echo '(includes Drupal severities "Moderately critical" and up; re-audited just now)'
 : >"$TMP/remediation.txt"
+POST="$TMP/post"; mkdir -p "$POST"
+FP_SPECS=()
 if [ "$DO_COMPOSER" = 1 ]; then
   info "re-auditing composer..."
-  composer_run audit --format=json --no-interaction >"$TMP/post-ca.json" 2>/dev/null || true
-  jq -e . "$TMP/post-ca.json" >/dev/null 2>&1 || echo '{}' >"$TMP/post-ca.json"
-  jq -r "$(cat "$TMP/tickets-composer.jq")" \
+  composer_run audit --format=json --no-interaction >"$POST/composer-audit.json" 2>/dev/null || true
+  jq -e . "$POST/composer-audit.json" >/dev/null 2>&1 || echo '{}' >"$POST/composer-audit.json"
+  jq -r "$FP_JQ_DEFS
+$(cat "$TMP/tickets-composer.jq")" \
         --rawfile plan "$PLAN/composer.tsv" \
         --slurpfile lock composer.lock \
-        "$TMP/post-ca.json" >>"$TMP/remediation.txt" 2>/dev/null || true
+        --slurpfile fpl "$TMP/fp.json" --arg today "$FP_TODAY" \
+        "$POST/composer-audit.json" >>"$TMP/remediation.txt" 2>/dev/null || true
+  FP_SPECS+=("composer|composer.lock|$POST/composer-audit.json")
 fi
 if [ "$DO_NPM" = 1 ]; then
   for t in "${NPM_TARGETS[@]}"; do
     IFS='|' read -r slug label dir <<<"$t"
     info "re-auditing $label..."
-    npm_run "$dir" audit --json >"$TMP/post-na-$slug.json" 2>/dev/null || true
-    jq -e . "$TMP/post-na-$slug.json" >/dev/null 2>&1 || echo '{}' >"$TMP/post-na-$slug.json"
+    npm_run "$dir" audit --json >"$POST/npm-audit--$slug.json" 2>/dev/null || true
+    jq -e . "$POST/npm-audit--$slug.json" >/dev/null 2>&1 || echo '{}' >"$POST/npm-audit--$slug.json"
     # $scope, not $label: "label" is a reserved word in jq 1.6, where the
     # variable $label is a compile error (jq 1.7+ accepts it).
-    jq -r "$(cat "$TMP/tickets-npm.jq")" \
-          --arg scope "$label" --arg dir "$dir" \
-          "$TMP/post-na-$slug.json" >>"$TMP/remediation.txt" 2>/dev/null || true
+    jq -r "$FP_JQ_DEFS
+$(cat "$TMP/tickets-npm.jq")" \
+          --arg scope "$label" --arg dir "$dir" --arg ctx "$(fp_npm_context "$dir")" \
+          --slurpfile fpl "$TMP/fp.json" --arg today "$FP_TODAY" \
+          "$POST/npm-audit--$slug.json" >>"$TMP/remediation.txt" 2>/dev/null || true
+    FP_SPECS+=("npm|$(fp_npm_context "$dir")|$POST/npm-audit--$slug.json")
   done
 fi
 TICKETS=0
@@ -1658,6 +1689,16 @@ else
   echo
   echo "None — no high/critical vulnerabilities remain in these dependencies."
   echo "(Lower-severity items may exist; see scripts/audit/deps-check.)"
+fi
+FP_STALE=0
+if [ "$(jq length "$TMP/fp.json")" != 0 ]; then
+  echo
+  echo "Known false positives (scripts/audit/false-positives.json) — suppressed"
+  echo "entries are left out above:"
+  fp_status "$TMP/fp.json" "$(printf '%s\n' "${FP_CONTEXTS[@]}" | jq -R . | jq -sc .)" \
+    ${FP_SPECS[@]+"${FP_SPECS[@]}"} >"$TMP/fp-status.txt"
+  sed 's/^/  /' "$TMP/fp-status.txt"
+  FP_STALE="$(grep -cE '^- \[(no longer reported|REVIEW OVERDUE|unknown context)' "$TMP/fp-status.txt" || true)"
 fi
 
 echo
@@ -1674,5 +1715,8 @@ if [ "${ACTIONS:-0}" -gt 0 ]; then
   step "Act on the $ACTIONS ACTION item(s) above — each names the command that fixes it (no ticket needed)."
 fi
 if [ "${TICKETS:-0}" -gt 0 ]; then
-  step "File the $TICKETS ticket(s) above: copy each Title/Description block into a new ticket so the remaining vulnerabilities stay tracked. Check for an existing ticket first — these recur each run until the update lands."
+  step "File the $TICKETS ticket(s) above: copy each Title/Description block into a new ticket so the remaining vulnerabilities stay tracked. Check for an existing ticket first — these recur each run until the update lands. One that does not apply to this site belongs in scripts/audit/false-positives.json instead (its advisory ID and context are in the block), with the ticket that records the review."
+fi
+if [ "${FP_STALE:-0}" -gt 0 ]; then
+  step "Tidy scripts/audit/false-positives.json: $FP_STALE entr$( [ "$FP_STALE" = 1 ] && echo y || echo ies ) above are no longer reported, overdue for review, or name an unknown context."
 fi
