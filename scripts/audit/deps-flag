@@ -1,0 +1,295 @@
+#!/usr/bin/env bash
+#
+# scripts/audit/deps-flag — record deps-update findings as ticketed or ignored.
+#
+# Reads the numbered ACTION/TICKET items the last scripts/audit/deps-update run
+# saved to scripts/audit/.last-findings.json and writes entries for them to
+# scripts/audit/reviewed-advisories.json, so the same items stop coming back.
+# Workflow and entry format: scripts/audit/README.md.
+#
+# Usage:
+#   scripts/audit/deps-flag                    # list the findings
+#   scripts/audit/deps-flag --show N           # print item N's full text again
+#   scripts/audit/deps-flag N... --ticketed TICKET [--reason TEXT] [--review-by YYYY-MM-DD]
+#   scripts/audit/deps-flag N... --ignore --ticket TICKET --reason TEXT [--review-by YYYY-MM-DD]
+#   scripts/audit/deps-flag -i                 # go through the unflagged items one by one
+#   scripts/audit/deps-flag --prune            # drop entries the last run no longer saw reported
+#   scripts/audit/deps-flag --findings FILE    # read another findings file
+#                                              (relative to where you run it)
+#
+#   --ticketed TICKET  a real issue, tracked in TICKET until the fix lands
+#   --ignore           a false positive in this context (needs --ticket and --reason)
+#
+# Flagging an item records every advisory it lists, for that item's context.
+# An advisory already recorded for the context is updated in place. Only
+# reviewed-advisories.json is changed — review it with git diff and commit it.
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
+CALLER_DIR="$PWD"   # path options are relative to where the script was run
+cd "$ROOT_DIR"
+
+usage() { awk 'NR==1 {next} /^#/ {sub(/^# ?/, ""); print; next} {exit}' "${BASH_SOURCE[0]}"; }
+info()  { printf '»» %s\n' "$*" >&2; }
+die()   { printf 'ERROR: %s\n' "$*" >&2; exit 1; }
+# optval <option> <value> — the option's value; dies when it is missing.
+optval() {
+  case "${2:-}" in ""|--*) die "$1 needs a value (see --help)" ;; esac
+  printf '%s\n' "$2"
+}
+# optpath <option> <value> — a path option's value, resolved against the
+# directory the script was run from (the script itself runs from the repo root).
+optpath() {
+  local v
+  v="$(optval "$1" "${2:-}")" || exit 1
+  case "$v" in /*) printf '%s\n' "$v" ;; *) printf '%s\n' "$CALLER_DIR/$v" ;; esac
+}
+
+# shellcheck source=lib/reviewed-advisories.sh
+. "$SCRIPT_DIR/lib/reviewed-advisories.sh"
+
+NUMS=()
+STATUS=""
+TICKET=""
+REASON=""
+REVIEW_BY=""
+SHOW=""
+INTERACTIVE=0
+PRUNE=0
+FINDINGS="$RA_FINDINGS"
+
+while [ $# -gt 0 ]; do
+  case "$1" in
+    [0-9]*)          NUMS+=("$1") ;;
+    --ticketed)      STATUS="ticketed"; TICKET="$(optval "$1" "${2:-}")"; shift ;;
+    --ignore)        STATUS="ignored" ;;
+    --ticket)        TICKET="$(optval "$1" "${2:-}")"; shift ;;
+    --reason)        REASON="$(optval "$1" "${2:-}")"; shift ;;
+    --review-by)     REVIEW_BY="$(optval "$1" "${2:-}")"; shift ;;
+    --show)          SHOW="$(optval "$1" "${2:-}")"; shift ;;
+    -i|--interactive) INTERACTIVE=1 ;;
+    --prune)         PRUNE=1 ;;
+    --findings)      FINDINGS="$(optpath "$1" "${2:-}")"; shift ;;
+    -h|--help)       usage; exit 0 ;;
+    *)               die "unknown option: $1 (see --help)" ;;
+  esac
+  shift
+done
+
+command -v jq >/dev/null 2>&1 || die "jq 1.6 or newer is required on the host (brew install jq)"
+for n in ${NUMS[@]+"${NUMS[@]}"} ${SHOW:+"$SHOW"}; do
+  case "$n" in *[!0-9]*|"") die "not an item number: $n" ;; esac
+done
+if [ -n "$REVIEW_BY" ] && ! printf '%s' "$REVIEW_BY" | grep -qE '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'; then
+  die "--review-by must be a YYYY-MM-DD date"
+fi
+
+[ -f "$FINDINGS" ] || die "no findings at $FINDINGS — run scripts/audit/deps-update first (its last step saves them)"
+jq -e '.findings | type == "array"' "$FINDINGS" >/dev/null 2>&1 || die "$FINDINGS is not a deps-update findings file"
+
+TMP="$(mktemp -d)"
+trap 'rm -rf "$TMP"' EXIT
+
+# The contexts the findings run knew about, for validating the list.
+CONTEXTS=()
+while IFS= read -r c; do CONTEXTS+=("$c"); done < <(jq -r '.contexts[]?' "$FINDINGS")
+ra_load "$TMP/reviewed.json" ${CONTEXTS[@]+"${CONTEXTS[@]}"}
+
+# Warn when a lock file has changed since the findings were written: the item
+# numbers still refer to that run, but what is reported now may differ.
+while IFS=$'\t' read -r ctx hash; do
+  now="$(git hash-object -- "$ctx" 2>/dev/null || echo '?')"
+  if [ "$now" != "$hash" ]; then
+    info "warning: $ctx has changed since these findings were saved — rerun scripts/audit/deps-update for current ones"
+  fi
+done < <(jq -r '.locks // {} | to_entries[] | "\(.key)\t\(.value)"' "$FINDINGS")
+
+FCOUNT="$(jq '.findings | length' "$FINDINGS")"
+
+# jq: which list entry (if any) records an advisory for a finding. Same match
+# as the scripts use, by ID string: the ID deps-update printed is one of the
+# advisory's IDs.
+FLAG_JQ='
+def covered($f; $id):
+  [ $reviewed[0][]
+    | select(.context == $f.context
+             and (.advisory | ascii_upcase) == ($id | ascii_upcase)
+             and ((.package // "") == "" or .package == $f.package)) ] | first;
+def flagnote($f):
+  [ $f.advisories[] | covered($f; .id) ] as $c
+  | if ($c | length) > 0 and all($c[]; . != null)
+    then "  [\($c | map("\(.status): \(.ticket)") | unique | join(", "))]"
+    elif any($c[]; . != null) then "  [partly flagged]"
+    else "" end;
+'
+
+list_findings() {
+  jq -r --slurpfile reviewed "$TMP/reviewed.json" "$FLAG_JQ"'
+    "Findings from the deps-update run of \(.generated) on \(.branch) (\(.commit)):\n",
+    ( .findings[]
+      | . as $f
+      | "  \(.n | tostring | if length < 2 then " " + . else . end). \(.kind | ascii_upcase)  \(.package) — \(.severity) — \(.context)\(flagnote($f))",
+        ( .advisories[] | "        \(.id) (\(.severity)): \(.title)" ) ),
+    ( if (.findings | length) == 0 then "  (none — nothing to flag)" else empty end )
+  ' "$FINDINGS"
+}
+
+# write_entries <JSON array of new entries> — merges them into RA_FILE,
+# replacing any entry for the same advisory, context and package.
+write_entries() {
+  local new="$1" base="$TMP/base.json" out="$TMP/out.json" problems
+  if [ -f "$RA_FILE" ]; then cp "$RA_FILE" "$base"; else echo '[]' >"$base"; fi
+  jq -r --argjson new "$new" '
+    . as $old
+    | $new[]
+    | . as $n
+    | (if any($old[]; ((.advisory | ascii_upcase) == ($n.advisory | ascii_upcase))
+                      and ((.context | ltrimstr("./")) == $n.context)
+                      and ((.package // "") == "" or .package == $n.package))
+       then "updated" else "added" end) as $verb
+    | "\($verb): \($n.advisory) (\($n.package)) in \($n.context) — \($n.status), \($n.ticket)"
+  ' "$base" | while IFS= read -r line; do info "$line"; done
+  jq --argjson new "$new" '
+    reduce $new[] as $n (.;
+      map(select(((.advisory | ascii_upcase) == ($n.advisory | ascii_upcase))
+                 and ((.context | ltrimstr("./")) == $n.context)
+                 and ((.package // "") == "" or .package == $n.package) | not))
+      + [$n])
+  ' "$base" >"$out"
+  problems="$(ra_validate "$out")"
+  [ -z "$problems" ] || { printf '%s\n' "$problems" | sed 's/^/  /' >&2; die "refusing to write an invalid list (nothing changed)"; }
+  mv -f "$out" "$RA_FILE"
+  # Keep the in-memory copy current for the next item (interactive mode).
+  jq 'map(.context |= ltrimstr("./"))' "$RA_FILE" >"$TMP/reviewed.json"
+}
+
+# entries_for <item number> <status> <ticket> <reason> <review_by> — the new
+# entries (JSON array) for one finding.
+entries_for() {
+  jq -c --argjson n "$1" --arg status "$2" --arg ticket "$3" --arg reason "$4" \
+        --arg review_by "$5" --arg today "$RA_TODAY" '
+    .findings[] | select(.n == $n) | . as $f
+    | [ .advisories[]
+        | { advisory: .id, context: $f.context, package: $f.package,
+            status: $status, ticket: $ticket }
+          + (if $reason != "" then {reason: $reason} else {} end)
+          + {added: $today}
+          + (if $review_by != "" then {review_by: $review_by} else {} end) ]
+  ' "$FINDINGS"
+}
+
+check_num() {
+  [ "$1" -ge 1 ] && [ "$1" -le "$FCOUNT" ] || die "no item #$1 (the findings have $FCOUNT — run scripts/audit/deps-flag to list them)"
+}
+
+check_ticket() {
+  printf '%s' "$1" | grep -qE '^[A-Z][A-Z0-9]*-[0-9]+$' \
+    || info "warning: \"$1\" does not look like a Jira key (e.g. DIGITAL-123) — recorded as given"
+}
+
+# ---------------------------------------------------------------------------
+
+if [ -n "$SHOW" ]; then
+  check_num "$SHOW"
+  jq -r --argjson n "$SHOW" '.findings[] | select(.n == $n) | .text' "$FINDINGS"
+  exit 0
+fi
+
+if [ "$PRUNE" = 1 ]; then
+  [ -f "$RA_FILE" ] || { info "nothing to prune — $RA_FILE does not exist"; exit 0; }
+  STALE="$(jq -c '[.reviewed[]? | select(.state == "not-reported")
+                   | {advisory, context, package: (.package // "")}]' "$FINDINGS")"
+  if [ "$(jq length <<<"$STALE")" = 0 ]; then
+    info "nothing to prune — the last deps-update run saw every entry it checked still reported"
+    exit 0
+  fi
+  MATCH='def stale($stale): . as $e
+    | any($stale[]; .advisory == $e.advisory and .context == ($e.context | ltrimstr("./"))
+                    and .package == ($e.package // ""));'
+  if [ "$(jq --argjson stale "$STALE" "$MATCH"'[.[] | select(stale($stale))] | length' "$RA_FILE")" = 0 ]; then
+    info "nothing to prune — the entries the last run no longer saw are already gone"
+    exit 0
+  fi
+  jq -r --argjson stale "$STALE" "$MATCH"'
+    .[] | . as $e
+    | select(stale($stale))
+    | "removed: \(.advisory) in \(.context) — \(.status), \(.ticket)\(if .status == "ticketed" then " (the fix may have landed; check the ticket)" else "" end)"
+  ' "$RA_FILE" | while IFS= read -r line; do info "$line"; done
+  jq --argjson stale "$STALE" "$MATCH"'map(select(stale($stale) | not))' "$RA_FILE" >"$TMP/out.json"
+  mv -f "$TMP/out.json" "$RA_FILE"
+  exit 0
+fi
+
+if [ "${#NUMS[@]}" -gt 0 ]; then
+  [ -n "$STATUS" ] || die "say what to record: --ticketed TICKET, or --ignore --ticket TICKET --reason TEXT"
+  [ -n "$TICKET" ] || die "a ticket is required (--ticketed TICKET, or --ticket TICKET with --ignore)"
+  [ "$STATUS" = ticketed ] || [ -n "$REASON" ] || die "--ignore needs --reason: why the advisory does not apply here"
+  check_ticket "$TICKET"
+  NEW='[]'
+  for n in "${NUMS[@]}"; do
+    check_num "$n"
+    NEW="$(jq -c --argjson add "$(entries_for "$n" "$STATUS" "$TICKET" "$REASON" "$REVIEW_BY")" '. + $add' <<<"$NEW")"
+  done
+  write_entries "$NEW"
+  info "review with: git diff scripts/audit/reviewed-advisories.json"
+  exit 0
+fi
+
+if [ "$INTERACTIVE" = 1 ]; then
+  [ "$FCOUNT" -gt 0 ] || { info "no findings to flag"; exit 0; }
+  LAST_TICKET=""
+  CHANGED=0
+  for n in $(seq 1 "$FCOUNT"); do
+    NOTE="$(jq -r --argjson n "$n" --slurpfile reviewed "$TMP/reviewed.json" "$FLAG_JQ"'
+      .findings[] | select(.n == $n) | . as $f | flagnote($f)' "$FINDINGS")"
+    case "$NOTE" in *"[partly"*|"") : ;; *) continue ;; esac
+    echo >&2
+    jq -r --argjson n "$n" '.findings[] | select(.n == $n)
+      | "#\(.n) \(.kind | ascii_upcase): \(.package) — \(.severity) — \(.context)",
+        (.advisories[] | "    \(.id) (\(.severity)): \(.title)")' "$FINDINGS" >&2
+    while :; do
+      printf '  [t]icketed, [i]gnore (false positive), [v]iew full text, [s]kip, [q]uit? ' >&2
+      read -r ANS || ANS=q
+      case "$ANS" in
+        v|V) jq -r --argjson n "$n" '.findings[] | select(.n == $n) | .text' "$FINDINGS" >&2 ;;
+        t|T|i|I)
+          if [ "$ANS" = t ] || [ "$ANS" = T ]; then ST=ticketed; else ST=ignored; fi
+          printf '  Ticket%s: ' "${LAST_TICKET:+ [$LAST_TICKET]}" >&2
+          read -r TK || TK=""
+          TK="${TK:-$LAST_TICKET}"
+          [ -n "$TK" ] || { echo "  a ticket is required" >&2; continue; }
+          check_ticket "$TK"
+          if [ "$ST" = ignored ]; then
+            printf '  Why does it not apply here? ' >&2
+            read -r RS || RS=""
+            [ -n "$RS" ] || { echo "  a reason is required for an ignored advisory" >&2; continue; }
+          else
+            printf '  Reason (optional): ' >&2
+            read -r RS || RS=""
+          fi
+          printf '  Review by (YYYY-MM-DD, optional): ' >&2
+          read -r RB || RB=""
+          if [ -n "$RB" ] && ! printf '%s' "$RB" | grep -qE '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'; then
+            echo "  not a YYYY-MM-DD date" >&2; continue
+          fi
+          write_entries "$(entries_for "$n" "$ST" "$TK" "$RS" "$RB")"
+          LAST_TICKET="$TK"
+          CHANGED=1
+          break ;;
+        s|S|"") break ;;
+        q|Q) [ "$CHANGED" = 1 ] && info "review with: git diff scripts/audit/reviewed-advisories.json"; exit 0 ;;
+        *) : ;;
+      esac
+    done
+  done
+  [ "$CHANGED" = 1 ] && info "review with: git diff scripts/audit/reviewed-advisories.json"
+  exit 0
+fi
+
+list_findings
+echo
+echo "Record items with:  scripts/audit/deps-flag <#>... --ticketed <TICKET>"
+echo "                    scripts/audit/deps-flag <#> --ignore --ticket <TICKET> --reason \"...\""
+echo "or step through them: scripts/audit/deps-flag -i"
