@@ -52,7 +52,7 @@ jobs:
           echo "WAF_NAME=waf"| tee -a $GITHUB_ENV
 
           if [ "${COMPOSER_DEV}" = "1" ]; then
-            sed -i 's/--no-dev //' .bp-config/options.json || exit 0
+            sed -i '/"--no-dev"/d' .bp-config/options.json || exit 0
           fi
       - name: Set repo name
         run: echo "REPO_NAME=${{ github.event.repository.name }}" >> $GITHUB_ENV

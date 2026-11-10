@@ -65,6 +65,10 @@
 #}
 <main role="main" id="main-content">
   <article class="dg-guide">
+    <div class="grid-container grid-container-desktop">
+      {{ drupal_entity('block', 'digital_gov_breadcrumbs') }}
+    </div>
+
     {% if (guide_overview_node) %}
     {{ include('@digital_gov/partials/guides/guide-header.html.twig', {
         node: guide_overview_node,
