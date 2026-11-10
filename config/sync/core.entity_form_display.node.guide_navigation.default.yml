@@ -20,7 +20,6 @@ third_party_settings:
   field_group:
     group_settings:
       children:
-        - field_show_next_previous
         - field_show_in_page_nav
       label: Settings
       region: content
@@ -119,13 +118,6 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-  field_show_next_previous:
-    type: boolean_checkbox
-    weight: 2
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
     weight: 7
@@ -158,6 +150,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
 hidden:
+  field_show_next_previous: true
   path: true
   promote: true
   publish_on: true
