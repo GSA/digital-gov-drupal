@@ -182,9 +182,6 @@ Fulfills security requirement to send Drupal log messages to the stdout for Clou
 #### Maxlength
 Adds a max length to WYSIWYG fields that just counts text while letting tags that don't provide length to be counted.
 
-#### Migrate plus & Migrate tools
-Provides additional migration function for migration scripts.
-
 #### Menu admin per menu
 Allows access to individual menus to edit instead of giving all.
 
