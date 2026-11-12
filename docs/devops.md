@@ -98,7 +98,7 @@ These are general tools and requirements needed to interact with the various scr
     echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
     sudo apt-get update
     sudo apt-get install cf8-cli
-    cf install-plugin https://github.com/cloud-gov/cf-service-connect/releases/download/1.1.0/cf-service-connect-darwin-amd64
+    cf install-plugin -f https://github.com/cloud-gov/cf-service-connect/releases/download/v2.0.2/cf-service-connect_linux_amd64
     ```
 
   - jq
@@ -161,7 +161,7 @@ These are general tools and requirements needed to interact with the various scr
 
        ```
        brew install cloudfoundry/tap/cf-cli@8
-       cf install-plugin https://github.com/cloud-gov/cf-service-connect/releases/download/1.1.0/cf-service-connect-darwin-amd64
+       cf install-plugin -f https://github.com/cloud-gov/cf-service-connect/releases/download/v2.0.2/cf-service-connect_darwin_arm64 # Intel Macs: cf-service-connect_darwin_amd64
        ```
 
      - coreutils

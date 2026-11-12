@@ -11,10 +11,11 @@ The script `database-backup.sh` comprises several key functions and processes:
    - The `kill_pids` function is used to terminate any ongoing SSH tunnels established to the MySQL database.
 
 2. **Waiting for SSH Tunnel**
-   - The `wait_for_tunnel` function monitors the progress of an SSH tunnel initiation, primarily checking for the specific message `"Press Control-C to stop."` in the `backup.txt` file.
+   - The `wait_for_tunnel` function monitors the progress of an SSH tunnel initiation, primarily checking for the specific message `"Press Control-C to stop."` in the `backup.txt` file. If the `cf connect-to-service` process exits before that message appears, the script fails instead of waiting forever; the plugin's error is in the job log.
 
 3. **Connecting to MySQL**
    - The script establishes a tunnel to the project's MySQL service through `cf connect-to-service`. This tunnel creation is a prerequisite for pulling the database backup.
+   - In prod, SSH is enabled on the space and bastion only long enough to open the tunnel. An `EXIT` trap disables it again if the script fails or is cancelled before that point.
 
 4. **Extracting Credentials and Creating Backup File**
    - Once the tunnel is established and the database endpoint details are available, the script extracts the necessary credentials and writes them to a MySQL configuration file (`~/.mysql/mysqldump.cnf`). The script also skips certain tables known to be non-data intensive.

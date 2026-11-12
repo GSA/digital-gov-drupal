@@ -12,9 +12,21 @@ kill_pids() {
 wait_for_tunnel() {
   while : ; do
     [ -n "$(grep 'Press Control-C to stop.' backup.txt)" ] && break
+    ## Fail instead of looping forever if the plugin has exited (its error is on stderr).
+    if ! kill -0 "${tunnel_pid}" 2>/dev/null; then
+      echo "cf connect-to-service exited before the tunnel was ready."
+      exit 1
+    fi
     echo "Waiting for tunnel..."
     sleep 1
   done
+}
+
+## Turn prod SSH back off. Best effort, so the second command runs even if the first fails.
+disable_prod_ssh() {
+  echo "Backup did not finish connecting; disabling ssh"
+  cf disallow-space-ssh "${CF_SPACE}" || true
+  cf disable-ssh "${PROJECT}-${DATABASE_BACKUP_BASTION_NAME}-${CF_SPACE}" || true
 }
 
 date
@@ -22,6 +34,8 @@ date
 ## Enable SSH if in prod.
 if [[ ${CF_SPACE} = "prod" ]]; then
   echo "Enabling ssh"
+  ## If anything fails before SSH is disabled below, disable it on the way out.
+  trap disable_prod_ssh EXIT
   cf allow-space-ssh "${CF_SPACE}"
   cf enable-ssh "${PROJECT}-${DATABASE_BACKUP_BASTION_NAME}-${CF_SPACE}"
   cf restart "${PROJECT}-${DATABASE_BACKUP_BASTION_NAME}-${CF_SPACE}"
@@ -29,6 +43,7 @@ fi
 ## Create a tunnel through the application to pull the database.
 echo "Creating tunnel to database..."
 cf connect-to-service --no-client "${PROJECT}-${DATABASE_BACKUP_BASTION_NAME}-${CF_SPACE}" "${PROJECT}-mysql-${CF_SPACE}" > backup.txt &
+tunnel_pid=$!
 
 wait_for_tunnel
 
@@ -39,16 +54,17 @@ if [[ ${CF_SPACE} = "prod" ]]; then
   echo "Connection established; disabling ssh"
   cf disallow-space-ssh "${CF_SPACE}"
   cf disable-ssh "${PROJECT}-${DATABASE_BACKUP_BASTION_NAME}-${CF_SPACE}"
+  trap - EXIT
 fi
 
 ## Create variables and credential file for MySQL login.
 echo "Backing up '${CF_SPACE}' database..."
 {
-  host=$(cat backup.txt | grep -i host | awk '{print $2}')
-  port=$(cat backup.txt | grep -i port | awk '{print $2}')
-  username=$(cat backup.txt | grep -i username | awk '{print $2}')
-  password=$(cat backup.txt | grep -i password | awk '{print $2}')
-  dbname=$(cat backup.txt | grep -i '^name' | awk '{print $2}')
+  host=$(cat backup.txt | grep -i '^host:' | awk '{print $2}')
+  port=$(cat backup.txt | grep -i '^port:' | awk '{print $2}')
+  username=$(cat backup.txt | grep -i '^username:' | awk '{print $2}')
+  password=$(cat backup.txt | grep -i '^password:' | awk '{print $2}')
+  dbname=$(cat backup.txt | grep -i '^name:' | awk '{print $2}')
 
   mkdir ~/.mysql && chmod 0700 ~/.mysql
 
