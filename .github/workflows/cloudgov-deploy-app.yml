@@ -98,3 +98,22 @@ jobs:
           PROJECT: "${{ secrets.PROJECT }}"
         if: contains(vars.GENERATE_STATIC_SITE_ON_DEPLOY_SPACES, env.CF_SPACE)
         run: source ./scripts/pipeline/pipeline_wrapper.sh upkeep
+
+      ## Gated on the same EGRESS_SPACES repository variable that decides where the proxy
+      ## is deployed, so a space can never be locked down without one. Same pattern as
+      ## GENERATE_STATIC_SITE_ON_DEPLOY_SPACES above. An unset variable is an empty string
+      ## and contains('', 'dev') is false, so merging this changes nothing anywhere.
+      ##
+      ## The script additionally refuses to act unless the proxy for this space is running
+      ## and the application is bound to its credentials -- the variable expresses intent,
+      ## those checks confirm reality. See egress-plan.md section 1.12 for why that
+      ## distinction matters.
+      ##
+      ## Runs last, and is idempotent, so it also re-applies the posture if the security
+      ## group is ever re-bound by hand.
+      - name: Enforce Egress Security Groups
+        if: contains(vars.EGRESS_SPACES, env.CF_SPACE)
+        env:
+          CF_ORG: "${{ secrets.CF_ORG }}"
+          PROJECT: "${{ secrets.PROJECT }}"
+        run: ./scripts/pipeline/cloud-gov-egress-asg.sh
