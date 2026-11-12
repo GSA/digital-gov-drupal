@@ -37,4 +37,5 @@ jobs:
         env:
           PROJECT: "${{ secrets.PROJECT }}"
           CF_SPACE: "${{ inputs.CF_SPACE }}"
+          MAX_WAIT_MINUTES: 0
         run: source ./scripts/pipeline/pipeline_wrapper.sh upkeep
