@@ -111,4 +111,4 @@ Restoring the environment is a matter of running a deployment pipeline for the e
 
 #### Database
 
-To restore the Drupal database, find the latest copy of the database in the GSA Google Drive and copy it to your local hard drive. Rename that database to `database_restore.sql.tar.gz` and upload it to the backup S3 bucket.  Next manually trigger the database restore pipeline on the branch you want to restore the database to.
+To restore the Drupal database, find the latest copy of the database in the GSA Google Drive and copy it to your local hard drive. Upload it (a gzipped `.sql.gz` dump) to the backup S3 bucket. Next manually trigger the database restore pipeline on the branch you want to restore the database to, giving the file's path in the bucket as `database_file_override`. Without an override, the pipeline restores the bucket's `latest.sql.gz`.

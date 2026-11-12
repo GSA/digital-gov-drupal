@@ -22,7 +22,7 @@ The workflow defined is structured into three main jobs: `start-bastion`, `resto
    - **Install Basic Dependencies and AWS CLI**: The job ensures the presence of basic dependencies and the AWS CLI for handling S3 interactions.
    - **Install MySQL Client**: The MySQL client is installed for performing database operations.
    - **Cloud.gov Login**: The job performs a Cloud.gov login, an initialization step for secure database actions.
-   - **Restore Database**: This step restores the database either from a default location or an overridden path, specified by the `database_file_override` input if provided. It retrieves the backup file from S3, restores the database via a script, and performs a post-deployment check.
+   - **Restore Database**: This step restores the database either from the backup bucket's `latest.sql.gz` (the newest backup) or an overridden path, specified by the `database_file_override` input if provided. It retrieves the backup file from S3, restores the database via a script, and performs a post-deployment check.
 
       A valid string value for `database_file_override` can be retrieved with:
       ```bash
@@ -44,7 +44,7 @@ The workflow defined is structured into three main jobs: `start-bastion`, `resto
 
 - **Authentication Issues**: If faced with issues during the authentication step (`Cloud.gov login`), ensure that the secrets (`CF_USER`, `CF_PASSWORD`, `CF_ORG`, `PROJECT`) are correctly configured in the repository’s Secrets setting.
   
-- **Dependency Installation Failures**: If the basic dependencies or specific application dependencies like the AWS CLI or MySQL client fail to install, review the respective installation scripts (`deb-basic-deps.sh`, `awscli-install.sh`, `deb-mysql-client-install.sh`, `deb-cf-install.sh`) for any known bugs or modifications that might be required for the current environment.
+- **Dependency Installation Failures**: If the basic dependencies or specific application dependencies like the AWS CLI or MySQL client fail to install, review the respective installation scripts (`deb-basic-deps.sh`, `deb-awscli.sh`, `deb-mysql-client-install.sh`, `deb-cf-install.sh`) for any known bugs or modifications that might be required for the current environment.
   
 - **Database Restore Failures**: Any errors related to restoring the database may be due to an incorrect path specified or permissions issues while accessing the path on S3. Verify that the path specified by `database_file_override` input is correct and that you have the necessary permissions to access the file.
 

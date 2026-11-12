@@ -96,6 +96,29 @@ Instead of using `lando composer` we use `./composer.sh` which generate entries 
 
 For additional details of custom lando commands review the tooling settings within the [Lando base file](.lando.dist.yml).
 
+### Loading Cloud.gov data locally
+
+These scripts pull backups from the Cloud.gov space you currently have targeted
+(`cf target`) into your local environment. Log in and select a space first:
+
+```
+cf login -a api.fr.cloud.gov --sso
+cf target -s dev
+```
+
+| **Command** | **Use case** |
+| --- | --- |
+| `./scripts/refresh-local.sh` | One-step local refresh: DB import + public files + config import + cache rebuild |
+| `./scripts/download_files.sh` | Download public (uploaded) files; `-x` extracts into `web/sites/default/files` |
+| `./scripts/download_static.sh` | Download the generated static site; `-x` extracts it locally |
+
+Each script takes `-h` for full options. `refresh-local.sh` reuses local data
+by default (a populated local DB, a cached SQL dump, or existing public files)
+and only downloads what's missing; pass `--force-db` or `--force-files` to pull
+fresh copies, and `-d YYYY-MM-DD` to load a specific day's backup instead of the
+latest. See the
+[backend documentation](docs/backend.md#refreshing-your-local-from-cloudgov) for details.
+
 ## Additional developer documentation
 
 Please take a look at the `./docs` directory for more information.
