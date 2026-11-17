@@ -2,9 +2,11 @@
 
 kill_pids() {
   app=$1
-  ids=$(pgrep -f "${app}" | awk '{print $2}')
+  ## pgrep prints bare PIDs. `|| true` because the step runs with -eo pipefail and
+  ## the tunnel may already be gone (cf exits on its own once the plugin is killed).
+  ids=$(pgrep -f "${app}" || true)
   for id in $ids; do
-    kill -9 "${id}" &> /dev/null
+    kill -9 "${id}" &> /dev/null || true
   done
 } &> /dev/null
 
@@ -12,6 +14,11 @@ kill_pids() {
 wait_for_tunnel() {
   while : ; do
     [ -n "$(grep 'Press Control-C to stop.' restore.txt)" ] && break
+    ## Fail instead of looping forever if the plugin has exited (its error is on stderr).
+    if ! kill -0 "${tunnel_pid}" 2>/dev/null; then
+      echo "cf connect-to-service exited before the tunnel was ready."
+      exit 1
+    fi
     echo "Waiting for tunnel..."
     sleep 1
   done
@@ -23,17 +30,18 @@ gunzip database_restore.sql.gz
 ## Create a tunnel through the application to restore the database.
 echo "Creating tunnel to database..."
 cf connect-to-service --no-client "${PROJECT}-${DATABASE_BACKUP_BASTION_NAME}-${BRANCH}" "${PROJECT}-mysql-${BRANCH}" > restore.txt &
+tunnel_pid=$!
 
 wait_for_tunnel
 
 ## Create variables and credential file for MySQL login.
 echo "Restoring database to '${BRANCH}'..."
 {
-  host=$(cat restore.txt | grep -i host | awk '{print $2}')
-  port=$(cat restore.txt | grep -i port | awk '{print $2}')
-  username=$(cat restore.txt | grep -i username | awk '{print $2}')
-  password=$(cat restore.txt | grep -i password | awk '{print $2}')
-  dbname=$(cat restore.txt | grep -i '^name' | awk '{print $2}')
+  host=$(cat restore.txt | grep -i '^host:' | awk '{print $2}')
+  port=$(cat restore.txt | grep -i '^port:' | awk '{print $2}')
+  username=$(cat restore.txt | grep -i '^username:' | awk '{print $2}')
+  password=$(cat restore.txt | grep -i '^password:' | awk '{print $2}')
+  dbname=$(cat restore.txt | grep -i '^name:' | awk '{print $2}')
 
   mkdir ~/.mysql && chmod 0700 ~/.mysql
 

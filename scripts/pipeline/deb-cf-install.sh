@@ -12,6 +12,6 @@ echo "Installing CloudFoundry repository..."
     mv cf cf8 /usr/local/bin
   fi
 
-  cf install-plugin -f https://github.com/cloud-gov/cf-service-connect/releases/download/v1.1.4/cf-service-connect_linux_amd64
+  cf install-plugin -f https://github.com/cloud-gov/cf-service-connect/releases/download/v2.0.2/cf-service-connect_linux_amd64
 
 } >/dev/null 2>&1
