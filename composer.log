@@ -169,3 +169,4 @@ e151c73dc8306d1236eadd47690c5fe7|Amy Farrell|feature/DIGITAL-879-composer-update
 
 4f22350712924e555836469c362a4e24|Amy Farrell|feature/DIGITAL-897-composer-updates|Fri Oct 23 02:54:18 PM PDT 2026|./scripts/audit/deps-update --composer-only
 bfa59696c883e6b09ea96e0564c77537|Amy Farrell|feature/DIGITAL-897-composer-updates|Fri Oct 23 03:31:15 PM PDT 2026|./composer.sh update drupal/svg_image --with-all-dependencies
+5cb3b47dddcd119112d53c72fd0fe7d6|Amy Farrell|develop|Mon Nov 16 04:23:19 PM PST 2026|./composer.sh require drupal/core-recommended:10.6.21 drupal/core-composer-scaffold:10.6.21 drupal/core-project-message:10.6.21 --update-with-all-dependencies
