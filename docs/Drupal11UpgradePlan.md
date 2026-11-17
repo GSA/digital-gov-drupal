@@ -51,7 +51,7 @@ The only other "Update requirements" hit is a test module inside `config_split`,
 ### Patches
 | Patch | On 11.4 | Action |
 | --- | --- | --- |
-| `drupal/core` #2916377 (`2916377-53.patch`) | 1 of 2 hunks fails (context drift) | Rebase as an unreferenced `_d11` file (item 5) |
+| `drupal/core` #2916377 (`2916377-53.patch`) | 1 of 2 hunks fails (context drift) | Rebased as `patches/core-2916377-css-identifiers_d11.patch`, unreferenced (item 5, done) |
 | `core-composer-scaffold` implicit-drupal-core-disable | Applies | Re-check at the bump |
 | Contrib patches | Not tested | Packages don't change for D11; re-check during the bump |
 
@@ -78,8 +78,13 @@ Orphaned patch files (nothing references them): `deafult_content_2698425.patch`,
    property was left out of the serialized form and came back only through the class
    default. As `protected`, it's serialized, and the injected services are still restored.
    `max_timeout` validation still rejects values above 2147483.
-5. **Rebase the #2916377 core patch** against 11.4.12 as an unreferenced `_d11` file. Check
-   for a newer upstream reroll first. (DIGITAL-917)
+5. ~~**Rebase the #2916377 core patch** against 11.4.12 as an unreferenced `_d11` file. Check
+   for a newer upstream reroll first.~~ **Done** (DIGITAL-917, PR TBD). The result is
+   `patches/core-2916377-css-identifiers_d11.patch`. It applies to 11.4.12 with no fuzz or
+   offset, and fails on 10.6.20 as expected. Upstream's 2025-06-20 "11.2 patch" was rejected:
+   it also allows `; < = > ?` and drops 11.4's `(string)` cast. On 28 sample identifiers,
+   `cleanCssIdentifier()` gives the same output on patched 11.4.12 as on today's patched
+   10.6.20. Without the patch, 11 of them differ.
 6. *Optional:* replace Twig `spaceless` (5 uses), with byte-identical output verified, and
    delete the 3 orphaned patch files. (DIGITAL-918)
 7. *Optional (D12 prep):* add `'initial preprocess'` to `ec_usasummarybox` and replace the
@@ -89,7 +94,8 @@ Orphaned patch files (nothing references them): `deafult_content_2698425.patch`,
    - change `drupal/core-dev` to `^11`;
    - **remove the `consolidation/robo: ~5.1.0` pin** in `require-dev`. It was added because
      Robo 5.2 needs Symfony Console 7.4, which arrives with this bump;
-   - swap in the rebased #2916377 patch;
+   - in `composer.patches.json`, replace the `2916377-53.patch` URL with
+     `patches/core-2916377-css-identifiers_d11.patch`;
    - run `composer update -W` and check that `chi-teck/drupal-code-generator` moves off
      `symfony/console ^6.3`;
    - run `drush updb`, then `cim`, then a reviewed `cex`;
