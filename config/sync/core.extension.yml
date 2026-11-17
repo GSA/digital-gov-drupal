@@ -112,7 +112,6 @@ module:
   twig_field_value: 0
   twig_tweak: 0
   update: 0
-  upgrade_status: 0
   user: 0
   userprotect: 0
   uswds_templates: 0
