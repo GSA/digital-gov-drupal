@@ -66,8 +66,9 @@ Orphaned patch files (nothing references them): `deafult_content_2698425.patch`,
    **Done** (DIGITAL-911, PR TBD). 4.3.10 fataled mid-scan. 5.0.0 stable has been released
    since the prep docs were written, so it's pinned instead of 5.0.0-alpha3. Its post-update
    deletes `upgrade_status.settings`, so that file is removed from `config/sync`.
-2. **`core_version_requirement: ^10 || ^11`** for `ec_shortcodes`, `ec_uswds` and the
-   `digital_gov` theme. (DIGITAL-914)
+2. ~~**`core_version_requirement: ^10 || ^11`** for `ec_shortcodes`, `ec_uswds` and the
+   `digital_gov` theme.~~ **Done** (DIGITAL-914, PR TBD). A rescan shows no "Update
+   requirements" for these three projects.
 3. **log_stdout 3.0.0** with `severity_level: 7` in `config/sync/log_stdout.settings.yml`.
    Verify all 8 levels (recipes §5). (DIGITAL-915)
 4. **`AutologoutSettingsForm::$maxAllowedTimeout`**: change it from `private` to `protected`,
