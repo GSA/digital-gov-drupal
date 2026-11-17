@@ -1,0 +1,111 @@
+name: Downsync
+
+permissions:
+  contents: read
+
+on:
+  workflow_dispatch:
+    inputs:
+      source:
+        description: "Space to copy from."
+        type: choice
+        options:
+          - prod
+          - staging
+          - dev
+        default: prod
+      target:
+        description: "Space to overwrite."
+        type: choice
+        options:
+          - staging
+          - dev
+          - prod
+        default: staging
+      confirm:
+        description: "Type the target's name to confirm. Upward syncs and syncs into prod need a longer phrase; a run without it stops and says what to type."
+        required: true
+      sync_database:
+        description: "Replace the target's database with the source's."
+        type: boolean
+        default: true
+      sync_files:
+        description: "Replace the target's public files with the source's."
+        type: boolean
+        default: true
+      use_latest_backup:
+        description: "Copy the source's most recent backup instead of taking a fresh one. Only prod is backed up nightly."
+        type: boolean
+        default: false
+      backup_target_first:
+        description: "Back up what's about to be overwritten, so it can be restored. Always on for prod."
+        type: boolean
+        default: true
+      regenerate_static:
+        description: "Regenerate the target's static site afterwards."
+        type: boolean
+        default: true
+      database_file_override:
+        description: "Path in the source's backup bucket to a specific database dump. Skips the fresh backup."
+        required: false
+      storage_file_override:
+        description: "Path in the source's backup bucket to a specific files archive. Skips the fresh backup."
+        required: false
+
+## One downsync at a time, so no space is read and written by two runs at once.
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+jobs:
+  downsync:
+    name: Downsync ${{ inputs.source }} to ${{ inputs.target }}
+    runs-on: ubuntu-latest
+    env:
+      SOURCE_SPACE: "${{ inputs.source }}"
+      TARGET_SPACE: "${{ inputs.target }}"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.2
+      ## Its own step, so a wrong phrase fails before anything is installed.
+      - name: Preflight
+        id: preflight
+        env:
+          CONFIRM: "${{ inputs.confirm }}"
+          SYNC_DATABASE: "${{ inputs.sync_database }}"
+          SYNC_FILES: "${{ inputs.sync_files }}"
+          BACKUP_TARGET_FIRST: "${{ inputs.backup_target_first }}"
+          REGENERATE_STATIC: "${{ inputs.regenerate_static }}"
+          INSTALL_DRUPAL_SPACES: "${{ vars.INSTALL_DRUPAL_SPACES }}"
+        run: ./scripts/pipeline/downsync-preflight.sh
+      - name: Install basic dependencies
+        run: ./scripts/pipeline/deb-basic-deps.sh
+      - name: Install AWSCLI
+        run: ./scripts/pipeline/deb-awscli.sh
+      - name: Install MySQL Client
+        if: inputs.sync_database
+        run: ./scripts/pipeline/deb-mysql-client-install.sh
+      - name: Install Cloudfoundry CLI
+        run: ./scripts/pipeline/deb-cf-install.sh
+      - name: Cloud.gov login
+        env:
+          CF_USER: "${{ secrets.CF_USER }}"
+          CF_PASSWORD: "${{ secrets.CF_PASSWORD }}"
+          CF_ORG: "${{ secrets.CF_ORG }}"
+          CF_SPACE: "${{ inputs.target }}"
+        run: source ./scripts/pipeline/cloud-gov-login.sh
+      ## The same script developers run from their computers; each stage is a
+      ## collapsible section of this step's log.
+      - name: Downsync
+        env:
+          PROJECT: "${{ secrets.PROJECT }}"
+          DATABASE_BACKUP_BASTION_NAME: "${{ secrets.DATABASE_BACKUP_BASTION_NAME }}"
+          PREFLIGHT_DONE: "true"
+          SYNC_DATABASE: "${{ inputs.sync_database }}"
+          SYNC_FILES: "${{ inputs.sync_files }}"
+          USE_LATEST_BACKUP: "${{ inputs.use_latest_backup }}"
+          BACKUP_TARGET_FIRST: "${{ steps.preflight.outputs.backup_target }}"
+          REGENERATE_STATIC: "${{ inputs.regenerate_static }}"
+          DATABASE_FILE_OVERRIDE: "${{ inputs.database_file_override }}"
+          STORAGE_FILE_OVERRIDE: "${{ inputs.storage_file_override }}"
+        run: ./scripts/downsync.sh
