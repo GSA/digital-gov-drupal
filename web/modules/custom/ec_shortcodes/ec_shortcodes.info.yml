@@ -2,7 +2,7 @@ name: Embedded Content - Short Codes
 type: module
 description: Short Codes
 package: Custom
-core_version_requirement: ^9 || ^10
+core_version_requirement: ^10 || ^11
 dependencies:
   - embedded_content
   - uswds_templates
