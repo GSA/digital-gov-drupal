@@ -67,18 +67,18 @@ Orphaned patch files (nothing references them): `deafult_content_2698425.patch`,
    since the prep docs were written, so it's pinned instead of 5.0.0-alpha3. Its post-update
    deletes `upgrade_status.settings`, so that file is removed from `config/sync`.
 2. **`core_version_requirement: ^10 || ^11`** for `ec_shortcodes`, `ec_uswds` and the
-   `digital_gov` theme. (DIGITAL-___)
+   `digital_gov` theme. (DIGITAL-914)
 3. **log_stdout 3.0.0** with `severity_level: 7` in `config/sync/log_stdout.settings.yml`.
-   Verify all 8 levels (recipes §5). (DIGITAL-___)
+   Verify all 8 levels (recipes §5). (DIGITAL-915)
 4. **`AutologoutSettingsForm::$maxAllowedTimeout`**: change it from `private` to `protected`,
-   then run a serialize round-trip. (DIGITAL-___)
+   then run a serialize round-trip. (DIGITAL-916)
 5. **Rebase the #2916377 core patch** against 11.4.12 as an unreferenced `_d11` file. Check
-   for a newer upstream reroll first. (DIGITAL-___)
+   for a newer upstream reroll first. (DIGITAL-917)
 6. *Optional:* replace Twig `spaceless` (5 uses), with byte-identical output verified, and
-   delete the 3 orphaned patch files. (DIGITAL-___)
+   delete the 3 orphaned patch files. (DIGITAL-918)
 7. *Optional (D12 prep):* add `'initial preprocess'` to `ec_usasummarybox` and replace the
-   `dialogClass` option in `dg_autologout`. (DIGITAL-___)
-8. **Core bump to 11.4.x** (DIGITAL-___):
+   `dialogClass` option in `dg_autologout`. (DIGITAL-919)
+8. **Core bump to 11.4.x** (DIGITAL-920):
    - set `core-recommended`, `core-composer-scaffold` and `core-project-message` to the target;
    - change `drupal/core-dev` to `^11`;
    - **remove the `consolidation/robo: ~5.1.0` pin** in `require-dev`. It was added because
