@@ -3,7 +3,7 @@ type: theme
 base theme: stark
 description: A 1-1 migration of the Hugo site.
 package: Custom
-core_version_requirement: ^10
+core_version_requirement: ^10 || ^11
 libraries:
   - digital_gov/global
 regions:
