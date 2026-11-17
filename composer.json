@@ -44,7 +44,7 @@
         "drupal/link_class": "^2.1",
         "drupal/linkit": "^7.0",
         "drupal/linkit_media_library": "^2.0",
-        "drupal/log_stdout": "^1.5",
+        "drupal/log_stdout": "^3.0",
         "drupal/maillog": "dev-1.x",
         "drupal/mailsystem": "^4.4",
         "drupal/masquerade": "^2.0",

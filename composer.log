@@ -171,3 +171,4 @@ e151c73dc8306d1236eadd47690c5fe7|Amy Farrell|feature/DIGITAL-879-composer-update
 bfa59696c883e6b09ea96e0564c77537|Amy Farrell|feature/DIGITAL-897-composer-updates|Fri Oct 23 03:31:15 PM PDT 2026|./composer.sh update drupal/svg_image --with-all-dependencies
 26e80a35db1a34dfc862a683fac67ee9|arpage|feature/DIGITAL-911-d11-upgrade-prep|Tue Nov 17 11:44:51 EST 2026|./composer.sh require --dev consolidation/robo:~5.1.0 -w --ignore-platform-reqs
 ba6b2268a060599fe670910ee57720e0|arpage|feature/DIGITAL-911-d11-upgrade-prep|Tue Nov 17 12:00:43 EST 2026|lando composer remove drupal/upgrade_status --no-update && lando composer require --dev drupal/upgrade_status:5.0.0
+d7b11467f76f5388d5126aa61554e35d|arpage|feature/DIGITAL-915-d11-log-stdout-3|Tue Nov 17 12:42:21 EST 2026|lando composer require drupal/log_stdout:^3.0

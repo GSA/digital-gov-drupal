@@ -69,8 +69,10 @@ Orphaned patch files (nothing references them): `deafult_content_2698425.patch`,
 2. ~~**`core_version_requirement: ^10 || ^11`** for `ec_shortcodes`, `ec_uswds` and the
    `digital_gov` theme.~~ **Done** (DIGITAL-914, PR TBD). A rescan shows no "Update
    requirements" for these three projects.
-3. **log_stdout 3.0.0** with `severity_level: 7` in `config/sync/log_stdout.settings.yml`.
-   Verify all 8 levels (recipes §5). (DIGITAL-915)
+3. ~~**log_stdout 3.0.0** with `severity_level: 7` in `config/sync/log_stdout.settings.yml`.
+   Verify all 8 levels (recipes §5).~~ **Done** (DIGITAL-915, PR TBD). All 8 levels log
+   (5 to stderr, 3 to stdout), identical to 1.5.0 apart from the date. Negative control:
+   without `severity_level`, only EMERGENCY logs.
 4. **`AutologoutSettingsForm::$maxAllowedTimeout`**: change it from `private` to `protected`,
    then run a serialize round-trip. (DIGITAL-916)
 5. **Rebase the #2916377 core patch** against 11.4.12 as an unreferenced `_d11` file. Check

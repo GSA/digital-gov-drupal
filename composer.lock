@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "64e485110435aaa63f0833dcf259e434",
+    "content-hash": "5a5b6b865e35ee8a1249cf2a95d4c4e8",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3254,26 +3254,26 @@
         },
         {
             "name": "drupal/log_stdout",
-            "version": "1.5.0",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/log_stdout.git",
-                "reference": "8.x-1.5"
+                "reference": "3.0.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/log_stdout-8.x-1.5.zip",
-                "reference": "8.x-1.5",
-                "shasum": "2adb5d992618ee0a26bb8ca2cf80137654d9e0eb"
+                "url": "https://ftp.drupal.org/files/projects/log_stdout-3.0.0.zip",
+                "reference": "3.0.0",
+                "shasum": "63f239bf69854cdc0bf1a930a84e7fe9b33370e6"
             },
             "require": {
-                "drupal/core": "^8.8 || ^9 || ^10"
+                "drupal/core": "^8.8 || ^9 || ^10 || ^11"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.5",
-                    "datestamp": "1696840633",
+                    "version": "3.0.0",
+                    "datestamp": "1747651306",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
