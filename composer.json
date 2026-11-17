@@ -193,7 +193,7 @@
         ]
     },
     "require-dev": {
-        "consolidation/robo": "^5",
+        "consolidation/robo": "~5.1.0",
         "drupal/core-dev": "^10.2",
         "drupal/devel": "^5.5",
         "vincentlanglet/twig-cs-fixer": "^3.3"
