@@ -73,8 +73,11 @@ Orphaned patch files (nothing references them): `deafult_content_2698425.patch`,
    Verify all 8 levels (recipes §5).~~ **Done** (DIGITAL-915, PR TBD). All 8 levels log
    (5 to stderr, 3 to stdout), identical to 1.5.0 apart from the date. Negative control:
    without `severity_level`, only EMERGENCY logs.
-4. **`AutologoutSettingsForm::$maxAllowedTimeout`**: change it from `private` to `protected`,
-   then run a serialize round-trip. (DIGITAL-916)
+4. ~~**`AutologoutSettingsForm::$maxAllowedTimeout`**: change it from `private` to `protected`,
+   then run a serialize round-trip.~~ **Done** (DIGITAL-916, PR TBD). As `private`, the
+   property was left out of the serialized form and came back only through the class
+   default. As `protected`, it's serialized, and the injected services are still restored.
+   `max_timeout` validation still rejects values above 2147483.
 5. **Rebase the #2916377 core patch** against 11.4.12 as an unreferenced `_d11` file. Check
    for a newer upstream reroll first. (DIGITAL-917)
 6. *Optional:* replace Twig `spaceless` (5 uses), with byte-identical output verified, and
