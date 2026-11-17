@@ -31,7 +31,7 @@ class AutologoutSettingsForm extends ConfigFormBase {
    *
    * More at: https://developer.mozilla.org/en-US/docs/Web/API/setTimeout
    */
-  private $maxAllowedTimeout = 2147483;
+  protected $maxAllowedTimeout = 2147483;
 
   /**
    * The module manager service.
