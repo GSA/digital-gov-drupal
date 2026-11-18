@@ -169,6 +169,10 @@ e151c73dc8306d1236eadd47690c5fe7|Amy Farrell|feature/DIGITAL-879-composer-update
 
 4f22350712924e555836469c362a4e24|Amy Farrell|feature/DIGITAL-897-composer-updates|Fri Oct 23 02:54:18 PM PDT 2026|./scripts/audit/deps-update --composer-only
 bfa59696c883e6b09ea96e0564c77537|Amy Farrell|feature/DIGITAL-897-composer-updates|Fri Oct 23 03:31:15 PM PDT 2026|./composer.sh update drupal/svg_image --with-all-dependencies
+5cb3b47dddcd119112d53c72fd0fe7d6|Amy Farrell|develop|Mon Nov 16 04:23:19 PM PST 2026|./composer.sh require drupal/core-recommended:10.6.21 drupal/core-composer-scaffold:10.6.21 drupal/core-project-message:10.6.21 --update-with-all-dependencies
+9e6584467a2fffbb026d0778aca6974f|Amy Farrell|feature/DIGITAL-912-composer-updates|Mon Nov 16 04:40:12 PM PST 2026|./scripts/audit/deps-update --composer-only
+d5303d2aa88c8b534ee8bd192c28f113|Amy Farrell|feature/DIGITAL-912-composer-updates|Mon Nov 16 04:46:14 PM PST 2026|./scripts/audit/deps-update --composer-only --minor
 26e80a35db1a34dfc862a683fac67ee9|arpage|feature/DIGITAL-911-d11-upgrade-prep|Tue Nov 17 11:44:51 EST 2026|./composer.sh require --dev consolidation/robo:~5.1.0 -w --ignore-platform-reqs
 ba6b2268a060599fe670910ee57720e0|arpage|feature/DIGITAL-911-d11-upgrade-prep|Tue Nov 17 12:00:43 EST 2026|lando composer remove drupal/upgrade_status --no-update && lando composer require --dev drupal/upgrade_status:5.0.0
 d7b11467f76f5388d5126aa61554e35d|arpage|feature/DIGITAL-915-d11-log-stdout-3|Tue Nov 17 12:42:21 EST 2026|lando composer require drupal/log_stdout:^3.0
+b4981de9f266547d7bcef29d3bdb8ad2|arpage|feature/DIGITAL-911-d11-workahead|Wed Nov 18 11:13:06 EST 2026|git checkout --theirs composer.lock (develop) && lando composer update drupal/upgrade_status drupal/log_stdout consolidation/robo dekor/php-array-table
