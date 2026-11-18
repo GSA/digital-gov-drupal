@@ -33,9 +33,9 @@ Command: `lando drush us-a --all --format=csv`. It covered 84 projects, and 79 w
 | `log_stdout` | Update | 3.0.0 is D11-ready (item 3) |
 | `ec_shortcodes`, `ec_uswds` | Update requirements | `core_version_requirement: ^9 \|\| ^10` (item 2) |
 | `digital_gov` theme | Update requirements | `core_version_requirement: ^10` (item 2) |
-| `digital_gov` theme | After Drupal 11 | Twig `spaceless` ×5: `node--short-post--teaser` :76, :80; `node--news--teaser` :69; `paragraph--internal-content--featured-links` :45, :52 (item 6) |
-| `ec_uswds` | After Drupal 11 | `ec_uswds.module:37`: `template_preprocess_ec_usasummarybox()` needs `'initial preprocess'` (deprecated 11.3, removed 12.0) (item 7) |
-| `dg_autologout` | After Drupal 11 | `js/autologout.js:164`: `dialogClass` dialog option (deprecated 10.3, ignored in 12.0) (item 7) |
+| `digital_gov` theme | After Drupal 11 | Twig `spaceless` ×5: `node--short-post--teaser` :76, :80; `node--news--teaser` :69; `paragraph--internal-content--featured-links` :45, :52 (deferred, see "Drupal 12 prep") |
+| `ec_uswds` | After Drupal 11 | `ec_uswds.module:37`: `template_preprocess_ec_usasummarybox()` needs `'initial preprocess'` (deprecated 11.3, removed 12.0) (deferred) |
+| `dg_autologout` | After Drupal 11 | `js/autologout.js:164`: `dialogClass` dialog option (deprecated 10.3, ignored in 12.0) (deferred) |
 | `digital_gov_migration` | Remove | Custom module that isn't installed (open question) |
 
 The only other "Update requirements" hit is a test module inside `config_split`, which is never installed.
@@ -57,8 +57,8 @@ The only other "Update requirements" hit is a test module inside `config_split`,
 
 `composer-exit-on-patch-failure` is not set, so at the bump, read the `composer update` output for every "Could not apply patch" line.
 
-Orphaned patch files (nothing references them): `deafult_content_2698425.patch`,
-`default_content-3200212-25.patch`, `default_content-hook-exclude-content.patch` (item 6).
+Orphaned patch files: `deafult_content_2698425.patch`, `default_content-3200212-25.patch` and
+`default_content-hook-exclude-content.patch` were deleted in item 6.
 
 ## Items
 
@@ -85,10 +85,13 @@ Orphaned patch files (nothing references them): `deafult_content_2698425.patch`,
    it also allows `; < = > ?` and drops 11.4's `(string)` cast. On 28 sample identifiers,
    `cleanCssIdentifier()` gives the same output on patched 11.4.12 as on today's patched
    10.6.20. Without the patch, 11 of them differ.
-6. *Optional:* replace Twig `spaceless` (5 uses), with byte-identical output verified, and
-   delete the 3 orphaned patch files. (DIGITAL-918)
-7. *Optional (D12 prep):* add `'initial preprocess'` to `ec_usasummarybox` and replace the
-   `dialogClass` option in `dg_autologout`. (DIGITAL-919)
+6. ~~**Delete the 3 orphaned `default_content` patch files.**~~ **Done** (DIGITAL-918, PR TBD).
+   No patch list or script references them:
+   - `deafult_content_2698425.patch` was replaced by a reroll in DIGITAL-47 (2024-12-30);
+   - the other two were dropped from `composer.patches.json` in DIGITAL-715 (2026-02-18).
+
+   The Twig `spaceless` cleanup originally planned for this ticket is deferred; see "Drupal 12 prep".
+7. *Deferred (DIGITAL-919):* see "Drupal 12 prep".
 8. **Core bump to 11.4.x** (DIGITAL-920):
    - set `core-recommended`, `core-composer-scaffold` and `core-project-message` to the target;
    - change `drupal/core-dev` to `^11`;
@@ -101,6 +104,16 @@ Orphaned patch files (nothing references them): `deafult_content_2698425.patch`,
    - run `drush updb`, then `cim`, then a reviewed `cex`;
    - do full verification: rendered pages, the Tome static build, and tests;
    - re-run upgrade_status on D11, then remove it.
+
+## Drupal 12 prep (deferred, not needed for 11.x)
+These items still work on Drupal 11 and only raise deprecation notices, so they're deferred
+until after the core bump:
+- **Twig `spaceless`** (5 uses, listed above). Removed in Twig 4. Verify byte-identical output
+  when replacing it.
+- **`'initial preprocess'`** for `ec_usasummarybox` (DIGITAL-919). Removed in Drupal 12.0.
+  Check that the key is safe on the core version in use.
+- **`dialogClass`** in `dg_autologout/js/autologout.js` (DIGITAL-919). Ignored from Drupal
+  12.0; use the `ui-dialog` key of `classes` instead.
 
 ## Open questions
 - Is the cloud.gov database (MariaDB/MySQL) at or above D11's minimum version?
