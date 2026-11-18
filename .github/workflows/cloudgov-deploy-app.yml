@@ -9,7 +9,7 @@ on:
 jobs:
   updateApp:
     name: Update App
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v6.0.2
@@ -62,6 +62,8 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: '24'
+      - name: Install gulp CLI
+        run: npm install -g gulp-cli@3
       - name: Install Cloudfoundry CLI
         run: ./scripts/pipeline/deb-cf-install.sh
       - name: Cloud.gov login
