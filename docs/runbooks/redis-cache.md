@@ -2,7 +2,8 @@
 
 The Drupal application uses Valkey only when a bound Cloud.gov service has the
 `cache-service` tag. Without that binding, it uses the configured default cache
-backend. Local Lando development continues to use Memcached.
+backend. Local Lando development uses a Redis 7 `cache` service, which
+`settings.lando.php` configures through the same `settings.redis.php`.
 
 Cloud.gov ElastiCache requires TLS for every connection. This project connects
 with the PhpRedis extension (enabled in

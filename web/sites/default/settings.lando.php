@@ -63,14 +63,6 @@ if (isset($lando_info->cache->type)) {
       }
       break;
 
-    case 'memcached':
-      require 'settings.memcache.php';
-      if (function_exists('_settings_memcache')) {
-        $memcache_host = implode(':', (array)$lando_info->cache->internal_connection);
-        _settings_memcache($settings, $memcache_host);
-      }
-      break;
-
     default:
       throw new \Exception('The Cache type "' . $lando_info->cache->type . "' is not automatically able to be configured.");
 

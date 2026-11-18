@@ -3,7 +3,7 @@ config:
   via: 'nginx:1.25'
 services:
   cache:
-    type: 'memcached:1.5.12'
+    type: 'redis:7'
   node:
     type: 'node:24'
     build:
