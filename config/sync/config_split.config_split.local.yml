@@ -10,7 +10,8 @@ stackable: false
 no_patching: false
 storage: folder
 folder: ../config/local
-module: {  }
+module:
+  upgrade_status: 0
 theme: {  }
 complete_list: {  }
 partial_list: {  }

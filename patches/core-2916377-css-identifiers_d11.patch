@@ -1,0 +1,44 @@
+Drupal core #2916377: Allow more characters in CSS identifiers (. / : @).
+https://www.drupal.org/project/drupal/issues/2916377
+
+Rebase of 2916377-53.patch onto Drupal 11.4.12 (DIGITAL-917). 11.4 added
+(string) casts and re-wrapped a comment in Html::cleanCssIdentifier(), so
+#53's second hunk no longer applies. Same allowed character set as #53;
+the (string) cast is kept. The drupal.org "11.2 patch" (2025-06-20) was not
+used: its regex range \x{0030}-\x{005A} also allows ; < = > ? and it drops
+the cast.
+
+Unreferenced on Drupal 10. Swap it in for the #53 URL in
+composer.patches.json at the core bump (DIGITAL-920).
+
+diff --git a/core/lib/Drupal/Component/Utility/Html.php b/core/lib/Drupal/Component/Utility/Html.php
+index 29f16edc..46eb00cc 100644
+--- a/core/lib/Drupal/Component/Utility/Html.php
++++ b/core/lib/Drupal/Component/Utility/Html.php
+@@ -101,7 +101,6 @@ class Html {
+     array $filter = [
+       ' ' => '-',
+       '_' => '-',
+-      '/' => '-',
+       '[' => '-',
+       ']' => '',
+     ],
+@@ -122,13 +121,17 @@ class Html {
+ 
+     // Valid characters in a CSS identifier are:
+     // - the hyphen (U+002D)
++    // - the period (U+002E)
++    // - the slash (U+002F)
++    // - the colon (U+003A)
+     // - a-z (U+0030 - U+0039)
++    // - the @ sign (U+0040)
+     // - A-Z (U+0041 - U+005A)
+     // - the underscore (U+005F)
+     // - 0-9 (U+0061 - U+007A)
+     // - ISO 10646 characters U+00A1 and higher
+     // We strip out any character not in the above list.
+-    $identifier = preg_replace('/[^\x{002D}\x{0030}-\x{0039}\x{0041}-\x{005A}\x{005F}\x{0061}-\x{007A}\x{00A1}-\x{FFFF}]/u', '', (string) $identifier);
++    $identifier = preg_replace('/[^\x{002D}\x{002E}\x{002F}\x{0030}-\x{0039}\x{003A}\x{0040}\x{0041}-\x{005A}\x{005F}\x{0061}-\x{007A}\x{00A1}-\x{FFFF}]/u', '', (string) $identifier);
+     // Identifiers cannot start with a digit, two hyphens, or a hyphen followed
+     // by a digit.
+     $identifier = preg_replace([
