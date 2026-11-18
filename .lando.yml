@@ -3,7 +3,13 @@ config:
   via: 'nginx:1.25'
 services:
   cache:
+    # Lando has no Valkey service type; run Valkey (matching the Cloud.gov
+    # ElastiCache engine) under the redis type so LANDO_INFO and
+    # settings.lando.php still treat it as Redis. ElastiCache's 8.2 is an
+    # AWS-only release; 8.1 is the closest upstream image.
     type: 'redis:7'
+    overrides:
+      image: 'valkey/valkey:8.1'
   node:
     type: 'node:24'
     build:
