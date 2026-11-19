@@ -10,4 +10,4 @@ echo "Installing MySQL client..."
       apt-get update
       apt-get install -y mysql-client-8.0
     fi
-} >/dev/null 2>&1
+} >/dev/null
