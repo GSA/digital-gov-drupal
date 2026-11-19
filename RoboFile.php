@@ -139,6 +139,9 @@ class RoboFile extends Tasks
      *    Either 'hotfix' or 'release'.
      * @param string $semantic_version
      *    A semantic version number in the form x.y.z. Release must end in 0.
+     * @param string|null $source_branch
+     *    The branch to create the release from. Defaults to 'main' for a
+     *    hotfix and 'develop' for a release when null or empty.
      *
      * @return array
      *    An indexed array of [$tag_description, $new_branch_name, $source_branch].
@@ -146,7 +149,7 @@ class RoboFile extends Tasks
      * @throws \Exception
      */
 
-    protected function getVariablesForRelease(string $hotfix_or_release, string $semantic_version): array
+    protected function getVariablesForRelease(string $hotfix_or_release, string $semantic_version, ?string $source_branch = null): array
     {
         if (!in_array($hotfix_or_release, ['hotfix', 'release'])) {
             throw new InvalidArgumentException("hotfix_or_release must be either 'hotfix' or 'release', '$hotfix_or_release' given.");
@@ -165,11 +168,14 @@ class RoboFile extends Tasks
             throw new \Exception('Your "git status" must be clean of any changes or untracked files before continuing. Please see the output of "git status" above.');
         }
         if ($hotfix_or_release === 'hotfix') {
-            $source_branch = 'main';
+            $default_source_branch = 'main';
             $tag_description = "Hotfix version $semantic_version";
         } else {
-            $source_branch = 'develop';
+            $default_source_branch = 'develop';
             $tag_description = "Release version $semantic_version";
+        }
+        if ($source_branch === null || $source_branch === '') {
+            $source_branch = $default_source_branch;
         }
 
         $new_branch_name = "$hotfix_or_release/$semantic_version";
@@ -189,6 +195,11 @@ class RoboFile extends Tasks
      * @param string $semantic_version
      *   A semantic version number in the form x.y.z. Release must end in 0.
      *
+     * @option source
+     *   Remote branch to create the release from. Defaults to 'develop' for a
+     *   release and 'main' for a hotfix. The local checkout is never used; the
+     *   new branch is created from origin/<source>.
+     *
      * @return \Robo\ResultData
      *
      * @throws \Exception
@@ -198,23 +209,32 @@ class RoboFile extends Tasks
         OutputInterface $output,
         string $hotfix_or_release,
         string $semantic_version,
+        array $opts = ['source' => null],
     ): ResultData
     {
-        [$tag_description, $new_branch_name, $source_branch] = $this->getVariablesForRelease($hotfix_or_release, $semantic_version);
+        [$tag_description, $new_branch_name, $source_branch] = $this->getVariablesForRelease($hotfix_or_release, $semantic_version, $opts['source']);
+        $io = new SymfonyStyle($input, $output);
 
         `git fetch`;
+
+        // Make sure the source branch exists on origin before checking out or
+        // resetting anything.
+        $source_sha = trim((string) shell_exec('git rev-parse --verify --quiet ' . escapeshellarg("origin/$source_branch")));
+        if ($source_sha === '') {
+            throw new InvalidArgumentException("Source branch 'origin/$source_branch' does not exist.");
+        }
+        $io->info("Creating $new_branch_name from origin/$source_branch ($source_sha).");
+
         // Checkout the branch that the release will be created from.
         $this->taskGitStack()
             ->stopOnFail()
             ->checkout($source_branch)
             ->run();
 
-        // If you trying to test this function, you will need to temp change
-        // $source_branch to whatever branch you are working in, otherwise,
-        // your changes will get wiped out.
-        // You will also want to comment the following line out, since it will
-        // also wipe out your changes.
-        `git reset --hard origin/$source_branch`;
+        // If you are trying to test this function, pass --source=<your branch>
+        // (pushed to origin), otherwise your changes will get wiped out.
+        // This reset will also discard any local commits on the source branch.
+        $this->_exec('git reset --hard ' . escapeshellarg("origin/$source_branch"));
 
         // Create the new release branch.
         `git checkout -b $new_branch_name`;
