@@ -15,6 +15,9 @@ jobs:
     name: Generate Static Site
     runs-on: ubuntu-latest
     if: contains(vars.GENERATE_STATIC_SITE_ON_CRON_SPACES, inputs.CF_SPACE)
+    concurrency:
+      group: generate-static-${{ inputs.CF_SPACE }}
+      cancel-in-progress: false
     steps:
       - name: Checkout
         uses: actions/checkout@v6.0.2

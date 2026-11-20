@@ -21,8 +21,10 @@ TASK_NAME="${APP}-${1}"
 
 # Don't start the task while another copy of it is still running. Automated
 # runs skip straight away (MAX_WAIT_MINUTES=0); manual ones like deploys wait
-# up to MAX_WAIT_MINUTES for it to finish, then skip.
+# up to MAX_WAIT_MINUTES for it to finish, then skip. A copy running longer
+# than STALE_MINUTES is treated as stuck and fails the run so someone notices.
 MAX_WAIT_MINUTES="${MAX_WAIT_MINUTES:-0}"
+STALE_MINUTES="${STALE_MINUTES:-120}"
 APP_GUID=$(cf app --guid "${APP}") || exit 1
 DEADLINE=$(( $(date +%s) + MAX_WAIT_MINUTES * 60 ))
 while true; do
@@ -33,6 +35,12 @@ while true; do
   STARTED_AT=$(echo "${TASKS_JSON}" | jq -r '[.resources[].created_at] | join(", ")')
   if [ -z "${STARTED_AT}" ]; then
     break
+  fi
+
+  OLDEST=$(echo "${TASKS_JSON}" | jq -r '[.resources[].created_at | fromdate] | min')
+  if [ $(( $(date +%s) - OLDEST )) -ge $(( STALE_MINUTES * 60 )) ]; then
+    echo "::error::${TASK_NAME} has been running since ${STARTED_AT}, over ${STALE_MINUTES} minutes, and may be stuck. Check it with 'cf tasks ${APP}' and stop it with 'cf terminate-task ${APP} <id>'."
+    exit 1
   fi
 
   if [ "$(date +%s)" -ge "${DEADLINE}" ]; then
