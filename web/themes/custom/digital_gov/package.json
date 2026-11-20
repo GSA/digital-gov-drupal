@@ -32,7 +32,7 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1016.0",
     "@prantlf/jsonlint": "^17.0.1",
-    "@uswds/uswds": "~3.8.1",
+    "@uswds/uswds": "~3.14.0",
     "autoprefixer": "^10.4.16",
     "concurrently": "^9.1.2",
     "del": "^6.1.1",
@@ -49,8 +49,8 @@
     "list.js": "^2.3.1",
     "mime-types": "^2.1.35",
     "postcss-csso": "^6.0.1",
-    "sass": "^1.69.7",
-    "sass-embedded": "^1.69.7",
+    "sass": "^1.100.0",
+    "sass-embedded": "^1.100.0",
     "sharp": "^0.35.4",
     "terser-webpack-plugin": "^5.4.0",
     "webpack-stream": "^7.0.0"
