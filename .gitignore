@@ -3,6 +3,8 @@
 web/themes/custom/digital_gov/static/dist
 web/themes/custom/digital_gov/static/uswds
 .twig-cs-fixer.cache
+# Local output of scripts/audit/deps-update, read by scripts/audit/deps-flag.
+scripts/audit/.last-findings.json
 # Ignore Tome static generated files.
 html
 
