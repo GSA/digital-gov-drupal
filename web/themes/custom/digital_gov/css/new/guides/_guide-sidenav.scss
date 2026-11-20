@@ -1,0 +1,97 @@
+@use "uswds-core" as *;
+
+.dg-guide__rule {
+  background-color: color("gray-10");
+  border: 0;
+  height: 10px;
+  margin: 0;
+}
+
+// Full width above the page content until the desktop breakpoint, then a
+// left-hand column. Source order keeps it above the content on small screens.
+.dg-guide__sidenav {
+  margin-top: units(4);
+
+  > nav {
+    // Room for the focus ring on the first and last items.
+    padding-bottom: units(0.5);
+    padding-top: units(0.5);
+  }
+
+  @include at-media("desktop") {
+    align-self: flex-start;
+    margin-top: units(5);
+    max-height: calc(100vh - #{units(4)});
+    overflow-y: auto;
+    position: sticky;
+    top: units(2);
+  }
+}
+
+.dg-guide__main {
+  min-width: 0;
+}
+
+// The back arrow sits in extra left padding so its label lines up with the
+// top-level items below. The gap between the arrow and the label is tighter
+// than a standard icon gap.
+$guide-sidenav-back-offset: 1rem + units(0.5);
+
+.dg-guide__sidenav .usa-sidenav:has(.dg-guide__sidenav-back) {
+  > .usa-sidenav__item > a:not(.dg-guide__sidenav-back) {
+    padding-left: units(2) + $guide-sidenav-back-offset;
+  }
+
+  .usa-sidenav__sublist > .usa-sidenav__item > a {
+    padding-left: units(4) + $guide-sidenav-back-offset;
+  }
+}
+
+.dg-guide__sidenav .usa-sidenav a.dg-guide__sidenav-back {
+  align-items: center;
+  column-gap: units(0.5);
+  display: flex;
+}
+
+// Inactive links stay the standard link blue. The current page is black.
+.dg-guide__sidenav .usa-sidenav a:not(.usa-button):not(.usa-current) {
+  &,
+  &:link,
+  &:visited,
+  &:hover {
+    color: color("blue-warm-60v");
+  }
+}
+
+.dg-guide__sidenav .usa-sidenav a.usa-current {
+  color: color("black");
+}
+
+// Keep the parent section bold while one of its child pages is current.
+.dg-guide__sidenav .usa-sidenav__item:has(> .usa-sidenav__sublist .usa-current) > a {
+  font-weight: font-weight("bold");
+}
+
+// USWDS removes the current-page bar inside a sublist. Restore that bar.
+.dg-guide__sidenav .usa-sidenav__sublist .usa-current {
+  position: relative;
+
+  &::after {
+    background-color: color("primary");
+    border-radius: radius("pill");
+    bottom: units(0.5);
+    content: "";
+    display: block;
+    left: units(0.5);
+    position: absolute;
+    top: units(0.5);
+    width: units(0.5);
+  }
+
+  @include at-media("tablet") {
+    &::after {
+      background-color: color("blue-warm-60v");
+      left: 0;
+    }
+  }
+}

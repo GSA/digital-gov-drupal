@@ -2,12 +2,18 @@
 
 <header class="dg-guide__header grid-container grid-container-desktop">
   <div class="dg-guide__header-title">
-    {% if kicker_url %}
-    <a class="usa-link kicker" href="{{ kicker_url }}">
-      {{ kicker }}
-    </a>
-    {% else %}
-    <p class="kicker">{{ kicker }}</p>
+    {#
+      A linked kicker moves into the side nav as the back item. Keep the
+      plain-text kicker when this guide has no link.
+    #}
+    {% if not hide_kicker %}
+      {% if kicker_url %}
+      <a class="usa-link kicker" href="{{ kicker_url }}">
+        {{ kicker }}
+      </a>
+      {% else %}
+      <p class="kicker">{{ kicker }}</p>
+      {% endif %}
     {% endif %}
 
     <h1>{{ node.title.value }}</h1>

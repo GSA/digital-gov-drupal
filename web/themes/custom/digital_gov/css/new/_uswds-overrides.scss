@@ -114,9 +114,3 @@
 }
 /* stylelint-enable */
 
-// Override grid container padding for side nav on guide pages
-.dg-guide .usa-in-page-nav-container .dg-guide__in-page-content > .dg-guide__content.grid-container-desktop,
-.dg-guide .usa-in-page-nav-container .dg-guide__in-page-content > .dg-guide__footer.grid-container-desktop {
-  @include u-padding-left(0);
-  @include u-padding-right(0);
-}

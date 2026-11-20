@@ -51,7 +51,8 @@ jobs:
           cf start "${PROJECT}-${DATABASE_BACKUP_BASTION_NAME}-${CF_SPACE}" >/dev/null 2>&1
           ./scripts/pipeline/cloud-gov-wait-for-app-start.sh "${PROJECT}-${DATABASE_BACKUP_BASTION_NAME}-${CF_SPACE}"
   restore-database:
-    runs-on: ubuntu-latest
+    # mysql-client-8.0 is not available on ubuntu-26.04 (ubuntu-latest since 2026-11).
+    runs-on: ubuntu-24.04
     needs: start-bastion
     steps:
       - name: Checkout
