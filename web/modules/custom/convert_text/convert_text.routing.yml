@@ -1,9 +1,0 @@
-convert_text.convert_text:
-  path: '/admin/convert-text'
-  defaults:
-    _title: 'Convert Text'
-    _form: 'Drupal\convert_text\Form\ConvertTextForm'
-  requirements:
-    _permission: 'administer content'
-  options:
-    _admin_route: TRUE
