@@ -78,7 +78,8 @@ final class ECShortcodesFeaturedResource extends EmbeddedContentPluginBase imple
     return [
       '#theme' => 'ec_shortcodes_featured_resource',
       '#content_reference' => $this->configuration['content_reference'],
-      '#kicker' => $this->configuration['kicker']['value'],
+      // Embeds saved without a kicker (e.g. community pages) have none set.
+      '#kicker' => $this->configuration['kicker']['value'] ?? '',
     ];
   }
 
