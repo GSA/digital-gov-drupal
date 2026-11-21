@@ -16,11 +16,43 @@ if [ -z "${CF_SPACE}" ] || [ -z "${PROJECT}" ]; then
   exit 1
 fi
 
-
-echo "${CF_SPACE} is running ${1} now..."
 APP="${PROJECT}-drupal-${CF_SPACE}"
 TASK_NAME="${APP}-${1}"
 
+# Don't start the task while another copy of it is still running. Automated
+# runs skip straight away (MAX_WAIT_MINUTES=0); manual ones like deploys wait
+# up to MAX_WAIT_MINUTES for it to finish, then skip. A copy running longer
+# than STALE_MINUTES is treated as stuck and fails the run so someone notices.
+MAX_WAIT_MINUTES="${MAX_WAIT_MINUTES:-0}"
+STALE_MINUTES="${STALE_MINUTES:-120}"
+APP_GUID=$(cf app --guid "${APP}") || exit 1
+DEADLINE=$(( $(date +%s) + MAX_WAIT_MINUTES * 60 ))
+while true; do
+  TASKS_JSON=$(cf curl --fail "/v3/apps/${APP_GUID}/tasks?names=${TASK_NAME}&states=PENDING,RUNNING,CANCELING") || {
+    echo "Could not check whether ${TASK_NAME} is already running"
+    exit 1
+  }
+  STARTED_AT=$(echo "${TASKS_JSON}" | jq -r '[.resources[].created_at] | join(", ")')
+  if [ -z "${STARTED_AT}" ]; then
+    break
+  fi
+
+  OLDEST=$(echo "${TASKS_JSON}" | jq -r '[.resources[].created_at | fromdate] | min')
+  if [ $(( $(date +%s) - OLDEST )) -ge $(( STALE_MINUTES * 60 )) ]; then
+    echo "::error::${TASK_NAME} has been running since ${STARTED_AT}, over ${STALE_MINUTES} minutes, and may be stuck. Check it with 'cf tasks ${APP}' and stop it with 'cf terminate-task ${APP} <id>'."
+    exit 1
+  fi
+
+  if [ "$(date +%s)" -ge "${DEADLINE}" ]; then
+    echo "::warning::${TASK_NAME} is already running (started ${STARTED_AT}), skipping this run."
+    exit 0
+  fi
+
+  echo "${TASK_NAME} is already running (started ${STARTED_AT}), checking again in 30s..."
+  sleep 30
+done
+
+echo "${CF_SPACE} is running ${1} now..."
 cf run-task "${APP}" --command "/home/vcap/app/scripts/${1}" --wait -m 1G -k 4G --name "${TASK_NAME}" &
 RUN_TASK_PID=$!
 
