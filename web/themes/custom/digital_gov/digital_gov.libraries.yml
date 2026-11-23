@@ -1,8 +1,8 @@
 # Main theme library.
+# uswds-init is inlined in html.html.twig so it runs before first paint.
 global:
   js:
     static/dist/js/uswds.min.js: { minified: true }
-    static/dist/js/uswds-init.min.js: { minified: true }
     static/dist/js/main.min.js: { minified: true }
   css:
     base:

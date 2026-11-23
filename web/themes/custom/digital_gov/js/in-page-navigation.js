@@ -4,6 +4,7 @@
 // getBoundingClientRect so flex layout does not overshoot.
 
 // Only show the in-page navigation when 3 or more primary items are present.
+// Templates set data-minimum-heading-count="3" so USWDS uses the same threshold.
 // On resource pages, place that nav above the related-communities block and
 // hide headings that live inside a ring component.
 
@@ -91,23 +92,44 @@ function followNavLink(event, nav) {
   return true;
 }
 
+function concealShortInPageNav(aside) {
+  const nav = aside.querySelector(".usa-in-page-nav__nav");
+  if (nav) nav.style.display = "none";
+  // Resource pages keep related communities in this aside.
+  if (!aside.querySelector("[data-related-items]")) {
+    aside.style.display = "none";
+  }
+}
+
 function arrangeInPageNav() {
   if (document.documentElement.dataset.inPageNavArranged === "true") return;
 
-  const inPageNav = document.querySelector(".usa-in-page-nav__nav");
-  const inPageNavHeader = document.querySelector(".usa-in-page-nav__heading");
-  const navItems = document.querySelectorAll(
+  const aside = document.querySelector(".usa-in-page-nav");
+  if (!aside) return;
+
+  const inPageNav = aside.querySelector(".usa-in-page-nav__nav");
+  const inPageNavHeader = aside.querySelector(".usa-in-page-nav__heading");
+  const navItems = aside.querySelectorAll(
     "li.usa-in-page-nav__item:not(.usa-in-page-nav__item--sub-item)"
   );
 
-  if (!inPageNav || !navItems.length) return;
-
-  document.documentElement.dataset.inPageNavArranged = "true";
-
-  if (navItems.length < 3) {
-    inPageNav.style.display = "none";
+  // USWDS can insert the "On this page" heading before it has any links.
+  // Wait to lock the arrangement until that nav element exists, so a later
+  // build with 3 or more items can still be shown.
+  if (!inPageNav) {
+    concealShortInPageNav(aside);
     return;
   }
+
+  if (navItems.length < 3) {
+    concealShortInPageNav(aside);
+    document.documentElement.dataset.inPageNavArranged = "true";
+    return;
+  }
+
+  document.documentElement.dataset.inPageNavArranged = "true";
+  aside.style.display = "";
+  inPageNav.style.display = "";
 
   const relatedItems = document.querySelector("[data-related-items]");
   if (!relatedItems || !inPageNavHeader) return;

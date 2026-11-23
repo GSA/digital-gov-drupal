@@ -50,6 +50,37 @@
 
   <!-- Bing Validation -->
   <meta name="msvalidate.01" content="A662823C2F59EB4F55F752CC752AC299" />
+
+  {#
+    Inlined from uswds-init.js. It has to run before first paint so the
+    banner does not flash open, and inlining avoids a separate request.
+    @see https://github.com/uswds/uswds-site/pull/3253
+  #}
+  <script>
+    (function uswdsInit() {
+      "use strict";
+
+      const loadingClass = "usa-js-loading";
+      let fallback;
+
+      document.documentElement.classList.add(loadingClass);
+      function revertClass() {
+        document.documentElement.classList.remove(loadingClass);
+      }
+
+      fallback = setTimeout(revertClass, 8000);
+
+      function verifyLoaded() {
+        if (window.uswdsPresent) {
+          clearTimeout(fallback);
+          revertClass();
+          window.removeEventListener("load", verifyLoaded, true);
+        }
+      }
+
+      window.addEventListener("load", verifyLoaded, true);
+    })();
+  </script>
 </head>
 <body{{ attributes.addClass(body_classes) }}>
 {#
