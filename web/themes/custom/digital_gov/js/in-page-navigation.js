@@ -4,6 +4,7 @@
 // getBoundingClientRect so flex layout does not overshoot.
 
 // Only show the in-page navigation when 3 or more primary items are present.
+// Templates set data-minimum-heading-count="3" so USWDS uses the same threshold.
 // On resource pages, place that nav above the related-communities block and
 // hide headings that live inside a ring component.
 
