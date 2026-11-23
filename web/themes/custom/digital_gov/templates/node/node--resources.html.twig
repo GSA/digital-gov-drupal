@@ -81,6 +81,10 @@
       <div>
         <div class="content usa-prose">
           {{ content.body|field_value }}
+          {{ include('@digital_gov/partials/last-updated.html.twig', {
+            last_updated: last_updated|default(''),
+            last_updated_iso: last_updated_iso|default(''),
+          }, with_context: false) }}
         </div>
 
         {# Touchpoints Form #}

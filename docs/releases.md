@@ -87,7 +87,7 @@ After deploying a normal release to the **PROD** site, it's possible that a bug 
 There are scripts written in our RoboFile that can help you create and update releases very easily.
 
 - You should have a clean (git status shows no changes) before you do this (It will stop you if you don't)
-- The branch you are on does not matter, the script checks out the appropriate branch
+- The branch you are on does not matter. The script checks out the source branch, resets it to `origin`, and creates the new branch from there. By default the source is `develop` for a release and `main` for a hotfix. Use `--source` to pick a different branch.
 
 `./robo.sh create-release --help`
 
@@ -95,6 +95,12 @@ This command accepts two required arguments.
 
 - `hotfix_or_release` Valid values are `hotfix` or `release`, depending on what type of release you ar creating.
 - `semantic_version` Valid values for `hotfix` are `int.int.int>0` (example: `3.14.1`), for `release` are `int.int.0` (example: `3.14.0`). Visit https://github.com/GSA/digital-gov-drupal/releases to see the last release to determine the next.
+
+It also accepts one option.
+
+- `--source=<branch>` The branch to create the release or hotfix from, for example a feature branch that holds only the hotfix commits. The branch must already be pushed, because the release is created from `origin/<branch>` and local-only commits are not included. If the branch doesn't exist on `origin`, the command stops before changing anything.
+
+Example: `./robo.sh create-release hotfix 3.14.1 --source=feature/DIGITAL-123-hotfix-branch`
 
 This command will create both a release / hotfix branch and a tag and push both up to GitHub.
 

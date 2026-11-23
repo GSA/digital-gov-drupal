@@ -1,0 +1,16 @@
+{#
+/**
+ * @file
+ * Automatic last-updated line, placed after body copy.
+ *
+ * Available variables:
+ * - last_updated: Human date, for example "March 2, 2026".
+ * - last_updated_iso: Machine date (Y-m-d) for the time element.
+ */
+#}
+{% if last_updated %}
+  <p class="dg-last-updated margin-top-5">
+    {{ 'LAST UPDATED:'|t }}
+    <time datetime="{{ last_updated_iso }}">{{ last_updated }}</time>
+  </p>
+{% endif %}
