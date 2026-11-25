@@ -173,3 +173,4 @@ bfa59696c883e6b09ea96e0564c77537|Amy Farrell|feature/DIGITAL-897-composer-update
 9e6584467a2fffbb026d0778aca6974f|Amy Farrell|feature/DIGITAL-912-composer-updates|Mon Nov 16 04:40:12 PM PST 2026|./scripts/audit/deps-update --composer-only
 d5303d2aa88c8b534ee8bd192c28f113|Amy Farrell|feature/DIGITAL-912-composer-updates|Mon Nov 16 04:46:14 PM PST 2026|./scripts/audit/deps-update --composer-only --minor
 401745c097ad6f0d64ec78658181cd55|arpage|feature/DIGITAL-926-deploydev|Wed Nov 18 19:41:34 EST 2026|./composer.sh require drupal/core-recommended:10.6.22 drupal/core-composer-scaffold:10.6.22 drupal/core-project-message:10.6.22 --update-with-all-dependencies
+ad00e70025d7eaf6b6050e4dba7b28ac|arpage|release/1.27.1|Wed Nov 25 20:16:31 UTC 2026|./composer.sh require drupal/core-recommended:10.6.23 drupal/core-composer-scaffold:10.6.23 drupal/core-project-message:10.6.23 --update-with-all-dependencies
