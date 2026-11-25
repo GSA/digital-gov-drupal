@@ -61,6 +61,9 @@ dg_autologout.settings:
     use_watchdog:
       type: boolean
       label: 'Use watchdog'
+    cookie_secure:
+      type: boolean
+      label: 'Set the login time cookie as secure'
     dialog_title:
       type: label
       label: 'Title'

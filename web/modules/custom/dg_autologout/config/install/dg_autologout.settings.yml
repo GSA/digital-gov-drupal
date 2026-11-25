@@ -18,4 +18,5 @@ jstimer_format: '%hours%:%mins%:%secs%'
 jstimer_js_load_option: false
 use_alt_logout_method: false
 use_watchdog: true
+cookie_secure: false
 whitelisted_ip_addresses: ''

@@ -262,6 +262,7 @@ function dg_autologout_page_attachments_alter(array &$attachments) {
     'use_alt_logout_method' => $use_alt_logout_method,
     'logout_regardless_of_activity' => $logout_regardless_of_activity,
     'modal_width' => $settings->get('modal_width') ? (int) $settings->get('modal_width') : 'auto',
+    'cookie_secure' => (bool) $settings->get('cookie_secure'),
   ];
   // If this is an AJAX request, then the logout redirect url should still be
   // referring to the page that generated this request.
@@ -350,6 +351,14 @@ function dg_autologout_user_login($account): void {
     }
   }
 
-  // Add login time cookie.
-  user_cookie_save(['dg_autologout_login' => \Drupal::time()->getCurrentTime()]);
+  // Add login time cookie. Set it directly rather than via user_cookie_save()
+  // so it can carry the Secure and SameSite attributes. It cannot be HttpOnly
+  // because autologout.js reads it.
+  setrawcookie('Drupal.visitor.dg_autologout_login', rawurlencode((string) \Drupal::time()->getCurrentTime()), [
+    'expires' => \Drupal::time()->getRequestTime() + 31536000,
+    'path' => '/',
+    'secure' => (bool) \Drupal::config('dg_autologout.settings')->get('cookie_secure'),
+    'httponly' => FALSE,
+    'samesite' => 'Lax',
+  ]);
 }
