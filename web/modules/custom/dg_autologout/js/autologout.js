@@ -144,7 +144,11 @@
         if (!disableButtons) {
           let yesButton = settings.dg_autologout.yes_button;
           buttons[Drupal.t(yesButton)] = function () {
-            cookies.set("Drupal.visitor.dg_autologout_login", Math.round((new Date()).getTime() / 1000));
+            cookies.set("Drupal.visitor.dg_autologout_login", Math.round((new Date()).getTime() / 1000), {
+              path: '/',
+              secure: !!localSettings.cookie_secure,
+              sameSite: 'Lax'
+            });
             $(this).dialog("destroy");
             clearTimeout(paddingTimer);
             refresh();

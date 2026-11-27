@@ -287,6 +287,13 @@ class AutologoutSettingsForm extends ConfigFormBase {
       '#description' => $this->t('Enable logging of automatically logged out users'),
     ];
 
+    $form['cookie_secure'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Secure cookie'),
+      '#default_value' => $config->get('cookie_secure') ?: FALSE,
+      '#description' => $this->t('Set the Drupal.visitor.dg_autologout_login cookie with the Secure attribute, so it is only sent over HTTPS.'),
+    ];
+
     $form['enforce_admin'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Enforce auto logout on admin pages'),
@@ -496,6 +503,7 @@ class AutologoutSettingsForm extends ConfigFormBase {
       ->set('whitelisted_ip_addresses', $values['whitelisted_ip_addresses'])
       ->set('use_alt_logout_method', $values['use_alt_logout_method'])
       ->set('use_watchdog', $values['use_watchdog'])
+      ->set('cookie_secure', $values['cookie_secure'])
       ->save();
 
     if (!empty($values['table'])) {
